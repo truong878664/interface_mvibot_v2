@@ -1,0 +1,19 @@
+@media (min-width: 1024px) and (max-width:1448px)  {
+    :root {
+        --colum-dashboard: 3;
+    }
+}
+
+
+@media (min-width: 739px) and (max-width:1023px)  {
+    :root {
+        --colum-dashboard: 2;
+    }
+}
+
+
+@media (max-width:738px)  {
+    :root {
+        --colum-dashboard: 1;
+    }
+}
