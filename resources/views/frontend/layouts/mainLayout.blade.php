@@ -24,9 +24,8 @@
             </li>
 
             <li class="bar-item active">
-                <a href="{{route('dashboard.')}}">
+                <a href="{{ route('dashboard.') }}">
                     <i class="fa-solid fa-table-columns"></i>
-
                 </a>
             </li>
 
@@ -42,7 +41,24 @@
 
         <button class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
     </div>
+    <div class="connect-ros-btn connection-failed">
+        <i class="fa-solid fa-tower-broadcast"></i>
+    </div>
 
+    {{-- <div class="connection-notification connected">
+        <div class="message">Connected</div>
+    </div>     --}}
+
+    {{-- <div class="connect-ros">
+        <div class="connect-ros-overlay"></div>
+        <div class="connect-ros-content-wrapper">
+            <div class="connect-ros-content">
+                <input class="connect-ros-input" type="text" placeholder="Enter ip address">
+                <button class="connect-ros-send-ip-btn">Connect</button>
+            </div>
+            
+        </div>
+    </div> --}}
     <div class="user">
         <div class="name-user">tran_quoc_truong</div>
         <img class="avatar-user"
@@ -54,6 +70,8 @@
         @yield('content')
     </div>
     <script src="/js/mainLayout.js"></script>
+    <script src="/js/library/roslib.min.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>

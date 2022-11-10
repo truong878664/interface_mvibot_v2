@@ -150,3 +150,104 @@
 .show-nav-bar:hover {
     bottom: 33px;
 }
+
+/* connect ros */
+
+.connect-ros-btn {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 30px;
+    left: 150px;
+    background-color: #71bec9;
+    background-color: var(--orange-color);
+    font-size: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 40%;
+    color: #fff;
+
+}
+.connect-ros-btn i {
+    line-height: 50px;
+}
+.connect-ros-btn.connected {
+    background-color: #82CD47;
+}
+
+.connect-ros-btn.connection-failed {
+    background-color: #CF0A0A;
+}
+
+
+.connection-notification {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    height: 100px;
+    width: 200px;
+    background-color: #E8F9FD;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ccc;
+}
+
+.connection-notification.connected {
+    background-color: #82CD47;
+}
+
+
+.message {
+    /* margin-left: 50px; */
+    /* line-height: 40px; */
+    font-size: 3rem;
+}
+/* .connect-ros-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.connect-ros-content-wrapper {
+    width: 30%;
+    height: 30%;
+    background-color: var(--white-color);
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 12px;
+}
+
+.connect-ros-content{
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.connect-ros-input{
+    flex: 1;
+    height: 30px;
+    margin-right: 20px;
+    padding: 0 16px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-family: var(--main-font);
+}
+
+.connect-ros-input::placeholder {
+    font-family: var(--main-font);
+}
+.connect-ros-send-ip-btn{
+    padding: 0 16px;
+    border: none;
+    font-family: var(--main-font);
+    background-color: #71bec9;
+    font-size: 2rem;
+    color: var(--white-color);
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+} */

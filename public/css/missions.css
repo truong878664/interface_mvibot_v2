@@ -1,0 +1,31 @@
+.missions-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-tab {
+    display: flex;
+    background-color: #ebebf5;
+    list-style: none;
+    height: 50px;
+    border-radius: 100px;
+    justify-content: space-between;
+    font-size: 2.5rem;
+}
+
+.navtab-item {
+    align-items: stretch;
+    padding: 0 25px;
+    line-height: 50px;
+    user-select: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+.navtab-item:hover {
+    background-color: rgba(72, 72, 130, 0.1);
+}
+.navtab-item.active {
+    background-color: #484882;
+    color: var(--white-color);
+}

@@ -7,21 +7,6 @@
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-html {
-    font-family: 'Zilla Slab', serif;
-    font-size: 62.5%;
-    color: #1c2536;
-}
-body {
-    font-size: 2rem;
-    background-color: #f5f5f5;
-}
-
 :root {
     --white-color: #fff;
     --main-color: #71bec9;
@@ -29,5 +14,38 @@ body {
     --orange-color: #f5b933;
     --black-color: #000;
     --green-color: #45a5ba;
+    --main-font: 'Zilla Slab', serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+html {
+    font-family: var(--main-font);
+    font-size: 62.5%;
+    color: #1c2536;
+}
+
+body {
+    font-size: 2rem;
+    background-color: #f5f5f5;
+}
+
+
+
+.heading {
+    font-size: 4rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    position: fixed;
+    margin-top: 30px;
+}
+
+.contents {
+    padding-top: 100px;
+    margin-left: 40px;
+}
