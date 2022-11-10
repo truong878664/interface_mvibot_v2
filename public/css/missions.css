@@ -29,3 +29,15 @@
     background-color: #484882;
     color: var(--white-color);
 }
+
+/* map */
+
+.missions-map {
+    width: 90%;
+    height: 60vh;
+    margin-top: 20px;
+    margin-right: 100px;
+    background-color: #484882;
+    border-radius: 10px;
+    overflow: hidden;
+}

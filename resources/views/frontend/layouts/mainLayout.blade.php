@@ -71,7 +71,8 @@
     </div>
     <script src="/js/mainLayout.js"></script>
     <script src="/js/library/roslib.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/library/ros3d.min.js"></script>
+    <script type="module" src="/js/main.js"></script>
 </body>
 
 </html>
