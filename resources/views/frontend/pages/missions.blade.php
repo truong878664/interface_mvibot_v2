@@ -12,5 +12,10 @@
             <li class="navtab-item tracking-mission">Tracking mission</li>
         </ul>
         <div class="missions-map" id="map"></div>
+        <div class="rotate-btn">
+
+        </div>
+        <script src="/js/missions.js"></script>
     </div>
-@endsection
+    @endsection
+    

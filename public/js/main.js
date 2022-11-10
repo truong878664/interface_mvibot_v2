@@ -5,14 +5,18 @@ let ros
 let viewer
 
 const mapEle = document.querySelector('#map')
-const heightMap = mapEle.offsetHeight
-const widthMap = mapEle.offsetWidth
 
 function start() {
     ros = connectRos()
-    viewer = createMap(heightMap,widthMap)
+
+    if (mapEle) {
+        const heightMap = mapEle.offsetHeight
+        const widthMap = mapEle.offsetWidth + 80
+
+        viewer = createMap(heightMap, widthMap)
+    }
 }
 start()
 
 
-export {ros, viewer}
+export { ros, viewer }

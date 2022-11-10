@@ -40,4 +40,29 @@
     background-color: #484882;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 0 20px #ccc;
 }
+
+.rotate-btn {
+    width: 90px;
+    height: 90px;
+    background-color: aqua;
+    border-radius: 50%;
+    position: relative;
+    /* transform: rotate(0deg); */
+}
+.rotate-btn::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #484882;
+    cursor: pointer;
+}
+
+
