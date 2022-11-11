@@ -32,8 +32,15 @@
 
 /* map */
 
-.missions-map {
+.missions-wrapper-map {
     width: 90%;
+    height: 60vh;
+    /* margin-top: 10px; */
+    margin-right: 100px;
+}
+
+.missions-map {
+    width: 100%;
     height: 60vh;
     margin-top: 20px;
     margin-right: 100px;
@@ -49,7 +56,6 @@
     background-color: aqua;
     border-radius: 50%;
     position: relative;
-    /* transform: rotate(0deg); */
 }
 .rotate-btn::after {
     content: "";
@@ -65,4 +71,11 @@
     cursor: pointer;
 }
 
+
+/* mission control */
+.mission-point-control {
+    width: 100%;
+    height: 40px;
+    background-color: #484882;
+}
 
