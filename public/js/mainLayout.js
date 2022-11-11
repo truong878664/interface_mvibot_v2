@@ -3,14 +3,11 @@ const showNavBarEle = document.querySelector('.show-nav-bar')
 const navBar = hideNavBarEle.parentElement
 const containerEle = document.querySelector('.container')
 
-
-
 function start() {
     showNavBar()
     hideNavBar()
 }
 start()
-
 
 function showNavBar() {
     showNavBarEle.addEventListener('click', () => {
