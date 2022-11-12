@@ -16,11 +16,9 @@ function activeTab() {
             $('.nav-content.show').classList.remove("show")
             navTabItem.classList.add("active")
             contentTablist[index].classList.add("show")
-            console.log(window.location.hash)
         })
     });
 }
-
 
 function reloadActiveTab() {
     if (currentHash) {
