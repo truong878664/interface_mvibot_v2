@@ -6,13 +6,15 @@ import displayPoint from './rosModule/displayPoint.js'
 import displayPose from './rosModule/displayPose.js'
 import createPoint from './rosModule/createPoint.js'
 import createPose from './rosModule/createPose.js'
-import {setPosition} from './rosModule/functionHandler.js'
+import { setPosition } from './rosModule/functionHandler.js'
 
 
+export const $ = document.querySelector.bind(document);
+export const $$ = document.querySelectorAll.bind(document);
 let viewer
 let tfClient
 const ros = connectRos()
-const mapElement = document.querySelector('#map')
+const mapElement = $('#map')
 
 function start() {
     if (mapElement) {
@@ -27,7 +29,7 @@ function start() {
         createPose()
 
         displayPoint(0, 0)
-        displayPose(0, 0, 0, 0)
+        displayPose(0, 0, 0, 1)
 
         setPosition()
     }

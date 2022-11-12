@@ -1,7 +1,9 @@
-const hideNavBarEle = document.querySelector('.hine-nav-bar')
-const showNavBarEle = document.querySelector('.show-nav-bar')
+const $ = document.querySelector.bind(document);
+
+const hideNavBarEle = $('.hine-nav-bar')
+const showNavBarEle = $('.show-nav-bar')
 const navBar = hideNavBarEle.parentElement
-const containerEle = document.querySelector('.container')
+const containerEle = $('.container')
 
 function start() {
     showNavBar()

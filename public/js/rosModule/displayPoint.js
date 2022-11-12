@@ -3,7 +3,7 @@ import { ros } from '../main.js'
 function displayPoint(x, y) {
     const point_pub = new ROSLIB.Topic({
         ros: ros,
-        name: "/point_pub",
+        name: "/point_pub", 
         messageType: 'geometry_msgs/PointStamped',
         queue_size: 0.1,
     });
@@ -17,7 +17,6 @@ function displayPoint(x, y) {
             z: 0,
         }
     });
-
     point_pub.publish(point_msg);
 }
 

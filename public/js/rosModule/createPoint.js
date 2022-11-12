@@ -11,7 +11,7 @@ function createPoint() {
         queue_size: 1,
         throttle_rate: 1000,
         radius: 0.1,
-    });
+    }); 
 
 }
 export default createPoint

@@ -1,8 +1,5 @@
-<head>
-    <link rel="stylesheet" href="/css/dashboard.css">
-</head>
-
 @extends('frontend.layouts.mainLayout')
+<link rel="stylesheet" href="/css/dashboard.css">
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <div class="contents dashboard-content">

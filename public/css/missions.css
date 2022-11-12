@@ -1,7 +1,51 @@
 :root {
     --column-control-point: 8;
 }
+/* connect ros */
 
+.connect-ros-btn {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 30px;
+    left: 150px;
+    background-color: #71bec9;
+    background-color: var(--orange-color);
+    font-size: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 40%;
+    color: #fff;
+
+}
+.connect-ros-btn i {
+    line-height: 50px;
+}
+.connect-ros-btn.connected {
+    background-color: #82CD47;
+}
+
+.connect-ros-btn.connection-failed {
+    background-color: #CF0A0A;
+}
+
+
+.connection-notification {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    height: 100px;
+    width: 200px;
+    background-color: #E8F9FD;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ccc;
+}
+
+.connection-notification.connected {
+    background-color: #82CD47;
+}
+
+/* content */
 .missions-content {
     display: flex;
     flex-direction: column;
@@ -38,11 +82,12 @@
 
 /* map */
 
-.missions-wrapper-map {
+.nav-content {
     width: 90%;
     height: 60vh;
-    /* margin-top: 10px; */
     margin-right: 100px;
+    margin-top: 10px;
+    background-color: #ccc;
 }
 
 .missions-map {
@@ -76,124 +121,7 @@
     background-color: #484882;
     cursor: pointer;
 }
-
-
-/* mission control */
-
-.mission-point-control-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.mission-point-control {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-
-
-.mission-point-control-item {
-    width: 30%;
-    height: 100px;
-    /* background-color: #ccc; */
-}
-
-
-
-
-
-.position {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.position .input-value {
-    font-size: 2rem;
-    width: 70px;
-    font-family: var(--number-font);
-    border: none;
-    text-align: center;
-    outline: none;
-    padding: 4px;
-    margin-bottom: 10px;
-}
-
-.input-value::-webkit-outer-spin-button,
-.input-value::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.positon-x .input-control {
-    width: 100%;
-}
-
-.input-control {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.input-control:hover {
-    opacity: 1;
-}
-
-
-.input-control::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: var(--main-color);
-    cursor: pointer;
-}
-
-#position-x::-webkit-slider-thumb {
-    background: red;
-}
-#position-y::-webkit-slider-thumb {
-    background: green;
-}
-
-
-.input-control::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: var(--main-color);
-    cursor: pointer;
-}
-
-.positon-y {}
-
-.rotate-z {}
-
-.submit-btn {
-    flex: 1;
-    margin-left: 40px;
-    background-color: var(--main-color);
-    font-family: var(--main-font);
-    font-size: 2.2rem;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    color: var(--white-color);
-    font-weight: 600;
-    max-height: 50px;
-    width: 95px;
-}
-
-
+ 
 /* create point */
 
 .form-create-point-checkbox:checked~.form-create-point-wrapper {
@@ -201,83 +129,14 @@
 }
 
 .form-create-point-wrapper {
-
     display: none;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.363);
+
+.content-missions {
+    display: none;
 }
 
-.form-create-point {
-    background-color: var(--white-color);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: 100;
-
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 3px;
-}
-
-.time-color-wrapper {
-    display: flex;
-}
-
-.form-create-point .form-create-point-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    cursor: pointer;
+.content-missions.show {
     display: block;
-    width: 40px;
-    height: 40px;
-    margin-right: 0;
-    line-height: 40px;
-    text-align: center;
-}
-
-.form-create-point input[type="text"] {
-    border: 1px solid #ccc;
-    padding: 8px 16px;
-}
-
-.form-create-point input[type="number"] {
-    width: 50px;
-    border: 1px solid #ccc;
-    padding: 8px;
-}
-
-.form-create-point input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.form-create-point label {
-    margin-right: 16px;
-    display: inline-block;
-    width: 120px;
-}
-
-
-.form-item {
-    margin-bottom: 16px;
-    margin-right: 16px;
-}
-
-.form-create-point .color-point {
-    width: 40px;
-    margin-left: 10px;
-}
-
-.save-point-btn {
-    align-self: flex-end;
 }

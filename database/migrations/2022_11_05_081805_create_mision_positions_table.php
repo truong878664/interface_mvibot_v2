@@ -16,7 +16,14 @@ return new class extends Migration
         Schema::create('mision_positions', function (Blueprint $table) {
             $table->id();
             $table->string('name_position');
-            $table->
+            $table->float('x');
+            $table->float('y');
+            $table->float('z', 20, 10);
+            $table->float('w', 20, 10);
+            $table->integer('time_position');
+            $table->string('color_position');
+            $table->string('mode_position');
+            $table->string('mode_child');
             $table->timestamps();
         });
     }

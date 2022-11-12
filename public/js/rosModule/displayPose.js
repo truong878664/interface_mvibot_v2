@@ -3,7 +3,7 @@ import { ros } from '../main.js'
 function displayPose(x, y, z, w) {
     const pose_pub = new ROSLIB.Topic({
         ros: ros,
-        name: "/pose_pub",
+        name: "/pose_pub", 
         messageType: 'geometry_msgs/PoseStamped',
         queue_size: 1,
     });
