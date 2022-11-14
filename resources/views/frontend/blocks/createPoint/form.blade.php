@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/createPoint/form.css">
 <div class="overlay"></div>
-<form method="POST" action="{{ route('dashboard.missions') }}" class="form-create-point">
+<form method="POST" action="{{ route('dashboard.missions.createpoint') }}" class="form-create-point">
     <label for="form-create-point-checkbox" class="form-create-point-close"><i class="fa-solid fa-xmark"></i></label>
 
     <div class="name-point-wrapper form-item">

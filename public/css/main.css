@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@
     --main-font: 'Zilla Slab', serif;
     --number-font: 'Fragment Mono', monospace;
 }
+
 html {
     font-family: var(--main-font);
     font-size: 62.5%;
@@ -26,11 +28,18 @@ html {
 body {
     font-size: 2rem;
     background-color: #f5f5f5;
+
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+i{
+    pointer-events: none;
 }
 
 input {
@@ -69,4 +78,15 @@ input {
     width: 95px;
     user-select: none;
     cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 100px;
 }

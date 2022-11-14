@@ -1,6 +1,4 @@
-import { viewer } from "../main.js";
-
-function createAxes() {
+function createAxes(viewer) {
     const axes = new ROS3D.Axes({
         scale: 1,
         shaftRadius: 0.025,

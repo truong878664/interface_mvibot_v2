@@ -13,7 +13,7 @@ class PositionController extends Controller
     public function index()
     {
     }
-    public function addPosition(Request $request)
+    public function createPoint(Request $request)
     {   
 
         $name_position = $request->name_position;
@@ -39,8 +39,6 @@ class PositionController extends Controller
             "mode_child" => $mode_child,
             "created_at" => $created_at,
         ];
-
-
 
         MisionPosition::insert($dataPosition);
 

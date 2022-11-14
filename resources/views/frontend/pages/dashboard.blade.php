@@ -3,7 +3,7 @@
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <div class="contents dashboard-content">
-        <a class="dashboard-content-item blue" href="{{route('dashboard.missions')}}">
+        <a class="dashboard-content-item blue" href="{{route('dashboard.missions.')}}">
             <div class="dashboard-content-item-icon"><i class="fa-solid fa-circle-chevron-right"></i></div>
             <div class="dashboard-content-item-wrapper">
                 <h3 class="dashboard-content-item-heading">Missions</h3>
@@ -11,7 +11,7 @@
             </div>
         </a>
 
-        <a class="dashboard-content-item orange" href="{{route('dashboard.missions')}}">
+        <a class="dashboard-content-item orange" href="{{route('dashboard.missions.')}}">
             <div class="dashboard-content-item-icon"><i class="fa-solid fa-map-location-dot"></i></div>
             <div class="dashboard-content-item-wrapper">
                 <h3 class="dashboard-content-item-heading">Map</h3>
@@ -19,7 +19,7 @@
             </div>
         </a>
 
-        <a class="dashboard-content-item green" href="{{route('dashboard.missions')}}">
+        <a class="dashboard-content-item green" href="{{route('dashboard.missions.')}}">
             <div class="dashboard-content-item-icon"><i class="fa-solid fa-clipboard-list"></i></div>
             <div class="dashboard-content-item-wrapper">
                 <h3 class="dashboard-content-item-heading">Status</h3>

@@ -1,11 +1,11 @@
-import {ros,viewer,tfClient} from '../main.js'
+import {ros} from '../main.js'
 
-function createPose () {
-    const a = new ROS3D.Pose({
+function createPose (viewer, tfClient, color = '#EA047E') {
+    new ROS3D.Pose({
         ros: ros,
         rootObject: viewer.scene,
         tfClient: tfClient,
-        color: 0xFF33FF,
+        color: color,
         topic: "/pose_pub",
         headDiameter: 0.3,
         shaftDiameter: 0.1,

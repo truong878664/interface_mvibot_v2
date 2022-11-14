@@ -87,7 +87,7 @@
     height: 60vh;
     margin-right: 100px;
     margin-top: 10px;
-    background-color: #ccc;
+    /* background-color: #ccc; */
 }
 
 .missions-map {
@@ -130,13 +130,4 @@
 
 .form-create-point-wrapper {
     display: none;
-}
-
-
-.content-missions {
-    display: none;
-}
-
-.content-missions.show {
-    display: block;
 }

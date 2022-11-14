@@ -1,6 +1,6 @@
 import {ros} from "../main.js"
 
-function createTfClient () {
+function createTfClient() {
     const tfClient = new ROSLIB.TFClient({
         ros: ros,
         rate: 10,

@@ -23,10 +23,10 @@ function start() {
 
         viewer = createMap(heightMap, widthMap)
         tfClient = createTfClient()
-        createAxes()
+        createAxes(viewer)
 
-        createPoint()
-        createPose()
+        createPoint(viewer, tfClient)
+        createPose(viewer, tfClient)
 
         displayPoint(0, 0)
         displayPose(0, 0, 0, 1)

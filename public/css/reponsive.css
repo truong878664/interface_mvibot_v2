@@ -1,6 +1,7 @@
 @media (min-width: 1024px) and (max-width:1448px)  {
     :root {
         --colum-dashboard: 3;
+        --column-create-missions: 4;
     }
 }
 
@@ -8,6 +9,7 @@
 @media (min-width: 739px) and (max-width:1023px)  {
     :root {
         --colum-dashboard: 2;
+        --column-create-missions: 3;
     }
 }
 
@@ -15,5 +17,6 @@
 @media (max-width:738px)  {
     :root {
         --colum-dashboard: 1;
+        --column-create-missions: 2;
     }
 }
