@@ -45,7 +45,7 @@
         <div class="name-user">tran_quoc_truong</div>
         <img class="avatar-user"
             src="https://images.unsplash.com/photo-1599817977364-b6f59e547258?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" />
-    </div>
+    </div> 
 
     <button class="show-nav-bar hide"><i class="fa-solid fa-o"></i></button>
     <div class="container">

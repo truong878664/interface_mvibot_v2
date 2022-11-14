@@ -5,19 +5,16 @@ use App\Http\Controllers\backend\PositionController;
 use App\Http\Controllers\backend\CreateMissionsController;
 
 
-// Route::prefix('missions')->name('missions.')->group(function () {
-//     Route::post('position', [PositionController::class, 'index'])->name('position');
-// });
-
-
-
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
-
+    
     Route::prefix('missions')->name('missions.')->group(function () {
-        Route::post('createpoint', [PositionController::class, 'createPoint'])->name('createpoint');
+        Route::post('createpoint', [PositionController::class, 'createPoint']);
 
-        Route::post('createmissions', [CreateMissionsController::class, 'createMissions'])->name('createmissions');
+        Route::post('createmissions', [CreateMissionsController::class, 'createMissions']);
 
-        Route::delete('delete/{id}', [CreateMissionsController::class, 'deleteMissions']);
+        Route::delete('delete/{id}', [CreateMissionsController::class , 'deleteMissions']);
+
+        Route::delete('deletepoint/{id}', [CreateMissionsController::class , 'deletePoint']);
     });
+
 });

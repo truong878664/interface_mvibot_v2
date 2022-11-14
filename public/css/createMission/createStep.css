@@ -50,7 +50,9 @@
     border-top-right-radius: 10px;
 }
 
-.missison-point {}
+.missison-point {
+    min-height: 300px;
+}
 
 .missison-point-content {
     overflow: scroll;
@@ -95,6 +97,8 @@
     border-radius: 4px;
     color: var(--main-color);
     cursor: pointer;
+    text-align: center;
+    /* font-size: 2rem; */
 }
 
 .action-point-btn:hover {
@@ -105,7 +109,13 @@
 
 .add-point {}
 
-
+.delete-point-map {
+    font-size: 1.6rem;
+    line-height: 30px;
+}
+.delete-point-map:hover{
+    color: red;
+}
 /* map show point` */
 .overlay {
     position: fixed;
@@ -146,4 +156,8 @@
 .remove-map:hover {
     /* color: red; */
     background-color: rgb(170, 170, 170);
+}
+
+.delete-point {
+    display: inline-block;
 }

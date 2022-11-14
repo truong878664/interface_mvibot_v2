@@ -34,7 +34,7 @@ class MissionsController extends Controller
     {
         $idRender = $request->id;
         $itemRender = Missions::where('id', $idRender)->first();
-        $allPoints = MisionPosition::all();
+        $allPoints = MisionPosition::orderBy('id', 'desc')->get();
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints'));
     }
 }

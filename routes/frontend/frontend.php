@@ -20,7 +20,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         
         Route::prefix('/createmissions')->name('createmissions.')->group(function () {
             Route::get('/', [MissionsController::class, 'createMissions']);
-            Route::get('/{id}', [MissionsController::class, 'createStepsMissions']);
+            Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('createstepsmissions');
         });
     });
 });
