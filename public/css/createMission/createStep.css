@@ -1,0 +1,350 @@
+.create-mission-header {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.back-btn {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 2.2rem;
+    line-height: 30px;
+}
+
+.back-btn:hover {
+    background-color: #ccc;
+}
+
+.create-mission-heading {
+    font-size: 2.8rem;
+}
+
+.create-mission-wrapper {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.mission-step-item {
+    width: 33.333%;
+    border-radius: 10px;
+    background-color: rgba(204, 204, 204, 0.445);
+    box-shadow: 0 0 10px rgb(231, 231, 231);
+    /* height: 200px; */
+    margin-left: 20px;
+}
+
+
+.mission-step-item-heading {
+    text-align: center;
+    line-height: 40px;
+    display: block;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #ccc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.missison-point {
+    min-height: 300px;
+}
+
+.f-a-f-wrapper {
+    flex: 2;
+}
+
+.f-a-wrapper {
+    display: flex;
+}
+
+.mission-step-item {
+    flex: 1;
+}
+
+.form-missions-f-a-wrapper {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+    background-color: rgba(73, 113, 116, 0.4);
+    box-shadow: 0 0 10px rgb(231, 231, 231);
+    position: relative;
+
+}
+
+
+.add-f-a-icon {
+    padding: 7px 10px;
+    background-color: rgb(240, 240, 240);
+    border: none;
+    border-radius: 4px;
+    color: var(--main-color);
+    cursor: pointer;
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+
+
+
+.missison-point-content {
+    overflow: scroll;
+    max-height: 500px;
+}
+
+.point-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 16px;
+    cursor: pointer;
+}
+
+.point-item:hover {
+    background-color: #ccc;
+}
+
+.point-item-content {
+    flex: 1;
+    padding-right: 10px;
+}
+
+.name-point {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.create-at {
+    font-size: 1.1rem;
+    font-family: var(--number-font);
+}
+
+.deciption-point {}
+
+.point-item-action {}
+
+.action-point-btn {
+    height: 30px;
+    width: 30px;
+    background-color: rgb(240, 240, 240);
+    border: none;
+    border-radius: 4px;
+    color: var(--main-color);
+    cursor: pointer;
+    text-align: center;
+}
+
+.action-point-btn:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.show-point-map {}
+
+.add-point {}
+
+.delete-point-map {
+    font-size: 1.6rem;
+    line-height: 30px;
+}
+
+.delete-point-map:hover {
+    color: red;
+}
+
+/* map show point` */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 100;
+}
+
+#map-show-point {
+    width: 40vw;
+    height: 40vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 6px;
+    z-index: 101;
+    overflow: hidden;
+}
+
+.remove-map {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    text-align: center;
+    line-height: 25px;
+    border: none;
+    border-radius: 50%;
+
+}
+
+.remove-map:hover {
+    /* color: red; */
+    background-color: rgb(170, 170, 170);
+}
+
+.delete-point {
+    display: inline-block;
+}
+
+
+.misison-function,
+.mission-action {
+    height: 220px;
+}
+
+/* function */
+.misisons-f-a-item {
+    display: flex;
+    /* background-color: aqua; */
+    height: 50px;
+    justify-content: space-between;
+    padding: 0 16px;
+    align-items: center;
+}
+
+.misisons-f-a-item:hover {
+    background-color: #ccc;
+
+}
+
+
+/* steps mission */
+.heading-form-mission {
+    font-size: 2.3rem;
+
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+
+
+.steps-mission {
+    width: calc(100% - 20px);
+    height: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 180px;
+    border-radius: 10px;
+    background-color: rgba(62, 109, 156, 0.58);
+    box-shadow: 0 0 10px rgb(231, 231, 231);
+}
+
+.form-missions-f-a.show {
+    display: block;
+}
+
+.misisons-f-a-item.active {
+    background-color: rgba(33, 69, 199, 0.4);
+}
+
+.add-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 16px;
+}
+
+.form-missions-f-a {
+    display: none;
+}
+
+.time-sleep {
+    width: 60px;
+    border: 1px solid #ccc;
+    height: 30px;
+    text-align: center;
+    padding: 0 8px;
+    font-family: var(--number-font);
+}
+
+
+/* footprint */
+.footprint-img {
+    /* z-index: 1000; */
+    height: 300px;
+    width: 350px;
+    /* object-fit: cover; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.input-footprint-wrapper {
+    position: absolute;
+}
+
+
+.input-footprint-wrapper span {
+    font-size: 1.6rem;
+    /* color: var(--main-color); */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-footprint {
+    border: 1px solid #ccc;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    padding: 0 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.top-footprint {
+    bottom: 50px;
+    left: 20px;
+}
+
+.right-footprint {
+    top: 70px;
+    left: 30px;
+}
+
+.left-footprint {
+    bottom: 80px;
+    right: 60px;
+
+}
+
+.bottom-footprint {
+    top: 50px;
+    right: 50px;
+}

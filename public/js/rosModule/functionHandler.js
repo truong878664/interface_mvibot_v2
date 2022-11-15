@@ -8,7 +8,7 @@ const $ = document.querySelector.bind(document);
 let positionX = 0
 let positionY = 0
 let rotateZ = 0
-let rotateW = 0
+let rotateW = 1
 let rotateZdeg = 0
 const positionXElement = $('.number-position-x')
 const positionYElement = $('.number-position-y')
@@ -98,10 +98,10 @@ function setValueToAddDatabase(x, y, z, w) {
     wElement.value = w
 }
 
-function checkValueInput (elementCheck, position) {
+function checkValueInput(elementCheck, position) {
     const max = Number(elementCheck.getAttribute('max'))
     const min = Number(elementCheck.getAttribute('min'))
-    if(elementCheck.value > max) {
+    if (elementCheck.value > max) {
         elementCheck.value = max
     } else if (elementCheck.value < min) {
         elementCheck.value = min
@@ -109,17 +109,19 @@ function checkValueInput (elementCheck, position) {
 }
 
 
-createButton.addEventListener('click', () => {
-    setValueToAddDatabase(positionX, positionY, rotateZ, rotateW)
-    setValuePositionForm()
-})
+if (createButton) {
+    createButton.addEventListener('click', () => {
+        setValueToAddDatabase(positionX, positionY, rotateZ, rotateW)
+        setValuePositionForm()
+    })
+}
 
 
 const displayPositonX = $('.display-positon-x')
 const displayPositonY = $('.display-positon-y')
 const displayRotateZ = $('.display-rotate-z')
 
-function setValuePositionForm () {
+function setValuePositionForm() {
     displayPositonX.value = positionXElement.value
     displayPositonY.value = positionYElement.value
     displayRotateZ.value = `${positionZElement.value}°`

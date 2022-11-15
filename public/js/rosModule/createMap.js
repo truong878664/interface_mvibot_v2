@@ -1,11 +1,12 @@
 import { ros } from '../main.js'
 
 var viewer
-function createMap(height, width) {
+
+function createMap(height, width, divID = 'map') {
 
     const obtionViewer =
     {
-        divID: 'map',
+        divID: divID,
         width: width,
         height: height,
         antialias: true,

@@ -1,0 +1,18 @@
+.form-create-mission {
+    display: none;
+}
+
+.show-create-missions:checked  ~ .form-create-mission {
+    display: block;
+}
+
+.form-create-missions .heading-create-mission {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-create-missions{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}

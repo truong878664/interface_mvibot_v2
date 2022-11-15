@@ -1,6 +1,7 @@
 :root {
     --column-control-point: 8;
 }
+
 /* connect ros */
 
 .connect-ros-btn {
@@ -16,11 +17,14 @@
     cursor: pointer;
     border-radius: 40%;
     color: #fff;
+    z-index: 100;
 
 }
+
 .connect-ros-btn i {
     line-height: 50px;
 }
+
 .connect-ros-btn.connected {
     background-color: #82CD47;
 }
@@ -52,6 +56,18 @@
     align-items: center;
 }
 
+.nav-tab-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--background-color);
+    height: 110px;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+
+}
+
 .nav-tab {
     display: flex;
     background-color: #ebebf5;
@@ -60,6 +76,9 @@
     border-radius: 100px;
     justify-content: space-between;
     font-size: 2rem;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 8px;
 }
 
 .navtab-item {
@@ -87,13 +106,12 @@
     height: 60vh;
     margin-right: 100px;
     margin-top: 10px;
-    background-color: #ccc;
 }
 
 .missions-map {
     width: 100%;
     height: 65vh;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-right: 100px;
     border-radius: 10px;
     overflow: hidden;
@@ -121,7 +139,7 @@
     background-color: #484882;
     cursor: pointer;
 }
- 
+
 /* create point */
 
 .form-create-point-checkbox:checked~.form-create-point-wrapper {
@@ -130,13 +148,4 @@
 
 .form-create-point-wrapper {
     display: none;
-}
-
-
-.content-missions {
-    display: none;
-}
-
-.content-missions.show {
-    display: block;
 }

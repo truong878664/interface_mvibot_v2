@@ -2,7 +2,7 @@ const connectRosBtn = document.querySelector('.connect-ros-btn')
 
 function connectRos() {
     const ros = new ROSLIB.Ros({
-        url: `ws:localhost:9090`
+        url: `ws://127.0.0.1:9090`
     });
 
     ros.on('connection', function () {

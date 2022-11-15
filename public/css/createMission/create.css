@@ -1,0 +1,57 @@
+:root {
+    --column-create-missions: 4;
+}
+.create-missions-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    margin-top: 60px;
+}
+.create-misisons-item {
+    width: calc(100% / var(--column-create-missions) - 20px);
+    height: 100px;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    margin-left: 20px ;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 2.2rem;
+    padding: 8px;
+    opacity: 0.8;
+    cursor: pointer;
+    position: relative;
+}
+.create-misisons-item:hover {
+    opacity: 0.9;
+ }
+
+.delete-mission-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 50%;
+    border: none;
+    transform: translateX(20%) translateY(-20%);
+    cursor: pointer;
+}
+.delete-mission-btn:hover{ 
+    background-color: rgb(184, 182, 182);
+}
+
+
+
+.create-missions-btn {
+    font-size: 6rem;
+    border: none;
+    background-color: #ccc;
+    color: var(--main-color);
+    opacity: 0.7;
+}
+.create-missions-btn:hover {
+    background-color: #ccc;
+    opacity: 1;
+}

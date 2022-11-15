@@ -10,8 +10,17 @@ Route::get('/', function () {
 
 
 
-Route::prefix('dashboard') ->name('dashboard.') -> group(function() {
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
 
-    Route::get('missions', [MissionsController::class, 'index'])->name('missions');
+    Route::prefix('missions')->name('missions.')->group(function () {
+        Route::get('/', [MissionsController::class, 'index']);
+        Route::get('/createpoint', [MissionsController::class, 'createPoint'])->name('createpoint');
+        Route::get('/trackingmission', [MissionsController::class, 'trackingMission'])->name('trackingmission');
+
+        Route::prefix('/createmissions')->name('createmissions.')->group(function () {
+            Route::get('/', [MissionsController::class, 'createMissions']);
+            Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('createstepsmissions');
+        });
+    });
 });

@@ -1,32 +1,35 @@
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
-const navTablist = $$('.navtab-item')
-const contentTablist = $$('.nav-content')
-let currentHash = window.location.hash
+activeNavTab()
+showTabFunctionAction()
 
 
-reloadActiveTab()
-activeTab()
+function activeNavTab() {
+    const navTablink = $$('.navtab-link')
+    let currentPathName = window.location.pathname
 
-function activeTab() {
-    navTablist.forEach((navTabItem, index) => {
-        navTabItem.addEventListener('click', () => {
-            $('.navtab-item.active').classList.remove("active")
-            $('.nav-content.show').classList.remove("show")
-            navTabItem.classList.add("active")
-            contentTablist[index].classList.add("show")
-        })
+    navTablink.forEach(element => {
+        if (element.href.indexOf(currentPathName) != -1) {
+            element.parentElement.classList.add('active')
+        }
     });
 }
 
-function reloadActiveTab() {
-    if (currentHash) {
-        const navContentActive = $(currentHash)
-        const navTabActive = $(`[href="${currentHash}"]`)
-        $('.navtab-item.active').classList.remove("active")
-        $('.nav-content.show').classList.remove("show")
-        navTabActive.parentElement.classList.add('active')
-        navContentActive.classList.add("show")
-    }
+
+function showTabFunctionAction() {
+    const addBtns = $$('.add-f-a-icon')
+    const formFunctionAction = $$('.form-missions-f-a')
+
+    addBtns.forEach((addBtn, index) => {
+        addBtn.addEventListener('click', (e) => {
+
+            $('.misisons-f-a-item.active').classList.remove('active')
+            $('.form-missions-f-a.show').classList.remove('show')
+
+            e.target.parentElement.classList.add('active')
+            formFunctionAction[index].classList.add('show')
+        })
+    })
+
 }
