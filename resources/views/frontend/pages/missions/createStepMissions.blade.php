@@ -12,10 +12,13 @@
 
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             @include('frontend.blocks.createMissions.createStep')
-            </div>
         </div>
-        <script type="module" src="/js/main.js"></script>
-        <script type="module" src="/js/missions.js"></script>
-        <script type="module" src="/js/missions/createStepMission.js"></script>
+        <script>
+            document.title = 'Create Mission | Mvibot'
+        </script>
+    </div>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/missions.js"></script>
+    <script type="module" src="/js/missions/createStepMission.js"></script>
     </div>
 @endsection

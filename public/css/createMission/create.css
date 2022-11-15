@@ -5,7 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: -20px;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 .create-misisons-item {
     width: calc(100% / var(--column-create-missions) - 20px);

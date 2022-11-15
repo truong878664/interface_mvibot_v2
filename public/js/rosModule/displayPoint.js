@@ -17,7 +17,9 @@ function displayPoint(x, y) {
             z: 0,
         }
     });
-    point_pub.publish(point_msg);
+    setTimeout(() => {
+        point_pub.publish(point_msg);
+    }, 100);
 }
 
 export default displayPoint
