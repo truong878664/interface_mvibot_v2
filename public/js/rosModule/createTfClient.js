@@ -1,14 +1,14 @@
-import {ros} from "../main.js"
+import { ros } from "../main.js";
 
 function createTfClient() {
     const tfClient = new ROSLIB.TFClient({
         ros: ros,
         rate: 10,
-        fixedFrame: '/map',
+        fixedFrame: "/map",
         angularThres: 0.08,
         transThres: 0.05,
     });
-    return tfClient
+    return tfClient;
 }
 
-export default createTfClient
+export default createTfClient;

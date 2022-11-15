@@ -1,11 +1,11 @@
-const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
-const missionCreateBtn = $('.create-missions-btn')
-const mission = $('#name-mission')
+const missionCreateBtn = $(".create-missions-btn");
+const mission = $("#name-mission");
 
-missionCreateBtn.addEventListener('click', () => {
+missionCreateBtn.addEventListener("click", () => {
     setTimeout(() => {
-        mission.focus()
-    }, 1)
-})
+        mission.focus();
+    }, 1);
+});

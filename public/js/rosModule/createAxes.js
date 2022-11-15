@@ -7,4 +7,4 @@ function createAxes(viewer) {
     viewer.addObject(axes);
 }
 
-export default createAxes
+export default createAxes;

@@ -13,13 +13,9 @@ class PositionController extends Controller
     public function index()
     {
     }
-<<<<<<< HEAD
-    public function addPosition(Request $request)
-    {
-=======
+
     public function createPoint(Request $request)
-    {   
->>>>>>> 5146c8de2006b02893ea370373fa6705899e8b8d
+    {
 
         $name_position = $request->name_position;
         $x = $request->x;
