@@ -23,4 +23,16 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
             Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('createstepsmissions');
         });
     });
+
+    Route::prefix('map')->name('map.')->group(function () {
+        Route::get('/', function() {
+            return view('frontend.pages.map.map');
+        });
+    });
+
+    Route::prefix('status')->name('status.')->group(function () {
+        Route::get('/', function() {
+            return view('frontend.pages.status.status');
+        });
+    });
 });

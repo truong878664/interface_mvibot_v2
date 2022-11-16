@@ -12,7 +12,7 @@ function createMap(height, width, divID = 'map') {
         antialias: true,
         cameraZoomSpeed: 2,
         alpha: 0.5,
-        cameraPose: { x: 10, y: 10, z: 20 },
+        cameraPose: { x: -10, y: -10, z: 20 },
     }
 
     viewer = new ROS3D.Viewer(obtionViewer)
