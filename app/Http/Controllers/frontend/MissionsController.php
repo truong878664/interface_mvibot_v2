@@ -33,7 +33,7 @@ class MissionsController extends Controller
     public function createStepsMissions(Request $request)
     {
         $idRender = $request->id;
-        $itemRender = Missions::where('id', $idRender)->first();
+        $itemRender = Missions::find( $idRender);
         $allPoints = MissionPosition::orderBy('id', 'desc')->get();
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints'));
     }

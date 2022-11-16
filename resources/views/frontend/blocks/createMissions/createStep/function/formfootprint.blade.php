@@ -30,14 +30,3 @@
     <input type="submit" class="add-btn submit-btn" value="Add">
     @csrf
 </form>
-<script>
-    function idMissonsCurrent() {
-        const pathName = window.location.pathname
-        const currentIdMission = pathName.slice(pathName.lastIndexOf('/') + 1, pathName.length)
-        const inputCurrentIdMission = document.querySelectorAll('.current-id-mission')
-        inputCurrentIdMission.forEach(element => {
-            element.value = currentIdMission
-        });
-    }
-    idMissonsCurrent()
-</script>

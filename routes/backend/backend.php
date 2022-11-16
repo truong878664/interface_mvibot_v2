@@ -17,5 +17,6 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::post('create-footprint', [FootprintController::class, 'createFootprint'])->name('create-footprint');
         Route::post('create-gpio', [GpioController::class, 'createGpio']);
         Route::post('create-sleep', [SleepController::class, 'createSleep']);
+        Route::post('add-point-to-mission', [CreateMissionsController::class, 'addPointToMission']);
     });
 });

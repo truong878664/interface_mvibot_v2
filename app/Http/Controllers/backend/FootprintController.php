@@ -28,13 +28,8 @@ class FootprintController extends Controller
 
         $idMission = $request->current_id_mission;
 
-        // $a = Missions::where('id', $idMission);
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $name_footprint]);
-        // $missions = new Missions;
-        // dd($missions);
-        // dd($idMission);
-        // dd($a->attributes);
-        // $a->save();
+        $oldStepMission = Missions::find($idMission)->steps_mission_name;
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'footprint#'.$name_footprint]);
         return back();
     }
 }

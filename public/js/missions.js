@@ -3,6 +3,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 activeNavTab();
 showTabFunctionAction();
+idMissionsCurrent();
 
 function activeNavTab() {
     const navTablink = $$(".navtab-link");
@@ -27,5 +28,19 @@ function showTabFunctionAction() {
             e.target.parentElement.classList.add("active");
             formFunctionAction[index].classList.add("show");
         });
+    });
+}
+
+function idMissionsCurrent() {
+    const pathName = window.location.pathname;
+    const currentIdMission = pathName.slice(
+        pathName.lastIndexOf("/") + 1,
+        pathName.length
+    );
+    const inputCurrentIdMission = document.querySelectorAll(
+        ".current-id-mission"
+    );
+    inputCurrentIdMission.forEach((element) => {
+        element.value = currentIdMission;
     });
 }

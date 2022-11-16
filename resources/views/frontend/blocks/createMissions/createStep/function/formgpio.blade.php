@@ -34,6 +34,7 @@
             <label for="in_pulldown">in_pulldown</label>
             <input type="text" name="in_pulldown" id="in_pulldown">
         </div>
+        @include('frontend.blocks.createMissions.createStep.function.idMission')
     </div>
     <button class="add-btn submit-btn">Add</button>
     @csrf

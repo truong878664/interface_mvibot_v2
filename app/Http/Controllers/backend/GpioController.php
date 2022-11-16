@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\MissionGpio;
+use App\Models\backend\Missions;
 use Illuminate\Http\Request;
 
 class GpioController extends Controller
@@ -37,6 +38,12 @@ class GpioController extends Controller
         ];
 
         MissionGpio::insert($dataGpio);
+
+        $idMission = $request->current_id_mission;
+        $oldStepMission = Missions::find($idMission)->steps_mission_name;
+        // dd( $idMission);
+
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'gpio#'.$name_gpio]);
         return back();
     }
 }
