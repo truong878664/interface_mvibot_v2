@@ -38,7 +38,6 @@
     margin-left: 20px;
 }
 
-
 .mission-step-item-heading {
     text-align: center;
     line-height: 40px;
@@ -78,9 +77,7 @@
     background-color: rgba(73, 113, 116, 0.4);
     box-shadow: 0 0 10px rgb(231, 231, 231);
     position: relative;
-
 }
-
 
 .add-f-a-icon {
     padding: 7px 10px;
@@ -92,10 +89,6 @@
     text-align: center;
     font-size: 2rem;
 }
-
-
-
-
 
 .missison-point-content {
     overflow: scroll;
@@ -129,9 +122,11 @@
     font-family: var(--number-font);
 }
 
-.deciption-point {}
+.deciption-point {
+}
 
-.point-item-action {}
+.point-item-action {
+}
 
 .action-point-btn {
     height: 30px;
@@ -148,9 +143,11 @@
     background-color: rgb(235, 235, 235);
 }
 
-.show-point-map {}
+.show-point-map {
+}
 
-.add-point {}
+.add-point {
+}
 
 .delete-point-map {
     font-size: 1.6rem;
@@ -197,7 +194,6 @@
     line-height: 25px;
     border: none;
     border-radius: 50%;
-
 }
 
 .remove-map:hover {
@@ -207,7 +203,6 @@
 .delete-point {
     display: inline-block;
 }
-
 
 .misison-function,
 .mission-action {
@@ -225,9 +220,7 @@
 
 .misisons-f-a-item:hover {
     background-color: #ccc;
-
 }
-
 
 /* steps mission */
 .heading-form-mission {
@@ -236,7 +229,6 @@
     margin-left: 8px;
     margin-bottom: 10px;
 }
-
 
 .steps-mission {
     width: calc(100% - 20px);
@@ -276,7 +268,11 @@
     padding: 0 8px;
     font-family: var(--number-font);
 }
-
+.name-sleep {
+    border: 1px solid #ccc;
+    height: 30px;
+    padding: 0 8px;
+}
 
 /* footprint */
 
@@ -295,13 +291,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    /* filter: drop-shadow(0 0 20px #000); */
 }
-
 
 .input-footprint-wrapper {
     position: absolute;
 }
-
 
 .input-footprint-wrapper span {
     font-size: 1.6rem;
@@ -314,7 +309,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
     -moz-appearance: textfield;
 }
 
@@ -329,22 +324,57 @@ input[type=number] {
 }
 
 .top-footprint {
-    bottom: 50px;
+    bottom: 100px;
     left: 20px;
 }
 
 .right-footprint {
-    top: 70px;
-    left: 30px;
+    top: 50px;
+    left: 20px;
 }
 
 .left-footprint {
-    bottom: 80px;
-    right: 60px;
-
+    bottom: 120px;
+    right: 0px;
 }
 
 .bottom-footprint {
-    top: 50px;
-    right: 50px;
+    top: 20px;
+    right: 30px;
+}
+
+.name-footprint-input {
+    border: 1px solid #ccc;
+    padding: 6px 4px;
+    flex: 1;
+}
+
+/* gpio form */
+.gpio_form input {
+    border: 1px solid #ccc;
+    padding: 6px 4px;
+    flex: 1;
+}
+
+.gpio_form label {
+    width: 108px;
+    display: inline-block;
+}
+
+.data-gpio {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.data-gpio-item {
+    width: calc(50% - 12px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 6px;
+}
+
+.label-sleep {
+    display: inline-block;
+    width: 100px;
 }

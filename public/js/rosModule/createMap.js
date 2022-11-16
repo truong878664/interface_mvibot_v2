@@ -3,22 +3,17 @@ import { ros } from "../main.js";
 var viewer;
 
 function createMap(height, width, divID = "map") {
-    const obtionViewer = {
+    const optionViewer = {
         divID: divID,
         width: width,
         height: height,
         antialias: true,
         cameraZoomSpeed: 2,
         alpha: 0.5,
-<<<<<<< HEAD
-        cameraPose: { x: -10, y: -10, z: 20 },
-    }
-=======
-        cameraPose: { x: 10, y: 10, z: 20 },
+        cameraPose: { x: -10, y: -10, z: 10 },
     };
->>>>>>> cbbdcf33e89e46e124cc84d79c56b3feda8da645
 
-    viewer = new ROS3D.Viewer(obtionViewer);
+    viewer = new ROS3D.Viewer(optionViewer);
 
     new ROS3D.OccupancyGridClient({
         ros: ros,

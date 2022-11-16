@@ -5,7 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\backend\Missions;
-use App\Models\backend\MisionPosition;
+use App\Models\backend\MissionPosition;
+use \Carbon\Carbon;
 
 class CreateMissionsController extends Controller
 {
@@ -18,8 +19,12 @@ class CreateMissionsController extends Controller
     public function createMissions(Request $request)
     {
         $name_mission = $request->input('name_mission');
+        $created_at = Carbon::now();
 
-        $data = ["name_mission" => $name_mission];
+        $data = [
+            "name_mission" => $name_mission,
+            "created_at" => $created_at
+        ];
 
         Missions::insert($data);
         return back();
@@ -35,7 +40,7 @@ class CreateMissionsController extends Controller
     public function deletePoint(Request $request)
     {
         $deleteId = $request->id;
-        MisionPosition::where('id', $deleteId)->delete();
+        MissionPosition::where('id', $deleteId)->delete();
         return back();
     }
 }

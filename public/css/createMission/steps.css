@@ -1,0 +1,46 @@
+.steps-mission {
+    overflow: scroll;
+}
+
+.steps-wrapper {
+    display: flex;
+    padding: 4px;
+    flex-wrap: wrap;
+}
+
+.arrow {
+    width: 30px;
+    height: 4px;
+    background-color: aqua;
+    position: relative;
+}
+
+.arrow::after {
+    content: "";
+    position: absolute;
+
+    /* width: 10px;
+    height: 10px;
+    background-color: aqua; */
+    right: -2px;
+    top: 50%;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid aqua;
+    border-top: 10px solid transparent;
+    /* border-right: 10px solid transparent; */
+    transform: translateY(-50%);
+    /* border-color: rgb(255, 0, 0); */
+}
+
+.step-item {
+    padding: 4px 8px;
+    margin: 8px 4px;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    border-radius: 4px;
+}
+.step-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -17,6 +17,7 @@ function displayPose(x, y, z, w) {
                 y: y,
                 z: 0,
             },
+
             orientation: {
                 x: 0,
                 y: 0,

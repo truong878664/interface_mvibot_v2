@@ -5,7 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\backend\Missions;
-use App\Models\backend\MisionPosition;
+use App\Models\backend\MissionPosition;
 
 class MissionsController extends Controller
 {
@@ -34,7 +34,7 @@ class MissionsController extends Controller
     {
         $idRender = $request->id;
         $itemRender = Missions::where('id', $idRender)->first();
-        $allPoints = MisionPosition::orderBy('id', 'desc')->get();
+        $allPoints = MissionPosition::orderBy('id', 'desc')->get();
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints'));
     }
 }

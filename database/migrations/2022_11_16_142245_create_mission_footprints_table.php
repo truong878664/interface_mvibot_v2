@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('missions', function (Blueprint $table) {
+        Schema::create('mission_footprints', function (Blueprint $table) {
             $table->id();
-            $table->string('name_mission');
-            $table->string('steps_mission')->nullable();
-            $table->string('steps_mission_name')->nullable();
-            $table->timestamps();
+            $table->string('name_footprint');
+            $table->string('mode')->default('footprint');
+            $table->integer('time_out')->default(-1);
+            $table->integer('x1');
+            $table->integer('y1');
+            $table->integer('x2');
+            $table->integer('y2');
         });
     }
 
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('missions');
+        Schema::dropIfExists('mission_footprints');
     }
 };

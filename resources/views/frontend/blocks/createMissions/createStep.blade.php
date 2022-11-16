@@ -38,4 +38,5 @@
     </div>
 </div>
 <div class="steps-mission">
+    @include('frontend/blocks/createMissions/createStep/steps')
 </div>

@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('missions', function (Blueprint $table) {
+        Schema::create('mission_markers', function (Blueprint $table) {
             $table->id();
-            $table->string('name_mission');
-            $table->string('steps_mission')->nullable();
-            $table->string('steps_mission_name')->nullable();
+            $table->string('name_marker');
+            $table->integer('time_out')->default(-1);
+            $table->string('mode')->default('marker');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('missions');
+        Schema::dropIfExists('mission_markers');
     }
 };

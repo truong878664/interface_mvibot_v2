@@ -8,8 +8,6 @@ Route::get('/', function () {
     return view('frontend.pages.home');
 });
 
-
-
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
 
@@ -23,20 +21,16 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
             Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('create-steps-missions');
         });
     });
-<<<<<<< HEAD
 
     Route::prefix('map')->name('map.')->group(function () {
-        Route::get('/', function() {
+        Route::get('/', function () {
             return view('frontend.pages.map.map');
         });
     });
 
     Route::prefix('status')->name('status.')->group(function () {
-        Route::get('/', function() {
+        Route::get('/', function () {
             return view('frontend.pages.status.status');
         });
     });
 });
-=======
-});
->>>>>>> cbbdcf33e89e46e124cc84d79c56b3feda8da645

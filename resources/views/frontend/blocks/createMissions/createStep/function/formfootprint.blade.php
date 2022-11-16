@@ -1,30 +1,31 @@
 <p class="heading-form-mission">Footprint</p>
-<form action="">
-    {{-- <label for="name-footprint">Name footprint</label> <br> --}}
-    {{-- <input id="name-footprint" type="text" > --}}
+<form method="POST" action="/dashboard/missions/create-footprint">
+    <div class="name-footprint">
+        <label for="">Name</label>
+        <input class="name-footprint-input" type="text" name="name_footprint" required>
+    </div>
     <div class="footprint-img" style="background-image:url('/img/footprint.png');" class="img-footprint">
         <div class="input-footprint-wrapper top-footprint">
-            <input type="number" class=" input-footprint" placeholder="front">
+            <input required type="number" class=" input-footprint" placeholder="front" name="x1">
             <span>cm</span>
         </div>
 
         <div class="input-footprint-wrapper right-footprint">
-            <input type="number" class=" input-footprint" placeholder="right">
+            <input required type="number" class=" input-footprint" placeholder="right" name="y2">
             <span>cm</span>
         </div>
 
         <div class="input-footprint-wrapper left-footprint">
-            <input type="number" class="left-footprint input-footprint" placeholder="left">
+            <input required type="number" class="left-footprint input-footprint" placeholder="left" name="y1">
             <span>cm</span>
         </div>
 
         <div class="input-footprint-wrapper bottom-footprint">
-            <input type="number" class="bottom-footprint input-footprint" placeholder="behind">
+            <input required type="number" class="bottom-footprint input-footprint" placeholder="behind" name="x2">
             <span>cm</span>
         </div>
-
     </div>
 
-    <button class="add-btn submit-btn">Add</button>
-
+    <input type="submit" class="add-btn submit-btn" value="Add">
+    @csrf
 </form>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\backend\MisionPosition;
+use App\Models\backend\MissionPosition;
 use \Carbon\Carbon;
 
 class PositionController extends Controller
@@ -16,7 +16,6 @@ class PositionController extends Controller
 
     public function createPoint(Request $request)
     {
-
         $name_position = $request->name_position;
         $x = $request->x;
         $y = $request->y;
@@ -41,7 +40,7 @@ class PositionController extends Controller
             "created_at" => $created_at,
         ];
 
-        MisionPosition::insert($dataPosition);
+        MissionPosition::insert($dataPosition);
 
         return Redirect::back();
     }

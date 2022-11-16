@@ -9,7 +9,7 @@
             </div>
             <div class="point-item-action">
 
-                <form class="delete-point" method="post" action="/dashboard/missions/deletepoint/{{ $point->id }}">
+                <form class="delete-point" method="post" action="/dashboard/missions/delete-point/{{ $point->id }}">
                     @method('delete')
                     <button class="delete-point-map action-point-btn"><i class="fa-solid fa-xmark"></i></button>
                     @csrf
