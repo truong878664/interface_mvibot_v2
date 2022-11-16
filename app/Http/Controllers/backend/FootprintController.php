@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\backend\MissionFootprint;
+use App\Models\backend\Missions;
 
 class FootprintController extends Controller
 {
@@ -24,6 +25,16 @@ class FootprintController extends Controller
             "y2" => $y2,
         ];
         MissionFootprint::insert($dataFootprint);
+
+        $idMission = $request->current_id_mission;
+
+        // $a = Missions::where('id', $idMission);
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $name_footprint]);
+        // $missions = new Missions;
+        // dd($missions);
+        // dd($idMission);
+        // dd($a->attributes);
+        // $a->save();
         return back();
     }
 }
