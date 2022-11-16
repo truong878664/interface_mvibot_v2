@@ -1,28 +1,31 @@
-import { ros } from '../main.js'
+import { ros } from "../main.js";
 
-var viewer
+var viewer;
 
-function createMap(height, width, divID = 'map') {
-
-    const obtionViewer =
-    {
+function createMap(height, width, divID = "map") {
+    const obtionViewer = {
         divID: divID,
         width: width,
         height: height,
         antialias: true,
         cameraZoomSpeed: 2,
         alpha: 0.5,
+<<<<<<< HEAD
         cameraPose: { x: -10, y: -10, z: 20 },
     }
+=======
+        cameraPose: { x: 10, y: 10, z: 20 },
+    };
+>>>>>>> cbbdcf33e89e46e124cc84d79c56b3feda8da645
 
-    viewer = new ROS3D.Viewer(obtionViewer)
+    viewer = new ROS3D.Viewer(obtionViewer);
 
     new ROS3D.OccupancyGridClient({
         ros: ros,
-        rootObject: viewer.scene
+        rootObject: viewer.scene,
     });
 
-    return viewer
-};
+    return viewer;
+}
 
-export default createMap
+export default createMap;

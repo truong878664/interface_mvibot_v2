@@ -35,7 +35,6 @@ class CreateMissionsController extends Controller
     public function deletePoint(Request $request)
     {
         $deleteId = $request->id;
-        // dd( $deleteId);
         MisionPosition::where('id', $deleteId)->delete();
         return back();
     }

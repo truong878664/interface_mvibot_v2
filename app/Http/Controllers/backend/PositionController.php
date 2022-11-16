@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\backend\MisionPosition;
-Use \Carbon\Carbon;
+use \Carbon\Carbon;
 
 class PositionController extends Controller
 {
     public function index()
     {
     }
+
     public function createPoint(Request $request)
-    {   
+    {
 
         $name_position = $request->name_position;
         $x = $request->x;

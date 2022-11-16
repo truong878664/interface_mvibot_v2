@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/createMission/createStep.css">
 <div class="create-mission-header">
-    <a href="{{ route('dashboard.missions.createmissions.') }}" class="back-btn"><i class="fa-solid fa-angle-left"></i></a>
+    <a href="{{ route('dashboard.missions.create-missions.') }}" class="back-btn"><i
+            class="fa-solid fa-angle-left"></i></a>
     <div class="create-mission-heading">{{ $itemRender->name_mission }}</div>
 </div>
 <div class="create-mission-wrapper">

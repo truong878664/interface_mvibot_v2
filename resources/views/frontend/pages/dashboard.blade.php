@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/dashboard.css">
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
-    
+
     <div class="contents dashboard-content">
         <a class="dashboard-content-item blue" href="{{ route('dashboard.missions.') }}">
             <div class="dashboard-content-item-icon"><i class="fa-solid fa-circle-chevron-right"></i></div>

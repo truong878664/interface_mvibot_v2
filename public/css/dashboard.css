@@ -1,10 +1,9 @@
-:root{
+:root {
     --colum-dashboard: 4;
 }
 
 
-.dashboard-heading {
-}
+.dashboard-heading {}
 
 .dashboard-content {
     display: flex;

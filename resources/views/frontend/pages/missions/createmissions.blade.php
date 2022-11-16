@@ -17,6 +17,7 @@
             <script type="module" src="/js/missions/createMissions.js"></script>
         </div>
     </div>
+
     <script>
         document.title = 'Create Mission | Mvibot'
     </script>

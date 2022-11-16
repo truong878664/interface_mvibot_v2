@@ -1,10 +1,10 @@
-import { ros } from '../main.js'
+import { ros } from "../main.js";
 
 function displayPose(x, y, z, w) {
     const pose_pub = new ROSLIB.Topic({
         ros: ros,
-        name: "/pose_pub", 
-        messageType: 'geometry_msgs/PoseStamped',
+        name: "/pose_pub",
+        messageType: "geometry_msgs/PoseStamped",
         queue_size: 1,
     });
     const pose_msg = new ROSLIB.Message({
@@ -23,11 +23,11 @@ function displayPose(x, y, z, w) {
                 z: z,
                 w: w,
             },
-        }
+        },
     });
     setTimeout(() => {
         pose_pub.publish(pose_msg);
     }, 100);
 }
 
-export default displayPose
+export default displayPose;

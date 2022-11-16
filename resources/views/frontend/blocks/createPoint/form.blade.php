@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/createPoint/form.css">
 <div class="overlay"></div>
-<form method="POST" action="{{ route('dashboard.missions.createpoint') }}" class="form-create-point">
+<form method="POST" action="{{ route('dashboard.missions.create-point') }}" class="form-create-point">
     <label for="form-create-point-checkbox" class="form-create-point-close"><i class="fa-solid fa-xmark"></i></label>
 
     <div class="name-point-wrapper form-item">
@@ -10,11 +10,13 @@
     <div class="display-positon-wrapper">
         <div class="display-position-item">
             <span>x</span>
-            <input class="display-positon display-positon-x" tabindex="-1" id="" type="text" value="0">
+            <input class="display-positon display-positon-x" tabindex="-1" id="" type="text"
+                value="0">
         </div>
         <div class="display-position-item">
             <span>y</span>
-            <input class="display-positon display-positon-y" tabindex="-1" id="" type="text" value="0">
+            <input class="display-positon display-positon-y" tabindex="-1" id="" type="text"
+                value="0">
         </div>
         <div class="display-position-item">
             <span>z</span>

@@ -11,23 +11,23 @@ class MissionsController extends Controller
 {
     public function index()
     {
-        return redirect('/dashboard/missions/createpoint');
+        return redirect('/dashboard/missions/create-point');
     }
 
     public function createPoint()
     {
-        return view('frontend.pages.missions.createpoint');
+        return view('frontend.pages.missions.createPoint');
     }
 
     public function createMissions()
     {
         $allMissions = Missions::all();
-        return view('frontend.pages.missions.createmissions', compact('allMissions'));
+        return view('frontend.pages.missions.createMissions', compact('allMissions'));
     }
 
     public function trackingMission()
     {
-        return view('frontend.pages.missions.trackingmission');
+        return view('frontend.pages.missions.trackingMission');
     }
 
     public function createStepsMissions(Request $request)

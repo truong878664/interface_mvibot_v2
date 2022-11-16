@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/createMission/form.css">
 
 @foreach ($allMissions as $itemMission)
-    <a href="createmissions/{{ $itemMission->id }}" class="create-misisons-item">
+    <a href="create-missions/{{ $itemMission->id }}" class="create-misisons-item">
         <form method="post" action="delete/{{ $itemMission->id }}">
             @method('delete')
             <button class="delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>
