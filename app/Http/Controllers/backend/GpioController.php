@@ -44,6 +44,7 @@ class GpioController extends Controller
         // dd( $idMission);
 
         Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'gpio#'.$name_gpio]);
-        return back();
+        
+        return back()->with('msg', 'success');
     }
 }

@@ -14,7 +14,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::delete('delete/{id}', [CreateMissionsController::class, 'deleteMissions']);
         Route::delete('delete-point/{id}', [CreateMissionsController::class, 'deletePoint']);
 
-        Route::post('create-footprint', [FootprintController::class, 'createFootprint'])->name('create-footprint');
+        Route::post('create-footprint', [FootprintController::class, 'createFootprint']);
         Route::post('create-gpio', [GpioController::class, 'createGpio']);
         Route::post('create-sleep', [SleepController::class, 'createSleep']);
         Route::post('add-point-to-mission', [CreateMissionsController::class, 'addPointToMission']);

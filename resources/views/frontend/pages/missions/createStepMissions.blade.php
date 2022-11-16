@@ -13,6 +13,7 @@
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             @include('frontend.blocks.createMissions.createStep')
         </div>
+
         <script>
             document.title = 'Create Mission | Mvibot'
         </script>
@@ -22,3 +23,13 @@
     <script type="module" src="/js/missions/createStepMission.js"></script>
     </div>
 @endsection
+
+
+
+@if (Session::has('msg'))
+    <div class="">
+        <ul>
+            <li>{{ Session::get('msg') }}</li>
+        </ul>
+    </div>
+@endif

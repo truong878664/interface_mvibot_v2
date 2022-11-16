@@ -1,5 +1,6 @@
 <p class="heading-form-mission">GPIO</p>
 {{-- <form method="post" action="{{route()}}" class="gpio_form"> --}}
+
 <form method="POST" action="/dashboard/missions/create-gpio" class="gpio_form">
     <div class="name-gpio">
         <label for="name-gpio">Name</label>
