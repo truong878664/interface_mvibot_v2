@@ -25,7 +25,6 @@ class GpioController extends Controller
         $in_pullup = $request->in_pullup;
         $in_pulldown = $request->in_pulldown;
 
-
         $dataGpio = [
             "name_gpio" => $name_gpio,
             "time_out" => $time_out,
@@ -43,8 +42,8 @@ class GpioController extends Controller
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
         // dd( $idMission);
 
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'gpio#'.$name_gpio]);
-        
-        return back()->with('msg', 'success');
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|' . 'gpio#' . $name_gpio]);
+
+        return back()->with('msg', 'Save GPIO successfully');
     }
 }

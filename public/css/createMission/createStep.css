@@ -122,7 +122,8 @@
     font-family: var(--number-font);
 }
 
-.deciption-point {}
+.deciption-point {
+}
 
 .point-item-action {
     display: flex;
@@ -147,9 +148,11 @@
     background-color: rgb(235, 235, 235);
 }
 
-.show-point-map {}
+.show-point-map {
+}
 
-.add-point {}
+.add-point {
+}
 
 .delete-point-map {
     font-size: 1.6rem;
@@ -381,4 +384,27 @@ input[type="number"] {
 .label-sleep {
     display: inline-block;
     width: 100px;
+}
+
+/* message */
+
+.message-success {
+    position: fixed;
+    height: 40px;
+    background-color: #55b43533;
+    top: 80px;
+    right: 40px;
+    z-index: 100;
+    display: flex;
+    border-radius: 4px;
+    padding: 4px;
+    border: 1px solid #54b435;
+    align-items: center;
+    color: #387522;
+}
+
+.check-icon {
+    padding: 0 8px;
+}
+.message-title {
 }

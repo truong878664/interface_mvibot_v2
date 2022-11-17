@@ -41,15 +41,16 @@ class CreateMissionsController extends Controller
     {
         $deleteId = $request->id;
         MissionPosition::where('id', $deleteId)->delete();
-        return back();
+        return back()->with('msg', 'Successful point deletion');
     }
 
-    public function addPointToMission(Request $request) {
+    public function addPointToMission(Request $request)
+    {
         $name_position = $request->name_position;
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
 
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'position#'. $name_position]);
-        return back();
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|' . 'position#' . $name_position]);
+        return back()->with('msg', 'Save point successfully');
     }
 }

@@ -4,6 +4,7 @@ const $$ = document.querySelectorAll.bind(document);
 activeNavTab();
 showTabFunctionAction();
 idMissionsCurrent();
+removeToastMsg();
 
 function activeNavTab() {
     const navTablink = $$(".navtab-link");
@@ -43,4 +44,13 @@ function idMissionsCurrent() {
     inputCurrentIdMission.forEach((element) => {
         element.value = currentIdMission;
     });
+}
+
+function removeToastMsg() {
+    const toastMsg = $(".message-success");
+    if (toastMsg) {
+        setTimeout(() => {
+            toastMsg.remove();
+        }, 3000);
+    }
 }

@@ -24,12 +24,13 @@ class FootprintController extends Controller
             "y1" => $y1,
             "y2" => $y2,
         ];
+
+        // add footprint to mission
         MissionFootprint::insert($dataFootprint);
-
         $idMission = $request->current_id_mission;
-
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission.'|'.'footprint#'.$name_footprint]);
-        return back();
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|' . 'footprint#' . $name_footprint]);
+
+        return back()->with('msg', 'Save footprint successfully');
     }
 }
