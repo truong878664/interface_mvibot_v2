@@ -386,6 +386,54 @@ input[type="number"] {
     width: 100px;
 }
 
+.step-item.step-gpio {
+    background-color: #379237;
+}
+
+.step-item.step-position {
+    background-color: #393e46;
+    margin-left: 50px;
+    position: relative;
+}
+.step-item.step-position::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: calc(100% + 2px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 4px;
+    background-color: #0008c1;
+}
+
+.step-item.step-position::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: calc(100% + 2px);
+    top: 50%;
+    transform: translateY(-50%) translateX(60%);
+    border-left: 10px solid #0008c1;
+    border-right: 10px solid transparent;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+}
+
+.step-item.step-footprint {
+    background-color: #0008c1;
+}
+.step-item.step-sleep {
+    background-color: #cf0a0a;
+    /* color: #000; */
+}
+.step-item.step-sound {
+    background-color: #3f3b6c;
+}
+.step-item.step-marker {
+    background-color: #432c7a;
+}
+
 /* message */
 
 .message-success {

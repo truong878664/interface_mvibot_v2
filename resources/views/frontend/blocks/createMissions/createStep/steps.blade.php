@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/createMission/steps.css">
 <div class="steps-wrapper">
-    <div class="step-item step-footprint">GPIO</div>
+    {{-- <div class="step-item step-footprint">GPIO</div>
 
     <div class="step-item-wrapper">
         <div class="arrow"></div>
@@ -12,8 +12,16 @@
     <div class="step-item step-marker">footprint</div>
 
     <div class="step-item step-sound">footprint</div>
-    <div class="step-item step-sleep">footprint</div>
-
+    <div class="step-item step-sleep">footprint</div> --}}
+    @php
+        $datas = explode('|', $itemRender->steps_mission_name);
+    @endphp
+    @foreach ($datas as $value)
+        @php
+            $item = substr($value, 0, strpos($value, '#'));
+        @endphp
+        <div class="step-item step-{{ $item }}">{{ $item }}</div>
+    @endforeach
 </div>
 
 <script>
