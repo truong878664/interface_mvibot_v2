@@ -24,7 +24,7 @@ class SleepController extends Controller
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
 
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|' . 'sleep#' . $name_sleep]);
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|sleep#' . $name_sleep]);
         return back()->with('msg', 'Save sleep successfully');
     }
 }

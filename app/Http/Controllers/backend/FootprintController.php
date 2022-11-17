@@ -54,6 +54,6 @@ class FootprintController extends Controller
         MissionFootprint::insert($dataFootprint);
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|' . 'footprint#' . $name_footprint]);
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|footprint#' . $name_footprint]);
     }
 }

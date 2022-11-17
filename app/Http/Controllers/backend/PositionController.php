@@ -6,14 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\backend\MissionPosition;
+use App\Models\backend\Missions;
 use \Carbon\Carbon;
 
 class PositionController extends Controller
 {
-    public function index()
-    {
-    }
-
     public function createPoint(Request $request)
     {
         $name_position = $request->name_position;
@@ -43,5 +40,24 @@ class PositionController extends Controller
         MissionPosition::insert($dataPosition);
 
         return Redirect::back();
+    }
+    public function deletePoint(Request $request)
+    {
+
+        $deleteId = $request->id;
+
+        $deleteName = MissionPosition::where('id', $deleteId)->get()->toArray()[0]['name_position'];
+
+        $nameStepMissionDelete = "|position#$deleteName";
+        $dataStepMission = Missions::all();
+
+        foreach ($dataStepMission as $itemStepMission) {
+            $newString = str_replace("$nameStepMissionDelete", "", $itemStepMission->steps_mission_name);
+            Missions::where('id', $itemStepMission->id)->update(["steps_mission_name" => $newString]);
+        }
+        MissionPosition::where('id', $deleteId)->delete();
+
+
+        return back()->with('msg', 'Successful point deletion');
     }
 }

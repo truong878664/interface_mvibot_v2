@@ -12,7 +12,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::post('create-point', [PositionController::class, 'createPoint']);
         Route::post('create-missions', [CreateMissionsController::class, 'createMissions']);
         Route::delete('delete/{id}', [CreateMissionsController::class, 'deleteMissions']);
-        Route::delete('delete-point/{id}', [CreateMissionsController::class, 'deletePoint']);
+        Route::delete('delete-point/{id}', [PositionController::class, 'deletePoint']);
 
         Route::post('create-footprint', [FootprintController::class, 'createFootprint']);
         Route::post('create-gpio', [GpioController::class, 'createGpio']);

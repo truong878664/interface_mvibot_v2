@@ -111,7 +111,7 @@ class MissionsController extends Controller
             }
         }, $stepMissionData);
 
-        $dataStepMission = implode($stepMission);
+        $dataStepMission = trim(implode($stepMission), " ");
 
         Missions::where('id', $idMission)->update(['steps_mission' => $dataStepMission]);
     }

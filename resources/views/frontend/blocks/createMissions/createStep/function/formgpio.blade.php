@@ -8,7 +8,7 @@
     </div>
     <div class="time-out">
         <label for="time-out"> Time out</label>
-        <input name="time_out" id="time_out" type="text">
+        <input name="time_out" id="time_out" type="number">
     </div>
     <div class="data-gpio">
         <div class="data-gpio-item">
