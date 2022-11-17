@@ -30,7 +30,7 @@
     <div class="time-color-wrapper form-item">
         <div class="time-point-wrapper form-item">
             <label for="time-point">Time out</label>
-            <input id="time-point" type="number" name="time_position" required>
+            <input id="time-point" type="number" name="time_out" required>
         </div>
 
         <div class="color-point-wrapper form-item">

@@ -21,7 +21,7 @@ class PositionController extends Controller
         $y = $request->y;
         $z = $request->z;
         $w = $request->w;
-        $time_position = $request->time_position;
+        $time_out = $request->time_out;
         $color_position = $request->color_position;
         $mode_position = $request->mode_position;
         $mode_child = $request->mode_child;
@@ -33,7 +33,7 @@ class PositionController extends Controller
             "y" => $y,
             "z" => $z,
             "w" => $w,
-            "time_position" => $time_position,
+            "time_out" => $time_out,
             "color_position" => $color_position,
             "mode_position" => $mode_position,
             "mode_child" => $mode_child,

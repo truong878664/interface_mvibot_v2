@@ -22,7 +22,6 @@ return new class extends Migration
             $table->float('y');
             $table->float('z', 20, 10);
             $table->float('w', 20, 10);
-            $table->integer('time_position');
             $table->string('color_position');
             $table->string('mode_position');
             $table->string('mode_child');
