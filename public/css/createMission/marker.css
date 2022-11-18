@@ -32,3 +32,76 @@
 #vl-marker:checked ~ .form-vl-marker {
     display: block;
 }
+
+.form-marker-wrapper {
+    position: fixed;
+    width: 700px;
+    /* height: 500px; */
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 16px 23px;
+    z-index: 1000;
+}
+
+.form-marker-item {
+    width: 50%;
+    /* height: 200px; */
+    /* background-color: aqua; */
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-marker {
+    display: flex;
+}
+.offset-wrapper-all {
+    /* flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+.input-offset {
+    width: 100px;
+    border: 1px solid #ccc;
+    padding: 4px;
+    margin: 8px 0;
+}
+
+.offset-wrapper-input label {
+    width: 100px;
+    display: inline-block;
+}
+
+#marker-dir-select {
+    /* background-color: red; */
+    padding: 4px;
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 50%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.close-form-marker-btn {
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color: #333;
+}
+
+.close-form-marker-btn:hover {
+    color: #000;
+}
+
+.submit-marker {
+    float: right;
+}
