@@ -244,6 +244,9 @@
     border-radius: 10px;
     background-color: rgba(62, 109, 156, 0.58);
     box-shadow: 0 0 10px rgb(231, 231, 231);
+    /* display: flex; */
+    padding-right: 100px;
+    position: relative;
 }
 
 .form-missions-f-a.show {
@@ -434,6 +437,55 @@ input[type="number"] {
     background-color: #432c7a;
 }
 
+.step-item {
+    position: relative;
+    height: 36px;
+}
+
+.step-item:hover > .move-btn,
+.step-item:hover > .delete-step {
+    display: block;
+}
+
+.move-btn {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(204, 204, 204, 0.411);
+    color: var(--main-color);
+    transform: translateY(-50%);
+    display: none;
+}
+
+.move-btn:hover,
+.delete-step:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.delete-step {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(204, 204, 204, 0.411);
+    color: var(--main-color);
+    transform: translateY(-50%) translateX(-50%);
+    display: none;
+}
+
+.move-left {
+    left: 0;
+}
+.move-right {
+    right: 0;
+}
 /* message */
 
 .message-success {
@@ -455,4 +507,20 @@ input[type="number"] {
     padding: 0 8px;
 }
 .message-title {
+}
+
+/* step sumbit */
+
+.form-submit-steps {
+    /* width: 100px; */
+}
+.submit-btn.step-submit-btn {
+    margin-left: 0px;
+}
+.submit-btn-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 16px;
 }

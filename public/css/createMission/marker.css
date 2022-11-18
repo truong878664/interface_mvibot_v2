@@ -1,0 +1,34 @@
+.type-marker {
+    display: flex;
+    width: 100%;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+
+.marker-btn {
+    /* width: 33.33%; */
+    margin: 8px;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: rgba(33, 70, 199, 0.5);
+    color: #fff;
+}
+
+.marker-btn:hover {
+    cursor: pointer;
+    background-color: var(--main-color);
+}
+
+.form-l-marker,
+.form-vl-marker {
+    /* display: none; */
+}
+
+#l-marker:checked ~ .form-l-marker {
+    display: block;
+}
+#vl-marker:checked ~ .form-vl-marker {
+    display: block;
+}

@@ -51,4 +51,13 @@ class CreateMissionsController extends Controller
         $oldStepMissionName = $currentMission->steps_mission_name;
         Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMissionName . '|position#' . $name_position]);
     }
+
+    public function updateStepMission(Request $request)
+    {
+        $idMission = $request->id_mission;
+        $dataStepsMissionName = $request->steps_mission_name;
+        $dataStepsMissionName == "|" ?    $dataStepsMissionName = "" : $dataStepsMissionName;
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $dataStepsMissionName]);
+        return back()->with('msg', 'Save step mission successfully');
+    }
 }

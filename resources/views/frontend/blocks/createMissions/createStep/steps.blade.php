@@ -1,70 +1,102 @@
 <link rel="stylesheet" href="/css/createMission/steps.css">
 <div class="steps-wrapper">
-    {{-- <div class="step-item step-footprint">GPIO</div>
-
-    <div class="step-item-wrapper">
-        <div class="arrow"></div>
-        <div class="step-item">
-            <div class="step-point">Point 1</div>
-        </div>
+    <div class="step-item step-gpio">
+        <button class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
+        <div>gpio:123</div>
+        <button class="delete-step" id-delete="1"><i class="fa-solid fa-xmark"></i></button>
+        <button class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
     </div>
-    <div class="step-item step-gpio">footprint</div>
-    <div class="step-item step-marker">footprint</div>
-    
-    <div    class="step-item step-sound">footprint</div>
-    <div class="step-item step-sleep">footprint</div> --}}
-    {{-- <input type="text" value=""> --}}
-    {{-- @foreach ($datas as $value)
-        @php
-        $item = substr($value, 0, strpos($value, '#'));
-        @endphp
-        <div class="step-item step-{{ $item }}">{{ $item }}</div>
-        @endforeach --}}
+</div>
+<div class="submit-btn-wrapper">
+    <form class="form-submit-steps" action="/dashboard/missions/update-step-missions-name" method="POST">
+        <input type="text" value="{{ $itemRender->id }}" name="id_mission" hidden>
+        <input id="input-steps-name-submit" type="text" value="" name="steps_mission_name" hidden>
+        <button class="submit-btn step-submit-btn">Save</button>
+        @csrf
+    </form>
+    <br>
+    <form class="form-submit-steps" action="">
+        <input id="input-steps-name-submit" type="text" value="" name="" hidden>
+        <button class="submit-btn step-submit-btn"><i class="fa-regular fa-paper-plane"></i></button>
+    </form>
 </div>
 @php
     $datas = explode('|', $itemRender->steps_mission_name);
     array_shift($datas);
     $datasJson = json_encode($datas);
-    // dd($datas);
     echo "<input hidden class='data-steps' type='text' value='$datasJson'>";
 @endphp
 
 <script>
     const dataStepsJson = document.querySelector('.data-steps').value
-    const dataSteps = JSON.parse(dataStepsJson)
-    // console.log(dataSteps)
-    const stepsWrapper = document.querySelector('.steps-wrapper')
-    const htmlStep = []
-    dataSteps.map(step => {
-        const stepMode = step.slice(0, step.indexOf("#"))
-        const stepName = step.slice(step.indexOf('#') + 1, step.length)
-        console.log(step)
-        return htmlStep.push(`<div class="step-item step-${stepMode}">${stepMode}:${stepName}</div>`)
-    });
+    let dataSteps = JSON.parse(dataStepsJson)
 
-    stepsWrapper.innerHTML = htmlStep.join("")
-    // console.log(htmlStep)
-    // console.log($datas)
-    // const datas = ["GPIO", "point", "Footpsdfsdfrint", "GPIggasdO", "point", "Footprint", "GPIO", "poiaasdnt",
-    //     "Footprint", "GPIO",
-    //     "point", "Footprasfint", "GasfPIO", "poiasfnt", "Footpasfrint", "GPIO", "point", "Footprint", "GPIO",
-    //     "point",
-    //     "Footpriasfnt", "GPIO", "point", "Footprint", "GPIO", "poinasft", "Footasdfprint", "GPIO", "point",
-    //     "Footprint",
-    //     "GPIO", "point", "Footpsafrint", "GPasdfIO", "point", "Footprint", "GPIO", "point", "Footprint", "GPIO",
-    //     "point",
-    //     "Footprint", "GPIO", "point", "Footprint", "GPIO", "point", "Footprint",
-    // ]
+    stepsNameSubmit(dataSteps)
+    renderStep(dataSteps)
 
-    // renderSteps(datas)
+    function stepsNameSubmit(dataSteps) {
+        const stepsNameSubmitEle = document.querySelector('#input-steps-name-submit')
+        stepsNameSubmitEle.value = `|${dataSteps.join('|')}`
+    }
 
-    // function renderSteps(datas) {
-    //     const stepWrappre = document.querySelector('.steps-wrapper')
-    //     const html = []
-    //     datas.map(item => {
-    //         html.push(`<div class="step-item">${item}</div>`)
-    //         return html
-    //     })
-    //     stepWrappre.innerHTML = html.join('')
-    // }
+    function renderStep(data) {
+        const stepsWrapper = document.querySelector('.steps-wrapper')
+        const htmlStep = []
+        data.map((step, index) => {
+            const stepMode = step.slice(0, step.indexOf("#"))
+            const stepName = step.slice(step.indexOf('#') + 1, step.length)
+            return htmlStep.push(
+                `<div class="step-item step-${stepMode}">
+                    <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
+                    <div>${stepMode}:${stepName}</div>
+                    <button class="delete-step" id-delete="${index}"><i class="fa-solid fa-xmark"></i></button>
+                    <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
+                </div>`
+            )
+        })
+        stepsWrapper.innerHTML = htmlStep.join("")
+        deleteStep(data)
+        moveStepLeft(data)
+        moveStepRight(data)
+        stepsNameSubmit(data)
+    }
+
+    function deleteStep(data) {
+        const allDeleteBtn = document.querySelectorAll('.delete-step')
+        allDeleteBtn.forEach(deleteBtn => {
+            deleteBtn.addEventListener('click', (e) => {
+                indexDelete = e.target.getAttribute('id-delete')
+                data.splice(indexDelete, 1)
+                renderStep(data)
+                dataSteps = data
+            })
+        });
+    }
+
+    function moveStepLeft(data) {
+        const allMoveBtnLeft = document.querySelectorAll('.move-left')
+        allMoveBtnLeft.forEach(moveLeftBtn => {
+            moveLeftBtn.addEventListener('click', (e) => {
+                const indexMove = Number(e.target.getAttribute('id-move'))
+                const itemMove = data.splice(indexMove, 1)
+                data.splice(indexMove - 1, '', ...itemMove)
+                dataSteps = data
+
+                renderStep(data)
+            })
+        })
+    }
+
+    function moveStepRight(data) {
+        const allMoveBtnRight = document.querySelectorAll('.move-right')
+        allMoveBtnRight.forEach(moveRightBtn => {
+            moveRightBtn.addEventListener('click', (e) => {
+                const indexMove = Number(e.target.getAttribute('id-move'))
+                const itemMove = data.splice(indexMove, 1)
+                data.splice(indexMove + 1, '', ...itemMove)
+                dataSteps = data
+                renderStep(data)
+            })
+        })
+    }
 </script>

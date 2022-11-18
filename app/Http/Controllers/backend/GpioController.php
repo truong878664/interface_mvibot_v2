@@ -36,7 +36,7 @@ class GpioController extends Controller
             "in_pulldown" => $in_pulldown,
         ];
 
-        MissionGpio::create($dataGpio);
+        $gpioInsert = MissionGpio::create($dataGpio);
 
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;

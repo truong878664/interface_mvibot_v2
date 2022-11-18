@@ -2,15 +2,14 @@
     --colum-dashboard: 4;
 }
 
-
-.dashboard-heading {}
+.dashboard-heading {
+}
 
 .dashboard-content {
     display: flex;
     width: 90%;
     flex-wrap: wrap;
 }
-
 
 /* dashboard item */
 .dashboard-content-item {
@@ -28,10 +27,10 @@
     position: relative;
     color: var(--white-color);
     cursor: pointer;
-
+    background-color: var(--main-color);
 }
 
-.dashboard-content-item.blue {
+/* .dashboard-content-item.blue {
     background-color: var(--blue-color);
 }
 
@@ -42,7 +41,7 @@
 
 .dashboard-content-item.orange {
     background-color: var(--orange-color);
-}
+} */
 
 .dashboard-content-item:hover {
     box-shadow: 0 0 20px #ccc;

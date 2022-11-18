@@ -18,5 +18,6 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::post('create-gpio', [GpioController::class, 'createGpio']);
         Route::post('create-sleep', [SleepController::class, 'createSleep']);
         Route::post('add-point-to-mission', [CreateMissionsController::class, 'addPointToMission']);
+        Route::post('update-step-missions-name', [CreateMissionsController::class, 'updateStepMission']);
     });
 });
