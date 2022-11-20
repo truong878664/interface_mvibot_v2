@@ -19,12 +19,14 @@ class SleepController extends Controller
             "name_sleep" => $name_sleep,
             "time_sleep" => $time_sleep,
         ];
-        MissionSleep::insert($dataSleep);
+
+        $sleepInsert = MissionSleep::create($dataSleep);
 
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
 
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|sleep#' . $name_sleep]);
+        $idSleep = $sleepInsert->id;
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|sleep#' . $name_sleep.'#'.$idSleep]);
         return back()->with('msg', 'Save sleep successfully');
     }
 }

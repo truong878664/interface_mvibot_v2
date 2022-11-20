@@ -1,6 +1,5 @@
 <div class="mission-step-item-heading">Point</div>
 <div class="missison-point-content">
-
     @foreach ($allPoints as $point)
         <div class="point-item point-id-{{ $point->id }}">
             <div class="point-item-content">
@@ -22,6 +21,7 @@
                 <form class="point-item-wrapper" method="post" action="/dashboard/missions/add-point-to-mission">
                     @include('frontend.blocks.createMissions.createStep.function.idMission')
                     <input type="text" value="{{ $point->name_position }}" name="name_position" hidden>
+                    <input type="text" value="{{ $point->id }}"" name="id_position" hidden>
                     <button class="add-point action-point-btn"><i class="fa-solid fa-plus"></i></button>
                     @csrf
                 </form>

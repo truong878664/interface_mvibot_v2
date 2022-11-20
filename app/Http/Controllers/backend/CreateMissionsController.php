@@ -41,15 +41,16 @@ class CreateMissionsController extends Controller
     {
         $name_position = $request->name_position;
         $idMission = $request->current_id_mission;
-        $this->addPointToStepsMissionName($idMission, $name_position);
+        $id_position = $request->id_position;
+        $this->addPointToStepsMissionName($idMission, $name_position, $id_position);
         return back()->with('msg', 'Save point successfully');
     }
 
-    public function addPointToStepsMissionName($idMission, $name_position)
+    public function addPointToStepsMissionName($idMission, $name_position, $id_position)
     {
         $currentMission = Missions::find($idMission);
         $oldStepMissionName = $currentMission->steps_mission_name;
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMissionName . '|position#' . $name_position]);
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMissionName . '|position#' . $name_position.'#'.$id_position]);
     }
 
     public function updateStepMission(Request $request)

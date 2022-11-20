@@ -1,4 +1,4 @@
-import { ros } from "../main.js";
+import { ros } from "../ros.js";
 
 function displayPose(x, y, z, w) {
     const pose_pub = new ROSLIB.Topic({

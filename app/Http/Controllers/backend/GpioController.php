@@ -40,9 +40,10 @@ class GpioController extends Controller
 
         $idMission = $request->current_id_mission;
         $oldStepMission = Missions::find($idMission)->steps_mission_name;
-        // dd( $idMission);
 
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|gpio#' . $name_gpio]);
+        $idGpio = $gpioInsert->id;
+
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMission . '|gpio#' . $name_gpio.'#'.$idGpio]);
 
         return back()->with('msg', 'Save GPIO successfully');
     }

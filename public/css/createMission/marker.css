@@ -23,20 +23,20 @@
 
 .form-l-marker,
 .form-vl-marker {
-    /* display: none; */
+    display: none;
 }
 
-#l-marker:checked ~ .form-l-marker {
+#l-marker:checked~.form-l-marker {
     display: block;
 }
-#vl-marker:checked ~ .form-vl-marker {
+
+#vl-marker:checked~.form-vl-marker {
     display: block;
 }
 
 .form-marker-wrapper {
     position: fixed;
     width: 700px;
-    /* height: 500px; */
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -48,8 +48,6 @@
 
 .form-marker-item {
     width: 50%;
-    /* height: 200px; */
-    /* background-color: aqua; */
     margin: 4px;
     display: flex;
     flex-direction: column;
@@ -58,6 +56,7 @@
 .wrapper-marker {
     display: flex;
 }
+
 .offset-wrapper-all {
     /* flex: 1;
     display: flex;

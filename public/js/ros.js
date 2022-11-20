@@ -9,7 +9,6 @@ import createPose from "./rosModule/createPose.js";
 import { setPosition } from "./rosModule/functionHandler.js";
 
 export const $ = document.querySelector.bind(document);
-export const $$ = document.querySelectorAll.bind(document);
 let viewer;
 let tfClient;
 const ros = connectRos();
@@ -18,7 +17,7 @@ const mapElement = $("#map");
 function start() {
     if (mapElement) {
         const heightMap = mapElement.offsetHeight;
-        const widthMap = mapElement.offsetWidth + 80;
+        const widthMap = mapElement.offsetWidth;
 
         viewer = createMap(heightMap, widthMap);
         tfClient = createTfClient();

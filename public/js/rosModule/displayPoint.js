@@ -1,4 +1,4 @@
-import { ros } from "../main.js";
+import { ros } from "../ros.js";
 
 function displayPoint(x, y) {
     const point_pub = new ROSLIB.Topic({

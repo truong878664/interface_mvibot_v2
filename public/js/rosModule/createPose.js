@@ -1,4 +1,4 @@
-import { ros } from "../main.js";
+import { ros } from "../ros.js";
 
 function createPose(viewer, tfClient, color = "#EA047E") {
     new ROS3D.Pose({

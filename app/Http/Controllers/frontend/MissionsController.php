@@ -42,7 +42,6 @@ class MissionsController extends Controller
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints'));
     }
 
-
     public function addPointToStepsMission($idMission)
     {
         function missionStepNameToArray($idMission)
@@ -59,10 +58,9 @@ class MissionsController extends Controller
 
         $stepMissionData = [];
         foreach ($arrayStepMissionName as $datas) {
-            $item = DB::table("mission_$datas[0]s")->where("name_$datas[0]", $datas[1])->get()->all();
+            $item = DB::table("mission_$datas[0]s")->where("id", $datas[2])->get()->all();
             array_push($stepMissionData, $item);
         };
-
         $stepMission = array_map(function ($items) {
             $item = $items[0];
             if ($item->mode == 'position') {

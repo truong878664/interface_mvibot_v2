@@ -1,4 +1,4 @@
-import { ros } from "../main.js";
+import { ros } from "../ros.js";
 
 var viewer;
 

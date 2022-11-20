@@ -1,4 +1,4 @@
-import { ros, viewer, tfClient } from "../main.js";
+import { ros } from "../ros.js";
 
 function createPoint(viewer, tfClient) {
     new ROS3D.Point({

@@ -1,6 +1,5 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <link rel="stylesheet" href="/css/missions.css">
     <div class="heading missions-heading">Mission</div>
     <div class="contents">
 
@@ -15,7 +14,6 @@
                 @include('frontend.blocks.createPoint.index')
             </div>
 
-            <script type="module" src="/js/main.js"></script>
             <script type="module" src="/js/missions.js"></script>
         </div>
     </div>

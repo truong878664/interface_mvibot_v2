@@ -1,4 +1,4 @@
-import { ros } from "../main.js";
+import { ros } from "../ros.js";
 
 function createTfClient() {
     const tfClient = new ROSLIB.TFClient({

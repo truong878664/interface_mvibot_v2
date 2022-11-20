@@ -1,4 +1,5 @@
-const connectRosBtn = document.querySelector(".connect-ros-btn");
+// const connectRosBtn = document.querySelector(".connect-ros-btn");
+import { connected, connectionFailed } from "../mainLayout.js";
 
 function connectRos() {
     const ros = new ROSLIB.Ros({
@@ -22,13 +23,4 @@ function connectRos() {
     return ros;
 }
 
-function connected() {
-    connectRosBtn.classList.remove("connection-failed");
-    connectRosBtn.classList.add("connected");
-}
-
-function connectionFailed() {
-    connectRosBtn.classList.remove("connected");
-    connectRosBtn.classList.add("connection-failed");
-}
 export default connectRos;
