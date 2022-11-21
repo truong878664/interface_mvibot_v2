@@ -27,6 +27,8 @@
             </div>
         </a>
     </div>
+    <script type="module" src="/js/ros.js"></script>
+
     <script>
         document.title = 'Mvibot | dashboard'
     </script>

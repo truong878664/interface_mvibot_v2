@@ -39,7 +39,6 @@
     <div class="container">
         @yield('content')
     </div>
-    <script type="module" src="/js/ros.js"></script>
     <script type="module" src="/js/mainLayout.js"></script>
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/ros3d.min.js"></script>

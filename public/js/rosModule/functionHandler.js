@@ -111,13 +111,13 @@ if (createButton) {
     });
 }
 
-const displayPositonX = $(".display-positon-x");
-const displayPositonY = $(".display-positon-y");
+const displayPositionX = $(".display-positon-x");
+const displayPositionY = $(".display-positon-y");
 const displayRotateZ = $(".display-rotate-z");
 
 function setValuePositionForm() {
-    displayPositonX.value = positionXElement.value;
-    displayPositonY.value = positionYElement.value;
+    displayPositionX.value = positionXElement.value;
+    displayPositionY.value = positionYElement.value;
     displayRotateZ.value = `${positionZElement.value}°`;
 }
 

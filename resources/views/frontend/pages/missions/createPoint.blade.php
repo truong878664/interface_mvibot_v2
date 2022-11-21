@@ -11,6 +11,8 @@
             </div>
 
             <script type="module" src="/js/missions.js"></script>
+            <script type="module" src="/js/ros.js"></script>
+
         </div>
     </div>
     <script>

@@ -1,4 +1,199 @@
+:root {
+    --column-status: 3;
+}
+
 .wrapper-status-content {
+    /* background-color: #cccccc; */
+    /* width: 95%; */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.status-item {
+    width: calc(100% / var(--column-status) - 16px * 2);
+    background-color: rgb(241, 241, 241);
+    margin: 16px;
+    height: 400px;
+    padding: 16px 23px;
+    box-shadow: 0 0 20px rgba(204, 204, 204, 0.514);
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: red; */
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.status-name-robot {
+}
+
+.status-status-robot {
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--white-color);
+}
+
+.status-status-robot.navigation {
+    background-color: rgb(4, 207, 4);
+}
+
+.status-status-robot.mapping {
+    background-color: red;
+}
+
+.status-battery {
+    /* font-size: 100px; */
+    width: 230px;
+    height: 230px;
+    align-self: center;
+    /* background-color: red; */
+    position: relative;
+}
+
+.outer-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
     background-color: #ccc;
-    width: 95%;
+    background: conic-gradient(#ccc 265deg, #ccc 265deg);
+    position: absolute;
+    transform: rotate(-130deg);
+    box-shadow: 0 0 20px rgba(204, 204, 204, 0.616);
+}
+.inner-circle {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 99;
+    background-color: rgb(241, 241, 241);
+}
+.inner-circle::after {
+    content: "";
+    width: 160px;
+    height: 160px;
+    background-color: red;
+    position: absolute;
+    transform: rotate(45deg) translateX(-50%);
+    top: 94%;
+    left: 35%;
+    background-color: rgb(241, 241, 241);
+}
+
+.battery-parameter-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.battery-percent {
+    font-size: 2.5em;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+}
+
+.battery-parameter {
+    display: flex;
+    position: absolute;
+    top: 40%;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.battery-a {
+    margin-bottom: 30px;
+}
+
+.battery-volt {
+}
+
+.temper-icon {
+    color: red;
+}
+.volt-icon {
+    color: orange;
+}
+
+.status-accessory {
+    display: flex;
+    font-size: 4rem;
+    justify-content: space-evenly;
+    /* background-color: red; */
+    z-index: 1000;
+    align-items: center;
+}
+
+.accessoty-item {
+    width: 90px;
+    text-align: center;
+    border: 2px solid;
+    border-color: green;
+    position: relative;
+}
+
+.icon-check {
+    font-size: 2rem;
+    position: absolute;
+    right: 10%;
+    z-index: 1000;
+}
+
+.active-icon {
+    color: green;
+}
+.inactive-icon {
+    color: red;
+}
+
+.active .inactive-icon {
+    display: none;
+}
+
+.inactive .active-icon {
+    display: none;
+}
+
+.active.accessoty-item {
+    border-color: green;
+}
+
+.inactive.accessoty-item {
+    border-color: red;
+}
+
+.name-accessoty {
+    font-size: 1.7rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.camera-icon,
+.lidar-icon {
+    display: none;
+}
+
+.lidar .lidar-icon {
+    display: block;
+}
+
+.camera .camera-icon {
+    display: block;
 }
