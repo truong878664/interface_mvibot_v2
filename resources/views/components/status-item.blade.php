@@ -20,65 +20,23 @@
         </div>
     </div>
     <div class="status-accessory">
-        <div class="accessoty-item active camera">
-            <div class="icon-check active-icon">
-                <i class="fa-solid fa-circle-check"></i>
+        @foreach ($dataSccessory as $index => $item)
+            <div
+                class="accessoty-item {{ $item['status'] === 1 ? 'active' : 'inactive' }} {{ $index <= 1 ? 'camera' : 'lidar' }}">
+                <div class="icon-check active-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="icon-check inactive-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="camera-icon">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <div class="lidar-icon">
+                    <i class="fa-solid fa-xmarks-lines"></i>
+                </div>
+                <div class="name-accessoty">{{ $item['name'] }}</div>
             </div>
-            <div class="icon-check inactive-icon">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </div>
-            <div class="camera-icon">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="lidar-icon">
-                <i class="fa-solid fa-xmarks-lines"></i>
-            </div>
-            <div class="name-accessoty">camera 1</div>
-        </div>
-        <div class="accessoty-item inactive camera">
-            <div class="icon-check active-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <div class="icon-check inactive-icon">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </div>
-            <div class="camera-icon">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="lidar-icon">
-                <i class="fa-solid fa-xmarks-lines"></i>
-            </div>
-            <div class="name-accessoty">camera 2</div>
-        </div>
-        <div class="accessoty-item inactive lidar">
-            <div class="icon-check active-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <div class="icon-check inactive-icon">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </div>
-            <div class="camera-icon">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="lidar-icon">
-                <i class="fa-solid fa-xmarks-lines"></i>
-            </div>
-            <div class="name-accessoty">lidar 1</div>
-        </div>
-        <div class="accessoty-item active lidar">
-            <div class="icon-check active-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <div class="icon-check inactive-icon">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </div>
-            <div class="camera-icon">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="lidar-icon">
-                <i class="fa-solid fa-xmarks-lines"></i>
-            </div>
-            <div class="name-accessoty">lidar 2</div>
-        </div>
+        @endforeach
     </div>
 </div>
