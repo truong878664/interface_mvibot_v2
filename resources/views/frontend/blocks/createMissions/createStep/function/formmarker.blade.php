@@ -13,11 +13,11 @@
     <label for="none-marker-angle" class="marker-btn">None Marker angle</label>
 </div>
 
-<input name="marker" type="radio" id="l-marker">
-<input name="marker" type="radio" id="vl-marker" checked>
-<input name="marker" type="radio" id="bar-marker">
-<input name="marker" type="radio" id="none-marker-dis">
-<input name="marker" type="radio" id="none-marker-angle">
+<input hidden name="marker" type="radio" id="l-marker">
+<input hidden name="marker" type="radio" id="vl-marker">
+<input hidden name="marker" type="radio" id="bar-marker">
+<input hidden name="marker" type="radio" id="none-marker-dis">
+<input hidden name="marker" type="radio" id="none-marker-angle">
 
 <div class="form-marker-wrapper form-l-marker">
     @include('frontend.blocks.createMissions.createStep.function.tabMarker.formLMarker')
@@ -25,4 +25,16 @@
 
 <div class="form-marker-wrapper form-vl-marker">
     @include('frontend.blocks.createMissions.createStep.function.tabMarker.formVlMarker')
+</div>
+
+<div class="form-marker-wrapper form-bar-marker">
+    @include('frontend.blocks.createMissions.createStep.function.tabMarker.formBarMarker')
+</div>
+
+<div class="form-marker-wrapper form-none-marker-dis">
+    @include('frontend.blocks.createMissions.createStep.function.tabMarker.noneMarkerDis')
+</div>
+
+<div class="form-marker-wrapper form-none-marker-angle">
+    @include('frontend.blocks.createMissions.createStep.function.tabMarker.noneMarkerAngle')
 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\PositionController;
 use App\Http\Controllers\backend\CreateMissionsController;
 use App\Http\Controllers\backend\FootprintController;
 use App\Http\Controllers\backend\GpioController;
+use App\Http\Controllers\backend\markerController;
 use App\Http\Controllers\backend\SleepController;
 
 Route::prefix('dashboard')->group(function () {
@@ -18,5 +19,7 @@ Route::prefix('dashboard')->group(function () {
         Route::post('create-sleep', [SleepController::class, 'createSleep']);
         Route::post('add-point-to-mission', [CreateMissionsController::class, 'addPointToMission']);
         Route::post('update-step-missions-name', [CreateMissionsController::class, 'updateStepMission']);
+
+        Route::post('create-marker', [markerController::class, 'createMarker']);
     });
 });

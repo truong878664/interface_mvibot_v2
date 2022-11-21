@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class MissionMarker extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name_marker',
+        'time_out',
+        'mode',
+        'marker_type',
+        'marker_dir',
+        'off_set_x1',
+        'off_set_x2',
+        'off_set_y1',
+        'off_set_y2',
+        'off_set_dis',
+        'off_set_angle',
+    ];
+    public $timestamps = false;
 }

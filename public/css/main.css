@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap");
 @import "../fonts/fontawesome-free-6.2.0-web/css/all.min.css";
 
 @import "dashboard.css";
 @import "mainLayout.css";
 @import "map.css";
 @import "missions.css";
-@import "reponsive.css";
+@import "responsive.css";
 @import "status.css";
 @import "createMission/marker.css";
 @import "createMission/steps.css";
@@ -25,13 +25,13 @@
 :root {
     --white-color: rgb(255, 255, 255);
     /* --main-color: #71bec9; */
-    --main-color: #2146C7;
+    --main-color: #2146c7;
     --blue-color: #82b0f5;
     --orange-color: #f5b933;
     --black-color: rgb(255, 255, 255);
     --green-color: #45a5ba;
-    --main-font: 'Zilla Slab', serif;
-    --number-font: 'Fragment Mono', monospace;
+    --main-font: "Zilla Slab", serif;
+    --number-font: "Fragment Mono", monospace;
     --background-color: #f5f5f5;
 }
 
@@ -44,7 +44,6 @@ html {
 body {
     font-size: 2rem;
     background-color: var(--background-color);
-
 }
 
 a {
@@ -63,8 +62,6 @@ input {
     outline: none;
 }
 
-
-
 .heading {
     font-size: 3rem;
     font-weight: 600;
@@ -75,7 +72,8 @@ input {
     z-index: 100;
 }
 
-.contents {}
+.contents {
+}
 
 .submit-btn {
     flex: 1;

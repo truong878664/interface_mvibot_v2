@@ -22,15 +22,27 @@
 }
 
 .form-l-marker,
-.form-vl-marker {
+.form-vl-marker,
+.form-bar-marker,
+.form-none-marker-dis,
+.form-none-marker-angle {
     display: none;
 }
 
-#l-marker:checked~.form-l-marker {
+#l-marker:checked ~ .form-l-marker {
     display: block;
 }
 
-#vl-marker:checked~.form-vl-marker {
+#vl-marker:checked ~ .form-vl-marker {
+    display: block;
+}
+#bar-marker:checked ~ .form-bar-marker {
+    display: block;
+}
+#none-marker-dis:checked ~ .form-none-marker-dis {
+    display: block;
+}
+#none-marker-angle:checked ~ .form-none-marker-angle {
     display: block;
 }
 
@@ -72,7 +84,7 @@
 }
 
 .offset-wrapper-input label {
-    width: 100px;
+    width: 120px;
     display: inline-block;
 }
 

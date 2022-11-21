@@ -2,9 +2,9 @@
 @section('content')
     <div class="heading missions-heading">Mission</div>
 
-    <div class="connect-ros-btn connection-failed">
+    {{-- <div class="connect-ros-btn connection-failed">
         <i class="fa-solid fa-tower-broadcast"></i>
-    </div>
+    </div> --}}
 
     <div class="contents missions-content">
         @include('frontend.blocks.navbarmissions')

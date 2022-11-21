@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/css/createPoint/form.css">
 <div class="overlay"></div>
 <form method="POST" action="{{ route('dashboard.missions.create-missions.') }}" class="form-create-point">
     <label for="show-create-missions" class="form-create-point-close"><i class="fa-solid fa-xmark"></i></label>

@@ -106,6 +106,30 @@ class MissionsController extends Controller
                 $in_pullup ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
                 $in_pulldown ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
                 return "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
+            } elseif ($item->mode == 'marker') {
+
+                $name_marker = $item->name_marker;
+                $time_out = $item->time_out;
+                $mode = $item->mode;
+                $marker_type = $item->marker_type;
+                $marker_dir = $item->marker_dir;
+                $off_set_x1 = $item->off_set_x1;
+                $off_set_x2 = $item->off_set_x2;
+                $off_set_y1 = $item->off_set_y1;
+                $off_set_y2 = $item->off_set_y2;
+                $off_set_dis = $item->off_set_dis;
+                $off_set_angle = $item->off_set_angle;
+
+
+                $marker_dir ? $data_marker_dir = "~marker_dir=$marker_dir~" : $data_marker_dir = "";
+                $off_set_x1 ? $data_off_set_x1 = "~off_set_x1=$off_set_x1~" : $data_off_set_x1 = "";
+                $off_set_x2 ? $data_off_set_x2 = "~off_set_x2=$off_set_x2~" : $data_off_set_x2 = "";
+                $off_set_y1 ? $data_off_set_y1 = "~off_set_y1=$off_set_y1~" : $data_off_set_y1 = "";
+                $off_set_y2 ? $data_off_set_y2 = "~off_set_y2=$off_set_y2~" : $data_off_set_y2 = "";
+                $off_set_dis ? $data_off_set_dis = "~off_set_dis=$off_set_dis~" : $data_off_set_dis = "";
+                $off_set_angle ? $data_off_set_angle = "~off_set_angle=$off_set_angle~" : $data_off_set_angle = "";
+                // dd($data_off_set_dis);
+                return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle)";
             }
         }, $stepMissionData);
 

@@ -19,13 +19,13 @@
         </div>
 
         <div class="form-missions-f-a-wrapper">
-            <div class="form-missions-f-a">
+            <div class="form-missions-f-a show">
                 @include('frontend/blocks/createMissions/createStep/function/formfootprint')
             </div>
             <div class="form-missions-f-a">
                 @include('frontend/blocks/createMissions/createStep/function/formgpio')
             </div>
-            <div class="form-missions-f-a show">
+            <div class="form-missions-f-a">
                 @include('frontend/blocks/createMissions/createStep/function/formmarker')
             </div>
             <div class="form-missions-f-a">
