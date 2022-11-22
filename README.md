@@ -1,3 +1,5 @@
+# Mvibot interface v2
+
 ### Download
 
 Download the files above and place on your server.
@@ -19,12 +21,12 @@ composer install
 You must create your database on your server and on your .env file update the following lines:
 
 ```tsx
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=name_database
-DB_USERNAME=username_database
-DB_PASSWORD=password_database
+DB_CONNECTION = mysql;
+DB_HOST = localhost;
+DB_PORT = 3306;
+DB_DATABASE = name_database;
+DB_USERNAME = username_database;
+DB_PASSWORD = password_database;
 ```
 
 Change these lines to reflect your new database settings.
