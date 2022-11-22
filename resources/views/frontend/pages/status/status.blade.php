@@ -5,7 +5,7 @@
         $dataSccessory = [
             [
                 'name' => 'camera 1',
-                'status' => 0,
+                'status' => 1,
             ],
             [
                 'name' => 'camera 2',
@@ -23,7 +23,7 @@
     @endphp
     <div class="contents">
         <div class="wrapper-status-content">
-            <x-status-item nameRobot="robot zxy" statusStatusRobot="mapping" batteryPercent='20%' batteryTemperValue='8°C'
+            <x-status-item nameRobot="robot zxy" statusStatusRobot="mapping" batteryPercent='100%' batteryTemperValue='8°C'
                 batteryA='27A' batteryVoltValue='0.4' :dataSccessory='$dataSccessory' />
 
             <x-status-item nameRobot="robot 123" statusStatusRobot="navigation" batteryPercent='70%'

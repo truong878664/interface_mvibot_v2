@@ -17,4 +17,5 @@
     array_shift($datas);
     $datasJson = json_encode($datas);
     echo "<input hidden class='data-steps' type='text' value='$datasJson'>";
+    echo "<textarea name='Text1' cols='200' rows='5'>$itemRender->steps_mission</textarea>";
 @endphp
