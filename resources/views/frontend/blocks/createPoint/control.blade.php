@@ -8,7 +8,7 @@
     </div>
 
     <div class="mission-point-control-item positon-y position">
-        <input id="" type="number" class="input-value number-position-y" min="-10.24" max="22.66"
+        <input id="iny" type="number" class="input-value number-position-y" min="-10.24" max="22.66"
             step="0.05" value="0">
         <input id="position-y" type="range" class="input-control" name="" value="0" min="-10.24"
             max="22.66" step="0.05">

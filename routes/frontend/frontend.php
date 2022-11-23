@@ -5,7 +5,7 @@ use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\MissionsController;
 
 Route::get('/', function () {
-    return view('frontend.pages.home');
+    return redirect('/login');
 });
 
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
@@ -33,4 +33,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
             return view('frontend.pages.status.status');
         });
     });
+});
+Route::get('/login', function () {
+    return view('frontend.pages.login');
 });

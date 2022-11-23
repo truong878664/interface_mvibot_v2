@@ -1,0 +1,29 @@
+.map-wrapper {
+    width: 100%;
+    height: calc(100vh - 100px);
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.list-map {
+    max-width: 100px;
+}
+.map-page_map {
+    width: calc(100% - 40px);
+    /* background-color: red; */
+    flex: 1;
+    margin: 20px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.joystick-wrapper {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(204, 204, 204, 50%);
+    right: 20px;
+    bottom: 20px;
+    border-radius: 4px;
+}

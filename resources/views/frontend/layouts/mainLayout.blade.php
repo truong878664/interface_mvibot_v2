@@ -10,11 +10,7 @@
 </head>
 
 <body>
-
-
-
     <div class="nav-bar">
-        {{-- <button class="hine-nav-bar"><i class="fa-solid fa-minus"></i></button> --}}
         <ul>
             <li class="connect-ros-btn connection-failed">
                 <i class="fa-solid fa-satellite-dish"></i>
@@ -50,6 +46,7 @@
     <script type="module" src="/js/mainLayout.js"></script>
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/ros3d.min.js"></script>
+    <script type="module" src="/js/main.js"></script>
 </body>
 
 </html>

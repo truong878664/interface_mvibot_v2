@@ -1,0 +1,127 @@
+.login-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+    display: flex;
+    overflow: hidden;
+}
+.login-img-wrapper {
+    width: 50%;
+    height: 100vh;
+    position: relative;
+}
+
+.login-layer {
+    position: absolute;
+    height: calc(110% + 100px);
+    background-color: var(--background-color);
+    width: 20%;
+}
+.login-layer-1 {
+    left: 105%;
+    bottom: -50px;
+    transform: rotate(5deg) translateX(-50%);
+}
+
+.login-layer-2 {
+    left: 98%;
+    bottom: -10%;
+    transform: rotate(10deg) translateX(-50%);
+    opacity: 60%;
+}
+
+.login-layer-3 {
+    left: 90%;
+    bottom: -10%;
+    transform: rotate(6deg) translateX(-50%);
+    opacity: 40%;
+}
+
+.login-img {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    object-fit: cover;
+}
+.login-from-wrapper {
+    width: 50%;
+    z-index: 100;
+    position: relative;
+}
+.login-form {
+    width: 400px;
+    height: 400px;
+    z-index: 1000;
+    position: absolute;
+    left: calc(50%);
+    top: calc(50%);
+    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+}
+.login-header {
+    display: flex;
+    align-items: flex-end;
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.robot-login-img {
+    width: 300px;
+    position: absolute;
+    left: -36%;
+}
+.login-heading {
+    margin-left: 70px;
+    color: var(--main-color);
+}
+
+.login-input {
+    padding: 8px 4px;
+    font-size: 1.8rem;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+.login-input::placeholder {
+    font-family: var(--main-font);
+}
+
+.login-footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.remember-checkbox {
+    border: 1px solid #ccc;
+    margin-right: 4px;
+}
+.remember-wrapper {
+    display: flex;
+}
+
+.login-btn {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+    display: inline-block;
+    background-color: #d13639;
+    font-size: 3rem;
+    border: none;
+    color: #fff;
+    border-radius: 40%;
+    box-shadow: 0 0 7px #ccc;
+    cursor: pointer;
+    text-align: center;
+    line-height: 80px;
+    user-select: none;
+}
+
+.login-btn:hover {
+    box-shadow: 2px 2px 15px rgb(167, 167, 167);
+}

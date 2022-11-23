@@ -94,7 +94,7 @@ function setValueToAddDatabase(x, y, z, w) {
     wElement.value = w;
 }
 
-function checkValueInput(elementCheck, position) {
+function checkValueInput(elementCheck) {
     const max = Number(elementCheck.getAttribute("max"));
     const min = Number(elementCheck.getAttribute("min"));
     if (elementCheck.value > max) {
