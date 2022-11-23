@@ -36,7 +36,8 @@
         </div>
         @include('frontend.blocks.createMissions.createStep.function.idMission')
 
-        <button class="submit-btn submit-marker">Add</button>
+        <x-button tag="button" title="Add" class="submit-marker" attribute=""></x-button>
+
         @csrf
     </form>
     <div class="form-marker-item illustration " markerDir="vl_marker_">

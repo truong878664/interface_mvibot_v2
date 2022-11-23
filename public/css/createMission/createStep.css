@@ -32,10 +32,12 @@
 
 .mission-step-item {
     width: 33.333%;
-    border-radius: 10px;
-    background-color: rgba(204, 204, 204, 0.445);
+    border-radius: 2px;
+    background-color: #fff;
     box-shadow: 0 0 10px rgb(231, 231, 231);
     margin-left: 20px;
+    flex: 1;
+    box-shadow: 0 0 5px rgb(224, 224, 224);
 }
 
 .mission-step-item-heading {
@@ -45,9 +47,12 @@
     top: 0;
     height: 40px;
     width: 100%;
-    background-color: #ccc;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    background-color: #f0f0f0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-weight: 600;
+    color: var(--main-color);
+    border-bottom: 2px solid rgb(223, 221, 221);
 }
 
 .missison-point {
@@ -63,7 +68,6 @@
 }
 
 .mission-step-item {
-    flex: 1;
 }
 
 .form-missions-f-a-wrapper {
@@ -71,10 +75,10 @@
     margin-left: 20px;
     margin-top: 20px;
     height: 300px;
-    border-radius: 10px;
+    border-radius: 2px;
     padding: 10px;
     overflow: hidden;
-    background-color: rgba(73, 113, 116, 0.4);
+    background-color: rgba(255, 255, 255, 0.596);
     box-shadow: 0 0 10px rgb(231, 231, 231);
     position: relative;
 }
@@ -93,6 +97,7 @@
 .missison-point-content {
     overflow: scroll;
     max-height: 500px;
+    padding: 0;
 }
 
 .point-item {
@@ -101,10 +106,12 @@
     align-items: center;
     padding: 4px 16px;
     cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    margin: 0 8px;
 }
 
 .point-item:hover {
-    background-color: #ccc;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%);
 }
 
 .point-item-content {
@@ -221,10 +228,19 @@
     justify-content: space-between;
     padding: 0 16px;
     align-items: center;
+    /* margin: 0 10px; */
+    border-bottom: 1px solid rgb(248, 248, 248);
+    cursor: pointer;
+    user-select: none;
 }
 
 .misisons-f-a-item:hover {
-    background-color: #ccc;
+    /* box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%); */
+    /* font-weight: 600; */
+    border-color: #f4f4f4;
+    background: #f5f5f5;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%);
+    transition: border-color 0.167s linear, box-shadow 0.167s linear;
 }
 
 /* steps mission */
@@ -241,10 +257,9 @@
     margin-left: 20px;
     margin-top: 20px;
     height: 180px;
-    border-radius: 10px;
-    background-color: rgba(62, 109, 156, 0.58);
-    box-shadow: 0 0 10px rgb(231, 231, 231);
-    /* display: flex; */
+    border-radius: 4px;
+    /* background-color: #5f9cf75e; */
+    box-shadow: 5px 5px 10px #ccc;
     padding-right: 100px;
     position: relative;
 }
@@ -254,7 +269,9 @@
 }
 
 .misisons-f-a-item.active {
-    background-color: rgba(33, 69, 199, 0.4);
+    font-weight: 700;
+    background: #f5f5f5;
+    box-shadow: 0 4px 16px 0 rgb(0 0 0 / 10%);
 }
 
 .add-btn {

@@ -48,6 +48,6 @@
         <label for="mode-child">Mode child</label>
         <input id="mode-child" type="text" class="point-input" name="mode_child" required>
     </div>
-    <button class="submit-btn save-point-btn">Save</button>
+    <x-button tag="button" title="Save" class="save-point-btn" attribute=""></x-button>
     @csrf
 </form>

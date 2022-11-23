@@ -26,7 +26,6 @@
         </div>
     </div>
     @include('frontend.blocks.createMissions.createStep.function.idMission')
-
-    <input type="submit" class="add-btn submit-btn" value="Add">
+    <x-button tag="button" title="Add" class="add-btn" attribute=""></x-button>
     @csrf
 </form>

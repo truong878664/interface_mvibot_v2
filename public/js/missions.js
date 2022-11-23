@@ -18,15 +18,14 @@ function activeNavTab() {
 }
 
 function showTabFunctionAction() {
-    const addBtns = $$(".add-f-a-icon");
+    const addBtns = $$(".misisons-f-a-item");
     const formFunctionAction = $$(".form-missions-f-a");
 
     addBtns.forEach((addBtn, index) => {
         addBtn.addEventListener("click", (e) => {
             $(".misisons-f-a-item.active").classList.remove("active");
             $(".form-missions-f-a.show").classList.remove("show");
-
-            e.target.parentElement.classList.add("active");
+            e.target.classList.add("active");
             formFunctionAction[index].classList.add("show");
         });
     });

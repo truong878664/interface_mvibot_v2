@@ -1,51 +1,53 @@
 /* navbar */
 .nav-bar {
-    width: 80px;
+    width: 74px;
     height: 100vh;
-    background-color: var(--main-color);
+    background-color: #f0f0f0;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     z-index: 10;
+    box-shadow: 0 0 5px #ccc;
 }
 
 .bar-item {
-    font-size: 3.6rem;
+    font-size: 3rem;
     display: block;
     align-self: stretch;
-    color: var(--white-color);
+    color: rgb(194, 191, 191);
     text-align: center;
     position: relative;
     cursor: pointer;
-    height: 75px;
+    height: 68px;
+    margin-left: 2px;
+    margin-bottom: 10px;
 }
 
 .bar-item i {
-    line-height: 75px;
+    line-height: 66px;
 }
 
 .bar-item:hover,
 .logout:hover {
-    opacity: 80%;
-    font-size: 3.5rem;
+    background-color: rgba(255, 255, 255, 0.452);
+    color: var(--main-color);
 }
 
-.bar-item.active::after {
-    content: "";
-    width: 80%;
-    height: 80%;
+.bar-item-title {
+    font-size: 1.3rem;
     position: absolute;
-    background-color: var(--white-color);
+    bottom: 2px;
     left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: -1;
-    border-radius: 40%;
-    opacity: 50%;
+    transform: translateX(-50%);
+    color: #333;
+}
+
+.bar-item.active {
+    color: var(--main-color);
+    border-left: 4px solid var(--main-color);
 }
 
 .logout {
@@ -59,8 +61,6 @@
     color: var(--white-color);
     cursor: pointer;
 }
-
-
 
 /* user */
 .user {
@@ -87,48 +87,9 @@
 
 /* content */
 .container {
-    /* margin-left: 80px; */
     margin-top: 80px;
     margin-left: 80px;
 }
-
-
-/* hide nav bar */
-.hine-nav-bar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: 14px 0px;
-    font-size: 3.6rem;
-    background-color: transparent;
-    border: none;
-    color: var(--white-color);
-    cursor: pointer;
-}
-
-.hine-nav-bar:hover {
-    font-size: 3.5rem;
-    opacity: 80%;
-}
-
-.hine-nav-bar::after {
-    content: "";
-    width: 60%;
-    height: 30%;
-    position: absolute;
-    background-color: var(--white-color);
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: -1;
-    border-radius: 4px;
-    opacity: 50%;
-}
-
-.nav-bar.hide {
-    display: none;
-}
-
 
 /* show nav bar */
 .show-nav-bar {
@@ -148,13 +109,31 @@
     display: none;
 }
 
-
 .show-nav-bar:hover {
     bottom: 33px;
 }
 
-
-
 .message {
     font-size: 3rem;
+}
+
+/* connect */
+.connect-ros-btn {
+    font-size: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    z-index: 100;
+}
+
+.connect-ros-btn i {
+    line-height: 50px;
+}
+
+.connect-ros-btn.connected {
+    color: #82cd47;
+}
+
+.connect-ros-btn.connection-failed {
+    color: #cf0a0a;
 }

@@ -3,5 +3,6 @@
     <label for="">Time sleep</label>
     <input type="text" class="time-sleep">
     <span>second</span>
-    <button class="add-btn submit-btn">Add</button>
+    <x-button tag="button" title="Add" class="add-btn" attribute=""></x-button>
+
 </form>

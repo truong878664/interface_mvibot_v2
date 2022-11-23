@@ -33,7 +33,7 @@
                     <i class="fa-solid fa-camera"></i>
                 </div>
                 <div class="lidar-icon">
-                    <i class="fa-solid fa-xmarks-lines"></i>
+                    <img src="/icon/lidar.svg" alt="" class="lidar-img">
                 </div>
                 <div class="name-accessoty">{{ $item['name'] }}</div>
             </div>

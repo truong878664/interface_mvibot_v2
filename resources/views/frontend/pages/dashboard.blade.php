@@ -3,29 +3,14 @@
     <div class="heading dashboard-heading">Dashboard</div>
 
     <div class="contents dashboard-content">
-        <a class="dashboard-content-item blue" href="{{ route('dashboard.missions.') }}">
-            <div class="dashboard-content-item-icon"><i class="fa-solid fa-circle-chevron-right"></i></div>
-            <div class="dashboard-content-item-wrapper">
-                <h3 class="dashboard-content-item-heading">Missions</h3>
-                <p class="dashboard-content-item-describe">assign tasks to robots</p>
-            </div>
-        </a>
+        <x-dashboard-item route='dashboard.missions.' icon='fa-solid fa-crosshairs' title='Missions'
+            describe='assign tasks to robots' color="#0c0c0c" />
 
-        <a class="dashboard-content-item orange" href="{{ route('dashboard.map.') }}">
-            <div class="dashboard-content-item-icon"><i class="fa-solid fa-map-location-dot"></i></div>
-            <div class="dashboard-content-item-wrapper">
-                <h3 class="dashboard-content-item-heading">Map</h3>
-                <p class="dashboard-content-item-describe">View map, create map</p>
-            </div>
-        </a>
+        <x-dashboard-item route='dashboard.map.' icon='fa-solid fa-map-location-dot' title='Map'
+            describe='View map, create map' color="#e62648" />
 
-        <a class="dashboard-content-item green" href="{{ route('dashboard.status.') }}">
-            <div class="dashboard-content-item-icon"><i class="fa-solid fa-clipboard-list"></i></div>
-            <div class="dashboard-content-item-wrapper">
-                <h3 class="dashboard-content-item-heading">Status</h3>
-                <p class="dashboard-content-item-describe">Status information of the robot</p>
-            </div>
-        </a>
+        <x-dashboard-item route='dashboard.status.' icon='fa-solid fa-gauge-high' title='Status'
+            describe='Status information of the robot' color="#f4ba23" />
     </div>
     <script type="module" src="/js/ros.js"></script>
 

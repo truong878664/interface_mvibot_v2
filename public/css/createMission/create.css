@@ -1,7 +1,7 @@
 :root {
-    --column-create-missions: 4;
+    --column-create-missions: 5;
 }
-.create-missions-wrapper{
+.create-missions-wrapper {
     display: flex;
     flex-wrap: wrap;
     margin-left: -20px;
@@ -12,37 +12,39 @@
     height: 100px;
     background-color: var(--main-color);
     color: var(--white-color);
-    margin-left: 20px ;
+    margin-left: 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     text-align: center;
     font-size: 2.2rem;
-    padding: 8px;
+    padding: 20px 8px;
     opacity: 0.8;
     cursor: pointer;
     position: relative;
+    box-shadow: 2px 2px 7px #ccc;
 }
 .create-misisons-item:hover {
-    opacity: 0.9;
- }
+    box-shadow: 2px 2px 14px rgb(158, 158, 158);
+}
 
-.delete-mission-btn{
+.delete-mission-btn {
     position: absolute;
     top: 0;
     right: 0;
-    width: 25px;
-    height: 25px;
-    background-color: #ccc;
+    /* width: 25px;
+    height: 25px; */
+    padding: 10px;
+    background-color: transparent;
+    color: rgb(143, 141, 141);
     border-radius: 50%;
     border: none;
-    transform: translateX(20%) translateY(-20%);
+    /* transform: translateX(20%) translateY(-20%); */
     cursor: pointer;
 }
-.delete-mission-btn:hover{ 
-    background-color: rgb(184, 182, 182);
+.delete-mission-btn:hover {
+    /* background-color: rgb(184, 182, 182); */
+    color: #fff;
 }
-
-
 
 .create-missions-btn {
     font-size: 6rem;

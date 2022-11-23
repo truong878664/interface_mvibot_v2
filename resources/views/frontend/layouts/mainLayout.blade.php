@@ -11,18 +11,26 @@
 
 <body>
 
-    <div class="connect-ros-btn connection-failed">
-        <i class="fa-solid fa-tower-broadcast"></i>
-    </div>
+
 
     <div class="nav-bar">
         {{-- <button class="hine-nav-bar"><i class="fa-solid fa-minus"></i></button> --}}
         <ul>
-            <li class="bar-item "><a><i class="fa-solid fa-house"></i></a></li>
-            <li class="bar-item active"><a href="{{ route('dashboard.') }}"><i
-                        class="fa-solid fa-table-columns"></i></a></li>
-            <li class="bar-item"><i class="fa-solid fa-user"></i></li>
-            <li class="bar-item"><i class="fa-solid fa-gear"></i></li>
+            <li class="connect-ros-btn connection-failed">
+                <i class="fa-solid fa-satellite-dish"></i>
+            </li>
+            <li class="bar-item ">
+                <a>
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <span class="bar-item-title">Home</span>
+            </li>
+            <li class="bar-item active">
+                <a href="{{ route('dashboard.') }}"><i class="fa-solid fa-table-columns"></i></a><span
+                    class="bar-item-title">Dashboard</span>
+            </li>
+            <li class="bar-item"><i class="fa-solid fa-user"></i><span class="bar-item-title">User</span></li>
+            <li class="bar-item"><i class="fa-solid fa-gear"></i><span class="bar-item-title">seting</span></li>
         </ul>
         <button class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
     </div>

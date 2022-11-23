@@ -16,7 +16,8 @@
             </div>
             @csrf
             @include('frontend.blocks.createMissions.createStep.function.idMission')
-            <button class="submit-btn submit-marker">Add</button>
+            <x-button tag="button" title="Add" class="submit-marker" attribute=""></x-button>
+
         </form>
         <div class="form-marker-item illustration">
             <img src="/img/marker/none_marker_angle.png" alt="">
