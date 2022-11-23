@@ -3,10 +3,17 @@
     <div class="heading map-heading">Map</div>
     <div class="contents">
         <div class="map-wrapper">
-            <button class="list-map">list Map</button>
+            <x-button tag="button" title="List map" class="" attribute=""></x-button> <br>
+
             <div class="map-page_map" id="map"></div>
-            <div class="joystick-wrapper">
-                <div id="zone_joystick"></div>
+            <div class="joystick-container">
+                <div class="joystick-wrapper">
+                    <div id="zone_joystick"></div>
+                </div>
+                <div class="position-icon up"><i class="fa-solid fa-caret-up"></i></div>
+                <div class="position-icon left"><i class="fa-solid fa-caret-left"></i></div>
+                <div class="position-icon right"><i class="fa-solid fa-caret-right"></i></div>
+                <div class="position-icon down"><i class="fa-solid fa-caret-down"></i></div>
             </div>
         </div>
     </div>

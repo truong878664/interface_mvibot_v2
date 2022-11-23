@@ -1,5 +1,4 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+import { $ } from "../main.js";
 
 const missionCreateBtn = $(".create-missions-btn");
 const mission = $("#name-mission");
