@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\FootprintController;
 use App\Http\Controllers\backend\GpioController;
 use App\Http\Controllers\backend\markerController;
 use App\Http\Controllers\backend\SleepController;
+use App\Http\Controllers\backend\AuthController;
 
 Route::prefix('dashboard')->group(function () {
     Route::prefix('missions')->group(function () {
@@ -23,3 +24,6 @@ Route::prefix('dashboard')->group(function () {
         Route::post('create-marker', [markerController::class, 'createMarker']);
     });
 });
+
+Route::post('/check', [AuthController::class, 'check'])->name('check');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

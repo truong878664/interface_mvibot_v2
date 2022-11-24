@@ -52,18 +52,19 @@
 
 .logout {
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
     width: 100%;
     padding: 16px 0px;
-    font-size: 3.6rem;
+    font-size: 2.7rem;
     background-color: transparent;
     border: none;
     color: var(--white-color);
     cursor: pointer;
+    color: #ccc;
 }
 
 /* user */
-.user {
+.user-wrapper {
     position: fixed;
     right: 30px;
     top: 20px;

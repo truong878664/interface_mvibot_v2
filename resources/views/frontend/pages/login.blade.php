@@ -18,13 +18,33 @@
             <div class="login-layer login-layer-3"></div>
         </div>
         <div class="login-from-wrapper">
-            <div class="login-form">
+            <form method="POST" action="{{ route('check') }}" class="login-form">
                 <div class="login-header">
                     <img class="robot-login-img" src="/img/robot_login.png" alt="">
                     <p class="login-heading">Login</p>
                 </div>
-                <input type="text" placeholder="Username" class="login-input username">
-                <input type="text" placeholder="Password" class="login-input password">
+
+                <div class="username-wrapper">
+                    <input type="text" placeholder="Username" name="username" class="login-input username"
+                        value="{{ old('username') }}">
+
+                    <span class="input-fail">
+                        @error('username')
+                            {{ $message }}
+                        @enderror
+                    </span>
+
+                </div>
+                <div class="password-wrapper">
+                    <input type="password" placeholder="Password" name="password" class="login-input password">
+                    <span class="input-fail">
+                        @error('password')
+                            {{ $message }}
+                        @enderror
+                    </span>
+
+                </div>
+
                 <div class="login-footer">
                     <div class="remember-wrapper">
                         <input type="checkbox" class="remember-checkbox" name="remember" id="remember">
@@ -34,8 +54,15 @@
                         <a href="">Forgot Password?</a>
                     </div>
                 </div>
-                <a href="{{ route('dashboard.') }}" class="login-btn"><i class="fa-solid fa-arrow-right-long"></i></a>
-            </div>
+                @if (Session::get('fail'))
+                    <span class="text-fail">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        {{ Session::get('fail') }}
+                    </span>
+                @endif
+                <button class="login-btn"><i class="fa-solid fa-arrow-right-long"></i></button>
+                @csrf
+            </form>
         </div>
     </div>
 </body>

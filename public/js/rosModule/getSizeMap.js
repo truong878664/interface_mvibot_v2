@@ -1,13 +1,12 @@
 import ros from "../main.js";
 import { $ } from "../main.js";
 
-// let datas = {};
+const map_listener = new ROSLIB.Topic({
+    ros: ros,
+    name: "/map",
+    messageType: "nav_msgs/OccupancyGrid",
+});
 function setSizeMap() {
-    const map_listener = new ROSLIB.Topic({
-        ros: ros,
-        name: "/map",
-        messageType: "nav_msgs/OccupancyGrid",
-    });
     map_listener.subscribe(function (message) {
         const resolution = message.info.resolution;
         const width = message.info.width;

@@ -12,8 +12,4 @@
         <x-dashboard-item route='dashboard.status.' icon='fa-solid fa-gauge-high' title='Status'
             describe='Status information of the robot' color="#f4ba23" />
     </div>
-
-    <script>
-        document.title = 'Mvibot | dashboard'
-    </script>
 @endsection
