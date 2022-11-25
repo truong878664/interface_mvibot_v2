@@ -168,11 +168,4 @@ function getDataAtString(string, showData) {
     return data;
 }
 
-// $$(".add-btn").forEach((item) => {
-//     item.addEventListener("click", () => {
-//         setTimeout(() => {
-//             window.location.reload();
-//         }, 100);
-//     });
-// });
 export { stepsNameSubmit, renderStep };

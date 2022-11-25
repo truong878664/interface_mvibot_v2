@@ -22,6 +22,9 @@ Route::prefix('dashboard')->group(function () {
         Route::post('update-step-missions-name', [CreateMissionsController::class, 'updateStepMission']);
 
         Route::post('create-marker', [markerController::class, 'createMarker']);
+
+
+        Route::post('update-footprint', [FootprintController::class, 'updateFootprint']);
     });
 });
 

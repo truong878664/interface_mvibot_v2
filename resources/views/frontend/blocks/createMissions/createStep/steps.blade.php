@@ -1,5 +1,4 @@
 <div class="steps-wrapper"></div>
-@include('frontend.blocks.createMissions.createStep.menu')
 
 <div class="submit-btn-wrapper">
     <form class="form-submit-steps" action="/dashboard/missions/update-step-missions-name" method="POST">
@@ -20,7 +19,7 @@
     array_shift($datas);
     $datasJson = json_encode($datas);
     echo "<input hidden class='data-steps' type='text' value='$datasJson'>";
-    echo "<textarea name='Text1' cols='200' rows='5'>$itemRender->steps_mission</textarea>";
+    // echo "<textarea name='Text1' cols='200' rows='5'>$itemRender->steps_mission</textarea>";
     $stringStep_mission = trim(str_replace(')(', '||', $itemRender->steps_mission), '()');
     $dataStepJson = json_encode(explode('||', $stringStep_mission));
     echo "<input hidden class='data-steps-value' type='text' value='$dataStepJson'>";
@@ -32,11 +31,12 @@
 
     <div class=" edit-item footprint-form-edit">
         <p class="heading-form-mission">Footprint</p>
-        <form method="POST" action="/dashboard/missions/create-footprint">
+        <form method="POST" action="/dashboard/missions/update-footprint">
             <div class="name-footprint">
                 <label for="">Name</label>
                 <input class="name-footprint-edit" type="text" name="name_footprint_edit" required>
             </div>
+            <input type="text" hidden input>
             <div class="footprint-img" style="background-image:url('/img/footprint.png');" class="img-footprint">
                 <div class="input-footprint-wrapper top-footprint">
                     <input required type="number" class="x1-edit  input-footprint" placeholder="front" name="x1">
@@ -61,10 +61,11 @@
                 </div>
             </div>
             @include('frontend.blocks.createMissions.createStep.function.idMission')
-            <x-button tag="button" title="Add" class="add-btn" attribute=""></x-button>
+            <x-button tag="button" title="Update" class="add-btn" attribute=""></x-button>
             @csrf
         </form>
     </div>
+
     <div class=" edit-item gpio-form-edit">
         <p class="heading-form-mission">GPIO</p>
         <form method="POST" action="/dashboard/missions/create-gpio" class="gpio_form">
@@ -108,9 +109,11 @@
             @csrf
         </form>
     </div>
+
     <div class=" edit-item marker-form-edit">
         marker
     </div>
+
     <div class=" edit-item sleep-form-edit">
         <p class="heading-form-mission">Sleep</p>
         <form method="POST" action="/dashboard/missions/create-sleep">

@@ -50,7 +50,7 @@ class CreateMissionsController extends Controller
     {
         $currentMission = Missions::find($idMission);
         $oldStepMissionName = $currentMission->steps_mission_name;
-        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMissionName . '|position#' . $name_position.'#'.$id_position]);
+        Missions::where('id', $idMission)->update(['steps_mission_name' => $oldStepMissionName . '|position#' . $name_position . '#' . $id_position]);
     }
 
     public function updateStepMission(Request $request)
