@@ -21,14 +21,19 @@ function renderStep() {
         );
 
         return htmlStep.push(
-            `<div class="step-item step-${stepMode}">
+            `<div class="step-item step-${stepMode}" index=${index}>
                 <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <div>${stepMode}|${stepName}</div>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
                 <button class="show-menu"><i class="fa-solid fa-ellipsis"></i></button>
                 <ul class="menu-right-click">
                     <div class="menu-overlay"></div>
-                    <li class="menu-item"><i class="fa-regular fa-pen-to-square"></i></i>edit</li>
+                    ${
+                        stepMode != "position"
+                            ? '<li class="menu-item edit-step"><i class="fa-regular fa-pen-to-square"></i></i>edit</li>'
+                            : ""
+                    }
+                    
                     <li class="menu-item delete-step" id-delete="${index}"><i class="fa-regular fa-trash-can"></i></i>delete</li>
                 </ul>
             </div>`
@@ -41,6 +46,8 @@ function renderStep() {
     moveStepRight(dataSteps);
     stepsNameSubmit(dataSteps);
     showMenu();
+    contextMenuStep();
+    evenClickEdit();
 }
 
 function showMenu() {
@@ -96,4 +103,76 @@ function moveStepRight(data) {
     });
 }
 
+function contextMenuStep() {
+    $$(".step-item").forEach((item, index) => {
+        item.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            $$(".menu-right-click")[index].classList.add("active");
+        });
+    });
+}
+
+function evenClickEdit() {
+    $$(".edit-step").forEach((item) => {
+        item.addEventListener("click", (e) => handleEditStep(e));
+    });
+}
+
+function showHideTabEdit() {
+    $(".form-edit-step").style.display = "block";
+    $(".overlay-form-edit-step").style.display = "block";
+    $(".overlay-form-edit-step").addEventListener("click", () => {
+        $(".form-edit-step").style.display = "none";
+        $(".overlay-form-edit-step").style.display = "none";
+    });
+    $(".menu-right-click.active").classList.remove("active");
+}
+
+function handleEditStep(e) {
+    const stepElement = e.target.parentElement.parentElement;
+    const indexStep = stepElement.getAttribute("index");
+    const stepsValue = JSON.parse($(".data-steps-value").value);
+    const showData = stepsValue[indexStep];
+    const mode = getDataAtString("mode", showData);
+    const timeOut = getDataAtString("tie", showData);
+    showHideTabEdit();
+
+    $$(".form-edit-step").forEach((element) => {
+        element.removeAttribute("class");
+        element.classList.add("form-edit-step");
+    });
+    $(".form-edit-step").classList.add(`${mode}-edit`);
+
+    const name = getDataAtString("name", showData);
+    $(`.name-${mode}-edit`).value = name;
+    const text = getDataAtString("data", showData)
+        .replaceAll("~~", "|")
+        .replaceAll("~", "");
+    const arrDataSteps = text.split("|");
+
+    arrDataSteps.forEach((item) => {
+        const name = item.slice(0, item.indexOf("="));
+        const value = item.slice(item.indexOf("=") + 1, item.length);
+        if (name.trim()) {
+            $(`.${name}-edit`).value = value;
+        }
+    });
+}
+
+function getDataAtString(string, showData) {
+    const indexString = showData.indexOf(string) + 1 + string.length;
+    const data = showData.slice(
+        indexString,
+        showData.indexOf("|", indexString)
+    );
+    return data;
+}
+
+// $$(".add-btn").forEach((item) => {
+//     item.addEventListener("click", () => {
+//         setTimeout(() => {
+//             window.location.reload();
+//         }, 100);
+//     });
+// });
 export { stepsNameSubmit, renderStep };
