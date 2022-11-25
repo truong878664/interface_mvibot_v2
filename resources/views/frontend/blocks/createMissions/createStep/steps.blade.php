@@ -1,4 +1,6 @@
 <div class="steps-wrapper"></div>
+@include('frontend.blocks.createMissions.createStep.menu')
+
 <div class="submit-btn-wrapper">
     <form class="form-submit-steps" action="/dashboard/missions/update-step-missions-name" method="POST">
         <input type="text" value="{{ $itemRender->id }}" name="id_mission" hidden>

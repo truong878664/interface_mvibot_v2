@@ -52,7 +52,7 @@ html {
 
 body {
     font-size: 2rem;
-    background-color: var(--background-color);
+    background-color: var(--background-color);/dashboard
 }
 
 a {
@@ -69,6 +69,19 @@ i {
 
 input {
     outline: none;
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+}
+
+input[type="number"] {
+    font-family: var(--number-font);
+}
+
+input::placeholder {
+    font-size: 1.3rem;
+}
+li {
+    list-style: none;
 }
 
 .heading {

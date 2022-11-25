@@ -24,16 +24,37 @@ function renderStep() {
             `<div class="step-item step-${stepMode}">
                 <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <div>${stepMode}|${stepName}</div>
-                <button class="delete-step" id-delete="${index}"><i class="fa-solid fa-xmark"></i></button>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
+                <button class="show-menu"><i class="fa-solid fa-ellipsis"></i></button>
+                <ul class="menu-right-click">
+                    <div class="menu-overlay"></div>
+                    <li class="menu-item"><i class="fa-regular fa-pen-to-square"></i></i>edit</li>
+                    <li class="menu-item delete-step" id-delete="${index}"><i class="fa-regular fa-trash-can"></i></i>delete</li>
+                </ul>
             </div>`
         );
     });
+
     stepsWrapper.innerHTML = htmlStep.join("");
     deleteStep(dataSteps);
     moveStepLeft(dataSteps);
     moveStepRight(dataSteps);
     stepsNameSubmit(dataSteps);
+    showMenu();
+}
+
+function showMenu() {
+    $$(".show-menu").forEach((showMenuItem, index) => {
+        showMenuItem.addEventListener("click", () => {
+            $$(".menu-right-click")[index].classList.add("active");
+        });
+    });
+
+    $$(".menu-overlay").forEach((item) => {
+        item.addEventListener("click", () => {
+            $(".menu-right-click.active")?.classList.remove("active");
+        });
+    });
 }
 
 function deleteStep(dataSteps) {

@@ -1,12 +1,16 @@
 # Mvibot interface v2
 
-### Download
+### Install composer
+
+### Install PHP
+
+### Download source code
 
 Download the files above and place on your server.
 
 ### Environment Files
 
-You must rename this file to just .env
+You must rename file .env.example to just .env
 
 ### Composer
 
@@ -30,6 +34,12 @@ DB_PASSWORD = password_database;
 ```
 
 Change these lines to reflect your new database settings.
+
+### Create User admin
+
+```tsx
+php artisan db:seed
+```
 
 ### Artisan Commands
 

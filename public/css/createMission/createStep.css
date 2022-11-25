@@ -460,7 +460,7 @@ input[type="number"] {
 }
 
 .step-item:hover > .move-btn,
-.step-item:hover > .delete-step {
+.step-item:hover > .show-menu {
     display: block;
 }
 
@@ -478,12 +478,12 @@ input[type="number"] {
 }
 
 .move-btn:hover,
-.delete-step:hover {
+.show-menu:hover {
     background-color: #ccc;
     cursor: pointer;
 }
 
-.delete-step {
+.show-menu {
     position: absolute;
     top: 50%;
     left: 50%;
