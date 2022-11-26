@@ -33,5 +33,5 @@
                 batteryA='27A' batteryVoltValue='0.9' :dataSccessory='$dataSccessory' />
         </div>
     </div>
-    <script src="/js/status/status.js"></script>
+    <script type="module" src="/js/status/status.js"></script>
 @endsection

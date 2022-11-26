@@ -4,6 +4,8 @@
 
 ### Install PHP
 
+### Install mySql
+
 ### Download source code
 
 Download the files above and place on your server.

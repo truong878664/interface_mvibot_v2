@@ -19,9 +19,11 @@ function renderStep() {
             step.indexOf("#") + 1,
             step.indexOf("#", step.indexOf("#") + 1)
         );
+        const stepId = step.slice(step.lastIndexOf("#") + 1, step.length);
 
         return htmlStep.push(
             `<div class="step-item step-${stepMode}" index=${index}>
+                <input hidden type="text" class="step-id" value=${stepId}>
                 <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <div>${stepMode}|${stepName}</div>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
@@ -134,8 +136,9 @@ function handleEditStep(e) {
     const stepsValue = JSON.parse($(".data-steps-value").value);
     const showData = stepsValue[indexStep];
     const mode = getDataAtString("mode", showData);
-    const timeOut = getDataAtString("tie", showData);
     showHideTabEdit();
+
+    $(`.${mode}-id`).value = stepElement.querySelector(".step-id").value;
 
     $$(".form-edit-step").forEach((element) => {
         element.removeAttribute("class");
@@ -152,7 +155,9 @@ function handleEditStep(e) {
 
     arrDataSteps.forEach((item) => {
         const name = item.slice(0, item.indexOf("="));
-        const value = item.slice(item.indexOf("=") + 1, item.length);
+        const value = item
+            .slice(item.indexOf("=") + 1, item.length)
+            .replace("-", "");
         if (name.trim()) {
             $(`.${name}-edit`).value = value;
         }

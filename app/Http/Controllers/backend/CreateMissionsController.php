@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
 use \Carbon\Carbon;
+use App\Http\Controllers\frontend\MissionsController;
 
 class CreateMissionsController extends Controller
 {
@@ -59,6 +60,10 @@ class CreateMissionsController extends Controller
         $dataStepsMissionName = $request->steps_mission_name;
         $dataStepsMissionName == "|" ?    $dataStepsMissionName = "" : $dataStepsMissionName;
         Missions::where('id', $idMission)->update(['steps_mission_name' => $dataStepsMissionName]);
-        return back()->with('msg', 'Save step mission successfully');
+
+        $updateDataSteps = new MissionsController;
+        $updateDataSteps->addPointToStepsMission($idMission);
+        $test = Missions::where('id', $idMission)->get()->toArray();
+        return back()->with('data', $test);
     }
 }

@@ -1,7 +1,5 @@
+import { $$ } from "../main.js";
 document.title = "Status Robot | Mvibot";
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
 setPercentBattery();
 setColorTemper();
 

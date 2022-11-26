@@ -25,6 +25,8 @@ Route::prefix('dashboard')->group(function () {
 
 
         Route::post('update-footprint', [FootprintController::class, 'updateFootprint']);
+        Route::post('update-gpio', [GpioController::class, 'updateGpio']);
+        Route::post('update-sleep', [SleepController::class, 'updateSleep']);
     });
 });
 
