@@ -8,6 +8,7 @@ import createPose from "../rosModule/createPose.js";
 import { setPosition } from "../rosModule/functionHandler.js";
 import ros, { $ } from "../main.js";
 import setSizeMap from "../rosModule/getSizeMap.js";
+import clickSetPointMap from "../rosModule/ clickSetPointMap.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -26,3 +27,7 @@ displayPose(0, 0, 0, 1);
 
 setSizeMap();
 setPosition();
+
+$("#map").addEventListener("dblclick", (e) => {
+    clickSetPointMap(e.offsetX, e.offsetY, viewer);
+});
