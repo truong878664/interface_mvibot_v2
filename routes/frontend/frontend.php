@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\MissionsController;
+use App\Http\Controllers\frontend\statusController;
 use App\Http\Middleware\AuthCheck;
 
 
@@ -38,9 +39,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         });
 
         Route::prefix('status')->name('status.')->group(function () {
-            Route::get('/', function () {
-                return view('frontend.pages.status.status');
-            });
+            Route::get('/', [statusController::class, 'index']);
         });
     });
 });

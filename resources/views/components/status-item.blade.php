@@ -20,23 +20,25 @@
         </div>
     </div>
     <div class="status-accessory">
-        @foreach ($dataSccessory as $index => $item)
-            <div
-                class="accessoty-item {{ $item['status'] === 1 ? 'active' : 'inactive' }} {{ $index <= 1 ? 'camera' : 'lidar' }}">
-                <div class="icon-check active-icon">
-                    <i class="fa-solid fa-circle-check"></i>
+        @if (is_array($dataAccessory) || is_object($dataAccessory))
+            @foreach ($dataAccessory as $index => $item)
+                <div
+                    class="accessoty-item {{ $item['status'] === 1 ? 'active' : 'inactive' }} {{ $index <= 1 ? 'camera' : 'lidar' }}">
+                    <div class="icon-check active-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="icon-check inactive-icon">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div class="camera-icon">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <div class="lidar-icon">
+                        <img src="/icon/lidar.svg" alt="" class="lidar-img">
+                    </div>
+                    <div class="name-accessoty">{{ $item['name'] }}</div>
                 </div>
-                <div class="icon-check inactive-icon">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                </div>
-                <div class="camera-icon">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
-                <div class="lidar-icon">
-                    <img src="/icon/lidar.svg" alt="" class="lidar-img">
-                </div>
-                <div class="name-accessoty">{{ $item['name'] }}</div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
 </div>

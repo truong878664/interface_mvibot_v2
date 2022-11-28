@@ -13,7 +13,7 @@ class StatusItem extends Component
     public $batteryTemperValue;
     public $batteryA;
     public $batteryVoltValue;
-    public $dataSccessory;
+    public $dataAccessory;
     /**
      * Create a new component instance.
      *
@@ -26,7 +26,7 @@ class StatusItem extends Component
         $batteryTemperValue,
         $batteryA,
         $batteryVoltValue,
-        $dataSccessory,
+        $dataAccessory,
     ) {
         $this->nameRobot = $nameRobot;
         $this->statusStatusRobot = $statusStatusRobot;
@@ -34,7 +34,7 @@ class StatusItem extends Component
         $this->batteryTemperValue = $batteryTemperValue;
         $this->batteryA = $batteryA;
         $this->batteryVoltValue = $batteryVoltValue;
-        $this->dataSccessory = $dataSccessory;
+        $this->dataAccessory = $dataAccessory;
     }
 
     /**
