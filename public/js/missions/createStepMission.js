@@ -7,6 +7,8 @@ import createPose from "../rosModule/createPose.js";
 import displayPose from "../rosModule/displayPose.js";
 import { stepsNameSubmit, renderStep } from "./renderStepMission.js";
 
+import { runMission } from "../rosModule/handleMission.js";
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const showMaps = $$(".show-point-map");
@@ -20,6 +22,8 @@ function start() {
 
     stepsNameSubmit();
     renderStep();
+
+    sendMission();
 }
 start();
 
@@ -112,4 +116,19 @@ function changeImgMarkerDir() {
             });
         });
     });
+}
+
+function sendMission() {
+    const sendMissionBtn = $(".send-mission-btn");
+    const dataStepsValue = $(".data-steps-value");
+    const optionRobot = $("#select-robot-option");
+    let nameRobot = "name robot value";
+
+    sendMissionBtn.onclick = () => {
+        runMission(nameRobot, dataStepsValue.value);
+    };
+
+    optionRobot.onchange = (e) => {
+        nameRobot = e.target.value;
+    };
 }

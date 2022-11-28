@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/css/createMission/createStep.css">
 <div class="create-mission-header">
     <a href="{{ route('dashboard.missions.create-missions.') }}" class="back-btn"><i
             class="fa-solid fa-angle-left"></i></a>

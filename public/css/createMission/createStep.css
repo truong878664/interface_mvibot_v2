@@ -235,8 +235,6 @@
 }
 
 .misisons-f-a-item:hover {
-    /* box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%); */
-    /* font-weight: 600; */
     border-color: #f4f4f4;
     background: #f5f5f5;
     box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%);
@@ -258,9 +256,7 @@
     margin-top: 20px;
     height: 180px;
     border-radius: 4px;
-    /* background-color: #5f9cf75e; */
     box-shadow: 5px 5px 10px #ccc;
-    padding-right: 100px;
     position: relative;
 }
 
@@ -527,17 +523,3 @@ input[type="number"] {
 }
 
 /* step sumbit */
-
-.form-submit-steps {
-    /* width: 100px; */
-}
-.submit-btn.step-submit-btn {
-    margin-left: 0px;
-}
-.submit-btn-wrapper {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    padding: 16px;
-}

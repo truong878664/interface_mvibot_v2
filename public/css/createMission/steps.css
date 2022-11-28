@@ -1,13 +1,45 @@
 @import url(./menuRightClick.css);
 
-.steps-mission {
+/* .steps-mission {
     overflow: scroll;
+}
+
+
+
+
+
+.submit-btn.step-submit-btn {
+    margin-left: 0px;
+}
+.submit-btn-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 16px;
+} */
+
+.steps-mission {
+    /* overflow: scroll; */
+    display: flex;
 }
 
 .steps-wrapper {
     display: flex;
     padding: 4px;
     flex-wrap: wrap;
+    /* margin-right: 100px; */
+    height: 100%;
+    overflow: scroll;
+    flex: 1;
+}
+
+.submit-btn-wrapper {
+    height: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .arrow {
@@ -21,19 +53,19 @@
     content: "";
     position: absolute;
 
-    /* width: 10px;
-    height: 10px;
-    background-color: aqua; */
     right: -2px;
     top: 50%;
     border-bottom: 10px solid transparent;
     border-left: 10px solid aqua;
     border-top: 10px solid transparent;
-    /* border-right: 10px solid transparent; */
     transform: translateY(-50%);
-    /* border-color: rgb(255, 0, 0); */
 }
 
+.step-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .step-item {
     padding: 4px 8px;
     margin: 8px 4px;
@@ -41,8 +73,8 @@
     color: var(--white-color);
     border-radius: 4px;
 }
-.step-item-wrapper {
+
+.form-submit-steps {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    max-height: 46px;
 }

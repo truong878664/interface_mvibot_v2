@@ -6,7 +6,7 @@ import displayPose from "../rosModule/displayPose.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
 import { setPosition } from "../rosModule/functionHandler.js";
-import ros, { $ } from "../main.js";
+import { $ } from "../main.js";
 import setSizeMap from "../rosModule/getSizeMap.js";
 import clickSetPointMap from "../rosModule/ clickSetPointMap.js";
 

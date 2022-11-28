@@ -18,8 +18,8 @@ function clickSetPointMap(xEvent, yEvent, viewer) {
     const klip = 1.45;
 
     const windowMap = document.getElementById("map").getBoundingClientRect();
-    const yClick = windowMap.width / 2 / windowMap.width - 0.5;
-    const xClick = windowMap.height / 2 / windowMap.height - 0.5;
+    const yClick = xEvent / windowMap.width - 0.5;
+    const xClick = yEvent / windowMap.height - 0.5;
 
     const dis = Math.sqrt(xClick * xClick + yClick * yClick);
     const alpha = rotaryZ + Math.atan2(yClick, xClick) - Math.PI / 2;

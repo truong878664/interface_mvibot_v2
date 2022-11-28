@@ -9,10 +9,61 @@
         @csrf
     </form>
     <br>
-    <form class="form-submit-steps" action="">
+    <div class="form-submit-steps">
         <input id="input-steps-name-submit" type="text" value="" name="" hidden>
-        <x-button tag="button" title='Send' class="step-submit-btn" attribute=""></x-button>
-    </form>
+
+        <x-button tag="label" title='Send' class="send-mission" attribute="for=select-robot"></x-button>
+    </div>
+    <input type="checkbox" name="" id="select-robot" hidden>
+    <div class="select-robot-wrapper">
+        <label for="select-robot" class="overlay"></label>
+        <div class="select-robot">
+            <select id="select-robot-option">
+                <option>Choose Robot</option>
+                <option>robot 1</option>
+            </select>
+            <x-button tag="label" title='Send' class="send-mission-btn" attribute="for=select-robot"></x-button>
+
+        </div>
+    </div>
+    <style>
+        .select-robot-wrapper {
+            display: none;
+        }
+
+        .select-robot {
+            position: fixed;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-60%);
+            z-index: 1000;
+            border-radius: 4px;
+            padding: 20px 32px;
+        }
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        #select-robot:checked~.select-robot-wrapper {
+            display: block;
+        }
+
+        #select-robot-option {
+            height: 46px;
+            padding: 4px 8px;
+            font-family: var(--main-font);
+            font-size: 2rem;
+        }
+    </style>
+
 </div>
 
 @php
