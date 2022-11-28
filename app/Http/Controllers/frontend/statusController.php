@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Robot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,11 +24,12 @@ class statusController extends Controller
 
     public function index()
     {
-        $robots =  DB::table('my_robot')->get();
+        $robots = Robot::all();
         foreach ($robots as $robot) {
             $this->statusRobotItem['nameRobot'] = $robot->name_seri;
             array_push($this->dataStatus, $this->statusRobotItem);
         }
+
 
         $batteryStatus = DB::table('battery_status')->get();
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
+use App\Models\Robot;
 use Illuminate\Support\Facades\DB;
 
 class MissionsController extends Controller
@@ -33,13 +34,16 @@ class MissionsController extends Controller
 
     public function createStepsMissions(Request $request)
     {
+
         $idRender = $request->id;
         $itemRender = Missions::find($idRender);
 
         $allPoints = MissionPosition::orderBy('id', 'desc')->get();
 
+        $allRobot = Robot::all()->toArray();
+
         $this->addPointToStepsMission($idRender);
-        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints'));
+        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot'));
     }
 
     public function addPointToStepsMission($idMission)

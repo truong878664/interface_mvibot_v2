@@ -8,7 +8,7 @@ import createPose from "../rosModule/createPose.js";
 import { setPosition } from "../rosModule/functionHandler.js";
 import { $ } from "../main.js";
 import setSizeMap from "../rosModule/getSizeMap.js";
-import clickSetPointMap from "../rosModule/ clickSetPointMap.js";
+import clickSetPointMap from "../rosModule/clickSetPointMap.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -28,6 +28,13 @@ displayPose(0, 0, 0, 1);
 setSizeMap();
 setPosition();
 
-$("#map").addEventListener("dblclick", (e) => {
-    clickSetPointMap(e.offsetX, e.offsetY, viewer);
-});
+const checkPoint = document.querySelector(".check-click-point");
+checkPoint.onchange = () => {
+    if (checkPoint.checked) {
+        mapElement.addEventListener("click", (e) => {
+            clickSetPointMap(e.offsetX, e.offsetY, viewer);
+        });
+    } else if (!checkPoint.checked) {
+        mapElement.removeEventListener("click", clickSetPointMap);
+    }
+};

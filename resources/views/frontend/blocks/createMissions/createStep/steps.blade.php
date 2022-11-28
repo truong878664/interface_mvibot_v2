@@ -20,7 +20,9 @@
         <div class="select-robot">
             <select id="select-robot-option">
                 <option>Choose Robot</option>
-                <option>robot 1</option>
+                @foreach ($allRobot as $robot)
+                    <option>{{ $robot['name_seri'] }}</option>
+                @endforeach
             </select>
             <x-button tag="label" title='Send' class="send-mission-btn" attribute="for=select-robot"></x-button>
 

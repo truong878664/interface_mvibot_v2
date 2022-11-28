@@ -1,14 +1,12 @@
-import { $ } from "../main.js";
 import displayPoint from "./displayPoint.js";
 import displayPose from "./displayPose.js";
 
 function clickSetPointMap(xEvent, yEvent, viewer) {
+    console.log("xxxx");
     const zCamera = viewer.camera.position.z;
     const xCamera = viewer.camera.position.x;
     const yCamera = viewer.camera.position.y;
 
-    const rotaryX = viewer.camera.rotation._x;
-    const rotaryY = viewer.camera.rotation._y;
     const rotaryZ = viewer.camera.rotation._z;
 
     const a1 = viewer.camera.matrixWorld.elements[8];
@@ -18,7 +16,8 @@ function clickSetPointMap(xEvent, yEvent, viewer) {
     const klip = 1.45;
 
     const windowMap = document.getElementById("map").getBoundingClientRect();
-    const yClick = xEvent / windowMap.width - 0.5;
+    const kMap = windowMap.width / windowMap.height;
+    const yClick = (xEvent / windowMap.width - 0.5) * kMap;
     const xClick = yEvent / windowMap.height - 0.5;
 
     const dis = Math.sqrt(xClick * xClick + yClick * yClick);
