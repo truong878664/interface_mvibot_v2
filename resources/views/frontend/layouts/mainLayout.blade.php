@@ -23,11 +23,10 @@
                 <span class="bar-item-title">Home</span>
             </li>
             <li class="bar-item active dashboard">
-                <a href="{{ route('dashboard.') }}"><i class="fa-solid fa-table-columns"></i></a>
+                <a href="{{ route('dashboard.') }}"><i class="fa-solid fa-gamepad"></i></a>
                 <span class="bar-item-title">Dashboard</span>
             </li>
             <li class="bar-item user"><i class="fa-solid fa-user"></i><span class="bar-item-title">User</span></li>
-            <li class="bar-item setting"><i class="fa-solid fa-gear"></i><span class="bar-item-title">seting</span></li>
         </ul>
 
 

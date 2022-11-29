@@ -1,14 +1,79 @@
 # Mvibot interface v2
 
-### Install composer
+### Install git ubuntu
+
+check version git
+
+```tsx
+git --version
+```
+
+If you receive output similar to the following, then Git is already installed.
+
+```tsx
+Output
+git version 2.25.1
+```
+
+---
+
+```tsx
+sudo apt update
+sudo apt install git
+```
 
 ### Install PHP
 
+```tsx
+sudo apt update
+```
+
+```tsx
+sudo apt install php-cli unzip
+```
+
+You will be prompted to confirm installation by typing Y and then ENTER.
+
+### Install composer
+
+```tsx
+cd ~
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+
+HASH=`curl -sS https://composer.github.io/installer.sig`
+
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+```
+
+To test your installation, run:
+
+```tsx
+composer;
+```
+
 ### Install mySql
+
+sudo apt update
+
+sudo apt install mysql-server
+
+sudo apt install mysql-server
 
 ### Download source code
 
 Download the files above and place on your server.
+create folder
+
+```tsx
+mkdir mvibotApp
+
+cd mvibotApp
+
+git clone https://github.com/truong878664/interface_mvibot_v2
+```
 
 ### Environment Files
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
+use App\Http\Controllers\frontend\joystickController;
 use App\Http\Middleware\AuthCheck;
 
 

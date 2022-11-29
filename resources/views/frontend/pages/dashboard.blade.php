@@ -11,5 +11,8 @@
 
         <x-dashboard-item route='dashboard.status.' icon='fa-solid fa-gauge-high' title='Status'
             describe='Status information of the robot' color="#f4ba23" />
+
+        <x-dashboard-item route='dashboard.status.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
+            color="#10A19D" />
     </div>
 @endsection
