@@ -1,7 +1,6 @@
 .create-mission-header {
     display: flex;
     align-items: center;
-    margin-top: 30px;
 }
 
 .back-btn {
@@ -21,12 +20,11 @@
 }
 
 .create-mission-heading {
-    font-size: 2.8rem;
+    font-size: 2.3rem;
 }
 
 .create-mission-wrapper {
     display: flex;
-    margin-top: 10px;
     width: 100%;
 }
 
@@ -504,7 +502,7 @@ input[type="number"] {
 .message-success {
     position: fixed;
     height: 40px;
-    background-color: #55b43533;
+    background-color: #55b435;
     top: 80px;
     right: 40px;
     z-index: 100;
@@ -513,7 +511,7 @@ input[type="number"] {
     padding: 4px;
     border: 1px solid #54b435;
     align-items: center;
-    color: #387522;
+    color: #fff;
 }
 
 .check-icon {

@@ -3,7 +3,7 @@
     <div class="heading map-heading">Map</div>
     <div class="contents">
         <div class="map-wrapper">
-            <x-button tag="button" title="List map" class="" attribute=""></x-button> <br>
+            <x-button tag="button" title="List map" class="list-map-btn" attribute=""></x-button>
 
             <div class="map-page_map" id="map"></div>
             <div class="joystick-container">

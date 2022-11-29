@@ -119,16 +119,22 @@ function changeImgMarkerDir() {
 }
 
 function sendMission() {
+    const nameMission = $(".create-mission-heading").innerText;
     const sendMissionBtn = $(".send-mission-btn");
-    const dataStepsValue = $(".data-steps-value");
+    const dataStepsValue = $(".data-steps-value")
+        .value.replace("[", "(")
+        .replace("]", ")")
+        .replaceAll(",", ")(")
+        .replaceAll('"', "");
     const optionRobot = $("#select-robot-option");
-    let nameRobot = "name robot value";
-
-    sendMissionBtn.onclick = () => {
-        runMission(nameRobot, dataStepsValue.value);
-    };
+    let nameRobot;
+    const dataBodyMission = `&name>${nameMission}/time_out>-1/mode>normal/data>%normal_step#${dataStepsValue}`;
 
     optionRobot.onchange = (e) => {
         nameRobot = e.target.value;
+    };
+
+    sendMissionBtn.onclick = () => {
+        runMission(nameRobot, dataBodyMission);
     };
 }

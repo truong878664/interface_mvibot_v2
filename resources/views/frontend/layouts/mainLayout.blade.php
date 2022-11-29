@@ -10,12 +10,24 @@
 </head>
 
 <body>
+    <header class="main-header">
+        <div class="header-left-wrapper">
+            <div class="connect-ros-btn connection-failed">
+                <i class="fa-solid fa-satellite-dish"></i>
+            </div>
+            <h3 class="">Mvibot</h3>
+        </div>
+
+        <div class="user-wrapper">
+            <div class="name-user">admin</div>
+            <img class="avatar-user"
+                src="https://images.unsplash.com/photo-1599817977364-b6f59e547258?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" />
+        </div>
+    </header>
     <div class="nav-bar">
         <ul>
-            <li class="connect-ros-btn connection-failed">
-                <i class="fa-solid fa-satellite-dish"></i>
-            </li>
-
+            <div class="bar-item-top">
+            </div>
             <li class="bar-item home ">
                 <a href="{{ route('home') }}">
                     <i class="fa-solid fa-house"></i>
@@ -35,16 +47,6 @@
                 <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </a>
     </div>
-
-    <div class="user-wrapper">
-        <div class="name-user">admin</div>
-        <img class="avatar-user"
-            src="https://images.unsplash.com/photo-1599817977364-b6f59e547258?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" />
-    </div>
-
-
-    <button class="show-nav-bar hide"><i class="fa-solid fa-o"></i></button>
-
     <div class="container">
         @yield('content')
     </div>
@@ -52,33 +54,6 @@
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/ros3d.min.js"></script>
     <script type="module" src="/js/main.js"></script>
-    <script>
-        const $ = document.querySelector.bind(document)
-        const $$ = document.querySelectorAll.bind(document)
-        activeNabBar()
-
-
-        function activeNabBar() {
-            const currentPathname = window.location.pathname.replace('/', '')
-            let currentPage
-            if (currentPathname.indexOf('dashboard') != -1) {
-                currentPage = 'dashboard'
-
-            } else if (currentPathname.indexOf('user') != -1) {
-                currentPage = 'user'
-
-            } else if (currentPathname.indexOf('setting') != -1) {
-                currentPage = 'setting'
-
-            } else {
-                currentPage = 'home'
-            }
-            $(`.bar-item.active`).classList.remove('active')
-            $(`.${currentPage}`).classList.add('active')
-            document.title = `Mvibot | ${currentPage}`
-
-        }
-    </script>
 </body>
 
 </html>

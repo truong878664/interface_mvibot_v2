@@ -25,19 +25,19 @@
 @import "createMission/createStep.css";
 
 @import "responsive.css";
+@font-face {
+    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    font-family: "Montserrat";
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-@font-face {
-    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
-    font-family: "Montserrat";
-}
 :root {
     --white-color: rgb(255, 255, 255);
-    --main-color: #2146c7;
+    --main-color: #0f6cbd;
     --blue-color: #82b0f5;
     --orange-color: #f5b933;
     --black-color: rgb(255, 255, 255);
@@ -74,6 +74,8 @@ input {
     outline: none;
     font-family: var(--main-font);
     font-size: 1.6rem;
+    border: 1px solid #ccc;
+    padding: 6px 4px;
 }
 
 input[type="number"] {
@@ -88,13 +90,11 @@ li {
 }
 
 .heading {
-    font-size: 3rem;
+    font-size: 2.6rem;
     font-weight: 600;
-    width: 100%;
     text-align: center;
-    top: 40px;
-    position: fixed;
-    z-index: 100;
+    margin: 8px 0;
+    margin-left: 8px;
 }
 
 .submit-btn {

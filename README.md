@@ -31,7 +31,7 @@ sudo apt update
 ```
 
 ```tsx
-sudo apt install --no-install-recommends php8.1
+sudo apt install --no-install-reco mmends php8.1
 ```
 
 You will be prompted to confirm installation by typing Y and then ENTER.

@@ -4,7 +4,7 @@
 
     <div class="contents dashboard-content">
         <x-dashboard-item route='dashboard.missions.' icon='fa-solid fa-crosshairs' title='Missions'
-            describe='assign tasks to robots' color="#0c0c0c" />
+            describe='assign tasks to robots' color="#0f6cbd" />
 
         <x-dashboard-item route='dashboard.map.' icon='fa-solid fa-map-location-dot' title='Map'
             describe='View map, create map' color="#e62648" />

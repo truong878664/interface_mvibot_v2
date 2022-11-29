@@ -1,6 +1,5 @@
 import displayPoint from "./displayPoint.js";
 import displayPose from "./displayPose.js";
-import mathYaw from "./mathYaw.js";
 
 function clickSetPointMap(xEvent, yEvent, rotateZ, rotateW, viewer) {
     const zCamera = viewer.camera.position.z;

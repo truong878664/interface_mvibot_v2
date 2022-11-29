@@ -37,7 +37,7 @@
 }
 
 .bar-item-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     position: absolute;
     bottom: 2px;
     left: 50%;
@@ -47,7 +47,7 @@
 
 .bar-item.active {
     color: var(--main-color);
-    border-left: 4px solid var(--main-color);
+    border-left: 2px solid var(--main-color);
 }
 
 .logout {
@@ -65,13 +65,12 @@
 
 /* user */
 .user-wrapper {
-    position: fixed;
-    right: 30px;
-    top: 20px;
     display: flex;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     z-index: 100;
+    color: #fff;
+    margin-right: 20px;
 }
 
 .name-user {
@@ -79,39 +78,18 @@
 }
 
 .avatar-user {
-    font-size: 50px;
+    font-size: 32px;
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    box-shadow: 0 0 10px rgb(177, 177, 177);
+    /* box-shadow: 0 0 10px rgb(177, 177, 177); */
 }
 
 /* content */
 .container {
-    margin-top: 80px;
-    margin-left: 80px;
-}
-
-/* show nav bar */
-.show-nav-bar {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    padding: 20px;
-    font-size: 3rem;
-    border-radius: 20px;
-    color: var(--white-color);
-    border: none;
-    background-color: var(--main-color);
-    cursor: pointer;
-}
-
-.show-nav-bar.hide {
-    display: none;
-}
-
-.show-nav-bar:hover {
-    bottom: 33px;
+    margin-top: 48px;
+    margin-left: 74px;
+    max-height: calc(100vh - 80px);
 }
 
 .message {
@@ -122,13 +100,12 @@
 .connect-ros-btn {
     font-size: 2.5rem;
     text-align: center;
-    cursor: pointer;
     color: #fff;
-    z-index: 100;
 }
 
 .connect-ros-btn i {
     line-height: 50px;
+    width: 68px;
 }
 
 .connect-ros-btn.connected {
@@ -137,4 +114,31 @@
 
 .connect-ros-btn.connection-failed {
     color: #cf0a0a;
+}
+
+.bar-item-top {
+    height: 48px;
+}
+
+.connect-ros-btn {
+    z-index: 1000;
+}
+
+.main-header {
+    height: 48px;
+    background-color: #0f6cbd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left-wrapper {
+    display: flex;
+    align-items: center;
+    color: #fff;
 }

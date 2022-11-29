@@ -1,25 +1,8 @@
-:root {
-    --column-control-point: 8;
-}
-
-/* connect ros */
-
 /* content */
 .missions-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.nav-tab-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: var(--background-color);
-    height: 110px;
-    position: fixed;
-    top: 10px;
-    z-index: 1;
 }
 
 .nav-tab {
@@ -31,8 +14,7 @@
     justify-content: space-between;
     font-size: 2rem;
     align-items: flex-start;
-    position: absolute;
-    bottom: 8px;
+    margin-bottom: 20px;
 }
 
 .navtab-item {
@@ -56,10 +38,7 @@
 /* map */
 
 .nav-content {
-    width: 90%;
-    height: 60vh;
-    margin-right: 100px;
-    margin-top: 10px;
+    width: calc(100% - 40px);
 }
 
 .missions-map {
@@ -67,7 +46,7 @@
     height: 1000px; */
     width: 100%;
     height: 65vh;
-    margin-top: 40px;
+    /* margin-top: 40px; */
     margin-right: 100px;
     border-radius: 4px;
     overflow: hidden;

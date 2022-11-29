@@ -1,6 +1,10 @@
 import ros from "../main.js";
+import getValueWakeUpStop from "../missions/ftWakeUpStop.js";
 
-function runMission(nameRobot, data) {
+function runMission(nameRobot, dataBodyMission) {
+    const dataHeadMission = getValueWakeUpStop();
+    const dataFullMission = `${dataHeadMission}*${dataBodyMission}%@`;
+
     const mission_pub = new ROSLIB.Topic({
         ros: ros,
         name: `/ ${nameRobot}/data_coordinates`,
@@ -8,7 +12,7 @@ function runMission(nameRobot, data) {
         queue_size: 1,
     });
     const mission_set = new ROSLIB.Message({
-        data: data,
+        data: dataFullMission,
     });
 
     console.log(mission_set.data);

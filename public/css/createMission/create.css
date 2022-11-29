@@ -5,7 +5,8 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: -20px;
-    margin-top: 60px;
+    max-height: calc(100vh - 150px);
+    overflow: scroll;
 }
 .create-misisons-item {
     width: calc(100% / var(--column-create-missions) - 20px);
