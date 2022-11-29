@@ -1,6 +1,6 @@
-# <strong>Mvibot interface v2 - config ubuntu 22.04</strong>
+# <strong style="color:#D2001A">Mvibot interface v2 - config ubuntu 22.04</strong>
 
-## <strong>Install git</strong>
+## <strong style="color:#2146c7">Install git</strong>
 
 Check version Git
 
@@ -17,26 +17,26 @@ git version 2.25.1
 
 ---
 
-## <strong>Install Git</strong>
+install Git
 
 ```tsx
 sudo apt update
 sudo apt install git
 ```
 
-## <strong>Install PHP</strong>
+## <strong style="color:#2146c7">Install PHP</strong>
 
 ```tsx
 sudo apt update
 ```
 
 ```tsx
-sudo apt install php-cli unzip
+sudo apt install --no-install-recommends php8.1
 ```
 
 You will be prompted to confirm installation by typing Y and then ENTER.
 
-## <strong>Install composer</strong>
+## <strong style="color:#2146c7">Install composer</strong>
 
 ```tsx
 cd ~
@@ -62,7 +62,7 @@ To test your installation, run:
 composer;
 ```
 
-## <strong>Install mySql</strong>
+## <strong style="color:#2146c7">Install mySql</strong>
 
 Reference link: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
@@ -124,7 +124,7 @@ mysql > exit;
 
 ---
 
-## <strong>Download source code</strong>
+## <strong style="color:#2146c7">Download source code</strong>
 
 Download the files above and place on your server.
 create folder
@@ -141,11 +141,11 @@ cd mvibotApp
 git clone https://github.com/truong878664/interface_mvibot_v2.git
 ```
 
-## <strong>Environment Files</strong>
+## <strong style="color:#2146c7">Environment Files</strong>
 
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong>
 
-## <strong>Create Database</strong>
+## <strong style="color:#2146c7">Create Database</strong>
 
 You must create your database on your server and on your .env file update the following lines:
 
@@ -160,7 +160,7 @@ DB_PASSWORD = "your password sql";
 
 Change these lines to reflect your new database settings.
 
-## <strong>Composer</strong>
+## <strong style="color:#2146c7">Composer</strong>
 
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
 
@@ -168,7 +168,7 @@ Laravel project dependencies are managed through the PHP Composer tool. The firs
 composer install
 ```
 
-## <strong>Artisan Commands</strong>
+## <strong style="color:#2146c7">Artisan Commands</strong>
 
 The first thing we are going to do is set the key that Laravel will use when doing encryption.
 
@@ -176,31 +176,31 @@ The first thing we are going to do is set the key that Laravel will use when doi
 php artisan key:generate
 ```
 
-## <strong>Clear cache</strong>
+## <strong style="color:#2146c7">Clear cache</strong>
 
 ```tsx
 php artisan config:clear
 php artisan cache:clear
 ```
 
-## <strong>Create table database</strong>
+## <strong style="color:#2146c7">Create table database</strong>
 
 ```tsx
 php artisan migrate
 ```
 
-## <strong>Create User admin</strong>
+## <strong style="color:#2146c7">Create User admin</strong>
 
 ```tsx
 php artisan db:seed
 ```
 
-## <strong>Run Project</strong>
+## <strong style="color:#2146c7">Run Project</strong>
 
 ```tsx
 php artisan serve
 ```
 
-## <strong>Open link</strong>
+## <strong style="color:#2146c7">Open link</strong>
 
 open link: http://127.0.0.1:8000/ open the link in your browser
