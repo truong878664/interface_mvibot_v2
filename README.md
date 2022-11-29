@@ -1,6 +1,6 @@
-# <strong style="color:#D2001A">Mvibot interface v2 - config ubuntu 22.04</strong>
+# <strong>Mvibot interface v2 - config ubuntu 22.04</strong>
 
-## <strong style="color:#2146c7">Install git</strong>
+## <strong>Install git</strong>
 
 Check version Git
 
@@ -24,7 +24,7 @@ sudo apt update
 sudo apt install git
 ```
 
-## <strong style="color:#2146c7">Install PHP</strong>
+## <strong>Install PHP</strong>
 
 ```tsx
 sudo apt update
@@ -36,7 +36,7 @@ sudo apt install --no-install-recommends php8.1
 
 You will be prompted to confirm installation by typing Y and then ENTER.
 
-## <strong style="color:#2146c7">Install composer</strong>
+## <strong>Install composer</strong>
 
 ```tsx
 cd ~
@@ -62,7 +62,7 @@ To test your installation, run:
 composer;
 ```
 
-## <strong style="color:#2146c7">Install mySql</strong>
+## <strong>Install mySql</strong>
 
 Reference link: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
@@ -124,7 +124,7 @@ mysql > exit;
 
 ---
 
-## <strong style="color:#2146c7">Download source code</strong>
+## <strong>Download source code</strong>
 
 Download the files above and place on your server.
 create folder
@@ -141,11 +141,11 @@ cd mvibotApp
 git clone https://github.com/truong878664/interface_mvibot_v2.git
 ```
 
-## <strong style="color:#2146c7">Environment Files</strong>
+## <strong>Environment Files</strong>
 
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong>
 
-## <strong style="color:#2146c7">Create Database</strong>
+## <strong>Create Database</strong>
 
 You must create your database on your server and on your .env file update the following lines:
 
@@ -160,15 +160,19 @@ DB_PASSWORD = "your password sql";
 
 Change these lines to reflect your new database settings.
 
-## <strong style="color:#2146c7">Composer</strong>
+## <strong>Composer</strong>
 
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
+
+```tsx
+cd interface_mvibot_v2
+```
 
 ```tsx
 composer install
 ```
 
-## <strong style="color:#2146c7">Artisan Commands</strong>
+## <strong>Artisan Commands</strong>
 
 The first thing we are going to do is set the key that Laravel will use when doing encryption.
 
@@ -176,31 +180,31 @@ The first thing we are going to do is set the key that Laravel will use when doi
 php artisan key:generate
 ```
 
-## <strong style="color:#2146c7">Clear cache</strong>
+## <strong>Clear cache</strong>
 
 ```tsx
 php artisan config:clear
 php artisan cache:clear
 ```
 
-## <strong style="color:#2146c7">Create table database</strong>
+## <strong>Create table database</strong>
 
 ```tsx
 php artisan migrate
 ```
 
-## <strong style="color:#2146c7">Create User admin</strong>
+## <strong>Create User admin</strong>
 
 ```tsx
 php artisan db:seed
 ```
 
-## <strong style="color:#2146c7">Run Project</strong>
+## <strong>Run Project</strong>
 
 ```tsx
 php artisan serve
 ```
 
-## <strong style="color:#2146c7">Open link</strong>
+## <strong>Open link</strong>
 
 open link: http://127.0.0.1:8000/ open the link in your browser
