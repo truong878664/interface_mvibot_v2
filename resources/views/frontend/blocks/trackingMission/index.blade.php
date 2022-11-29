@@ -11,7 +11,6 @@
     </div>
     <div class="map-tracking" id="map">
     </div>
-    <script type="module" src="/js/missions/trackingMission.js"></script>
 </div>
 <style>
     .tracking-mission-step-wrapper {

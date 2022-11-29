@@ -165,12 +165,18 @@ function handleEditStep(e) {
 }
 
 function getDataAtString(string, showData) {
-    const indexString = showData.indexOf(string) + 1 + string.length;
-    const data = showData.slice(
-        indexString,
-        showData.indexOf("|", indexString)
-    );
-    return data;
+    if (showData) {
+        const indexString = showData.indexOf(string) + 1 + string.length;
+        const data = showData.slice(
+            indexString,
+            showData.indexOf("|", indexString)
+        );
+        console.log(data);
+        return data;
+    } else {
+        alert("please save");
+        location.reload();
+    }
 }
 
 export { stepsNameSubmit, renderStep };

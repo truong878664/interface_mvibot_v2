@@ -1,8 +1,9 @@
 import displayPoint from "./displayPoint.js";
 import displayPose from "./displayPose.js";
 import mathYaw from "./mathYaw.js";
-
-const $ = document.querySelector.bind(document);
+import { viewer, mapElement } from "../missions/createPoint.js";
+import clickSetPointMap from "./clickSetPointMap.js";
+import { $ } from "../main.js";
 
 let positionX = 0;
 let positionY = 0;
@@ -119,6 +120,46 @@ function setValuePositionForm() {
     displayPositionX.value = positionXElement.value;
     displayPositionY.value = positionYElement.value;
     displayRotateZ.value = `${positionZElement.value}°`;
+}
+
+const checkPoint = document.querySelector(".check-click-point");
+checkPoint.onchange = () => {
+    if (checkPoint.checked) {
+        lockZ();
+        mapElement.addEventListener("dblclick", clickSetPoint);
+        mapElement.addEventListener("mousemove", lockZ);
+
+        mapElement.style.cursor = "cell";
+    } else {
+        mapElement.removeEventListener("dblclick", clickSetPoint);
+        mapElement.removeEventListener("mousemove", lockZ);
+        mapElement.style.cursor = "default";
+    }
+};
+
+const clickSetPoint = function (e) {
+    const [positionXSet, positionYSet] = clickSetPointMap(
+        e.offsetX,
+        e.offsetY,
+        rotateZ,
+        rotateW,
+        viewer
+    );
+    const inx = $("#inx");
+    const iny = $("#iny");
+    const positionXEle = $("#position-x");
+    const positionYEle = $("#position-y");
+
+    inx.value = positionXSet;
+    iny.value = positionYSet;
+    positionXEle.value = positionXSet;
+    positionYEle.value = positionYSet;
+    positionX = positionXSet;
+    positionY = positionYSet;
+};
+
+function lockZ() {
+    viewer.cameraControls.rotateUp(1.57);
 }
 
 export { setPosition };

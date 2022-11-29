@@ -1,8 +1,8 @@
 import displayPoint from "./displayPoint.js";
 import displayPose from "./displayPose.js";
+import mathYaw from "./mathYaw.js";
 
-function clickSetPointMap(xEvent, yEvent, viewer) {
-    console.log("xxxx");
+function clickSetPointMap(xEvent, yEvent, rotateZ, rotateW, viewer) {
     const zCamera = viewer.camera.position.z;
     const xCamera = viewer.camera.position.x;
     const yCamera = viewer.camera.position.y;
@@ -17,6 +17,7 @@ function clickSetPointMap(xEvent, yEvent, viewer) {
 
     const windowMap = document.getElementById("map").getBoundingClientRect();
     const kMap = windowMap.width / windowMap.height;
+
     const yClick = (xEvent / windowMap.width - 0.5) * kMap;
     const xClick = yEvent / windowMap.height - 0.5;
 
@@ -29,8 +30,9 @@ function clickSetPointMap(xEvent, yEvent, viewer) {
 
     const xCameraConvert = xCamera + xClickConvert + a1 * t;
     const yCameraConvert = yCamera + yClickConvert + a2 * t;
-    displayPose(xCameraConvert, yCameraConvert, 0, 1);
+    displayPose(xCameraConvert, yCameraConvert, rotateZ, rotateW);
     displayPoint(xCameraConvert, yCameraConvert);
+    return [xCameraConvert, yCameraConvert];
 }
 
 export default clickSetPointMap;

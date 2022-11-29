@@ -37,6 +37,7 @@
                 </div>
                 <div class="password-wrapper">
                     <input type="password" placeholder="Password" name="password" class="login-input password">
+                    <span class="show-password"><i class="fa-regular fa-eye"></i></span>
                     <span class="input-fail">
                         @error('password')
                             {{ $message }}
@@ -66,5 +67,39 @@
         </div>
     </div>
 </body>
+<style>
+    .login-input::placeholder {
+        font-size: 1.6rem;
+    }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .show-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        font-size: 1.5rem;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: none
+    }
+</style>
+<script>
+    const showPassBtn = document.querySelector('.show-password')
+    const iconShow = '<i class="fa-regular fa-eye"></i>'
+    const iconHide = '<i class="fa-regular fa-eye-slash"></i>'
+    const passwordEle = document.querySelector('.password')
+
+    passwordEle.oninput = (e) => {
+        e.target.value.length > 0 ? showPassBtn.style.display = 'block' : showPassBtn.style.display = 'none'
+
+    }
+    showPassBtn.onclick = () => {
+        showPassBtn.innerHTML == iconShow ? showPassBtn.innerHTML = iconHide : showPassBtn.innerHTML = iconShow
+        passwordEle.type === 'password' ? passwordEle.type = 'text' : passwordEle.type = 'password'
+    }
+</script>
 
 </html>
