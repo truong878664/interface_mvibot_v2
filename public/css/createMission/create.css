@@ -23,6 +23,11 @@
     cursor: pointer;
     position: relative;
     box-shadow: 2px 2px 7px #ccc;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 .create-misisons-item:hover {
     box-shadow: 2px 2px 14px rgb(158, 158, 158);
