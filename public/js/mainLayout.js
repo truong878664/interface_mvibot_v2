@@ -1,5 +1,4 @@
 const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
 function connected() {
@@ -28,7 +27,7 @@ function activeNabBar() {
     }
     $(`.bar-item.active`).classList.remove("active");
     $(`.${currentPage}`).classList.add("active");
-    document.title = `Mvibot | ${currentPage}`;
+    document.title = `Mvibot – ${currentPage}`;
 }
 
 export { connected, connectionFailed };

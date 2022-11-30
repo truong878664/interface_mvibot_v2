@@ -35,7 +35,6 @@ function renderStep() {
                             ? '<li class="menu-item edit-step"><i class="fa-regular fa-pen-to-square"></i></i>edit</li>'
                             : ""
                     }
-                    
                     <li class="menu-item delete-step" id-delete="${index}"><i class="fa-regular fa-trash-can"></i></i>delete</li>
                 </ul>
             </div>`
@@ -171,11 +170,9 @@ function getDataAtString(string, showData) {
             indexString,
             showData.indexOf("|", indexString)
         );
-        console.log(data);
         return data;
     } else {
         alert("please save");
-        location.reload();
     }
 }
 

@@ -208,3 +208,6 @@ php artisan serve
 ## <strong>Open link</strong>
 
 open link: http://127.0.0.1:8000/ open the link in your browser
+
+User: admin <br>
+Password: admin

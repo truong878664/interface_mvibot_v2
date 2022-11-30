@@ -1,5 +1,5 @@
 import { $$ } from "../main.js";
-document.title = "Status Robot | Mvibot";
+document.title = "Mvibot – Status Robot";
 setPercentBattery();
 setColorTemper();
 
