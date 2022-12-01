@@ -44,8 +44,9 @@
 
         <button class="logout">
             <a href="{{ route('logout') }}">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-        </a>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </button>
     </div>
     <div class="container">
         @yield('content')
