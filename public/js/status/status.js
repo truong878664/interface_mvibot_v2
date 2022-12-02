@@ -1,7 +1,31 @@
 import { $$ } from "../main.js";
 document.title = "Mvibot – Status Robot";
-setPercentBattery();
-setColorTemper();
+// setPercentBattery();
+// setColorTemper();
+const xhttp = new XMLHttpRequest();
+let oldResponse = "";
+
+function dataLoad() {
+    xhttp.onload = function () {
+        if (oldResponse !== this.responseText) {
+            oldResponse = this.responseText;
+            document.querySelector(".wrapper-status-content").innerHTML =
+                this.responseText;
+            setPercentBattery();
+            setColorTemper();
+        }
+    };
+    xhttp.open("GET", "status/item-status");
+    xhttp.send();
+}
+
+setInterval(() => {
+    dataLoad();
+}, 2000);
+
+window.onload = function () {
+    dataLoad();
+};
 
 function setPercentBattery() {
     const outerCircles = $$(".outer-circle");

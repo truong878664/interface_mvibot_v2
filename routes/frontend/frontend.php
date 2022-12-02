@@ -4,11 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
-use App\Http\Controllers\frontend\joystickController;
-use App\Http\Middleware\AuthCheck;
-
-
-
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
@@ -40,7 +35,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         });
 
         Route::prefix('status')->name('status.')->group(function () {
-            Route::get('/', [statusController::class, 'index']);
+            Route::get('/', [statusController::class, 'index'])->name('status');
+            Route::get('item-status', [statusController::class, 'allStatus']);
         });
     });
 });

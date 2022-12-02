@@ -1,9 +1,8 @@
-// const connectRosBtn = document.querySelector(".connect-ros-btn");
 import { connected, connectionFailed } from "../mainLayout.js";
 
-function connectRos() {
+function connectRos(ip) {
     const ros = new ROSLIB.Ros({
-        url: `ws://127.0.0.1:9090`,
+        url: `ws://${ip}:9090`,
     });
 
     ros.on("connection", function () {

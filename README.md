@@ -21,18 +21,26 @@ install Git
 
 ```tsx
 sudo apt update
+
+
 sudo apt install git
 ```
 
 ## <strong>Install PHP</strong>
 
+https://computingforgeeks.com/how-to-install-php-on-ubuntu-linux-system/
+
 ```tsx
 sudo apt update
 ```
 
-```tsx
-sudo apt install --no-install-reco mmends php8.1
-```
+sudo apt -y upgrade
+
+sudo apt update
+
+sudo apt install lsb-release ca-certificates apt-transport-https software-properties-common -y
+
+sudo apt install php8.1
 
 You will be prompted to confirm installation by typing Y and then ENTER.
 
@@ -167,6 +175,12 @@ Laravel project dependencies are managed through the PHP Composer tool. The firs
 ```tsx
 cd interface_mvibot_v2
 ```
+
+sudo apt install php8.1\*
+sudo apt install php8.1-mysql
+sudo apt install php8.1-mbstring
+sudo apt install php8.1-common
+sudo apt install php8.1-xml
 
 ```tsx
 composer install

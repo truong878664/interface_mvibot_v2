@@ -24,12 +24,24 @@ class statusController extends Controller
 
     public function index()
     {
+        $this->getDataStatus();
+        $dataStatus = $this->dataStatus;
+        return view('frontend.pages.status.status', compact('dataStatus'));
+    }
+    public function allStatus()
+    {
+        $this->getDataStatus();
+        $dataStatus = $this->dataStatus;
+        return view('frontend.pages.status.dataStatus', compact('dataStatus'));
+    }
+
+    public function getDataStatus()
+    {
         $robots = Robot::all();
         foreach ($robots as $robot) {
             $this->statusRobotItem['nameRobot'] = $robot->name_seri;
             array_push($this->dataStatus, $this->statusRobotItem);
         }
-
 
         $batteryStatus = DB::table('battery_status')->get();
 
@@ -79,8 +91,5 @@ class statusController extends Controller
                 }
             }
         }
-
-        $dataStatus = $this->dataStatus;
-        return view('frontend.pages.status.status', compact('dataStatus'));
     }
 }
