@@ -1,9 +1,10 @@
 import ros from "../main.js";
+import uniqueCode from "./uniqueCode.js";
 
 function displayPose(x, y, z, w) {
     const pose_pub = new ROSLIB.Topic({
         ros: ros,
-        name: "/pose_pub",
+        name: `/pose_pub_${uniqueCode}`,
         messageType: "geometry_msgs/PoseStamped",
         queue_size: 1,
     });

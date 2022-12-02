@@ -1,9 +1,10 @@
 import ros from "../main.js";
+import uniqueCode from "./uniqueCode.js";
 
 function displayPoint(x, y) {
     const point_pub = new ROSLIB.Topic({
         ros: ros,
-        name: "/point_pub",
+        name: `/point_pub_${uniqueCode}`,
         messageType: "geometry_msgs/PointStamped",
         queue_size: 0.1,
     });
