@@ -4,13 +4,7 @@ import createTfClient from "../rosModule/createTfClient.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
 import { $ } from "../main.js";
-import {
-    mvibot_color,
-    mvibot_layer,
-    mvibot_position,
-    mvibot_scale,
-} from "../rosModule/classMvibot.js";
-
+import { mvibot_layer } from "../rosModule/classMvibot.js";
 import { markerClient, displayLayer } from "../rosModule/layer/markerClient.js";
 import {
     markerClientPath,
@@ -27,10 +21,11 @@ const tfClient = createTfClient();
 markerClient(tfClient, viewer);
 markerClientPath(tfClient, viewer);
 
-const layer1 = new mvibot_layer("A", 0, 0, 5, 5, "dead_zone");
+const layer1 = new mvibot_layer("A", 0, 0, 7, 7, "dead_zone");
 const layer2 = new mvibot_layer("B", 10, -10, -10, -35, "lowspeed_zone");
 const layer3 = new mvibot_layer("C", 5, 0, -5, -15, "lowspeed_zone");
 const layer4 = new mvibot_layer("E", 0, 3, -5, -15, "dead_zone");
+
 const mvibot_layer_active = [layer1, layer2, layer3, layer4];
 
 displayLayer(mvibot_layer_active);

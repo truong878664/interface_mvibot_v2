@@ -2,7 +2,7 @@ import ros from "../../main.js";
 import { mvibot_position, mvibot_color, mvibot_scale } from "../classMvibot.js";
 
 export function markerClientPath(tfClient, viewer) {
-    const markerClient_path = new ROS3D.MarkerClient({
+    new ROS3D.MarkerClient({
         ros: ros,
         tfClient: tfClient,
         topic: "/visualization_marker_path",
@@ -31,7 +31,7 @@ export function displayPath() {
             r: 0,
             g: 0,
             b: 0,
-            a: 0,
+            a: 0.8,
         },
         scale: {
             x: 0.0,
@@ -55,14 +55,14 @@ export function displayPath() {
     });
     var points_path = [];
     let j = 0;
-    for (let i = 0; i < 10; i = i + 0.2) {
+    for (let i = 0; i < 10; i = i + 0.3) {
         points_path[j] = new mvibot_position(-0.1 * i * i - i + 1, i, 0.02);
         j++;
     }
     markerClient_path_msg.action = 0;
     markerClient_path_msg.id = 0;
     markerClient_path_msg.type = 7;
-    markerClient_path_msg.color = new mvibot_color(0.0, 1.0, 0, 0.8);
+    markerClient_path_msg.color = new mvibot_color(1, 1, 0, 0.8);
     markerClient_path_msg.scale = new mvibot_scale(0.25, 0.25, 0.01);
     markerClient_path_msg.points = points_path;
     markerClient_path_topic.publish(markerClient_path_msg);

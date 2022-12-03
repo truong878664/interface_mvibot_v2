@@ -42,6 +42,11 @@ sudo apt install lsb-release ca-certificates apt-transport-https software-proper
 
 sudo apt install php8.1
 
+sudo apt install php8.1-mysql
+sudo apt install php8.1-mbstring
+sudo apt install php8.1-common
+sudo apt install php8.1-xml
+
 You will be prompted to confirm installation by typing Y and then ENTER.
 
 ## <strong>Install composer</strong>
@@ -130,6 +135,16 @@ mysql> CREATE DATABASE IF NOT EXISTS mvibot_database;
 mysql > exit;
 ```
 
+create new user
+
+sudo mysql
+
+mysql > mysql -u root -p
+
+mysql > GRANT ALL PRIVILEGES ON _._ TO 'name_new_user'@'localhost' WITH GRANT OPTION;
+
+mysql > FLUSH PRIVILEGES;
+
 ---
 
 ## <strong>Download source code</strong>
@@ -175,12 +190,6 @@ Laravel project dependencies are managed through the PHP Composer tool. The firs
 ```tsx
 cd interface_mvibot_v2
 ```
-
-sudo apt install php8.1\*
-sudo apt install php8.1-mysql
-sudo apt install php8.1-mbstring
-sudo apt install php8.1-common
-sudo apt install php8.1-xml
 
 ```tsx
 composer install

@@ -1,7 +1,7 @@
 import ros from "../../main.js";
 
 export function markerClient(tfClient, viewer) {
-    const markerClient = new ROS3D.MarkerClient({
+    new ROS3D.MarkerClient({
         ros: ros,
         tfClient: tfClient,
         topic: "/visualization_marker_layer",
