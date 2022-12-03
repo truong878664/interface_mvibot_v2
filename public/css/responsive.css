@@ -20,4 +20,107 @@
         --column-create-missions: 2;
         --column-status: 1;
     }
+
+    /* login */
+    .login-img-wrapper {
+        width: 100%;
+    }
+
+    .login-layer {
+        display: none;
+    }
+
+    .login-from-wrapper {
+        /* width: 0; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .login-form {
+        border-radius: 10px;
+        padding: 30px 20px;
+    }
+
+    .robot-login-img {
+        left: -10%;
+        filter: drop-shadow(5px 5px 10px rgba(85, 85, 85, 0.226));
+    }
+
+    .login-heading {
+        width: 100%;
+        text-align: right;
+    }
+
+    .nav-bar {
+        width: 100vw;
+        right: 0;
+        height: 74px;
+        top: auto;
+        flex-direction: row;
+        z-index: 1000;
+    }
+
+    .container {
+        margin-left: 0;
+        margin-bottom: 68px;
+    }
+    .bar-item-top {
+        display: none;
+    }
+
+    .nav-bar ul {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .logout {
+        display: none;
+    }
+
+    .bar-item {
+        min-width: 68px;
+        padding: 0 20px;
+    }
+    .bar-item.active {
+        border-top: 3px solid var(--main-color);
+        border-left: transparent;
+    }
+
+    .navtab-item {
+        /* padding: 0 10px; */
+    }
+
+    .mission-point-control-item {
+        font-size: 1.8rem;
+    }
+    /* main layout */
+
+    .container .heading {
+        font-size: 2rem;
+    }
+    .nav-tab {
+        font-size: 1.1rem;
+        width: 100vw;
+    }
+
+    .position .input-value {
+        width: 50px;
+    }
+    .mission-point-control-wrapper {
+        flex-direction: column;
+    }
+
+    .mission-point-control-item span {
+        font-size: 1.5rem;
+    }
+
+    .mission-point-control-wrapper {
+        margin-bottom: 100px;
+    }
+
+    .create-point-btn {
+        align-self: flex-end;
+    }
 }

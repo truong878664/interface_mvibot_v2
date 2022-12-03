@@ -9,6 +9,7 @@
     width: calc(100% - 40px);
     flex: 1;
     box-shadow: 0 0 10px #ccc;
+    overflow: hidden;
 }
 
 .map-wrapper .list-map-btn {
