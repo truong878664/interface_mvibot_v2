@@ -179,7 +179,7 @@ $ mysql > mysql -u root -p
 ```
 
 ```tsx
-$ mysql > GRANT ALL PRIVILEGES ON _._ TO 'name_new_user'@'localhost' WITH GRANT OPTION;
+$ mysql > GRANT ALL PRIVILEGES ON *.* TO 'name_new_user'@'localhost' WITH GRANT OPTION;
 ```
 
 ```tsx

@@ -128,12 +128,16 @@ checkPoint.onchange = () => {
         lockZ();
         mapElement.addEventListener("dblclick", clickSetPoint);
         mapElement.addEventListener("mousemove", lockZ);
-
+        mapElement.addEventListener("dblclick", clickSetPoint);
         mapElement.style.cursor = "cell";
+        mapElement.addEventListener("touchmove", lockZ);
+        mapElement.addEventListener("touchstart", tapHandler);
     } else {
         mapElement.removeEventListener("dblclick", clickSetPoint);
         mapElement.removeEventListener("mousemove", lockZ);
         mapElement.style.cursor = "default";
+        mapElement.removeEventListener("touchmove", lockZ);
+        mapElement.removeEventListener("touchstart", tapHandler);
     }
 };
 
@@ -162,4 +166,39 @@ function lockZ() {
     viewer.cameraControls.rotateUp(1.57);
 }
 
+var tapedTwice = false;
+function tapHandler(e) {
+    if (!tapedTwice) {
+        tapedTwice = true;
+        setTimeout(function () {
+            tapedTwice = false;
+        }, 300);
+        return false;
+    }
+    e.preventDefault();
+    touchSetPoint(e);
+}
+
+const touchSetPoint = function (e) {
+    const mapWrapper = $(".missions-point-map");
+    const [positionXSet, positionYSet] = clickSetPointMap(
+        e.touches[0].pageX - mapWrapper.offsetLeft,
+        e.touches[0].pageY - mapWrapper.offsetTop,
+        rotateZ,
+        rotateW,
+        viewer
+    );
+
+    const inx = $("#inx");
+    const iny = $("#iny");
+    const positionXEle = $("#position-x");
+    const positionYEle = $("#position-y");
+
+    inx.value = positionXSet;
+    iny.value = positionYSet;
+    positionXEle.value = positionXSet;
+    positionYEle.value = positionYSet;
+    positionX = positionXSet;
+    positionY = positionYSet;
+};
 export { setPosition };
