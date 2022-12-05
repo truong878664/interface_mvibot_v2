@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Http\Controllers\backend\mapController;
 use App\Http\Controllers\Controller;
+use App\Models\backend\Map;
 use Illuminate\Http\Request;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
@@ -18,7 +20,9 @@ class MissionsController extends Controller
 
     public function createPoint()
     {
-        return view('frontend.pages.missions.createPoint');
+        $map = new mapController();
+        $mapActive = $map->mapActive();
+        return view('frontend.pages.missions.createPoint', compact('mapActive'));
     }
 
     public function createMissions()
@@ -35,10 +39,15 @@ class MissionsController extends Controller
     public function createStepsMissions(Request $request)
     {
 
+        if (Map::all()->count() > 0) {
+            $mapActive = Map::all()[0]['map_active'];
+        } else {
+            $mapActive = "";
+        }
         $idRender = $request->id;
         $itemRender = Missions::find($idRender);
 
-        $allPoints = MissionPosition::orderBy('id', 'desc')->get();
+        $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
 
         $allRobot = Robot::all()->toArray();
 

@@ -139,3 +139,13 @@
     align-items: center;
     color: #fff;
 }
+
+.message-map-wrapper {
+    margin-left: 20px;
+    font-size: 1rem;
+}
+.message-map-none {
+    padding: 2px 4px;
+    border-radius: 2px;
+    background-color: #cf0a0a;
+}

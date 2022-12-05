@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\MissionsController;
@@ -29,9 +30,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         });
 
         Route::prefix('map')->name('map.')->group(function () {
-            Route::get('/', function () {
-                return view('frontend.pages.map.map');
-            });
+            Route::get('/', [mapController::class, 'index'])->name('map');
+            Route::get('/map-active', [mapController::class, 'mapActive']);
         });
 
         Route::prefix('status')->name('status.')->group(function () {

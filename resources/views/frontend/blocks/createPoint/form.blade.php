@@ -48,6 +48,7 @@
         <label for="mode-child">Mode child</label>
         <input id="mode-child" type="text" class="point-input" name="mode_child" required>
     </div>
+    <input type="text" value={{ $mapActive }} name="map" hidden />
     <x-button tag="button" title="Save" class="save-point-btn" attribute=""></x-button>
     @csrf
 </form>

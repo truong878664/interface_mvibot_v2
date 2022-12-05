@@ -6,7 +6,7 @@
         <x-dashboard-item route='dashboard.missions.' icon='fa-solid fa-crosshairs' title='Missions'
             describe='assign tasks to robots' color="#0f6cbd" />
 
-        <x-dashboard-item route='dashboard.map.' icon='fa-solid fa-map-location-dot' title='Map'
+        <x-dashboard-item route='dashboard.map.map' icon='fa-solid fa-map-location-dot' title='Map'
             describe='View map, create map' color="#e62648" />
 
         <x-dashboard-item route='dashboard.status.status' icon='fa-solid fa-gauge-high' title='Status'

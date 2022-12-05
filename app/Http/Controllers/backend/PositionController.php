@@ -23,6 +23,7 @@ class PositionController extends Controller
         $mode_position = $request->mode_position;
         $mode_child = $request->mode_child;
         $created_at = Carbon::now();
+        $map = $request->map;
 
         $dataPosition = [
             "name_position" => $name_position,
@@ -35,6 +36,7 @@ class PositionController extends Controller
             "mode_position" => $mode_position,
             "mode_child" => $mode_child,
             "created_at" => $created_at,
+            "map" => $map,
         ];
 
         MissionPosition::insert($dataPosition);

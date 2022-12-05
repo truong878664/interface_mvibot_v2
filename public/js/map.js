@@ -24,8 +24,16 @@ displayPoint(0, 0);
 displayPose(0, 0, 0, 1);
 
 createJoystick();
+const a = 1;
 
-const layer1 = new mvibot_layer("A", 0, 0, 5, 5, "dead_zone");
+const layer1 = new mvibot_layer(
+    "A",
+    3.2 - a,
+    0.1 + a,
+    8 - a,
+    2.2 + a,
+    "dead_zone"
+);
 const layer2 = new mvibot_layer("B", 2, -10, -10, -5, "lowspeed_zone");
 const layer3 = new mvibot_layer("C", 5, 0, -5, -15, "lowspeed_zone");
 const layer4 = new mvibot_layer("E", 0, 3, -5, -15, "dead_zone");

@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\GpioController;
 use App\Http\Controllers\backend\markerController;
 use App\Http\Controllers\backend\SleepController;
 use App\Http\Controllers\backend\AuthController;
+use App\Http\Controllers\backend\mapController;
 
 Route::prefix('dashboard')->group(function () {
     Route::prefix('missions')->group(function () {
@@ -31,3 +32,5 @@ Route::prefix('dashboard')->group(function () {
 
 Route::post('/check', [AuthController::class, 'check'])->name('check');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/map-active', [mapController::class, 'addMapActive']);

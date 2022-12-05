@@ -1,9 +1,25 @@
 <div class="missions-point-map">
+    <?php
+    $fileMapList = glob('../maps/*');
+    ?>
+    <div class="map-active">
+        <span>Map active:</span>
+        <span>
+            @foreach ($fileMapList as $item)
+                @if (strpos($item, "$mapActive.yaml"))
+                    {{ $mapActive }}
+                @else
+                @endif
+            @endforeach
+        </span>
+    </div>
+    <div class="map_active"></div>
     <div class="missions-map" id="map"></div>
     <label class="switch">
         <input class="check-click-point" type="checkbox">
         <span class="slider round"></span>
     </label>
+
 </div>
 <div class="mission-point-control-wrapper">
 
@@ -84,5 +100,12 @@
 
     .slider.round:before {
         border-radius: 50%;
+    }
+
+    .map-active {
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+        padding: 8px;
     }
 </style>
