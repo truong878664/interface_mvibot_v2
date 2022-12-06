@@ -1,0 +1,18 @@
+<svg width="126" height="93" viewBox="0 0 126 93" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 10V0" stroke="black" stroke-width="9"/>
+<path d="M24 93V83" stroke="black" stroke-width="9"/>
+<mask id="path-3-inside-1_25_195" fill="white">
+<rect y="6" width="126" height="81" rx="6"/>
+</mask>
+<rect y="6" width="126" height="81" rx="6" stroke="black" stroke-width="18" mask="url(#path-3-inside-1_25_195)"/>
+<path d="M45 10V0" stroke="black" stroke-width="9"/>
+<path d="M45 93V83" stroke="black" stroke-width="9"/>
+<path d="M65 10V0" stroke="black" stroke-width="9"/>
+<path d="M65 93V83" stroke="black" stroke-width="9"/>
+<path d="M84 10V0" stroke="black" stroke-width="9"/>
+<path d="M84 93V83" stroke="black" stroke-width="9"/>
+<path d="M103 10V0" stroke="black" stroke-width="9"/>
+<path d="M103 93V83" stroke="black" stroke-width="9"/>
+<rect x="27" y="33" width="42" height="28" rx="4" stroke="black" stroke-width="6"/>
+<path d="M106 29.5C106 33.0899 103.09 36 99.5 36C95.9101 36 93 33.0899 93 29.5C93 25.9101 95.9101 23 99.5 23C103.09 23 106 25.9101 106 29.5Z" fill="black"/>
+</svg>

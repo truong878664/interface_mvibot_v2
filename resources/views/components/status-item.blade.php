@@ -1,7 +1,7 @@
 <div class="status-item">
     <div class="status-header">
         <div class="status-name-robot">{{ $nameRobot }}</div>
-        <div class="status-status-robot {{ $statusStatusRobot }}">{{ $statusStatusRobot }}</div>
+        {{-- <div class="status-status-robot {{ $statusStatusRobot }}">{{ $statusStatusRobot }}</div> --}}
     </div>
     <div class="status-battery">
         <div class="inner-circle"></div>
@@ -22,6 +22,14 @@
         </div>
     </div>
     <div class="status-accessory">
+        <div class="accessoty-item-wrapper">
+            <div class="accessoty-item">
+                <img src="icon/camera.svg" alt="">
+            </div>
+            <span>camera 1</span>
+        </div>
+    </div>
+    {{-- <div class="status-accessory">
         @if (is_array($dataAccessory) || is_object($dataAccessory))
             @foreach ($dataAccessory as $index => $item)
                 <div
@@ -34,7 +42,7 @@
                     </div>
                     <div class="camera-icon">
                         <i class="fa-brands fa-discord"></i>
-                        {{-- <i class="fa-solid fa-camera"></i> --}}
+                        <i class="fa-solid fa-camera"></i>
                     </div>
                     <div class="lidar-icon">
                         <img src="/icon/lidar.svg" alt="" class="lidar-img">
@@ -45,7 +53,77 @@
         @endif
     </div>
     <div class="status-line-2">
-        {{-- @if (is_array($dataAccessory) || is_object($dataAccessory))
+        <div class="accessoty-item inactive lidar">
+            <div class="icon-check active-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="icon-check inactive-icon">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <div class="camera-icon">
+                <i class="fa-brands fa-discord"></i>
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="lidar-icon">
+                <img src="/icon/lidar.svg" alt="" class="lidar-img">
+            </div>
+            <div class="name-accessoty">{{ $item['name'] }}</div>
+        </div>
+
+        <div class="accessoty-item inactive lidar">
+            <div class="icon-check active-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="icon-check inactive-icon">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <div class="camera-icon">
+                <i class="fa-brands fa-discord"></i>
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="lidar-icon">
+                <img src="/icon/lidar.svg" alt="" class="lidar-img">
+            </div>
+            <div class="name-accessoty">{{ $item['name'] }}</div>
+        </div>
+
+        <div class="accessoty-item inactive lidar">
+            <div class="icon-check active-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="icon-check inactive-icon">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <div class="camera-icon">
+                <i class="fa-brands fa-discord"></i>
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="lidar-icon">
+                <img src="/icon/lidar.svg" alt="" class="lidar-img">
+            </div>
+            <div class="name-accessoty">{{ $item['name'] }}</div>
+        </div>
+
+        <div class="accessoty-item inactive lidar">
+            <div class="icon-check active-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="icon-check inactive-icon">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <div class="camera-icon">
+                <i class="fa-brands fa-discord"></i>
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="lidar-icon">
+                <img src="/icon/lidar.svg" alt="" class="lidar-img">
+            </div>
+            <div class="name-accessoty">{{ $item['name'] }}</div>
+        </div> --}}
+
+
+
+    {{-- @if (is_array($dataAccessory) || is_object($dataAccessory))
             @foreach ($dataAccessory as $index => $item)
                 <div
                     class="accessoty-item {{ $item['status'] === 1 ? 'active' : 'inactive' }} {{ $index <= 1 ? 'lidar' : 'camera' }}">
@@ -66,13 +144,20 @@
                 </div>
             @endforeach
         @endif --}}
-    </div>
-    <style>
-        .status-line-2 {
-            background-color: red;
-            width: 100%;
-            height: 123px;
-        }
-    </style>
+</div>
+
+
+<style>
+    .status-line-2 {
+        /* background-color: red; */
+        width: 100%;
+        /* height: 200px; */
+        z-index: 1000;
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        /* padding: 0 50px; */
+    }
+</style>
 
 </div>

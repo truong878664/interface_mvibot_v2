@@ -13,14 +13,16 @@
     width: calc(100% / var(--column-status) - 16px * 2);
     background-color: rgb(241, 241, 241);
     margin: 16px;
-    height: 400px;
+    /* height: 400px; */
     padding: 16px 23px;
     box-shadow: 0 0 20px rgba(204, 204, 204, 0.514);
 }
 
 .status-item {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    overflow: hidden;
+    min-width: 400px;
 }
 
 .status-header {
@@ -50,16 +52,16 @@
 
 .status-battery {
     /* font-size: 100px; */
-    width: 230px;
-    height: 230px;
-    align-self: center;
+    width: 200px;
+    height: 200px;
+    /* align-self: center; */
     /* background-color: red; */
     position: relative;
 }
 
 .outer-circle {
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: #ccc;
     background: conic-gradient(#ccc 265deg, #ccc 265deg);
@@ -68,8 +70,8 @@
     box-shadow: 0 0 20px rgba(204, 204, 204, 0.616);
 }
 .inner-circle {
-    width: 190px;
-    height: 190px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
     border-radius: 50%;
     position: absolute;
     left: 50%;
@@ -129,12 +131,11 @@
 .volt-icon {
     color: orange;
 }
-
+/* 
 .status-accessory {
     display: flex;
     font-size: 4rem;
     justify-content: space-evenly;
-    /* background-color: red; */
     z-index: 1000;
     align-items: center;
 }
@@ -198,4 +199,48 @@
 
 .camera .camera-icon {
     display: block;
+} */
+
+.status-accessory {
+    background-color: red;
+    z-index: 100;
+    width: 100%;
+    margin-left: 20px;
+    min-width: 80px;
+}
+
+.accessoty-item {
+}
+
+.icon-check {
+}
+
+.active-icon {
+}
+.inactive-icon {
+}
+
+.active .inactive-icon {
+}
+
+.inactive .active-icon {
+}
+
+.active.accessoty-item {
+}
+
+.inactive.accessoty-item {
+}
+
+.name-accessoty {
+}
+
+.camera-icon,
+.lidar-icon {
+}
+
+.lidar .lidar-icon {
+}
+
+.camera .camera-icon {
 }
