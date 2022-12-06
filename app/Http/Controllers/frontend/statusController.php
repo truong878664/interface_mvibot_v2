@@ -48,8 +48,8 @@ class statusController extends Controller
         foreach ($batteryStatus as $itemBatteryStatus) {
             foreach ($this->dataStatus as $index => $dataItem) {
                 if ($itemBatteryStatus->name_seri === $dataItem['nameRobot']) {
-                    $this->dataStatus[$index]['batteryPercent'] = $itemBatteryStatus->current;
-                    $this->dataStatus[$index]['batteryA'] = $itemBatteryStatus->soc;
+                    $this->dataStatus[$index]['batteryPercent'] = $itemBatteryStatus->soc;
+                    $this->dataStatus[$index]['batteryA'] = $itemBatteryStatus->current;
                     $this->dataStatus[$index]['batteryVolt'] = $itemBatteryStatus->vol;
                     $this->dataStatus[$index]['batteryTemperValue'] = $itemBatteryStatus->temperature;
                 }
@@ -70,14 +70,14 @@ class statusController extends Controller
             foreach ($this->dataStatus as $index => $dataItem) {
                 if ($itemSensorStatus->name_seri === $dataItem['nameRobot']) {
                     $sensor = [
-                        [
-                            'name' => 'camera 1',
-                            'status' => $itemSensorStatus->camera1,
-                        ],
-                        [
-                            'name' => 'camera 2',
-                            'status' => $itemSensorStatus->camera2,
-                        ],
+                        // [
+                        //     'name' => 'camera 1',
+                        //     'status' => $itemSensorStatus->camera1,
+                        // ],
+                        // [
+                        //     'name' => 'camera 2',
+                        //     'status' => $itemSensorStatus->camera2,
+                        // ],
                         [
                             'name' => 'radar 1',
                             'status' => $itemSensorStatus->radar1,
@@ -85,6 +85,10 @@ class statusController extends Controller
                         [
                             'name' => 'radar 2',
                             'status' => $itemSensorStatus->radar2,
+                        ],
+                        [
+                            'name' => 'uda',
+                            'status' => $itemSensorStatus->uda,
                         ],
                     ];
                     $this->dataStatus[$index]['dataAccessory'] = $sensor;

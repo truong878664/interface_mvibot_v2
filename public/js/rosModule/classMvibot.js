@@ -60,7 +60,7 @@ export class mvibot_layer {
             (y1 + y2) / 2,
             0.01
         );
-        this.pose.orientation = new mvibot_orientation(0, 0, 0.22, 1);
+        this.pose.orientation = new mvibot_orientation(0, 0, 1, 1);
         //
     }
 }

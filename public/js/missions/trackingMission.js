@@ -21,7 +21,7 @@ const tfClient = createTfClient();
 markerClient(tfClient, viewer);
 markerClientPath(tfClient, viewer);
 
-const layer1 = new mvibot_layer("A", 0, 0, 7, 7, "dead_zone");
+const layer1 = new mvibot_layer("A", 4, 4, 3, 7, "dead_zone");
 const layer2 = new mvibot_layer("B", 10, -10, -10, -35, "lowspeed_zone");
 const layer3 = new mvibot_layer("C", 5, 0, -5, -15, "lowspeed_zone");
 const layer4 = new mvibot_layer("E", 0, 3, -5, -15, "dead_zone");
