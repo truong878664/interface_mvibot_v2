@@ -2,6 +2,17 @@ import displayPoint from "./displayPoint.js";
 import displayPose from "./displayPose.js";
 
 function clickSetPointMap(xEvent, yEvent, rotateZ, rotateW, viewer) {
+    const [xCameraConvert, yCameraConvert] = convertToPosition(
+        xEvent,
+        yEvent,
+        viewer
+    );
+    displayPose(xCameraConvert, yCameraConvert, rotateZ, rotateW);
+    displayPoint(xCameraConvert, yCameraConvert);
+    return [xCameraConvert, yCameraConvert];
+}
+
+export function convertToPosition(xEvent, yEvent, viewer) {
     const zCamera = viewer.camera.position.z;
     const xCamera = viewer.camera.position.x;
     const yCamera = viewer.camera.position.y;
@@ -29,8 +40,6 @@ function clickSetPointMap(xEvent, yEvent, rotateZ, rotateW, viewer) {
 
     const xCameraConvert = xCamera + xClickConvert + a1 * t;
     const yCameraConvert = yCamera + yClickConvert + a2 * t;
-    displayPose(xCameraConvert, yCameraConvert, rotateZ, rotateW);
-    displayPoint(xCameraConvert, yCameraConvert);
     return [xCameraConvert, yCameraConvert];
 }
 

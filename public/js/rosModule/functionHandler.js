@@ -4,6 +4,7 @@ import mathYaw from "./mathYaw.js";
 import { viewer, mapElement } from "../missions/createPoint.js";
 import clickSetPointMap from "./clickSetPointMap.js";
 import { $ } from "../main.js";
+import { convertToPosition } from "./clickSetPointMap.js";
 
 let positionX = 0;
 let positionY = 0;
@@ -162,9 +163,11 @@ const clickSetPoint = function (e) {
     positionY = positionYSet;
 };
 
-function lockZ() {
+const lockZ = function (e) {
     viewer.cameraControls.rotateUp(1.57);
-}
+    setPositionSpan(e);
+    setLine(e);
+};
 
 var tapedTwice = false;
 function tapHandler(e) {
@@ -201,4 +204,22 @@ const touchSetPoint = function (e) {
     positionX = positionXSet;
     positionY = positionYSet;
 };
+
+const xShow = $(".x-value");
+const yShow = $(".y-value");
+
+function setPositionSpan(e) {
+    const x = e?.x - mapElement.offsetParent.offsetLeft;
+    const y = e?.y - mapElement.offsetParent.offsetTop;
+    const [positionXSet, positionYSet] = convertToPosition(x, y, viewer);
+    xShow.innerText = positionXSet.toFixed(5);
+    yShow.innerText = positionYSet.toFixed(5);
+}
+
+const lineX = $(".line-x");
+const lineY = $(".line-y");
+function setLine(e) {
+    lineY.style.left = e?.x - mapElement.offsetParent.offsetLeft + "px";
+    lineX.style.top = e?.y - mapElement.offsetParent.offsetTop + "px";
+}
 export { setPosition };

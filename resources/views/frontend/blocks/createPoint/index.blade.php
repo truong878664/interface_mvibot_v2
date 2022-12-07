@@ -12,8 +12,13 @@
                 @endif
             @endforeach
         </span>
+        <div class="">
+            <span>x:</span><span class="x-value"></span>
+            <span>y:</span><span class="y-value"></span>
+        </div>
     </div>
-    <div class="map_active"></div>
+    <div class="line-x"></div>
+    <div class="line-y"></div>
     <div class="missions-map" id="map"></div>
     <label class="switch">
         <input class="check-click-point" type="checkbox">
@@ -107,5 +112,22 @@
         left: 0;
         font-size: 1.2rem;
         padding: 8px;
+    }
+
+    .line-x {
+        width: 100%;
+        height: 0.4px;
+        background: rgba(0, 0, 0, 0.1);
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .line-y {
+        height: 100%;
+        width: 0.4px;
+        background: rgba(0, 0, 0, 0.1);
+        position: absolute;
+        pointer-events: none;
+
     }
 </style>
