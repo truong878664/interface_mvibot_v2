@@ -1,8 +1,8 @@
 <svg width="126" height="88" viewBox="0 0 126 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="4.5" y="11.5" width="117" height="72" rx="11.5" stroke="black" stroke-width="9"/>
-<mask id="path-2-inside-1_23_93" fill="white">
-<path d="M42 5C42 2.23858 44.2386 0 47 0H83C85.7614 0 88 2.23858 88 5V9H42V5Z"/>
-</mask>
-<path d="M88 9V18H97V9H88ZM42 9H33V18H42V9ZM47 9H83V-9H47V9ZM79 5V9H97V5H79ZM88 0H42V18H88V0ZM51 9V5H33V9H51ZM83 9C80.7909 9 79 7.20914 79 5H97C97 -2.73198 90.732 -9 83 -9V9ZM47 -9C39.268 -9 33 -2.73199 33 5H51C51 7.20914 49.2091 9 47 9V-9Z" fill="black" mask="url(#path-2-inside-1_23_93)"/>
-<circle cx="65.5" cy="47.5" r="24" stroke="black" stroke-width="9"/>
+    <rect x="4.5" y="11.5" width="117" height="72" rx="11.5" stroke="white" stroke-width="9" />
+    <mask id="path-2-inside-1_23_93" fill="white">
+        <path d="M42 5C42 2.23858 44.2386 0 47 0H83C85.7614 0 88 2.23858 88 5V9H42V5Z" />
+    </mask>
+    <path d="M88 9V18H97V9H88ZM42 9H33V18H42V9ZM47 9H83V-9H47V9ZM79 5V9H97V5H79ZM88 0H42V18H88V0ZM51 9V5H33V9H51ZM83 9C80.7909 9 79 7.20914 79 5H97C97 -2.73198 90.732 -9 83 -9V9ZM47 -9C39.268 -9 33 -2.73199 33 5H51C51 7.20914 49.2091 9 47 9V-9Z" fill="white" mask="url(#path-2-inside-1_23_93)" />
+    <circle cx="65.5" cy="47.5" r="24" stroke="white" stroke-width="9" />
 </svg>

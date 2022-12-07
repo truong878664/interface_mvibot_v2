@@ -32,6 +32,7 @@ class statusController extends Controller
     {
         $this->getDataStatus();
         $dataStatus = $this->dataStatus;
+        // dd($dataStatus);
         return view('frontend.pages.status.dataStatus', compact('dataStatus'));
     }
 
@@ -64,34 +65,56 @@ class statusController extends Controller
                 }
             }
         }
-
         $sensorStatus = DB::table('sensor_status')->get();
+
         foreach ($sensorStatus as $itemSensorStatus) {
             foreach ($this->dataStatus as $index => $dataItem) {
                 if ($itemSensorStatus->name_seri === $dataItem['nameRobot']) {
+                    $motorRightStatusData = DB::table('motor_right_status')->where('name_seri', $dataItem['nameRobot'])->get()->all();
+                    $motorLeftStatusData = DB::table('motor_left_status')->where('name_seri', $dataItem['nameRobot'])->get()->all();
                     $sensor = [
-                        // [
-                        //     'name' => 'camera 1',
-                        //     'status' => $itemSensorStatus->camera1,
-                        // ],
-                        // [
-                        //     'name' => 'camera 2',
-                        //     'status' => $itemSensorStatus->camera2,
-                        // ],
+                        [
+                            'name' => 'camera 1',
+                            'status' => $itemSensorStatus->camera1,
+                            'type' => 'camera',
+
+                        ],
+                        [
+                            'name' => 'camera 2',
+                            'status' => $itemSensorStatus->camera2,
+                            'type' => 'camera',
+
+                        ],
                         [
                             'name' => 'radar 1',
                             'status' => $itemSensorStatus->radar1,
+                            'type' => 'radar',
                         ],
                         [
                             'name' => 'radar 2',
                             'status' => $itemSensorStatus->radar2,
+                            'type' => 'radar',
+
                         ],
                         [
-                            'name' => 'uda',
-                            'status' => $itemSensorStatus->uda,
+                            'name' => 'motor right',
+                            'status' => $motorRightStatusData ? $motorRightStatusData[0]->{'live'} : 0,
+                            'type' => 'motor',
                         ],
+                        [
+                            'name' => 'motor left',
+                            'status' => $motorLeftStatusData ? $motorLeftStatusData[0]->{"live"} : 0,
+                            'type' => 'motor',
+                        ],
+                        [
+                            'name' => 'uart',
+                            'status' => $itemSensorStatus->uart,
+                            'type' => 'uart',
+
+                        ]
                     ];
                     $this->dataStatus[$index]['dataAccessory'] = $sensor;
+                } else {
                 }
             }
         }

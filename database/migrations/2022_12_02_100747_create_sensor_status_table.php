@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->integer('radar2')->nullable();
                 $table->integer('camera1')->nullable();
                 $table->integer('camera2')->nullable();
+                $table->integer('uart')->nullable();
             });
         }
     }

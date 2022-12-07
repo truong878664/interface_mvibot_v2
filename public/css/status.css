@@ -1,5 +1,5 @@
 :root {
-    --column-status: 3;
+    --column-status: 4;
 }
 
 .wrapper-status-content {
@@ -8,21 +8,23 @@
     display: flex;
     flex-wrap: wrap;
 }
-
-.status-item {
+.status-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    overflow: hidden;
     width: calc(100% / var(--column-status) - 16px * 2);
     background-color: rgb(241, 241, 241);
     margin: 16px;
-    /* height: 400px; */
-    padding: 16px 23px;
     box-shadow: 0 0 20px rgba(204, 204, 204, 0.514);
+    padding: 16px 23px;
+}
+.status-item {
+    /* height: 400px; */
 }
 
 .status-item {
     display: flex;
-    /* flex-direction: column; */
-    overflow: hidden;
-    min-width: 400px;
 }
 
 .status-header {
@@ -84,7 +86,7 @@
     content: "";
     width: 160px;
     height: 160px;
-    background-color: red;
+    /* background-color: red; */
     position: absolute;
     transform: rotate(45deg) translateX(-50%);
     top: 94%;
@@ -122,125 +124,57 @@
     margin-bottom: 30px;
 }
 
-.battery-volt {
-}
-
 .temper-icon {
     color: red;
 }
 .volt-icon {
     color: orange;
 }
-/* 
 .status-accessory {
-    display: flex;
-    font-size: 4rem;
-    justify-content: space-evenly;
-    z-index: 1000;
-    align-items: center;
-}
-
-.accessoty-item {
-    width: 90px;
-    text-align: center;
-    border: 2px solid;
-    border-color: green;
-    position: relative;
-}
-
-.icon-check {
-    font-size: 2rem;
-    position: absolute;
-    right: 10%;
-    z-index: 1000;
-}
-
-.active-icon {
-    color: green;
-}
-.inactive-icon {
-    color: red;
-}
-
-.active .inactive-icon {
-    display: none;
-}
-
-.inactive .active-icon {
-    display: none;
-}
-
-.active.accessoty-item {
-    border-color: green;
-}
-
-.inactive.accessoty-item {
-    border-color: red;
-}
-
-.name-accessoty {
-    font-size: 1.7rem;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-}
-
-.camera-icon,
-.lidar-icon {
-    display: none;
-    padding-bottom: 0;
-}
-
-.lidar .lidar-icon {
-    display: block;
-}
-
-.camera .camera-icon {
-    display: block;
-} */
-
-.status-accessory {
-    background-color: red;
     z-index: 100;
     width: 100%;
     margin-left: 20px;
-    min-width: 80px;
+    min-width: 160px;
+}
+
+.status-line-2 {
+    width: 100%;
+    z-index: 1000;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.accessoty-item-wrapper {
+    font-size: 1.1rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 4px 8px 4px;
+    width: 66px;
+    text-align: center;
+}
+
+.accessoty-item-wrapper.active .accessoty-item {
+    background: #60c15d;
+    box-shadow: 8px 16px 14px -2px rgba(0, 213, 34, 0.2);
+}
+
+.accessoty-item-wrapper.inactive .accessoty-item {
+    background: #ff3a3a;
+    box-shadow: 8px 16px 14px -2px rgba(255, 24, 24, 0.2);
 }
 
 .accessoty-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 40%;
 }
 
-.icon-check {
-}
-
-.active-icon {
-}
-.inactive-icon {
-}
-
-.active .inactive-icon {
-}
-
-.inactive .active-icon {
-}
-
-.active.accessoty-item {
-}
-
-.inactive.accessoty-item {
-}
-
-.name-accessoty {
-}
-
-.camera-icon,
-.lidar-icon {
-}
-
-.lidar .lidar-icon {
-}
-
-.camera .camera-icon {
+.accessoty-icon {
+    width: 24px;
+    fill: #fff;
 }

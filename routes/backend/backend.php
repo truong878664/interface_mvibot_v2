@@ -29,7 +29,6 @@ Route::prefix('dashboard')->group(function () {
         Route::post('update-sleep', [SleepController::class, 'updateSleep']);
     });
 });
-
 Route::post('/check', [AuthController::class, 'check'])->name('check');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

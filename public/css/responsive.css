@@ -2,7 +2,7 @@
     :root {
         --colum-dashboard: 3;
         --column-create-missions: 4;
-        --column-status: 3;
+        --column-status: 4;
     }
 }
 
@@ -31,7 +31,6 @@
     }
 
     .login-from-wrapper {
-        /* width: 0; */
         position: absolute;
         top: 50%;
         left: 50%;
