@@ -19,7 +19,8 @@ class statusController extends Controller
         'batteryA' => "",
         'batteryVolt' => "",
         'dataAccessory' => "",
-        'batteryChange' => ''
+        'batteryCharge' => "",
+        'activate' => 0
     ];
 
     public function index()
@@ -32,7 +33,6 @@ class statusController extends Controller
     {
         $this->getDataStatus();
         $dataStatus = $this->dataStatus;
-        // dd($dataStatus);
         return view('frontend.pages.status.dataStatus', compact('dataStatus'));
     }
 
@@ -53,6 +53,8 @@ class statusController extends Controller
                     $this->dataStatus[$index]['batteryA'] = $itemBatteryStatus->current;
                     $this->dataStatus[$index]['batteryVolt'] = $itemBatteryStatus->vol;
                     $this->dataStatus[$index]['batteryTemperValue'] = $itemBatteryStatus->temperature;
+                    $this->dataStatus[$index]['batteryCharge'] = $itemBatteryStatus->charging;
+                    $this->dataStatus[$index]['activate'] = 1;
                 }
             }
         }

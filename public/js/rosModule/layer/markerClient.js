@@ -1,10 +1,11 @@
 import ros from "../../main.js";
+import uniqueCode from "../uniqueCode.js";
 
 export function markerClient(tfClient, viewer) {
     new ROS3D.MarkerClient({
         ros: ros,
         tfClient: tfClient,
-        topic: "/visualization_marker_layer",
+        topic: `/visualization_marker_layer${uniqueCode}`,
         rootObject: viewer.scene,
     });
 }
@@ -12,7 +13,7 @@ export function markerClient(tfClient, viewer) {
 export function displayLayer(mvibot_layer_active) {
     const markerClient_topic = new ROSLIB.Topic({
         ros: ros,
-        name: "/visualization_marker_layer",
+        name: `/visualization_marker_layer${uniqueCode}`,
         messageType: "visualization_msgs/Marker",
     });
     const markerClient_msg = new ROSLIB.Message({
@@ -51,7 +52,6 @@ export function displayLayer(mvibot_layer_active) {
             },
         },
     });
-
     for (let i = 0; i < mvibot_layer_active.length; i++) {
         markerClient_msg.type = 1;
         markerClient_msg.action = 0;
@@ -59,6 +59,7 @@ export function displayLayer(mvibot_layer_active) {
         markerClient_msg.scale = mvibot_layer_active[i].scale;
         markerClient_msg.color = mvibot_layer_active[i].color;
         markerClient_msg.pose = mvibot_layer_active[i].pose;
+        // console.log(markerClient_msg);
         markerClient_topic.publish(markerClient_msg);
     }
 }

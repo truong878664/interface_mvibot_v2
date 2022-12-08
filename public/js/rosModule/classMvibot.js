@@ -36,7 +36,7 @@ export class mvibot_scale {
     }
 }
 export class mvibot_layer {
-    constructor(name, x1, y1, x2, y2, type) {
+    constructor(name, x1, y1, x2, y2, type, z = 0, w = 1) {
         this.name = name;
         this.x1 = x1;
         this.y1 = y1;
@@ -60,7 +60,8 @@ export class mvibot_layer {
             (y1 + y2) / 2,
             0.01
         );
-        this.pose.orientation = new mvibot_orientation(0, 0, 1, 1);
+
+        this.pose.orientation = new mvibot_orientation(0, 0, z, w);
         //
     }
 }

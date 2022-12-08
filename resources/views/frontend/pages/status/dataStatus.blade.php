@@ -42,18 +42,18 @@
     @php
         
         $dataAccessory = $item['dataAccessory'] ? $item['dataAccessory'] : $sensor;
-        // $dataAccessory = $item['dataAccessory'];
-        // dd($dataAccessory);
-        
         $nameRobot = $item['nameRobot'] ? $item['nameRobot'] : 0;
         $statusRobot = $item['statusRobot'] ? $item['statusRobot'] : 0;
         $batteryPercent = $item['batteryPercent'] ? $item['batteryPercent'] : 0;
         $batteryTemperValue = $item['batteryTemperValue'] ? $item['batteryTemperValue'] : 0;
         $batteryA = $item['batteryA'] ? $item['batteryA'] : 0;
         $batteryVolt = $item['batteryVolt'] ? $item['batteryVolt'] : 0;
+        $batteryCharge = $item['batteryCharge'];
+        $activate = $item['activate'];
     @endphp
     <x-status-item nameRobot="{{ $nameRobot }}"
         statusStatusRobot="{{ $statusRobot === 1 ? 'navigation' : 'mapping' }}" batteryPercent="{{ $batteryPercent }}%"
-        batteryTemperValue="{{ $batteryTemperValue }}°C" batteryA="{{ $batteryA }}A"
-        batteryVoltValue="{{ $batteryVolt }}" :dataAccessory="$dataAccessory" />
+        batteryCharge="{{ $batteryCharge }}" batteryTemperValue="{{ $batteryTemperValue }}°C"
+        batteryA="{{ $batteryA }}A" batteryVoltValue="{{ $batteryVolt }}" :dataAccessory="$dataAccessory"
+        activate="{{ $activate }}" />
 @endforeach

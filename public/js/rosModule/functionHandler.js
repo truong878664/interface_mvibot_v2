@@ -5,6 +5,7 @@ import { viewer, mapElement } from "../missions/createPoint.js";
 import clickSetPointMap from "./clickSetPointMap.js";
 import { $ } from "../main.js";
 import { convertToPosition } from "./clickSetPointMap.js";
+import lockZ from "./lockZ.js";
 
 let positionX = 0;
 let positionY = 0;
@@ -126,18 +127,18 @@ function setValuePositionForm() {
 const checkPoint = document.querySelector(".check-click-point");
 checkPoint.onchange = () => {
     if (checkPoint.checked) {
-        lockZ();
+        lockZ(viewer);
         mapElement.addEventListener("dblclick", clickSetPoint);
-        mapElement.addEventListener("mousemove", lockZ);
+        mapElement.addEventListener("mousemove", handleMouseMapMove);
         mapElement.addEventListener("dblclick", clickSetPoint);
         mapElement.style.cursor = "cell";
-        mapElement.addEventListener("touchmove", lockZ);
+        mapElement.addEventListener("touchmove", handleMouseMapMove);
         mapElement.addEventListener("touchstart", tapHandler);
     } else {
         mapElement.removeEventListener("dblclick", clickSetPoint);
-        mapElement.removeEventListener("mousemove", lockZ);
+        mapElement.removeEventListener("mousemove", handleMouseMapMove);
         mapElement.style.cursor = "default";
-        mapElement.removeEventListener("touchmove", lockZ);
+        mapElement.removeEventListener("touchmove", handleMouseMapMove);
         mapElement.removeEventListener("touchstart", tapHandler);
     }
 };
@@ -163,11 +164,11 @@ const clickSetPoint = function (e) {
     positionY = positionYSet;
 };
 
-const lockZ = function (e) {
-    viewer.cameraControls.rotateUp(1.57);
+function handleMouseMapMove(e) {
+    lockZ(viewer);
     setPositionSpan(e);
     setLine(e);
-};
+}
 
 var tapedTwice = false;
 function tapHandler(e) {

@@ -130,7 +130,8 @@
     }
 
     window.onload = () => {
-        if (!$('.text-fail')) {
+
+        if ($('.text-fail')?.innerText == " You must be logged in" || !$('.text-fail')) {
             if (getCookie('username') && getCookie('password')) {
                 usernameEle.value = getCookie('username')
                 passwordEle.value = getCookie('password')
@@ -142,6 +143,7 @@
                 passwordEle.value = getCookie('password')
             }
         }
+
     }
 
     function getCookie(cname) {

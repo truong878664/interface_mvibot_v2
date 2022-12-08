@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Layer;
 use App\Models\backend\Map;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,19 @@ class mapController extends Controller
     public function index()
     {
         $mapActive = $this->mapActive();
-        return view('frontend.pages.map.map', compact('mapActive'));
+        $layersData = Layer::where('map', $mapActive)->get()->toArray();
+        if ($layersData) {
+            $layers = $layersData[0]['data_layers'];
+        } else {
+            $layers = "";
+        }
+
+        return view('frontend.pages.map.map', compact('mapActive', 'layers'));
     }
     public function addMapActive(Request $request)
     {
         $map_active = $request->map_active;
+
         $data_maps = ['map_active' => $map_active];
         if (Map::get()) {
             Map::truncate();
