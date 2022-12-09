@@ -377,22 +377,8 @@ input[type="number"] {
 }
 
 .gpio_form label {
-    width: 108px;
+    /* width: 108px; */
     display: inline-block;
-}
-
-.data-gpio {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.data-gpio-item {
-    width: calc(50% - 12px);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 6px;
 }
 
 .label-sleep {

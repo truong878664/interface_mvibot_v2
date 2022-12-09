@@ -2,7 +2,7 @@
     display: none;
 }
 
-.show-create-missions:checked  ~ .form-create-mission {
+.show-create-missions:checked ~ .form-create-mission {
     display: block;
 }
 
@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.form-create-missions{
+.form-create-missions {
     display: flex;
     flex-direction: column;
     width: 400px;

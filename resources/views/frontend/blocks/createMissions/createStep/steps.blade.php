@@ -153,10 +153,6 @@
     .add-wake-up-btn {
         align-items: flex-end;
     }
-
-    .data-gpio {
-        justify-content: flex-end;
-    }
 </style>
 
 </div>
