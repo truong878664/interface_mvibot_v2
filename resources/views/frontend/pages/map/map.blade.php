@@ -18,9 +18,14 @@
                 </span>
             </div>
             <div class="header-map">
+                <select class="list-robot" id="list-robot">
+                    <option value="">chose robot</option>
+                    @foreach ($allRobot as $robot)
+                        <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
+                    @endforeach
+                </select>
                 <form method="POST" action="/map-active">
                     <div class="list-map-wrapper">
-
                         <label for="list-map" class="list-map-label">List map</label>
                         <select name="map_active" id="list-map" class="list-map">
                             <option value="">Select Map</option>
@@ -35,11 +40,17 @@
                         <input type="submit" class="map-submit" hidden>
                     </div>
                 </form>
+                <div class="list-layer">
+                    <x-button tag="label" title="list layer" class="layer-btn" attribute="for=list-layer"></x-button>
+                    <input type="checkbox" id="list-layer">
+                    <div class="list-layer-wrapper"></div>
+                </div>
                 <div class="create-layer">
-                    <x-button tag="label" title="create layer" class="create-layer layer-btn"
-                        attribute="for=value-layer"></x-button>
+
+                    <x-button tag="label" title="create layer" class="layer-btn" attribute="for=value-layer"></x-button>
                     <input hidden type="checkbox" id="value-layer">
                     <div class="value-layer">
+                        <input type="text" class="input-layer name_layer" placeholder="Name">
                         <input type="text" class="input-layer point-layer-1">
                         <input type="text" class="input-layer point-layer-2">
                         <input type="text" class="input-layer point-layer-3">
@@ -47,7 +58,7 @@
                             <option value="dead_zone">dead_zone</option>
                             <option value="lowspeed_zone">lowspeed_zone</option>
                         </select>
-                        <x-button tag="button" title="Show layer" class="save-layer" attribute=""></x-button>
+                        <x-button tag="button" title="Show layer" class="show-layer" attribute=""></x-button>
                     </div>
                     <form action="/add-layer" method="POST" class="save-layer-form">
                         <input type="hidden" name='data_layer' class="data-layer" value="{{ $layers }}">
@@ -57,7 +68,6 @@
                         <x-button tag="button" title="Save layer" class="layer-btn" attribute=""></x-button>
                     </form>
                 </div>
-
             </div>
             <div class="map-page_map" id="map"></div>
             <div class="joystick-container">
@@ -81,6 +91,7 @@
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/nipplejs.js"></script>
     <script type="module" src="/js/map.js"></script>
+    <script></script>
     <style>
         .header-map {
             position: absolute;
@@ -99,10 +110,18 @@
             box-shadow: 2px 2px 5px #333;
         }
 
+        .list-robot {
+            margin-right: 8px;
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+        }
+
         .list-map {
 
             /* height: ; */
         }
+
 
         .list-map-wrapper label {
             background: var(--main-color);
@@ -124,6 +143,8 @@
             font-size: 1.2rem;
             padding: 8px;
         }
+
+        .list-layer {}
 
         .create-layer {
             margin-left: 20px;
@@ -174,6 +195,9 @@
             height: 30px;
             font-size: 1.6rem;
             padding: 0 8px;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
 
         }
 
@@ -187,7 +211,7 @@
 
         .create-layer {}
 
-        .save-layer {
+        .show-layer {
             height: 20px;
             font-size: 1.3rem;
             padding: 0 8px;

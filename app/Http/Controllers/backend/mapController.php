@@ -5,12 +5,14 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Layer;
 use App\Models\backend\Map;
+use App\Models\Robot;
 use Illuminate\Http\Request;
 
 class mapController extends Controller
 {
     public function index()
     {
+        $allRobot = Robot::all()->toArray();
         $mapActive = $this->mapActive();
         $layersData = Layer::where('map', $mapActive)->get()->toArray();
         if ($layersData) {
@@ -19,7 +21,7 @@ class mapController extends Controller
             $layers = "";
         }
 
-        return view('frontend.pages.map.map', compact('mapActive', 'layers'));
+        return view('frontend.pages.map.map', compact('mapActive', 'layers', 'allRobot'));
     }
     public function addMapActive(Request $request)
     {

@@ -39,7 +39,8 @@ displayLayer(mvibot_layer_active);
 const pointLayer1 = $(".point-layer-1");
 const pointLayer2 = $(".point-layer-2");
 const pointLayer3 = $(".point-layer-3");
-$(".map-page_map").ondblclick = (e) => {
+
+const clickSetLayer = function (e) {
     const [x, y] = convertToPosition(e.offsetX, e.offsetY, viewer);
     if (pointLayer1.value == "") {
         pointLayer1.value = `${x.toFixed(2)} : ${y.toFixed(2)}`;
@@ -78,7 +79,8 @@ function equationLine(x1, y1, x2, y2) {
     return [m, n];
 }
 
-$(".save-layer").onclick = () => {
+$(".show-layer").onclick = () => {
+    const nameLayer = $(".name_layer").value || "no_name";
     const xa = Number(pointLayer1.getAttribute("x1"));
     const ya = Number(pointLayer1.getAttribute("y1"));
     const xb = Number(pointLayer2.getAttribute("x2"));
@@ -111,7 +113,7 @@ $(".save-layer").onclick = () => {
     const y22 = ya + distance2 + b;
     const zone = $(".zone").value;
 
-    const layer = new mvibot_layer("F", x12, y12, x22, y22, zone, z, w);
+    const layer = new mvibot_layer(nameLayer, x12, y12, x22, y22, zone, z, w);
     mvibot_layer_active.push(layer);
 
     saveLayer(mvibot_layer_active);
@@ -142,8 +144,10 @@ function saveLayer(data) {
 $("#value-layer").onchange = (e) => {
     lockZ(viewer);
     if (e.target.checked) {
+        $(".map-page_map").addEventListener("dblclick", clickSetLayer);
         $(".map-page_map").addEventListener("mousemove", handleMouseMove);
     } else {
+        $(".map-page_map").removeEventListener("dblclick", clickSetLayer);
         $(".map-page_map").removeEventListener("mousemove", handleMouseMove);
     }
 };
@@ -151,3 +155,5 @@ $("#value-layer").onchange = (e) => {
 const handleMouseMove = function (e) {
     lockZ(viewer);
 };
+
+console.log(JSON.parse($(".data-layer").value));

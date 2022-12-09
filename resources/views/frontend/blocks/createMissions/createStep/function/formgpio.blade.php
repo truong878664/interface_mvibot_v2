@@ -189,7 +189,6 @@
                 getValueCheckbox(element.parentElement)
             }
         });
-
     }
 
     function hiddeFormGpio() {
@@ -232,13 +231,11 @@
         })
     }
 
-
     function addIdInputCheckbox() {
         const allLabel = $$('.label-for-checkbox-gpio')
         $$('.checkbox-gpio').forEach((element, index) => {
             element.setAttribute('id', index)
             allLabel[index].setAttribute('for', index)
-            console.log(allLabel[index])
         })
     }
 </script>
