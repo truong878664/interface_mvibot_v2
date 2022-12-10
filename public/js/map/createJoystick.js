@@ -17,13 +17,15 @@ const createJoystick = function () {
     const manager = nipplejs.create(options);
     let linear_speed = 0;
     let angular_speed = 0;
-    let timer;
+    let robotMoving;
     manager.on("start", function (event, nipple) {
-        timer = setInterval(function () {
+        robotMoving = setInterval(function () {
             moveRobot(linear_speed, angular_speed);
         }, 500);
     });
     manager.on("move", function (event, nipple) {
+        setColorDirection(nipple.direction);
+
         const max_linear = 0.5; // m/s 0.5;
         const max_angular = 0.314; // rad/s
         const max_distance = 200; // pixels;
@@ -33,10 +35,9 @@ const createJoystick = function () {
         angular_speed =
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
-        setColorDirection(nipple.direction);
     });
     manager.on("end", function () {
-        clearInterval(timer);
+        clearInterval(robotMoving);
         moveRobot(0, 0);
         removeColorDirection();
     });

@@ -1,0 +1,36 @@
+.map-joystick-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    bottom: 0;
+}
+
+.map-page_joystick {
+    width: 100%;
+    height: 100%;
+}
+
+.header-joystick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 8px 0 0 8px;
+}
+
+.list-robot {
+    padding: 0 8px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.close-page-joystick {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 8px;
+    height: 80px;
+    width: 80px;
+}

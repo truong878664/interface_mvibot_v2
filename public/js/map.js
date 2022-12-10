@@ -33,8 +33,8 @@ if ($(".data-layer").value) {
 }
 
 const mvibot_layer_active = dataLayer;
-markerClient(tfClient, viewer);
-displayLayer(mvibot_layer_active);
+// markerClient(tfClient, viewer);
+// displayLayer(mvibot_layer_active);
 
 const pointLayer1 = $(".point-layer-1");
 const pointLayer2 = $(".point-layer-2");
@@ -155,5 +155,3 @@ $("#value-layer").onchange = (e) => {
 const handleMouseMove = function (e) {
     lockZ(viewer);
 };
-
-console.log(JSON.parse($(".data-layer").value));

@@ -1,11 +1,10 @@
 import ros from "../main.js";
 
-const cmd_vel_listener = new ROSLIB.Topic({
+export const cmd_vel_listener = new ROSLIB.Topic({
     ros: ros,
     name: "/cmd_vel",
     messageType: "geometry_msgs/Twist",
 });
-
 function moveRobot(linear, angular) {
     var twist = new ROSLIB.Message({
         linear: {

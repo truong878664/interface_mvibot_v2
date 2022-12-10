@@ -53,7 +53,7 @@ class statusController extends Controller
                     $this->dataStatus[$index]['batteryA'] = $itemBatteryStatus->current;
                     $this->dataStatus[$index]['batteryVolt'] = $itemBatteryStatus->vol;
                     $this->dataStatus[$index]['batteryTemperValue'] = $itemBatteryStatus->temperature;
-                    $this->dataStatus[$index]['batteryCharge'] = $itemBatteryStatus->charging;
+                    $this->dataStatus[$index]['batteryCharge'] = $itemBatteryStatus->charge;
                     $this->dataStatus[$index]['activate'] = 1;
                 }
             }

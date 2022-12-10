@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->integer('cycle')->nullable();
                 $table->float('capacity_now')->nullable();
                 $table->float('capacity_max')->nullable();
-                $table->integer('charging')->nullable();
+                $table->integer('charge')->nullable();
                 $table->float('current')->nullable();
                 $table->integer('num_cell')->nullable();
                 $table->float('temperature')->nullable();

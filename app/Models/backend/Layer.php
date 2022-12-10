@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Layer extends Model
 {
     use HasFactory;
+    protected $table = "layer_emulator";
 }

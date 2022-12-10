@@ -25,6 +25,7 @@
 @import "createMission/gpio.css";
 
 @import "createMission/createStep.css";
+@import "./joystick.css";
 
 @import "responsive.css";
 

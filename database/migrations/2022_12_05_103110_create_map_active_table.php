@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('layers')) {
-            Schema::create('layers', function (Blueprint $table) {
+        if (!Schema::hasTable('map_active')) {
+            Schema::create('map_active', function (Blueprint $table) {
                 $table->id();
-                $table->longText('data_layers');
-                $table->string('map')->nullable();
-                $table->timestamps();
+                $table->string('name_map_active');
             });
         }
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layers');
+        Schema::dropIfExists('map_active');
     }
 };

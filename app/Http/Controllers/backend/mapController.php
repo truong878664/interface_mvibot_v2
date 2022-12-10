@@ -14,20 +14,20 @@ class mapController extends Controller
     {
         $allRobot = Robot::all()->toArray();
         $mapActive = $this->mapActive();
-        $layersData = Layer::where('map', $mapActive)->get()->toArray();
-        if ($layersData) {
-            $layers = $layersData[0]['data_layers'];
-        } else {
-            $layers = "";
-        }
+        // $layersData = Layer::where('map', $mapActive)->get()->toArray();
+        // if ($layersData) {
+        //     $layers = $layersData[0]['data_layers'];
+        // } else {
+        //     $layers = "";
+        // }
 
-        return view('frontend.pages.map.map', compact('mapActive', 'layers', 'allRobot'));
+        return view('frontend.pages.map.map', compact('mapActive', 'allRobot'));
     }
     public function addMapActive(Request $request)
     {
         $map_active = $request->map_active;
 
-        $data_maps = ['map_active' => $map_active];
+        $data_maps = ['name_map_active' => $map_active];
         if (Map::get()) {
             Map::truncate();
         } {
@@ -38,7 +38,7 @@ class mapController extends Controller
     public function mapActive()
     {
         if (Map::all()->count() > 0) {
-            $mapActive = Map::all()->toArray()[0]['map_active'];
+            $mapActive = Map::all()->toArray()[0]['name_map_active'];
         } else {
             $mapActive = "no map";
         }
