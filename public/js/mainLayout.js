@@ -20,8 +20,6 @@ function activeNabBar() {
         currentPage = "dashboard";
     } else if (currentPathname.indexOf("user") != -1) {
         currentPage = "user";
-    } else if (currentPathname.indexOf("setting") != -1) {
-        currentPage = "setting";
     } else {
         currentPage = "home";
     }

@@ -4,10 +4,11 @@
     <div class="contents">
 
         <div class="contents missions-content">
-            @include('frontend.blocks.navbarmissions')
+            @include('frontend.blocks.mission.navbarmissions')
+
 
             <div id="create-point" class="missions-wrapper-create-point nav-content">
-                @include('frontend.blocks.createPoint.index')
+                @include('frontend.blocks.mission.createPoint.index')
             </div>
 
             <script type="module" src="/js/missions.js"></script>

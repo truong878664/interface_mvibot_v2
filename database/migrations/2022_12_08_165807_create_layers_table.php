@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('layers', function (Blueprint $table) {
-            $table->id();
-            $table->longText('data_layers');
-            $table->string('map')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('layers')) {
+            Schema::create('layers', function (Blueprint $table) {
+                $table->id();
+                $table->longText('data_layers');
+                $table->string('map')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

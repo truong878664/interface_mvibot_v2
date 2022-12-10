@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mission_footprints', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_footprint');
-            $table->string('mode')->default('footprint');
-            $table->integer('time_out')->default(-1);
-            $table->integer('x1');
-            $table->integer('y1');
-            $table->integer('x2');
-            $table->integer('y2');
-        });
+        if (!Schema::hasTable('mission_footprints')) {
+            Schema::create('mission_footprints', function (Blueprint $table) {
+                $table->id();
+                $table->string('name_footprint');
+                $table->string('mode')->default('footprint');
+                $table->integer('time_out')->default(-1);
+                $table->integer('x1');
+                $table->integer('y1');
+                $table->integer('x2');
+                $table->integer('y2');
+            });
+        }
     }
 
     /**

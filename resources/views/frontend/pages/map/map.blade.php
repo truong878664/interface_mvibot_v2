@@ -6,17 +6,7 @@
             <?php
             $fileMapList = glob('../maps/*');
             ?>
-            <div class="map-active">
-                <span>Map active:</span>
-                <span>
-                    @foreach ($fileMapList as $item)
-                        @if (strpos($item, "$mapActive.yaml"))
-                            {{ $mapActive }}
-                        @else
-                        @endif
-                    @endforeach
-                </span>
-            </div>
+
             <div class="header-map">
                 <select class="list-robot" id="list-robot">
                     <option value="">chose robot</option>
@@ -63,11 +53,21 @@
                     <form action="/add-layer" method="POST" class="save-layer-form">
                         <input type="hidden" name='data_layer' class="data-layer" value="{{ $layers }}">
                         <input type="hidden" name='map_active' value="{{ $mapActive }}">
-
                         @csrf
                         <x-button tag="button" title="Save layer" class="layer-btn" attribute=""></x-button>
                     </form>
                 </div>
+            </div>
+            <div class="map-active-map">
+                <span>Map active:</span>
+                <span>
+                    @foreach ($fileMapList as $item)
+                        @if (strpos($item, "$mapActive.yaml"))
+                            {{ $mapActive }}
+                        @else
+                        @endif
+                    @endforeach
+                </span>
             </div>
             <div class="map-page_map" id="map"></div>
             <div class="joystick-container">
@@ -93,128 +93,6 @@
     <script type="module" src="/js/map.js"></script>
     <script></script>
     <style>
-        .header-map {
-            position: absolute;
-            height: 30px;
-            display: flex;
-            align-item: center;
-            margin: 10px;
-            font-size: 1.6rem;
-        }
 
-        .list-map-wrapper {
-            display: flex;
-            align-item: center;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 2px 2px 5px #333;
-        }
-
-        .list-robot {
-            margin-right: 8px;
-            border: none;
-            outline: none;
-            font-size: 1.6rem;
-        }
-
-        .list-map {
-
-            /* height: ; */
-        }
-
-
-        .list-map-wrapper label {
-            background: var(--main-color);
-            color: var(--white-color);
-            line-height: 30px;
-            padding: 0 8px;
-        }
-
-        #list-map {
-            outline: none;
-            border: none;
-            font-size: 1.6rem;
-            /* padding: 8px; */
-        }
-
-        .map-active {
-            position: absolute;
-            right: 0;
-            font-size: 1.2rem;
-            padding: 8px;
-        }
-
-        .list-layer {}
-
-        .create-layer {
-            margin-left: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .create-layer-button {
-            height: 30px;
-            padding: 0 6px;
-            font-size: 1.6rem;
-            border: none;
-            background: var(--main-color);
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .value-layer {
-            display: none;
-            /* display: flex; */
-            align-items: center;
-        }
-
-        .save-layer-form {
-            display: none;
-        }
-
-        #value-layer:checked~.save-layer-form {
-            display: block;
-        }
-
-        #value-layer:checked~.value-layer {
-            display: flex;
-        }
-
-        .input-layer {
-            height: 30px;
-            width: 70px;
-            border: none;
-            background: transparent;
-            border: 1px solid rgba(70, 69, 69, 0.438);
-            font-size: 1rem;
-            margin: 0 4px;
-        }
-
-        .layer-btn {
-            height: 30px;
-            font-size: 1.6rem;
-            padding: 0 8px;
-            margin-left: 20px;
-            display: flex;
-            align-items: center;
-
-        }
-
-        .zone {
-            background: transparent;
-            height: 30px;
-            outline: none;
-            border: 1px solid rgba(70, 69, 69, 0.438);
-
-        }
-
-        .create-layer {}
-
-        .show-layer {
-            height: 20px;
-            font-size: 1.3rem;
-            padding: 0 8px;
-        }
     </style>
 @endsection

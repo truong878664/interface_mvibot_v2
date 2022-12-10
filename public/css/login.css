@@ -83,7 +83,6 @@
     border: none;
     border-bottom: 2px solid #ccc;
     background-color: transparent;
-    /* font-family: var(--main-font); */
 }
 
 .login-input::placeholder {
@@ -126,9 +125,6 @@
     box-shadow: 2px 2px 15px rgb(167, 167, 167);
 }
 
-.text-message {
-}
-
 .username-wrapper,
 .password-wrapper {
     display: flex;
@@ -145,4 +141,22 @@
 .input-fail {
     font-size: 1.6rem;
     color: rgb(240, 52, 52);
+}
+
+.login-input::placeholder {
+    font-size: 1.6rem;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.show-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    font-size: 1.5rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
 }

@@ -2,26 +2,14 @@
 @section('content')
     <div class="heading missions-heading">Mission</div>
 
-    <style>
-        textarea {
-            padding: 10px;
-        }
-    </style>
-
     <div class="contents missions-content">
-        @include('frontend.blocks.navbarmissions')
+        @include('frontend.blocks.mission.navbarmissions')
 
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
-            @include('frontend.blocks.createMissions.createStep')
+            @include('frontend.blocks.mission.createMissions.createStep')
         </div>
     </div>
-
-    @if (Session::has('msg'))
-        <div class="message-success">
-            <div class="check-icon"><i class="fa-solid fa-circle-check"></i></div>
-            <p class="message-title">{{ Session::get('msg') }}</p>
-        </div>
-    @endif
+    @include('frontend.blocks.message')
     <script>
         document.title = 'Create Mission | Mvibot'
     </script>

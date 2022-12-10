@@ -1,0 +1,112 @@
+.create-gpio {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: rgba(15, 108, 189, 0.467);
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 4px;
+    border-radius: 2px;
+}
+
+.create-gpio:hover {
+    background: rgba(15, 108, 189, 0.6);
+}
+
+.item-gpio {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: rgba(204, 204, 204, 0.295);
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 20px;
+    margin: 0 4px;
+}
+
+.data-gpio-item.show .form-gpio-item {
+    display: flex;
+}
+
+.form-gpio-item {
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 120%;
+    left: 10%;
+    background: #fff;
+    box-shadow: 2px 2px 10px #ccc;
+    padding: 6px 0;
+    display: none;
+}
+.input-gpio-wrapper {
+    margin-bottom: 6px;
+}
+.data-gpio {
+    display: flex;
+}
+
+.data-gpio-item {
+    /* width: calc(50% - 12px); */
+    display: flex;
+    flex-wrap: wrap;
+    margin: 6px;
+    position: relative;
+}
+
+.data-gpio-wrapper {
+    width: 50%;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    font-size: 1.4rem;
+    margin: 2px 4px;
+    background: rgba(204, 204, 204, 0.479);
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox-wrapper label {
+    margin-left: 6px;
+    margin-right: 4px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.show-gpio-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-gpio {
+}
+
+.hidden-form-gpio-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.checkbox-gpio {
+}
+
+.data-gpio {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.data-gpio-item {
+    width: calc(50% - 20px);
+}
+
+.label-gpio {
+    width: 100px;
+}
+
+.name_gpio_item {
+    width: 120px;
+}

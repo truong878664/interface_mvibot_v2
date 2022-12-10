@@ -15,9 +15,27 @@
     position: absolute;
     background-color: rgba(255, 255, 255, 0.521);
     bottom: 0;
+    display: flex;
 }
 
 .map-tracking {
     width: 100%;
     flex: 1;
+}
+
+.step-mission-tracking {
+    flex: 1;
+}
+
+.tracking-misison-btn {
+    display: flex;
+    align-items: flex-end;
+}
+
+.stop-mission-btn {
+    background: #ff1700;
+}
+
+.continue-mission-btn {
+    background: #54b435;
 }

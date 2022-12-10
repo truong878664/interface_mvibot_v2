@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mission_sleeps', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_sleep');
-            $table->integer('time_out')->default(-1);
-            $table->string('mode')->default('sleep');
-            $table->integer('time_sleep');
-        });
+        if (!Schema::hasTable('mission_sleeps')) {
+            Schema::create('mission_sleeps', function (Blueprint $table) {
+                $table->id();
+                $table->string('name_sleep');
+                $table->integer('time_out')->default(-1);
+                $table->string('mode')->default('sleep');
+                $table->integer('time_sleep');
+            });
+        }
     }
 
     /**

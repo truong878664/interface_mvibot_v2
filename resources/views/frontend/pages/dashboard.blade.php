@@ -1,7 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
-
     <div class="contents dashboard-content">
         <x-dashboard-item route='dashboard.missions.' icon='fa-solid fa-crosshairs' title='Missions'
             describe='assign tasks to robots' color="#0f6cbd" />

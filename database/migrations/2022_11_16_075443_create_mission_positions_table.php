@@ -13,21 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mission_positions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_position');
-            $table->integer('time_out')->default(-1);
-            $table->string('mode')->default('position');
-            $table->float('x');
-            $table->float('y');
-            $table->float('z', 20, 10);
-            $table->float('w', 20, 10);
-            $table->string('color_position');
-            $table->string('mode_position');
-            $table->string('mode_child');
-            $table->string('map');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('mission_positions')) {
+
+            Schema::create('mission_positions', function (Blueprint $table) {
+                $table->id();
+                $table->string('name_position');
+                $table->integer('time_out')->default(-1);
+                $table->string('mode')->default('position');
+                $table->float('x');
+                $table->float('y');
+                $table->float('z', 20, 10);
+                $table->float('w', 20, 10);
+                $table->string('color_position');
+                $table->string('mode_position');
+                $table->string('mode_child');
+                $table->string('map');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

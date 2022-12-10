@@ -37,10 +37,9 @@
         ],
     ];
 @endphp
-{{-- {{ dd($dataStatus) }} --}}
+
 @foreach ($dataStatus as $item)
     @php
-        
         $dataAccessory = $item['dataAccessory'] ? $item['dataAccessory'] : $sensor;
         $nameRobot = $item['nameRobot'] ? $item['nameRobot'] : 0;
         $statusRobot = $item['statusRobot'] ? $item['statusRobot'] : 0;

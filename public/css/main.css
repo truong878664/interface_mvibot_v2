@@ -1,5 +1,9 @@
 @import "../fonts/fontawesome-free-6.2.0-web/css/all.min.css";
 
+/* component */
+@import "status.css";
+@import "button.css";
+
 @import "login.css";
 
 @import "dashboard.css";
@@ -16,15 +20,14 @@
 @import "createMission/form.css";
 @import "createPoint/form.css";
 @import "createPoint/control.css";
+@import "createPoint/createPoint.css";
 @import "tracking.css";
-
-/* component */
-@import "status.css";
-@import "button.css";
+@import "createMission/gpio.css";
 
 @import "createMission/createStep.css";
 
 @import "responsive.css";
+
 @font-face {
     src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
     font-family: "Montserrat";
@@ -100,7 +103,7 @@ li {
     margin-left: 8px;
 }
 
-.submit-btn {
+/* .submit-btn {
     flex: 1;
     margin-left: 40px;
     background-color: var(--main-color);
@@ -115,7 +118,7 @@ li {
     width: 95px;
     user-select: none;
     cursor: pointer;
-}
+} */
 
 /* width */
 ::-webkit-scrollbar {

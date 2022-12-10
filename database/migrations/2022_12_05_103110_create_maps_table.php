@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('maps', function (Blueprint $table) {
-            $table->id();
-            $table->string('map_active');
-        });
+        if (!Schema::hasTable('maps')) {
+            Schema::create('maps', function (Blueprint $table) {
+                $table->id();
+                $table->string('map_active');
+            });
+        }
     }
 
     /**

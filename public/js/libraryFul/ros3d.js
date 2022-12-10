@@ -91,11 +91,8 @@ var ROS3D = (function (exports, ROSLIB) {
 				}
 
 				return output;
-
 			};
-
 		})();
-
 	}
 
 	/**

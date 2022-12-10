@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('motor_left_status', function (Blueprint $table) {
-            $table->string('name_seri')->nullable()->unique();
-            $table->integer('live')->nullable();
-            $table->integer('error')->nullable();
-            $table->integer('enable')->nullable();
-            $table->integer('brake')->nullable();
-        });
+        if (!Schema::hasTable('motor_left_status')) {
+            Schema::create('motor_left_status', function (Blueprint $table) {
+                $table->string('name_seri')->nullable()->unique();
+                $table->integer('live')->nullable();
+                $table->integer('error')->nullable();
+                $table->integer('enable')->nullable();
+                $table->integer('brake')->nullable();
+            });
+        }
     }
 
     /**
