@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
+    @vite('resources/css/app.css')
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
@@ -29,11 +30,11 @@
 
     </header>
     <div class="nav-bar">
-        <ul>
+        <ul class="">
             <div class="bar-item-top">
             </div>
             <li class="bar-item home ">
-                <a href="{{ route('home') }}">
+                <a href="{{ route('home') }}" class="flex justify-center">
                     <svg width="40" height="40" viewBox="0 0 677 677" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path class="icon"
@@ -44,7 +45,7 @@
                 </a>
             </li>
             <li class="bar-item active dashboard">
-                <a href="{{ route('dashboard.') }}">
+                <a href="{{ route('dashboard.') }} "class="flex justify-center">
                     <svg width="40" height="40" viewBox="0 0 677 677" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <mask id="path-1-inside-1_38_70" fill="white">
@@ -63,15 +64,18 @@
                 </a>
             </li>
             <li class="bar-item user">
-                <svg width="40" height="40" viewBox="0 0 677 677" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path class="icon"
-                        d="M270.245 408H405.755C484.315 408 548 471.685 548 550.245C548 558.946 540.946 566 532.245 566H143.755C135.054 566 128 558.946 128 550.245C128 471.685 191.685 408 270.245 408Z"
-                        fill="white" stroke="black" stroke-width="30" />
-                    <circle class="icon" cx="337.5" cy="226.5" r="115" fill="white" stroke="black"
-                        stroke-width="31" />
-                </svg>
-                <span class="bar-item-title">User</span>
+                <a href="#" class="flex justify-center">
+
+                    <svg width="40" height="40" viewBox="0 0 677 677" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path class="icon"
+                            d="M270.245 408H405.755C484.315 408 548 471.685 548 550.245C548 558.946 540.946 566 532.245 566H143.755C135.054 566 128 558.946 128 550.245C128 471.685 191.685 408 270.245 408Z"
+                            fill="white" stroke="black" stroke-width="30" />
+                        <circle class="icon" cx="337.5" cy="226.5" r="115" fill="white"
+                            stroke="black" stroke-width="31" />
+                    </svg>
+                    <span class="bar-item-title">User</span>
+                </a>
             </li>
         </ul>
 
@@ -81,7 +85,7 @@
             </a>
         </button>
     </div>
-    <div class="container">
+    <div class="container-content">
         @yield('content')
     </div>
     <style>

@@ -86,7 +86,7 @@
 }
 
 /* content */
-.container {
+.container-content {
     margin-top: 48px;
     margin-left: 74px;
     max-height: calc(100vh - 80px);
