@@ -55,6 +55,7 @@ html {
     font-family: var(--main-font);
     font-size: 62.5%;
     color: #1c2536;
+    touch-action: none;
 }
 
 body {

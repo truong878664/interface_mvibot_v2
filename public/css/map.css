@@ -209,12 +209,12 @@
 
 .input-layer {
     height: 30px;
-    width: 70px;
+    width: 50px;
     border: none;
     background: transparent;
-    border: 1px solid rgba(70, 69, 69, 0.438);
-    font-size: 1rem;
-    margin: 0 4px;
+    font-size: 1.4rem;
+    outline: none;
+    padding-left: 10px;
 }
 
 .layer-btn {
