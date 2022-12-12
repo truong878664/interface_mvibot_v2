@@ -20,6 +20,10 @@
         --column-create-missions: 2;
         --column-status: 1;
     }
+    .container-content {
+        margin-left: 0;
+        padding-bottom: 74px;
+    }
 
     /* login */
     .login-img-wrapper {

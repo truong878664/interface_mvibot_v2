@@ -1,9 +1,9 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="heading missions-heading">Mission</div>
-    <div class="contents">
+    <div class="">
 
-        <div class="contents missions-content">
+        <div class=" missions-content">
             @include('frontend.blocks.mission.navbarmissions')
 
 

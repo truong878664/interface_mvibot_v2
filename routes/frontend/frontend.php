@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\joystickController;
+use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
 
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::prefix('map')->name('map.')->group(function () {
             Route::get('/', [mapController::class, 'index'])->name('map');
             Route::get('/map-active', [mapController::class, 'mapActive']);
+            Route::get('create-layer', [mapController::class, 'createLayer'])->name('create-layer');
         });
 
         Route::prefix('status')->name('status.')->group(function () {
@@ -41,6 +43,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         });
         Route::prefix('joystick')->name('joystick.')->group(function () {
             Route::get('/', [joystickController::class, 'index']);
+        });
+
+        Route::prefix('mapping')->name('mapping.')->group(function () {
+            Route::get('/', [mappingController::class, 'index']);
         });
     });
 });

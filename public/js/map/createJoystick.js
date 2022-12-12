@@ -47,7 +47,7 @@ let oldAngle;
 function setColorDirection(direction) {
     const angle = direction?.angle;
     if (angle !== oldAngle) {
-        $(".position-icon.light")?.classList.remove("light");
+        $(".light")?.classList.remove("light");
         const arrowActive = $(`.${angle}`);
         arrowActive?.classList.add("light");
         oldAngle = angle;
@@ -55,7 +55,7 @@ function setColorDirection(direction) {
 }
 
 function removeColorDirection() {
-    $(".position-icon.light")?.classList.remove("light");
+    $(".light")?.classList.remove("light");
 }
 
 export default createJoystick;

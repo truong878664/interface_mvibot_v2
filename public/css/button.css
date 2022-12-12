@@ -22,7 +22,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    max-width: 120px;
+    /* max-width: 170px; */
     text-align: center;
     margin-left: 10px;
 }

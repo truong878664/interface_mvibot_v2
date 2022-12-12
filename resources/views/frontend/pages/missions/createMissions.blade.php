@@ -2,7 +2,7 @@
 @section('content')
     <div class="heading missions-heading">Mission</div>
 
-    <div class="contents missions-content">
+    <div class=" missions-content">
         @include('frontend.blocks.mission.navbarmissions')
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             @include('frontend.blocks.mission.createMissions.index')

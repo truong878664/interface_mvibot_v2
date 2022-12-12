@@ -44,4 +44,8 @@ class mapController extends Controller
         }
         return $mapActive;
     }
+    public function createLayer()
+    {
+        return view('frontend.pages.map.createLayer');
+    }
 }

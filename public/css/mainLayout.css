@@ -89,7 +89,7 @@
 .container-content {
     margin-top: 48px;
     margin-left: 74px;
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 48px);
 }
 
 .message {
