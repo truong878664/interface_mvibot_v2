@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
     @vite('resources/css/app.css')
+    {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/css/main.css">
 </head>
 

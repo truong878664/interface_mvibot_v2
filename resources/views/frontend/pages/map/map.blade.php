@@ -30,79 +30,10 @@
                         <input type="submit" class="map-submit" hidden>
                     </div>
                 </form>
-                {{-- <div class="list-layer">
-                    <x-button tag="label" title="list layer" class="layer-btn" attribute="for=list-layer"></x-button>
-                    <input type="checkbox" id="list-layer">
-                    <div class="list-layer-wrapper"></div>
-                </div> --}}
-                {{-- @include('frontend.pages.map.binCreateLayer') --}}
 
-
-                <div class="test">1234</div>
                 <div class="create-layer">
-                    <div class="overlay overlay-create-layer"></div>
-                    <x-button tag="label" title="create layer" class="layer-btn" attribute="for=value-layer"></x-button>
-                    <input hidden type="checkbox" checked id="value-layer">
-                    <form class="value-layer">
-                        <label for="name-layer" class="input-layer-wrapper">
-                            <span class="">Name</span>
-                            <input class="input-layer" type="text" id="name-layer">
-                        </label>
-                        <select class="input-layer-wrapper" name="" id="" class="type-layer">
-                            <option value="dead_zone">dead_zone</option>
-                            <option value="lowspeed_zone">lowspeed_zone</option><label
-                                class="transform_panel--scrubbableInputLeftCol--5B9SL raw_components--borderFocusWithin--mSvWa scrubbable_control--containerBordered---60m8 raw_components--borderFocusWithin--mSvWa scrubbable_control--container--myvKL"
-                                data-tooltip-type="text" data-tooltip="Rotation" aria-label="Rotation">flex
-                        </select>
-                        <label for="" class="input-layer-wrapper ">
-                            <span class="label-input-layer">W</span>
-                            <input class="input-layer input-layer-w" type="text" value="0">
-                        </label>
-
-                        <label for="" class="input-layer-wrapper ">
-                            <span class="label-input-layer">H</span>
-                            <input class="input-layer input-layer-h" type="text" value="0">
-                        </label>
-
-                        <label for="" class="input-layer-wrapper ">
-                            <span class="label-input-layer deg-icon" style="background-image: url('/icon/deg.svg')">
-                            </span>
-                            <input class="input-layer input-layer-z" type="text" value="0">
-                        </label>
-                        <x-button tag="button" title="add" class="layer-btn" attribute=""></x-button>
-                    </form>
                 </div>
             </div>
-            <style>
-                .input-layer-wrapper {
-                    background: #fff;
-                    height: 30px;
-                    border: 1px solid rgba(70, 69, 69, 0.438);
-                    display: flex;
-                    align-items: center;
-                    margin: 0 4px;
-                    padding: 0 4px;
-                }
-
-                .label-input-layer {
-                    z-index: 1000;
-
-                }
-
-                .overlay-create-layer {
-                    cursor: ew-resize;
-                    background: transparent;
-                    display: none;
-                }
-
-                .deg-icon {
-                    width: 20px;
-                    height: 20px;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    object-fit: cover;
-                }
-            </style>
             <div class="map-active-map">
                 <span>Map active:</span>
                 <span>
