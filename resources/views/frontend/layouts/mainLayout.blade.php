@@ -19,7 +19,6 @@
             </div>
             <h3 class="">Mvibot</h3>
             <div class="message-map-wrapper">
-
             </div>
         </div>
 

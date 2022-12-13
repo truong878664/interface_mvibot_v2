@@ -46,6 +46,7 @@ class mapController extends Controller
     }
     public function createLayer()
     {
-        return view('frontend.pages.map.createLayer');
+        $mapActive = $this->mapActive();
+        return view('frontend.pages.map.createLayer', compact('mapActive'));
     }
 }

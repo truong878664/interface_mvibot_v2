@@ -21,20 +21,20 @@ const createJoystick = function () {
     manager.on("start", function (event, nipple) {
         robotMoving = setInterval(function () {
             moveRobot(linear_speed, angular_speed);
-        }, 500);
+        }, 100);
     });
     manager.on("move", function (event, nipple) {
         setColorDirection(nipple.direction);
-
-        const max_linear = 0.5; // m/s 0.5;
+        const max_linear = 1.0; // m/s 0.5;
         const max_angular = 0.314; // rad/s
-        const max_distance = 200; // pixels;
+        const max_distance = 55; // pixels;
         linear_speed =
             (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
             max_distance;
         angular_speed =
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
+        console.log(angular_speed);
     });
     manager.on("end", function () {
         clearInterval(robotMoving);

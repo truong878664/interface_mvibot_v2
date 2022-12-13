@@ -10,12 +10,12 @@ export function markerClient(tfClient, viewer) {
     });
 }
 
+const markerClient_topic = new ROSLIB.Topic({
+    ros: ros,
+    name: `/visualization_marker_layer${uniqueCode}`,
+    messageType: "visualization_msgs/Marker",
+});
 export function displayLayer(mvibot_layer_active) {
-    const markerClient_topic = new ROSLIB.Topic({
-        ros: ros,
-        name: `/visualization_marker_layer${uniqueCode}`,
-        messageType: "visualization_msgs/Marker",
-    });
     const markerClient_msg = new ROSLIB.Message({
         header: {
             frame_id: "/map",
@@ -64,7 +64,7 @@ export function displayLayer(mvibot_layer_active) {
     }
 }
 
-function deleteLayer() {
+export function deleteLayer() {
     for (let i = markerClient_msgaray.length - 1; i >= 0; i--) {
         markerClient_msg.action = 2;
         markerClient_msg.id = i;
