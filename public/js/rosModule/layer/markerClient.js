@@ -1,4 +1,5 @@
 import ros from "../../main.js";
+import { mvibot_color, mvibot_scale } from "../classMvibot.js";
 import uniqueCode from "../uniqueCode.js";
 
 export function markerClient(tfClient, viewer) {
@@ -15,43 +16,43 @@ const markerClient_topic = new ROSLIB.Topic({
     name: `/visualization_marker_layer${uniqueCode}`,
     messageType: "visualization_msgs/Marker",
 });
-export function displayLayer(mvibot_layer_active) {
-    const markerClient_msg = new ROSLIB.Message({
-        header: {
-            frame_id: "/map",
+const markerClient_msg = new ROSLIB.Message({
+    header: {
+        frame_id: "/map",
+    },
+    ns: "layer",
+    id: 0,
+    type: 6,
+    action: 0,
+    frame_locked: false,
+    mesh_resource: "",
+    mesh_use_embedded_materials: false,
+    color: {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 0,
+    },
+    scale: {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    },
+    pose: {
+        position: {
+            x: 0.0,
+            y: 0.0,
+            z: 0.01,
         },
-        ns: "layer",
-        id: 0,
-        type: 6,
-        action: 0,
-        frame_locked: false,
-        mesh_resource: "",
-        mesh_use_embedded_materials: false,
-        color: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
-        },
-        scale: {
+        orientation: {
             x: 0.0,
             y: 0.0,
             z: 0.0,
+            w: 1.0,
         },
-        pose: {
-            position: {
-                x: 0.0,
-                y: 0.0,
-                z: 0.01,
-            },
-            orientation: {
-                x: 0.0,
-                y: 0.0,
-                z: 0.0,
-                w: 1.0,
-            },
-        },
-    });
+    },
+});
+export function displayLayer(mvibot_layer_active) {
     for (let i = 0; i < mvibot_layer_active.length; i++) {
         markerClient_msg.type = 1;
         markerClient_msg.action = 0;
@@ -64,8 +65,8 @@ export function displayLayer(mvibot_layer_active) {
     }
 }
 
-export function deleteLayer() {
-    for (let i = markerClient_msgaray.length - 1; i >= 0; i--) {
+export function deleteAllLayer(mvibot_layer_active) {
+    for (let i = mvibot_layer_active.length - 1; i >= 0; i--) {
         markerClient_msg.action = 2;
         markerClient_msg.id = i;
         markerClient_msg.scale = new mvibot_scale(0.0001, 0.0001, 0.0001);

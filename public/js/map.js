@@ -5,7 +5,11 @@ import createAxes from "./rosModule/createAxes.js";
 import createPoint from "./rosModule/createPoint.js";
 import createPose from "./rosModule/createPose.js";
 import displayPoint from "./rosModule/displayPoint.js";
-import { markerClient, displayLayer } from "./rosModule/layer/markerClient.js";
+import {
+    markerClient,
+    displayLayer,
+    deleteAllLayer,
+} from "./rosModule/layer/markerClient.js";
 import { mvibot_layer } from "./rosModule/classMvibot.js";
 import { convertToPosition } from "./rosModule/clickSetPointMap.js";
 import lockZ from "./rosModule/lockZ.js";
@@ -69,6 +73,8 @@ mapElement.addEventListener("dblclick", (e) => {
     dataLayer.height_layer = Number($("#height-layer").value);
     dataLayer.z_rotate = Number($("#z-rotate").value);
 
+    $("#name_layer").value = "";
+
     const degInput = (Number(dataLayer.z_rotate) / 180) * Math.PI;
     const { z, w } = mathYaw(degInput);
 
@@ -84,11 +90,32 @@ mapElement.addEventListener("dblclick", (e) => {
     );
 
     saveDataToDatabase(dataLayer);
-
-    console.log(mvibot_layer_active);
     mvibot_layer_active.push(layer);
     displayLayer(mvibot_layer_active);
 });
+
+const typeLayer = $("#type-layer");
+typeLayer.onchange = (e) => {
+    const degInput = (Number(dataLayer.z_rotate) / 180) * Math.PI;
+    const { z, w } = mathYaw(degInput);
+    dataLayer.type_layer = e.target.value;
+    const layer = new mvibot_layer(
+        dataLayer.name_layer,
+        dataLayer.width_layer,
+        dataLayer.height_layer,
+        dataLayer.xo,
+        dataLayer.yo,
+        dataLayer.type_layer,
+        z,
+        w
+    );
+    dataLayerSaveDatabase.pop();
+    saveDataToDatabase(dataLayer);
+
+    mvibot_layer_active.pop();
+    mvibot_layer_active.push(layer);
+    displayLayer(mvibot_layer_active);
+};
 
 $$(".layer-range").forEach((element) => {
     element.oninput = (e) => {
@@ -110,7 +137,9 @@ $$(".layer-range").forEach((element) => {
             w
         );
 
-        console.log(dataLayerSaveDatabase);
+        dataLayerSaveDatabase.pop();
+        saveDataToDatabase(dataLayer);
+
         mvibot_layer_active.pop();
         mvibot_layer_active.push(layer);
         displayLayer(mvibot_layer_active);
@@ -173,3 +202,14 @@ function saveDataToDatabase(dataLayer) {
     const dataLayerNew = { yawo, height, width, ...rest };
     dataLayerSaveDatabase.push(dataLayerNew);
 }
+
+$("#delete-btn-layer").onclick = () => {
+    deleteLayer(2);
+};
+
+const deleteLayer = (id) => {
+    deleteAllLayer(mvibot_layer_active);
+    mvibot_layer_active.splice(id, 1);
+    dataLayerSaveDatabase.splice(id, 1);
+    displayLayer(mvibot_layer_active);
+};
