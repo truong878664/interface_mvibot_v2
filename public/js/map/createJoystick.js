@@ -24,17 +24,18 @@ const createJoystick = function () {
         }, 100);
     });
     manager.on("move", function (event, nipple) {
+        const sizeJoystick = $(".back").offsetWidth;
+
         setColorDirection(nipple.direction);
         const max_linear = 1.0; // m/s 0.5;
         const max_angular = 0.314; // rad/s
-        const max_distance = 55; // pixels;
+        const max_distance = sizeJoystick / 2; // pixels;
         linear_speed =
             (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
             max_distance;
         angular_speed =
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
-        console.log(angular_speed);
     });
     manager.on("end", function () {
         clearInterval(robotMoving);

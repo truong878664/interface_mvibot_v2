@@ -1,5 +1,6 @@
-<div class="w-[210px] h-[210px] relative md:w-[260px] md:h-[260px]">
-    <div class="joystick-wrapper absolute bg-[#ccc/0.5] left-1/2 top-1/2 rounded h-[160px] w-[160px]">
+<div class="w-[210px] h-[210px] relative md:w-[300px] md:h-[300px] md:mb-4">
+    <div
+        class="joystick-wrapper absolute bg-[#ccc/0.5] left-1/2 top-1/2 rounded h-[160px] w-[160px] md:h-[250px] md:w-[250px]">
         <div id="zone_joystick"></div>
     </div>
     <div class="absolute text-[#ccc] top-0 left-1/2 -translate-x-1/2 up">
