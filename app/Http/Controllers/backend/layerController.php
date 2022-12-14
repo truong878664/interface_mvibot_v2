@@ -10,16 +10,9 @@ class layerController extends Controller
 {
     public function addLayer(Request $request)
     {
-        $mapActive =  $request->map_active;
-        $dataLayer = $request->data_layer;
-        $data = ['data_layers' => $dataLayer, 'map' => $mapActive];
-        $currentLayer = Layer::where('map', $mapActive);
-        // dd($dataLayer);
-        if ($currentLayer->get()->toArray() === []) {
-            Layer::insert($data);
-        } else {
-            $currentLayer->update(['data_layers' => $dataLayer, 'map' => $mapActive]);
-        }
+        $dataLayer = json_decode($request->data_layer);
+        $array = json_decode(json_encode($dataLayer), true);
+        Layer::insert($array);
         return back();
     }
 }

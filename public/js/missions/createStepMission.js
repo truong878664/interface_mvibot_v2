@@ -42,10 +42,15 @@ function handleShowPointOnMap() {
             const widthMap = $("#map-show-point").offsetWidth;
             const heightMap = $("#map-show-point").offsetHeight;
 
-            const viewer = createMap(heightMap, widthMap, "map-show-point");
+            const viewer = createMap(
+                heightMap,
+                widthMap,
+                "",
+                "",
+                "map-show-point"
+            );
             createAxes(viewer);
             const tfClient = createTfClient();
-            // createAxes(viewer)
 
             const color = showMap.getAttribute("color_position");
             createPoint(viewer, tfClient);
@@ -55,6 +60,7 @@ function handleShowPointOnMap() {
             const y = Number(showMap.getAttribute("y"));
             const z = Number(showMap.getAttribute("z"));
             const w = Number(showMap.getAttribute("w"));
+            console.log(x, y);
             displayPoint(x, y);
             displayPose(x, y, z, w);
 

@@ -87,10 +87,10 @@ function displayValue(positionX, positionY, rotateZ) {
 }
 
 function setValueToAddDatabase(x, y, z, w) {
-    const xElement = $(".x-value");
-    const yElement = $(".y-value");
-    const zElement = $(".z-value");
-    const wElement = $(".w-value");
+    const xElement = $(".x-value-database");
+    const yElement = $(".y-value-database");
+    const zElement = $(".z-value-database");
+    const wElement = $(".w-value-database");
     xElement.value = x;
     yElement.value = y;
     zElement.value = z;

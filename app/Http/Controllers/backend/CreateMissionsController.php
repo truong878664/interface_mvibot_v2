@@ -26,7 +26,6 @@ class CreateMissionsController extends Controller
             "name_mission" => $name_mission,
             "created_at" => $created_at
         ];
-
         Missions::insert($data);
         return back();
     }

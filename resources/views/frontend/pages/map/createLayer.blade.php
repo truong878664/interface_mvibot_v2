@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="flex flex-col mt-3 justify-end content-start w-1/6 px-5">
-                    <form class="">
+                    <div class="">
                         <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px] ">Name layer</span>
                             <input type="text" class=" w-[200px] px-4" id="name_layer">
@@ -80,9 +80,13 @@
                             </div>
                         </label>
                         <div class="">
-                            <button class="px-4 bg-[#0f6cbd] text-[#fff]">Save</button>
+                            <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
+                                <input type="text" id="data-layer" name="data_layer" hidden>
+                                @csrf
+                                <button class="px-4 bg-[#0f6cbd] text-[#fff]" id="save-layer-btn">Save</button>
+                            </form>
                         </div>
-                    </form>
+                    </div>
 
                     {{-- ===list layer=== --}}
                     <div class="flex-1 mt-10  relative border-solid border-[1px] border-[#ccc] overflow-hidden "
@@ -90,7 +94,7 @@
                         <label class="block text-center absolute w-full h-[30px] bg-[rgba(204,204,204,0.51)]">list
                             layer</label>
                         <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[360px]" id="layer-container">
-                            <div class="">123</div>
+
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ class PositionController extends Controller
 {
     public function createPoint(Request $request)
     {
+
         $name_position = $request->name_position;
         $x = $request->x;
         $y = $request->y;
@@ -24,7 +25,6 @@ class PositionController extends Controller
         $mode_child = $request->mode_child;
         $created_at = Carbon::now();
         $map = $request->map;
-
         $dataPosition = [
             "name_position" => $name_position,
             "x" => $x,

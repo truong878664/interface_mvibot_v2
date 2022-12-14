@@ -2,7 +2,13 @@ import ros from "../main.js";
 
 var viewer;
 
-function createMap(height, width, divID = "map") {
+function createMap(
+    height,
+    width,
+    tfClient = "",
+    topic = "/map",
+    divID = "map"
+) {
     const optionViewer = {
         divID: divID,
         width: width,
@@ -18,8 +24,10 @@ function createMap(height, width, divID = "map") {
     new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,
+        continuous: true,
+        tfClient: tfClient,
+        topic: topic,
     });
-
     return viewer;
 }
 

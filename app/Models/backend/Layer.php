@@ -9,4 +9,15 @@ class Layer extends Model
 {
     use HasFactory;
     protected $table = "layer_emulator";
+    protected $fillable = [
+        'yawo',
+        'height',
+        'width',
+        'name_map_active',
+        'name_layer',
+        'type_layer',
+        'xo',
+        'yo',
+    ];
+    public $timestamps = false;
 }

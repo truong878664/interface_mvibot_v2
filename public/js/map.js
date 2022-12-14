@@ -19,8 +19,8 @@ const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
 const widthMap = mapElement.offsetWidth;
 
-const viewer = createMap(heightMap, widthMap);
 const tfClient = createTfClient();
+const viewer = createMap(heightMap, widthMap, tfClient);
 
 createAxes(viewer);
 createPoint(viewer, tfClient);
@@ -92,6 +92,8 @@ mapElement.addEventListener("dblclick", (e) => {
     saveDataToDatabase(dataLayer);
     mvibot_layer_active.push(layer);
     displayLayer(mvibot_layer_active);
+
+    renderLayer(mvibot_layer_active);
 });
 
 const typeLayer = $("#type-layer");
@@ -146,52 +148,6 @@ $$(".layer-range").forEach((element) => {
     };
 });
 
-const datax = [
-    {
-        name_layer: "layer1670906141326",
-        width_layer: 1,
-        height_layer: 1,
-        xo: -0.4522844363038446,
-        yo: 3.5403069294219143,
-        color: { r: 0.2, g: 0, b: 0.8, a: 0.3 },
-        scale: { x: 1, y: 1, z: 0.01 },
-        pose: {
-            position: {
-                x: -0.4522844363038446,
-                y: 3.5403069294219143,
-                z: 0.01,
-            },
-            orientation: {
-                x: 0,
-                y: 0,
-                z: 0.008726535498373935,
-                w: 0.9999619230641713,
-            },
-        },
-    },
-    {
-        name_layer: "layer1670906142726",
-        width_layer: 1,
-        xo: 3.8,
-        yo: 0.0035060809027252556,
-        color: { r: 0.2, g: 0, b: 0.8, a: 0.3 },
-        scale: { x: 1, z: 0.01 },
-        pose: {
-            position: {
-                x: 3.8234232342314314231423,
-                y: 0.0035060809027252556,
-                z: 0.01,
-            },
-            orientation: {
-                x: 0,
-                y: 0,
-                z: 0.008726535498373935,
-                w: 0.9999619230641713,
-            },
-        },
-    },
-];
-
 function saveDataToDatabase(dataLayer) {
     let {
         z_rotate: yawo,
@@ -203,13 +159,42 @@ function saveDataToDatabase(dataLayer) {
     dataLayerSaveDatabase.push(dataLayerNew);
 }
 
-$("#delete-btn-layer").onclick = () => {
-    deleteLayer(2);
-};
-
 const deleteLayer = (id) => {
     deleteAllLayer(mvibot_layer_active);
     mvibot_layer_active.splice(id, 1);
     dataLayerSaveDatabase.splice(id, 1);
     displayLayer(mvibot_layer_active);
+    renderLayer(mvibot_layer_active);
+};
+
+function renderLayer(mvibot_layer_active) {
+    const html = [];
+    mvibot_layer_active.map((item, index) => {
+        html.push(
+            `<div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
+            <span class="">${item.name_layer}</span>
+            <button id-delete=${index} class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>`
+        );
+    });
+    $("#layer-container").innerHTML = html.join("");
+    handleDeleteLayer();
+}
+
+function handleDeleteLayer() {
+    $$(".delete-layer-btn").forEach((item, index) => [
+        (item.onclick = () => {
+            deleteLayer(index);
+        }),
+    ]);
+}
+
+$("#save-layer-btn").onclick = (e) => {
+    e.preventDefault();
+    const dataLayer = JSON.stringify(dataLayerSaveDatabase);
+    $("#data-layer").value = dataLayer;
+    // $("#form-add-layer").submit();
+    console.log(dataLayerSaveDatabase);
 };
