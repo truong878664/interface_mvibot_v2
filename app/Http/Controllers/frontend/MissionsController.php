@@ -40,7 +40,7 @@ class MissionsController extends Controller
     {
 
         if (Map::all()->count() > 0) {
-            $mapActive = Map::all()[0]['map_active'];
+            $mapActive = Map::all()[0]['name_map_active'];
         } else {
             $mapActive = "";
         }
