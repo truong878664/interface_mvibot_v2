@@ -31,7 +31,6 @@ function createMap(
     });
 
     if (nameRobot) {
-        // console.log(nameRobot);
         new ROS3D.UrdfClient({
             ros: ros,
             tfClient: tfClient,
@@ -45,7 +44,7 @@ function createMap(
             topic: "/" + nameRobot + "/laser/scan",
             rootObject: viewer.scene,
             tfClient: tfClient,
-            material: { size: 0.5, color: 0xff0000 },
+            material: { size: 0.5, color: 0x008000 },
             rate: 1,
         });
     }

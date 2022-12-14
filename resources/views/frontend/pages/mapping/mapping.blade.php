@@ -16,7 +16,9 @@
             </div>
         </div>
         <div class="h-1/3 flex justify-between items-center px-7 md:h-full md:w-1/3 md:flex-col">
-            <div class=""></div>
+            <div class="bg-red-500 w-full h-full">
+                <input type="text">
+            </div>
             @include('frontend/blocks/joystick')
 
         </div>
