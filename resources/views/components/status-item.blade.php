@@ -42,36 +42,3 @@
         </div>
     </div>
 </div>
-<style>
-    .inactivate {
-        color: #ccc;
-    }
-
-    .inactivate .accessoty-item-wrapper .accessoty-item {
-        background: #ccc;
-        box-shadow: none;
-    }
-
-    .inactivate .temper-icon,
-    .inactivate .volt-icon {
-        color: #ccc !important;
-    }
-
-
-    .charge {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-    }
-
-    .charging {
-        color: #82CD47;
-        text-shadow: 0 0 20px #82CD47;
-    }
-
-    .no-change {
-        color: #ccc;
-    }
-</style>
