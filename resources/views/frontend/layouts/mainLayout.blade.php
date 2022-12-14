@@ -113,8 +113,6 @@
             height: 100vh;
         }
     </style>
-    <script type="module" src="/js/mainLayout.js"></script>
-    <script type="module" src="/js/main.js"></script>
 
     {{-- <script type="text/javascript" src="/js/library/three.min.js"></script>
     <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script>
@@ -123,6 +121,27 @@
     <script type="text/javascript" src="/js/library/nipplejs.js"></script>
     <script type="text/javascript" src="/js/library/easeljs.min.js"></script>
     <script type="text/javascript" src="/js/library/ros2d.min.js"></script> --}}
+
+
+    {{-- <script src="/js/library/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/library/three.min.js"></script>
+    <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="/js/library/roslib.min.js"></script>
+    <script type="text/javascript" src="/js/library/ros3d.min.js"></script>
+    <script type="text/javascript" src="/js/library/nipplejs.js"></script>
+    <script type="text/javascript" src="/js/library/easeljs.min.js"></script>
+    <script type="text/javascript" src="/js/library/ros2d.min.js"></script>
+
+    <script src="/js/library/three.js"></script>
+    <script src="/js/library/STLLoader.js"></script>
+    <script src="/js/library/eventemitter2.js"></script>
+    <script src="/js/library/ColladaLoader.js"></script>
+
+    <script src="/js/library/roslib.js"></script>
+    <script src="/js/library/ros3d.js"></script> --}}
+
+
+    <meta charset="utf-8" />
     <script src="/js/library/jquery.min.js"></script>
     <script type="text/javascript" src="/js/library/three.min.js"></script>
     <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script>
@@ -140,6 +159,9 @@
     <script src="/js/library/roslib.js"></script>
     <script src="/js/library/ros3d.js"></script>
 
+
+    <script type="module" src="/js/mainLayout.js"></script>
+    <script type="module" src="/js/main.js"></script>
 
 
     <script>
