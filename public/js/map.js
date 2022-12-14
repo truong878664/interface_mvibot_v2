@@ -195,6 +195,6 @@ $("#save-layer-btn").onclick = (e) => {
     e.preventDefault();
     const dataLayer = JSON.stringify(dataLayerSaveDatabase);
     $("#data-layer").value = dataLayer;
-    // $("#form-add-layer").submit();
-    console.log(dataLayerSaveDatabase);
+    $("#form-add-layer").submit();
+    // console.log(dataLayerSaveDatabase);
 };
