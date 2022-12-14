@@ -31,5 +31,12 @@ function changeTopicMoveRobot(robotActive) {
 function changTopicOccupancy(robotActive) {
     $("#map").remove();
     $("#map-wrapper").innerHTML = `<div class="w-full h-full" id="map"></div>`;
-    viewer = createMap(heightMap, widthMap, tfClient, `${robotActive}/map`);
+    viewer = createMap(
+        heightMap,
+        widthMap,
+        tfClient,
+        `${robotActive}/map`,
+        "map",
+        robotActive
+    );
 }

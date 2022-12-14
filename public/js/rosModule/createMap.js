@@ -7,7 +7,8 @@ function createMap(
     width,
     tfClient = "",
     topic = "/map",
-    divID = "map"
+    divID = "map",
+    nameRobot = ""
 ) {
     const optionViewer = {
         divID: divID,
@@ -21,7 +22,7 @@ function createMap(
 
     viewer = new ROS3D.Viewer(optionViewer);
 
-    const occup = new ROS3D.OccupancyGridClient({
+    new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,
         continuous: true,
@@ -29,7 +30,26 @@ function createMap(
         topic: topic,
     });
 
-    console.log(occup);
+    if (nameRobot) {
+        console.log(nameRobot);
+        new ROS3D.UrdfClient({
+            ros: ros,
+            tfClient: tfClient,
+            param: "/" + nameRobot + "/robot_description",
+            rootObject: viewer.scene,
+            loader: ROS3D.COLLADA_LOADER_2,
+        });
+
+        new ROS3D.LaserScan({
+            ros: ros,
+            topic: "/" + nameRobot + "/laser/scan",
+            rootObject: viewer.scene,
+            tfClient: tfClient,
+            material: { size: 0.5, color: 0xff0000 },
+            rate: 1,
+        });
+    }
+
     return viewer;
 }
 
