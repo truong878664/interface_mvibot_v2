@@ -24,10 +24,10 @@
                 <input class="display-positon display-rotate-z" tabindex="-1" id="" type="text"
                     value="0">
             </div>
-            <input type="text" name="x" class="x x-value-database">
-            <input type="text" name="y" class="y y-value-database">
-            <input type="text" name="z" class="z z-value-database">
-            <input type="text" name="w" class="w w-value-database">
+            <input type="text" name="x" class="x x-value-database" hidden>
+            <input type="text" name="y" class="y y-value-database" hidden>
+            <input type="text" name="z" class="z z-value-database" hidden>
+            <input type="text" name="w" class="w w-value-database" hidden>
         </div>
         <div class="time-color-wrapper form-item">
             <div class="time-point-wrapper form-item">
