@@ -5,6 +5,7 @@
             <label class="absolute h-[30px] bg-[#0f6cbd] text-[#fff] m-4 px-2 rounded-sm z-[1000]">
                 <span for="">Choose robot:</span>
                 <select name="" id="robot-mapping" class="bg-transparent outline-none">
+                    <option value="">select robot</option>
                     @foreach ($robotSlam as $item)
                         <option value="{{ $item['name_seri'] }}" class="text-[#333]">{{ $item['name_seri'] }}</option>
                     @endforeach
