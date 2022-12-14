@@ -15,11 +15,17 @@
                 <div class="w-full h-full" id="map"></div>
             </div>
         </div>
-        <div class="h-1/3 flex justify-between items-center px-7 md:h-full md:w-1/3 md:flex-col">
-            <div class="bg-red-500 w-full h-full">
-                <input type="text">
+        <div class="h-1/3 flex justify-between items-center px-7 md:h-full md:w-1/3 md:flex-col ">
+            <div class="w-full mt-[32px] h-full">
+                <div class="flex">
+                    <input type="text" class="px-3" placeholder="Name map" id="create_map">
+                    <button class="bg-[#0f6cbd] px-3 text-[#fff]" id="create_map_btn">Save map</button>
+                </div>
+                <span class="text-[1.5rem] text-red-500 block" id="error_create_map"></span>
             </div>
-            @include('frontend/blocks/joystick')
+            <div class="md:p-10 md:mb-[70px]">
+                @include('frontend/blocks/joystick')
+            </div>
 
         </div>
     </div>

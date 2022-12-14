@@ -3,13 +3,14 @@ import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
 import { $ } from "./main.js";
 import { cmd_vel_listener } from "./rosModule/moveRobot.js";
+import changeMapActive from "./rosModule/changeMapMapping.js";
+
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
 const robotMappingEle = $("#robot-mapping");
 let robotActive = robotMappingEle.value;
-// const viewer = createMap(heightMap, widthMap);
 const tfClient = createTfClient();
-const topic = "/map";
+const topic = "/";
 let viewer = createMap(heightMap, widthMap, tfClient, topic);
 console.log(viewer);
 
@@ -40,3 +41,17 @@ function changTopicOccupancy(robotActive) {
         robotActive
     );
 }
+
+$("#create_map_btn").onclick = () => {
+    const nameMap = $("#create_map");
+    if (nameMap.value === "") {
+        $("#error_create_map").innerText = "please enter this field";
+        nameMap.focus();
+        nameMap.oninput = () => {
+            $("#error_create_map").innerText = "";
+        };
+    } else {
+        changeMapActive(robotActive, nameMap.value);
+        nameMap.value = "";
+    }
+};
