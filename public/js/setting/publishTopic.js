@@ -11,7 +11,7 @@ $("#public-btn").onclick = () => {
     } else if (dataPublic === "") {
         alert("enter data public");
     } else {
-        publishTopic(dataPublic);
+        publishTopic($("#choose_robot").value, dataPublic);
         alert("public success");
         $("#public-data").value = "";
         $("#public-data").focus();
