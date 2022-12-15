@@ -37,6 +37,7 @@ const yoElement = $("#yo");
 const xoRangeElement = $("#xo-range");
 const yoRangeElement = $("#yo-range");
 const mapActive = $("#map-active").innerText;
+const nameLayerElement = $("#name_layer");
 
 mapElement.addEventListener("mousemove", () => {
     lockZ(viewer);
@@ -57,43 +58,52 @@ dataLayer.name_map_active = mapActive;
 const dataLayerSaveDatabase = [];
 
 mapElement.addEventListener("dblclick", (e) => {
-    const time = new Date();
-    const [x, y] = convertToPosition(e.offsetX, e.offsetY, viewer);
-    xoElement.value = x.toFixed(2);
-    yoElement.value = y.toFixed(2);
-    xoRangeElement.value = x.toFixed(2);
-    yoRangeElement.value = y.toFixed(2);
+    if (nameLayerElement.value === "") {
+        $("#msg-name-layer").innerText = "please enter this field";
+        nameLayerElement.focus();
+        nameLayerElement.oninput = () => {
+            $("#msg-name-layer").innerText = "";
+        };
+    } else {
+        const time = new Date();
+        const [x, y] = convertToPosition(e.offsetX, e.offsetY, viewer);
+        xoElement.value = x.toFixed(2);
+        yoElement.value = y.toFixed(2);
+        xoRangeElement.value = x.toFixed(2);
+        yoRangeElement.value = y.toFixed(2);
 
-    dataLayer.xo = x;
-    dataLayer.yo = y;
+        dataLayer.xo = x;
+        dataLayer.yo = y;
 
-    dataLayer.name_layer = $("#name_layer").value || `layer${time.getTime()}`;
-    dataLayer.type_layer = $("#type-layer").value;
-    dataLayer.width_layer = Number($("#width-layer").value);
-    dataLayer.height_layer = Number($("#height-layer").value);
-    dataLayer.z_rotate = Number($("#z-rotate").value);
+        dataLayer.name_layer =
+            nameLayerElement.value || `layer${time.getTime()}`;
+        dataLayer.type_layer = $("#type-layer").value;
+        dataLayer.width_layer = Number($("#width-layer").value);
+        dataLayer.height_layer = Number($("#height-layer").value);
+        dataLayer.z_rotate = Number($("#z-rotate").value);
 
-    $("#name_layer").value = "";
+        nameLayerElement.value = "";
 
-    const degInput = (Number(dataLayer.z_rotate) / 180) * Math.PI;
-    const { z, w } = mathYaw(degInput);
+        const degInput = (Number(dataLayer.z_rotate) / 180) * Math.PI;
+        const { z, w } = mathYaw(degInput);
 
-    const layer = new mvibot_layer(
-        dataLayer.name_layer,
-        dataLayer.width_layer,
-        dataLayer.height_layer,
-        dataLayer.xo,
-        dataLayer.yo,
-        dataLayer.type_layer,
-        z,
-        w
-    );
+        const layer = new mvibot_layer(
+            dataLayer.name_layer,
+            dataLayer.width_layer,
+            dataLayer.height_layer,
+            dataLayer.xo,
+            dataLayer.yo,
+            dataLayer.type_layer,
+            z,
+            w
+        );
 
-    saveDataToDatabase(dataLayer);
-    mvibot_layer_active.push(layer);
-    displayLayer(mvibot_layer_active);
+        saveDataToDatabase(dataLayer);
+        mvibot_layer_active.push(layer);
+        displayLayer(mvibot_layer_active);
 
-    renderLayer(mvibot_layer_active);
+        renderLayer(mvibot_layer_active);
+    }
 });
 
 const typeLayer = $("#type-layer");

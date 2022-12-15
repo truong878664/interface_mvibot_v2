@@ -7,6 +7,7 @@ use App\Http\Controllers\frontend\joystickController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
+use App\Models\Robot;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
@@ -48,5 +49,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::prefix('mapping')->name('mapping.')->group(function () {
             Route::get('/', [mappingController::class, 'index']);
         });
+
+        Route::get('setting', function () {
+            $allRobot = Robot::all();
+            // dd($allRobot);
+            return view('frontend.pages.setting.publictopic', compact('allRobot'));
+        })->name('setting.');
     });
 });

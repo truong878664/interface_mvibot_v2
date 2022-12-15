@@ -16,38 +16,43 @@
                 </div>
                 <div class="flex flex-col mt-3 justify-end content-start w-1/6 px-5">
                     <div class="">
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
-                            <span class="pr-2 min-w-[77px] ">Name layer</span>
-                            <input type="text" class=" w-[200px] px-4" id="name_layer">
-                        </label>
+                        <div for="" class="text-[1.4rem] w-full mb-9 relative">
+                            <span
+                                class="block w-full text-right text-[1.2rem] text-red-500 absolute top-0 right-1 -translate-y-full"
+                                id="msg-name-layer"></span>
+                            <div class="flex items-center">
+                                <span class="pr-2 min-w-[77px] ">Name layer</span>
+                                <input type="text" class=" w-[200px] px-4" id="name_layer">
+                            </div>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Type layer</span>
                             <select name="" id="type-layer" class=" w-[200px] px-4 flex-1 outline-none border-[1px]">
                                 <option value="lowspeed_zone">lowspeed_zone</option>
                                 <option value="dead_zone">dead_zone</option>
                             </select>
-                        </label>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Width</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="1" id="width-layer">
                                 <input id="width-layer-range" type="range" step="0.1" value="1" max="50"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
-                        </label>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Height</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="1" id="height-layer">
                                 <input id="height-layer-range" type="range" step="0.1" max="50" value="1"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
-                        </label>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">X</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="0" name="xo"
@@ -56,9 +61,9 @@
                                     min="-30" value='1'
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
-                        </label>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Y</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="0" name="yo"
@@ -68,9 +73,9 @@
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
 
                             </div>
-                        </label>
+                        </div>
 
-                        <label for="" class="text-[1.4rem] w-full flex items-center mb-9">
+                        <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Yawo</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class="px-4 flex-1 w-[200px] " value="1" id="z-rotate">
@@ -78,7 +83,7 @@
                                     min="-180"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
-                        </label>
+                        </div>
                         <div class="">
                             <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
                                 <input type="text" id="data-layer" name="data_layer" hidden>
@@ -94,7 +99,6 @@
                         <label class="block text-center absolute w-full h-[30px] bg-[rgba(204,204,204,0.51)]">list
                             layer</label>
                         <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[360px]" id="layer-container">
-
                         </div>
                     </div>
                 </div>
