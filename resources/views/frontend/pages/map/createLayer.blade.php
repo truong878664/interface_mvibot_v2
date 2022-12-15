@@ -1,18 +1,25 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="w-full h-full flex flex-col max-h-[calc(100vh_-_48px)]">
+
         <div class="heading map-heading">Map</div>
         <div class="mx-4 mb-4 h-full flex flex-col">
             <a class="inline-block px-3 rounded hover:bg-[#ccc] w-[30px] mb-2" href="{{ route('dashboard.map.map') }}">
                 <i class="fa-solid fa-chevron-left"></i>
             </a>
             <div class="flex-1 flex ">
-                <div class="w-5/6 relative" id="map">
-                    <div class="absolute px-2 text-[1.5rem]">
-                        <span>Map active:</span>
-                        <span id="map-active">{{ $mapActive }}</span>
-                    </div>
 
+                <div class="w-5/6 relative" id="map">
+                    {{-- ===heading map=== --}}
+                    <div class="absolute px-2 text-[1.5rem] w-full flex justify-between">
+                        <div class="">
+                            <span>Map active:</span>
+                            <span id="map-active">{{ $mapActive }}</span>
+                        </div>
+                        <div class="">
+                            <label for="">saved layer list</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex flex-col mt-3 justify-end content-start w-1/6 px-5">
                     <div class="">
@@ -29,7 +36,7 @@
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Type layer</span>
                             <select name="" id="type-layer" class=" w-[200px] px-4 flex-1 outline-none border-[1px]">
-                                <option value="lowspeed_zone">lowspeed_zone</option>
+                                <option value="hight_zone">hight_zone</option>
                                 <option value="dead_zone">dead_zone</option>
                             </select>
                         </div>
@@ -76,7 +83,7 @@
                         </div>
 
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
-                            <span class="pr-2 min-w-[77px]">Yawo</span>
+                            <span class="pr-2 min-w-[77px]">Angle</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class="px-4 flex-1 w-[200px] " value="1" id="z-rotate">
                                 <input id="z-rotate-range" type="range" step="1" value="0" max="180"

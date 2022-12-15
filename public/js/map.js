@@ -22,14 +22,6 @@ const widthMap = mapElement.offsetWidth;
 const tfClient = createTfClient();
 const viewer = createMap(heightMap, widthMap, tfClient);
 
-createAxes(viewer);
-createPoint(viewer, tfClient);
-createPose(viewer, tfClient);
-displayPoint(0, 0);
-lockZ(viewer);
-
-markerClient(tfClient, viewer);
-
 const mvibot_layer_active = [];
 
 const xoElement = $("#xo");
@@ -38,6 +30,15 @@ const xoRangeElement = $("#xo-range");
 const yoRangeElement = $("#yo-range");
 const mapActive = $("#map-active").innerText;
 const nameLayerElement = $("#name_layer");
+
+createAxes(viewer);
+createPoint(viewer, tfClient);
+createPose(viewer, tfClient);
+displayPoint(0, 0);
+lockZ(viewer);
+nameLayerElement.focus();
+
+markerClient(tfClient, viewer);
 
 mapElement.addEventListener("mousemove", () => {
     lockZ(viewer);
@@ -102,7 +103,7 @@ mapElement.addEventListener("dblclick", (e) => {
         mvibot_layer_active.push(layer);
         displayLayer(mvibot_layer_active);
 
-        renderLayer(mvibot_layer_active);
+        renderLayer(dataLayerSaveDatabase);
     }
 });
 
@@ -150,23 +151,27 @@ $$(".layer-range").forEach((element) => {
         );
 
         dataLayerSaveDatabase.pop();
-        saveDataToDatabase(dataLayer);
+        dataLayerSaveDatabase.length > 0 && saveDataToDatabase(dataLayer);
 
-        mvibot_layer_active.pop();
-        mvibot_layer_active.push(layer);
+        if (mvibot_layer_active.length > 0) {
+            mvibot_layer_active.pop();
+            mvibot_layer_active.push(layer);
+        }
         displayLayer(mvibot_layer_active);
     };
 });
 
 function saveDataToDatabase(dataLayer) {
     let {
-        z_rotate: yawo,
+        z_rotate: deg,
         height_layer: height,
         width_layer: width,
         ...rest
     } = dataLayer;
+    const yawo = Number(deg / 180) * Math.PI;
     const dataLayerNew = { yawo, height, width, ...rest };
     dataLayerSaveDatabase.push(dataLayerNew);
+    console.log(dataLayerSaveDatabase);
 }
 
 const deleteLayer = (id) => {
@@ -174,7 +179,7 @@ const deleteLayer = (id) => {
     mvibot_layer_active.splice(id, 1);
     dataLayerSaveDatabase.splice(id, 1);
     displayLayer(mvibot_layer_active);
-    renderLayer(mvibot_layer_active);
+    renderLayer(dataLayerSaveDatabase);
 };
 
 function renderLayer(mvibot_layer_active) {
@@ -182,11 +187,11 @@ function renderLayer(mvibot_layer_active) {
     mvibot_layer_active.map((item, index) => {
         html.push(
             `<div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
-            <span class="">${item.name_layer}</span>
-            <button id-delete=${index} class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>`
+                <span class="">${item.name_layer}</span>
+                <button id-delete=${index} class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>`
         );
     });
     $("#layer-container").innerHTML = html.join("");
@@ -206,5 +211,4 @@ $("#save-layer-btn").onclick = (e) => {
     const dataLayer = JSON.stringify(dataLayerSaveDatabase);
     $("#data-layer").value = dataLayer;
     $("#form-add-layer").submit();
-    // console.log(dataLayerSaveDatabase);
 };
