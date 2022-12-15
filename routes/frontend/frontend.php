@@ -52,7 +52,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::get('setting', function () {
             $allRobot = Robot::all();
-            // dd($allRobot);
             return view('frontend.pages.setting.publictopic', compact('allRobot'));
         })->name('setting.');
     });

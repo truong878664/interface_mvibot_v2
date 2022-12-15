@@ -15,16 +15,14 @@ return new class extends Migration
     {
         if (!Schema::hasTable('layer_emulator')) {
             Schema::create('layer_emulator', function (Blueprint $table) {
-                $table->id();
                 $table->string('name_map_active');
                 $table->string('name_layer')->unique();
                 $table->string('type_layer');
-                $table->integer('height');
-                $table->integer('width');
-                $table->integer('xo');
-                $table->integer('yo');
-                $table->integer('yawo');
-                // $table->timestamps();
+                $table->float('height');
+                $table->float('width');
+                $table->float('xo');
+                $table->float('yo');
+                $table->float('yawo', 7, 5);
             });
         }
     }
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layers');
+        Schema::dropIfExists('layer_emulator');
     }
 };

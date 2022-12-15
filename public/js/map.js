@@ -22,7 +22,46 @@ const widthMap = mapElement.offsetWidth;
 const tfClient = createTfClient();
 const viewer = createMap(heightMap, widthMap, tfClient);
 
-const mvibot_layer_active = [];
+const dataLayerFromDatabase = JSON.parse(
+    '{"name_layer":"asdf","width_layer":7.8,"height_layer":7.8,"xo":-2.1168759187897623,"yo":4.395283194523269,"color":{"r":0.2,"g":0,"b":0.8,"a":0.3},"scale":{"x":7.8,"y":7.8,"z":0.01},"pose":{"position":{"x":-2.1168759187897623,"y":4.395283194523269,"z":0.01},"orientation":{"x":0,"y":0,"z":-0.49242356010346705,"w":0.8703556959398997}}}'
+);
+
+// const layer = new mvibot_layer(
+//     name_layer,
+//     width_layer,
+//     height_layer,
+//     xo,
+//     yo,
+//     type_layer,
+//     z,
+//     w
+// );
+
+// [
+//     {
+//         name_map_active: "map4",
+//         name_layer: "asdf",
+//         width: 1,
+//         height: 1,
+//         xo: 4.782226486240947,
+//         yo: 0.5411549991225735,
+//         type_layer: "dead_zone",
+//         yawo: 0.017453292519943295,
+//     },
+// ];
+const mvibot_layer_active = [dataLayerFromDatabase];
+
+console.log(mvibot_layer_active);
+displayLayer(mvibot_layer_active);
+
+// name_map_active: "",
+//     name_layer: "",
+//     type_layer: "",
+//     width_layer: "",
+//     height_layer: "",
+//     z_rotate: "",
+//     xo: "",
+//     yo: "",
 
 const xoElement = $("#xo");
 const yoElement = $("#yo");
@@ -102,7 +141,6 @@ mapElement.addEventListener("dblclick", (e) => {
         saveDataToDatabase(dataLayer);
         mvibot_layer_active.push(layer);
         displayLayer(mvibot_layer_active);
-
         renderLayer(dataLayerSaveDatabase);
     }
 });
@@ -150,8 +188,10 @@ $$(".layer-range").forEach((element) => {
             w
         );
 
-        dataLayerSaveDatabase.pop();
-        dataLayerSaveDatabase.length > 0 && saveDataToDatabase(dataLayer);
+        if (dataLayerSaveDatabase.length > 0) {
+            dataLayerSaveDatabase.pop();
+            saveDataToDatabase(dataLayer);
+        }
 
         if (mvibot_layer_active.length > 0) {
             mvibot_layer_active.pop();
@@ -210,5 +250,6 @@ $("#save-layer-btn").onclick = (e) => {
     e.preventDefault();
     const dataLayer = JSON.stringify(dataLayerSaveDatabase);
     $("#data-layer").value = dataLayer;
+    // console.log(dataLayer);
     $("#form-add-layer").submit();
 };

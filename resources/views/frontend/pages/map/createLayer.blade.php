@@ -11,13 +11,28 @@
 
                 <div class="w-5/6 relative" id="map">
                     {{-- ===heading map=== --}}
-                    <div class="absolute px-2 text-[1.5rem] w-full flex justify-between">
+                    <div class="absolute p-2 text-[1.5rem] w-full">
                         <div class="">
                             <span>Map active:</span>
                             <span id="map-active">{{ $mapActive }}</span>
                         </div>
-                        <div class="">
-                            <label for="">saved layer list</label>
+                        <div class="bg-[#fff] absolute top-3 right-3 w-[200px]">
+                            <label for=""
+                                class="absolute bg-slate-400 text-[#fff] top-0 w-full block h-[23px] text-center">saved
+                                layer
+                                list</label>
+                            <div class="max-h-[300px] overflow-scroll overflow-x-hidden mt-[23px]">
+                                @foreach ($allLayer as $layer)
+                                    <div
+                                        class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
+                                        <span class="">{{ $layer->name_layer }}</span>
+                                        <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333]">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,13 +106,7 @@
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
                         </div>
-                        <div class="">
-                            <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
-                                <input type="text" id="data-layer" name="data_layer" hidden>
-                                @csrf
-                                <button class="px-4 bg-[#0f6cbd] text-[#fff]" id="save-layer-btn">Save</button>
-                            </form>
-                        </div>
+
                     </div>
 
                     {{-- ===list layer=== --}}
@@ -105,7 +114,14 @@
                         id="list-layer-wrapper">
                         <label class="block text-center absolute w-full h-[30px] bg-[rgba(204,204,204,0.51)]">list
                             layer</label>
-                        <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[360px]" id="layer-container">
+                        <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[340px]" id="layer-container">
+                        </div>
+                        <div class="float-right">
+                            <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
+                                <input type="text" id="data-layer" name="data_layer" hidden>
+                                @csrf
+                                <button class="px-4 bg-[#0f6cbd] text-[#fff] m-4" id="save-layer-btn">Save</button>
+                            </form>
                         </div>
                     </div>
                 </div>
