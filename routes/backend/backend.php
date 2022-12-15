@@ -37,3 +37,5 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/map-active', [mapController::class, 'addMapActive']);
 
 Route::post('/add-layer', [layerController::class, 'addLayer'])->name('add-layer');
+Route::post('/delete-layer', [layerController::class, 'deleteLayer'])->name('delete-layer');
+Route::get('/all-layer', [layerController::class, 'allLayer']);

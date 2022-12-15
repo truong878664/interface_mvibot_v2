@@ -22,13 +22,22 @@
                                 layer
                                 list</label>
                             <div class="max-h-[300px] overflow-scroll overflow-x-hidden mt-[23px]">
+                                @php
+                                    $allLayerJson = json_encode($allLayer->toArray());
+                                @endphp
+                                <input type="hidden" value="{{ $allLayerJson }}" id="data-layer-json">
                                 @foreach ($allLayer as $layer)
                                     <div
                                         class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
                                         <span class="">{{ $layer->name_layer }}</span>
-                                        <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333]">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
+                                        <form method="POST"
+                                            action="{{ route('delete-layer', ['name' => $layer->name_layer]) }}">
+                                            <input type="hidden" name="id" value="{{ $layer->id }}">
+                                            @csrf
+                                            <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333]">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 @endforeach
 
@@ -115,6 +124,11 @@
                         <label class="block text-center absolute w-full h-[30px] bg-[rgba(204,204,204,0.51)]">list
                             layer</label>
                         <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[340px]" id="layer-container">
+                            <div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
+                                <span class=""></span>
+                                <button class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
+                                </button>
+                            </div>
                         </div>
                         <div class="float-right">
                             <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
@@ -130,8 +144,8 @@
 
         </div>
     </div>
+    @include('frontend.blocks.message')
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/nipplejs.js"></script>
     <script type="module" src="/js/map.js"></script>
-    <script></script>
 @endsection

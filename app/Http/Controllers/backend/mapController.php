@@ -40,9 +40,8 @@ class mapController extends Controller
     }
     public function createLayer()
     {
-        $allLayer = Layer::all();
-        // dd($allLayer);
         $mapActive = $this->mapActive();
+        $allLayer = Layer::where('name_map_active', $mapActive)->get();
         return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer'));
     }
 }
