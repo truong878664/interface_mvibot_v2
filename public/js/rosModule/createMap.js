@@ -24,13 +24,16 @@ function createMap(
 
     viewer = new ROS3D.Viewer(optionViewer);
 
-    new ROS3D.OccupancyGridClient({
+    const a = new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,
         continuous: true,
         tfClient: tfClient,
         topic: topic,
     });
+
+    console.log(a);
+    console.log(viewer);
 
     if (nameRobot) {
         showUrd(nameRobot, ros, viewer, tfClient);

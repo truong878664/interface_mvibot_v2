@@ -18,11 +18,11 @@ function createMapMapActive(topic) {
 $("#choose-map-active").onchange = (e) => {
     let mapSelect = e.target.value;
     if (mapSelect) {
-        topicString("/map_select", mapSelect);
         $("#map").remove();
         $(
             "#map-wrapper"
         ).innerHTML = `<div class="w-full h-full" id="map"></div>`;
+        topicString("/map_select", mapSelect);
         createMapMapActive("/map_selector");
     }
 };
