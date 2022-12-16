@@ -23,6 +23,6 @@ $("#choose-map-active").onchange = (e) => {
         $(
             "#map-wrapper"
         ).innerHTML = `<div class="w-full h-full" id="map"></div>`;
-        createMapMapActive("/map-selector");
+        createMapMapActive("/map_selector");
     }
 };
