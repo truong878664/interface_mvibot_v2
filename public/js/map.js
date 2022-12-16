@@ -105,7 +105,9 @@ function checkNameLayer(nameLayer, e) {
 
 function setDbSetLayer(e) {
     const time = new Date();
-    const [x, y] = convertToPosition(e.offsetX, e.offsetY, viewer);
+    console.log(e.layerX);
+    // console.log(e.layerX, e.LayerY);
+    const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
     xoElement.value = x.toFixed(2);
     yoElement.value = y.toFixed(2);
     xoRangeElement.value = x.toFixed(2);

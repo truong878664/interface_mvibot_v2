@@ -7,8 +7,8 @@
 
             <div class="flex-1 flex ">
 
-                <div class="w-5/6 relative bg-[#ccc] overflow-hidden">
-                    <div class="w-full h-full absolute" id="map"></div>
+                <div class="w-5/6 h-full relative  overflow-hidden">
+                    <divs class="w-full h-full absolute" id="map"></divs>
                     {{-- ===heading map=== --}}
                     <div class="absolute p-2 text-[1.5rem] w-full flex">
                         <div class="">
@@ -131,7 +131,6 @@
                             layer</label>
                         <div class="mt-[30px] overflow-y-visible overflow-x-auto max-h-[300px]" id="layer-container">
                             <div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
-                                <span class="">123</span>
                                 <button class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
                                 </button>
                             </div>
