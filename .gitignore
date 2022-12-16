@@ -80,6 +80,7 @@ tailwindcss
 /public/css/
 /public/dist/
 .tailwindcss-manifest.json
+<<<<<<< HEAD
 tailwindcss
 /public/css/
 /public/dist/
@@ -96,4 +97,6 @@ tailwindcss
 /public/css/
 /public/dist/
 .tailwindcss-manifest.json
+=======
+>>>>>>> dl map
 tailwindcss
