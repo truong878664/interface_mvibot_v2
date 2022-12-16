@@ -32,9 +32,6 @@ function createMap(
         topic: topic,
     });
 
-    console.log(a);
-    console.log(viewer);
-
     if (nameRobot) {
         showUrd(nameRobot, ros, viewer, tfClient);
         showLaser(nameRobot, ros, viewer, tfClient);
