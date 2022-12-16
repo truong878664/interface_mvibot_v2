@@ -213,3 +213,9 @@ const touchSetPoint = function (e) {
     $("#inx").value = x;
     $("#iny").value = y;
 };
+
+document.onkeydown = (e) => {
+    if (e.key === "ArrowRight") {
+        console.log(111);
+    }
+};
