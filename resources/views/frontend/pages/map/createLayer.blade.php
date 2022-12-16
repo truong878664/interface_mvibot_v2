@@ -140,7 +140,7 @@
                             <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
                                 <input type="text" id="data-layer" name="data_layer" hidden>
                                 @csrf
-                                <button class="px-4 bg-[#0f6cbd] text-[#fff] m-4" id="save-layer-btn">Save</button>
+                                <button class="px-4 bg-[#0f6cbd] text-[#fff] m-4 btn" id="save-layer-btn">Save</button>
                             </form>
                         </div>
                     </div>

@@ -20,7 +20,7 @@
                 <div class="flex">
                     <input type="text" class="px-3 w-[200px] text-[1.5rem] placeholder:text-[1.5rem]"
                         placeholder="Name map" id="create_map">
-                    <button class="bg-[#0f6cbd] px-3 text-[#fff]" id="create_map_btn">Save map</button>
+                    <button class="bg-[#0f6cbd] px-3 text-[#fff] btn" id="create_map_btn">Save map</button>
                 </div>
                 <span class="text-[1.5rem] text-red-500 block" id="error_create_map"></span>
             </div>

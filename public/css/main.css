@@ -131,3 +131,27 @@ li {
 ::-webkit-scrollbar-thumb {
     background: #888;
 }
+
+.btn {
+    transform: translateZ(0) scale(1);
+    transition: transform 0.2s;
+}
+.btn:not(:disabled):hover {
+    transform: scale(1.02);
+}
+
+.btn:not(:disabled):hover:active {
+    transform: scale(1.02) translateY(0.125rem);
+}
+
+.btn:focus {
+    outline: 0 solid transparent;
+}
+
+.btn:focus:not(:focus-visible) {
+    outline: 0 solid transparent;
+}
+
+.btn:not(:disabled):active {
+    transform: translateY(0.125rem);
+}

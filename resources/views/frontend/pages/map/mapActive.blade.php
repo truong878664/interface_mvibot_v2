@@ -26,8 +26,8 @@
                     </select>
                 </label>
                 <div class="mx-4 ">
-                    <button class="bg-[#0f6cbd] text-[#fff] px-3 rounded-sm" id="active-map-btn">Active map</button>
-                    <button class="bg-red-500 text-[#fff] px-3 rounded-sm" id="delete-map-btn">Delete map</button>
+                    <button class="bg-[#0f6cbd] text-[#fff] px-3 rounded-sm btn" id="active-map-btn">Active map</button>
+                    <button class="bg-red-500 text-[#fff] px-3 rounded-sm btn" id="delete-map-btn">Delete map</button>
                 </div>
 
             </div>
