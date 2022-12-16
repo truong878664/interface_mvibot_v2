@@ -1,4 +1,6 @@
 import ros from "../main.js";
+import showLaser from "./showLaser.js";
+import showUrd from "./showUrd.js";
 
 var viewer;
 
@@ -7,7 +9,8 @@ function createMap(
     width,
     tfClient = "",
     topic = "/map",
-    divID = "map"
+    divID = "map",
+    nameRobot = ""
 ) {
     const optionViewer = {
         divID: divID,
@@ -21,7 +24,7 @@ function createMap(
 
     viewer = new ROS3D.Viewer(optionViewer);
 
-    const occup = new ROS3D.OccupancyGridClient({
+    const a = new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,
         continuous: true,
@@ -29,7 +32,11 @@ function createMap(
         topic: topic,
     });
 
-    console.log(occup);
+    if (nameRobot) {
+        showUrd(nameRobot, ros, viewer, tfClient);
+        showLaser(nameRobot, ros, viewer, tfClient);
+    }
+
     return viewer;
 }
 

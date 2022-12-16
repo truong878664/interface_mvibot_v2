@@ -14,12 +14,6 @@ class mapController extends Controller
     {
         $allRobot = Robot::all()->toArray();
         $mapActive = $this->mapActive();
-        // $layersData = Layer::where('map', $mapActive)->get()->toArray();
-        // if ($layersData) {
-        //     $layers = $layersData[0]['data_layers'];
-        // } else {
-        //     $layers = "";
-        // }
 
         return view('frontend.pages.map.map', compact('mapActive', 'allRobot'));
     }
@@ -47,6 +41,11 @@ class mapController extends Controller
     public function createLayer()
     {
         $mapActive = $this->mapActive();
-        return view('frontend.pages.map.createLayer', compact('mapActive'));
+        $allLayer = Layer::where('name_map_active', $mapActive)->get();
+        return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer'));
+    }
+    public function chooseMapActive()
+    {
+        return view('frontend.pages.map.mapActive');
     }
 }

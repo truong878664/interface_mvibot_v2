@@ -80,4 +80,23 @@ tailwindcss
 /public/css/
 /public/dist/
 .tailwindcss-manifest.json
+<<<<<<< HEAD
+=======
+tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+>>>>>>> 143d3728697d761e50f9e171080e1aedf8035dc8
 tailwindcss

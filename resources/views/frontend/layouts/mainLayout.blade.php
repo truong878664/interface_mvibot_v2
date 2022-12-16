@@ -27,9 +27,8 @@
             <img class="avatar-user"
                 src="https://images.unsplash.com/photo-1599817977364-b6f59e547258?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" />
         </div>
-
     </header>
-    <div class="nav-bar">
+    <section class="nav-bar">
         <ul class="">
             <div class="bar-item-top">
             </div>
@@ -59,7 +58,6 @@
                             d="M203.121 350.877V320.877H173.121V350.877H203.121ZM174.327 350.877H204.327V320.877H174.327V350.877ZM174.327 322.083V352.083H204.327V322.083H174.327ZM203.121 322.083H173.121V352.083H203.121V322.083ZM206 127C90.5725 127 -3 220.572 -3 336H57C57 253.71 123.71 187 206 187V127ZM473.78 127H206V187H473.78V127ZM682.78 336C682.78 220.572 589.208 127 473.78 127V187C556.071 187 622.78 253.71 622.78 336H682.78ZM473.78 545C589.208 545 682.78 451.428 682.78 336H622.78C622.78 418.29 556.071 485 473.78 485V545ZM206 545H473.78V485H206V545ZM-3 336C-3 451.428 90.5727 545 206 545V485C123.71 485 57 418.29 57 336H-3ZM287.348 336.48C287.348 311.96 267.471 292.083 242.952 292.083V352.083C234.334 352.083 227.348 345.097 227.348 336.48H287.348ZM242.952 380.877C267.471 380.877 287.348 360.999 287.348 336.48H227.348C227.348 327.862 234.334 320.877 242.952 320.877V380.877ZM203.121 380.877H242.952V320.877H203.121V380.877ZM233.121 390.708V350.877H173.121V390.708H233.121ZM188.724 435.105C213.244 435.105 233.121 415.228 233.121 390.708H173.121C173.121 382.09 180.107 375.105 188.724 375.105V435.105ZM144.327 390.708C144.327 415.227 164.204 435.105 188.724 435.105V375.105C197.341 375.105 204.327 382.09 204.327 390.708H144.327ZM144.327 350.877V390.708H204.327V350.877H144.327ZM134.496 380.877H174.327V320.877H134.496V380.877ZM90.0992 336.48C90.0992 360.999 109.976 380.877 134.496 380.877V320.877C143.113 320.877 150.099 327.862 150.099 336.48H90.0992ZM134.496 292.083C109.976 292.083 90.0992 311.96 90.0992 336.48H150.099C150.099 345.097 143.113 352.083 134.496 352.083V292.083ZM174.327 292.083H134.496V352.083H174.327V292.083ZM144.327 282.252V322.083H204.327V282.252H144.327ZM188.724 237.855C164.204 237.855 144.327 257.732 144.327 282.252H204.327C204.327 290.87 197.341 297.855 188.724 297.855V237.855ZM233.121 282.252C233.121 257.732 213.244 237.855 188.724 237.855V297.855C180.106 297.855 173.121 290.87 173.121 282.252H233.121ZM233.121 322.083V282.252H173.121V322.083H233.121ZM242.952 292.083H203.121V352.083H242.952V292.083ZM510.252 336.726C540.868 336.726 565.686 311.908 565.686 281.292H505.686C505.686 278.771 507.731 276.726 510.252 276.726V336.726ZM454.818 281.292C454.818 311.908 479.637 336.726 510.252 336.726V276.726C512.774 276.726 514.818 278.771 514.818 281.292H454.818ZM510.252 225.858C479.637 225.858 454.818 250.677 454.818 281.292H514.818C514.818 283.814 512.774 285.858 510.252 285.858V225.858ZM565.686 281.292C565.686 250.677 540.868 225.858 510.252 225.858V285.858C507.73 285.858 505.686 283.814 505.686 281.292H565.686ZM454.818 374.391C454.818 371.87 456.862 369.826 459.383 369.826V429.826C489.999 429.826 514.818 405.007 514.818 374.391H454.818ZM459.383 378.957C456.862 378.957 454.818 376.913 454.818 374.391H514.818C514.818 343.776 489.999 318.957 459.383 318.957V378.957ZM463.949 374.391C463.949 376.913 461.905 378.957 459.383 378.957V318.957C428.768 318.957 403.949 343.776 403.949 374.391H463.949ZM459.383 369.826C461.905 369.826 463.949 371.87 463.949 374.391H403.949C403.949 405.007 428.768 429.826 459.383 429.826V369.826Z"
                             fill="black" mask="url(#path-1-inside-1_38_70)" />
                     </svg>
-                    {{-- <i class="fa-solid fa-gamepad"></i> --}}
                     <span class="bar-item-title">Dashboard</span>
                 </a>
             </li>
@@ -84,39 +82,33 @@
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </a>
         </button>
-    </div>
+    </section>
     <div class="container-content">
         @yield('content')
     </div>
-    <style>
-        .active .icon {
-            fill: var(--main-color);
-            stroke: var(--main-color);
-        }
 
-        .active .dashboard-strock {
-            fill: var(--main-color);
-        }
 
-        .bar-item svg {
-            margin-top: 12px;
-            /* display: flex;
-            flex-direction: column;
-            justify-content: center; */
-        }
+    {{-- <script src="/js/library/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/library/three.min.js"></script>
+    <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script> --}}
+    <script type="text/javascript" src="/js/library/roslib.min.js"></script>
+    <script type="text/javascript" src="/js/library/ros3d.min.js"></script>
+    <script type="text/javascript" src="/js/library/nipplejs.js"></script>
+    {{-- <script type="text/javascript" src="/js/library/easeljs.min.js"></script> --}}
+    {{-- <script type="text/javascript" src="/js/library/ros2d.min.js"></script> --}}
 
-        .nav-bar-icon {
-            width: 40px;
-        }
+    {{-- <script src="/js/library/three.js"></script>
+    <script src="/js/library/STLLoader.js"></script>
+    <script src="/js/library/eventemitter2.js"></script>
+    <script src="/js/library/ColladaLoader.js"></script>
 
-        .container-content {
-            height: 100vh;
-        }
-    </style>
+    <script src="/js/library/roslib.js"></script>
+    <script src="/js/library/ros3d.js"></script> --}}
+
     <script type="module" src="/js/mainLayout.js"></script>
-    <script src="/js/library/roslib.min.js"></script>
-    <script src="/js/library/ros3d.min.js"></script>
     <script type="module" src="/js/main.js"></script>
+
+
     <script>
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {

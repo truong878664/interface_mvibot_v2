@@ -4,9 +4,11 @@ use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\joystickController;
+use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
+use App\Models\Robot;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('/', [mapController::class, 'index'])->name('map');
             Route::get('/map-active', [mapController::class, 'mapActive']);
             Route::get('create-layer', [mapController::class, 'createLayer'])->name('create-layer');
+            Route::get('choose-map-active', [mapController::class, 'chooseMapActive'])->name('choose-map-active');
         });
 
         Route::prefix('status')->name('status.')->group(function () {
@@ -48,5 +51,15 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::prefix('mapping')->name('mapping.')->group(function () {
             Route::get('/', [mappingController::class, 'index']);
         });
+
+        Route::get('setting', function () {
+            $allRobot = Robot::all();
+            return view('frontend.pages.setting.publictopic', compact('allRobot'));
+        })->name('setting.');
+
+        Route::get(
+            'location',
+            [locationController::class, 'index']
+        )->name('location.');
     });
 });

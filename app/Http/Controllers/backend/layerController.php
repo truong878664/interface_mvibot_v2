@@ -13,6 +13,16 @@ class layerController extends Controller
         $dataLayer = json_decode($request->data_layer);
         $array = json_decode(json_encode($dataLayer), true);
         Layer::insert($array);
-        return back();
+        return back()->with('msg', 'Add layer successfully');
+    }
+    public function deleteLayer(Request $request)
+    {
+        Layer::where('name_layer', $request->name)->delete();
+        return back()->with('msg', 'Delete layer successfully');
+    }
+    public function allLayer()
+    {
+        $allLayer = Layer::all();
+        return $allLayer;
     }
 }

@@ -1,7 +1,6 @@
 /* navbar */
 .nav-bar {
     width: 74px;
-    height: 100vh;
     background-color: #f0f0f0;
     position: fixed;
     top: 0;
@@ -89,7 +88,12 @@
 .container-content {
     margin-top: 48px;
     margin-left: 74px;
+    width: 100vw;
+    height: 100vh;
     max-height: calc(100vh - 48px);
+    max-width: calc(100vw - 74px);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .message {
@@ -148,4 +152,24 @@
     padding: 2px 4px;
     border-radius: 2px;
     background-color: #cf0a0a;
+}
+
+.active .icon {
+    fill: var(--main-color);
+    stroke: var(--main-color);
+}
+
+.active .dashboard-strock {
+    fill: var(--main-color);
+}
+
+.bar-item svg {
+    margin-top: 12px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.nav-bar-icon {
+    width: 40px;
 }

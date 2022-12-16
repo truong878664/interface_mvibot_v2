@@ -15,8 +15,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('map_active')) {
             Schema::create('map_active', function (Blueprint $table) {
-                $table->id();
-                $table->string('name_map_active');
+                $table->string('name_map_active')->unique();
             });
         }
     }

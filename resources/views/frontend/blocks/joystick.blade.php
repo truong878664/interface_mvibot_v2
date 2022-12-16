@@ -3,16 +3,16 @@
         class="joystick-wrapper absolute bg-[#ccc/0.5] left-1/2 top-1/2 rounded h-[160px] w-[160px] md:h-[250px] md:w-[250px]">
         <div id="zone_joystick"></div>
     </div>
-    <div class="absolute text-[#ccc] top-0 left-1/2 -translate-x-1/2 up">
+    <div class="absolute z-[9] text-[#ccc] top-0 left-1/2 -translate-x-1/2 up">
         <i class="fa-solid fa-caret-up"></i>
     </div>
-    <div class="absolute text-[#ccc] left-0 top-1/2 -translate-y-1/2 left">
+    <div class="absolute z-[9] text-[#ccc] left-0 top-1/2 -translate-y-1/2 left">
         <i class="fa-solid fa-caret-left"></i>
     </div>
-    <div class="absolute text-[#ccc] right-0 top-1/2 -translate-y-1/2 right">
+    <div class="absolute z-[9] text-[#ccc] right-0 top-1/2 -translate-y-1/2 right">
         <i class="fa-solid fa-caret-right"></i>
     </div>
-    <div class="absolute text-[#ccc] bottom-0 left-1/2 -translate-x-1/2 down">
+    <div class="absolute z-[9] text-[#ccc] bottom-0 left-1/2 -translate-x-1/2 down">
         <i class="fa-solid fa-caret-down"></i>
     </div>
 </div>
@@ -25,6 +25,20 @@
         border-radius: 50%;
         transform: translate(-50%, -50%);
         cursor: pointer;
+        user-select: none;
+        /* pointer-events: none; */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+
+    }
+
+    .collection_0 {
+        opacity: 1 !important;
+    }
+
+    .zone_joystick {
+        /* opacity: 1 !important; */
     }
 
     .back {
@@ -55,7 +69,7 @@
             -50px 0 40px -20px rgba(0, 0, 0, 0.3),
             50px 50px 40px -20px rgba(0, 0, 0, 0.2);
         position: absolute;
-        z-index: 2;
+        z-index: 10;
         border-radius: 50%;
         transition: 200ms ease all;
         opacity: 1 !important;
