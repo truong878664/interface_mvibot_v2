@@ -81,7 +81,10 @@ tailwindcss
 /public/dist/
 .tailwindcss-manifest.json
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> temp-branch
 tailwindcss
 /public/css/
 /public/dist/
@@ -98,5 +101,10 @@ tailwindcss
 /public/css/
 /public/dist/
 .tailwindcss-manifest.json
+<<<<<<< HEAD
 >>>>>>> 143d3728697d761e50f9e171080e1aedf8035dc8
+=======
+=======
+>>>>>>> dl map
+>>>>>>> temp-branch
 tailwindcss

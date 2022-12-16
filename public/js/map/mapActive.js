@@ -4,7 +4,7 @@ import createMap from "../rosModule/createMap.js";
 import createTfClient from "../rosModule/createTfClient.js";
 import topicString from "../rosModule/topicString.js";
 
-createMapMapActive("/map");
+createMapMapActive("/nomap");
 
 function createMapMapActive(topic) {
     const heightMap = $("#map").offsetHeight;
@@ -25,4 +25,15 @@ $("#choose-map-active").onchange = (e) => {
         topicString("/map_select", mapSelect);
         createMapMapActive("/map_selector");
     }
+};
+
+$("#active-map-btn").onclick = () => {
+    const mapActive = $("#choose-map-active").value;
+    topicString("/request_action", `active_map|~name_map=${mapActive}~`);
+};
+
+$("#delete-map-btn").onclick = () => {
+    const mapActive = $("#choose-map-active").value;
+    topicString("/request_action", `delete_map|~name_map=${mapActive}~`);
+    location.reload();
 };

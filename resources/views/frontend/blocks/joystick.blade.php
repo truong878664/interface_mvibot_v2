@@ -29,8 +29,6 @@
         /* pointer-events: none; */
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         -webkit-tap-highlight-color: transparent;
-
-
     }
 
     .collection_0 {
