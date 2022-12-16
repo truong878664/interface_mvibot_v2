@@ -1,9 +1,10 @@
-import createJoystick from "./map/createJoystick.js";
+import createJoystick from "./createJoystick/createJoystick.js";
 import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
 import { $ } from "./main.js";
 import { cmd_vel_listener } from "./rosModule/moveRobot.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
+import createAxes from "./rosModule/createAxes.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -12,7 +13,7 @@ let robotActive = robotMappingEle.value;
 const tfClient = createTfClient();
 const topic = "/";
 let viewer = createMap(heightMap, widthMap, tfClient, topic);
-console.log(viewer);
+createAxes(viewer);
 
 createJoystick();
 changeTopic();
