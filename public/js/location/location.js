@@ -171,11 +171,7 @@ const clickSetPoint = function (e) {
     x = Number(positionXSet.toFixed(2));
     y = Number(positionYSet.toFixed(2));
 
-    $("#position-x").value = x;
-    $("#position-y").value = y;
-
-    $("#inx").value = x;
-    $("#iny").value = y;
+    displayValue();
 };
 function handleMouseMapMove(e) {
     lockZ(viewer);
@@ -207,15 +203,44 @@ const touchSetPoint = function (e) {
     x = Number(positionXSet.toFixed(2));
     y = Number(positionYSet.toFixed(2));
 
-    $("#position-x").value = x;
-    $("#position-y").value = y;
-
-    $("#inx").value = x;
-    $("#iny").value = y;
+    displayValue();
 };
 
 document.onkeydown = (e) => {
-    if (e.key === "ArrowRight") {
-        console.log(111);
+    switch (e.key) {
+        case "ArrowRight":
+            !e.shiftKey || (x = x + 1);
+            x = x + 0.1;
+            displayLocation();
+            displayValue();
+            break;
+        case "ArrowUp":
+            !e.shiftKey || (y = y + 1);
+            y = y + 0.1;
+            displayLocation();
+            displayValue();
+            break;
+        case "ArrowDown":
+            !e.shiftKey || (y = y - 1);
+            y = y - 0.1;
+            displayLocation();
+            displayValue();
+            break;
+        case "ArrowLeft":
+            !e.shiftKey || (x = x - 1);
+            x = x - 0.1;
+            displayLocation();
+            displayValue();
+            break;
+        default:
+            break;
     }
 };
+
+function displayValue() {
+    $("#position-x").value = x.toFixed(2);
+    $("#position-y").value = y.toFixed(2);
+
+    $("#inx").value = x.toFixed(2);
+    $("#iny").value = y.toFixed(2);
+}
