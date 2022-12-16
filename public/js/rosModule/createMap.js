@@ -1,4 +1,6 @@
 import ros from "../main.js";
+import showLaser from "./showLaser.js";
+import showUrd from "./showUrd.js";
 
 var viewer;
 
@@ -31,22 +33,8 @@ function createMap(
     });
 
     if (nameRobot) {
-        new ROS3D.UrdfClient({
-            ros: ros,
-            tfClient: tfClient,
-            param: "/" + nameRobot + "/robot_description_web",
-            rootObject: viewer.scene,
-            loader: ROS3D.COLLADA_LOADER_2,
-        });
-
-        new ROS3D.LaserScan({
-            ros: ros,
-            topic: "/" + nameRobot + "/laser/scan",
-            rootObject: viewer.scene,
-            tfClient: tfClient,
-            material: { size: 0.5, color: 0x008000 },
-            rate: 1,
-        });
+        showUrd(nameRobot, ros, viewer, tfClient);
+        showLaser(nameRobot, ros, viewer, tfClient);
     }
 
     return viewer;

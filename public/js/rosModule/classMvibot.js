@@ -44,7 +44,7 @@ export class mvibot_layer {
         this.yo = yo;
 
         if (type == "dead_zone") this.color = new mvibot_color(1, 0, 0, 0.3);
-        else if (type == "hight_zone")
+        else if (type == "high_zone")
             this.color = new mvibot_color(0.2, 0, 0.8, 0.3);
         //
         this.scale = new mvibot_scale(width, height, 0.01);

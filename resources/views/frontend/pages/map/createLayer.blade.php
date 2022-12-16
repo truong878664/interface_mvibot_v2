@@ -4,14 +4,20 @@
 
         <div class="heading map-heading">Map</div>
         <div class="mx-4 mb-4 h-full flex flex-col">
-            <a class="inline-block px-3 rounded hover:bg-[#ccc] w-[30px] mb-2" href="{{ route('dashboard.map.map') }}">
-                <i class="fa-solid fa-chevron-left"></i>
-            </a>
+
             <div class="flex-1 flex ">
 
-                <div class="w-5/6 relative" id="map">
+                <div class="w-5/6 relative bg-[#ccc] overflow-hidden">
+                    <div class="w-full h-full absolute" id="map"></div>
                     {{-- ===heading map=== --}}
-                    <div class="absolute p-2 text-[1.5rem] w-full">
+                    <div class="absolute p-2 text-[1.5rem] w-full flex">
+                        <div class="">
+
+                            <a class="inline-block px-3 rounded hover:bg-[#ccc] w-[30px] mb-2"
+                                href="{{ route('dashboard.map.map') }}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                        </div>
                         <div class="">
                             <span>Map active:</span>
                             <span id="map-active">{{ $mapActive }}</span>
@@ -45,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col mt-3 justify-end content-start w-1/6 px-5">
+                <div class="flex flex-col mt-3 justify-end content-start w-[300px] px-5">
                     <div class="">
                         <div for="" class="text-[1.4rem] w-full mb-9 relative">
                             <span
@@ -60,7 +66,7 @@
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Type layer</span>
                             <select name="" id="type-layer" class=" w-[200px] px-4 flex-1 outline-none border-[1px]">
-                                <option value="hight_zone">hight_zone</option>
+                                <option value="high_zone">high_zone</option>
                                 <option value="dead_zone">dead_zone</option>
                             </select>
                         </div>
@@ -123,14 +129,15 @@
                         id="list-layer-wrapper">
                         <label class="block text-center absolute w-full h-[30px] bg-[rgba(204,204,204,0.51)]">list
                             layer</label>
-                        <div class="mt-[30px] overflow-y-visible overflow-x-auto h-[340px]" id="layer-container">
+                        <div class="mt-[30px] overflow-y-visible overflow-x-auto max-h-[300px]" id="layer-container">
                             <div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
-                                <span class=""></span>
+                                <span class="">123</span>
                                 <button class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
                                 </button>
                             </div>
                         </div>
-                        <div class="float-right">
+
+                        <div class="absolute bottom-0 right-0 ">
                             <form method="POST" action="{{ route('add-layer') }}" id="form-add-layer">
                                 <input type="text" id="data-layer" name="data_layer" hidden>
                                 @csrf

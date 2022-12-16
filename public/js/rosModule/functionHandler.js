@@ -124,7 +124,7 @@ function setValuePositionForm() {
     displayRotateZ.value = `${positionZElement.value}°`;
 }
 
-const checkPoint = document.querySelector(".check-click-point");
+const checkPoint = $(".check-click-point");
 checkPoint.onchange = () => {
     if (checkPoint.checked) {
         lockZ(viewer);

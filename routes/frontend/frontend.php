@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\joystickController;
+use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
@@ -54,5 +55,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             $allRobot = Robot::all();
             return view('frontend.pages.setting.publictopic', compact('allRobot'));
         })->name('setting.');
+
+        Route::get(
+            'location',
+            [locationController::class, 'index']
+        )->name('location.');
     });
 });

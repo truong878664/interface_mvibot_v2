@@ -21,8 +21,10 @@ function changeTopic() {
     cmd_vel_listener.name = `${robotActive}/cmd_vel`;
     robotMappingEle.onchange = (e) => {
         robotActive = e.target.value;
-        changeTopicMoveRobot(robotActive);
-        changTopicOccupancy(robotActive);
+        if (robotActive) {
+            changeTopicMoveRobot(robotActive);
+            changTopicOccupancy(robotActive);
+        }
     };
 }
 function changeTopicMoveRobot(robotActive) {

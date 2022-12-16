@@ -16,8 +16,9 @@
 
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
-
         <x-dashboard-item route='dashboard.mapping.' icon='fa-solid fa-map' title='Maping' describe='Create map'
             color="#e62648" />
+        <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-location-dot' title='Set Location'
+            describe='Set Location for robot' color="#B01E68" />
     </div>
 @endsection
