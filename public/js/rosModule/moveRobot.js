@@ -18,7 +18,9 @@ function moveRobot(linear, angular) {
             z: angular,
         },
     });
-    cmd_vel_listener.publish(twist);
+    if (cmd_vel_listener.name !== "/cmd_vel") {
+        cmd_vel_listener.publish(twist);
+    }
 }
 
 export default moveRobot;

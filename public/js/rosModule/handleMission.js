@@ -14,6 +14,7 @@ function runMission(nameRobot, dataBodyMission) {
     const mission_set = new ROSLIB.Message({
         data: dataFullMission,
     });
+    console.log(dataFullMission);
 }
 
 function continueMission(nameRobot) {

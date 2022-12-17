@@ -38,8 +38,8 @@ const createJoystick = function () {
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
 
-        console.log(linear_speed);
-        console.log(cmd_vel_listener.name);
+        // console.log(linear_speed);
+        // console.log(cmd_vel_listener.name);
     });
     manager.on("end", function () {
         clearInterval(robotMoving);
