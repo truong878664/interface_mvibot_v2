@@ -15,6 +15,7 @@ function runMission(nameRobot, dataBodyMission) {
         data: dataFullMission,
     });
     console.log(dataFullMission);
+    mission_pub.publish(mission_set);
 }
 
 function continueMission(nameRobot) {
