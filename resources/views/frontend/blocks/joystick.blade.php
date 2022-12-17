@@ -16,6 +16,8 @@
         <i class="fa-solid fa-caret-down"></i>
     </div>
 </div>
+<script src="/js/library/nipplejs.js"></script>
+
 <style>
     .joystick-wrapper {
         background: radial-gradient(at 75% 75%, #f2f2f2 0%, #d9d9d9 100%);
@@ -26,17 +28,12 @@
         transform: translate(-50%, -50%);
         cursor: pointer;
         user-select: none;
-        /* pointer-events: none; */
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         -webkit-tap-highlight-color: transparent;
     }
 
     .collection_0 {
         opacity: 1 !important;
-    }
-
-    .zone_joystick {
-        /* opacity: 1 !important; */
     }
 
     .back {

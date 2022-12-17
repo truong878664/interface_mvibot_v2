@@ -32,6 +32,5 @@
     </div>
 
     <script src="/js/library/roslib.min.js"></script>
-    <script src="/js/library/nipplejs.js"></script>
     <script type="module" src="/js/mapping.js"></script>
 @endsection

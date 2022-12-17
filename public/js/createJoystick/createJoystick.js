@@ -1,5 +1,6 @@
 import { $ } from "../main.js";
 import moveRobot from "../rosModule/moveRobot.js";
+import { cmd_vel_listener } from "../rosModule/moveRobot.js";
 
 const createJoystick = function () {
     const heightJoystick = $(".joystick-wrapper").offsetHeight;
@@ -36,6 +37,9 @@ const createJoystick = function () {
         angular_speed =
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
+
+        console.log(linear_speed);
+        console.log(cmd_vel_listener.name);
     });
     manager.on("end", function () {
         clearInterval(robotMoving);

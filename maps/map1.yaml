@@ -1,6 +1,6 @@
-image: map30.pgm
+image: map27.pgm
 resolution: 0.050000
-origin: [-24.778434, -73.317548, 0.000000]
+origin: [-20.336041, -3.545875, 0.000000]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
