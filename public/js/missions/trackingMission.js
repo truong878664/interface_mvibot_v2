@@ -10,6 +10,8 @@ import {
     markerClientPath,
     displayPath,
 } from "../rosModule/path/markerClientPath.js";
+import createJoystick from "../createJoystick/createJoystick.js";
+import mathYaw from "../rosModule/mathYaw.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -21,14 +23,10 @@ const tfClient = createTfClient();
 markerClient(tfClient, viewer);
 markerClientPath(tfClient, viewer);
 
-const layer1 = new mvibot_layer("A", 4, 4, 3, 7, "dead_zone");
-const layer2 = new mvibot_layer("B", 10, -10, -10, -35, "lowspeed_zone");
-const layer3 = new mvibot_layer("C", 5, 0, -5, -15, "lowspeed_zone");
-const layer4 = new mvibot_layer("E", 0, 3, -5, -15, "dead_zone");
+const mvibot_layer_active = [];
 
-const mvibot_layer_active = [layer1, layer2, layer3, layer4];
+addLayerDbToLayerActive();
 
-displayLayer(mvibot_layer_active);
 displayPath();
 
 createAxes(viewer);
@@ -36,3 +34,27 @@ createAxes(viewer);
 createPoint(viewer, tfClient);
 createPose(viewer, tfClient);
 displayLayer(tfClient);
+
+createJoystick();
+
+function addLayerDbToLayerActive() {
+    fetch("/dashboard/missions/layer-active")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((item) => {
+                const { z, w } = mathYaw(item.yawo);
+                const layer = new mvibot_layer(
+                    item.name_layer,
+                    item.width,
+                    item.height,
+                    item.xo,
+                    item.yo,
+                    item.type_layer,
+                    z,
+                    w
+                );
+                mvibot_layer_active.push(layer);
+            });
+            displayLayer(mvibot_layer_active);
+        });
+}

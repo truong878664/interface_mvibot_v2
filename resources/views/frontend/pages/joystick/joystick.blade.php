@@ -25,18 +25,18 @@
             </label>
             <a class="px-4 py-2" href="{{ route('dashboard.') }}">close</a>
         </header>
-        <div class="w-full flex-1">
 
-        </div>
-        <div class="mx-[50px] mb-[50px] self-end">
+        <div class="w-full flex-1 flex justify-center items-center">
             @include('frontend/blocks/joystick')
+        </div>
+
+        <div class="w-full">
         </div>
     </div>
 
-    {{-- <script src="/js/library/nipplejs.js"></script> --}}
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/ros3d.min.js"></script>
-    {{-- <script type="module" src="/js/main.js"></script> --}}
+
     <script type="module" src="/js/joystick/joystick.js"></script>
 </body>
 

@@ -25,4 +25,11 @@ class layerController extends Controller
         $allLayer = Layer::all();
         return $allLayer;
     }
+    public function layerActive()
+    {
+        $map = new mapController;
+        $mapActive = $map->mapActive();
+        $layerActive = Layer::where('name_map_active', $mapActive)->get();
+        return $layerActive;
+    }
 }

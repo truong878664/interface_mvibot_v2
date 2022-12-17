@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('/', [MissionsController::class, 'index']);
             Route::get('/create-point', [MissionsController::class, 'createPoint'])->name('create-point');
             Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
+            Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
 
             Route::prefix('/create-missions')->name('create-missions.')->group(function () {
                 Route::get('/', [MissionsController::class, 'createMissions']);

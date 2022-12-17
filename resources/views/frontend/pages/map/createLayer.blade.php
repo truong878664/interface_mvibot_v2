@@ -8,7 +8,7 @@
             <div class="flex-1 flex ">
 
                 <div class="w-5/6 h-full relative  overflow-hidden">
-                    <divs class="w-full h-full absolute" id="map"></divs>
+                    <div class="w-full h-full absolute cursor-copy" id="map"></div>
                     {{-- ===heading map=== --}}
                     <div class="absolute p-2 text-[1.5rem] w-full flex">
                         <div class="">
@@ -153,5 +153,5 @@
     @include('frontend.blocks.message')
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/nipplejs.js"></script>
-    <script type="module" src="/js/map.js"></script>
+    <script type="module" src="/js/map/createLayer.js"></script>
 @endsection

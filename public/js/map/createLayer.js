@@ -1,19 +1,19 @@
-import { $, $$ } from "./main.js";
-import createMap from "./rosModule/createMap.js";
-import createTfClient from "./rosModule/createTfClient.js";
-import createAxes from "./rosModule/createAxes.js";
-import createPoint from "./rosModule/createPoint.js";
-import createPose from "./rosModule/createPose.js";
-import displayPoint from "./rosModule/displayPoint.js";
+import { $, $$ } from "../main.js";
+import createMap from "../rosModule/createMap.js";
+import createTfClient from "../rosModule/createTfClient.js";
+import createAxes from "../rosModule/createAxes.js";
+import createPoint from "../rosModule/createPoint.js";
+import createPose from "../rosModule/createPose.js";
+import displayPoint from "../rosModule/displayPoint.js";
 import {
     markerClient,
     displayLayer,
     deleteAllLayer,
-} from "./rosModule/layer/markerClient.js";
-import { mvibot_layer } from "./rosModule/classMvibot.js";
-import { convertToPosition } from "./rosModule/clickSetPointMap.js";
-import lockZ from "./rosModule/lockZ.js";
-import mathYaw from "./rosModule/mathYaw.js";
+} from "../rosModule/layer/markerClient.js";
+import { mvibot_layer } from "../rosModule/classMvibot.js";
+import { convertToPosition } from "../rosModule/clickSetPointMap.js";
+import lockZ from "../rosModule/lockZ.js";
+import mathYaw from "../rosModule/mathYaw.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -106,7 +106,6 @@ function checkNameLayer(nameLayer, e) {
 function setDbSetLayer(e) {
     const time = new Date();
     console.log(e.layerX);
-    // console.log(e.layerX, e.LayerY);
     const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
     xoElement.value = x.toFixed(2);
     yoElement.value = y.toFixed(2);
@@ -145,8 +144,7 @@ function setDbSetLayer(e) {
     renderLayer(dataLayerSaveDatabase);
 }
 
-const typeLayer = $("#type-layer");
-typeLayer.onchange = (e) => {
+$("#type-layer").onchange = (e) => {
     const degInput = (Number(dataLayerModel.z_rotate) / 180) * Math.PI;
     const { z, w } = mathYaw(degInput);
     dataLayerModel.type_layer = e.target.value;
@@ -275,3 +273,32 @@ function addLayerDbToLayerActive() {
         mvibot_layer_active.push(layer);
     });
 }
+
+let x, y;
+
+document.onkeydown = (e) => {
+    switch (e.key) {
+        case "ArrowRight":
+            !e.shiftKey || (x = x + 1);
+            x = x + 0.1;
+            console.log(1);
+            break;
+        case "ArrowUp":
+            !e.shiftKey || (y = y + 1);
+            y = y + 0.1;
+            console.log(2);
+            break;
+        case "ArrowDown":
+            !e.shiftKey || (y = y - 1);
+            y = y - 0.1;
+            console.log(3);
+            break;
+        case "ArrowLeft":
+            !e.shiftKey || (x = x - 1);
+            x = x - 0.1;
+            console.log(4);
+            break;
+        default:
+            break;
+    }
+};

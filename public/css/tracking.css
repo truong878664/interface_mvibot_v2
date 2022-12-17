@@ -5,6 +5,7 @@
     flex-direction: column;
     border-radius: 6px;
     position: relative;
+    overflow: hidden;
 }
 
 .step-mission-tracking-wrapper {
@@ -38,4 +39,10 @@
 
 .continue-mission-btn {
     background: #54b435;
+}
+
+.joystick {
+    position: absolute;
+    right: 0;
+    bottom: 120px;
 }

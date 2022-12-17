@@ -627,18 +627,9 @@ video {
   margin: 50px;
 }
 
-.mx-\[50px\] {
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.mb-\[50px\] {
-  margin-bottom: 50px;
 }
 
 .mb-4 {
@@ -806,6 +797,10 @@ video {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.cursor-copy {
+  cursor: copy;
 }
 
 .cursor-pointer {

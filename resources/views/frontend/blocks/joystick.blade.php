@@ -70,6 +70,7 @@
         opacity: 1 !important;
     }
 
+
     .light {
         color: orange;
         text-shadow: 0 0 16px orange;
