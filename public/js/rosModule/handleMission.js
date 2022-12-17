@@ -4,10 +4,10 @@ import getValueWakeUpStop from "../missions/ftWakeUpStop.js";
 function runMission(nameRobot, dataBodyMission) {
     const dataHeadMission = getValueWakeUpStop();
     const dataFullMission = `${dataHeadMission}*${dataBodyMission}%@`;
-
+    const nameRobotReplace = nameRobot.replace(" ", "");
     const mission_pub = new ROSLIB.Topic({
         ros: ros,
-        name: `/ ${nameRobot}/data_coordinates`,
+        name: `/${nameRobotReplace}/data_coordinates`,
         messageType: "std_msgs/String",
         queue_size: 1,
     });
@@ -21,7 +21,7 @@ function runMission(nameRobot, dataBodyMission) {
 function continueMission(nameRobot) {
     mission_continue_pub = new ROSLIB.Topic({
         ros: ros,
-        name: `/ ${name_select}/mission_continue`,
+        name: `/${name_select}/mission_continue`,
         messageType: "std_msgs/String",
         queue_size: 1,
     });
@@ -34,7 +34,7 @@ function continueMission(nameRobot) {
 function stopMission(nameRobot) {
     mission_stop_pub = new ROSLIB.Topic({
         ros: ros,
-        name: `/ ${name_select}/mission_cancel`,
+        name: `/${name_select}/mission_cancel`,
         messageType: "std_msgs/String",
         queue_size: 1,
     });
