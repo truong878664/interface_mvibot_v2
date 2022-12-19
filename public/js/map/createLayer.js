@@ -40,6 +40,7 @@ function start() {
     displayPoint(0, 0);
     markerClient(tfClient, viewer);
     lockZ(viewer);
+    nameLayerElement.focus();
 
     addLayerDbToLayerActive();
     displayLayer(mvibot_layer_active);
@@ -121,9 +122,20 @@ function setDbSetLayer(e) {
     dataLayerModel.z_rotate = Number($("#z-rotate").value);
 
     nameLayerElement.value = "";
-    nameLayerElement.blur();
 
-    const layer = createModelLayer();
+    const degInput = (Number(dataLayerModel.z_rotate) / 180) * Math.PI;
+    const { z, w } = mathYaw(degInput);
+
+    const layer = new mvibot_layer(
+        dataLayerModel.name_layer,
+        dataLayerModel.width_layer,
+        dataLayerModel.height_layer,
+        dataLayerModel.xo,
+        dataLayerModel.yo,
+        dataLayerModel.type_layer,
+        z,
+        w
+    );
 
     saveDataToDatabase(dataLayerModel);
     mvibot_layer_active.push(layer);
@@ -132,13 +144,30 @@ function setDbSetLayer(e) {
 }
 
 $("#type-layer").onchange = (e) => {
+    const degInput = (Number(dataLayerModel.z_rotate) / 180) * Math.PI;
+    const { z, w } = mathYaw(degInput);
     dataLayerModel.type_layer = e.target.value;
+    const layer = new mvibot_layer(
+        dataLayerModel.name_layer,
+        dataLayerModel.width_layer,
+        dataLayerModel.height_layer,
+        dataLayerModel.xo,
+        dataLayerModel.yo,
+        dataLayerModel.type_layer,
+        z,
+        w
+    );
 
-    const layer = createModelLayer();
+    if (mvibot_layer_active.length - countLayerDb > 0) {
+        dataLayerSaveDatabase.pop();
+        saveDataToDatabase(dataLayerModel);
+    }
 
-    reloadLayerSaveDb();
-
-    reloadLayer(layer);
+    if (mvibot_layer_active.length - countLayerDb > 0) {
+        mvibot_layer_active.pop();
+        mvibot_layer_active.push(layer);
+    }
+    displayLayer(mvibot_layer_active);
 };
 
 $$(".layer-range").forEach((element) => {
@@ -148,11 +177,32 @@ $$(".layer-range").forEach((element) => {
         const idCurrentInputChang = idCurrentInput.replace("-", "_");
         dataLayerModel[idCurrentInputChang] = Number(e.target.value);
 
-        const layer = createModelLayer();
+        const degInput = (Number(dataLayerModel.z_rotate) / 180) * Math.PI;
+        const { z, w } = mathYaw(degInput);
+        const layer = new mvibot_layer(
+            dataLayerModel.name_layer,
+            dataLayerModel.width_layer,
+            dataLayerModel.height_layer,
+            dataLayerModel.xo,
+            dataLayerModel.yo,
+            dataLayerModel.type_layer,
+            z,
+            w
+        );
 
-        reloadLayerSaveDb();
+        console.log();
+        // console.log(countLayerDb);
 
-        reloadLayer(layer);
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            dataLayerSaveDatabase.pop();
+            saveDataToDatabase(dataLayerModel);
+        }
+
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            mvibot_layer_active.pop();
+            mvibot_layer_active.push(layer);
+        }
+        displayLayer(mvibot_layer_active);
     };
 });
 
@@ -166,6 +216,7 @@ function saveDataToDatabase(dataLayerModel) {
     const yawo = Number(deg / 180) * Math.PI;
     const dataLayerNew = { yawo, height, width, ...rest };
     dataLayerSaveDatabase.push(dataLayerNew);
+    console.log(dataLayerSaveDatabase);
 }
 
 const deleteLayer = (id) => {
@@ -225,61 +276,35 @@ function addLayerDbToLayerActive() {
     });
 }
 
-// document.onkeydown = (e) => {
-//     switch (e.key) {
-//         case "ArrowRight":
-//             if (e.ctrlKey) {
-//                 dataLayerModel.z_rotate += 1;
-//                 const layerRight = createModelLayer();
-//
-//                     reloadLayer(layerRight);
-//             } else {
-//                 !e.shiftKey || (dataLayerModel.xo += 1);
-//                 dataLayerModel.xo += 0.1;
-//                 const layerRight = createModelLayer();
-//                 console.log(e);
-//                 if (mvibot_layer_active.length - countLayerDb > 0) {
-//                     reloadLayer(layerRight);
-//                 }
-//             }
-//             break;
-//         case "ArrowLeft":
-//             if (e.ctrlKey) {
-//                 dataLayerModel.z_rotate -= 1;
-//                 const layerRight = createModelLayer();
-//                 if (mvibot_layer_active.length - countLayerDb > 0) {
-//                     reloadLayer(layerRight);
-//                 }
-//             } else {
-//                 !e.shiftKey || (dataLayerModel.xo -= 1);
-//                 dataLayerModel.xo -= 0.1;
-//                 const layerLeft = createModelLayer();
-//                 if (mvibot_layer_active.length - countLayerDb > 0) {
-//                     reloadLayer(layerLeft);
-//                 }
-//             }
-//             break;
-//         case "ArrowUp":
-//             !e.shiftKey || (dataLayerModel.yo += 1);
-//             dataLayerModel.yo += 0.1;
-//             const layerUp = createModelLayer();
-//             if (mvibot_layer_active.length - countLayerDb > 0) {
-//                 reloadLayer(layerUp);
-//             }
-//             break;
-//         case "ArrowDown":
-//             !e.shiftKey || (dataLayerModel.yo -= 1);
-//             dataLayerModel.yo -= 0.1;
-//             const layerDown = createModelLayer();
-//             if (mvibot_layer_active.length - countLayerDb > 0) {
-//                 reloadLayer(layerDown);
-//             }
-//             break;
+let x, y;
 
-//         default:
-//             break;
-//     }
-// };
+document.onkeydown = (e) => {
+    switch (e.key) {
+        case "ArrowRight":
+            // !e.shiftKey || (x = x + 1);
+            dataLayerModel.xo += 1;
+            const layer = createModelLayer();
+            console.log(layer);
+            break;
+        case "ArrowUp":
+            !e.shiftKey || (y = y + 1);
+            y = y + 0.1;
+            console.log(2);
+            break;
+        case "ArrowDown":
+            !e.shiftKey || (y = y - 1);
+            y = y - 0.1;
+            console.log(3);
+            break;
+        case "ArrowLeft":
+            !e.shiftKey || (x = x - 1);
+            x = x - 0.1;
+            console.log(4);
+            break;
+        default:
+            break;
+    }
+};
 
 const map_listener = new ROSLIB.Topic({
     ros: ros,
@@ -326,32 +351,3 @@ function createModelLayer() {
 
     return layer;
 }
-
-function reloadLayer(layer) {
-    if (mvibot_layer_active.length - countLayerDb > 0) {
-        mvibot_layer_active.pop();
-        mvibot_layer_active.push(layer);
-        displayLayer(mvibot_layer_active);
-    }
-}
-function reloadLayerSaveDb() {
-    if (dataLayerSaveDatabase.length - countLayerDb > 0) {
-        dataLayerSaveDatabase.pop();
-        saveDataToDatabase(dataLayerModel);
-    }
-}
-
-const nameInputLayer = ["width-layer", "height-layer", "z-rotate", "xo", "yo"];
-
-nameInputLayer.forEach((item) => {
-    $(`#${item}`).onchange = (e) => {
-        $(`#${item}-range`).value = Number(e.target.value);
-
-        const nameItem = item.replace("-", "_");
-        dataLayerModel[nameItem] = Number(e.target.value);
-        const layer = createModelLayer();
-        reloadLayerSaveDb();
-        console.log(dataLayerSaveDatabase);
-        reloadLayer(layer);
-    };
-});
