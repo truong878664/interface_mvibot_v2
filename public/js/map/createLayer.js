@@ -40,7 +40,6 @@ function start() {
     displayPoint(0, 0);
     markerClient(tfClient, viewer);
     lockZ(viewer);
-    nameLayerElement.focus();
 
     addLayerDbToLayerActive();
     displayLayer(mvibot_layer_active);
@@ -51,6 +50,10 @@ function start() {
 start();
 
 mapElement.addEventListener("mousemove", () => {
+    lockZ(viewer);
+});
+
+mapElement.addEventListener("touchmove", () => {
     lockZ(viewer);
 });
 
@@ -81,6 +84,29 @@ function handleDbClick() {
     });
 }
 
+mapElement.addEventListener("touchstart", tapHandler);
+
+var tapedTwice = false;
+function tapHandler(e) {
+    if (!tapedTwice) {
+        tapedTwice = true;
+        setTimeout(function () {
+            tapedTwice = false;
+        }, 300);
+        return false;
+    }
+    e.preventDefault();
+    if (nameLayerElement.value === "") {
+        $("#msg-name-layer").innerText = "please enter this field";
+        nameLayerElement.focus();
+        nameLayerElement.oninput = () => {
+            $("#msg-name-layer").innerText = "";
+        };
+    } else {
+        checkNameLayer(nameLayerElement.value, e);
+    }
+}
+
 function checkNameLayer(nameLayer, e) {
     fetch("/all-layer")
         .then((res) => res.json())
@@ -104,8 +130,21 @@ function checkNameLayer(nameLayer, e) {
 }
 
 function setDbSetLayer(e) {
-    const time = new Date();
-    const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
+    console.log(e.type);
+    if (e.type === "dblclick") {
+        const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
+        handleClick(x, y);
+    } else if (e.type === "touchstart") {
+        var rect = e.target.getBoundingClientRect();
+        const [x, y] = convertToPosition(
+            e.targetTouches[0].pageX - rect.left,
+            e.targetTouches[0].pageY - rect.top,
+            viewer
+        );
+        handleClick(x, y);
+    }
+}
+function handleClick(x, y) {
     xoElement.value = x.toFixed(2);
     yoElement.value = y.toFixed(2);
     xoRangeElement.value = x.toFixed(2);
