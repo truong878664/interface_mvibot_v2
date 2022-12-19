@@ -27,7 +27,8 @@
         </header>
 
         <div class="w-full flex-1 flex justify-center items-center">
-            @include('frontend/blocks/joystick')
+            <div class="h-[160px] w-[160px] md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px]" hidden></div>
+            @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '400px'])
         </div>
 
         <div class="w-full">

@@ -7,11 +7,11 @@
                 <select name="" id="robot-mapping" class="bg-transparent outline-none">
                     <option value="">select robot</option>
                     @foreach ($robotSlam as $item)
-                        <option value="{{ $item['name_seri'] }}" class="text-[#333]">{{ $item['name_seri'] }}</option>
+                        <option value="{{ $item['name_seri'] }}" class="text-[#ccc]">{{ $item['name_seri'] }}</option>
                     @endforeach
                 </select>
             </label>
-            <div class="w-full h-full overflow-hidden" id="map-wrapper">
+            <div class="w-full h-full overflow-hidden bg-[#333]" id="map-wrapper">
                 <div class="w-full h-full" id="map"></div>
             </div>
         </div>
@@ -24,8 +24,9 @@
                 </div>
                 <span class="text-[1.5rem] text-red-500 block" id="error_create_map"></span>
             </div>
+            <div class="h-[160px] w-[160px] md:w-[220px] md:h-[220px] lg:h-[300px] lg:w-[300px]" hidden></div>
             <div class="lg:p-10 lg:mb-[70px]">
-                @include('frontend/blocks/joystick')
+                @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
             </div>
 
         </div>

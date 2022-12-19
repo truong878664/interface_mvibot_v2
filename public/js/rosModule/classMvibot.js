@@ -51,7 +51,7 @@ export class mvibot_layer {
         //
         this.pose = new mvibot_pose();
         //
-        this.pose.position = new mvibot_position(xo, yo, 0.01);
+        this.pose.position = new mvibot_position(xo, yo, 0.1);
 
         this.pose.orientation = new mvibot_orientation(0, 0, z, w);
         //

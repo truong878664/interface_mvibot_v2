@@ -19,10 +19,34 @@
     display: flex;
 }
 
-.map-tracking {
+.map-tracking-wrapper {
     width: 100%;
     flex: 1;
+    position: relative;
 }
+
+.map-tracking {
+    width: 100%;
+    height: 100%;
+}
+
+.choose-robot-tracking{
+    position:absolute;
+    top: 0;
+    padding: 4px 6px;
+    background: var(--main-color);
+    color: #fff;
+}
+
+.obtion-robot{
+    background-color: transparent;
+    outline: none;
+}
+
+.obtion-robot option{
+    color: #000;
+}
+
 
 .step-mission-tracking {
     flex: 1;

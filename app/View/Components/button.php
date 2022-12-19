@@ -17,7 +17,7 @@ class button extends Component
     public function __construct($tag, $attribute)
     {
         $this->tag = $tag;
-        $this->attribute= $attribute
+        $this->attribute= $attribute;
     }
 
     /**

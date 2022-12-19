@@ -8,6 +8,7 @@ use App\Models\backend\Map;
 use Illuminate\Http\Request;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
+use App\Models\backend\StatusRobot;
 use App\Models\Robot;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,9 @@ class MissionsController extends Controller
 
     public function trackingMission()
     {
-        return view('frontend.pages.missions.trackingMission');
+        $robotNavigate = StatusRobot::where('mode', 'navigation')->get();
+
+        return view('frontend.pages.missions.trackingMission', compact('robotNavigate'));
     }
 
     public function createStepsMissions(Request $request)

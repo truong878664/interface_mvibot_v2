@@ -8,8 +8,7 @@ import createAxes from "./rosModule/createAxes.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
-const robotMappingEle = $("#robot-mapping");
-let robotActive = robotMappingEle.value;
+let robotActive = $("#robot-mapping").value;
 const tfClient = createTfClient();
 const topic = "/";
 let viewer = createMap(heightMap, widthMap, tfClient, topic);
@@ -20,7 +19,7 @@ changeTopic();
 
 function changeTopic() {
     cmd_vel_listener.name = `${robotActive}/cmd_vel`;
-    robotMappingEle.onchange = (e) => {
+    $("#robot-mapping").onchange = (e) => {
         robotActive = e.target.value;
         if (robotActive) {
             changeTopicMoveRobot(robotActive);

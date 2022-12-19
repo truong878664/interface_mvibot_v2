@@ -35,7 +35,6 @@ let y = 0;
 let rotateZ = 0;
 let rotateW = 1;
 let robotActive;
-const laser = [];
 
 $("#position-x").oninput = (e) => {
     x = Number(e.target.value);
@@ -132,6 +131,7 @@ $("#send-location-btn").onclick = () => {
 // set point location
 const robotNavigation = JSON.parse($("#robot-navigation").value);
 const robotNavigationChange = [...robotNavigation];
+const laser = [];
 
 displayLaserUrd(robotNavigationChange);
 function displayLaserUrd(dataRobotNavigation) {
