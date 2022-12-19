@@ -115,7 +115,7 @@
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Angle</span>
                             <div class="flex-1 flex flex-col">
-                                <input type="number" class="px-4 flex-1 w-[200px] " value="1" id="z-rotate">
+                                <input type="number" class="px-4 flex-1 w-[200px] " value="0" id="z-rotate">
                                 <input id="z-rotate-range" type="range" step="1" value="0" max="180"
                                     min="-180"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
