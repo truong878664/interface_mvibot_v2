@@ -17,6 +17,7 @@ import mathYaw from "../rosModule/mathYaw.js";
 import showUrd from "../rosModule/showUrd.js";
 import showLaser from "../rosModule/showLaser.js";
 import { cmd_vel_listener } from "../rosModule/moveRobot.js";
+import topicString from "../rosModule/topicString.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -99,3 +100,18 @@ function changeTopic() {
         }
     };
 }
+
+$(".stop-mission-btn").onclick = (e) => {
+    if (robotActive) {
+        topicString(`${robotActive}/mission_action`, "0");
+    } else {
+        alert("choose robot");
+    }
+};
+$(".continue-mission-btn").onclick = (e) => {
+    if (robotActive) {
+        topicString(`${robotActive}/mission_action`, "1");
+    } else {
+        alert("choose robot");
+    }
+};

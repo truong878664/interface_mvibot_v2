@@ -87,7 +87,21 @@ function handleDbClick() {
 mapElement.addEventListener("touchstart", tapHandler);
 
 var tapedTwice = false;
+let oldX;
+let oldY;
 function tapHandler(e) {
+    // console.log(oldX);
+    // console.log(Math.abs(e.touches[0].pageY - oldY) < 100);
+    // const isTouch = !!(
+    //     (Math.abs(e.touches[0].pageX - oldX) < 70) &
+    //     (Math.abs(e.touches[0].pageY - oldY) < 70)
+    // );
+
+    // oldX = e.touches[0].pageX;
+    // oldY = e.touches[0].pageY;
+
+    console.log(isTouch);
+    // if (isTouch) {
     if (!tapedTwice) {
         tapedTwice = true;
         setTimeout(function () {
@@ -95,6 +109,11 @@ function tapHandler(e) {
         }, 300);
         return false;
     }
+    // }
+
+    // if() {
+
+    // }
     e.preventDefault();
     if (nameLayerElement.value === "") {
         $("#msg-name-layer").innerText = "please enter this field";
