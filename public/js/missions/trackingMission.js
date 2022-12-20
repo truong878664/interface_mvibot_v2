@@ -18,6 +18,7 @@ import showUrd from "../rosModule/showUrd.js";
 import showLaser from "../rosModule/showLaser.js";
 import { cmd_vel_listener } from "../rosModule/moveRobot.js";
 import topicString from "../rosModule/topicString.js";
+import reloadWhenOrientation from "../reloadOnOrientation.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -115,3 +116,5 @@ $(".continue-mission-btn").onclick = (e) => {
         alert("choose robot");
     }
 };
+
+reloadWhenOrientation();

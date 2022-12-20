@@ -5,12 +5,15 @@ import { $ } from "./main.js";
 import { cmd_vel_listener } from "./rosModule/moveRobot.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
+import reloadWhenOrientation from "./reloadOnOrientation.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
 let robotActive = $("#robot-mapping").value;
 const tfClient = createTfClient();
 const topic = "/";
+
+reloadWhenOrientation();
 let viewer = createMap(heightMap, widthMap, tfClient, topic);
 createAxes(viewer);
 

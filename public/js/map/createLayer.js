@@ -14,13 +14,16 @@ import { mvibot_layer } from "../rosModule/classMvibot.js";
 import { convertToPosition } from "../rosModule/clickSetPointMap.js";
 import lockZ from "../rosModule/lockZ.js";
 import mathYaw from "../rosModule/mathYaw.js";
+import reloadWhenOrientation from "../reloadOnOrientation.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
 const widthMap = mapElement.offsetWidth;
 
 const tfClient = createTfClient();
-const viewer = createMap(heightMap, widthMap, tfClient);
+let viewer = createMap(heightMap, widthMap, tfClient);
+
+reloadWhenOrientation();
 
 const mvibot_layer_active = [];
 
