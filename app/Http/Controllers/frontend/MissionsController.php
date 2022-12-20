@@ -92,7 +92,6 @@ class MissionsController extends Controller
                     $w_position = $item->w;
                     $mode_position = $item->mode_position;
                     return "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)";
-
                     break;
                 case 'sleep':
                     $name_sleep = $item->name_sleep;
