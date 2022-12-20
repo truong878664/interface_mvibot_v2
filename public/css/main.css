@@ -98,11 +98,10 @@ li {
 }
 
 .heading {
-    font-size: 2.6rem;
+    font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    margin: 8px 0;
-    margin-left: 8px;
+    margin: 4px 0;
 }
 
 /* .submit-btn {

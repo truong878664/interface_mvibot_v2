@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    max-height: calc(100% - 38px); 
+    /* justify-content: space-between; */
 }
 
 .nav-tab {
@@ -40,18 +43,20 @@
 
 .nav-content {
     width: calc(100% - 40px);
+    flex: 1;
+    margin-bottom: 10px;
+    position: relative;
 }
 
 .missions-map {
-    /* width: 1000px;
-    height: 1000px; */
+    height: 100%;
     width: 100%;
-    height: 65vh;
-    /* margin-top: 40px; */
     margin-right: 100px;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0 20px #ccc;
+    background: #ccc;
+    position: absolute;
 }
 
 .rotate-btn {

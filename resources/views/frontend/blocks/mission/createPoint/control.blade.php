@@ -25,4 +25,7 @@
             max="180" step="1">
         <p>Rotate Z</p>
     </div>
+    <x-button tag="label" title="Create" class="create-point-btn" attribute="for=form-create-point-checkbox">
+    </x-button>
+
 </div>

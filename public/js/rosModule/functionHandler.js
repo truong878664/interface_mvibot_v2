@@ -192,12 +192,9 @@ function tapHandler(e) {
 
 const touchSetPoint = function (e) {
     var rect = e.target.getBoundingClientRect();
-    const mapWrapper = $(".missions-point-map");
-    console.log(e);
-    console.log(e.touches[0].pageX - mapWrapper.offsetLeft);
     const [positionXSet, positionYSet] = clickSetPointMap(
-        e.touches[0].pageX - mapWrapper.offsetLeft,
-        e.touches[0].pageY - mapWrapper.offsetTop,
+        e.touches[0].pageX - rect.left,
+        e.touches[0].pageY - rect.top,
         rotateZ,
         rotateW,
         viewer

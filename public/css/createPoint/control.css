@@ -1,22 +1,18 @@
-.mission-point-control-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
 .mission-point-control {
-    width: 90%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px;
+    background: rgba(204, 204, 204, 0.466);
 }
 
 .mission-point-control-item {
     width: 30%;
     height: 100px;
-    /* background-color: #ccc; */
+    margin: 0 4px;
 }
 
 .position {
