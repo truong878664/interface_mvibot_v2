@@ -130,7 +130,7 @@ function sendMission() {
     const dataStepsValue = $(".data-steps-value")
         .value.replace("[", "(")
         .replace("]", ")")
-        .replaceAll(",", ")(")
+        .replaceAll('","', ")(")
         .replaceAll('"', "");
     const optionRobot = $("#select-robot-option");
     let nameRobot;

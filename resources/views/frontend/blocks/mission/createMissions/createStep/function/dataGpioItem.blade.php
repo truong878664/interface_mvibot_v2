@@ -4,10 +4,10 @@
     <button class="create-gpio"><i class="fa-solid fa-plus-minus"></i></button>
     <div class="show-gpio-wrapper"></div>
     <div class="in_pulldown_value form-gpio-item">
-        @for ($i = 0; $i < 15; $i++)
+        @for ($i = 0; $i < 21; $i++)
             <label class="checkbox-wrapper">
-                <label class="label-for-checkbox-gpio">{{ $i + 1 }}</label>
-                <input class="checkbox-gpio" type="checkbox" value="{{ $i + 1 }}" />
+                <label class="label-for-checkbox-gpio">{{ $i }}</label>
+                <input class="checkbox-gpio" type="checkbox" value="{{ $i }}" />
             </label>
         @endfor
         <button class="hidden-form-gpio-item"><i class="fa-solid fa-xmark"></i></button>

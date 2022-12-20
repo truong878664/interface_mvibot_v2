@@ -167,28 +167,32 @@ const clickSetPoint = function (e) {
 function handleMouseMapMove(e) {
     lockZ(viewer);
     setPositionSpan(e);
-    setLine(e);
 }
 
 var tapedTwice = false;
+let oldX;
+let oldY;
+let isTouch = false;
 function tapHandler(e) {
+    isTouch = !!(
+        Math.abs(e.touches[0].pageX - oldX) < 70 &&
+        Math.abs(e.touches[0].pageY - oldY) < 70
+    );
+
+    oldX = e.touches[0].pageX;
+    oldY = e.touches[0].pageY;
+
     if (!tapedTwice) {
         tapedTwice = true;
         setTimeout(function () {
             tapedTwice = false;
+            isTouch = false;
         }, 300);
         return false;
     }
     e.preventDefault();
-    touchSetPoint(e);
+    isTouch && touchSetPoint(e);
 }
-
-// var rect = e.target.getBoundingClientRect();
-//         const [x, y] = convertToPosition(
-//             e.targetTouches[0].pageX - rect.left,
-//             e.targetTouches[0].pageY - rect.top,
-//             viewer
-//         );
 
 const touchSetPoint = function (e) {
     var rect = e.target.getBoundingClientRect();
@@ -222,12 +226,5 @@ function setPositionSpan(e) {
     const [positionXSet, positionYSet] = convertToPosition(x, y, viewer);
     xShow.innerText = positionXSet.toFixed(5);
     yShow.innerText = positionYSet.toFixed(5);
-}
-
-const lineX = $(".line-x");
-const lineY = $(".line-y");
-function setLine(e) {
-    lineY.style.left = e?.x - mapElement.offsetParent.offsetLeft + "px";
-    lineX.style.top = e?.y - mapElement.offsetParent.offsetTop + "px";
 }
 export { setPosition };

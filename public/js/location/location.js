@@ -13,6 +13,7 @@ import lockZ from "../rosModule/lockZ.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import showLaser from "../rosModule/showLaser.js";
 import showUrd from "../rosModule/showUrd.js";
+import reloadWhenOrientation from "../reloadOnOrientation.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -21,7 +22,7 @@ const tfClient = createTfClient();
 let viewer = createMap(heightMap, widthMap);
 
 createAxes(viewer);
-
+reloadWhenOrientation();
 createPoint(viewer, tfClient);
 createPose(viewer, tfClient);
 

@@ -369,19 +369,13 @@ function createModelLayer() {
     return layer;
 }
 
-const listInputLayer = [
-    "width_layer",
-    "height_layer",
-    "xo",
-    "yo",
-    "type_layer",
-    "z_rotate",
-];
+const listInputLayer = ["width_layer", "height_layer", "xo", "yo", "z_rotate"];
 
 listInputLayer.forEach((item) => {
     const itemModel = item.replace("_", "-");
     $(`#${itemModel}`).onchange = (e) => {
         $(`#${itemModel}-range`).value = e.target.value;
+        console.log($(`#${itemModel}-range`));
         dataLayerModel[item] = Number(e.target.value);
 
         const layer = createModelLayer();
