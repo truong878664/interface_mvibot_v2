@@ -89,40 +89,36 @@ mapElement.addEventListener("touchstart", tapHandler);
 var tapedTwice = false;
 let oldX;
 let oldY;
+let isTouch = false;
 function tapHandler(e) {
-    // console.log(oldX);
-    // console.log(Math.abs(e.touches[0].pageY - oldY) < 100);
-    // const isTouch = !!(
-    //     (Math.abs(e.touches[0].pageX - oldX) < 70) &
-    //     (Math.abs(e.touches[0].pageY - oldY) < 70)
-    // );
+    isTouch = !!(
+        Math.abs(e.touches[0].pageX - oldX) < 70 &&
+        Math.abs(e.touches[0].pageY - oldY) < 70
+    );
 
-    // oldX = e.touches[0].pageX;
-    // oldY = e.touches[0].pageY;
+    oldX = e.touches[0].pageX;
+    oldY = e.touches[0].pageY;
 
-    console.log(isTouch);
-    // if (isTouch) {
     if (!tapedTwice) {
         tapedTwice = true;
         setTimeout(function () {
             tapedTwice = false;
+            isTouch = false;
         }, 300);
         return false;
     }
-    // }
 
-    // if() {
-
-    // }
-    e.preventDefault();
-    if (nameLayerElement.value === "") {
-        $("#msg-name-layer").innerText = "please enter this field";
-        nameLayerElement.focus();
-        nameLayerElement.oninput = () => {
-            $("#msg-name-layer").innerText = "";
-        };
-    } else {
-        checkNameLayer(nameLayerElement.value, e);
+    if (tapedTwice) {
+        e.preventDefault();
+        if (nameLayerElement.value === "") {
+            $("#msg-name-layer").innerText = "please enter this field";
+            nameLayerElement.focus();
+            nameLayerElement.oninput = () => {
+                $("#msg-name-layer").innerText = "";
+            };
+        } else {
+            isTouch && checkNameLayer(nameLayerElement.value, e);
+        }
     }
 }
 
@@ -149,7 +145,6 @@ function checkNameLayer(nameLayer, e) {
 }
 
 function setDbSetLayer(e) {
-    console.log(e.type);
     if (e.type === "dblclick") {
         const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
         handleClick(x, y);
@@ -172,8 +167,7 @@ function handleClick(x, y) {
     dataLayerModel.xo = x;
     dataLayerModel.yo = y;
 
-    dataLayerModel.name_layer =
-        nameLayerElement.value || `layer${time.getTime()}`;
+    dataLayerModel.name_layer = nameLayerElement.value;
     dataLayerModel.type_layer = $("#type-layer").value;
     dataLayerModel.width_layer = Number($("#width-layer").value);
     dataLayerModel.height_layer = Number($("#height-layer").value);
@@ -371,3 +365,33 @@ function createModelLayer() {
 
     return layer;
 }
+
+const listInputLayer = [
+    "width_layer",
+    "height_layer",
+    "xo",
+    "yo",
+    "type_layer",
+    "z_rotate",
+];
+
+listInputLayer.forEach((item) => {
+    const itemModel = item.replace("_", "-");
+    $(`#${itemModel}`).onchange = (e) => {
+        $(`#${itemModel}-range`).value = e.target.value;
+        dataLayerModel[item] = Number(e.target.value);
+
+        const layer = createModelLayer();
+
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            dataLayerSaveDatabase.pop();
+            saveDataToDatabase(dataLayerModel);
+        }
+
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            mvibot_layer_active.pop();
+            mvibot_layer_active.push(layer);
+        }
+        displayLayer(mvibot_layer_active);
+    };
+});
