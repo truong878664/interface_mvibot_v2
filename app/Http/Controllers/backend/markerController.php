@@ -12,7 +12,6 @@ class markerController extends Controller
     public function createMarker(Request $request)
     {
 
-
         $name_marker = $request->name_marker;
         $marker_type = $request->marker_type;
         $marker_dir = $this->checkDataMarker($request->marker_dir);

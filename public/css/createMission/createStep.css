@@ -436,7 +436,10 @@ input[type="number"] {
 
 .step-item {
     position: relative;
-    height: 36px;
+    height: 30px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
 }
 
 .step-item:hover > .move-btn,

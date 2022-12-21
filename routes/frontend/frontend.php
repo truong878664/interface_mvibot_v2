@@ -65,3 +65,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         )->name('location.');
     });
 });
+
+Route::get('test', function () {
+    return view("frontend.pages.missions.createMission2");
+});

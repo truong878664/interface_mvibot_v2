@@ -44,20 +44,24 @@ function getValueCheckbox(element) {
                 .querySelector("input");
             const typeGpio = inputGpio.getAttribute("name");
             if (item.checked) {
-                valueGpio[`${typeGpio}`].push(item.defaultValue);
+                valueGpio[typeGpio].push(item.defaultValue);
             } else {
-                valueGpio[`${typeGpio}`].splice(
-                    valueGpio[`${typeGpio}`].indexOf(item.defaultValue),
+                valueGpio[typeGpio].splice(
+                    valueGpio[typeGpio].indexOf(item.defaultValue),
                     1
                 );
             }
             const html = [];
-            valueGpio[`${typeGpio}`].map((item) => {
+            valueGpio[typeGpio].sort((x, y) => {
+                return Number(x) - Number(y);
+            });
+            console.log(valueGpio[typeGpio]);
+            valueGpio[typeGpio].map((item) => {
                 html.push(`<div class="item-gpio">${item}</div>`);
             });
             element.querySelector(".show-gpio-wrapper").innerHTML =
                 html.join("");
-            inputGpio.value = valueGpio[`${typeGpio}`].toString();
+            inputGpio.value = valueGpio[typeGpio].toString();
         };
     });
 }

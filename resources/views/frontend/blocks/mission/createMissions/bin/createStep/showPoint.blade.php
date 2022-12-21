@@ -19,9 +19,9 @@
                         class="fa-solid fa-eye"></i></button>
 
                 <form class="point-item-wrapper" method="post" action="/dashboard/missions/add-point-to-mission">
-                    @include('frontend.blocks.mission.createMissions.createStep.function.idMission')
+                    @include('frontend.blocks.mission.createMissions.functionTab.idMission')
                     <input type="text" value="{{ $point->name_position }}" name="name_position" hidden>
-                    <input type="text" value="{{ $point->id }}"" name="id_position" hidden>
+                    <input type="text" value="{{ $point->id }}" name="id_position" hidden>
                     <button class="add-point action-point-btn"><i class="fa-solid fa-plus"></i></button>
                     @csrf
                 </form>

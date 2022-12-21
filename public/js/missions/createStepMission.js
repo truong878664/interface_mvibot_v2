@@ -138,6 +138,7 @@ function sendMission() {
 
     optionRobot.onchange = (e) => {
         nameRobot = e.target.value;
+        console.log(nameRobot);
     };
 
     sendMissionBtn.onclick = () => {

@@ -25,7 +25,7 @@ function renderStep() {
             `<div class="step-item step-${stepMode}" index=${index}>
                 <input hidden type="text" class="step-id" value=${stepId}>
                 <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
-                <div>${stepMode}|${stepName}</div>
+                <span class="stem-name">${stepMode}|${stepName}</span>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
                 <button class="show-menu"><i class="fa-solid fa-ellipsis"></i></button>
                 <ul class="menu-right-click">

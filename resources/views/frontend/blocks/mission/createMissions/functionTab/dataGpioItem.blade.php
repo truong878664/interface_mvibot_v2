@@ -1,12 +1,12 @@
-<div class="data-gpio-item">
+<div class="text-2xl data-gpio-item">
     <label class="name_gpio_item" for={{ $name_gpio_item }}>{{ $name_gpio_item }}</label>
-    <input type="text" hidden name="{{ $name_gpio_item }}" id="{{ $name_gpio_item }}">
+    <input type="text" hidden name="{{ $name_gpio_item }}" id="{{ $name_gpio_item }}" class="">
     <button class="create-gpio"><i class="fa-solid fa-plus-minus"></i></button>
-    <div class="show-gpio-wrapper"></div>
-    <div class="in_pulldown_value form-gpio-item">
+    <div class="show-gpio-wrapper mt-2 w-full overflow-x-scroll"></div>
+    <div class="in_pulldown_value form-gpio-item  lg:bottom-[auto] lg:top-[100%]">
         @for ($i = 0; $i < 21; $i++)
             <label class="checkbox-wrapper">
-                <label class="label-for-checkbox-gpio">{{ $i }}</label>
+                <label class="label-for-checkbox-gpio w-[16px]">{{ $i }}</label>
                 <input class="checkbox-gpio" type="checkbox" value="{{ $i }}" />
             </label>
         @endfor
