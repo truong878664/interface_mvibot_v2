@@ -1,5 +1,5 @@
-<div class="tracking-mission-wrapper">
-    <div class="map-tracking-wrapper">
+<div class="tracking-mission-wrapper h-[calc(100vh_-_200px)] md:h-[calc(100vh_-_140px)]">
+    <div class="map-tracking-wrapper bg-[#ccc]">
         <div class="map-tracking" id="map"></div>
         <div class="choose-robot-tracking">
             <label for="">choose robot:</label>

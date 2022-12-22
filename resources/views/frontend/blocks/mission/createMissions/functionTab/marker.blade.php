@@ -28,6 +28,8 @@
     }
 </style>
 <script>
+    const $$ = document.querySelectorAll.bind(document)
+    const $ = document.querySelector.bind(document)
     $$('.marker-btn').forEach((item, index) => {
         item.onclick = () => {
             $('.marker-btn.active').classList.remove("active")

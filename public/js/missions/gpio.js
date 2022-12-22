@@ -1,5 +1,5 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+// const $ = document.querySelector.bind(document);
+// const $$ = document.querySelectorAll.bind(document);
 
 showFormGpio();
 hiddeFormGpio();
@@ -73,3 +73,28 @@ function addIdInputCheckbox() {
         allLabel[index].setAttribute("for", index);
     });
 }
+const allCheckBoxWakeUp = $$(".wake_up_checkbox");
+// console.log(allCheckBoxWakeUp);
+
+const show = $(".out_set_wake_up_show");
+
+const nameWakeUp = [
+    "out_set",
+    "out_reset",
+    "in_on",
+    "in_off",
+    "in_pullup",
+    "in_pulldown",
+];
+
+nameWakeUp.forEach((nameGpio) => {
+    const dataGpios = $(`.${nameGpio}_wake_up`).value.split(",");
+    dataGpios.forEach((dataGpio) => {
+        $$(`.${nameGpio}_wake_up_checkbox`)[Number(dataGpio)].checked = true;
+    });
+    const html = [];
+    dataGpios.map((dataGpio) => {
+        return html.push(`<div class="item-gpio">${dataGpio}</div>`);
+    });
+    $(`.${nameGpio}_wake_up_show`).innerHTML = html.join("");
+});

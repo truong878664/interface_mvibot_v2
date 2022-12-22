@@ -21,10 +21,10 @@ class FootprintController extends Controller
     public function addFootprintToStepMissionsName($request)
     {
         $name_footprint = $request->name_footprint;
-        $x1 = $request->x1;
-        $x2 = -$request->x2;
-        $y1 = $request->y1;
-        $y2 = -$request->y2;
+        $x1 = -$request->x1;
+        $x2 = $request->x2;
+        $y1 = -$request->y1;
+        $y2 = $request->y2;
 
         $dataFootprint = [
             "name_footprint" => $name_footprint,
@@ -45,10 +45,10 @@ class FootprintController extends Controller
     public function updateFootprint(Request $request)
     {
         $name_footprint = $request->name_footprint;
-        $x1 = $request->x1;
-        $x2 = -$request->x2;
-        $y1 = $request->y1;
-        $y2 = -$request->y2;
+        $x1 = -$request->x1;
+        $x2 = $request->x2;
+        $y1 = -$request->y1;
+        $y2 = $request->y2;
         $idMission = $request->current_id_mission;
 
         $dataFootprint = [

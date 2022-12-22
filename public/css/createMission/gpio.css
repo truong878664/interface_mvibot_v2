@@ -1,16 +1,3 @@
-.create-gpio {
-    width: 20px;
-    height: 20px;
-    border: none;
-    background: rgba(15, 108, 189, 0.467);
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0 4px;
-    border-radius: 2px;
-}
-
-.create-gpio:hover {
-    background: rgba(15, 108, 189, 0.6);
-}
 
 .item-gpio {
     width: 20px;

@@ -10,7 +10,7 @@
 
 .nav-tab {
     display: flex;
-    background-color: #5f9cf733;
+    background-color: rgba(15, 108, 189, 0.4);
     list-style: none;
     height: 26px;
     /* width: 700px; */
@@ -31,11 +31,12 @@
 }
 
 .navtab-item:hover {
-    background-color: #5f9cf77e;
+    background-color: var(--main-color);
+    color: #fff;
 }
 
 .navtab-item.active {
-    background-color: #5f9df7;
+    background-color: var(--main-color);
     color: var(--white-color);
 }
 

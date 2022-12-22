@@ -95,7 +95,6 @@
             </div>
             <label for="wake-up"
                 class="text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</label>
-            <script type="module" src="/js/missions/gpio.js"></script>
         </div>
     </div>
 </div>
@@ -118,15 +117,13 @@
         </div>
         <label for="stop"
             class="text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</label>
-        <script type="module" src="/js/missions/gpio.js"></script>
+        {{-- <script type="module" src="/js/missions/gpio.js"></script> --}}
     </div>
 </div>
 </div>
 </div>
-
-
-
 </div>
+{{-- <script type="module" src="/js/missions/gpio.js"></script> --}}
 
 @php
     $datas = explode('|', $itemRender->steps_mission_name);

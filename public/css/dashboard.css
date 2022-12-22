@@ -45,6 +45,7 @@
     padding: 24px;
     z-index: 100;
     color: white;
+    opacity: 70%;
 }
 
 .dashboard-content-item-icon::after {
@@ -63,6 +64,6 @@
 }
 
 .dashboard-content-item-wrapper {
-    font-size: 3rem;
+    font-size: 2rem;
     width: 100%;
 }

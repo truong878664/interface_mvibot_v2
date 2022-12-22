@@ -9,7 +9,7 @@
     <div class="h-[calc(100%_-_190px)] w-full lg:flex">
         {{-- point --}}
         <div class="mb-2 bg-[#fff] h-[30%] overflow-hidden lg:w-1/5 lg:h-full lg:mx-1 border-[1px] border-solid">
-            <p class="text-2xl text-center bg-[#ccc]">point</p>
+            <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">point</p>
             <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                 {{-- point item --}}
                 @include('frontend.blocks.mission.createMissions.showPoint.showPoint')
@@ -18,7 +18,7 @@
         </div>
         {{-- function --}}
         <div class="mb-2 bg-[#fff] h-[30%] lg:mx-1 lg:w-1/5 lg:h-full border-[1px]  overflow-hidden">
-            <p class="text-2xl text-center bg-[#ccc]">function</p>
+            <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">function</p>
             <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                 <div
                     class=" function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] active">
@@ -54,9 +54,10 @@
             </div>
         </div>
     </div>
-    <div class="mb-2 h absolute bottom-[20px] w-full h-[150px] border-[1px] ">
+    <div class="mb-2 h absolute bottom-[20px] w-full h-[150px] border-[1px] bg-slate-50 ">
         @include('frontend.blocks.mission.createMissions.functionTab.steps')
     </div>
+
 </div>
 </div>
 <style>
@@ -76,3 +77,4 @@
         }
     });
 </script>
+<script src="/js/missions/gpio.js"></script>

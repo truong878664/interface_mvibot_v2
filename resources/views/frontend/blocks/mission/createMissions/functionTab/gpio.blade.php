@@ -28,4 +28,3 @@
 
     @csrf
 </form>
-<script src="/js/missions/gpio.js"></script>
