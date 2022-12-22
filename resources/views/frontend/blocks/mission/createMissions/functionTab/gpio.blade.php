@@ -18,12 +18,13 @@
         @foreach ($gpios as $gpio)
             @include('frontend.blocks.mission.createMissions.functionTab.dataGpioItem', [
                 'name_gpio_item' => $gpio,
+                'type' => 'gpio',
             ])
         @endforeach
     </div>
     @include('frontend.blocks.mission.createMissions.functionTab.idMission')
     <button
-        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[var(--main-color)] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
+        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
 
     @csrf
 </form>

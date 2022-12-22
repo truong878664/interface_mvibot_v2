@@ -334,13 +334,13 @@ input[type="number"] {
 }
 
 .input-footprint {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc;
     width: 60px;
     height: 30px;
     text-align: center;
     padding: 0 8px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8); */
 }
 
 .top-footprint {

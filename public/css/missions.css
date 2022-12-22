@@ -12,19 +12,19 @@
     display: flex;
     background-color: #5f9cf733;
     list-style: none;
-    height: 30px;
+    height: 26px;
     /* width: 700px; */
     border-radius: 4px;
     justify-content: space-between;
-    font-size: 2rem;
+    font-size: 1.6rem;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .navtab-item {
     align-items: stretch;
     padding: 0 25px;
-    line-height: 30px;
+    line-height: 26px;
     user-select: none;
     border-radius: 4px;
     cursor: pointer;

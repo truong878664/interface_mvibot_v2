@@ -21,6 +21,10 @@ class markerController extends Controller
         $off_set_y2 = $this->checkDataMarker($request->off_set_y2);
         $off_set_dis = $this->checkDataMarker($request->off_set_dis);
         $off_set_angle = $this->checkDataMarker($request->off_set_angle);
+        $sx1 = $request->sx1;
+        $sx2 = $request->sx2;
+        $sy1 = $request->sy1;
+        $sy2 = $request->sy2;
 
 
         $dataMarker = [
@@ -33,6 +37,10 @@ class markerController extends Controller
             'off_set_y2' => $off_set_y2,
             'off_set_dis' => $off_set_dis,
             'off_set_angle' => $off_set_angle,
+            'sx1' => $sx1,
+            'sx2' => $sx2,
+            'sy1' => $sy1,
+            'sy2' => $sy2,
         ];
         $markerInsert = MissionMarker::create($dataMarker);
         $idMission = $request->current_id_mission;

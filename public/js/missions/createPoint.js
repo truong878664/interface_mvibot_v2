@@ -13,6 +13,7 @@ import { displayLayer, markerClient } from "../rosModule/layer/markerClient.js";
 import { mvibot_layer } from "../rosModule/classMvibot.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import { markerClientPath } from "../rosModule/path/markerClientPath.js";
+import validateInputSubmit from "../functionHandle/validateForm.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -60,5 +61,11 @@ function addLayerDbToLayerActive() {
             displayLayer(mvibot_layer_active);
         });
 }
+validateInputSubmit(
+    ".input-submit",
+    ".form-create-point",
+    ".point-submit-btn",
+    ".time-out"
+);
 
 export { viewer, mapElement };

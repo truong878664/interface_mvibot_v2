@@ -20,6 +20,10 @@ class MissionMarker extends Model
         'off_set_y2',
         'off_set_dis',
         'off_set_angle',
+        'sx1',
+        'sx2',
+        'sy1',
+        'sy2',
     ];
     public $timestamps = false;
 }

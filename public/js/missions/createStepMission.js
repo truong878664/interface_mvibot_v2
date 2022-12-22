@@ -8,6 +8,7 @@ import displayPose from "../rosModule/displayPose.js";
 import { stepsNameSubmit, renderStep } from "./renderStepMission.js";
 
 import { runMission } from "../rosModule/handleMission.js";
+import validateInputSubmit from "../functionHandle/validateForm.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);

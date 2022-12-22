@@ -1,8 +1,8 @@
 <div class="flex items-center">
-    <a href="{{ route('dashboard.missions.create-missions.') }}" class="mx-2">
+    <a href="{{ route('dashboard.missions.create-missions.') }}" class="mx-4">
         <i class="fa-solid fa-angle-left"></i>
     </a>
-    <div class="create-mission-heading">{{ $itemRender->name_mission }}</div>
+    <div class="create-mission-heading text-[20px]">{{ $itemRender->name_mission }}</div>
 </div>
 
 <div class="w-full h-[calc(100%_-_26px)] flex flex-col relative">
@@ -13,7 +13,6 @@
             <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                 {{-- point item --}}
                 @include('frontend.blocks.mission.createMissions.showPoint.showPoint')
-
 
             </div>
         </div>
@@ -56,9 +55,7 @@
         </div>
     </div>
     <div class="mb-2 h absolute bottom-[20px] w-full h-[150px] border-[1px] ">
-        {{-- <div class="steps-mission"> --}}
         @include('frontend.blocks.mission.createMissions.functionTab.steps')
-        {{-- </div> --}}
     </div>
 </div>
 </div>

@@ -1,3 +1,5 @@
+// import validateInputSubmit from "./functionHandle/validateForm";
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 

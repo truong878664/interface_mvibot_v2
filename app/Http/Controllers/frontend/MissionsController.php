@@ -142,7 +142,10 @@ class MissionsController extends Controller
                     $off_set_y2 = $item->off_set_y2;
                     $off_set_dis = $item->off_set_dis;
                     $off_set_angle = $item->off_set_angle;
-
+                    $sx1 = $item->sx1;
+                    $sx2 = $item->sx2;
+                    $sy1 = $item->sy1;
+                    $sy2 = $item->sy2;
 
                     strlen($marker_dir) ? $data_marker_dir = "~marker_dir=$marker_dir~" : $data_marker_dir = "";
                     strlen($off_set_x1) ? $data_off_set_x1 = "~off_set_x1=$off_set_x1~" : $data_off_set_x1 = "";
@@ -151,7 +154,12 @@ class MissionsController extends Controller
                     strlen($off_set_y2) ? $data_off_set_y2 = "~off_set_y2=$off_set_y2~" : $data_off_set_y2 = "";
                     strlen($off_set_dis) ? $data_off_set_dis = "~off_set_dis=$off_set_dis~" : $data_off_set_dis = "";
                     strlen($off_set_angle) ? $data_off_set_angle = "~off_set_angle=$off_set_angle~" : $data_off_set_angle = "";
-                    return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle)";
+                    strlen($sx1) ? $data_sx1 = "~sx1=$sx1~" : $data_sx1 = "";
+                    strlen($sx2) ? $data_sx2 = "~sx2=$sx2~" : $data_sx2 = "";
+                    strlen($sy1) ? $data_sy1 = "~sy1=$sy1~" : $data_sy1 = "";
+                    strlen($sy2) ? $data_sy2 = "~sy2=$sy2~" : $data_sy2 = "";
+
+                    return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
 
                     break;
             }

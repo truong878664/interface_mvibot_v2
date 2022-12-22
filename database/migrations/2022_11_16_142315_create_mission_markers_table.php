@@ -27,6 +27,10 @@ return new class extends Migration
                 $table->float('off_set_y2')->nullable();
                 $table->float('off_set_dis')->nullable();
                 $table->float('off_set_angle')->nullable();
+                $table->float('sx1', 4, 2)->nullable();
+                $table->float('sx2', 4, 2)->nullable();
+                $table->float('sy1', 4, 2)->nullable();
+                $table->float('sy2', 4, 2)->nullable();
             });
         }
     }

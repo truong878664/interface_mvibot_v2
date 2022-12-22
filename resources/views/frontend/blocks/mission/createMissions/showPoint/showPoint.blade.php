@@ -2,8 +2,8 @@
     <div
         class="point-id-1 flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-3 mb-2 point-id-{{ $point->id }}">
         <div class="text-2xl">
-            <p class="">asdf</p>
-            <p class="text-xl">create at: asdf</p>
+            <p class="">{{ $point->name_position }}</p>
+            <p class="text-xl">create at: {{ $point->created_at }}</p>
         </div>
         <div class="flex items-center ">
             <form class="" method="post" action="/dashboard/missions/delete-point/{{ $point->id }}">
@@ -11,7 +11,8 @@
                 <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white "><i class="fa-solid fa-xmark"></i></button>
                 @csrf
             </form>
-            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white "><i class="fa-solid fa-eye"></i></button>
+            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white show-point-map"><i
+                    class="fa-solid fa-eye"></i></button>
 
             <form class="" method="post" action="/dashboard/missions/add-point-to-mission">
                 @include('frontend.blocks.mission.createMissions.functionTab.idMission')
