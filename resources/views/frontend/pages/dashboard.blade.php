@@ -23,8 +23,8 @@
         <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-location-dot' title='localization'
             describe='Set localization for robot' color="#B01E68" />
 
-        <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-toggle-on' title='Gpio'
-            describe='Set & reset Gpio' color="#FBDF07" />
+        <x-dashboard-item route='dashboard.gpio.' icon='fa-solid fa-toggle-on' title='Gpio' describe='Set & reset Gpio'
+            color="#FBDF07" />
 
         <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-music' title='Music' describe='Set sound'
             color="#5BB318" />

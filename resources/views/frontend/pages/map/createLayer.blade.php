@@ -24,10 +24,16 @@
                         </div>
                         <div class="bg-[#fff] absolute top-3 right-3 w-[200px]">
                             <label for=""
-                                class="absolute bg-slate-400 text-[#fff] top-0 w-full block h-[23px] text-center">saved
-                                layer
-                                list</label>
-                            <div class="max-h-[300px] overflow-scroll overflow-x-hidden mt-[23px]">
+                                class="absolute bg-[#0f6cbd] rounded-sm select-none text-[#fff] top-0 w-full block h-[23px] text-center btn"
+                                id="list-layer-btn">
+                                <span>saved layer list</span>
+                                <span class="text-xl float-right pr-4 leading-[23px]">
+                                    <i class="fa-solid fa-chevron-down hidden" id="down-icon"></i>
+                                    <i class="fa-solid fa-chevron-up hidden" id="up-icon"></i>
+                                </span>
+                            </label>
+                            <div class="max-h-[300px] overflow-scroll overflow-x-hidden mt-[23px] hidden"
+                                id="list-layer-item">
                                 @php
                                     $allLayerJson = json_encode($allLayer->toArray());
                                 @endphp
@@ -62,7 +68,7 @@
                                 <input type="text" class=" w-[200px] px-4" id="name_layer">
                             </div>
                         </div>
-
+                        <div class="w-full h-[1px] bg-slate-400 mb-4"></div>
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
                             <span class="pr-2 min-w-[77px]">Type layer</span>
                             <select name="" id="type-layer" class=" w-[200px] px-4 flex-1 outline-none border-[1px]">
@@ -75,7 +81,8 @@
                             <span class="pr-2 min-w-[77px]">Width</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="1" id="width-layer">
-                                <input id="width-layer-range" type="range" step="0.1" value="1" max="50"
+                                <input id="width-layer-range" type="range" step="0.1" value="0.1" max="50"
+                                    min="0.1"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
                         </div>
@@ -84,7 +91,8 @@
                             <span class="pr-2 min-w-[77px]">Height</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="1" id="height-layer">
-                                <input id="height-layer-range" type="range" step="0.1" max="50" value="1"
+                                <input id="height-layer-range" type="range" step="0.1" max="50" value="0.1"
+                                    min="0.1"
                                     class="layer-range w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-3">
                             </div>
                         </div>
@@ -154,4 +162,27 @@
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/nipplejs.js"></script>
     <script type="module" src="/js/map/createLayer.js"></script>
+    <script>
+        const $ = document.querySelector.bind(document)
+        let isShowListlayer = JSON.parse(localStorage.getItem("isShowListlayer"));
+        showIcon(isShowListlayer)
+        isShowListlayer && $('#list-layer-item').classList.remove('hidden')
+        $('#list-layer-btn').onclick = () => {
+            $('#list-layer-item').classList.toggle('hidden')
+            isShowListlayer = !isShowListlayer
+            localStorage.setItem("isShowListlayer", isShowListlayer);
+            showIcon(isShowListlayer)
+        }
+
+        function showIcon(boolean) {
+            if (boolean) {
+                $('#up-icon').classList.remove('hidden')
+                $('#down-icon').classList.add('hidden')
+            } else {
+                $('#up-icon').classList.add('hidden')
+                $('#down-icon').classList.remove('hidden')
+
+            }
+        }
+    </script>
 @endsection

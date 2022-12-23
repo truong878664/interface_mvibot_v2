@@ -11,32 +11,32 @@
             <div class="mr-4">
                 <label for="" class="text-xl">X1</label>
                 <input required type="number" class="w-[40px] text-xl px-4 py-1" step="0.01" name="x1">
-                <span class="text-xl">m</span>
+                <span class="text-xl">mm</span>
             </div>
 
             <div class="mr-4">
                 <span class="font-[300] text-[#ccc]">|</span>
                 <label for="" class="text-xl">X2</label>
                 <input required type="number" class="w-[40px] text-xl px-4 py-1" step="0.01" name="x2">
-                <span class="text-xl">m</span>
+                <span class="text-xl">mm</span>
             </div>
 
             <div class="mr-4">
                 <span class="font-[300] text-[#ccc]">|</span>
                 <label for="" class="text-xl">Y1</label>
                 <input required type="number" class="w-[40px] text-xl px-4 py-1" step="0.01" name="y1">
-                <span class="text-xl">m</span>
+                <span class="text-xl">mm</span>
             </div>
 
             <div class="mr-4">
                 <span class="font-[300] text-[#ccc]">|</span>
                 <label for="" class="text-xl">Y2</label>
                 <input required type="number" class="w-[40px] text-xl px-4 py-1" step="0.01" name="y2">
-                <span class="text-xl">m</span>
+                <span class="text-xl">mm</span>
             </div>
         </div>
     </div>
-    <div class=" relative w-[50%] h-[10%] bg-contain bg-center bg-no-repeat self-center flex-1"
+    <div class=" relative w-[50%] bg-contain bg-center bg-no-repeat self-center flex-1 max-w-[300px]"
         style="background-image:url('/img/footprint.png');">
 
     </div>

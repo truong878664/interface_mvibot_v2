@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\DashboardController;
+use App\Http\Controllers\frontend\gpioPageController;
 use App\Http\Controllers\frontend\joystickController;
 use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
@@ -63,9 +64,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             'location',
             [locationController::class, 'index']
         )->name('location.');
-    });
-});
 
-Route::get('test', function () {
-    return view("frontend.pages.missions.createMission2");
+        Route::get('gpio', [gpioPageController::class, 'index'])->name('gpio.');
+    });
 });

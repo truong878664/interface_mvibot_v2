@@ -45,7 +45,7 @@
     padding: 24px;
     z-index: 100;
     color: white;
-    opacity: 70%;
+    opacity: 80%;
 }
 
 .dashboard-content-item-icon::after {
