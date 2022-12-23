@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
 use App\Models\backend\StatusRobot;
+use App\Models\backend\Stop;
+use App\Models\backend\WakeUp;
 use App\Models\Robot;
 use Illuminate\Support\Facades\DB;
 
@@ -54,8 +56,11 @@ class MissionsController extends Controller
 
         $allRobot = Robot::all()->toArray();
 
+        $currentWakeUp = json_encode(WakeUp::where('name_mission', $itemRender->name_mission)->get());
+        $currentStop = json_encode(Stop::where('name_mission', $itemRender->name_mission)->get());
+
         $this->addPointToStepsMission($idRender);
-        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot'));
+        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot', 'currentWakeUp', 'currentStop'));
     }
 
     public function addPointToStepsMission($idMission)

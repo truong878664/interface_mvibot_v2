@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\GpioController;
 use App\Http\Controllers\backend\markerController;
 use App\Http\Controllers\backend\SleepController;
 use App\Http\Controllers\backend\AuthController;
+use App\Http\Controllers\backend\gpioOtherController;
 use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
 
@@ -29,6 +30,9 @@ Route::prefix('dashboard')->group(function () {
         Route::post('update-footprint', [FootprintController::class, 'updateFootprint']);
         Route::post('update-gpio', [GpioController::class, 'updateGpio']);
         Route::post('update-sleep', [SleepController::class, 'updateSleep']);
+
+        Route::post('add-wake-up', [gpioOtherController::class, 'createWakeUp']);
+        Route::post('add-stop', [gpioOtherController::class, 'createStop']);
     });
 });
 Route::post('/check', [AuthController::class, 'check'])->name('check');

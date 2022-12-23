@@ -79,8 +79,9 @@
 
     <input type="checkbox" name="" id="wake-up" class="input-checkbox" hidden>
     <div class="select-robot-wrapper form-checkbox ">
+        <input type="hidden" name="" id="current-wake-up" value="{{ $currentWakeUp }}">
         <label for="wake-up" class="overlay"></label>
-        <div class="form-wrapper w-[500px]">
+        <form method="POST" action="/dashboard/missions/add-wake-up" class="form-wrapper w-[500px]" id="form-wake-up">
             <strong>Wake Up</strong>
             <div class="flex flex-wrap justify-between">
                 @php
@@ -93,16 +94,24 @@
                     ])
                 @endforeach
             </div>
-            <label for="wake-up"
-                class="text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</label>
-        </div>
+            @csrf
+            <input type="hidden" name="name_mission" value="{{ $itemRender->name_mission }}">
+            <div class="mt-4">
+                <label for="wake-up"
+                    class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md">cancel</label>
+                <button
+                    class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</button>
+            </div>
+
+        </form>
     </div>
 </div>
 
 <input type="checkbox" name="" id="stop" class="input-checkbox" hidden>
 <div class="select-robot-wrapper form-checkbox">
+    <input type="hidden" name="" id="current-stop" value="{{ $currentStop }}">
     <label for="stop" class="overlay"></label>
-    <div class="form-wrapper w-[500px]">
+    <form method="POST" action="/dashboard/missions/add-stop" class="form-wrapper w-[500px]" id="form-stop">
         <strong>Stop</strong>
         <div class="flex flex-wrap justify-between">
             @php
@@ -115,15 +124,17 @@
                 ])
             @endforeach
         </div>
-        <label for="stop"
-            class="text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</label>
-        {{-- <script type="module" src="/js/missions/gpio.js"></script> --}}
-    </div>
+        <input type="hidden" name="name_mission" value="{{ $itemRender->name_mission }}">
+        @csrf
+        <div class="mt-4">
+            <label for="stop"
+                class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md">cancel</label>
+
+            <button
+                class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Ok</button>
+        </div>
+    </form>
 </div>
-</div>
-</div>
-</div>
-{{-- <script type="module" src="/js/missions/gpio.js"></script> --}}
 
 @php
     $datas = explode('|', $itemRender->steps_mission_name);
