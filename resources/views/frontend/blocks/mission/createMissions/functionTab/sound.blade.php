@@ -1,1 +1,1 @@
-<div class="hidden function-item">sound</div>
+<div class="hidden function-item"></div>

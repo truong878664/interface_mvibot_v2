@@ -36,10 +36,10 @@
                     class=" function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                     <span>Sleep</span>
                 </div>
-                <div
+                {{-- <div
                     class=" function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                     <span>Sound</span>
-                </div>
+                </div> --}}
             </div>
         </div>
 

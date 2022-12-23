@@ -174,7 +174,7 @@ export function deletePath(nameRobot) {
 export function robotPathTopic(nameRobot) {
     const robot_path_topic = new ROSLIB.Topic({
         ros: ros,
-        name: `/${nameRobot}/move_base_flex/DWAPlannerROS/global_plan`,
+        name: `/${nameRobot}/move_base_flex/NavfnROS/plan`,
         messageType: "nav_msgs/Path",
         queue_size: 1,
     });

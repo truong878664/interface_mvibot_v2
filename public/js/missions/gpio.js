@@ -4,7 +4,7 @@
 showFormGpio(".create-gpio_gpio");
 showFormGpio(".create-gpio_wake_up");
 showFormGpio(".create-gpio_stop");
-hiddeFormGpio();
+hiddenFormGpio();
 
 function showFormGpio(classElement) {
     const allCreateGpioBtn = $$(classElement);
@@ -18,7 +18,7 @@ function showFormGpio(classElement) {
     });
 }
 
-function hiddeFormGpio() {
+function hiddenFormGpio() {
     $$(".hidden-form-gpio-item").forEach((element) => {
         element.onclick = (e) => {
             e.preventDefault();
@@ -100,11 +100,16 @@ const nameGpios = [
 ];
 
 nameGpios.forEach((nameGpio) => {
-    const dataWakeUp = currentWakeUp[0][nameGpio]?.split(",").map(Number) || [];
-    valueGpioOther[0][nameGpio] = dataWakeUp;
+    if (currentWakeUp.length > 0) {
+        const dataWakeUp =
+            currentWakeUp[0][nameGpio]?.split(",").map(Number) || [];
+        valueGpioOther[0][nameGpio] = dataWakeUp;
+    }
 
-    const dataStop = currentStop[0][nameGpio]?.split(",").map(Number) || [];
-    valueGpioOther[1][nameGpio] = dataStop;
+    if (currentStop.length > 0) {
+        const dataStop = currentStop[0][nameGpio]?.split(",").map(Number) || [];
+        valueGpioOther[1][nameGpio] = dataStop;
+    }
 });
 
 valueGpioOther.forEach((itemOther) => {

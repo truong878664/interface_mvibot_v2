@@ -39,7 +39,41 @@ function getValueWakeUpStop() {
         ? `~in_pulldown=${$(".in_pulldown_stop").value}~`
         : "";
 
-    const dataHeader = `(name:wake_up|time_out:-1|mode:gpio|data:${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})(name:stop|time_out:-1|mode:gpio|data:${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
+    const isWakeUp = !!(
+        out_set_wake_up ||
+        out_reset_wake_up ||
+        in_on_wake_up ||
+        in_off_wake_up ||
+        in_pullup_wake_up ||
+        in_pulldown_wake_up
+    );
+
+    const isStop = !!(
+        out_set_stop ||
+        out_reset_stop ||
+        in_on_stop ||
+        in_off_stop ||
+        in_pullup_stop ||
+        in_pulldown_stop
+    );
+
+    let wake_up;
+    let stop;
+
+    if (!isWakeUp && !isStop) {
+        wake_up = "";
+        stop = "";
+    } else if (!isWakeUp) {
+        wake_up = "";
+        stop = `(name:stop|time_out:-1|mode:gpio|data:${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
+    } else if (!isStop) {
+        stop = "";
+        wake_up = `(name:wake_up|time_out:-1|mode:gpio|data:${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
+    } else {
+        wake_up = `(name:wake_up|time_out:-1|mode:gpio|data:${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
+        stop = `(name:stop|time_out:-1|mode:gpio|data:${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
+    }
+    const dataHeader = `${wake_up}${stop}`;
     return dataHeader;
 }
 export default getValueWakeUpStop;
