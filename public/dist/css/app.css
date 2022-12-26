@@ -1455,10 +1455,6 @@ video {
     height: 300px;
   }
 
-  .lg\:min-h-\[400px\] {
-    min-height: 400px;
-  }
-
   .lg\:w-\[400px\] {
     width: 400px;
   }
