@@ -44,7 +44,7 @@
         </div>
 
         {{-- deteil fc --}}
-        <div class="mb-2 bg-[#fff] h-[40%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px]">
+        <div class="mb-2 bg-[#fff] h-[40%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] min-h-[250px]">
             <div class="h-full w-full relative">
                 @include('frontend.blocks.mission.createMissions.functionTab.footprint')
                 @include('frontend.blocks.mission.createMissions.functionTab.gpio')
