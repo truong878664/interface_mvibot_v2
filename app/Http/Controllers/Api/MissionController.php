@@ -42,7 +42,6 @@ class MissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

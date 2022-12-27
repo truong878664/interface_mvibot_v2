@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\MissionController;
+use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\frontend\statusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('mission', MissionController::class);
+Route::resource('position', PositionController::class);

@@ -379,4 +379,28 @@ function moveStepRight(dataSteps) {
     });
 }
 
+$$(".delete-point-btn").forEach((element) => {
+    element.onclick = (e) => {
+        deletePoint(e.target.getAttribute("point-id"));
+        e.target.closest(".item-point").remove();
+    };
+});
+
+function deletePoint(id) {
+    fetch(`/api/position/${id}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "DELETE",
+    })
+        .then(function (res) {
+            console.log(res);
+            renderStep();
+        })
+        .catch(function (res) {
+            console.log(res);
+        });
+}
+
 export { renderStep };

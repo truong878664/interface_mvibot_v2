@@ -3,7 +3,7 @@
         <label for="" class="text-xl">Name footpint</label>
         <input class="w-[200px] text-xl px-4 py-1" type="text" name="name_footprint" required>
     </div>
-    <div class="flex w-full h-full">
+    <div class="flex w-full h-[calc(100%_-_100px)]">
         <div class="w-[22%]">
             <div class="mr-4 ">
                 <label for="" class="text-xl">X1</label>
@@ -39,7 +39,7 @@
             </div>
 
         </div>
-        <div class="w-[78%] h-full flex justify-center">
+        <div class="w-[78%] flex-1 flex justify-center">
             <div class="w-full h-full bg-contain bg-center bg-no-repeat max-w-[300px]"
                 style="background-image:url('/img/footprint.png');"></div>
         </div>

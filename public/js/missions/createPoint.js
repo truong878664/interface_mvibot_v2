@@ -6,7 +6,7 @@ import displayPose from "../rosModule/displayPose.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
 import { setPosition } from "../rosModule/functionHandler.js";
-import { $ } from "../main.js";
+import { $, toggerMessage } from "../main.js";
 import setSizeMap from "../rosModule/getSizeMap.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import { displayLayer, markerClient } from "../rosModule/layer/markerClient.js";
@@ -67,5 +67,65 @@ validateInputSubmit(
     ".point-submit-btn",
     ".time-out"
 );
+
+$(".point-submit-btn").onclick = (e) => {
+    e.preventDefault();
+    const name_position = $('[name="name_position"]');
+    const x = $('[name="x"]');
+    const y = $('[name="y"]');
+    const z = $('[name="z"]');
+    const w = $('[name="w"]');
+    const time_out = $('[name="time_out"]');
+    const color_position = $('[name="color_position"]');
+    const mode_position = $('[name="mode_position"]');
+    const mode_child = $('[name="mode_child"]');
+    const map = $('[name="map"]');
+
+    const dataPosition = {
+        name_position: name_position.value,
+        x: x.value,
+        y: y.value,
+        z: z.value,
+        w: w.value,
+        time_out: time_out.value,
+        color_position: color_position.value,
+        mode_position: mode_position.value,
+        mode_child: mode_child.value,
+        map: map.value,
+        mode: "position",
+    };
+    storeData("/api/position", dataPosition);
+    name_position.value = "";
+    time_out.value = "";
+    mode_position.value = "";
+    mode_child.value = "";
+};
+
+function storeData(url, data) {
+    fetch(url, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+    })
+        .then(function (res) {
+            res.status == 200
+                ? toggerMessage("success", "add point successfully")
+                : toggerMessage(
+                      "error",
+                      "An internet error has occurred or your type data, please try again"
+                  );
+            $("#form-create-point-checkbox").checked = false;
+        })
+        .catch(function (res) {
+            console.log(res);
+            toggerMessage(
+                "error",
+                "An internet error has occurred or your type data, please try again"
+            );
+        });
+}
 
 export { viewer, mapElement };

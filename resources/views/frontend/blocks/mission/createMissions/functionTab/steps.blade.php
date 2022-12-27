@@ -39,23 +39,20 @@
             align-items: flex-end;
         }
     </style>
-    <div class="h-full flex">
-        <div class="flex-1 flex relative">
-            <div class="steps-wrapper"></div>
+    <div class="h-full flex ">
+        <div class="flex-1 flex relative h-full ">
+            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap"></div>
             <label class="absolute right-0 top-0 animate-spin text-[#0f6cbd] hidden step-loading">
                 <i class="fa-solid fa-spinner"></i>
             </label>
         </div>
         <div class="submit-btn-wrapper flex flex-col justify-end">
-            <div class="form-submit-steps">
+            <div class="flex flex-col lg:flex-row">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
                 <label for="wake-up"
-                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn">Wake
-                    up</label>
-
+                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn">Wakeup</label>
                 <label for="stop"
                     class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn">Stop</label>
-
                 <label for="select-robot"
                     class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn ">Send</label>
             </div>

@@ -25,13 +25,13 @@
 }
 
 .steps-wrapper {
-    display: flex;
+    /* display: flex;
     padding: 4px;
     flex-wrap: wrap;
     /* margin-right: 100px; */
-    height: 100%;
-    overflow: scroll;
-    flex: 1;
+    /* height: 100%; */
+    /* overflow: scroll;
+    flex: 1;  */
 }
 
 .submit-btn-wrapper {
