@@ -10,21 +10,30 @@ export const currentMission = location.pathname.slice(
 );
 
 function renderStep() {
+    loading();
     fetch(`/api/mission/${currentMission}`)
         .then((res) => res.json())
         .then((data) => {
-            const dataSteps = data.steps_mission_name.split("|");
-            dataSteps.shift();
+            const dataSteps = data.steps_mission_name?.split("|");
+            dataSteps?.shift();
             return dataSteps;
         })
         .then((dataSteps) => {
             render(dataSteps);
+            loaded();
         });
+}
+
+function loading() {
+    $(".step-loading").classList.remove("hidden");
+}
+function loaded() {
+    $(".step-loading").classList.add("hidden");
 }
 function render(dataSteps) {
     const stepsWrapper = document.querySelector(".steps-wrapper");
     const htmlStep = [];
-    dataSteps.map((step, index) => {
+    dataSteps?.map((step, index) => {
         const stepMode = step.slice(0, step.indexOf("#"));
         const stepName = step.slice(
             step.indexOf("#") + 1,
@@ -332,8 +341,6 @@ $$(".submit-btn-marker").forEach((element) => {
 });
 
 function moveStepLeft(dataSteps) {
-    console.log(dataSteps);
-
     const allMoveBtnLeft = document.querySelectorAll(".move-left");
     allMoveBtnLeft.forEach((moveLeftBtn, index) => {
         moveLeftBtn.addEventListener("click", (e) => {
