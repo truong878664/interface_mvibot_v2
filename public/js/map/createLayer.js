@@ -22,7 +22,7 @@ const widthMap = mapElement.offsetWidth;
 
 const tfClient = createTfClient();
 let viewer = createMap(heightMap, widthMap, tfClient);
-
+console.log(tfClient);
 reloadWhenOrientation();
 
 const mvibot_layer_active = [];
