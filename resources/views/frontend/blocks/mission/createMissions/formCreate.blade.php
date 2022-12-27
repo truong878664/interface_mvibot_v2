@@ -5,6 +5,6 @@
         <label for="name-mission" class="heading-create-mission">Name group missions</label>
         <input id="name-mission" type="text" class="point-input" name="name_mission" required>
     </div>
-    <x-button tag="button" title="Create" class="save-point-btn" attribute=""></x-button>
+    <x-button tag="button" title="Create" class="save-point-btn" attribute="for=''"></x-button>
     @csrf
 </form>

@@ -21,7 +21,7 @@ class dashboardItem extends Component
         $icon,
         $title,
         $describe,
-        $color
+        $color,
     ) {
         $this->route = $route;
         $this->icon = $icon;
