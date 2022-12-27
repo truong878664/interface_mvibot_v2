@@ -89,7 +89,7 @@ const markerClient_path_topic = new ROSLIB.Topic({
 
 const markerClient_path_msg = new ROSLIB.Message({
     header: {
-        frame_id: `/odom`,
+        frame_id: `map`,
     },
     ns: "path",
     id: 0,
@@ -126,7 +126,7 @@ const markerClient_path_msg = new ROSLIB.Message({
 });
 
 export function displayPath(nameRobot) {
-    markerClient_path_msg.header.frame_id = `${nameRobot}/odom`;
+    markerClient_path_msg.header.frame_id = `map`;
     console.log(markerClient_path_msg);
     if (robot_path_enable) {
         var points_path = [];
@@ -161,7 +161,7 @@ export function displayPath(nameRobot) {
 }
 
 export function deletePath(nameRobot) {
-    markerClient_path_msg.header.frame_id = `${nameRobot}/odom`;
+    markerClient_path_msg.header.frame_id = `map`;
     markerClient_path_msg.action = 3;
     markerClient_path_msg.id = 0;
     markerClient_path_msg.type = 7;

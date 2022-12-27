@@ -4,6 +4,7 @@ import getValueWakeUpStop from "../missions/ftWakeUpStop.js";
 function runMission(nameRobot, dataBodyMission) {
     const dataHeadMission = getValueWakeUpStop();
     const dataFullMission = `${dataHeadMission}*${dataBodyMission}%@`;
+    // console.log(nameRobot);
     const nameRobotReplace = nameRobot.replace(" ", "");
     const mission_pub = new ROSLIB.Topic({
         ros: ros,

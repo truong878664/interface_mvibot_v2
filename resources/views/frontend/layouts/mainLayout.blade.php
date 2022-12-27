@@ -8,7 +8,7 @@
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/dist/css/app.css">
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 </head>
 
 <body>
@@ -76,7 +76,6 @@
                 </a>
             </li>
         </ul>
-
         <button class="logout">
             <a href="{{ route('logout') }}">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -85,6 +84,10 @@
     </section>
     <div class="container-content">
         @yield('content')
+    </div>
+    <div class="fixed top-[50px] right-4 z-20 text-2xl px-3 rounded-sm border-[1px] border-solid bg-[#ffeddd20]">
+        <span id="message-error" class="text-red-400 w-full h-full"></span>
+        <span id="message-success" class="text-green-400 w-full h-full"></span>
     </div>
 
 

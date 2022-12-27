@@ -18,7 +18,7 @@
 
     @csrf
     <button
-        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
+        class="submit-btn-sleep text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
 
 
 </form>

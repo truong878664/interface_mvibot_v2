@@ -42,13 +42,6 @@
     </style>
     <div class="steps-wrapper"></div>
     <div class="submit-btn-wrapper flex flex-col justify-between">
-        <form class="form-submit-steps" action="/dashboard/missions/update-step-missions-name" method="POST">
-            <input type="text" value="{{ $itemRender->id }}" name="id_mission" hidden>
-            <input id="input-steps-name-submit" type="text" value="" name="steps_mission_name" hidden>
-            <button
-                class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn">Save</button>
-            @csrf
-        </form>
         <div class="form-submit-steps ">
             <input id="input-steps-name-submit" type="text" value="" name="" hidden>
             <label for="wake-up"

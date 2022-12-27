@@ -26,7 +26,7 @@ function hiddenFormGpio() {
         };
     });
 }
-const valueGpio = {
+export const valueGpio = {
     out_set: [],
     out_reset: [],
     in_on: [],

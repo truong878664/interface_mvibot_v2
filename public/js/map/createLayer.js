@@ -34,6 +34,8 @@ const yoRangeElement = $("#yo-range");
 const mapActive = $("#map-active").innerText;
 const nameLayerElement = $("#name_layer");
 const dataLayerFromDatabase = JSON.parse($("#data-layer-json").value);
+
+console.log(dataLayerFromDatabase);
 const countLayerDb = dataLayerFromDatabase.length;
 
 function start() {

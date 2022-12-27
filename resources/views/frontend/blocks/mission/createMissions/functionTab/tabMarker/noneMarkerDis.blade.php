@@ -1,5 +1,4 @@
-<form class="flex h-full w-full justify-between hidden marker-item" action="/dashboard/missions/create-marker"
-    method="POST">
+<form class="flex h-full w-full justify-between hidden marker-item">
     <div class="w-1/2 ">
         <div class="flex items-stretch">
             <div class="flex flex-col mb-2">
@@ -14,7 +13,7 @@
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">Offset dis</label>
-                <input class="w-[54px] text-xl px-4 py-1" type="number" step="0.01" name="off_set_angle" required>
+                <input class="w-[54px] text-xl px-4 py-1" type="number" step="0.01" name="off_set_dis" required>
             </div>
 
         </div>
@@ -51,8 +50,7 @@
     </div>
     @include('frontend.blocks.mission.createMissions.functionTab.idMission')
 
-    @csrf
     <button
-        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
+        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md submit-btn-marker">Add</button>
 
 </form>

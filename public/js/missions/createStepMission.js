@@ -5,10 +5,11 @@ import createTfClient from "../rosModule/createTfClient.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
 import displayPose from "../rosModule/displayPose.js";
-import { stepsNameSubmit, renderStep } from "./renderStepMission.js";
+import { currentMission, renderStep } from "./renderStepMission.js";
 
 import { runMission } from "../rosModule/handleMission.js";
 import validateInputSubmit from "../functionHandle/validateForm.js";
+import { toggerMessage } from "../main.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -21,7 +22,6 @@ function start() {
     tabTypeMarker();
     changeImgMarkerDir();
 
-    stepsNameSubmit();
     renderStep();
 
     sendMission();
@@ -126,23 +126,19 @@ function changeImgMarkerDir() {
 }
 
 function sendMission() {
-    const nameMission = $(".create-mission-heading").innerText;
-    const sendMissionBtn = $(".send-mission-btn");
-    const dataStepsValue = $(".data-steps-value")
-        .value.replace("[", "(")
-        .replace("]", ")")
-        .replaceAll('","', ")(")
-        .replaceAll('"', "");
-    const optionRobot = $("#select-robot-option");
-    let nameRobot;
-    const dataBodyMission = `&name>${nameMission}/time_out>-1/mode>normal/data>%normal_step#${dataStepsValue}`;
+    $(".send-mission-btn").onclick = () => {
+        fetch(`/api/mission/${currentMission}`)
+            .then((res) => res.json())
 
-    optionRobot.onchange = (e) => {
-        nameRobot = e.target.value;
-        console.log(nameRobot);
-    };
-
-    sendMissionBtn.onclick = () => {
-        runMission(nameRobot, dataBodyMission);
+            .then((data) => {
+                const nameRobot = $("#select-robot-option").value;
+                if (nameRobot == "Choose Robot") {
+                    toggerMessage("error", "please choose robot");
+                } else {
+                    const dataBodyMission = `&name>${data.name_mission}/time_out>-1/mode>normal/data>%normal_step#${data.steps_mission}`;
+                    runMission(nameRobot, dataBodyMission);
+                    toggerMessage("success", "send data to robot successfully");
+                }
+            });
     };
 }

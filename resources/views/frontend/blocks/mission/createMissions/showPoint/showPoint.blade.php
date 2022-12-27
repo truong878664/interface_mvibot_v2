@@ -14,11 +14,13 @@
             <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white show-point-map"><i
                     class="fa-solid fa-eye"></i></button>
 
-            <form class="" method="post" action="/dashboard/missions/add-point-to-mission">
+            <form class="item-point" method="post" action="/dashboard/missions/add-point-to-mission">
                 @include('frontend.blocks.mission.createMissions.functionTab.idMission')
-                <input type="text" value="{{ $point->name_position }}" name="name_position" hidden>
-                <input type="text" value="{{ $point->id }}"" name="id_position" hidden>
-                <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white "><i class="fa-solid fa-plus"></i></button>
+                <input type="text" value="position" class="type" hidden>
+                <input type="text" value="{{ $point->name_position }}" class="name_type" hidden>
+                <input type="text" value="{{ $point->id }}" class="id_type" hidden>
+                <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white add-point-btn"><i
+                        class="fa-solid fa-plus"></i></button>
                 @csrf
             </form>
             <div class="show-point" id="{{ $point->id }}" x="{{ $point->x }}" y="{{ $point->y }}"
