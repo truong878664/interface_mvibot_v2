@@ -8,6 +8,11 @@
     <div class="">
         <input type="text" class="input-test">
         <span class="validate-text">123</span>
+        <div class="flex justify-center items-center w-full h-full overflow-hidden">
+            <svg width="100%" height="100%" viewBox="0 0 2100 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @include('frontend.blocks.imgGpio')
+            </svg>
+        </div>
     </div>
     <script>
         let isNumber = false
@@ -26,4 +31,9 @@
             }
         }
     </script>
+    <style>
+        #gpio-input-2 {
+            fill: #f90909;
+        }
+    </style>
 @endsection

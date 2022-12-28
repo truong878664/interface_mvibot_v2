@@ -1,5 +1,7 @@
-// const $ = document.querySelector.bind(document);
-// const $$ = document.querySelectorAll.bind(document);
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+// import { $ } from "../main.js";
 
 showFormGpio(".create-gpio_gpio");
 showFormGpio(".create-gpio_wake_up");
@@ -55,13 +57,23 @@ function getValueCheckbox(element) {
             valueGpio[typeGpio].sort((x, y) => {
                 return Number(x) - Number(y);
             });
-            console.log(valueGpio[typeGpio]);
+
             valueGpio[typeGpio].map((item) => {
                 html.push(`<div class="item-gpio">${item}</div>`);
             });
             element.querySelector(".show-gpio-wrapper").innerHTML =
                 html.join("");
             inputGpio.value = valueGpio[typeGpio].toString();
+
+            const lightGpio = $(".out_set_gpio").value.split(",");
+            $$(".light-gpio").forEach((light) => {
+                light.style.fill = "#969696";
+            });
+            lightGpio.forEach((item) => {
+                // console.log($(`#gpio-output-1`));
+                item != "" &&
+                    ($(`#gpio-output-${Number(item) + 1}`).style.fill = "red");
+            });
         };
     });
 }

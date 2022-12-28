@@ -1,4 +1,4 @@
-<form method="POST" action="/dashboard/missions/create-gpio " class="hidden function-item">
+<form class="hidden function-item h-full flex flex-col">
     <div class="flex">
         <div class="flex flex-col">
             <label for="" class="text-xl">Name GPIO</label>
@@ -22,9 +22,14 @@
             ])
         @endforeach
     </div>
-    @include('frontend.blocks.mission.createMissions.functionTab.idMission')
+    <div class="flex justify-center items-center overflow-hidden">
+        <svg width="100%" height="100%" viewBox="0 0 2400 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            @include('frontend.blocks.imgGpio')
+        </svg>
+    </div>
+
+    {{-- @include('frontend.blocks.mission.createMissions.functionTab.idMission') --}}
     <button
         class="submit-btn-gpio text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
 
-    @csrf
 </form>

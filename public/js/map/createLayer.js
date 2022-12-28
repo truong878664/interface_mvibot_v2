@@ -35,7 +35,6 @@ const mapActive = $("#map-active").innerText;
 const nameLayerElement = $("#name_layer");
 const dataLayerFromDatabase = JSON.parse($("#data-layer-json").value);
 
-console.log(dataLayerFromDatabase);
 const countLayerDb = dataLayerFromDatabase.length;
 
 function start() {
@@ -79,7 +78,6 @@ function handleDbClick() {
     mapElement.addEventListener("dblclick", (e) => {
         if (nameLayerElement.value === "") {
             $("#msg-name-layer").innerText = "please enter this field";
-            nameLayerElement.focus();
             nameLayerElement.oninput = () => {
                 $("#msg-name-layer").innerText = "";
             };
@@ -96,11 +94,12 @@ let oldX;
 let oldY;
 let isTouch = false;
 function tapHandler(e) {
+    // console.log(e.touches[0].pageX - oldX);
+    // console.log(e.touches[0].pageY - oldY);
     isTouch = !!(
-        Math.abs(e.touches[0].pageX - oldX) < 70 &&
-        Math.abs(e.touches[0].pageY - oldY) < 70
+        Math.abs(e.touches[0].pageX - oldX) < 4 &&
+        Math.abs(e.touches[0].pageY - oldY) < 4
     );
-
     oldX = e.touches[0].pageX;
     oldY = e.touches[0].pageY;
 
@@ -113,16 +112,16 @@ function tapHandler(e) {
         return false;
     }
 
-    if (tapedTwice) {
+    if (tapedTwice && isTouch) {
         e.preventDefault();
         if (nameLayerElement.value === "") {
             $("#msg-name-layer").innerText = "please enter this field";
-            nameLayerElement.focus();
             nameLayerElement.oninput = () => {
                 $("#msg-name-layer").innerText = "";
             };
         } else {
-            isTouch && checkNameLayer(nameLayerElement.value, e);
+            console.log(1);
+            checkNameLayer(nameLayerElement.value, e);
         }
     }
 }
@@ -145,6 +144,7 @@ function checkNameLayer(nameLayer, e) {
                 };
             } else {
                 setDbSetLayer(e);
+                nameLayerElement.blur();
             }
         });
 }
