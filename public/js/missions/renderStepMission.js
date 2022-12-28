@@ -344,37 +344,63 @@ function moveStepLeft(dataSteps) {
     const allMoveBtnLeft = document.querySelectorAll(".move-left");
     allMoveBtnLeft.forEach((moveLeftBtn, index) => {
         moveLeftBtn.addEventListener("click", (e) => {
-            const itemMove = dataSteps.splice(index, 1);
-            dataSteps.splice(index - 1, "", ...itemMove);
+            let moveIndex = Number(
+                e.target.closest(".step-item").getAttribute("index")
+            );
+            if (moveIndex != 0) {
+                array_move(dataSteps, moveIndex, moveIndex - 1);
 
-            const stepSave = dataStepSave(dataSteps);
-            const data = { steps_mission_name: stepSave, method: "update" };
-            updateStep(`/api/mission/${currentMission}`, data);
+                const stepSave = dataStepSave(dataSteps);
+                const data = { steps_mission_name: stepSave, method: "update" };
+                updateStep(`/api/mission/${currentMission}`, data);
 
-            const currentStep = e.target.closest(".step-item");
-            const moveStep = currentStep.previousSibling;
-            $(".steps-wrapper").insertBefore(currentStep, moveStep);
-            index--;
+                const currentStep = e.target.closest(".step-item");
+                const moveStep = currentStep.previousSibling;
+                $(".steps-wrapper").insertBefore(currentStep, moveStep);
+
+                moveIndex--;
+                e.target.closest(".step-item").setAttribute("index", moveIndex);
+
+                const itemNext = e.target.closest(".step-item").nextSibling;
+                itemNext.setAttribute(
+                    "index",
+                    Number(itemNext.getAttribute("index")) + 1
+                );
+            }
         });
     });
 }
 
 function moveStepRight(dataSteps) {
     const allMoveBtnRight = document.querySelectorAll(".move-right");
-    allMoveBtnRight.forEach((moveRightBtn, index) => {
+    allMoveBtnRight.forEach((moveRightBtn) => {
         moveRightBtn.addEventListener("click", (e) => {
-            const itemMove = dataSteps.splice(index, 1);
-            dataSteps.splice(index + 1, "", ...itemMove);
+            let moveIndex = Number(
+                e.target.closest(".step-item").getAttribute("index")
+            );
+            if (moveIndex < dataSteps.length - 1) {
+                array_move(dataSteps, moveIndex, moveIndex + 1);
 
-            const stepSave = dataStepSave(dataSteps);
-            const data = { steps_mission_name: stepSave, method: "update" };
-            updateStep(`/api/mission/${currentMission}`, data);
+                const stepSave = dataStepSave(dataSteps);
+                const data = { steps_mission_name: stepSave, method: "update" };
+                updateStep(`/api/mission/${currentMission}`, data);
 
-            const currentStep = e.target.closest(".step-item");
-            const moveStep = currentStep.nextSibling.nextSibling;
+                const currentStep = e.target.closest(".step-item");
+                const moveStep = currentStep.nextSibling.nextSibling;
 
-            $(".steps-wrapper").insertBefore(currentStep, moveStep);
-            index++;
+                $(".steps-wrapper").insertBefore(currentStep, moveStep);
+
+                moveIndex++;
+                e.target.closest(".step-item").setAttribute("index", moveIndex);
+
+                const itemPrevious =
+                    e.target.closest(".step-item").previousSibling;
+
+                itemPrevious.setAttribute(
+                    "index",
+                    Number(itemPrevious.getAttribute("index")) - 1
+                );
+            }
         });
     });
 }
