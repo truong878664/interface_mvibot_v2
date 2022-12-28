@@ -81,8 +81,11 @@ class LayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($name)
     {
-        //
+        // return $request->all();
+        Layer::where('name_layer', $name)->delete();
+
+        return ["message" => "delete success"];
     }
 }

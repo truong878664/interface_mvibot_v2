@@ -35,6 +35,7 @@ const nameLayerElement = $("#name_layer");
 const dataLayerFromDatabase = JSON.parse($("#data-layer-json").value);
 
 const countLayerDb = dataLayerFromDatabase.length;
+let dataLayerSaveDatabase = [];
 
 function start() {
     createAxes(viewer);
@@ -44,9 +45,8 @@ function start() {
     markerClient(tfClient, viewer);
     handleLockZ(viewer);
 
-    // getLayer();
-    addLayerDbToLayerActive();
-    displayLayer(mvibot_layer_active);
+    getLayer();
+
     setParameterRange();
 
     handleDbClick();
@@ -69,30 +69,33 @@ const dataLayerModel = {
     yo: 0,
 };
 
-const dataLayerSaveDatabase = [];
-
 function getLayer() {
+    deleteAllLayer(mvibot_layer_active);
+    mvibot_layer_active.splice(0, mvibot_layer_active.length);
     fetch("/api/layer")
         .then((res) => res.json())
-        .then((data) => console.log(data));
-}
-function addLayerDbToLayerActive() {
-    dataLayerFromDatabase.forEach((item) => {
-        const { z, w } = mathYaw(item.yawo);
-        const layer = new mvibot_layer(
-            item.name_layer,
-            item.width,
-            item.height,
-            item.xo,
-            item.yo,
-            item.type_layer,
-            z,
-            w
-        );
+        .then((data) => {
+            data.forEach((item) => {
+                const { z, w } = mathYaw(item.yawo);
+                const layer = new mvibot_layer(
+                    item.name_layer,
+                    item.width,
+                    item.height,
+                    item.xo,
+                    item.yo,
+                    item.type_layer,
+                    z,
+                    w
+                );
 
-        mvibot_layer_active.push(layer);
-    });
-    console.log(mvibot_layer_active);
+                mvibot_layer_active.push(layer);
+            });
+            return data;
+        })
+        .then((data) => {
+            displayLayer(mvibot_layer_active);
+            renderListLayer(mvibot_layer_active);
+        });
 }
 
 function checkNameLayer(nameLayer, e) {
@@ -218,9 +221,9 @@ const deleteLayer = (id) => {
     renderLayer(dataLayerSaveDatabase);
 };
 
-function renderLayer(mvibot_layer_active) {
+function renderLayer(dataLayerSaveDatabase) {
     const html = [];
-    mvibot_layer_active.map((item, index) => {
+    dataLayerSaveDatabase.map((item, index) => {
         html.push(
             `<div class="flex justify-between px-8 py-3 select-none hover:bg-[#cccccc25]">
                 <span class="">${item.name_layer}</span>
@@ -245,9 +248,23 @@ function handleDeleteLayer() {
 function handleSaveLayer() {
     $("#save-layer-btn").onclick = (e) => {
         e.preventDefault();
-        const dataLayer = JSON.stringify(dataLayerSaveDatabase);
-        $("#data-layer").value = dataLayer;
-        $("#form-add-layer").submit();
+        fetch("/api/layer", {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(dataLayerSaveDatabase),
+        })
+            .then(function (res) {
+                renderLayer([]);
+                renderListLayer(mvibot_layer_active);
+                dataLayerSaveDatabase = [];
+                console.log(res);
+            })
+            .catch(function (res) {
+                console.log(res);
+            });
     };
 }
 
@@ -393,4 +410,44 @@ function handleDbTouch() {
             }
         }
     }
+}
+
+function renderListLayer(mvibot_layer_active) {
+    const html = [];
+    const layer_active = [...mvibot_layer_active].reverse();
+    layer_active.map((item) => {
+        html.push(`
+            <div class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
+                <span class="">${item.name_layer}</span>
+                <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333] delete-layer-db-btn" layer-delete="${item.name_layer}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        `);
+    });
+    $("#list-layer-item").innerHTML = html.join("");
+    HandleDeleteLayer();
+}
+
+function HandleDeleteLayer() {
+    $$(".delete-layer-db-btn").forEach((element) => {
+        element.onclick = (e) => {
+            const nameLayer = e.target.getAttribute("layer-delete");
+            deleteLayerDb(nameLayer);
+        };
+    });
+}
+
+function deleteLayerDb(nameLayer) {
+    fetch(`/api/layer/${nameLayer}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            getLayer();
+        });
 }

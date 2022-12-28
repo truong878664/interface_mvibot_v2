@@ -32,26 +32,26 @@
                                     <i class="fa-solid fa-chevron-up hidden" id="up-icon"></i>
                                 </span>
                             </label>
+                            @php
+                                $allLayerJson = json_encode($allLayer->toArray());
+                            @endphp
+                            <input type="hidden" value="{{ $allLayerJson }}" id="data-layer-json">
                             <div class="max-h-[300px] overflow-scroll overflow-x-hidden mt-[23px] hidden"
                                 id="list-layer-item">
-                                @php
-                                    $allLayerJson = json_encode($allLayer->toArray());
-                                @endphp
-                                <input type="hidden" value="{{ $allLayerJson }}" id="data-layer-json">
-                                @foreach ($allLayer as $layer)
-                                    <div
-                                        class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
-                                        <span class="">{{ $layer->name_layer }}</span>
-                                        <form method="POST"
+                                {{-- @foreach ($allLayer as $layer) --}}
+                                <div
+                                    class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
+                                    {{-- <span class="">{{ $layer->name_layer }}</span> --}}
+                                    {{-- <form method="POST"
                                             action="{{ route('delete-layer', ['name' => $layer->name_layer]) }}">
                                             <input type="hidden" name="id" value="{{ $layer->id }}">
-                                            @csrf
-                                            <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333]">
-                                                <i class="fa-solid fa-xmark"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                @endforeach
+                                            @csrf --}}
+                                    <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333]">
+                                        {{-- <i class="fa-solid fa-xmark"></i> --}}
+                                    </button>
+                                    {{-- </form> --}}
+                                </div>
+                                {{-- @endforeach --}}
 
                             </div>
                         </div>
