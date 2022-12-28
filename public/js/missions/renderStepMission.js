@@ -344,9 +344,8 @@ function moveStepLeft(dataSteps) {
     const allMoveBtnLeft = document.querySelectorAll(".move-left");
     allMoveBtnLeft.forEach((moveLeftBtn, index) => {
         moveLeftBtn.addEventListener("click", (e) => {
-            const indexMove = Number(e.target.getAttribute("id-move"));
-            const itemMove = dataSteps.splice(indexMove, 1);
-            dataSteps.splice(indexMove - 1, "", ...itemMove);
+            const itemMove = dataSteps.splice(index, 1);
+            dataSteps.splice(index - 1, "", ...itemMove);
 
             const stepSave = dataStepSave(dataSteps);
             const data = { steps_mission_name: stepSave, method: "update" };
@@ -355,17 +354,17 @@ function moveStepLeft(dataSteps) {
             const currentStep = e.target.closest(".step-item");
             const moveStep = currentStep.previousSibling;
             $(".steps-wrapper").insertBefore(currentStep, moveStep);
+            index--;
         });
     });
 }
 
 function moveStepRight(dataSteps) {
     const allMoveBtnRight = document.querySelectorAll(".move-right");
-    allMoveBtnRight.forEach((moveRightBtn) => {
+    allMoveBtnRight.forEach((moveRightBtn, index) => {
         moveRightBtn.addEventListener("click", (e) => {
-            const indexMove = Number(e.target.getAttribute("id-move"));
-            const itemMove = dataSteps.splice(indexMove, 1);
-            dataSteps.splice(indexMove + 1, "", ...itemMove);
+            const itemMove = dataSteps.splice(index, 1);
+            dataSteps.splice(index + 1, "", ...itemMove);
 
             const stepSave = dataStepSave(dataSteps);
             const data = { steps_mission_name: stepSave, method: "update" };
@@ -375,6 +374,7 @@ function moveStepRight(dataSteps) {
             const moveStep = currentStep.nextSibling.nextSibling;
 
             $(".steps-wrapper").insertBefore(currentStep, moveStep);
+            index++;
         });
     });
 }
@@ -401,6 +401,17 @@ function deletePoint(id) {
         .catch(function (res) {
             console.log(res);
         });
+}
+
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
 }
 
 export { renderStep };
