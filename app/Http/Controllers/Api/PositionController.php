@@ -95,12 +95,24 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
+        // $deleteName = MissionPosition::where('id', $id)->get()->toArray()[0]['name_position'];
+        // $nameStepMissionDelete = "|position#$deleteName";
+        // $missions = Missions::all();
+        // foreach ($missions as $mission) {
+        //     $newString = str_replace("$nameStepMissionDelete", "", $mission->steps_mission_name);
+        //     Missions::where('id', $mission->id)->update(["steps_mission_name" => $newString]);
+        // }
+        // MissionPosition::where('id', $id)->delete();
+
+
         $deleteName = MissionPosition::where('id', $id)->get()->toArray()[0]['name_position'];
-        $nameStepMissionDelete = "|position#$deleteName";
+        $nameStepMissionDelete = "|position#$deleteName#$id";
         $missions = Missions::all();
+        $arr = [];
         foreach ($missions as $mission) {
             $newString = str_replace("$nameStepMissionDelete", "", $mission->steps_mission_name);
             Missions::where('id', $mission->id)->update(["steps_mission_name" => $newString]);
+            array_push($arr, $newString);
         }
         MissionPosition::where('id', $id)->delete();
     }

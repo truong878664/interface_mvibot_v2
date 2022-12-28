@@ -41,7 +41,7 @@
     </style>
     <div class="h-full flex ">
         <div class="flex-1 flex relative h-full ">
-            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap"></div>
+            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap content-start"></div>
             <label class="absolute right-0 top-0 animate-spin text-[#0f6cbd] hidden step-loading">
                 <i class="fa-solid fa-spinner"></i>
             </label>
