@@ -22,6 +22,7 @@ const widthMap = mapElement.offsetWidth;
 
 const tfClient = createTfClient();
 let viewer = createMap(heightMap, widthMap, tfClient);
+console.log(tfClient);
 reloadWhenOrientation();
 
 const mvibot_layer_active = [];
@@ -42,21 +43,23 @@ function start() {
     createPose(viewer, tfClient);
     displayPoint(0, 0);
     markerClient(tfClient, viewer);
-    handleLockZ(viewer);
+    lockZ(viewer);
 
-    // getLayer();
     addLayerDbToLayerActive();
     displayLayer(mvibot_layer_active);
-    setParameterRange();
 
     handleDbClick();
-    handleDbTouch();
-    handleChangeRange();
-    handleSaveLayer();
-
-    linkInputRange();
 }
+
 start();
+
+mapElement.addEventListener("mousemove", () => {
+    lockZ(viewer);
+});
+
+mapElement.addEventListener("touchmove", () => {
+    lockZ(viewer);
+});
 
 const dataLayerModel = {
     name_map_active: mapActive,
@@ -71,28 +74,56 @@ const dataLayerModel = {
 
 const dataLayerSaveDatabase = [];
 
-function getLayer() {
-    fetch("/api/layer")
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-}
-function addLayerDbToLayerActive() {
-    dataLayerFromDatabase.forEach((item) => {
-        const { z, w } = mathYaw(item.yawo);
-        const layer = new mvibot_layer(
-            item.name_layer,
-            item.width,
-            item.height,
-            item.xo,
-            item.yo,
-            item.type_layer,
-            z,
-            w
-        );
-
-        mvibot_layer_active.push(layer);
+function handleDbClick() {
+    mapElement.addEventListener("dblclick", (e) => {
+        if (nameLayerElement.value === "") {
+            $("#msg-name-layer").innerText = "please enter this field";
+            nameLayerElement.oninput = () => {
+                $("#msg-name-layer").innerText = "";
+            };
+        } else {
+            checkNameLayer(nameLayerElement.value, e);
+        }
     });
-    console.log(mvibot_layer_active);
+}
+
+mapElement.addEventListener("touchstart", tapHandler);
+
+var tapedTwice = false;
+let oldX;
+let oldY;
+let isTouch = false;
+function tapHandler(e) {
+    // console.log(e.touches[0].pageX - oldX);
+    // console.log(e.touches[0].pageY - oldY);
+    isTouch = !!(
+        Math.abs(e.touches[0].pageX - oldX) < 4 &&
+        Math.abs(e.touches[0].pageY - oldY) < 4
+    );
+    oldX = e.touches[0].pageX;
+    oldY = e.touches[0].pageY;
+
+    if (!tapedTwice) {
+        tapedTwice = true;
+        setTimeout(function () {
+            tapedTwice = false;
+            isTouch = false;
+        }, 300);
+        return false;
+    }
+
+    if (tapedTwice && isTouch) {
+        e.preventDefault();
+        if (nameLayerElement.value === "") {
+            $("#msg-name-layer").innerText = "please enter this field";
+            nameLayerElement.oninput = () => {
+                $("#msg-name-layer").innerText = "";
+            };
+        } else {
+            console.log(1);
+            checkNameLayer(nameLayerElement.value, e);
+        }
+    }
 }
 
 function checkNameLayer(nameLayer, e) {
@@ -121,7 +152,7 @@ function checkNameLayer(nameLayer, e) {
 function setDbSetLayer(e) {
     if (e.type === "dblclick") {
         const [x, y] = convertToPosition(e.layerX, e.layerY, viewer);
-        handleClickSetPositionLayer(x, y);
+        handleClick(x, y);
     } else if (e.type === "touchstart") {
         var rect = e.target.getBoundingClientRect();
         const [x, y] = convertToPosition(
@@ -129,11 +160,10 @@ function setDbSetLayer(e) {
             e.targetTouches[0].pageY - rect.top,
             viewer
         );
-        handleClickSetPositionLayer(x, y);
+        handleClick(x, y);
     }
 }
-
-function handleClickSetPositionLayer(x, y) {
+function handleClick(x, y) {
     xoElement.value = x.toFixed(2);
     yoElement.value = y.toFixed(2);
     xoRangeElement.value = x.toFixed(2);
@@ -158,9 +188,29 @@ function handleClickSetPositionLayer(x, y) {
     renderLayer(dataLayerSaveDatabase);
 }
 
-function handleChangeRange() {
-    $("#type-layer").onchange = (e) => {
-        dataLayerModel.type_layer = e.target.value;
+$("#type-layer").onchange = (e) => {
+    dataLayerModel.type_layer = e.target.value;
+    const layer = createModelLayer();
+
+    if (mvibot_layer_active.length - countLayerDb > 0) {
+        dataLayerSaveDatabase.pop();
+        saveDataToDatabase(dataLayerModel);
+    }
+
+    if (mvibot_layer_active.length - countLayerDb > 0) {
+        mvibot_layer_active.pop();
+        mvibot_layer_active.push(layer);
+    }
+    displayLayer(mvibot_layer_active);
+};
+
+$$(".layer-range").forEach((element) => {
+    element.oninput = (e) => {
+        const idCurrentInput = e.target.id.replace("-range", "");
+        $(`#${idCurrentInput}`).value = e.target.value;
+        const idCurrentInputChang = idCurrentInput.replace("-", "_");
+        dataLayerModel[idCurrentInputChang] = Number(e.target.value);
+
         const layer = createModelLayer();
 
         if (mvibot_layer_active.length - countLayerDb > 0) {
@@ -174,29 +224,7 @@ function handleChangeRange() {
         }
         displayLayer(mvibot_layer_active);
     };
-
-    $$(".layer-range").forEach((element) => {
-        element.oninput = (e) => {
-            const idCurrentInput = e.target.id.replace("-range", "");
-            $(`#${idCurrentInput}`).value = e.target.value;
-            const idCurrentInputChang = idCurrentInput.replace("-", "_");
-            dataLayerModel[idCurrentInputChang] = Number(e.target.value);
-
-            const layer = createModelLayer();
-
-            if (mvibot_layer_active.length - countLayerDb > 0) {
-                dataLayerSaveDatabase.pop();
-                saveDataToDatabase(dataLayerModel);
-            }
-
-            if (mvibot_layer_active.length - countLayerDb > 0) {
-                mvibot_layer_active.pop();
-                mvibot_layer_active.push(layer);
-            }
-            displayLayer(mvibot_layer_active);
-        };
-    });
-}
+});
 
 function saveDataToDatabase(dataLayerModel) {
     let {
@@ -242,45 +270,89 @@ function handleDeleteLayer() {
     ]);
 }
 
-function handleSaveLayer() {
-    $("#save-layer-btn").onclick = (e) => {
-        e.preventDefault();
-        const dataLayer = JSON.stringify(dataLayerSaveDatabase);
-        $("#data-layer").value = dataLayer;
-        $("#form-add-layer").submit();
-    };
-}
+$("#save-layer-btn").onclick = (e) => {
+    e.preventDefault();
+    const dataLayer = JSON.stringify(dataLayerSaveDatabase);
+    $("#data-layer").value = dataLayer;
+    $("#form-add-layer").submit();
+};
 
-function setParameterRange() {
-    const map_listener = new ROSLIB.Topic({
-        ros: ros,
-        name: "/map",
-        messageType: "nav_msgs/OccupancyGrid",
-    });
-    map_listener.subscribe(function (message) {
-        const resolution = message.info.resolution;
-        const width = message.info.width;
-        const height = message.info.height;
-        const positionX = message.info.origin.position.x;
-        const positionY = message.info.origin.position.y;
+function addLayerDbToLayerActive() {
+    dataLayerFromDatabase.forEach((item) => {
+        const { z, w } = mathYaw(item.yawo);
+        const layer = new mvibot_layer(
+            item.name_layer,
+            item.width,
+            item.height,
+            item.xo,
+            item.yo,
+            item.type_layer,
+            z,
+            w
+        );
 
-        const xMax = Number((width * resolution + positionX).toFixed(2));
-        const xMin = Number(positionX.toFixed(2));
-        const yMin = Number(positionY.toFixed(2));
-        const yMax = Number((height * resolution + positionY).toFixed(2));
-
-        const xWidth = Math.abs(xMax) + Math.abs(xMin);
-        const yWidth = Math.abs(yMax) + Math.abs(yMin);
-
-        $("#width-layer-range").setAttribute("max", xWidth);
-        $("#height-layer-range").setAttribute("max", yWidth);
-
-        $("#xo-range").setAttribute("min", xMin);
-        $("#xo-range").setAttribute("max", xMax);
-        $("#yo-range").setAttribute("min", yMin);
-        $("#yo-range").setAttribute("max", yMax);
+        mvibot_layer_active.push(layer);
     });
 }
+
+// let x, y;
+
+// document.onkeydown = (e) => {
+//     switch (e.key) {
+//         case "ArrowRight":
+//             // !e.shiftKey || (x = x + 1);
+//             dataLayerModel.xo += 1;
+//             const layer = const layer = createModelLayer();
+//             console.log(layer);
+//             break;
+//         case "ArrowUp":
+//             !e.shiftKey || (y = y + 1);
+//             y = y + 0.1;
+//             console.log(2);
+//             break;
+//         case "ArrowDown":
+//             !e.shiftKey || (y = y - 1);
+//             y = y - 0.1;
+//             console.log(3);
+//             break;
+//         case "ArrowLeft":
+//             !e.shiftKey || (x = x - 1);
+//             x = x - 0.1;
+//             console.log(4);
+//             break;
+//         default:
+//             break;
+//     }
+// };
+
+const map_listener = new ROSLIB.Topic({
+    ros: ros,
+    name: "/map",
+    messageType: "nav_msgs/OccupancyGrid",
+});
+map_listener.subscribe(function (message) {
+    const resolution = message.info.resolution;
+    const width = message.info.width;
+    const height = message.info.height;
+    const positionX = message.info.origin.position.x;
+    const positionY = message.info.origin.position.y;
+
+    const xMax = Number((width * resolution + positionX).toFixed(2));
+    const xMin = Number(positionX.toFixed(2));
+    const yMin = Number(positionY.toFixed(2));
+    const yMax = Number((height * resolution + positionY).toFixed(2));
+
+    const xWidth = Math.abs(xMax) + Math.abs(xMin);
+    const yWidth = Math.abs(yMax) + Math.abs(yMin);
+
+    $("#width-layer-range").setAttribute("max", xWidth);
+    $("#height-layer-range").setAttribute("max", yWidth);
+
+    $("#xo-range").setAttribute("min", xMin);
+    $("#xo-range").setAttribute("max", xMax);
+    $("#yo-range").setAttribute("min", yMin);
+    $("#yo-range").setAttribute("max", yMax);
+});
 
 function createModelLayer() {
     const degInput = (Number(dataLayerModel.z_rotate) / 180) * Math.PI;
@@ -299,98 +371,26 @@ function createModelLayer() {
     return layer;
 }
 
-function linkInputRange() {
-    const listInputLayer = [
-        "width_layer",
-        "height_layer",
-        "xo",
-        "yo",
-        "z_rotate",
-    ];
+const listInputLayer = ["width_layer", "height_layer", "xo", "yo", "z_rotate"];
 
-    listInputLayer.forEach((item) => {
-        const itemModel = item.replace("_", "-");
-        $(`#${itemModel}`).onchange = (e) => {
-            $(`#${itemModel}-range`).value = e.target.value;
-            console.log($(`#${itemModel}-range`));
-            dataLayerModel[item] = Number(e.target.value);
+listInputLayer.forEach((item) => {
+    const itemModel = item.replace("_", "-");
+    $(`#${itemModel}`).onchange = (e) => {
+        $(`#${itemModel}-range`).value = e.target.value;
+        console.log($(`#${itemModel}-range`));
+        dataLayerModel[item] = Number(e.target.value);
 
-            const layer = createModelLayer();
+        const layer = createModelLayer();
 
-            if (mvibot_layer_active.length - countLayerDb > 0) {
-                dataLayerSaveDatabase.pop();
-                saveDataToDatabase(dataLayerModel);
-            }
-
-            if (mvibot_layer_active.length - countLayerDb > 0) {
-                mvibot_layer_active.pop();
-                mvibot_layer_active.push(layer);
-            }
-            displayLayer(mvibot_layer_active);
-        };
-    });
-}
-
-function handleLockZ(viewer) {
-    lockZ(viewer);
-
-    mapElement.addEventListener("mousemove", () => {
-        lockZ(viewer);
-    });
-
-    mapElement.addEventListener("touchmove", () => {
-        lockZ(viewer);
-    });
-}
-
-function handleDbClick() {
-    mapElement.addEventListener("dblclick", (e) => {
-        if (nameLayerElement.value === "") {
-            $("#msg-name-layer").innerText = "please enter this field";
-            nameLayerElement.oninput = () => {
-                $("#msg-name-layer").innerText = "";
-            };
-        } else {
-            checkNameLayer(nameLayerElement.value, e);
-        }
-    });
-}
-
-function handleDbTouch() {
-    mapElement.addEventListener("touchstart", tapHandler);
-
-    var tapedTwice = false;
-    let oldX;
-    let oldY;
-    let isTouch = false;
-    function tapHandler(e) {
-        isTouch = !!(
-            Math.abs(e.touches[0].pageX - oldX) < 4 &&
-            Math.abs(e.touches[0].pageY - oldY) < 4
-        );
-        oldX = e.touches[0].pageX;
-        oldY = e.touches[0].pageY;
-
-        if (!tapedTwice) {
-            tapedTwice = true;
-            setTimeout(function () {
-                tapedTwice = false;
-                isTouch = false;
-            }, 300);
-            return false;
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            dataLayerSaveDatabase.pop();
+            saveDataToDatabase(dataLayerModel);
         }
 
-        if (tapedTwice && isTouch) {
-            e.preventDefault();
-            if (nameLayerElement.value === "") {
-                $("#msg-name-layer").innerText = "please enter this field";
-                nameLayerElement.oninput = () => {
-                    $("#msg-name-layer").innerText = "";
-                };
-            } else {
-                console.log(1);
-                checkNameLayer(nameLayerElement.value, e);
-            }
+        if (mvibot_layer_active.length - countLayerDb > 0) {
+            mvibot_layer_active.pop();
+            mvibot_layer_active.push(layer);
         }
-    }
-}
+        displayLayer(mvibot_layer_active);
+    };
+});
