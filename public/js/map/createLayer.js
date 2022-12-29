@@ -32,9 +32,10 @@ const xoRangeElement = $("#xo-range");
 const yoRangeElement = $("#yo-range");
 const mapActive = $("#map-active").innerText;
 const nameLayerElement = $("#name_layer");
-const dataLayerFromDatabase = JSON.parse($("#data-layer-json").value);
+// const dataLayerFromDatabase = JSON.parse($("#data-layer-json").value);
 
-const countLayerDb = dataLayerFromDatabase.length;
+let countLayerDb;
+
 let dataLayerSaveDatabase = [];
 
 function start() {
@@ -90,6 +91,9 @@ function getLayer() {
 
                 mvibot_layer_active.push(layer);
             });
+
+            countLayerDb = data.length;
+            // console.log(data.length);
             return data;
         })
         .then((data) => {
@@ -170,7 +174,6 @@ function handleChangeRange() {
             dataLayerSaveDatabase.pop();
             saveDataToDatabase(dataLayerModel);
         }
-
         if (mvibot_layer_active.length - countLayerDb > 0) {
             mvibot_layer_active.pop();
             mvibot_layer_active.push(layer);
@@ -260,6 +263,9 @@ function handleSaveLayer() {
                 if (res.status == 200) {
                     renderLayer([]);
                     renderListLayer(mvibot_layer_active);
+
+                    countLayerDb += dataLayerSaveDatabase.length;
+
                     dataLayerSaveDatabase = [];
                     toggerMessage("success", "save layer successfully");
                 } else {

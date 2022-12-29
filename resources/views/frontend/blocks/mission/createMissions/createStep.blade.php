@@ -50,6 +50,25 @@
             {{-- deteil fc --}}
             <div class="mb-2 bg-[#fff] h-[60%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] flex-1 lg:min-h-[300px]">
                 <div class="h-full w-full relative">
+                    <div class="absolute right-0 top-0">
+                        <div class="w-[30px] h-[30px] bg-cover " style="background-image: url(/img/info_icon.png)">
+                        </div>
+                        {{-- <div
+                            class="shadow-indigo-500/40 w-[300px] h-[300px] bg-slate-400 absolute right-0 mt-3 p-4 text-2xl overflow-auto">
+                            <span class="function-info-heading font-bold">footprint</span>
+                            <p class="function-info-content indent-[30px] text-justify">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis recusandae labore
+                                deleniti, consectetur mollitia aperiam ea ut suscipit tempore odit ducimus minima,
+                                dolore perspiciatis impedit dignissimos earum? Sunt, fuga cumque. Lorem ipsum dolor, sit
+                                amet consectetur adipisicing elit. Debitis recusandae labore
+                                deleniti, consectetur mollitia aperiam ea ut suscipit tempore odit ducimus minima,
+                                dolore perspiciatis impedit dignissimos earum? Sunt, fuga cumque. Lorem ipsum dolor, sit
+                                amet consectetur adipisicing elit. Debitis recusandae labore
+                                deleniti, consectetur mollitia aperiam ea ut suscipit tempore odit ducimus minima,
+                                dolore perspiciatis impedit dignissimos earum? Sunt, fuga cumque.
+                            </p>
+                        </div> --}}
+                    </div>
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
                     @include('frontend.blocks.mission.createMissions.functionTab.gpio')
                     @include('frontend.blocks.mission.createMissions.functionTab.marker')

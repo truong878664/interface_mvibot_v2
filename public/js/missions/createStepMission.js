@@ -8,7 +8,6 @@ import displayPose from "../rosModule/displayPose.js";
 import { currentMission, renderStep } from "./renderStepMission.js";
 
 import { runMission } from "../rosModule/handleMission.js";
-import validateInputSubmit from "../functionHandle/validateForm.js";
 import { toggerMessage } from "../main.js";
 
 const $ = document.querySelector.bind(document);

@@ -93,7 +93,7 @@ function changeTopic() {
 
             displayPathFs = setInterval(() => {
                 displayPath(robotActive);
-            }, 1000);
+            }, 2000);
 
             robotPathTopic(robotActive);
         } else {

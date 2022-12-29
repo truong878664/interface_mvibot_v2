@@ -94,11 +94,26 @@ $(".point-submit-btn").onclick = (e) => {
         map: map.value,
         mode: "position",
     };
-    storeData("/api/position", dataPosition);
-    name_position.value = "";
-    time_out.value = "";
-    mode_position.value = "";
-    mode_child.value = "";
+
+    if (
+        name_position.value &&
+        x.value &&
+        y.value &&
+        z.value &&
+        w.value &&
+        time_out.value &&
+        color_position.value &&
+        mode_position.value &&
+        mode_child.value
+    ) {
+        storeData("/api/position", dataPosition);
+        name_position.value = "";
+        time_out.value = -1;
+        mode_position.value = "";
+        mode_child.value = "";
+    } else {
+        toggerMessage("error", "Please enter all inputs");
+    }
 };
 
 function storeData(url, data) {

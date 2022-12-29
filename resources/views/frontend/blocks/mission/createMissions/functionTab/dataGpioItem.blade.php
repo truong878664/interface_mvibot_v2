@@ -8,7 +8,7 @@
         class="show-gpio-wrapper mt-2 w-full overflow-x-scroll h-[24px] select-none {{ $name_gpio_item . '_' . $type . '_show' }}">
     </div>
     <div class="in_pulldown_value form-gpio-item  lg:bottom-[auto] lg:top-[100%]">
-        @for ($i = 0; $i < 21; $i++)
+        @for ($i = 0; $i < 20; $i++)
             <label class="checkbox-wrapper ">
                 <label class="label-for-checkbox-gpio w-[16px]">{{ $i }}</label>
                 <input class="checkbox-gpio {{ $name_gpio_item . '_' . $type . '_checkbox' }} {{ $type . '_checkbox' }}"

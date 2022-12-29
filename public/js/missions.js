@@ -4,8 +4,8 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 activeNavTab();
-showTabFunctionAction();
-idMissionsCurrent();
+// showTabFunctionAction();
+// idMissionsCurrent();
 
 function activeNavTab() {
     const navTablink = $$(".navtab-link");
@@ -45,3 +45,13 @@ function idMissionsCurrent() {
         element.value = currentIdMission;
     });
 }
+
+$$("[name='marker_dir']").forEach((element) => {
+    element.onchange = (e) => {
+        e.target
+            .closest(".marker-item")
+            .querySelector(
+                ".marker-img"
+            ).style.backgroundImage = `url('/img/marker/l_marker_${e.target.value}.png')`;
+    };
+});

@@ -91,11 +91,15 @@ function showMenu() {
 
 function deleteStep(dataSteps) {
     const allDeleteBtn = $$(".delete-step");
-    allDeleteBtn.forEach((deleteBtn, index) => {
+    allDeleteBtn.forEach((deleteBtn) => {
         deleteBtn.addEventListener("click", (e) => {
+            const index = Number(
+                e.target.closest(".step-item").getAttribute("index")
+            );
             dataSteps.splice(index, 1);
             render(dataSteps);
             const stepSave = dataStepSave(dataSteps);
+            console.log(dataSteps);
             const data = { steps_mission_name: stepSave, method: "update" };
             updateStep(`/api/mission/${currentMission}`, data);
         });
@@ -221,7 +225,7 @@ $(".submit-btn-gpio").onclick = (e) => {
         renderStep();
 
         name_gpio.value = "";
-        time_out_gpio.value = "";
+        time_out_gpio.value = -1;
         out_set_gpio.value = "";
         out_reset_gpio.value = "";
         in_on_gpio.value = "";
@@ -232,6 +236,8 @@ $(".submit-btn-gpio").onclick = (e) => {
         $$(".gpio_checkbox").forEach((element) => {
             element.checked = false;
         });
+
+        $$(".gpio-io").forEach((element) => (element.style.fill = "#CCCCCC"));
 
         valueGpio.out_set = [];
         valueGpio.out_reset = [];

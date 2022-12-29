@@ -65,16 +65,43 @@ function getValueCheckbox(element) {
                 html.join("");
             inputGpio.value = valueGpio[typeGpio].toString();
 
-            const lightGpio = $(".out_set_gpio").value.split(",");
-            $$(".light-gpio").forEach((light) => {
-                light.style.fill = "#969696";
-            });
-            lightGpio.forEach((item) => {
-                // console.log($(`#gpio-output-1`));
-                item != "" &&
-                    ($(`#gpio-output-${Number(item) + 1}`).style.fill = "red");
-            });
+            outputGpioLight();
+            inputGpioLight();
         };
+    });
+}
+
+function outputGpioLight() {
+    const lightOutSetGpio = $(".out_set_gpio").value.split(",");
+    const lightOutReSetGpio = $(".out_reset_gpio").value.split(",");
+    $$(".gpio-io-output").forEach((light) => {
+        light.style.fill = "#cccccc";
+    });
+    lightOutSetGpio.forEach((item) => {
+        item != "" &&
+            ($(`#gpio-output-${Number(item) + 1}`).style.fill = "#00E7FF");
+    });
+
+    lightOutReSetGpio.forEach((item) => {
+        item != "" &&
+            ($(`#gpio-output-${Number(item) + 1}`).style.fill = "#DC0000");
+    });
+}
+
+function inputGpioLight() {
+    const lightInOnGpio = $(".in_on_gpio").value.split(",");
+    const lightInOffGpio = $(".in_off_gpio").value.split(",");
+    $$(".gpio-io-input").forEach((light) => {
+        light.style.fill = "#cccccc";
+    });
+    lightInOnGpio.forEach((item) => {
+        item != "" &&
+            ($(`#gpio-input-${Number(item) + 1}`).style.fill = "#00E7FF");
+    });
+
+    lightInOffGpio.forEach((item) => {
+        item != "" &&
+            ($(`#gpio-input-${Number(item) + 1}`).style.fill = "#DC0000");
     });
 }
 

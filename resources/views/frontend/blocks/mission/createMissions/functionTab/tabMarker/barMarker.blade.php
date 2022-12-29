@@ -69,9 +69,12 @@
 
         </div>
     </div>
-    <div class="w-1/2 h-full bg-contain bg-no-repeat self-center bg-center" markerDir="bar_marker_"
-        style="background-image: url('/img/marker/bar_marker_front_ward.png')">
+
+    <div class="w-1/2 h-full ">
+        <div class="h-full w-full max-w-[400px] bg-contain bg-no-repeat self-center bg-center marker-img"
+            markerDir="l_marker_" style="background-image: url('/img/marker/bar_marker_front_ward.png')"></div>
     </div>
+
     @include('frontend.blocks.mission.createMissions.functionTab.idMission')
 
     <button
