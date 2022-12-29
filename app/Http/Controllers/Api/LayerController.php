@@ -86,6 +86,6 @@ class LayerController extends Controller
         // return $request->all();
         Layer::where('name_layer', $name)->delete();
 
-        return ["message" => "delete success"];
+        return ["status" => 200];
     }
 }

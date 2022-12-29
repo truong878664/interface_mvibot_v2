@@ -1,4 +1,4 @@
-import ros, { $, $$ } from "../main.js";
+import ros, { $, $$, toggerMessage } from "../main.js";
 import createMap from "../rosModule/createMap.js";
 import createTfClient from "../rosModule/createTfClient.js";
 import createAxes from "../rosModule/createAxes.js";
@@ -191,7 +191,6 @@ function handleChangeRange() {
                 dataLayerSaveDatabase.pop();
                 saveDataToDatabase(dataLayerModel);
             }
-
             if (mvibot_layer_active.length - countLayerDb > 0) {
                 mvibot_layer_active.pop();
                 mvibot_layer_active.push(layer);
@@ -257,10 +256,15 @@ function handleSaveLayer() {
             body: JSON.stringify(dataLayerSaveDatabase),
         })
             .then(function (res) {
-                renderLayer([]);
-                renderListLayer(mvibot_layer_active);
-                dataLayerSaveDatabase = [];
                 console.log(res);
+                if (res.status == 200) {
+                    renderLayer([]);
+                    renderListLayer(mvibot_layer_active);
+                    dataLayerSaveDatabase = [];
+                    toggerMessage("success", "save layer successfully");
+                } else {
+                    toggerMessage("error", `error(code:${res.status})`);
+                }
             })
             .catch(function (res) {
                 console.log(res);
@@ -447,7 +451,11 @@ function deleteLayerDb(nameLayer) {
     })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
-            getLayer();
+            if (data.status == 200) {
+                toggerMessage("success", "delete layer successfully");
+                getLayer();
+            } else {
+                toggerMessage("error", "delete error, please try again");
+            }
         });
 }
