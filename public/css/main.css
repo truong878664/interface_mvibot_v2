@@ -123,13 +123,14 @@ li {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
+    width: 3px;
+    height: 3px;
+    border-right: 2px solid transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .btn {

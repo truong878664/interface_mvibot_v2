@@ -4,8 +4,8 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 activeNavTab();
-// showTabFunctionAction();
-// idMissionsCurrent();
+handleChangeImgMarker();
+handleInfoFunction();
 
 function activeNavTab() {
     const navTablink = $$(".navtab-link");
@@ -18,40 +18,22 @@ function activeNavTab() {
     });
 }
 
-function showTabFunctionAction() {
-    const addBtns = $$(".misisons-f-a-item");
-    const formFunctionAction = $$(".form-missions-f-a");
+function handleChangeImgMarker() {
+    $$("[name='marker_dir']").forEach((element) => {
+        element.onchange = (e) => {
+            const divImgMarker = e.target
+                .closest(".marker-item")
+                .querySelector(".marker-img");
 
-    addBtns.forEach((addBtn, index) => {
-        addBtn.addEventListener("click", (e) => {
-            $(".misisons-f-a-item.active").classList.remove("active");
-            $(".form-missions-f-a.show").classList.remove("show");
-            e.target.classList.add("active");
-            formFunctionAction[index].classList.add("show");
+            const typeMarker = divImgMarker.getAttribute("markerDir");
+            divImgMarker.style.backgroundImage = `url('/img/marker/${typeMarker}${e.target.value}.png')`;
+        };
+    });
+}
+
+function handleInfoFunction() {
+    $(".info-function-btn") &&
+        ($(".info-function-btn").onclick = () => {
+            $(".info-function-content").classList.toggle("hidden");
         });
-    });
 }
-
-function idMissionsCurrent() {
-    const pathName = window.location.pathname;
-    const currentIdMission = pathName.slice(
-        pathName.lastIndexOf("/") + 1,
-        pathName.length
-    );
-    const inputCurrentIdMission = document.querySelectorAll(
-        ".current-id-mission"
-    );
-    inputCurrentIdMission.forEach((element) => {
-        element.value = currentIdMission;
-    });
-}
-
-$$("[name='marker_dir']").forEach((element) => {
-    element.onchange = (e) => {
-        e.target
-            .closest(".marker-item")
-            .querySelector(
-                ".marker-img"
-            ).style.backgroundImage = `url('/img/marker/l_marker_${e.target.value}.png')`;
-    };
-});
