@@ -318,7 +318,7 @@ class MissionController extends Controller
                     strlen($sy2) ? $data_sy2 = "~sy2=$sy2~" : $data_sy2 = "";
 
                     return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
-
+                    // return $data_off_set_dis;
                     break;
             }
         }, $stepMissionData);

@@ -6,7 +6,7 @@
                 <input class="w-[100px] text-xl px-4 py-1" type="text" name="name_marker" required>
             </div>
         </div>
-        <input name="marker_type" class="input-offset" type="text" value="none_marker_angle" hidden>
+        <input name="marker_type" class="input-offset" type="text" value="none_marker_dis" hidden>
 
 
         <div class="flex">

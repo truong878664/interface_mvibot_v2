@@ -330,6 +330,7 @@ $$(".submit-btn-marker").forEach((element) => {
                 sy2: sy2?.value,
                 method: "add",
             };
+
             updateStep(`/api/mission/${currentMission}`, data);
             renderStep();
             name_marker ? (name_marker.value = "") : "";
