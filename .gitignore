@@ -211,3 +211,7 @@ tailwindcss
 /public/dist/
 .tailwindcss-manifest.json
 tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+tailwindcss

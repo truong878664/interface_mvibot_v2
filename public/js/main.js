@@ -14,6 +14,11 @@ function toggerMessage(type, message) {
     type = "error" && window.navigator.vibrate(200);
 }
 
+window.oncontextmenu = (e) => {
+    e.preventDefault();
+    return false;
+};
+
 export { $, $$, toggerMessage };
 
 export default ros;

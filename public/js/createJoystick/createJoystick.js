@@ -22,8 +22,10 @@ const createJoystick = function () {
     manager.on("start", function (event, nipple) {
         robotMoving = setInterval(function () {
             moveRobot(linear_speed, angular_speed);
+            console.log(linear_speed);
         }, 100);
     });
+
     manager.on("move", function (event, nipple) {
         const sizeJoystick = $(".back").offsetWidth;
 
@@ -37,15 +39,21 @@ const createJoystick = function () {
         angular_speed =
             (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
             max_distance;
-
-        // console.log(linear_speed);
-        // console.log(cmd_vel_listener.name);
     });
     manager.on("end", function () {
         clearInterval(robotMoving);
         moveRobot(0, 0);
         removeColorDirection();
     });
+
+    window.ontouchend = () => {
+        clearInterval(robotMoving);
+        moveRobot(0, 0);
+    };
+    window.ontouchcancel = (e) => {
+        clearInterval(robotMoving);
+        moveRobot(0, 0);
+    };
 };
 
 let oldAngle;

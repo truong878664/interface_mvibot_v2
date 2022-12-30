@@ -1,5 +1,4 @@
-import { toggerMessage } from "../main.js";
-import { valueGpio } from "./gpio.js";
+import arrayMove from "../functionHandle/arrayMove.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -128,225 +127,6 @@ function dataStepSave(dataSteps) {
     return data;
 }
 
-$$(".add-point-btn").forEach((element) => {
-    element.onclick = (e) => {
-        e.preventDefault();
-        const itemPoint = e.target.closest(".item-point");
-        const type = itemPoint.querySelector(".type").value;
-        const nameType = itemPoint.querySelector(".name_type").value;
-        const idType = itemPoint.querySelector(".id_type").value;
-
-        const dataSaveStep = dataSaveSteps("add", type, nameType, idType);
-
-        updateStep(`/api/mission/${currentMission}`, dataSaveStep);
-
-        renderStep();
-
-        toggerMessage("success", "add point successfully");
-    };
-});
-
-function dataSaveSteps(method, type, name_type, id_type) {
-    return { method, type, name_type, id_type };
-}
-
-$(".submit-btn-footprint").onclick = (e) => {
-    e.preventDefault();
-
-    const x1_footprint = $('[name="x1_footprint"]');
-    const x2_footprint = $('[name="x2_footprint"]');
-    const y1_footprint = $('[name="y1_footprint"]');
-    const y2_footprint = $('[name="y2_footprint"]');
-    const name_footprint = $('[name="name_footprint"]');
-    if (
-        x1_footprint.value &&
-        x2_footprint.value &&
-        y1_footprint.value &&
-        y2_footprint.value &&
-        name_footprint.value
-    ) {
-        const data = {
-            method: "add",
-            type: "footprint",
-            x1: x1_footprint.value,
-            x2: x2_footprint.value,
-            y1: y1_footprint.value,
-            y2: y2_footprint.value,
-            name_type: name_footprint.value,
-        };
-        updateStep(`/api/mission/${currentMission}`, data);
-        renderStep();
-
-        x1_footprint.value = "";
-        x2_footprint.value = "";
-        y1_footprint.value = "";
-        y2_footprint.value = "";
-        name_footprint.value = "";
-        toggerMessage("success", "save footprint successfully");
-    } else {
-        toggerMessage("error", "Please enter all inputs");
-    }
-};
-
-$(".submit-btn-gpio").onclick = (e) => {
-    e.preventDefault();
-    const name_gpio = $(".name_gpio");
-    const time_out_gpio = $(".time_out_gpio");
-    const out_set_gpio = $(".out_set_gpio");
-    const out_reset_gpio = $(".out_reset_gpio");
-    const in_on_gpio = $(".in_on_gpio");
-    const in_off_gpio = $(".in_off_gpio");
-    const in_pullup_gpio = $(".in_pullup_gpio");
-    const in_pulldown_gpio = $(".in_pulldown_gpio");
-
-    if (
-        name_gpio.value &&
-        time_out_gpio.value &&
-        (out_set_gpio.value ||
-            out_reset_gpio.value ||
-            in_on_gpio.value ||
-            in_off_gpio.value ||
-            in_pullup_gpio.value ||
-            in_pulldown_gpio.value)
-    ) {
-        const data = {
-            method: "add",
-            type: "gpio",
-            name_type: name_gpio.value,
-            time_out: time_out_gpio.value,
-            out_set: out_set_gpio.value,
-            out_reset: out_reset_gpio.value,
-            in_on: in_on_gpio.value,
-            in_off: in_off_gpio.value,
-            in_pullup: in_pullup_gpio.value,
-            in_pulldown: in_pulldown_gpio.value,
-        };
-        updateStep(`/api/mission/${currentMission}`, data);
-        renderStep();
-
-        name_gpio.value = "";
-        time_out_gpio.value = -1;
-        out_set_gpio.value = "";
-        out_reset_gpio.value = "";
-        in_on_gpio.value = "";
-        in_off_gpio.value = "";
-        in_pullup_gpio.value = "";
-        in_pulldown_gpio.value = "";
-
-        $$(".gpio_checkbox").forEach((element) => {
-            element.checked = false;
-        });
-
-        $$(".gpio-io").forEach((element) => (element.style.fill = "#CCCCCC"));
-
-        valueGpio.out_set = [];
-        valueGpio.out_reset = [];
-        valueGpio.in_on = [];
-        valueGpio.in_off = [];
-        valueGpio.in_pullup = [];
-        valueGpio.in_pulldown = [];
-
-        $$(".show-gpio-wrapper").forEach((item) => {
-            item.innerHTML = "";
-        });
-
-        $(".data-gpio-item.show")?.classList.remove("show");
-        toggerMessage("success", "save gpio successfully");
-    } else {
-        toggerMessage(
-            "error",
-            "Please enter name, timeout and at least one type of gpio"
-        );
-    }
-};
-
-$(".submit-btn-sleep").onclick = (e) => {
-    e.preventDefault();
-    const name_sleep = $('[name="name_sleep"]');
-    const time_sleep = $('[name="time_sleep"]');
-
-    if (name_sleep.value && time_sleep.value) {
-        const data = {
-            method: "add",
-            type: "sleep",
-            time_sleep: $('[name="time_sleep"]').value,
-            name_type: $('[name="name_sleep"]').value,
-        };
-        updateStep(`/api/mission/${currentMission}`, data);
-        renderStep();
-
-        $('[name="time_sleep"]').value = "";
-        $('[name="name_sleep"]').value = "";
-        toggerMessage("success", `save sleep successfully`);
-    } else {
-        toggerMessage("error", "Please enter all inputs");
-    }
-};
-
-$$(".submit-btn-marker").forEach((element) => {
-    element.onclick = (e) => {
-        e.preventDefault();
-        const formElement = e.target.closest(".marker-item");
-
-        const name_marker = formElement.querySelector('[name="name_marker"]');
-        const marker_type = formElement.querySelector('[name="marker_type"]');
-        const marker_dir = formElement.querySelector('[name="marker_dir"]');
-        const off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
-        const off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
-        const off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
-        const off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
-        const off_set_dis = formElement.querySelector('[name="off_set_dis"]');
-        const off_set_angle = formElement.querySelector(
-            '[name="off_set_angle"]'
-        );
-        const sx1 = formElement.querySelector('[name="sx1"]');
-        const sx2 = formElement.querySelector('[name="sx2"]');
-        const sy1 = formElement.querySelector('[name="sy1"]');
-        const sy2 = formElement.querySelector('[name="sy2"]');
-
-        if (
-            name_marker.value &&
-            (off_set_x1 ? off_set_x1.value : true) &&
-            (off_set_x2 ? off_set_x2.value : true) &&
-            (off_set_y1 ? off_set_y1.value : true) &&
-            (off_set_y2 ? off_set_y2.value : true) &&
-            (off_set_dis ? off_set_dis.value : true) &&
-            (off_set_angle ? off_set_angle.value : true)
-        ) {
-            const data = {
-                type: "marker",
-                name_type: name_marker?.value,
-                marker_type: marker_type.value,
-                marker_dir: marker_dir?.value,
-                off_set_x1: off_set_x1?.value,
-                off_set_x2: off_set_x2?.value,
-                off_set_y1: off_set_y1?.value,
-                off_set_y2: off_set_y2?.value,
-                off_set_dis: off_set_dis?.value,
-                off_set_angle: off_set_angle?.value,
-                sx1: sx1?.value,
-                sx2: sx2?.value,
-                sy1: sy1?.value,
-                sy2: sy2?.value,
-                method: "add",
-            };
-
-            updateStep(`/api/mission/${currentMission}`, data);
-            renderStep();
-            name_marker ? (name_marker.value = "") : "";
-            off_set_x1 ? (off_set_x1.value = "") : "";
-            off_set_x2 ? (off_set_x2.value = "") : "";
-            off_set_y1 ? (off_set_y1.value = "") : "";
-            off_set_y2 ? (off_set_y2.value = "") : "";
-            off_set_dis ? (off_set_dis.value = "") : "";
-            off_set_angle ? (off_set_angle.value = "") : "";
-            toggerMessage("success", `save ${marker_type.value} successfully`);
-        } else {
-            toggerMessage("error", "Please enter all inputs");
-        }
-    };
-});
-
 function moveStepLeft(dataSteps) {
     const allMoveBtnLeft = document.querySelectorAll(".move-left");
     allMoveBtnLeft.forEach((moveLeftBtn, index) => {
@@ -355,7 +135,7 @@ function moveStepLeft(dataSteps) {
                 e.target.closest(".step-item").getAttribute("index")
             );
             if (moveIndex != 0) {
-                array_move(dataSteps, moveIndex, moveIndex - 1);
+                arrayMove(dataSteps, moveIndex, moveIndex - 1);
 
                 const stepSave = dataStepSave(dataSteps);
                 const data = { steps_mission_name: stepSave, method: "update" };
@@ -386,7 +166,7 @@ function moveStepRight(dataSteps) {
                 e.target.closest(".step-item").getAttribute("index")
             );
             if (moveIndex < dataSteps.length - 1) {
-                array_move(dataSteps, moveIndex, moveIndex + 1);
+                arrayMove(dataSteps, moveIndex, moveIndex + 1);
 
                 const stepSave = dataStepSave(dataSteps);
                 const data = { steps_mission_name: stepSave, method: "update" };
@@ -412,39 +192,4 @@ function moveStepRight(dataSteps) {
     });
 }
 
-$$(".delete-point-btn").forEach((element) => {
-    element.onclick = (e) => {
-        deletePoint(e.target.getAttribute("point-id"));
-        e.target.closest(".item-point").remove();
-    };
-});
-
-function deletePoint(id) {
-    fetch(`/api/position/${id}`, {
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "DELETE",
-    })
-        .then(function (res) {
-            console.log(res);
-            renderStep();
-        })
-        .catch(function (res) {
-            console.log(res);
-        });
-}
-
-function array_move(arr, old_index, new_index) {
-    if (new_index >= arr.length) {
-        var k = new_index - arr.length + 1;
-        while (k--) {
-            arr.push(undefined);
-        }
-    }
-    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-    return arr; // for testing
-}
-
-export { renderStep };
+export { renderStep, updateStep };

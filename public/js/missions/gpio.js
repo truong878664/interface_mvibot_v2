@@ -126,8 +126,8 @@ const valueGpioOther = [
     },
 ];
 
-const currentWakeUp = JSON.parse($("#current-wake-up").value);
-const currentStop = JSON.parse($("#current-stop").value);
+const currentWakeUp = JSON.parse($("#current-wake-up")?.value);
+const currentStop = JSON.parse($("#current-stop")?.value);
 
 const nameGpios = [
     "out_set",

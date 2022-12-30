@@ -20,6 +20,7 @@ function moveRobot(linear, angular) {
     });
     if (cmd_vel_listener.name !== "/cmd_vel") {
         cmd_vel_listener.publish(twist);
+        console.log(linear, angular);
     }
 }
 
