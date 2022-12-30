@@ -22,7 +22,6 @@ const createJoystick = function () {
     manager.on("start", function (event, nipple) {
         robotMoving = setInterval(function () {
             moveRobot(linear_speed, angular_speed);
-            console.log(linear_speed);
         }, 100);
     });
 

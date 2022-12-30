@@ -43,6 +43,7 @@ function render(dataSteps) {
         return htmlStep.push(
             `<div class="step-item step-${stepMode}" index=${index}>
                 <input hidden type="text" class="step-id" value=${stepId}>
+                <input hidden type="text" class="step-mode" value=${stepMode}>
                 <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <span class="stem-name">${stepMode}|${stepName}</span>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
@@ -65,6 +66,7 @@ function render(dataSteps) {
     moveStepLeft(dataSteps);
     moveStepRight(dataSteps);
     showMenu();
+    handleEditStep();
 }
 
 function showMenu() {
@@ -190,6 +192,85 @@ function moveStepRight(dataSteps) {
             }
         });
     });
+}
+
+//edit step
+function handleEditStep() {
+    $$(".edit-step").forEach((element) => {
+        element.onclick = (e) => {
+            const stepItem = e.target.closest(".step-item");
+
+            const stepMode = stepItem.querySelector(".step-mode").value;
+            const stepId = stepItem.querySelector(".step-id").value;
+
+            $(`.${stepMode}-function-btn`).click();
+            $([".menu-right-click.active"]).classList.remove("active");
+
+            getValueStep(stepMode, stepId);
+        };
+    });
+}
+
+function getValueStep(stepMode, id) {
+    fetch(`/api/step/0?type=${stepMode}&id=${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+            showDataUpdate(stepMode, data);
+        });
+}
+
+function showDataUpdate(stepMode, data) {
+    switch (stepMode) {
+        case "footprint":
+            const x1_footprint = $('[name="x1_footprint"]');
+            const x2_footprint = $('[name="x2_footprint"]');
+            const y1_footprint = $('[name="y1_footprint"]');
+            const y2_footprint = $('[name="y2_footprint"]');
+            const name_footprint = $('[name="name_footprint"]');
+
+            x1_footprint.value = Math.abs(data[0].x1);
+            x2_footprint.value = Math.abs(data[0].x2);
+            y1_footprint.value = Math.abs(data[0].y1);
+            y2_footprint.value = Math.abs(data[0].y2);
+            name_footprint.value = data[0].name_footprint;
+            break;
+        case "sleep":
+            const name_sleep = $('[name="name_sleep"]');
+            const time_sleep = $('[name="time_sleep"]');
+
+            name_sleep.value = data[0].name_sleep;
+            time_sleep.value = data[0].name_sleep;
+            break;
+        case "marker":
+            $(`.${data[0].marker_type}-btn`).click();
+
+            $(".marker-item");
+
+            // const formElement = e.target.closest(".marker-item");
+
+            // const name_marker = formElement.querySelector(
+            //     '[name="name_marker"]'
+            // );
+            // const marker_type = formElement.querySelector(
+            //     '[name="marker_type"]'
+            // );
+            // const marker_dir = formElement.querySelector('[name="marker_dir"]');
+            // const off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
+            // const off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
+            // const off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
+            // const off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
+            // const off_set_dis = formElement.querySelector(
+            //     '[name="off_set_dis"]'
+            // );
+            // const off_set_angle = formElement.querySelector(
+            //     '[name="off_set_angle"]'
+            // );
+            // const sx1 = formElement.querySelector('[name="sx1"]');
+            // const sx2 = formElement.querySelector('[name="sx2"]');
+            // const sy1 = formElement.querySelector('[name="sy1"]');
+            // const sy2 = formElement.querySelector('[name="sy2"]');
+            break;
+    }
 }
 
 export { renderStep, updateStep };
