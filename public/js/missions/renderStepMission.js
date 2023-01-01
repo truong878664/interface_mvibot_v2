@@ -1,4 +1,5 @@
 import arrayMove from "../functionHandle/arrayMove.js";
+import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -239,36 +240,70 @@ function showDataUpdate(stepMode, data) {
             const time_sleep = $('[name="time_sleep"]');
 
             name_sleep.value = data[0].name_sleep;
-            time_sleep.value = data[0].name_sleep;
+            time_sleep.value = data[0].time_sleep;
             break;
         case "marker":
             $(`.${data[0].marker_type}-btn`).click();
 
-            $(".marker-item");
+            const formMarkerCurrent = $(".marker-item:not(.hidden)");
 
-            // const formElement = e.target.closest(".marker-item");
+            const name_marker = formMarkerCurrent.querySelector(
+                '[name="name_marker"]'
+            );
+            const marker_type = formMarkerCurrent.querySelector(
+                '[name="marker_type"]'
+            );
+            const marker_dir = formMarkerCurrent.querySelector(
+                '[name="marker_dir"]'
+            );
+            const off_set_x1 = formMarkerCurrent.querySelector(
+                '[name="off_set_x1"]'
+            );
+            const off_set_x2 = formMarkerCurrent.querySelector(
+                '[name="off_set_x2"]'
+            );
+            const off_set_y1 = formMarkerCurrent.querySelector(
+                '[name="off_set_y1"]'
+            );
+            const off_set_y2 = formMarkerCurrent.querySelector(
+                '[name="off_set_y2"]'
+            );
+            const off_set_dis = formMarkerCurrent.querySelector(
+                '[name="off_set_dis"]'
+            );
+            const off_set_angle = formMarkerCurrent.querySelector(
+                '[name="off_set_angle"]'
+            );
+            const sx1 = formMarkerCurrent.querySelector('[name="sx1"]');
+            const sx2 = formMarkerCurrent.querySelector('[name="sx2"]');
+            const sy1 = formMarkerCurrent.querySelector('[name="sy1"]');
+            const sy2 = formMarkerCurrent.querySelector('[name="sy2"]');
 
-            // const name_marker = formElement.querySelector(
-            //     '[name="name_marker"]'
-            // );
-            // const marker_type = formElement.querySelector(
-            //     '[name="marker_type"]'
-            // );
-            // const marker_dir = formElement.querySelector('[name="marker_dir"]');
-            // const off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
-            // const off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
-            // const off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
-            // const off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
-            // const off_set_dis = formElement.querySelector(
-            //     '[name="off_set_dis"]'
-            // );
-            // const off_set_angle = formElement.querySelector(
-            //     '[name="off_set_angle"]'
-            // );
-            // const sx1 = formElement.querySelector('[name="sx1"]');
-            // const sx2 = formElement.querySelector('[name="sx2"]');
-            // const sy1 = formElement.querySelector('[name="sy1"]');
-            // const sy2 = formElement.querySelector('[name="sy2"]');
+            name_marker ? (name_marker.value = data[0].name_marker) : "";
+            marker_type ? (marker_type.value = data[0].marker_type) : "";
+            marker_dir ? (marker_dir.value = data[0].marker_dir) : "";
+            off_set_x1 ? (off_set_x1.value = data[0].off_set_x1) : "";
+            off_set_x2 ? (off_set_x2.value = data[0].off_set_x2) : "";
+            off_set_y1 ? (off_set_y1.value = data[0].off_set_y1) : "";
+            off_set_y2 ? (off_set_y2.value = data[0].off_set_y2) : "";
+            off_set_dis ? (off_set_dis.value = data[0].off_set_dis) : "";
+            off_set_angle ? (off_set_angle.value = data[0].off_set_angle) : "";
+            sx1 ? (sx1.value = data[0].sx1) : "";
+            sx2 ? (sx2.value = data[0].sx2) : "";
+            sy1 ? (sy1.value = data[0].sy1) : "";
+            sy2 ? (sy2.value = data[0].sy2) : "";
+            break;
+        case "gpio":
+            $(".name_gpio").value = data[0].name_gpio;
+            $(".time_out_gpio").value = data[0].time_out;
+
+            nameGpios.forEach((item) => {
+                valueGpio[item] = [];
+                const dataGpioDb = data[0][item]?.split(",");
+                valueGpio[item].push(...(dataGpioDb || []));
+                renderGpio(item);
+            });
+            checkboxInputGpio();
             break;
     }
 }

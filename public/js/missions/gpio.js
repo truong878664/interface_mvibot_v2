@@ -1,8 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-// import { $ } from "../main.js";
-
 showFormGpio(".create-gpio_gpio");
 showFormGpio(".create-gpio_wake_up");
 showFormGpio(".create-gpio_stop");
@@ -40,35 +38,52 @@ export const valueGpio = {
 function getValueCheckbox(element) {
     const allCheckBox = element.querySelectorAll(".gpio_checkbox");
     Array.prototype.map.call(allCheckBox, (item) => {
-        item.onchange = () => {
+        item.onchange = (e) => {
             const inputGpio = item
                 .closest(".data-gpio-item")
                 .querySelector("input");
             const typeGpio = inputGpio.getAttribute("name");
-            if (item.checked) {
-                valueGpio[typeGpio].push(item.defaultValue);
+
+            const valueGpioItem = Number(e.target.value);
+
+            if (e.target.checked) {
+                valueGpio[typeGpio].push(valueGpioItem);
             } else {
                 valueGpio[typeGpio].splice(
-                    valueGpio[typeGpio].indexOf(item.defaultValue),
+                    valueGpio[typeGpio].indexOf(valueGpioItem),
                     1
                 );
             }
-            const html = [];
-            valueGpio[typeGpio].sort((x, y) => {
-                return Number(x) - Number(y);
-            });
-
-            valueGpio[typeGpio].map((item) => {
-                html.push(`<div class="item-gpio">${item}</div>`);
-            });
-            element.querySelector(".show-gpio-wrapper").innerHTML =
-                html.join("");
-            inputGpio.value = valueGpio[typeGpio].toString();
-
-            outputGpioLight();
-            inputGpioLight();
+            renderGpio(typeGpio);
         };
     });
+}
+
+export function renderGpio(typeGpio) {
+    const html = [];
+    valueGpio[typeGpio].sort((x, y) => {
+        return Number(x) - Number(y);
+    });
+
+    valueGpio[typeGpio].map((item) => {
+        html.push(`<div class="item-gpio">${item}</div>`);
+    });
+    $(`.${typeGpio}_gpio_show`).innerHTML = html.join("");
+    $(`.${typeGpio}_gpio`).value = valueGpio[typeGpio].toString();
+
+    outputGpioLight();
+    inputGpioLight();
+}
+
+export function checkboxInputGpio() {
+    for (const [key, value] of Object.entries(valueGpio)) {
+        $$(`.${key}_gpio_checkbox`).forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+        value.forEach((item) => {
+            $$(`.${key}_gpio_checkbox`)[item].checked = true;
+        });
+    }
 }
 
 function outputGpioLight() {
@@ -129,7 +144,7 @@ const valueGpioOther = [
 const currentWakeUp = JSON.parse($("#current-wake-up")?.value);
 const currentStop = JSON.parse($("#current-stop")?.value);
 
-const nameGpios = [
+export const nameGpios = [
     "out_set",
     "out_reset",
     "in_on",
