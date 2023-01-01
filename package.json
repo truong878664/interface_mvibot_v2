@@ -160,6 +160,7 @@
     "fragment-cache": "^0.2.1",
     "fresh": "^0.5.2",
     "fs-extra": "^3.0.1",
+    "fsevents": "^1.2.9",
     "function-bind": "^1.1.1",
     "get-caller-file": "^2.0.5",
     "get-stream": "^3.0.0",

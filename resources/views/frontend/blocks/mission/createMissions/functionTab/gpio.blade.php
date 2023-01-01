@@ -2,7 +2,7 @@
     <div class="flex">
         <div class="flex flex-col">
             <label for="" class="text-xl">Name GPIO</label>
-            <input class="w-[200px] text-xl px-4 py-1 name_gpio" type="text" name="name_gpio" required>
+            <input class="w-[200px] text-xl px-4 py-1 name_gpio input-reset" type="text" name="name_gpio" required>
         </div>
 
         <div class="flex flex-col ml-2">
@@ -29,8 +29,6 @@
         </svg>
     </div>
 
-    {{-- @include('frontend.blocks.mission.createMissions.functionTab.idMission') --}}
-    <button
-        class="submit-btn-gpio text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Add</button>
+    @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'gpio'])
 
 </form>

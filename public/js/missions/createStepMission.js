@@ -13,6 +13,7 @@ import { valueGpio } from "./gpio.js";
 import { currentMission, renderStep, updateStep } from "./renderStepMission.js";
 import { setDefaultValueFootprint } from "./footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
+import inputFunction from "./inputFunction.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -176,12 +177,14 @@ function handlePointMission() {
 function handleFootprintMission() {
     $(".submit-btn-footprint").onclick = (e) => {
         e.preventDefault();
+        const {
+            x1_footprint,
+            x2_footprint,
+            y1_footprint,
+            y2_footprint,
+            name_footprint,
+        } = inputFunction("footprint");
 
-        const x1_footprint = $('[name="x1_footprint"]');
-        const x2_footprint = $('[name="x2_footprint"]');
-        const y1_footprint = $('[name="y1_footprint"]');
-        const y2_footprint = $('[name="y2_footprint"]');
-        const name_footprint = $('[name="name_footprint"]');
         if (
             x1_footprint.value &&
             x2_footprint.value &&
@@ -215,14 +218,17 @@ function handleFootprintMission() {
 function handleGpioMission() {
     $(".submit-btn-gpio").onclick = (e) => {
         e.preventDefault();
-        const name_gpio = $(".name_gpio");
-        const time_out_gpio = $(".time_out_gpio");
-        const out_set_gpio = $(".out_set_gpio");
-        const out_reset_gpio = $(".out_reset_gpio");
-        const in_on_gpio = $(".in_on_gpio");
-        const in_off_gpio = $(".in_off_gpio");
-        const in_pullup_gpio = $(".in_pullup_gpio");
-        const in_pulldown_gpio = $(".in_pulldown_gpio");
+
+        const {
+            name_gpio,
+            time_out_gpio,
+            out_set_gpio,
+            out_reset_gpio,
+            in_on_gpio,
+            in_off_gpio,
+            in_pullup_gpio,
+            in_pulldown_gpio,
+        } = inputFunction("gpio");
 
         if (
             name_gpio.value &&
@@ -248,34 +254,7 @@ function handleGpioMission() {
             };
             updateStep(`/api/mission/${currentMission}`, data);
             renderStep();
-
-            name_gpio.value = "";
-            time_out_gpio.value = -1;
-            out_set_gpio.value = "";
-            out_reset_gpio.value = "";
-            in_on_gpio.value = "";
-            in_off_gpio.value = "";
-            in_pullup_gpio.value = "";
-            in_pulldown_gpio.value = "";
-
-            $$(".gpio_checkbox").forEach((element) => {
-                element.checked = false;
-            });
-
-            $$(".gpio-io").forEach(
-                (element) => (element.style.fill = "#CCCCCC")
-            );
-
-            valueGpio.out_set = [];
-            valueGpio.out_reset = [];
-            valueGpio.in_on = [];
-            valueGpio.in_off = [];
-            valueGpio.in_pullup = [];
-            valueGpio.in_pulldown = [];
-
-            $$(".show-gpio-wrapper").forEach((item) => {
-                item.innerHTML = "";
-            });
+            resetDataGpio();
 
             $(".data-gpio-item.show")?.classList.remove("show");
             toggerMessage("success", "save gpio successfully");
@@ -288,11 +267,50 @@ function handleGpioMission() {
     };
 }
 
+export function resetDataGpio() {
+    const {
+        name_gpio,
+        time_out_gpio,
+        out_set_gpio,
+        out_reset_gpio,
+        in_on_gpio,
+        in_off_gpio,
+        in_pullup_gpio,
+        in_pulldown_gpio,
+    } = inputFunction("gpio");
+
+    name_gpio.value = "";
+    time_out_gpio.value = -1;
+    out_set_gpio.value = "";
+    out_reset_gpio.value = "";
+    in_on_gpio.value = "";
+    in_off_gpio.value = "";
+    in_pullup_gpio.value = "";
+    in_pulldown_gpio.value = "";
+
+    $$(".gpio_checkbox").forEach((element) => {
+        element.checked = false;
+    });
+
+    $$(".gpio-io").forEach((element) => (element.style.fill = "#CCCCCC"));
+
+    valueGpio.out_set = [];
+    valueGpio.out_reset = [];
+    valueGpio.in_on = [];
+    valueGpio.in_off = [];
+    valueGpio.in_pullup = [];
+    valueGpio.in_pulldown = [];
+
+    $$(".show-gpio-wrapper").forEach((item) => {
+        item.innerHTML = "";
+    });
+}
+
 function handleSleepMission() {
     $(".submit-btn-sleep").onclick = (e) => {
         e.preventDefault();
-        const name_sleep = $('[name="name_sleep"]');
-        const time_sleep = $('[name="time_sleep"]');
+
+        const { name_sleep, time_sleep } = inputFunction("sleep");
 
         if (name_sleep.value && time_sleep.value) {
             const data = {
@@ -317,29 +335,22 @@ function handleMarkerMission() {
     $$(".submit-btn-marker").forEach((element) => {
         element.onclick = (e) => {
             e.preventDefault();
-            const formElement = e.target.closest(".marker-item");
 
-            const name_marker = formElement.querySelector(
-                '[name="name_marker"]'
-            );
-            const marker_type = formElement.querySelector(
-                '[name="marker_type"]'
-            );
-            const marker_dir = formElement.querySelector('[name="marker_dir"]');
-            const off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
-            const off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
-            const off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
-            const off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
-            const off_set_dis = formElement.querySelector(
-                '[name="off_set_dis"]'
-            );
-            const off_set_angle = formElement.querySelector(
-                '[name="off_set_angle"]'
-            );
-            const sx1 = formElement.querySelector('[name="sx1"]');
-            const sx2 = formElement.querySelector('[name="sx2"]');
-            const sy1 = formElement.querySelector('[name="sy1"]');
-            const sy2 = formElement.querySelector('[name="sy2"]');
+            const {
+                name_marker,
+                marker_type,
+                marker_dir,
+                off_set_x1,
+                off_set_x2,
+                off_set_y1,
+                off_set_y2,
+                off_set_dis,
+                off_set_angle,
+                sx1,
+                sx2,
+                sy1,
+                sy2,
+            } = inputFunction("marker");
 
             if (
                 name_marker.value &&
@@ -377,6 +388,11 @@ function handleMarkerMission() {
                 off_set_y2 ? (off_set_y2.value = "") : "";
                 off_set_dis ? (off_set_dis.value = "") : "";
                 off_set_angle ? (off_set_angle.value = "") : "";
+
+                sx1.value = 0.01;
+                sx2.value = 0.01;
+                sy1.value = 0.01;
+                sy2.value = 0.01;
                 toggerMessage(
                     "success",
                     `save ${marker_type.value} successfully`

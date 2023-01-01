@@ -1,5 +1,7 @@
 import arrayMove from "../functionHandle/arrayMove.js";
+import { resetDataGpio } from "./createStepMission.js";
 import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
+import inputFunction from "./inputFunction.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -223,61 +225,46 @@ function getValueStep(stepMode, id) {
 function showDataUpdate(stepMode, data) {
     switch (stepMode) {
         case "footprint":
-            const x1_footprint = $('[name="x1_footprint"]');
-            const x2_footprint = $('[name="x2_footprint"]');
-            const y1_footprint = $('[name="y1_footprint"]');
-            const y2_footprint = $('[name="y2_footprint"]');
-            const name_footprint = $('[name="name_footprint"]');
+            const {
+                x1_footprint,
+                x2_footprint,
+                y1_footprint,
+                y2_footprint,
+                name_footprint,
+            } = inputFunction("footprint");
 
             x1_footprint.value = Math.abs(data[0].x1);
             x2_footprint.value = Math.abs(data[0].x2);
             y1_footprint.value = Math.abs(data[0].y1);
             y2_footprint.value = Math.abs(data[0].y2);
             name_footprint.value = data[0].name_footprint;
+            handleUpdateStep("footprint");
             break;
         case "sleep":
-            const name_sleep = $('[name="name_sleep"]');
-            const time_sleep = $('[name="time_sleep"]');
+            const { name_sleep, time_sleep } = inputFunction("sleep");
 
             name_sleep.value = data[0].name_sleep;
             time_sleep.value = data[0].time_sleep;
+            handleUpdateStep("sleep");
             break;
         case "marker":
             $(`.${data[0].marker_type}-btn`).click();
 
-            const formMarkerCurrent = $(".marker-item:not(.hidden)");
-
-            const name_marker = formMarkerCurrent.querySelector(
-                '[name="name_marker"]'
-            );
-            const marker_type = formMarkerCurrent.querySelector(
-                '[name="marker_type"]'
-            );
-            const marker_dir = formMarkerCurrent.querySelector(
-                '[name="marker_dir"]'
-            );
-            const off_set_x1 = formMarkerCurrent.querySelector(
-                '[name="off_set_x1"]'
-            );
-            const off_set_x2 = formMarkerCurrent.querySelector(
-                '[name="off_set_x2"]'
-            );
-            const off_set_y1 = formMarkerCurrent.querySelector(
-                '[name="off_set_y1"]'
-            );
-            const off_set_y2 = formMarkerCurrent.querySelector(
-                '[name="off_set_y2"]'
-            );
-            const off_set_dis = formMarkerCurrent.querySelector(
-                '[name="off_set_dis"]'
-            );
-            const off_set_angle = formMarkerCurrent.querySelector(
-                '[name="off_set_angle"]'
-            );
-            const sx1 = formMarkerCurrent.querySelector('[name="sx1"]');
-            const sx2 = formMarkerCurrent.querySelector('[name="sx2"]');
-            const sy1 = formMarkerCurrent.querySelector('[name="sy1"]');
-            const sy2 = formMarkerCurrent.querySelector('[name="sy2"]');
+            const {
+                name_marker,
+                marker_type,
+                marker_dir,
+                off_set_x1,
+                off_set_x2,
+                off_set_y1,
+                off_set_y2,
+                off_set_dis,
+                off_set_angle,
+                sx1,
+                sx2,
+                sy1,
+                sy2,
+            } = inputFunction("marker");
 
             name_marker ? (name_marker.value = data[0].name_marker) : "";
             marker_type ? (marker_type.value = data[0].marker_type) : "";
@@ -292,10 +279,14 @@ function showDataUpdate(stepMode, data) {
             sx2 ? (sx2.value = data[0].sx2) : "";
             sy1 ? (sy1.value = data[0].sy1) : "";
             sy2 ? (sy2.value = data[0].sy2) : "";
+
+            handleUpdateStep("marker");
             break;
         case "gpio":
-            $(".name_gpio").value = data[0].name_gpio;
-            $(".time_out_gpio").value = data[0].time_out;
+            const { name_gpio, time_out_gpio } = inputFunction("gpio");
+
+            name_gpio.value = data[0].name_gpio;
+            time_out_gpio.value = data[0].time_out;
 
             nameGpios.forEach((item) => {
                 valueGpio[item] = [];
@@ -304,6 +295,97 @@ function showDataUpdate(stepMode, data) {
                 renderGpio(item);
             });
             checkboxInputGpio();
+
+            handleUpdateStep("gpio");
+            break;
+    }
+}
+
+function handleUpdateStep(type) {
+    let updateBtnWrapper;
+    if (type == "marker") {
+        updateBtnWrapper = $(".marker-item:not(.hidden)").querySelector(
+            `.${type}-update-btn-wrapper`
+        );
+        updateBtnWrapper.classList.remove("hidden");
+    } else {
+        updateBtnWrapper = $(`.${type}-update-btn-wrapper`);
+        updateBtnWrapper.classList.remove("hidden");
+    }
+
+    updateBtnWrapper.querySelector(`.${type}-update-cancel`).onclick = (e) => {
+        e.preventDefault();
+        handleResetData();
+    };
+
+    updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
+        e.preventDefault();
+        dataUpdateStep(type);
+        // handleResetData(e);
+    };
+
+    function handleResetData(e) {
+        updateBtnWrapper.classList.add("hidden");
+        $$(".input-reset").forEach((element) => {
+            element.value = "";
+        });
+
+        $$(".offset-s-001").forEach((element) => {
+            element.value = 0.01;
+        });
+
+        if (type == "gpio") {
+            resetDataGpio();
+        }
+    }
+}
+
+function dataUpdateStep(type) {
+    console.log(type);
+    switch (type) {
+        case "marker":
+            const {
+                name_marker,
+                marker_type,
+                marker_dir,
+                off_set_x1,
+                off_set_x2,
+                off_set_y1,
+                off_set_y2,
+                off_set_dis,
+                off_set_angle,
+                sx1,
+                sx2,
+                sy1,
+                sy2,
+            } = inputFunction("marker");
+
+            if (
+                name_marker.value &&
+                (off_set_x1 ? off_set_x1.value : true) &&
+                (off_set_x2 ? off_set_x2.value : true) &&
+                (off_set_y1 ? off_set_y1.value : true) &&
+                (off_set_y2 ? off_set_y2.value : true) &&
+                (off_set_dis ? off_set_dis.value : true) &&
+                (off_set_angle ? off_set_angle.value : true)
+            ) {
+                const data = {
+                    type: "marker",
+                    name_type: name_marker?.value,
+                    marker_type: marker_type.value,
+                    marker_dir: marker_dir?.value,
+                    off_set_x1: Number(off_set_x1?.value),
+                    off_set_x2: Number(off_set_x2?.value),
+                    off_set_y1: Number(off_set_y1?.value),
+                    off_set_y2: Number(off_set_y2?.value),
+                    off_set_dis: Number(off_set_dis?.value),
+                    off_set_angle: Number(off_set_angle?.value),
+                    sx1: Number(sx1?.value),
+                    sx2: Number(sx2?.value),
+                    sy1: Number(sy1?.value),
+                    sy2: Number(sy2?.value),
+                };
+            }
             break;
     }
 }
