@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Missions;
 use Illuminate\Http\Request;
-use App\Http\Controllers\frontend\MissionsController;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionMarker;
@@ -198,10 +197,12 @@ class MissionController extends Controller
                         return 'incorrect type';
                 }
                 break;
+            case "update-step-value":
+                break;
         }
 
         $this->changeData($id);
-        return;
+        return ['message' => "update success", "status" => 200];
     }
 
     /**

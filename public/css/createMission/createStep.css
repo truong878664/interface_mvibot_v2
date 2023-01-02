@@ -333,15 +333,6 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-.input-footprint {
-    /* border: 1px solid #ccc;
-    width: 60px;
-    height: 30px;
-    text-align: center;
-    padding: 0 8px;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.8); */
-}
 
 .top-footprint {
     bottom: 100px;
@@ -425,7 +416,6 @@ input[type="number"] {
 }
 .step-item.step-sleep {
     background-color: #cf0a0a;
-    /* color: #000; */
 }
 .step-item.step-sound {
     background-color: #3f3b6c;
@@ -450,19 +440,18 @@ input[type="number"] {
 .move-btn {
     position: absolute;
     top: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 33.3%;
+    height: 100%;
     border: none;
-    background-color: rgba(204, 204, 204, 0.411);
-    color: var(--main-color);
+    background-color: rgba(204, 204, 204, 0.507);
+    color: #000;
     transform: translateY(-50%);
     display: none;
 }
 
 .move-btn:hover,
 .show-menu:hover {
-    background-color: #ccc;
+    background-color: rgba(204, 204, 204, 0.553);
     cursor: pointer;
 }
 
@@ -470,12 +459,11 @@ input[type="number"] {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 33.3%;
+    color: #000;
+    height: 100%;
     border: none;
     background-color: rgba(204, 204, 204, 0.411);
-    color: var(--main-color);
     transform: translateY(-50%) translateX(-50%);
     display: none;
 }

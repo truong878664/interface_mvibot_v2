@@ -10,10 +10,11 @@ import { runMission } from "../rosModule/handleMission.js";
 
 import { toggerMessage } from "../main.js";
 import { valueGpio } from "./gpio.js";
-import { currentMission, renderStep, updateStep } from "./renderStepMission.js";
+import { currentMission, renderStep, updateStep } from "./handleStepMission.js";
 import { setDefaultValueFootprint } from "./footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
 import inputFunction from "./inputFunction.js";
+import { loaded, loading } from "./displayLoad.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -157,6 +158,7 @@ function handlePointMission() {
             };
         });
         function deletePoint(id) {
+            loading();
             fetch(`/api/position/${id}`, {
                 headers: {
                     Accept: "application/json",
@@ -165,6 +167,7 @@ function handlePointMission() {
                 method: "DELETE",
             })
                 .then(function (res) {
+                    loaded();
                     console.log(res);
                     renderStep();
                 })

@@ -1,7 +1,10 @@
 import arrayMove from "../functionHandle/arrayMove.js";
+import { toggerMessage } from "../main.js";
 import { resetDataGpio } from "./createStepMission.js";
+import { loaded, loading } from "./displayLoad.js";
 import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
 import inputFunction from "./inputFunction.js";
+import updateStepValue from "./updateStepValue.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -10,6 +13,8 @@ export const currentMission = location.pathname.slice(
     location.pathname.lastIndexOf("/") + 1,
     location.pathname.length
 );
+
+let currentIdUpdate;
 
 function renderStep() {
     loading();
@@ -26,12 +31,6 @@ function renderStep() {
         });
 }
 
-function loading() {
-    $(".step-loading").classList.remove("hidden");
-}
-function loaded() {
-    $(".step-loading").classList.add("hidden");
-}
 function render(dataSteps) {
     const stepsWrapper = document.querySelector(".steps-wrapper");
     const htmlStep = [];
@@ -111,6 +110,7 @@ function deleteStep(dataSteps) {
 }
 
 function updateStep(url = "", stepSave) {
+    loading();
     fetch(url, {
         headers: {
             Accept: "application/json",
@@ -120,7 +120,12 @@ function updateStep(url = "", stepSave) {
         body: JSON.stringify(stepSave),
     })
         .then(function (res) {
+            loaded();
             console.log(res);
+
+            res.status == 200
+                ? toggerMessage("success", "Update step success")
+                : toggerMessage("error", "ERR!, please try again");
         })
         .catch(function (res) {
             console.log(res);
@@ -239,6 +244,8 @@ function showDataUpdate(stepMode, data) {
             y2_footprint.value = Math.abs(data[0].y2);
             name_footprint.value = data[0].name_footprint;
             handleUpdateStep("footprint");
+
+            currentIdUpdate = data[0].id;
             break;
         case "sleep":
             const { name_sleep, time_sleep } = inputFunction("sleep");
@@ -246,6 +253,8 @@ function showDataUpdate(stepMode, data) {
             name_sleep.value = data[0].name_sleep;
             time_sleep.value = data[0].time_sleep;
             handleUpdateStep("sleep");
+            currentIdUpdate = data[0].id;
+
             break;
         case "marker":
             $(`.${data[0].marker_type}-btn`).click();
@@ -279,8 +288,8 @@ function showDataUpdate(stepMode, data) {
             sx2 ? (sx2.value = data[0].sx2) : "";
             sy1 ? (sy1.value = data[0].sy1) : "";
             sy2 ? (sy2.value = data[0].sy2) : "";
-
             handleUpdateStep("marker");
+            currentIdUpdate = data[0].id;
             break;
         case "gpio":
             const { name_gpio, time_out_gpio } = inputFunction("gpio");
@@ -297,6 +306,7 @@ function showDataUpdate(stepMode, data) {
             checkboxInputGpio();
 
             handleUpdateStep("gpio");
+            currentIdUpdate = data[0].id;
             break;
     }
 }
@@ -320,11 +330,10 @@ function handleUpdateStep(type) {
 
     updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
         e.preventDefault();
-        dataUpdateStep(type);
-        // handleResetData(e);
+        dataUpdateStep(type) && handleResetData();
     };
 
-    function handleResetData(e) {
+    function handleResetData() {
         updateBtnWrapper.classList.add("hidden");
         $$(".input-reset").forEach((element) => {
             element.value = "";
@@ -341,7 +350,6 @@ function handleUpdateStep(type) {
 }
 
 function dataUpdateStep(type) {
-    console.log(type);
     switch (type) {
         case "marker":
             const {
@@ -371,7 +379,7 @@ function dataUpdateStep(type) {
             ) {
                 const data = {
                     type: "marker",
-                    name_type: name_marker?.value,
+                    name_marker: name_marker?.value,
                     marker_type: marker_type.value,
                     marker_dir: marker_dir?.value,
                     off_set_x1: Number(off_set_x1?.value),
@@ -385,9 +393,106 @@ function dataUpdateStep(type) {
                     sy1: Number(sy1?.value),
                     sy2: Number(sy2?.value),
                 };
+                updateStep(`/api/step/${currentIdUpdate}`, data);
+                return true;
+            } else {
+                toggerMessage("error", "Please enter all inputs");
+                return false;
+            }
+            break;
+        case "footprint":
+            const {
+                x1_footprint,
+                x2_footprint,
+                y1_footprint,
+                y2_footprint,
+                name_footprint,
+            } = inputFunction("footprint");
+            if (
+                x1_footprint.value &&
+                x2_footprint.value &&
+                y1_footprint.value &&
+                y2_footprint.value &&
+                name_footprint.value
+            ) {
+                const data = {
+                    type: "footprint",
+                    x1: x1_footprint.value,
+                    x2: x2_footprint.value,
+                    y1: y1_footprint.value,
+                    y2: y2_footprint.value,
+                    name_footprint: name_footprint.value,
+                };
+                updateStep(`/api/step/${currentIdUpdate}`, data);
+                return true;
+            } else {
+                toggerMessage("error", "Please enter all inputs");
+                return false;
+            }
+            break;
+
+        case "gpio":
+            const {
+                name_gpio,
+                time_out_gpio,
+                out_set_gpio,
+                out_reset_gpio,
+                in_on_gpio,
+                in_off_gpio,
+                in_pullup_gpio,
+                in_pulldown_gpio,
+            } = inputFunction("gpio");
+
+            if (
+                name_gpio.value &&
+                time_out_gpio.value &&
+                (out_set_gpio.value ||
+                    out_reset_gpio.value ||
+                    in_on_gpio.value ||
+                    in_off_gpio.value ||
+                    in_pullup_gpio.value ||
+                    in_pulldown_gpio.value)
+            ) {
+                const data = {
+                    type: "gpio",
+                    name_gpio: name_gpio.value,
+                    time_out: time_out_gpio.value,
+                    out_set: out_set_gpio.value,
+                    out_reset: out_reset_gpio.value,
+                    in_on: in_on_gpio.value,
+                    in_off: in_off_gpio.value,
+                    in_pullup: in_pullup_gpio.value,
+                    in_pulldown: in_pulldown_gpio.value,
+                };
+                updateStep(`/api/step/${currentIdUpdate}`, data);
+                $(".data-gpio-item.show")?.classList.remove("show");
+                return true;
+            } else {
+                toggerMessage(
+                    "error",
+                    "Please enter name, timeout and at least one type of gpio"
+                );
+                return false;
+            }
+            break;
+        case "sleep":
+            const { name_sleep, time_sleep } = inputFunction("sleep");
+
+            if (name_sleep.value && time_sleep.value) {
+                const data = {
+                    type: "sleep",
+                    name_sleep: name_sleep.value,
+                    time_sleep: Number(time_sleep.value),
+                };
+                updateStep(`/api/step/${currentIdUpdate}`, data);
+                return true;
+            } else {
+                toggerMessage("error", "Please enter all inputs");
+                return false;
             }
             break;
     }
+    updateStepValue(currentMission);
 }
 
 export { renderStep, updateStep };

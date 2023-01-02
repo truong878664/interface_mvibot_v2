@@ -8,6 +8,7 @@ use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionMarker;
 use App\Models\backend\MissionSleep;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StepController extends Controller
 {
@@ -52,7 +53,7 @@ class StepController extends Controller
     {
         switch ($request->type) {
             case 'footprint':
-                return  MissionFootprint::where('id', $request->id)->get();
+                return MissionFootprint::where('id', $request->id)->get();
                 break;
             case 'gpio':
                 return MissionGpio::where('id', $request->id)->get();
@@ -88,7 +89,11 @@ class StepController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
+
+        $dataUpdate = $request->all();
+        unset($dataUpdate['type']);
+        DB::table("mission_$request->type" . "s")->where('id', $id)->update($dataUpdate);
+        return  $dataUpdate;
     }
 
     /**
