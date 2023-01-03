@@ -15,6 +15,8 @@ export const currentMission = location.pathname.slice(
 );
 
 let currentIdUpdate;
+let oldName;
+let currentStepUpdate;
 
 function renderStep() {
     loading();
@@ -102,7 +104,6 @@ function deleteStep(dataSteps) {
             dataSteps.splice(index, 1);
             render(dataSteps);
             const stepSave = dataStepSave(dataSteps);
-            console.log(dataSteps);
             const data = { steps_mission_name: stepSave, method: "update" };
             updateStep(`/api/mission/${currentMission}`, data);
         });
@@ -215,6 +216,8 @@ function handleEditStep() {
             $([".menu-right-click.active"]).classList.remove("active");
 
             getValueStep(stepMode, stepId);
+
+            e.target.closest(".step-item").classList.add("out-line");
         };
     });
 }
@@ -246,6 +249,8 @@ function showDataUpdate(stepMode, data) {
             handleUpdateStep("footprint");
 
             currentIdUpdate = data[0].id;
+            oldName = data[0].name_footprint;
+
             break;
         case "sleep":
             const { name_sleep, time_sleep } = inputFunction("sleep");
@@ -254,7 +259,7 @@ function showDataUpdate(stepMode, data) {
             time_sleep.value = data[0].time_sleep;
             handleUpdateStep("sleep");
             currentIdUpdate = data[0].id;
-
+            oldName = data[0].name_sleep;
             break;
         case "marker":
             $(`.${data[0].marker_type}-btn`).click();
@@ -290,6 +295,8 @@ function showDataUpdate(stepMode, data) {
             sy2 ? (sy2.value = data[0].sy2) : "";
             handleUpdateStep("marker");
             currentIdUpdate = data[0].id;
+            oldName = data[0].name_marker;
+
             break;
         case "gpio":
             const { name_gpio, time_out_gpio } = inputFunction("gpio");
@@ -307,6 +314,7 @@ function showDataUpdate(stepMode, data) {
 
             handleUpdateStep("gpio");
             currentIdUpdate = data[0].id;
+            oldName = data[0].name_gpio;
             break;
     }
 }
@@ -326,11 +334,13 @@ function handleUpdateStep(type) {
     updateBtnWrapper.querySelector(`.${type}-update-cancel`).onclick = (e) => {
         e.preventDefault();
         handleResetData();
+        $(".step-item.out-line").classList.remove("out-line");
     };
 
     updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
         e.preventDefault();
         dataUpdateStep(type) && handleResetData();
+        $(".step-item.out-line").classList.remove("out-line");
     };
 
     function handleResetData() {
@@ -379,7 +389,7 @@ function dataUpdateStep(type) {
             ) {
                 const data = {
                     type: "marker",
-                    name_marker: name_marker?.value,
+                    name_marker: name_marker.value,
                     marker_type: marker_type.value,
                     marker_dir: marker_dir?.value,
                     off_set_x1: Number(off_set_x1?.value),
@@ -394,11 +404,19 @@ function dataUpdateStep(type) {
                     sy2: Number(sy2?.value),
                 };
                 updateStep(`/api/step/${currentIdUpdate}`, data);
+
+                changeNameStep(
+                    currentMission,
+                    `|${type}#${oldName}#${currentIdUpdate}`,
+                    `|${type}#${name_marker.value}#${currentIdUpdate}`
+                );
+
                 return true;
             } else {
                 toggerMessage("error", "Please enter all inputs");
                 return false;
             }
+
             break;
         case "footprint":
             const {
@@ -424,6 +442,12 @@ function dataUpdateStep(type) {
                     name_footprint: name_footprint.value,
                 };
                 updateStep(`/api/step/${currentIdUpdate}`, data);
+                changeNameStep(
+                    currentMission,
+                    `|${type}#${oldName}#${currentIdUpdate}`,
+                    `|${type}#${name_footprint.value}#${currentIdUpdate}`
+                );
+
                 return true;
             } else {
                 toggerMessage("error", "Please enter all inputs");
@@ -466,6 +490,12 @@ function dataUpdateStep(type) {
                 };
                 updateStep(`/api/step/${currentIdUpdate}`, data);
                 $(".data-gpio-item.show")?.classList.remove("show");
+                changeNameStep(
+                    currentMission,
+                    `|${type}#${oldName}#${currentIdUpdate}`,
+                    `|${type}#${name_gpio.value}#${currentIdUpdate}`
+                );
+
                 return true;
             } else {
                 toggerMessage(
@@ -485,6 +515,12 @@ function dataUpdateStep(type) {
                     time_sleep: Number(time_sleep.value),
                 };
                 updateStep(`/api/step/${currentIdUpdate}`, data);
+                changeNameStep(
+                    currentMission,
+                    `|${type}#${oldName}#${currentIdUpdate}`,
+                    `|${type}#${name_sleep.value}#${currentIdUpdate}`
+                );
+
                 return true;
             } else {
                 toggerMessage("error", "Please enter all inputs");
@@ -493,6 +529,23 @@ function dataUpdateStep(type) {
             break;
     }
     updateStepValue(currentMission);
+}
+function changeNameStep(id, stepOld, stepNew) {
+    fetch(`/api/mission/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+            const newStepNameData = data.steps_mission_name.replace(
+                stepOld,
+                stepNew
+            );
+
+            const dataUpdate = {
+                steps_mission_name: newStepNameData,
+                method: "update",
+            };
+            updateStep(`/api/mission/${id}`, dataUpdate);
+            renderStep();
+        });
 }
 
 export { renderStep, updateStep };

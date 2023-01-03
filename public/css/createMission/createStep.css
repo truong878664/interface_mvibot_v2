@@ -436,11 +436,14 @@ input[type="number"] {
 .step-item:hover > .show-menu {
     display: block;
 }
+.step-item.out-line{
+    border: 3px solid aqua;
+} 
 
 .move-btn {
     position: absolute;
     top: 50%;
-    width: 33.3%;
+    width: 33.3333333%;
     height: 100%;
     border: none;
     background-color: rgba(204, 204, 204, 0.507);
@@ -459,7 +462,7 @@ input[type="number"] {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 33.3%;
+    width: 33.33333333%;
     color: #000;
     height: 100%;
     border: none;
