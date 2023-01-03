@@ -85,7 +85,7 @@
     <div class="container-content">
         @yield('content')
     </div>
-    <div class="fixed top-[80px] right-4 z-[1000] text-2xl px-4 py-2 rounded-sm bg-[#fff] shadow-indigo-500/40">
+    <div class="fixed top-[80px] right-4 z-[1000] text-2xl">
         <span id="message-error" class="text-red-400 w-full h-full"></span>
         <span id="message-success" class="text-green-400 w-full h-full"></span>
     </div>
@@ -93,20 +93,20 @@
 
     {{-- <script src="/js/library/jquery.min.js"></script>
     <script type="text/javascript" src="/js/library/three.min.js"></script>
-    <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script> --}}
+    <script type="text/javascript" src="/js/library/eventemitter2.min.js"></script> 
+    <script type="text/javascript" src="/js/library/easeljs.min.js"></script>
+    <script type="text/javascript" src="/js/library/ros2d.min.js"></script>
+    
+    <script src="/js/library/three.js"></script>
+    <script src="/js/library/STLLoader.js"></script>
+    <script src="/js/library/eventemitter2.js"></script>
+    <script src="/js/library/ColladaLoader.js"></script> 
+    <script src="/js/library/roslib.js"></script>
+    <script src="/js/library/ros3d.js"></script>
+    --}}
     <script type="text/javascript" src="/js/library/roslib.min.js"></script>
     <script type="text/javascript" src="/js/library/ros3d.min.js"></script>
     <script type="text/javascript" src="/js/library/nipplejs.js"></script>
-    {{-- <script type="text/javascript" src="/js/library/easeljs.min.js"></script> --}}
-    {{-- <script type="text/javascript" src="/js/library/ros2d.min.js"></script> --}}
-
-    {{-- <script src="/js/library/three.js"></script>
-    <script src="/js/library/STLLoader.js"></script>
-    <script src="/js/library/eventemitter2.js"></script>
-    <script src="/js/library/ColladaLoader.js"></script>
-
-    <script src="/js/library/roslib.js"></script>
-    <script src="/js/library/ros3d.js"></script> --}}
 
     <script type="module" src="/js/mainLayout.js"></script>
     <script type="module" src="/js/main.js"></script>
