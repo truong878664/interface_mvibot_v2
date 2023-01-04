@@ -20,7 +20,7 @@ class AuthController extends Controller
             return back()->with('fail', 'We do not recognize your username');
         } else {
             if (Hash::check($request->password, $userInfo->password)) {
-                $request->session()->put('LoggedUser', $userInfo->name);
+                $request->session()->put('LoggedUser', $userInfo->id);
                 return redirect('/');
             } else {
                 return back()->with('fail', 'incorrect password');

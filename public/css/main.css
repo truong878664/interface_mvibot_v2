@@ -26,6 +26,7 @@
 
 @import "createMission/createStep.css";
 @import "./joystick.css";
+@import "setting.css";
 
 @import "responsive.css";
 
@@ -57,6 +58,9 @@ html {
     color: #1c2536;
     touch-action: none;
 }
+
+
+
 
 body {
     font-size: 2rem;
@@ -95,6 +99,14 @@ input::placeholder {
 }
 li {
     list-style: none;
+}
+
+.bg-main {
+    background-color: #0f6cbd;
+}
+
+.text-white {
+    color: #fff;
 }
 
 .heading {

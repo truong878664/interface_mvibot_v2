@@ -24,8 +24,9 @@
 
         <div class="user-wrapper">
             <div class="name-user">admin</div>
-            <img class="avatar-user"
-                src="https://images.unsplash.com/photo-1599817977364-b6f59e547258?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" />
+            <div class="avatar-user bg-sky-400 flex justify-center items-center">
+                <span class="text-[20px] font-[300] uppercase avatar-img-key">a</span>
+            </div>
         </div>
     </header>
     <section class="nav-bar">
@@ -135,6 +136,16 @@
         const deleteCookie = function(cname) {
             document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         };
+
+        const $ = document.querySelector.bind(document)
+
+        fetch('/api/user/logged')
+            .then(res => res.json())
+            .then(data => {
+                const username = data.data.name
+                $('.name-user').innerText = username
+                $('.avatar-img-key').innerText = username.slice(0, 1)
+            })
     </script>
 </body>
 
