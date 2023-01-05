@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
@@ -23,9 +23,16 @@
         </div>
 
         <div class="user-wrapper">
-            <div class="name-user">admin</div>
-            <div class="avatar-user bg-sky-400 flex justify-center items-center">
-                <span class="text-[20px] font-[300] uppercase avatar-img-key">a</span>
+            <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
+            <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
+                value="" />
+            <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
+                <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
+                @if (session('TypeUser') == 'admin')
+                    <div class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]"><i
+                            class="fa-solid fa-circle-check"></i>
+                    </div>
+                @endif
             </div>
         </div>
     </header>
@@ -62,7 +69,7 @@
                     <span class="bar-item-title">Dashboard</span>
                 </a>
             </li>
-            <li class="bar-item user">
+            {{-- <li class="bar-item user">
                 <a href="#" class="flex justify-center">
 
                     <svg width="40" height="40" viewBox="0 0 677 677" fill="none"
@@ -75,20 +82,20 @@
                     </svg>
                     <span class="bar-item-title">User</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
-        <button class="logout">
+        {{-- <button class="logout">
             <a href="{{ route('logout') }}">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </a>
-        </button>
+        </button> --}}
     </section>
     <div class="container-content">
         @yield('content')
     </div>
     <div class="fixed top-[80px] right-4 z-[1000] text-2xl">
-        <span id="message-error" class="text-red-400 w-full h-full"></span>
-        <span id="message-success" class="text-green-400 w-full h-full"></span>
+        <span id="message-error" class="text-red-400 w-full h-full bg-[#fff]"></span>
+        <span id="message-success" class="text-green-400 w-full h-full bg-[#fff]"></span>
     </div>
 
 
@@ -112,41 +119,6 @@
     <script type="module" src="/js/mainLayout.js"></script>
     <script type="module" src="/js/main.js"></script>
 
-
-    <script>
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-
-            if (this.responseText === "no map") {
-                document.querySelector('.message-map-wrapper').innerHTML =
-                    `<div class = "message-map-none" >
-                        <i class = "fa-solid fa-triangle-exclamation" ></i>
-                        <span> no active map </span>
-                    </div>`
-            }
-        }
-        xhttp.open("GET", "/dashboard/map/map-active", true);
-        xhttp.send();
-
-        const logoutBtn = document.querySelector('.logout')
-        logoutBtn.onclick = () => {
-            deleteCookie('username')
-            deleteCookie('password')
-        }
-        const deleteCookie = function(cname) {
-            document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        };
-
-        const $ = document.querySelector.bind(document)
-
-        fetch('/api/user/logged')
-            .then(res => res.json())
-            .then(data => {
-                const username = data.data.name
-                $('.name-user').innerText = username
-                $('.avatar-img-key').innerText = username.slice(0, 1)
-            })
-    </script>
 </body>
 
 </html>

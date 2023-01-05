@@ -1,3 +1,23 @@
+```tsx
+cd /home/mvibot/Truong/project/interface_mvibot_v2
+php artisan serve
+```
+
+```tsx
+roslaunch rosbridge_server rosbridge_websocket.launch
+```
+
+```tsx
+rosrun tf2_web_republisher tf2_web_republisher
+```
+
+```tsx
+cd maps
+rosrun map_server map_server map30.yaml
+```
+
+---
+
 # <strong>Mvibot interface v2 - config ubuntu 22.04</strong>
 
 # <strong>Install git</strong>

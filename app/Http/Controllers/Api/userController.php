@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
 {
@@ -38,7 +39,15 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user =
+            [
+                'name' => $request->username,
+                'password' => Hash::make($request->password)
+            ];
+
+        User::insert($user);
+        return  ['message' => 'create user success', 'status' => 200];
     }
 
     /**
@@ -50,8 +59,12 @@ class userController extends Controller
     public function show(Request $request, $type)
     {
 
-        if ($type == "logged") {
-            return ['data' => User::where('id', session('LoggedUser'))->first()];
+        switch ($type) {
+            case 'logged':
+                return ['data' => User::where('id', session('LoggedUser'))->first()];
+
+            case 'normal-user':
+                return User::where('type', 'user')->get();
         }
     }
 
@@ -73,8 +86,36 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $type)
     {
+        $userLogged = User::where('id', session('LoggedUser'))->first();
+        // if ($type == "check") {
+        //     if (Hash::check($request->password, $userLogged->password)) {
+
+        //         $userLogged->update(['password' => Hash::make($request->new_password)]);
+        //         return ['message' => 'Updated password', 'status' => 200];
+        //     } else {
+        //         return ['message' => 'incorrect password'];
+        //     }
+        // } else if ($type == 'update') {
+        //     $userLogged->update(['name' => $request->username]);
+        //     return ['message' => 'ok'];
+        // }
+
+        switch ($type) {
+            case 'check':
+                if (Hash::check($request->password, $userLogged->password)) {
+
+                    $userLogged->update(['password' => Hash::make($request->new_password)]);
+                    return ['message' => 'Updated password', 'status' => 200];
+                } else {
+                    return ['message' => 'incorrect password'];
+                }
+
+            case 'update':
+                $userLogged->update(['name' => $request->username]);
+                return ['message' => 'ok'];
+        }
     }
 
     /**

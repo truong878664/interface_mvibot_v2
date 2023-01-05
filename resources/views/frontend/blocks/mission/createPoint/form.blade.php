@@ -43,13 +43,13 @@
 
         <div class="mb-4">
             <label for="" class="text-2xl">Mode</label>
-            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_position">
+            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_position" value="normal">
         </div>
 
 
         <div class="mb-4">
             <label for="" class="text-2xl">Mode child</label>
-            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_child">
+            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_child" value="-1">
         </div>
 
         <input type="text" value={{ $mapActive }} name="map" hidden />

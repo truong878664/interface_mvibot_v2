@@ -43,40 +43,40 @@ loginBtn.onclick = (e) => {
     $(".login-form").submit();
 };
 
-window.onload = () => {
-    if (
-        $(".text-fail")?.innerText == " You must be logged in" ||
-        !$(".text-fail")
-    ) {
-        if (getCookie("username") && getCookie("password")) {
-            usernameEle.value = getCookie("username");
-            passwordEle.value = getCookie("password");
-            $(".login-form").submit();
-        }
-    } else {
-        if (getCookie("username") && getCookie("password")) {
-            usernameEle.value = getCookie("username");
-            passwordEle.value = getCookie("password");
-        }
-    }
-};
+// window.onload = () => {
+//     if (
+//         $(".text-fail")?.innerText == " You must be logged in" ||
+//         !$(".text-fail")
+//     ) {
+//         if (getCookie("username") && getCookie("password")) {
+//             usernameEle.value = getCookie("username");
+//             passwordEle.value = getCookie("password");
+//             $(".login-form").submit();
+//         }
+//     } else {
+//         if (getCookie("username") && getCookie("password")) {
+//             usernameEle.value = getCookie("username");
+//             passwordEle.value = getCookie("password");
+//         }
+//     }
+// };
 
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == " ") {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+// function getCookie(cname) {
+//     let name = cname + "=";
+//     let decodedCookie = decodeURIComponent(document.cookie);
+//     let ca = decodedCookie.split(";");
+//     for (let i = 0; i < ca.length; i++) {
+//         let c = ca[i];
+//         while (c.charAt(0) == " ") {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// }
 
-const deleteCookie = function (cname) {
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-};
+// const deleteCookie = function (cname) {
+//     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+// };

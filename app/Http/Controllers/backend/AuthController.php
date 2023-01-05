@@ -21,6 +21,7 @@ class AuthController extends Controller
         } else {
             if (Hash::check($request->password, $userInfo->password)) {
                 $request->session()->put('LoggedUser', $userInfo->id);
+                $request->session()->put('TypeUser', $userInfo->type);
                 return redirect('/');
             } else {
                 return back()->with('fail', 'incorrect password');
@@ -32,6 +33,7 @@ class AuthController extends Controller
     {
         if (session()->has('LoggedUser')) {
             session()->pull('LoggedUser');
+            session()->pull('TypeUser');
             return redirect('/login');
         }
     }

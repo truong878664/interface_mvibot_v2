@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\gpioPageController;
 use App\Http\Controllers\frontend\joystickController;
@@ -10,7 +12,6 @@ use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\statusController;
-use App\Models\Robot;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
@@ -55,10 +56,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('/', [mappingController::class, 'index']);
         });
 
-        Route::get('setting', function () {
-            $allRobot = Robot::all();
-            return view('frontend.pages.setting.setting', compact('allRobot'));
-        })->name('setting.');
+
+
+        Route::get('setting', [SettingController::class, 'index'])->name('setting.');
 
         Route::get(
             'location',

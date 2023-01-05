@@ -1,4 +1,8 @@
+import { color } from "./color.js";
+// import { $, $$ } from "./main.js";
+
 const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
 function connected() {
@@ -12,6 +16,7 @@ function connectionFailed() {
 }
 
 activeNabBar();
+updateAvatarUser();
 
 function activeNabBar() {
     const currentPathname = window.location.pathname.replace("/", "");
@@ -28,4 +33,45 @@ function activeNabBar() {
     document.title = `Mvibot – ${currentPage}`;
 }
 
-export { connected, connectionFailed };
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function () {
+    if (this.responseText === "no map") {
+        document.querySelector(
+            ".message-map-wrapper"
+        ).innerHTML = `<div class = "message-map-none" >
+                        <i class = "fa-solid fa-triangle-exclamation" ></i>
+                        <span> no active map </span>
+                    </div>`;
+    }
+};
+xhttp.open("GET", "/dashboard/map/map-active", true);
+xhttp.send();
+
+// const logoutBtn = document.querySelector(".logout");
+// logoutBtn.onclick = () => {
+//     deleteCookie("username");
+//     deleteCookie("password");
+// };
+// const deleteCookie = function (cname) {
+//     document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+// };
+
+function updateAvatarUser() {
+    fetch("/api/user/logged")
+        .then((res) => res.json())
+        .then((data) => {
+            const username = data.data.name;
+            $$(".name-user").forEach((element) => {
+                element.value = username;
+            });
+
+            $$(".avatar-img-key").forEach((element) => {
+                element.innerText = username.slice(0, 1);
+            });
+            $$(".bg-avatar").forEach((element) => {
+                element.style.backgroundColor = color[username.length];
+            });
+        });
+}
+
+export { connected, connectionFailed, updateAvatarUser };

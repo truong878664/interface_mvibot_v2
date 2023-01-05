@@ -14,10 +14,6 @@ export const currentMission = location.pathname.slice(
     location.pathname.length
 );
 
-let currentIdUpdate;
-let oldName;
-let currentStepUpdate;
-
 function renderStep() {
     loading();
     fetch(`/api/mission/${currentMission}`)
@@ -230,6 +226,8 @@ function getValueStep(stepMode, id) {
         });
 }
 
+let currentIdUpdate;
+let oldName;
 function showDataUpdate(stepMode, data) {
     switch (stepMode) {
         case "footprint":
@@ -417,7 +415,6 @@ function dataUpdateStep(type) {
                 return false;
             }
 
-            break;
         case "footprint":
             const {
                 x1_footprint,
@@ -453,7 +450,6 @@ function dataUpdateStep(type) {
                 toggerMessage("error", "Please enter all inputs");
                 return false;
             }
-            break;
 
         case "gpio":
             const {
@@ -504,7 +500,7 @@ function dataUpdateStep(type) {
                 );
                 return false;
             }
-            break;
+
         case "sleep":
             const { name_sleep, time_sleep } = inputFunction("sleep");
 
@@ -526,7 +522,6 @@ function dataUpdateStep(type) {
                 toggerMessage("error", "Please enter all inputs");
                 return false;
             }
-            break;
     }
     updateStepValue(currentMission);
 }
@@ -534,7 +529,7 @@ function changeNameStep(id, stepOld, stepNew) {
     fetch(`/api/mission/${id}`)
         .then((res) => res.json())
         .then((data) => {
-            const newStepNameData = data.steps_mission_name.replace(
+            const newStepNameData = data.steps_mission_name.replaceAll(
                 stepOld,
                 stepNew
             );
