@@ -1,7 +1,6 @@
 <div class="status-item-wrapper {{ $activate ? '' : 'inactivate' }}">
     <div class="status-header">
         <div class="status-name-robot">{{ $nameRobot }}</div>
-        {{-- <div class="status-status-robot {{ $statusStatusRobot }}">{{ $statusStatusRobot }}</div> --}}
     </div>
     <div class="status-item">
 

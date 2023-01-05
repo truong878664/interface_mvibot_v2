@@ -25,13 +25,13 @@ rosrun map_server map_server map30.yaml
 Check version Git
 
 ```tsx
-$ git --version
+git --version
 ```
 
 If you receive output similar to the following, then Git is already installed.
 
 ```tsx
-$ Output
+Output
 git version 2.25.1
 ```
 
@@ -40,11 +40,11 @@ git version 2.25.1
 install Git
 
 ```tsx
-$ sudo apt update
+sudo apt update
 ```
 
 ```tsx
-$ sudo apt install git
+sudo apt install git
 ```
 
 # <strong>Install PHP</strong>
@@ -52,35 +52,35 @@ $ sudo apt install git
 https://computingforgeeks.com/how-to-install-php-on-ubuntu-linux-system/
 
 ```tsx
-$ sudo apt -y upgrade
+sudo apt -y upgrade
 ```
 
 ```tsx
-$ sudo apt update
+sudo apt update
 ```
 
 ```tsx
-$ sudo apt install lsb-release ca-certificates apt-transport-https software-properties-common -y
+sudo apt install lsb-release ca-certificates apt-transport-https software-properties-common -y
 ```
 
 ```tsx
-$ sudo apt install php8.1
+sudo apt install php8.1
 ```
 
 ```tsx
-$ sudo apt install php8.1-mysql
+sudo apt install php8.1-mysql
 ```
 
 ```tsx
-$ sudo apt install php8.1-mbstring
+sudo apt install php8.1-mbstring
 ```
 
 ```tsx
-$ sudo apt install php8.1-common
+sudo apt install php8.1-common
 ```
 
 ```tsx
-$ sudo apt install php8.1-xml
+sudo apt install php8.1-xml
 ```
 
 You will be prompted to confirm installation by typing Y and then ENTER.
@@ -90,32 +90,32 @@ You will be prompted to confirm installation by typing Y and then ENTER.
 Download the PHP Composer installer script by utilizing the following “curl” command:
 
 ```tsx
-$ cd ~
-$ curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+cd ~
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 ```
 
 Verify the hash of the downloaded PHP composer script with the signatures present at the official page:
 
 ```tsx
-$ HASH=`curl -sS https://composer.github.io/installer.sig`;
+HASH = `curl -sS https://composer.github.io/installer.sig`;
 ```
 
 Then, validate if the PHP Composer installer can be safely executed or not:
 
 ```tsx
-$ php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 ```
 
 After verifying the installer, install PHP Composer on Ubuntu 22.04 by utilizing the following command:
 
 ```tsx
-$ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
 
 To test your installation, run:
 
 ```tsx
-$ composer;
+composer;
 ```
 
 ```tsx
@@ -135,15 +135,15 @@ Reference link: https://www.digitalocean.com/community/tutorials/how-to-install-
 -   Installing MySQL
 
 ```tsx
-$ sudo apt update
+sudo apt update
 ```
 
 ```tsx
-$ sudo apt install mysql-server
+sudo apt install mysql-server
 ```
 
 ```tsx
-$ sudo apt install mysql-server
+sudo apt install mysql-server
 ```
 
 -   Configuring MySQL
@@ -151,7 +151,7 @@ $ sudo apt install mysql-server
 Run the security script with sudo:
 
 ```tsx
-$ sudo mysql_secure_installation
+sudo mysql_secure_installation
 ```
 
 Enter your new password
@@ -163,11 +163,11 @@ MySQL creates a root user account which you can use to manage your database
 -   Creating a Dedicated MySQL User and Granting Privileges
 
 ```tsx
-$ sudo mysql
+sudo mysql
 ```
 
 ```tsx
-$ mysql -u root -p
+mysql -u root -p
 ```
 
 Enter your password...
@@ -175,35 +175,35 @@ Enter your password...
 A prompt displays like the one below once you log in.
 
 ```tsx
-$ mysql>
+mysql>
 ```
 
 To create a database with the name tutorial_database, type the following command.
 
 ```tsx
-$ mysql> CREATE DATABASE IF NOT EXISTS mvibot_database;
+mysql> CREATE DATABASE IF NOT EXISTS mvibot_database;
 ```
 
 ```tsx
-$ mysql > exit;
+mysql > exit;
 ```
 
 Create new user
 
 ```tsx
-$ sudo mysql
+sudo mysql
 ```
 
 ```tsx
-$ mysql > mysql -u root -p
+mysql > mysql -u root -p
 ```
 
 ```tsx
-$ mysql > GRANT ALL PRIVILEGES ON *.* TO 'name_new_user'@'localhost' WITH GRANT OPTION;
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'name_new_user'@'localhost' WITH GRANT OPTION;
 ```
 
 ```tsx
-$ mysql > FLUSH PRIVILEGES;
+mysql > FLUSH PRIVILEGES;
 ```
 
 # <strong> Add C++ -> MySql </strong>
@@ -224,15 +224,15 @@ Download the files above and place on your server.
 create folder
 
 ```tsx
-$ mkdir mvibotApp
+mkdir mvibotApp
 ```
 
 ```tsx
-$ cd mvibotApp
+cd mvibotApp
 ```
 
 ```tsx
-$ git clone https://github.com/truong878664/interface_mvibot_v2.git
+git clone https://github.com/truong878664/interface_mvibot_v2.git
 ```
 
 # <strong>Environment Files</strong>
@@ -244,15 +244,15 @@ press Ctrl + H
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong> -->
 
 ```tsx
-$ cd /mvibotApp/interface_mvibot_v2
+cd / mvibotApp / interface_mvibot_v2;
 ```
 
 ```tsx
-$ mv .env.example .env
+mv.env.example.env;
 ```
 
 ```tsx
-$ gedit .env
+gedit.env;
 ```
 
 Update lines 11 to 16 as follows:
@@ -273,15 +273,15 @@ Change these lines to reflect your new database settings.
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
 
 ```tsx
-$ cd /mvibotApp/interface_mvibot_v2
+cd / mvibotApp / interface_mvibot_v2;
 ```
 
 ```tsx
-$ composer update
+composer update
 ```
 
 ```tsx
-$ composer install
+composer install
 ```
 
 # <strong>Artisan Commands</strong>
@@ -289,32 +289,32 @@ $ composer install
 The first thing we are going to do is set the key that Laravel will use when doing encryption.
 
 ```tsx
-$ php artisan key:generate
+php artisan key:generate
 ```
 
 # <strong>Clear cache</strong>
 
 ```tsx
-$ php artisan config:clear
+php artisan config:clear
 php artisan cache:clear
 ```
 
 # <strong>Create table database</strong>
 
 ```tsx
-$ php artisan migrate
+php artisan migrate
 ```
 
 # <strong>Create User admin</strong>
 
 ```tsx
-$ php artisan db:seed
+php artisan db:seed
 ```
 
 # <strong>Run Project</strong>
 
 ```tsx
-$ php artisan serve
+php artisan serve
 ```
 
 # <strong>Open link</strong>

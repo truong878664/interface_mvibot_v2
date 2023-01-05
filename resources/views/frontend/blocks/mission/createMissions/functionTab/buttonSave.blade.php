@@ -5,5 +5,6 @@
         <button
             class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md {{ $type . '-update-btn' }}">Update</button>
     </div>
-    <button class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md {{ 'submit-btn-' . $type }}">Add</button>
+    <button
+        class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md {{ 'submit-btn-' . $type }}">Create</button>
 </div>

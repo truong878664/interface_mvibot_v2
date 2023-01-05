@@ -1,4 +1,4 @@
-<form method="POST" action="/dashboard/missions/create-sleep" class="hidden function-item">
+<div class="hidden function-item">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name Sleep</label>
         <input class="w-[200px] text-xl px-4 py-1  input-reset" type="text" name="name_sleep" required>
@@ -16,8 +16,7 @@
 
     @include('frontend.blocks.mission.createMissions.functionTab.idMission')
 
-    @csrf
     @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'sleep'])
 
 
-</form>
+</div>

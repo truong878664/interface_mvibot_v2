@@ -1,4 +1,4 @@
-<form class="h-full w-full flex flex-col function-item form-footprint">
+<div class="h-full w-full flex flex-col function-item hidden form-footprint">
     <div class="flex flex-col mr-[30px]">
         <label for="" class="text-xl">Name footpint</label>
         <input class="w-[200px] text-xl px-4 py-1 input-reset" type="text" name="name_footprint" required>
@@ -46,4 +46,4 @@
     </div>
 
     @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'footprint'])
-</form>
+</div>

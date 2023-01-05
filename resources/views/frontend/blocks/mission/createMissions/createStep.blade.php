@@ -12,11 +12,24 @@
             <div
                 class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border-[1px] lg:min-h-[300px] border-solid relative ">
 
-                <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] absolute w-full top-0">point</p>
-                <div class="overflow-y-scroll overflow-x-hidden min-h-0 mt-[20px] h-full">
+                <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] absolute w-full top-0">type mission
+                </p>
+                <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     {{-- point item --}}
-                    @include('frontend.blocks.mission.createMissions.showPoint.showPoint')
-                    <div class="h-[20px]"></div>
+                    {{-- @include('frontend.blocks.mission.createMissions.showPoint.showPoint') --}}
+                    {{-- <div
+                        class=" active sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>If-Else</span>
+                    </div> --}}
+
+                    <div
+                        class=" active sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>Normal mission</span>
+                    </div>
+                    <div
+                        class=" sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>If-Else mission</span>
+                    </div>
                 </div>
             </div>
             {{-- function --}}
@@ -25,7 +38,7 @@
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">function</p>
                 <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                     <div
-                        class="footprint-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] active ">
+                        class="footprint-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
                         <span>Footprint</span>
                     </div>
                     <div
@@ -41,8 +54,13 @@
                         <span>Sleep</span>
                     </div>
                     <div
-                        class="sound-function-btn hidden function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="hidden sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sound</span>
+                    </div>
+
+                    <div
+                        class="sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>Point</span>
                     </div>
                 </div>
             </div>
@@ -70,11 +88,16 @@
                             </p>
                         </div>
                     </div>
+                    {{-- type mission --}}
+                    @include('frontend.blocks.mission.createMissions.typeMissionTab.normal')
+                    @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
+                    {{-- function --}}
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
                     @include('frontend.blocks.mission.createMissions.functionTab.gpio')
                     @include('frontend.blocks.mission.createMissions.functionTab.marker')
                     @include('frontend.blocks.mission.createMissions.functionTab.sleep')
                     @include('frontend.blocks.mission.createMissions.functionTab.sound')
+                    @include('frontend.blocks.mission.createMissions.functionTab.point')
                 </div>
             </div>
         </div>

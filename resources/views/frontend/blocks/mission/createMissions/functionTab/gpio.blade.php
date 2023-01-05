@@ -1,4 +1,4 @@
-<form class="hidden function-item h-full flex flex-col">
+<div class="hidden function-item h-full flex flex-col">
     <div class="flex">
         <div class="flex flex-col">
             <label for="" class="text-xl">Name GPIO</label>
@@ -31,4 +31,4 @@
 
     @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'gpio'])
 
-</form>
+</div>

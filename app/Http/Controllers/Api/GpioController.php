@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\MissionPosition;
-use App\Models\backend\Missions;
+use App\Models\backend\MissionGpio;
 use Illuminate\Http\Request;
 
-class PositionController extends Controller
+class GpioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return MissionPosition::all();
+        return MissionGpio::all();
     }
 
     /**
@@ -26,6 +25,7 @@ class PositionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -36,7 +36,7 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        MissionPosition::create($request->all());
+        //
     }
 
     /**
@@ -81,14 +81,6 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        $deleteName = MissionPosition::where('id', $id)->get()->toArray()[0]['name_position'];
-        $nameStepMissionDelete = "|position#$deleteName#$id";
-        $missions = Missions::all();
-
-        foreach ($missions as $mission) {
-            $newString = str_replace("$nameStepMissionDelete", "", $mission->steps_mission_name);
-            Missions::where('id', $mission->id)->update(["steps_mission_name" => $newString]);
-        }
-        MissionPosition::where('id', $id)->delete();
+        //
     }
 }

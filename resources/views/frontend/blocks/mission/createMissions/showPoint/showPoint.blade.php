@@ -15,15 +15,15 @@
                 <i class="fa-solid fa-eye"></i>
             </button>
 
-            <form class="item-point" method="post" action="/dashboard/missions/add-point-to-mission">
+            <div class="item-point">
                 @include('frontend.blocks.mission.createMissions.functionTab.idMission')
                 <input type="text" value="position" class="type" hidden>
                 <input type="text" value="{{ $point->name_position }}" class="name_type" hidden>
                 <input type="text" value="{{ $point->id }}" class="id_type" hidden>
-                <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white add-point-btn"><i
-                        class="fa-solid fa-plus"></i></button>
-                @csrf
-            </form>
+                <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white add-point-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
             <div class="show-point" id="{{ $point->id }}" x="{{ $point->x }}" y="{{ $point->y }}"
                 z="{{ $point->z }}" w="{{ $point->w }}" color_position="{{ $point->color_position }}">
             </div>

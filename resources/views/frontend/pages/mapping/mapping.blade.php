@@ -24,7 +24,7 @@
                 </div>
                 <span class="text-[1.5rem] text-red-500 block" id="error_create_map"></span>
             </div>
-            <div class="h-[160px] w-[160px] md:w-[220px] md:h-[220px] lg:h-[300px] lg:w-[300px]" hidden></div>
+            {{-- <div class="h-[160px] w-[160px] md:w-[220px] md:h-[220px] lg:h-[300px] lg:w-[300px]"></div> --}}
             <div class="lg:p-10 lg:mb-[70px]">
                 @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
             </div>

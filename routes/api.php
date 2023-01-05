@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\FootprintController;
+use App\Http\Controllers\Api\GpioController;
 use App\Http\Controllers\Api\LayerController;
+use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\userController;
 use App\Http\Controllers\frontend\statusController;
@@ -30,3 +34,8 @@ Route::resource('position', PositionController::class);
 Route::resource('layer', LayerController::class);
 Route::resource('step', StepController::class);
 Route::resource('user', userController::class);
+
+Route::resource('footprint', FootprintController::class);
+Route::resource('gpio', GpioController::class);
+Route::resource('marker', MarkerController::class);
+Route::resource('sleep', SleepController::class);

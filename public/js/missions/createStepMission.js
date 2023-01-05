@@ -15,6 +15,7 @@ import { setDefaultValueFootprint } from "./footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
 import inputFunction from "./inputFunction.js";
 import { loaded, loading } from "./displayLoad.js";
+import { loadDataFunction } from "./handleTypeMission.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -213,6 +214,7 @@ function handleFootprintMission() {
             y2_footprint.value = "";
             name_footprint.value = "";
             toggerMessage("success", "save footprint successfully");
+            loadDataFunction();
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -261,6 +263,7 @@ function handleGpioMission() {
 
             $(".data-gpio-item.show")?.classList.remove("show");
             toggerMessage("success", "save gpio successfully");
+            loadDataFunction();
         } else {
             toggerMessage(
                 "error",
@@ -328,6 +331,7 @@ function handleSleepMission() {
             $('[name="time_sleep"]').value = "";
             $('[name="name_sleep"]').value = "";
             toggerMessage("success", `save sleep successfully`);
+            loadDataFunction();
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -400,6 +404,7 @@ function handleMarkerMission() {
                     "success",
                     `save ${marker_type.value} successfully`
                 );
+                loadDataFunction();
             } else {
                 toggerMessage("error", "Please enter all inputs");
             }

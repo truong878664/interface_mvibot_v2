@@ -17,6 +17,5 @@
     <script type="module" src="/js/missions/createStepMission.js"></script>
     <script type="module" src="/js/missions/gpio.js"></script>
     <script type="module" src="/js/missions/footprint.js"></script>
-
-    </div>
+    <script type="module" src="/js/missions/handleTypeMission.js"></script>
 @endsection
