@@ -129,6 +129,23 @@ function sendMission() {
 
 ///
 
+function addFunctionStep(type, data) {
+    fetch(`/api/${type}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+    })
+        .then(function (res) {
+            console.log(res);
+        })
+        .catch(function (res) {
+            console.log(res);
+        });
+}
+
 function handlePointMission() {
     $$(".add-point-btn").forEach((element) => {
         element.onclick = (e) => {
@@ -197,16 +214,16 @@ function handleFootprintMission() {
             name_footprint.value
         ) {
             const data = {
-                method: "add",
-                type: "footprint",
-                x1: x1_footprint.value,
-                x2: x2_footprint.value,
-                y1: y1_footprint.value,
-                y2: y2_footprint.value,
+                x1: Number(x1_footprint.value),
+                x2: Number(x2_footprint.value),
+                y1: Number(y1_footprint.value),
+                y2: Number(y2_footprint.value),
                 name_type: name_footprint.value,
             };
-            updateStep(`/api/mission/${currentMission}`, data);
+
             renderStep();
+
+            addFunctionStep("footprint", data);
 
             x1_footprint.value = "";
             x2_footprint.value = "";
@@ -246,7 +263,6 @@ function handleGpioMission() {
                 in_pulldown_gpio.value)
         ) {
             const data = {
-                method: "add",
                 type: "gpio",
                 name_type: name_gpio.value,
                 time_out: time_out_gpio.value,
@@ -257,8 +273,7 @@ function handleGpioMission() {
                 in_pullup: in_pullup_gpio.value,
                 in_pulldown: in_pulldown_gpio.value,
             };
-            updateStep(`/api/mission/${currentMission}`, data);
-            renderStep();
+            addFunctionStep("gpio", data);
             resetDataGpio();
 
             $(".data-gpio-item.show")?.classList.remove("show");
@@ -320,16 +335,14 @@ function handleSleepMission() {
 
         if (name_sleep.value && time_sleep.value) {
             const data = {
-                method: "add",
                 type: "sleep",
-                time_sleep: $('[name="time_sleep"]').value,
-                name_type: $('[name="name_sleep"]').value,
+                time_sleep: time_sleep.value,
+                name_type: name_sleep.value,
             };
-            updateStep(`/api/mission/${currentMission}`, data);
-            renderStep();
+            addFunctionStep("sleep", data);
 
-            $('[name="time_sleep"]').value = "";
-            $('[name="name_sleep"]').value = "";
+            time_sleep.value = "";
+            name_sleep.value = "";
             toggerMessage("success", `save sleep successfully`);
             loadDataFunction();
         } else {
@@ -383,11 +396,9 @@ function handleMarkerMission() {
                     sx2: sx2?.value,
                     sy1: sy1?.value,
                     sy2: sy2?.value,
-                    method: "add",
                 };
+                addFunctionStep("marker", data);
 
-                updateStep(`/api/mission/${currentMission}`, data);
-                renderStep();
                 name_marker ? (name_marker.value = "") : "";
                 off_set_x1 ? (off_set_x1.value = "") : "";
                 off_set_x2 ? (off_set_x2.value = "") : "";

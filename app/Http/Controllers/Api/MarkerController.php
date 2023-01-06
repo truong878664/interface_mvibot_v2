@@ -36,7 +36,38 @@ class MarkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name_type = $request->name_type;
+        $marker_type = $request->marker_type;
+        $marker_dir = $this->checkDataMarker($request->marker_dir);
+        $off_set_x1 = $this->checkDataMarker($request->off_set_x1);
+        $off_set_x2 = $this->checkDataMarker($request->off_set_x2);
+        $off_set_y1 = $this->checkDataMarker($request->off_set_y1);
+        $off_set_y2 = $this->checkDataMarker($request->off_set_y2);
+        $off_set_dis = $this->checkDataMarker($request->off_set_dis);
+        $off_set_angle = $this->checkDataMarker($request->off_set_angle);
+        $sx1 = $request->sx1;
+        $sx2 = $request->sx2;
+        $sy1 = $request->sy1;
+        $sy2 = $request->sy2;
+
+
+        $dataMarker = [
+            'name_marker' => $name_type,
+            'marker_type' => $marker_type,
+            'marker_dir' => $marker_dir,
+            'off_set_x1' => $off_set_x1,
+            'off_set_x2' => $off_set_x2,
+            'off_set_y1' => $off_set_y1,
+            'off_set_y2' => $off_set_y2,
+            'off_set_dis' => $off_set_dis,
+            'off_set_angle' => $off_set_angle,
+            'sx1' => $sx1,
+            'sx2' => $sx2,
+            'sy1' => $sy1,
+            'sy2' => $sy2,
+        ];
+
+        MissionMarker::create($dataMarker);
     }
 
     /**
@@ -82,5 +113,14 @@ class MarkerController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function checkDataMarker($dataCheck)
+    {
+        if ($dataCheck) {
+            $data = $dataCheck;
+        } else {
+            $data = null;
+        }
+        return $data;
     }
 }

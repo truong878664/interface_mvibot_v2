@@ -36,7 +36,32 @@ class GpioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->time_out) {
+            $time_out = $request->time_out;
+        } else {
+            $time_out = -1;
+        }
+
+        $name_type = $request->name_type;
+        $out_set = $request->out_set;
+        $out_reset = $request->out_reset;
+        $in_on = $request->in_on;
+        $in_off = $request->in_off;
+        $in_pullup = $request->in_pullup;
+        $in_pulldown = $request->in_pulldown;
+
+        $dataGpio = [
+            "name_gpio" => $name_type,
+            "time_out" => $time_out,
+            "out_set" => $out_set,
+            "out_reset" => $out_reset,
+            "in_on" => $in_on,
+            "in_off" => $in_off,
+            "in_pullup" => $in_pullup,
+            "in_pulldown" => $in_pulldown,
+        ];
+
+        MissionGpio::create($dataGpio);
     }
 
     /**

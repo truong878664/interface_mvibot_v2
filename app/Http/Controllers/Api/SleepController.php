@@ -36,7 +36,15 @@ class SleepController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name_type = $request->name_type;
+        $time_sleep = $request->time_sleep;
+
+        $dataSleep = [
+            "name_sleep" => $name_type,
+            "time_sleep" => $time_sleep,
+        ];
+
+        MissionSleep::create($dataSleep);
     }
 
     /**

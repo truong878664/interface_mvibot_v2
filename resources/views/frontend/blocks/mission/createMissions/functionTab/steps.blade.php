@@ -41,7 +41,49 @@
     </style>
     <div class="h-full flex ">
         <div class="flex-1 flex relative h-full ">
-            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap content-start"></div>
+            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap content-start">
+                {{-- <i class="fa-solid fa-quote-left"></i>
+
+                <div class="step-item text-[#333] border border-[#333] bg-white " index=${index}>normal</div>
+                <div class="step-item step-${stepMode}" index=${index}>
+                    <input hidden type="text" class="step-id" value=${stepId}>
+                    <input hidden type="text" class="step-mode" value=${stepMode}>
+                    <button id-move="${index}" class="move-btn move-left"><i
+                            class="fa-solid fa-angle-left"></i></button>
+                    <span class="stem-name">footprint|123</span>
+                    <button id-move="${index}" class="move-btn move-right"><i
+                            class="fa-solid fa-angle-right"></i></button>
+                    <button class="show-menu" index="${index}"><i class="fa-solid fa-ellipsis"></i></button>
+                    <ul class="menu-right-click menu-click-${index}">
+                        <div class="menu-overlay"></div>
+
+                        <li class="menu-item delete-step" id-delete="${index}"><i
+                                class="fa-regular fa-trash-can"></i></i>delete</li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-quote-right mr-7"></i> --}}
+
+                {{--
+                <i class="fa-solid fa-quote-left"></i>
+                <div class="step-item bg-black text-[#fff]" index=${index}>normal</div>
+                <div class="step-item step-${stepMode}" index=${index}>
+                    <input hidden type="text" class="step-id" value=${stepId}>
+                    <input hidden type="text" class="step-mode" value=${stepMode}>
+                    <button id-move="${index}" class="move-btn move-left"><i
+                            class="fa-solid fa-angle-left"></i></button>
+                    <span class="stem-name">footprint|123</span>
+                    <button id-move="${index}" class="move-btn move-right"><i
+                            class="fa-solid fa-angle-right"></i></button>
+                    <button class="show-menu" index="${index}"><i class="fa-solid fa-ellipsis"></i></button>
+                    <ul class="menu-right-click menu-click-${index}">
+                        <div class="menu-overlay"></div>
+
+                        <li class="menu-item delete-step" id-delete="${index}"><i
+                                class="fa-regular fa-trash-can"></i></i>delete</li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-quote-right"></i> --}}
+            </div>
             <label class="absolute right-0 top-0 animate-spin text-[#0f6cbd] hidden step-loading">
                 <i class="fa-solid fa-spinner"></i>
             </label>

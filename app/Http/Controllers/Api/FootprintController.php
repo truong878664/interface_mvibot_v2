@@ -36,7 +36,21 @@ class FootprintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name_type = $request->name_type;
+        $x1 = -$request->x1;
+        $x2 = $request->x2;
+        $y1 = -$request->y1;
+        $y2 = $request->y2;
+
+        $dataFootprint = [
+            "name_footprint" => $name_type,
+            "x1" => $x1,
+            "y1" => $y1,
+            "x2" => $x2,
+            "y2" => $y2,
+        ];
+
+        MissionFootprint::create($dataFootprint);
     }
 
     /**
