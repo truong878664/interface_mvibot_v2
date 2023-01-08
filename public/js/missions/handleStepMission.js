@@ -608,11 +608,6 @@ function renderStep() {
 function updateStep() {}
 
 export { renderStep, updateStep };
-{
-    /* <i class="fa-solid fa-quote-left"></i><i class="fa-solid fa-quote-right"></i> 
-                                <div class="step-item bg-black text-[#fff]" index=${index}>normal</div>
-                            */
-}
 
 function renderStepItem(data, html) {
     const dataNormal = data.split("|");
@@ -627,19 +622,7 @@ function renderStepItem(data, html) {
 
         return html.push(`
             <div class="step-item step-${stepMode}" index=${index}>
-            <input hidden type="text" class="step-id" value=${stepId}>
-                <input hidden type="text" class="step-mode" value=${stepMode}>
-                <button id-move="${index}" class="move-btn move-left"><i
-                        class="fa-solid fa-angle-left"></i></button>
                 <span class="stem-name">${stepMode}|${stepName}</span>
-                <button id-move="${index}" class="move-btn move-right"><i
-                        class="fa-solid fa-angle-right"></i></button>
-                <button class="show-menu" index="${index}"><i class="fa-solid fa-ellipsis"></i></button>
-                <ul class="menu-right-click menu-click-${index}">
-                    <div class="menu-overlay"></div>
-                    <li class="menu-item delete-step" id-delete="${index}"><i
-                            class="fa-regular fa-trash-can"></i></i>delete</li>
-                </ul>
             </div>
         `);
     });

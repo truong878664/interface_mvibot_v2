@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name_mission');
             $table->text('steps_mission')->nullable();
             $table->text('steps_mission_name')->nullable();
+            $table->text('mission_shorthand')->nullable();
             $table->timestamps();
         });
     }

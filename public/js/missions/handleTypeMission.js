@@ -100,12 +100,9 @@ function renderDataFunction(data, type) {
     });
 }
 const nameNormalMission = $(".name-normal-mission");
-let valueNormalMissionSaveDatabase = "";
 const valueNormalMissionArray = [];
 
 const nameIfelseMission = $(".name-ifelse-mission");
-
-let valueIfelseMissionSaveDatabase = "";
 
 const valueItemIfelse = {
     if: [],
@@ -136,7 +133,6 @@ function handleAddStep() {
             switch (type) {
                 case "normal":
                     valueNormalMissionArray.push(valueStep);
-
                     render(valueNormalMissionArray, ".normal-steps-wrapper");
 
                     break;
@@ -156,14 +152,16 @@ function handleAddStep() {
 
 function handleAddMissionNormal() {
     $(".add-mission-normal").onclick = () => {
-        valueNormalMissionSaveDatabase = `${
-            nameNormalMission.value
-        }^normal^|${valueNormalMissionArray.join("|")}`;
-        updateStep(currentMission, {
-            steps_mission_name: valueNormalMissionSaveDatabase,
-        });
+        const dataSaveTypeMission = {
+            name: nameNormalMission.value,
+            type: "normal",
+            data: valueNormalMissionArray.join("|"),
+        };
+        console.log(dataSaveTypeMission);
+
+        addTypeMission(dataSaveTypeMission);
+
         resetValueInputNormal();
-        renderStep();
     };
     function resetValueInputNormal() {
         valueNormalMissionArray.length = 0;
@@ -174,18 +172,16 @@ function handleAddMissionNormal() {
 
 function handleAddMissionIfelse() {
     $(".add-mission-ifelse").onclick = () => {
-        valueIfelseMissionSaveDatabase = `${
-            nameIfelseMission.value
-        }^ifelse^|${valueItemIfelse.if.join("|")}?|${valueItemIfelse.then.join(
-            "|"
-        )}?|${valueItemIfelse.else.join("|")}`;
+        const dataSaveTypeMission = {
+            name: nameIfelseMission.value,
+            type: "ifelse",
+            data: `${valueItemIfelse.if.join("|")}?|${valueItemIfelse.then.join(
+                "|"
+            )}?|${valueItemIfelse.else.join("|")}`,
+        };
 
-        updateStep(currentMission, {
-            steps_mission_name: valueIfelseMissionSaveDatabase,
-        });
-
+        addTypeMission(dataSaveTypeMission);
         resetValueInputIfelse();
-        renderStep();
     };
 
     function resetValueInputIfelse() {
@@ -198,6 +194,27 @@ function handleAddMissionIfelse() {
         $(".else-steps-wrapper").innerHTML = "";
         nameIfelseMission.value = "";
     }
+}
+
+function addTypeMission(data) {
+    fetch("/api/type-mission", {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            updateStep(currentMission, {
+                mission_shorthand: data.id,
+            });
+            renderStep();
+        })
+        .catch(function (res) {
+            console.log(res);
+        });
 }
 
 function updateStep(id, data) {
@@ -232,7 +249,6 @@ function render(dataSteps, element) {
             `<div class="step-item step-${stepMode}" index=${index}>
                 <input hidden type="text" class="step-id" value=${stepId}>
                 <input hidden type="text" class="step-mode" value=${stepMode}>
-                <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <span class="stem-name">${stepMode}|${stepName}</span>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
                 <button class="show-menu" index="${index}"><i class="fa-solid fa-ellipsis"></i></button>

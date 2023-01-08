@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
+use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -71,15 +72,16 @@ class MiController extends Controller
     public function update(Request $request, $id)
     {
 
-        $old_steps_mission_name = Mi::where('id', $id)->first()->steps_mission_name;
-        $steps_mission_name = $request->steps_mission_name;
-        if ($old_steps_mission_name !== "") {
-            $new_steps_mission_name = $old_steps_mission_name . "+" . $steps_mission_name;
+        $old_mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
+        $mission_shorthand = $request->mission_shorthand;
+        if (trim($old_mission_shorthand, " ") !== "") {
+            $new_mission_shorthand = $old_mission_shorthand . "+" . $mission_shorthand;
         } else {
-            $new_steps_mission_name = $steps_mission_name;
+            $new_mission_shorthand = $mission_shorthand;
         }
-        Mi::where('id', $id)->update(['steps_mission_name' => $new_steps_mission_name]);;
+        Mi::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);;
 
+        $this->translateStepMissionName($id);
         $this->translateData($id);
         return ['message' => 'save data success', "status " => 200];
     }
@@ -93,6 +95,20 @@ class MiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function translateStepMissionName($id)
+    {
+        $dataMission = Mi::where('id', $id)->first();
+        $mission_shorthand = $dataMission->mission_shorthand;
+        $split_mission_shorthand = explode("+", $mission_shorthand);
+
+        $data = array_map(function ($item) {
+            $itemStep = TypeMission::where('id', $item)->first();
+            return $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
+        }, $split_mission_shorthand);
+
+        Mi::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
     }
     public function translateData($id)
     {

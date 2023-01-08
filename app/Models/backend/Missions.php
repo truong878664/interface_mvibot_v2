@@ -10,5 +10,5 @@ class Missions extends Model
 {
     use HasFactory;
     public $table = 'missions';
-    protected $fillable = ['name_mission', 'steps_mission', 'steps_mission_name'];
+    protected $fillable = ['name_mission', 'steps_mission', 'steps_mission_name', 'mission_shorthand'];
 }

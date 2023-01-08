@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\StepController;
+use App\Http\Controllers\Api\TypeMissionController;
 use App\Http\Controllers\Api\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,4 @@ Route::resource('sleep', SleepController::class);
 
 
 Route::resource('mi', MiController::class);
+Route::resource('type-mission', TypeMissionController::class);
