@@ -551,9 +551,9 @@ function renderStep() {
         .then((data) => {
             loaded();
             const steps_mission_name = data.steps_mission_name;
-            const arraySteps = steps_mission_name.split("+");
+            const arraySteps = steps_mission_name?.split("+");
             const html = [];
-            arraySteps.forEach((arrayStep) => {
+            arraySteps?.forEach((arrayStep) => {
                 const typeMissionItem = arrayStep.split("^");
                 switch (typeMissionItem[1]) {
                     case "normal":

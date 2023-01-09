@@ -56,8 +56,8 @@ class MissionsController extends Controller
 
         $allRobot = Robot::all()->toArray();
 
-        $currentWakeUp = json_encode(WakeUp::where('name_mission', $itemRender->name_mission)->get());
-        $currentStop = json_encode(Stop::where('name_mission', $itemRender->name_mission)->get());
+        $currentWakeUp = json_encode(WakeUp::where('id_mission', $itemRender->id)->get());
+        $currentStop = json_encode(Stop::where('id_mission', $itemRender->id)->get());
 
         $this->addPointToStepsMission($idRender);
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot', 'currentWakeUp', 'currentStop'));

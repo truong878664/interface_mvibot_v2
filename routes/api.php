@@ -9,8 +9,10 @@ use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\StepController;
+use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
 use App\Http\Controllers\Api\userController;
+use App\Http\Controllers\Api\WakeUpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,8 @@ Route::resource('gpio', GpioController::class);
 Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
 
-
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);
+
+Route::resource('wake-up', WakeUpController::class)->only('store');
+Route::resource('stop', StopController::class)->only('store');

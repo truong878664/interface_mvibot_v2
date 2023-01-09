@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('missions', function (Blueprint $table) {
+        Schema::create('sounds', function (Blueprint $table) {
             $table->id();
-            $table->string('name_mission');
-            $table->text('steps_mission')->nullable();
-            $table->text('steps_mission_name')->nullable();
-            $table->text('mission_shorthand')->nullable();
-            $table->text('wake_up')->nullable();
-            $table->text('stop')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('missions');
+        Schema::dropIfExists('sounds');
     }
 };

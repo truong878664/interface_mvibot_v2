@@ -46,9 +46,21 @@ class MiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $type)
     {
-        //
+
+        switch ($type) {
+            case "get-mission":
+                $list_id = explode(",", $request->list_id);
+                $dataMission = array_map(function ($item) {
+                    return Mi::where('id', $item)->first()->steps_mission;
+                }, $list_id);
+
+                return $dataMission;
+
+            default:
+                return Mi::where('id', $type)->first();
+        }
     }
 
     /**
@@ -136,10 +148,15 @@ class MiController extends Controller
                     $changeDataIfelse = explode('?', $dataItem[2]);
 
                     $dataIf = $this->translateStepItem($changeDataIfelse[0]);
-                    $dataThen = $this->translateStepItem($changeDataIfelse[1]);
-                    $dataElse = $this->translateStepItem($changeDataIfelse[2]);
+                    $dataThen = $changeDataIfelse[1] == "|" ? "" : $this->translateStepItem($changeDataIfelse[1]);
+                    $dataElse = $changeDataIfelse[2] == "|" ? "" : $this->translateStepItem($changeDataIfelse[2]);
 
-                    $body =  $dataIf . "%%if_step#" . $dataThen . "%%else_step#" . $dataElse . "%@";
+
+                    $dataStringIf = "$dataIf%";
+                    $dataStringThen = $dataThen ? "%if_step#$dataThen%" : "";
+                    $dataStringElse = $dataElse ? "%else_step#$dataElse%" : "";
+
+                    $body =  "$dataStringIf$dataStringThen$dataStringElse@";
                     array_push($data, $head . $body);
                     break;
             }
@@ -151,6 +168,7 @@ class MiController extends Controller
     public function translateStepItem($arrayStepMissionName)
     {
         $currentMissionToArray = explode('|', $arrayStepMissionName);
+
         $arrayStepMissionName = array_map(function ($item) {
             return explode('#', $item);
         }, $currentMissionToArray);

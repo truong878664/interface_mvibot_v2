@@ -1,6 +1,6 @@
 <div class="w-full flex-1 flex justify-between overflow-hidden">
     <div class="w-full lg:w-1/2 bg-slate-50 overflow-hidden relative shadow-md">
-        <div class="absolute top-0 w-full h-[30px] bg-slate-100 flex z-30">
+        <div class="absolute top-0 w-full h-[30px] bg-slate-100 flex z-20">
             <button
                 class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
                 type="footprint">footprint</button>

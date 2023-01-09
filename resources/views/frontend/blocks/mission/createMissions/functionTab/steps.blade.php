@@ -136,9 +136,9 @@
                 <input type="hidden" name="name_mission" value="{{ $itemRender->name_mission }}">
                 <div class="mt-4">
                     <label for="wake-up"
-                        class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md">cancel</label>
+                        class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-wake-up">cancel</label>
                     <button
-                        class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Save</button>
+                        class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-wake-up-btn">Save</button>
                 </div>
 
             </form>
@@ -166,10 +166,10 @@
             @csrf
             <div class="mt-4">
                 <label for="stop"
-                    class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md">cancel</label>
+                    class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-stop">cancel</label>
 
                 <button
-                    class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Save</button>
+                    class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
             </div>
         </form>
     </div>

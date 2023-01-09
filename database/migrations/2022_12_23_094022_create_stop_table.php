@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('stop')) {
             Schema::create('stop', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_mission');
+                $table->string('id_mission');
                 $table->string('type')->default('stop');
                 $table->string('out_set')->nullable();
                 $table->string('out_reset')->nullable();
@@ -24,6 +24,7 @@ return new class extends Migration
                 $table->string('in_off')->nullable();
                 $table->string('in_pullup')->nullable();
                 $table->string('in_pulldown')->nullable();
+                $table->string('data')->nullable();
             });
         }
     }

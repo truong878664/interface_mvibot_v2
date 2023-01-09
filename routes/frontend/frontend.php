@@ -15,11 +15,11 @@ use App\Http\Controllers\frontend\statusController;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
-        return view('frontend.pages.login');
+        return view('frontend.pages.auth.login');
     });
 
     Route::get('/', function () {
-        return view('frontend.pages.home');
+        return view('frontend.pages.home.home');
     })->name('home');
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
