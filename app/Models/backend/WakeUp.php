@@ -17,6 +17,7 @@ class WakeUp extends Model
         'in_off',
         'in_pullup',
         'in_pulldown',
+        'data'
     ];
     public $timestamps = false;
 }

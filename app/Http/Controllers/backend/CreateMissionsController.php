@@ -8,6 +8,8 @@ use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
 use \Carbon\Carbon;
 use App\Http\Controllers\frontend\MissionsController;
+use App\Models\backend\Stop;
+use App\Models\backend\WakeUp;
 
 class CreateMissionsController extends Controller
 {
@@ -34,6 +36,9 @@ class CreateMissionsController extends Controller
     {
         $deleteId = $request->id;
         Missions::where('id', $deleteId)->delete();
+
+        Stop::where('id_mission', $deleteId)->delete();
+        WakeUp::where('id_mission', $deleteId)->delete();
         return back();
     }
 

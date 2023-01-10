@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Mi;
 use App\Models\backend\WakeUp;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,7 @@ class WakeUpController extends Controller
         $in_off = $request->in_off;
         $in_pullup = $request->in_pullup;
         $in_pulldown = $request->in_pulldown;
+        $data = $request->data;
 
         $dataGpio = [
             "id_mission" => $id_mission,
@@ -52,6 +54,7 @@ class WakeUpController extends Controller
             "in_off" => $in_off,
             "in_pullup" => $in_pullup,
             "in_pulldown" => $in_pulldown,
+            "data" => $data,
         ];
 
         if (WakeUp::where('id_mission', $id_mission)->count() > 0) {
@@ -59,7 +62,9 @@ class WakeUpController extends Controller
         } else {
             WakeUp::insert($dataGpio);
         }
-        return 123;
+
+        Mi::where('id', $id_mission)->update(['wake_up' => $data]);
+        return $dataGpio;
     }
 
     /**

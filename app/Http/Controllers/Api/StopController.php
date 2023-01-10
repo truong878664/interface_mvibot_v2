@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Mi;
 use App\Models\backend\Stop;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,7 @@ class StopController extends Controller
         $in_off = $request->in_off;
         $in_pullup = $request->in_pullup;
         $in_pulldown = $request->in_pulldown;
+        $data = $request->data;
 
         $dataGpio = [
             "id_mission" => $id_mission,
@@ -52,12 +54,15 @@ class StopController extends Controller
             "in_off" => $in_off,
             "in_pullup" => $in_pullup,
             "in_pulldown" => $in_pulldown,
+            "data" => $data
         ];
         if (Stop::where('id_mission', $id_mission)->count() > 0) {
             Stop::where('id_mission', $id_mission)->update($dataGpio);
         } else {
             Stop::insert($dataGpio);
         }
+        Mi::where('id', $id_mission)->update(['stop' => $data]);
+
         return 123;
     }
 

@@ -9,11 +9,19 @@ missionCreateBtn.addEventListener("click", () => {
     }, 1);
 });
 
-$(".select-btn").onclick = () => {
+$(".select-btn").onclick = (e) => {
     $(".action-select").classList.toggle("hidden");
     $$(".select-mission-wrapper").forEach((item) => {
         item.classList.toggle("hidden");
     });
+
+    if (e.target.innerText == "Select") {
+        e.target.innerText = "Cancel";
+        e.target.style.backgroundColor = "rgb(250 204 21)";
+    } else {
+        e.target.innerText = "Select";
+        e.target.style.backgroundColor = "rgb(56 189 248)";
+    }
 };
 
 $(".send-btn").onclick = (e) => {
@@ -24,7 +32,8 @@ $(".send-btn").onclick = (e) => {
         }
         item.checked = false;
     });
-
+    $("#select-robot").checked = false;
+    $(".select-btn").click();
     getMission(idSelect);
 };
 
@@ -32,5 +41,8 @@ function getMission(ids) {
     const list_id = ids.join(",");
     fetch(`/api/mi/get-mission?list_id=${list_id}`)
         .then((res) => res.json())
-        .then((data) => console.log(data.join("")));
+        .then((data) => {
+            // console.log(data.join(""));
+            console.log(data);
+        });
 }

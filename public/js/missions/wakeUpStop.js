@@ -31,8 +31,7 @@ $(".save-wake-up-btn").onclick = (e) => {
         data: translateGpioWakeUp(dataWakeUp),
     };
 
-    saveHeaderMission("wake-up", dataWakeUp);
-    console.log(dataWakeUpSave);
+    saveHeaderMission("wake-up", dataWakeUpSave);
 
     $(".cancel-wake-up").click();
 };
@@ -53,8 +52,12 @@ $(".save-stop-btn").onclick = (e) => {
         dataStop[item] = $(`.${item}_stop`).value;
     });
 
-    saveHeaderMission("stop", dataStop);
-    console.log(translateGpioStop(dataStop));
+    const dataStopSave = {
+        ...dataStop,
+        data: translateGpioStop(dataStop),
+    };
+
+    saveHeaderMission("stop", dataStopSave);
     $(".cancel-stop").click();
 };
 

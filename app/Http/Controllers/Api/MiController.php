@@ -53,7 +53,7 @@ class MiController extends Controller
             case "get-mission":
                 $list_id = explode(",", $request->list_id);
                 $dataMission = array_map(function ($item) {
-                    return Mi::where('id', $item)->first()->steps_mission;
+                    return Mi::where('id', $item)->first();
                 }, $list_id);
 
                 return $dataMission;

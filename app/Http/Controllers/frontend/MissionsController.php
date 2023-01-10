@@ -30,8 +30,9 @@ class MissionsController extends Controller
 
     public function createMissions()
     {
+        $allRobot = Robot::all();
         $allMissions = Missions::all();
-        return view('frontend.pages.missions.createMissions', compact('allMissions'));
+        return view('frontend.pages.missions.createMissions', compact('allMissions', 'allRobot'));
     }
 
     public function trackingMission()
