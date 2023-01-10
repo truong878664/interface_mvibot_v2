@@ -42,7 +42,14 @@ function getMission(ids) {
     fetch(`/api/mi/get-mission?list_id=${list_id}`)
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data.join(""));
-            console.log(data);
+            const allMission = [];
+            data.map((item) => {
+                return allMission.push(
+                    `${item.wake_up ? item.wake_up : ""}${
+                        item.stop ? item.stop : ""
+                    }${item.steps_mission ? item.steps_mission : ""}`
+                );
+            });
+            console.log(allMission.join(""));
         });
 }

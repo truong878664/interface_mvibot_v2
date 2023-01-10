@@ -33,24 +33,24 @@
     box-shadow: 2px 2px 14px rgb(158, 158, 158);
 }
 
-.delete-mission-btn {
+/* .delete-mission-btn {
     position: absolute;
     top: 0;
     right: 0;
-    /* width: 25px;
-    height: 25px; */
+    width: 25px;
+    height: 25px;
     padding: 10px;
     background-color: transparent;
     color: rgb(143, 141, 141);
     border-radius: 50%;
     border: none;
-    /* transform: translateX(20%) translateY(-20%); */
+    transform: translateX(20%) translateY(-20%);
     cursor: pointer;
 }
 .delete-mission-btn:hover {
-    /* background-color: rgb(184, 182, 182); */
+    background-color: rgb(184, 182, 182);
     color: #fff;
-}
+} */
 
 .create-missions-btn {
     font-size: 6rem;

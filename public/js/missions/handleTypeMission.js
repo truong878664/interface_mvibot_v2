@@ -1,3 +1,4 @@
+import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$ } from "../main.js";
 import { currentMission, renderStep } from "./handleStepMission.js";
 
@@ -134,7 +135,14 @@ function handleAddStep() {
                 case "normal":
                     valueNormalMissionArray.push(valueStep);
                     render(valueNormalMissionArray, ".normal-steps-wrapper");
-
+                    handleMoveStep(
+                        valueNormalMissionArray,
+                        ".normal-steps-wrapper"
+                    );
+                    handleDeleteStep(
+                        valueNormalMissionArray,
+                        ".normal-steps-wrapper"
+                    );
                     break;
 
                 case "ifelse":
@@ -142,6 +150,20 @@ function handleAddStep() {
                     render(
                         valueItemIfelse[currentIf],
                         `.${currentIf}-steps-wrapper`
+                    );
+
+                    handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
+                    handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
+                    handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");
+
+                    handleDeleteStep(valueItemIfelse.if, ".if-steps-wrapper");
+                    handleDeleteStep(
+                        valueItemIfelse.then,
+                        ".then-steps-wrapper"
+                    );
+                    handleDeleteStep(
+                        valueItemIfelse.else,
+                        ".else-steps-wrapper"
                     );
 
                     break;
@@ -152,26 +174,38 @@ function handleAddStep() {
 
 function handleAddMissionNormal() {
     $(".add-mission-normal").onclick = () => {
+        const isValid = validateInput(".name-normal-mission");
+        const isData = validateArray(
+            valueNormalMissionArray,
+            ".normal-steps-wrapper"
+        );
+
         const dataSaveTypeMission = {
             name: nameNormalMission.value,
             type: "normal",
             data: valueNormalMissionArray.join("|"),
         };
-        console.log(dataSaveTypeMission);
 
-        addTypeMission(dataSaveTypeMission);
-
-        resetValueInputNormal();
+        if (isValid && isData) {
+            addTypeMission(dataSaveTypeMission);
+            resetValueInputNormal();
+        }
     };
-    function resetValueInputNormal() {
-        valueNormalMissionArray.length = 0;
-        $(".normal-steps-wrapper").innerHTML = "";
-        nameNormalMission.value = "";
-    }
+}
+function resetValueInputNormal() {
+    valueNormalMissionArray.length = 0;
+    $(".normal-steps-wrapper").innerHTML = "";
+    nameNormalMission.value = "";
 }
 
 function handleAddMissionIfelse() {
     $(".add-mission-ifelse").onclick = () => {
+        const isValid = validateInput(".name-ifelse-mission");
+        const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
+        const isData =
+            validateArray(valueItemIfelse.then, ".then-label") ||
+            validateArray(valueItemIfelse.else, ".else-label");
+
         const dataSaveTypeMission = {
             name: nameIfelseMission.value,
             type: "ifelse",
@@ -179,9 +213,13 @@ function handleAddMissionIfelse() {
                 "|"
             )}?|${valueItemIfelse.else.join("|")}`,
         };
-
-        addTypeMission(dataSaveTypeMission);
-        resetValueInputIfelse();
+        if (isValid && isDataIf && isData) {
+            addTypeMission(dataSaveTypeMission);
+            resetValueInputIfelse();
+            $$(".normal-border").forEach((item) => {
+                item.style.borderColor = "#ccc";
+            });
+        }
     };
 
     function resetValueInputIfelse() {
@@ -209,12 +247,11 @@ function addTypeMission(data) {
         .then((data) => {
             updateStep(currentMission, {
                 mission_shorthand: data.id,
+                method: "add",
             });
             renderStep();
         })
-        .catch(function (res) {
-            console.log(res);
-        });
+        .catch(function (res) {});
 }
 
 function updateStep(id, data) {
@@ -226,12 +263,8 @@ function updateStep(id, data) {
         method: "PUT",
         body: JSON.stringify(data),
     })
-        .then(function (res) {
-            console.log(res);
-        })
-        .catch(function (res) {
-            console.log(res);
-        });
+        .then(function (res) {})
+        .catch(function (res) {});
 }
 
 function render(dataSteps, element) {
@@ -249,9 +282,10 @@ function render(dataSteps, element) {
             `<div class="step-item step-${stepMode}" index=${index}>
                 <input hidden type="text" class="step-id" value=${stepId}>
                 <input hidden type="text" class="step-mode" value=${stepMode}>
+                <button id-move="${index}" class="move-btn move-left"><i class="fa-solid fa-angle-left"></i></button>
                 <span class="stem-name">${stepMode}|${stepName}</span>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
-                <button class="show-menu" index="${index}"><i class="fa-solid fa-ellipsis"></i></button>
+                <button class="show-menu delete-step-btn" index="${index}"><i class="fa-solid fa-trash-can"></i></button>
                 <ul class="menu-right-click menu-click-${index}">
                     <div class="menu-overlay"></div>
                     ${
@@ -264,6 +298,117 @@ function render(dataSteps, element) {
             </div>`
         );
     });
-
     stepsWrapper.innerHTML = htmlStep.join("");
+}
+
+function handleMoveStep(data, wrapperItem) {
+    $(wrapperItem)
+        .querySelectorAll(".move-left")
+        .forEach((element) => {
+            element.onclick = (e) => {
+                let moveIndex =
+                    e.target.closest(".step-item").getAttribute("index") * 1;
+
+                if (moveIndex != 0) {
+                    arrayMove(data, moveIndex, moveIndex - 1);
+                    console.log(data);
+                    const currentStep = e.target.closest(".step-item");
+
+                    const moveStep = currentStep.previousSibling;
+
+                    e.target
+                        .closest(".step-item")
+                        .parentElement.insertBefore(currentStep, moveStep);
+
+                    moveIndex--;
+                    e.target
+                        .closest(".step-item")
+                        .setAttribute("index", moveIndex);
+
+                    const itemNext = e.target.closest(".step-item").nextSibling;
+                    itemNext.setAttribute(
+                        "index",
+                        Number(itemNext.getAttribute("index")) + 1
+                    );
+                }
+            };
+        });
+
+    $$(".move-right").forEach((element) => {
+        element.onclick = (e) => {
+            let moveIndex =
+                e.target.closest(".step-item").getAttribute("index") * 1;
+
+            if (moveIndex < data.length - 1) {
+                arrayMove(data, moveIndex, moveIndex + 1);
+
+                const currentStep = e.target.closest(".step-item");
+                const moveStep = currentStep.nextSibling.nextSibling;
+
+                e.target
+                    .closest(".step-item")
+                    .parentElement.insertBefore(currentStep, moveStep);
+
+                moveIndex++;
+                e.target.closest(".step-item").setAttribute("index", moveIndex);
+
+                const itemPrevious =
+                    e.target.closest(".step-item").previousSibling;
+
+                itemPrevious.setAttribute(
+                    "index",
+                    Number(itemPrevious.getAttribute("index")) - 1
+                );
+            }
+        };
+    });
+}
+
+function handleDeleteStep(data, wrapperItem) {
+    $(wrapperItem)
+        .querySelectorAll(".delete-step-btn")
+        .forEach((element) => {
+            element.onclick = (e) => {
+                const stepItem = e.target;
+                data.splice(
+                    stepItem.closest(".step-item").getAttribute("index"),
+                    1
+                );
+                stepItem.closest(".step-item").remove();
+
+                $(wrapperItem)
+                    .querySelectorAll(".step-item")
+                    .forEach((element, index) => {
+                        element.setAttribute("index", index);
+                    });
+
+                console.log(data);
+            };
+        });
+}
+
+function validateInput(...rest) {
+    const result = rest.map((item) => {
+        $(item).oninput = (e) => {
+            e.target.style.borderColor = "#ccc";
+        };
+        if ($(item).value == "") {
+            $(item).style.borderColor = "red";
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    return result.indexOf(false) == -1;
+}
+
+function validateArray(arr, element) {
+    if (arr.length == 0) {
+        $(element).style.borderColor = "red";
+        return false;
+    } else {
+        $(element).style.borderColor = "#ccc";
+        return true;
+    }
 }

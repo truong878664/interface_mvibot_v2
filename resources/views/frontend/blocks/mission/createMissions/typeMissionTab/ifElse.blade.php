@@ -13,7 +13,7 @@
             {{-- if --}}
             <div class="flex items-center h-[46px]">
                 <label
-                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg">if</label>
+                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg border if-label normal-border">if</label>
                 <div class="text-[16px] flex if-steps-wrapper overflow-x-auto">
 
                 </div>
@@ -26,7 +26,7 @@
             {{-- then --}}
             <div class="flex items-center h-[46px]">
                 <label
-                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg">then</label>
+                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg border then-label normal-border">then</label>
                 <div class="text-[16px] flex then-steps-wrapper overflow-x-auto">
 
                 </div>
@@ -39,7 +39,7 @@
             {{-- else --}}
             <div class="flex items-center h-[46px]">
                 <label
-                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg">else</label>
+                    class="h-[30px] px-5 bg-black text-white text-[16px] leading-[30px] font-bold rounded-lg border else-label normal-border">else</label>
                 <div class="text-[16px] flex else-steps-wrapper overflow-x-auto">
 
                 </div>
@@ -58,6 +58,8 @@
         ])
 
     </div>
+
+
 </div>
 <style>
     .add-ifelse-step-btn.active {

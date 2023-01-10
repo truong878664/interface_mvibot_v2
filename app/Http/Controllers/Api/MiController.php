@@ -83,15 +83,22 @@ class MiController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $old_mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
-        $mission_shorthand = $request->mission_shorthand;
-        if (trim($old_mission_shorthand, " ") !== "") {
-            $new_mission_shorthand = $old_mission_shorthand . "+" . $mission_shorthand;
-        } else {
-            $new_mission_shorthand = $mission_shorthand;
+        switch ($request->method) {
+            case "add":
+                $old_mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
+                $mission_shorthand = $request->mission_shorthand;
+                if (trim($old_mission_shorthand, " ") !== "") {
+                    $new_mission_shorthand = $old_mission_shorthand . "+" . $mission_shorthand;
+                } else {
+                    $new_mission_shorthand = $mission_shorthand;
+                }
+                Mi::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
+                break;
+            case "update":
+                $update_mission_shorthand = $request->mission_shorthand;
+                Mi::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
+                break;
         }
-        Mi::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);;
 
         $this->translateStepMissionName($id);
         $this->translateData($id);
@@ -113,57 +120,64 @@ class MiController extends Controller
     {
         $dataMission = Mi::where('id', $id)->first();
         $mission_shorthand = $dataMission->mission_shorthand;
-        $split_mission_shorthand = explode("+", $mission_shorthand);
+        if ($mission_shorthand != "") {
+            $split_mission_shorthand = explode("+", $mission_shorthand);
 
-        $data = array_map(function ($item) {
-            $itemStep = TypeMission::where('id', $item)->first();
-            return $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
-        }, $split_mission_shorthand);
-
-        Mi::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
+            $data = array_map(function ($item) {
+                $itemStep = TypeMission::where('id', $item)->first();
+                return $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
+            }, $split_mission_shorthand);
+            Mi::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
+        } else {
+            Mi::where("id", $id)->update(['steps_mission_name' => NULL]);
+        }
     }
     public function translateData($id)
     {
 
         $dataMission = Mi::where('id', $id)->first();
         $step_name = $dataMission->steps_mission_name;
-        $splitSteps = explode("+", $step_name);
+        if ($step_name != "") {
 
-        $dataChange = [];
-        foreach ($splitSteps as $splitStep) {
-            array_push($dataChange, explode("^", $splitStep));
-        }
-
-        $data = [];
-        foreach ($dataChange as $dataItem) {
-            switch ($dataItem[1]) {
-                case "normal":
-                    $head = "&name>$dataItem[0]/time_out>-1/mode>normal/data>%normal_step#";
-                    $body = $this->translateStepItem($dataItem[2]);
-                    array_push($data, $head . $body);
-                    break;
-                case "ifelse":
-                    $head = "&name>$dataItem[0]/time_out>-1/mode>if_else/data>%condition#";
-
-                    $changeDataIfelse = explode('?', $dataItem[2]);
-
-                    $dataIf = $this->translateStepItem($changeDataIfelse[0]);
-                    $dataThen = $changeDataIfelse[1] == "|" ? "" : $this->translateStepItem($changeDataIfelse[1]);
-                    $dataElse = $changeDataIfelse[2] == "|" ? "" : $this->translateStepItem($changeDataIfelse[2]);
-
-
-                    $dataStringIf = "$dataIf%";
-                    $dataStringThen = $dataThen ? "%if_step#$dataThen%" : "";
-                    $dataStringElse = $dataElse ? "%else_step#$dataElse%" : "";
-
-                    $body =  "$dataStringIf$dataStringThen$dataStringElse@";
-                    array_push($data, $head . $body);
-                    break;
+            $splitSteps = explode("+", $step_name);
+            $dataChange = [];
+            foreach ($splitSteps as $splitStep) {
+                array_push($dataChange, explode("^", $splitStep));
             }
-        }
 
-        $dataStepMission = "[" . trim(implode('][', $data), " ") . "]";
-        Mi::where("id", $id)->update(['steps_mission' => $dataStepMission]);
+            $data = [];
+            foreach ($dataChange as $dataItem) {
+                switch ($dataItem[1]) {
+                    case "normal":
+                        $head = "&name>$dataItem[0]/time_out>-1/mode>normal/data>%normal_step#";
+                        $body = $this->translateStepItem($dataItem[2]);
+                        array_push($data, $head . $body);
+                        break;
+                    case "ifelse":
+                        $head = "&name>$dataItem[0]/time_out>-1/mode>if_else/data>%condition#";
+
+                        $changeDataIfelse = explode('?', $dataItem[2]);
+
+                        $dataIf = $this->translateStepItem($changeDataIfelse[0]);
+                        $dataThen = $changeDataIfelse[1] == "|" ? "" : $this->translateStepItem($changeDataIfelse[1]);
+                        $dataElse = $changeDataIfelse[2] == "|" ? "" : $this->translateStepItem($changeDataIfelse[2]);
+
+
+                        $dataStringIf = "$dataIf%";
+                        $dataStringThen = $dataThen ? "%if_step#$dataThen%" : "";
+                        $dataStringElse = $dataElse ? "%else_step#$dataElse%" : "";
+
+                        $body =  "$dataStringIf$dataStringThen$dataStringElse@";
+                        array_push($data, $head . $body);
+                        break;
+                }
+            }
+
+            $dataStepMission = "[" . trim(implode('][', $data), " ") . "]";
+            Mi::where("id", $id)->update(['steps_mission' => $dataStepMission]);
+        } else {
+            Mi::where("id", $id)->update(['steps_mission' => NULL]);
+        }
     }
     public function translateStepItem($arrayStepMissionName)
     {
