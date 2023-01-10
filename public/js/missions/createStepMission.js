@@ -10,7 +10,7 @@ import { runMission } from "../rosModule/handleMission.js";
 
 import { toggerMessage } from "../main.js";
 import { valueGpio } from "./gpio.js";
-import { currentMission, renderStep, updateStep } from "./handleStepMission.js";
+import { currentMission, renderStep } from "./handleStepMission.js";
 import { setDefaultValueFootprint } from "./footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
 import inputFunction from "./inputFunction.js";
@@ -156,8 +156,6 @@ function handlePointMission() {
             const idType = itemPoint.querySelector(".id_type").value;
 
             const dataSaveStep = dataSaveSteps("add", type, nameType, idType);
-
-            updateStep(`/api/mission/${currentMission}`, dataSaveStep);
 
             renderStep();
 

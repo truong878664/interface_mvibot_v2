@@ -78,3 +78,9 @@
     display: flex;
     max-height: 46px;
 }
+
+.edit-step-btn.active {
+    background-color: var(--main-color);
+    color: #fff;
+    border-color: #fff;
+}

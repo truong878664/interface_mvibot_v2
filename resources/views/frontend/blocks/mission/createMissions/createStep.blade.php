@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="w-full border-[1px] bg-[#fff] mt-5 z-20 h-1/4">
+        <div class="w-full border-[1px] bg-[#fff] mt-5 z-20 h-2/5 relative">
             @include('frontend.blocks.mission.createMissions.functionTab.steps')
         </div>
     </div>

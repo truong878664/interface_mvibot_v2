@@ -521,10 +521,10 @@ function renderStep() {
                                 ${arrayStep.slice(0, arrayStep.indexOf("^"))}
                                 </div>
                                 ${htmlNormalText}
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye-slash"></i></button>
+                                <button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-angle-up"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-angle-down"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>
                             </div>`
                         );
@@ -561,10 +561,10 @@ function renderStep() {
                             }>
                                 <i class="fa-solid fa-play"></i>
                                 ${htmlIfelse.join("")}
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye-slash"></i></button>
+                                <button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-angle-up"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-angle-down"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
                                 <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>
                             </div>`
                         );
@@ -576,10 +576,10 @@ function renderStep() {
             scrollTop(".steps-wrapper");
             handleDeleteMission(shortHandMissionList);
             showStep();
+            showAllStep();
+            handleEditMission();
         });
 }
-
-function updateStep() {}
 
 function renderStepItem(data, html) {
     const dataNormal = data.split("|");
@@ -648,8 +648,70 @@ function showStep() {
             missionItems.forEach((item) => {
                 item.classList.toggle("hidden");
             });
+            e.target.innerHTML == '<i class="fa-regular fa-eye-slash"></i>'
+                ? (e.target.innerHTML = '<i class="fa-regular fa-eye"></i>')
+                : (e.target.innerHTML =
+                      '<i class="fa-regular fa-eye-slash"></i>');
         };
     });
 }
 
-export { renderStep, updateStep };
+function showAllStep() {
+    $(".check-show-step").checked =
+        localStorage.getItem("isShowAllStep") === "true";
+
+    if ($(".check-show-step").checked) {
+        $$(".step-hidden").forEach((element) => {
+            element.classList.remove("hidden");
+        });
+
+        $$(".show-step-btn").forEach((element) => {
+            element.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+        });
+    } else {
+        $$(".step-hidden").forEach((element) => {
+            element.classList.add("hidden");
+        });
+
+        $$(".show-step-btn").forEach((element) => {
+            element.innerHTML = '<i class="fa-regular fa-eye"></i>';
+        });
+    }
+
+    $(".check-show-step").onchange = (e) => {
+        if (e.target.checked) {
+            $$(".step-hidden").forEach((element) => {
+                element.classList.remove("hidden");
+            });
+
+            $$(".show-step-btn").forEach((element) => {
+                element.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+            });
+
+            localStorage.setItem("isShowAllStep", true);
+        } else {
+            $$(".step-hidden").forEach((element) => {
+                element.classList.add("hidden");
+            });
+
+            $$(".show-step-btn").forEach((element) => {
+                element.innerHTML = '<i class="fa-regular fa-eye"></i>';
+            });
+            localStorage.setItem("isShowAllStep", false);
+        }
+    };
+}
+
+function handleEditMission() {
+    $$(".edit-step-btn").forEach((element) => {
+        element.onclick = (e) => {
+            $(".edit-step-btn.active")?.classList.remove("active");
+            e.target.classList.add("active");
+            const missionItem = e.target.closest(".mission-item");
+            const idMission = missionItem.getAttribute("id-mission");
+            console.log(idMission);
+        };
+    });
+}
+
+export { renderStep };

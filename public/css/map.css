@@ -26,14 +26,14 @@
     position: absolute;
     height: 30px;
     display: flex;
-    align-item: center;
+    align-items: center;
     margin: 10px;
     font-size: 1.6rem;
 }
 
 .list-map-wrapper {
     display: flex;
-    align-item: center;
+    align-items: center;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 2px 2px 5px #333;

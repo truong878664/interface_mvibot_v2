@@ -5,9 +5,9 @@
                 value="{{ $itemMission->id }}" id="mission-{{ $itemMission->id }}">
             <label for="mission-{{ $itemMission->id }}" class="absolute h-[60px] w-[60px] bg-transparent"></label>
         </div>
-        <form method="post" action="delete/{{ $itemMission->id }}">
+        <form method="post" action="delete/{{ $itemMission->id }}" class="absolute top-0 right-0">
             @method('delete')
-            <button class="delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>
+            <button class="w-[30px] h-[30px]"><i class="fa-solid fa-xmark"></i></button>
             @csrf
         </form>
         <p> {{ $itemMission->name_mission }}</p>

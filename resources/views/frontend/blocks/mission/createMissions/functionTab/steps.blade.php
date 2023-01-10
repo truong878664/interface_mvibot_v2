@@ -40,7 +40,14 @@
         }
     </style>
     <div class="h-full flex ">
-        <div class="flex-1 flex relative h-full ">
+        <div class="flex-1 flex relative h-full">
+            <div class="absolute top-2 right-2">
+                <label class="switch">
+                    <input class="check-show-step" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
             <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap content-start">
                 {{-- <i class="fa-solid fa-quote-left"></i>
 
