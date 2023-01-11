@@ -98,6 +98,8 @@ class MiController extends Controller
                 $update_mission_shorthand = $request->mission_shorthand;
                 Mi::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
                 break;
+            case "update-type-mission":
+                break;
         }
 
         $this->translateStepMissionName($id);

@@ -3,7 +3,18 @@ import { toggerMessage } from "../main.js";
 import { resetDataGpio } from "./createStepMission.js";
 import { loaded, loading } from "./displayLoad.js";
 import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
+import {
+    handleAddStep,
+    handleDeleteStep,
+    handleMoveStep,
+    render,
+    validateArray,
+    validateInput,
+    valueItemIfelse,
+    valueNormalMissionArray,
+} from "./handleTypeMission.js";
 import inputFunction from "./inputFunction.js";
+import translatesStepsMission from "./translatesStepsMission.js";
 import updateStepValue from "./updateStepValue.js";
 
 const $ = document.querySelector.bind(document);
@@ -501,7 +512,6 @@ function renderStep() {
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
             arraySteps?.forEach((arrayStep, index) => {
-                console.log(arrayStep.slice(0, arrayStep.indexOf("^")));
                 const typeMissionItem = arrayStep.split("^");
                 switch (typeMissionItem[1]) {
                     case "normal":
@@ -510,7 +520,6 @@ function renderStep() {
                         renderStepItem(typeMissionItem[2], htmlNormal);
 
                         const htmlNormalText = htmlNormal.join("");
-                        // html.push(htmlNormalText);
                         html.push(
                             `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" id-mission=${
                                 shortHandMissionList &&
@@ -702,15 +711,189 @@ function showAllStep() {
     };
 }
 
+let currentIdMissionEdit;
 function handleEditMission() {
     $$(".edit-step-btn").forEach((element) => {
         element.onclick = (e) => {
             $(".edit-step-btn.active")?.classList.remove("active");
             e.target.classList.add("active");
             const missionItem = e.target.closest(".mission-item");
-            const idMission = missionItem.getAttribute("id-mission");
-            console.log(idMission);
+
+            $(".delete-mission-btn.not-allowed")?.classList.remove(
+                "not-allowed"
+            );
+            missionItem
+                .querySelector(".delete-mission-btn")
+                .classList.add("not-allowed");
+
+            currentIdMissionEdit = missionItem.getAttribute("id-mission");
+            getMission(currentIdMissionEdit, editTypeMission);
+
+            handleCancelUpdateMission();
+            handleUpdateMission();
         };
+    });
+    function editTypeMission(data) {
+        switch (data.type) {
+            case "normal":
+                valueNormalMissionArray.length = 0;
+                valueNormalMissionArray.push(...data.data.split("|"));
+
+                $(".normal-mission-btn").click();
+                $(".name-normal-mission").value = data.name;
+
+                render(valueNormalMissionArray, ".normal-steps-wrapper");
+                handleMoveStep(
+                    valueNormalMissionArray,
+                    ".normal-steps-wrapper"
+                );
+                handleDeleteStep(
+                    valueNormalMissionArray,
+                    ".normal-steps-wrapper"
+                );
+                showUpdateBtn(true, "normal");
+
+                break;
+            case "ifelse":
+                valueItemIfelse.if.length = 0;
+                valueItemIfelse.then.length = 0;
+                valueItemIfelse.else.length = 0;
+
+                const dataIfElse = data.data.split("?");
+                const dataIf = dataIfElse[0].split("|");
+                const dataThen = dataIfElse[1]
+                    .split("|")
+                    .filter((item) => item.length != 0);
+
+                const dataElse = dataIfElse[2]
+                    .split("|")
+                    .filter((item) => item.length != 0);
+
+                valueItemIfelse.if.push(...dataIf);
+                valueItemIfelse.then.push(...dataThen);
+                valueItemIfelse.else.push(...dataElse);
+
+                $(".ifelse-mission-btn").click();
+                $(".name-ifelse-mission").value = data.name;
+                showUpdateBtn(true, "ifelse");
+
+                render(valueItemIfelse.if, `.if-steps-wrapper`);
+                render(valueItemIfelse.then, `.then-steps-wrapper`);
+                render(valueItemIfelse.else, `.else-steps-wrapper`);
+
+                handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
+                handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
+                handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");
+
+                handleDeleteStep(valueItemIfelse.if, ".if-steps-wrapper");
+                handleDeleteStep(valueItemIfelse.then, ".then-steps-wrapper");
+                handleDeleteStep(valueItemIfelse.else, ".else-steps-wrapper");
+                break;
+        }
+    }
+}
+
+function getMission(id, callback) {
+    fetch(`/api/type-mission/${id}`)
+        .then((res) => res.json())
+        .then((data) => callback(data));
+}
+
+function showUpdateBtn(isShow, type) {
+    if (isShow) {
+        $(`.cancel-${type}`).classList.remove("hidden");
+        $(`.update-${type}`).classList.remove("hidden");
+        $(`.add-mission-${type}`).classList.add("hidden");
+    } else {
+        $(`.cancel-${type}`).classList.add("hidden");
+        $(`.update-${type}`).classList.add("hidden");
+        $(`.add-mission-${type}`).classList.remove("hidden");
+    }
+}
+
+function handleCancelUpdateMission() {
+    $(`.cancel-normal`).onclick = () => {
+        valueNormalMissionArray.length = 0;
+        $(".edit-step-btn.active")?.classList.remove("active");
+        $(".name-normal-mission").value = "";
+
+        render(valueNormalMissionArray, ".normal-steps-wrapper");
+        showUpdateBtn(false, "normal");
+
+        $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
+    };
+
+    $(`.cancel-ifelse`).onclick = () => {
+        showUpdateBtn(false, "ifelse");
+        valueItemIfelse.if.length = 0;
+        valueItemIfelse.then.length = 0;
+        valueItemIfelse.else.length = 0;
+        $(".name-ifelse-mission").value = "";
+
+        $(".edit-step-btn.active")?.classList.remove("active");
+
+        render(valueItemIfelse.if, `.if-steps-wrapper`);
+        render(valueItemIfelse.then, `.then-steps-wrapper`);
+        render(valueItemIfelse.else, `.else-steps-wrapper`);
+
+        $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
+    };
+}
+
+function handleUpdateMission() {
+    $(".update-normal").onclick = () => {
+        const isValid = validateInput(".name-normal-mission");
+        const isData = validateArray(
+            valueNormalMissionArray,
+            ".normal-steps-wrapper"
+        );
+
+        const dataTypeMission = {
+            name: $(".name-normal-mission").value,
+            data: valueNormalMissionArray.join("|"),
+        };
+
+        if (isValid && isData) {
+            updateTypeMission(currentIdMissionEdit, dataTypeMission);
+            translatesStepsMission(currentMission);
+            renderStep();
+            $(`.cancel-normal`).click();
+        }
+    };
+
+    $(".update-ifelse").onclick = () => {
+        console.log(currentIdMissionEdit);
+
+        const isValid = validateInput(".name-ifelse-mission");
+        const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
+        const isData =
+            validateArray(valueItemIfelse.then, ".then-label") ||
+            validateArray(valueItemIfelse.else, ".else-label");
+
+        const dataTypeMission = {
+            name: $(".name-ifelse-mission").value,
+            data: `${valueItemIfelse.if.join("|")}?|${valueItemIfelse.then.join(
+                "|"
+            )}?|${valueItemIfelse.else.join("|")}`,
+        };
+        if (isValid && isDataIf && isData) {
+            updateTypeMission(currentIdMissionEdit, dataTypeMission);
+            translatesStepsMission(currentMission);
+            renderStep();
+
+            $(`.cancel-ifelse`).click();
+        }
+    };
+}
+
+function updateTypeMission(id, data) {
+    fetch(`/api/type-mission/${id}`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
     });
 }
 

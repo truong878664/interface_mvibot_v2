@@ -101,11 +101,11 @@ function renderDataFunction(data, type) {
     });
 }
 const nameNormalMission = $(".name-normal-mission");
-const valueNormalMissionArray = [];
+export const valueNormalMissionArray = [];
 
 const nameIfelseMission = $(".name-ifelse-mission");
 
-const valueItemIfelse = {
+export const valueItemIfelse = {
     if: [],
     then: [],
     else: [],
@@ -120,7 +120,7 @@ $$(".add-ifelse-step-btn").forEach((element) => {
     };
 });
 
-function handleAddStep() {
+export function handleAddStep() {
     $$(".add-mission-step-item-btn").forEach((element) => {
         element.onclick = (e) => {
             let type = "";
@@ -151,7 +151,7 @@ function handleAddStep() {
                         valueItemIfelse[currentIf],
                         `.${currentIf}-steps-wrapper`
                     );
-
+                    console.log(valueItemIfelse);
                     handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
                     handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
                     handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");
@@ -165,7 +165,6 @@ function handleAddStep() {
                         valueItemIfelse.else,
                         ".else-steps-wrapper"
                     );
-
                     break;
             }
         };
@@ -267,7 +266,7 @@ function updateStep(id, data) {
         .catch(function (res) {});
 }
 
-function render(dataSteps, element) {
+export function render(dataSteps, element) {
     const stepsWrapper = document.querySelector(element);
     const htmlStep = [];
     dataSteps?.map((step, index) => {
@@ -301,7 +300,7 @@ function render(dataSteps, element) {
     stepsWrapper.innerHTML = htmlStep.join("");
 }
 
-function handleMoveStep(data, wrapperItem) {
+export function handleMoveStep(data, wrapperItem) {
     $(wrapperItem)
         .querySelectorAll(".move-left")
         .forEach((element) => {
@@ -311,7 +310,7 @@ function handleMoveStep(data, wrapperItem) {
 
                 if (moveIndex != 0) {
                     arrayMove(data, moveIndex, moveIndex - 1);
-                    console.log(data);
+
                     const currentStep = e.target.closest(".step-item");
 
                     const moveStep = currentStep.previousSibling;
@@ -364,7 +363,7 @@ function handleMoveStep(data, wrapperItem) {
     });
 }
 
-function handleDeleteStep(data, wrapperItem) {
+export function handleDeleteStep(data, wrapperItem) {
     $(wrapperItem)
         .querySelectorAll(".delete-step-btn")
         .forEach((element) => {
@@ -381,13 +380,11 @@ function handleDeleteStep(data, wrapperItem) {
                     .forEach((element, index) => {
                         element.setAttribute("index", index);
                     });
-
-                console.log(data);
             };
         });
 }
 
-function validateInput(...rest) {
+export function validateInput(...rest) {
     const result = rest.map((item) => {
         $(item).oninput = (e) => {
             e.target.style.borderColor = "#ccc";
@@ -403,7 +400,7 @@ function validateInput(...rest) {
     return result.indexOf(false) == -1;
 }
 
-function validateArray(arr, element) {
+export function validateArray(arr, element) {
     if (arr.length == 0) {
         $(element).style.borderColor = "red";
         return false;

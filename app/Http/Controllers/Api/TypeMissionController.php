@@ -47,7 +47,7 @@ class TypeMissionController extends Controller
      */
     public function show($id)
     {
-        //
+        return TypeMission::where('id', $id)->first();
     }
 
     /**
@@ -70,7 +70,8 @@ class TypeMissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        TypeMission::where('id', $id)->update($request->all());
+        return 123;
     }
 
     /**

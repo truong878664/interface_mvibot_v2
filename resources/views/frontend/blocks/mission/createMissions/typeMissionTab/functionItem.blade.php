@@ -32,13 +32,26 @@
 
         </div>
     </div>
-    <button
-        class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md md:text-3xl text-xl add-mission-{{ $type }}">Add</button>
+    <div class="flex">
+        <button
+            class=" btn mr-2 bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md md:text-3xl text-xl cancel-{{ $type }} hidden">Cancel</button>
+        <button
+            class=" btn mr-2 bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md md:text-3xl text-xl update-{{ $type }} hidden">Update</button>
+        <button
+            class=" btn mr-2 bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md md:text-3xl text-xl add-mission-{{ $type }}">Add</button>
+    </div>
 </div>
 
 <style>
     .type-mission-function-normal.active,
     .type-mission-function-ifelse.active {
         background-color: rgba(204, 204, 204, 0.5);
+    }
+
+    .not-allowed {
+        pointer-events: none;
+        background-color: rgb(126, 126, 126);
+        color: #fff;
+        border-color: rgb(126, 126, 126);
     }
 </style>

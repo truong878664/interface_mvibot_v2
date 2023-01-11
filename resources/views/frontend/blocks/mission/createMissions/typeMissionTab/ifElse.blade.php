@@ -68,14 +68,3 @@
         border: #fff;
     }
 </style>
-
-
-@php
-    // $string = 'aa>normal^|footprint#1#3|gpio#1#3|sllep#123#2+bb>ifelse^|gpio#1#5|footprint#1#3?|gpio#1#3|gpio#4#2?|gpio#2#3';
-    // $arr1 = explode('+', $string);
-    
-    // foreach ($arr1 as $value1) {
-    //     $arr2 = explode('^', $value1);
-    //     dd($arr2[1]);
-    // }
-@endphp
