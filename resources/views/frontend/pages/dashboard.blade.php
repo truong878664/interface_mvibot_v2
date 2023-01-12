@@ -2,8 +2,10 @@
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <div class=" dashboard-content">
-        <x-dashboard-item route='dashboard.missions.' icon='fa-solid fa-crosshairs' title='Missions'
+        <x-dashboard-item route='dashboard.missions.create-missions.' icon='fa-solid fa-crosshairs' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
+        <x-dashboard-item route='dashboard.missions.tracking-mission' icon='fa-solid fa-circle-right' title='Tracking Missions'
+            describe='Follow the robot on the mission' color="#FF0032" />
 
         <x-dashboard-item route='dashboard.map.map' icon='fa-solid fa-map-location-dot' title='Map'
             describe='Choose map active, create layer' color="#82CD47" />

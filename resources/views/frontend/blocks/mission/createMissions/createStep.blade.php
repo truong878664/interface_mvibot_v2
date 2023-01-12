@@ -6,7 +6,7 @@
         <div class="create-mission-heading text-[20px]">{{ $itemRender->name_mission }}</div>
     </div>
 
-    <div class="w-full h-full max-h-[calc(100vh_-_170px)] flex flex-col">
+    <div class="w-full h-full max-h-[calc(100vh_-_100px)] flex flex-col">
         <div class="w-full lg:flex h-3/4 lg:min-h-[300px]">
             {{-- point --}}
             <div

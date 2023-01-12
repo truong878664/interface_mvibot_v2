@@ -1,4 +1,4 @@
-<ul class="nav-tab">
+<ul class="nav-tab hidden">
     <li class="navtab-item create-point ">
         <a class="navtab-link" href="{{ route('dashboard.missions.create-point') }}">Create point</a>
     </li>
