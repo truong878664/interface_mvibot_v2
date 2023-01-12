@@ -23,21 +23,21 @@ const controlRotateZ = $("#rotate-z");
 const createButton = $(".create-point-btn");
 
 function setPosition() {
-    controlPositionX.addEventListener("input", (e) => {
+    $("#position-x").addEventListener("input", (e) => {
         positionX = Number(e.target.value);
         displayPoint(positionX, positionY);
         displayPose(positionX, positionY, rotateZ, rotateW);
         displayValue(positionX, positionY, rotateZdeg);
     });
 
-    controlPositionY.addEventListener("input", (e) => {
+    $("#position-y").addEventListener("input", (e) => {
         positionY = Number(e.target.value);
         displayPoint(positionX, positionY);
         displayPose(positionX, positionY, rotateZ, rotateW);
         displayValue(positionX, positionY, rotateZdeg);
     });
 
-    controlRotateZ.addEventListener("input", (e) => {
+    $("#rotate-z").addEventListener("input", (e) => {
         rotateZdeg = e.target.value;
         const degInput = (Number(e.target.value) / 180) * Math.PI;
         const { z, w } = mathYaw(degInput);
@@ -48,7 +48,7 @@ function setPosition() {
         displayValue(positionX, positionY, rotateZdeg);
     });
 
-    positionXElement.addEventListener("change", (e) => {
+    $(".number-position-x").addEventListener("change", (e) => {
         checkValueInput(positionXElement);
         positionX = Number(e.target.value);
         displayPoint(positionX, positionY);
@@ -56,7 +56,7 @@ function setPosition() {
         displayValue(positionX, positionY, rotateZdeg);
     });
 
-    positionYElement.addEventListener("change", (e) => {
+    $(".number-position-y").addEventListener("change", (e) => {
         checkValueInput(positionYElement);
         positionY = Number(e.target.value);
         displayPoint(positionX, positionY);
@@ -64,7 +64,7 @@ function setPosition() {
         displayValue(positionX, positionY, rotateZdeg);
     });
 
-    positionZElement.addEventListener("change", (e) => {
+    $(".number-rotate-z").addEventListener("change", (e) => {
         checkValueInput(positionZElement);
         rotateZdeg = e.target.value;
         const degInput = (Number(e.target.value) / 180) * Math.PI;

@@ -98,6 +98,28 @@ class MiController extends Controller
                 $update_mission_shorthand = $request->mission_shorthand;
                 Mi::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
                 break;
+            case "move":
+                $mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
+                $arrayIdBlockStep = explode("+", $mission_shorthand);
+                switch ($request->type) {
+                    case 'left':
+                        $indexItemMove = array_search($request->id_move, $arrayIdBlockStep);
+
+                        $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
+                        array_splice($arrayIdBlockStep, $indexItemMove - 1, 0, $out);
+
+                        Mi::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        break;
+                    case 'right':
+                        $indexItemMove = array_search($request->id_move, $arrayIdBlockStep);
+
+                        $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
+                        array_splice($arrayIdBlockStep, $indexItemMove + 1, 0, $out);
+
+                        Mi::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        break;
+                }
+                break;
             case "update-type-mission":
                 break;
         }
@@ -283,5 +305,10 @@ class MiController extends Controller
 
         $dataStepMission = trim(implode($stepMission), " ");
         return $dataStepMission;
+    }
+    public function moveArray($array, $from, $to)
+    {
+        $out = array_splice($array, $from, 1);
+        array_splice($array, $to, 0, $out);
     }
 }

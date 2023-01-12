@@ -19,4 +19,5 @@
     <script type="module" src="/js/missions/footprint.js"></script>
     <script type="module" src="/js/missions/handleTypeMission.js"></script>
     <script type="module" src="/js/missions/wakeUpStop.js"></script>
+    <script type="module" src="/js/missions/point.js"></script>
 @endsection

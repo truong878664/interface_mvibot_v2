@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\MissionFootprint;
+use App\Models\backend\MissionPosition;
 use Illuminate\Http\Request;
 
 class FootprintController extends Controller

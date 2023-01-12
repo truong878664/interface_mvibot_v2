@@ -27,9 +27,9 @@ function displayPose(x, y, z, w) {
             },
         },
     });
-    setTimeout(() => {
-        pose_pub.publish(pose_msg);
-    }, 100);
+    // setTimeout(() => {
+    pose_pub.publish(pose_msg);
+    // }, 100);
 }
 
 export default displayPose;

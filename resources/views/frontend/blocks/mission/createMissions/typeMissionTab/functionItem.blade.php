@@ -53,5 +53,6 @@
         background-color: rgb(126, 126, 126);
         color: #fff;
         border-color: rgb(126, 126, 126);
+        display: none;
     }
 </style>

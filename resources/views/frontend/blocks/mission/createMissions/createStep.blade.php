@@ -59,8 +59,8 @@
                     </div>
 
                     <div
-                        class="sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
-                        <span>Point</span>
+                        class="point-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>Position</span>
                     </div>
                 </div>
             </div>
@@ -107,21 +107,8 @@
         </div>
     </div>
 </div>
-{{-- </div> --}}
 <style>
     .function-btn.active {
         background: rgba(204, 204, 204, 70%)
     }
 </style>
-
-<script>
-    $$('.function-btn').forEach((item, index) => {
-        item.onclick = () => {
-            $('.function-btn.active').classList.remove('active')
-            $('.function-item:not(.hidden)')?.classList.add('hidden')
-            $$('.function-item')[index].classList.remove(
-                'hidden')
-            item.classList.add('active')
-        }
-    });
-</script>

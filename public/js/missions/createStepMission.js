@@ -16,6 +16,7 @@ import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
 import inputFunction from "./inputFunction.js";
 import { loaded, loading } from "./displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
+import { createMapPoint } from "./point.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -23,6 +24,8 @@ const showMaps = $$(".show-point-map");
 
 function start() {
     activeTab();
+    nextTabFunction();
+
     handleShowPointOnMap();
 
     tabTypeMarker();
@@ -44,6 +47,19 @@ start();
 function activeTab() {
     const tabbar = $(".create-missions");
     tabbar.classList.add("active");
+}
+
+function nextTabFunction() {
+    $$(".function-btn").forEach((item, index) => {
+        item.onclick = () => {
+            $(".function-btn.active").classList.remove("active");
+            $(".function-item:not(.hidden)")?.classList.add("hidden");
+            $$(".function-item")[index].classList.remove("hidden");
+            item.classList.add("active");
+
+            item.classList.contains("point-function-btn") && createMapPoint();
+        };
+    });
 }
 
 function handleShowPointOnMap() {

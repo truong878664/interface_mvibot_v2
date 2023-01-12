@@ -244,7 +244,7 @@ function addTypeMission(data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            updateStep(currentMission, {
+            updateBlockStep(currentMission, {
                 mission_shorthand: data.id,
                 method: "add",
             });
@@ -253,7 +253,7 @@ function addTypeMission(data) {
         .catch(function (res) {});
 }
 
-function updateStep(id, data) {
+export function updateBlockStep(id, data) {
     fetch(`/api/mi/${id}`, {
         headers: {
             Accept: "application/json",
@@ -262,8 +262,9 @@ function updateStep(id, data) {
         method: "PUT",
         body: JSON.stringify(data),
     })
-        .then(function (res) {})
-        .catch(function (res) {});
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((data) => console.log(data));
 }
 
 export function render(dataSteps, element) {
@@ -389,7 +390,9 @@ export function validateInput(...rest) {
         $(item).oninput = (e) => {
             e.target.style.borderColor = "#ccc";
         };
-        if ($(item).value == "") {
+        const pattern = /^[a-zA-Z0-9]*$/;
+
+        if ($(item).value == "" || !pattern.exec($(item).value)) {
             $(item).style.borderColor = "red";
             return false;
         } else {
