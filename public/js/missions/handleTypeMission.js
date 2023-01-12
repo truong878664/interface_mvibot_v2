@@ -1,5 +1,6 @@
 import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$ } from "../main.js";
+import handleEditFunctionType from "./editFunctionItem.js";
 import { currentMission, renderStep } from "./handleStepMission.js";
 
 const htmlDataFunction = {
@@ -18,18 +19,20 @@ handleAddMissionNormal();
 handleAddMissionIfelse();
 
 export function loadDataFunction() {
-    typeFunction.map((item) => {
-        getDataFunction(item, htmlDataFunction);
+    typeFunction.map((item, index) => {
+        getDataFunction(item, index);
     });
 }
 
-function getDataFunction(type) {
+function getDataFunction(type, index) {
     fetch(`/api/${type}`)
         .then((res) => res.json())
         .then((data) => {
             renderDataFunction(data, type);
-            $(".type-mission-function-normal[type=footprint]").click();
-            $(".type-mission-function-ifelse[type=footprint]").click();
+            if (index == typeFunction.length - 1) {
+                $(".type-mission-function-normal[type=footprint]").click();
+                $(".type-mission-function-ifelse[type=footprint]").click();
+            }
         });
 }
 function handleRenderDataFunction() {
@@ -44,6 +47,7 @@ function handleRenderDataFunction() {
             $(".detail-type-mission-function-normal").innerHTML =
                 htmlDataFunction[type].join("");
             handleAddStep();
+            handleEditFunctionType();
         };
     });
 
@@ -59,16 +63,25 @@ function handleRenderDataFunction() {
             $(".detail-type-mission-function-ifelse").innerHTML =
                 htmlDataFunction[type].join("");
             handleAddStep();
+            handleEditFunctionType();
         };
     });
 }
+const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn  rounded-md">
+<i class="fa-regular fa-eye"></i>
+</button>`;
 
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
     data.map((item) => {
         htmlDataFunction[type].push(
-            `<div class="point-id-1 flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
-                <div class="flex">
+            `<div function-id=${item.id} function-type="${
+                item.mode
+            }" class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
+            <input type="hidden" value=${JSON.stringify(
+                item
+            )} class="value-function-item"/>
+            <div class="flex">
                     <span class="type-mission-${item.mode}">${item.mode}|</span>
                     <span class="name-mission-${item.mode}">${
                 item.name_position ||
@@ -88,11 +101,15 @@ function renderDataFunction(data, type) {
                 item.id
             }" type="hidden" class="value-type-mission-function-item"/>
                 <div class="">
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn">
+                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
+                    ${item.mode == "position" ? buttonPosition : ""}
+                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
 
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn add-mission-step-item-btn">
+                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>

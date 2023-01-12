@@ -1,10 +1,5 @@
-import arrayMove from "../functionHandle/arrayMove.js";
-import { toggerMessage } from "../main.js";
-import { resetDataGpio } from "./createStepMission.js";
 import { loaded, loading } from "./displayLoad.js";
-import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
 import {
-    handleAddStep,
     handleDeleteStep,
     handleMoveStep,
     render,
@@ -14,9 +9,7 @@ import {
     valueItemIfelse,
     valueNormalMissionArray,
 } from "./handleTypeMission.js";
-import inputFunction from "./inputFunction.js";
 import translatesStepsMission from "./translatesStepsMission.js";
-import updateStepValue from "./updateStepValue.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
