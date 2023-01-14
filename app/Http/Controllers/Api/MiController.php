@@ -120,6 +120,9 @@ class MiController extends Controller
                         break;
                 }
                 break;
+            case "update-name":
+                Mi::where('id', $id)->update(['name_mission' => $request->name_mission]);
+                return ['status' => 200];
             case "update-type-mission":
                 break;
         }

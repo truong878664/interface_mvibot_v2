@@ -6,7 +6,7 @@
         <div class="create-mission-heading text-[20px]">{{ $itemRender->name_mission }}</div>
     </div>
 
-    <div class="w-full h-full max-h-[calc(100vh_-_100px)] flex flex-col">
+    <div class="w-full h-full max-h-[calc(100vh_-_130px)] flex flex-col">
         <div class="w-full lg:flex h-3/4 lg:min-h-[300px]">
             {{-- point --}}
             <div
@@ -16,12 +16,6 @@
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     {{-- point item --}}
-                    {{-- @include('frontend.blocks.mission.createMissions.showPoint.showPoint') --}}
-                    {{-- <div
-                        class=" active sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
-                        <span>If-Else</span>
-                    </div> --}}
-
                     <div
                         class="active normal-mission-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Normal mission</span>

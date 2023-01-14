@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Mi;
 use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
 
@@ -68,10 +69,20 @@ class TypeMissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $method)
     {
-        TypeMission::where('id', $id)->update($request->all());
-        return 123;
+        switch ($method) {
+            case "update-name-step":
+                $allTypeMission = TypeMission::all();
+                foreach ($allTypeMission as $item) {
+                    $newData = str_replace($request->stepOld, $request->stepNew, $item->data);
+                    TypeMission::where('id', $item->id)->update(['data' => $newData]);
+                }
+                return 123;
+                break;
+            default:
+                return TypeMission::where('id', $method)->update($request->all());
+        }
     }
 
     /**

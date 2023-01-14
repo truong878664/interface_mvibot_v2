@@ -1,24 +1,28 @@
-import { $, $$, toggerMessage } from "../main.js";
-import { resetDataGpio } from "./createStepMission.js";
-import { loaded, loading } from "./displayLoad.js";
+import { $, $$, toggerMessage } from "../../main.js";
+import { resetDataGpio } from "../createStepMission.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
-import inputFunction from "./inputFunction.js";
+import inputFunction from "../functionHandle/inputFunction.js";
+import { loadDataFunction } from "../handleTypeMission.js";
+import updateStepValue from "../functionHandle/updateStepValue.js";
+import { currentMission, renderBlockStep } from "../handleStepMission.js";
+import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
     let oldName;
+    let refActiveTypeMission;
 
     $$(".edit-function-item-btn").forEach((element) => {
         element.onclick = (e) => {
+            refActiveTypeMission = $(".function-btn.active");
             const functionItem = e.target.closest(
                 ".type-mission-function-item"
             );
-            const idFunction = functionItem.getAttribute("function-id");
             const typeFunction = functionItem.getAttribute("function-type");
             const valueFunction = JSON.parse(
                 functionItem.querySelector(".value-function-item").value
             );
-            console.log(valueFunction);
 
             switch (typeFunction) {
                 case "footprint":
@@ -132,7 +136,6 @@ export default function handleEditFunctionType() {
                 case "position":
                     $(".point-function-btn").click();
             }
-            console.log(oldName);
         };
     });
 
@@ -143,6 +146,9 @@ export default function handleEditFunctionType() {
                 `.${type}-update-btn-wrapper`
             );
             updateBtnWrapper.classList.remove("hidden");
+            $(".marker-item:not(.hidden)")
+                .querySelector(`.submit-btn-marker`)
+                .classList.add("hidden");
         } else {
             updateBtnWrapper = $(`.${type}-update-btn-wrapper`);
             updateBtnWrapper.classList.remove("hidden");
@@ -155,11 +161,15 @@ export default function handleEditFunctionType() {
             e.preventDefault();
             handleResetData();
             $(`.submit-btn-${type}`).classList.remove("hidden");
+            refActiveTypeMission.click();
         };
 
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
             e.preventDefault();
             dataUpdateStep(type) && handleResetData();
+
+            loadDataFunction(type);
+            refActiveTypeMission.click();
         };
 
         function handleResetData() {
@@ -204,12 +214,12 @@ export default function handleEditFunctionType() {
                         name_footprint: name_footprint.value,
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
-                    // changeNameStep(
-                    //     currentMission,
-                    //     `|${type}#${oldName}#${currentIdUpdate}`,
-                    //     `|${type}#${name_footprint.value}#${currentIdUpdate}`
-                    // );
 
+                    oldName != name_footprint.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_footprint.value}#${currentIdUpdate}`
+                        );
                     return true;
                 } else {
                     toggerMessage("error", "Please enter all inputs");
@@ -250,11 +260,12 @@ export default function handleEditFunctionType() {
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
                     $(".data-gpio-item.show")?.classList.remove("show");
-                    // changeNameStep(
-                    //     currentMission,
-                    //     `|${type}#${oldName}#${currentIdUpdate}`,
-                    //     `|${type}#${name_gpio.value}#${currentIdUpdate}`
-                    // );
+
+                    oldName != name_gpio.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_gpio.value}#${currentIdUpdate}`
+                        );
 
                     return true;
                 } else {
@@ -308,11 +319,11 @@ export default function handleEditFunctionType() {
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
 
-                    // changeNameStep(
-                    //     currentMission,
-                    //     `|${type}#${oldName}#${currentIdUpdate}`,
-                    //     `|${type}#${name_marker.value}#${currentIdUpdate}`
-                    // );
+                    oldName != name_marker.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_marker.value}#${currentIdUpdate}`
+                        );
 
                     return true;
                 } else {
@@ -330,11 +341,12 @@ export default function handleEditFunctionType() {
                         time_sleep: Number(time_sleep.value),
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
-                    // changeNameStep(
-                    //     currentMission,
-                    //     `|${type}#${oldName}#${currentIdUpdate}`,
-                    //     `|${type}#${name_sleep.value}#${currentIdUpdate}`
-                    // );
+
+                    oldName != name_sleep.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_sleep.value}#${currentIdUpdate}`
+                        );
 
                     return true;
                 } else {
@@ -357,8 +369,6 @@ export default function handleEditFunctionType() {
         })
             .then(function (res) {
                 loaded();
-                console.log(res);
-
                 res.status == 200
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");
@@ -368,21 +378,20 @@ export default function handleEditFunctionType() {
             });
     }
 
-    function changeNameStep(id, stepOld, stepNew) {
-        fetch(`/api/mission/${id}`)
+    function updateNameStepAtBlockStep(stepOld, stepNew) {
+        fetch(`/api/type-mission/update-name-step`, {
+            method: "PUT",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ stepOld, stepNew }),
+        })
             .then((res) => res.json())
             .then((data) => {
-                const newStepNameData = data.steps_mission_name.replaceAll(
-                    stepOld,
-                    stepNew
-                );
-
-                const dataUpdate = {
-                    steps_mission_name: newStepNameData,
-                    method: "update",
-                };
-                updateStep(`/api/mission/${id}`, dataUpdate);
-                renderStep();
+                console.log(123);
+                translatesStepsMission(currentMission);
+                renderBlockStep();
             });
     }
 }

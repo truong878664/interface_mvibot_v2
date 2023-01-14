@@ -1,4 +1,4 @@
-import { loaded, loading } from "./displayLoad.js";
+import { loaded, loading } from "./functionHandle/displayLoad.js";
 import {
     handleDeleteStep,
     handleMoveStep,
@@ -9,7 +9,8 @@ import {
     valueItemIfelse,
     valueNormalMissionArray,
 } from "./handleTypeMission.js";
-import translatesStepsMission from "./translatesStepsMission.js";
+import translatesStepsMission from "./functionHandle/translatesStepsMission.js";
+import dbDelete from "./functionHandle/dbDelete.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -19,9 +20,11 @@ export const currentMission = location.pathname.slice(
     location.pathname.length
 );
 
-function renderStep() {
+translatesStepsMission(currentMission);
+
+function renderBlockStep() {
     loading();
-    fetch(`/api/mission/${currentMission}`)
+    fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())
         .then((data) => {
             loaded();
@@ -33,10 +36,10 @@ function renderStep() {
             const html = [];
 
             const buttonHandle = `<button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn move-up-step-btn"><i class="fa-solid fa-angle-up"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn move-down-step-btn"><i class="fa-solid fa-angle-down"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
-                                <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
+                            <button class="step-item text-[#333] border border-[#333] bg-white btn move-up-step-btn"><i class="fa-solid fa-angle-up"></i></button>
+                            <button class="step-item text-[#333] border border-[#333] bg-white btn move-down-step-btn"><i class="fa-solid fa-angle-down"></i></button>
+                            <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
+                            <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
             arraySteps?.forEach((arrayStep, index) => {
                 const typeMissionItem = arrayStep.split("^");
                 switch (typeMissionItem[1]) {
@@ -135,21 +138,24 @@ function scrollTop(element) {
 function handleDeleteMission(missionShorthand) {
     $$(".delete-mission-btn").forEach((element) => {
         element.onclick = (e) => {
-            const missionItem = e.target.closest(".mission-item");
-            const idDeleteMission = missionItem.getAttribute("id-mission");
+            dbDelete(element, () => {
+                console.log(element);
+                const missionItem = e.target.closest(".mission-item");
+                const idDeleteMission = missionItem.getAttribute("id-mission");
 
-            missionShorthand?.splice(
-                missionShorthand.indexOf(idDeleteMission),
-                1
-            );
+                missionShorthand?.splice(
+                    missionShorthand.indexOf(idDeleteMission),
+                    1
+                );
 
-            const dataMissionShorthand = {
-                mission_shorthand: missionShorthand.join("+"),
-                method: "update",
-            };
-            updateBlockStep(currentMission, dataMissionShorthand);
-            missionItem.remove();
-            notAllowMove();
+                const dataMissionShorthand = {
+                    mission_shorthand: missionShorthand.join("+"),
+                    method: "update",
+                };
+                updateBlockStep(currentMission, dataMissionShorthand);
+                missionItem.remove();
+                notAllowMove();
+            });
         };
     });
 }
@@ -363,7 +369,7 @@ function handleUpdateMission() {
         if (isValid && isData) {
             updateTypeMission(currentIdMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
-            renderStep();
+            renderBlockStep();
             $(`.cancel-normal`).click();
         }
     };
@@ -386,7 +392,7 @@ function handleUpdateMission() {
         if (isValid && isDataIf && isData) {
             updateTypeMission(currentIdMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
-            renderStep();
+            renderBlockStep();
 
             $(`.cancel-ifelse`).click();
         }
@@ -445,4 +451,4 @@ function updateTypeMission(id, data) {
     });
 }
 
-export { renderStep };
+export { renderBlockStep };

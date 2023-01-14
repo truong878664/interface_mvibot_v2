@@ -59,9 +59,6 @@ html {
     touch-action: none;
 }
 
-
-
-
 body {
     font-size: 2rem;
     background-color: var(--background-color);
@@ -148,6 +145,7 @@ li {
 .btn {
     transform: translateZ(0) scale(1);
     transition: transform 0.2s;
+    user-select: none;
 }
 .btn:not(:disabled):hover {
     transform: scale(1.02);
@@ -167,4 +165,10 @@ li {
 
 .btn:not(:disabled):active {
     transform: translateY(0.125rem);
+}
+
+.btn.db-click {
+    color: red;
+    background-color: rgb(255, 223, 223);
+    border-color: rgb(255, 223, 223);
 }

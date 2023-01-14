@@ -1,9 +1,10 @@
 import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$ } from "../main.js";
-import handleEditFunctionType from "./editFunctionItem.js";
-import { currentMission, renderStep } from "./handleStepMission.js";
+import handleDeleteFunctionType from "./function/deleteFuntionItem.js";
+import handleEditFunctionType from "./function/editFunctionItem.js";
+import { currentMission, renderBlockStep } from "./handleStepMission.js";
 
-const htmlDataFunction = {
+export const htmlDataFunction = {
     footprint: [],
     gpio: [],
     marker: [],
@@ -18,20 +19,24 @@ handleRenderDataFunction();
 handleAddMissionNormal();
 handleAddMissionIfelse();
 
-export function loadDataFunction() {
+export function loadDataFunction(typeFunctionActive = "footprint") {
     typeFunction.map((item, index) => {
-        getDataFunction(item, index);
+        getDataFunction(item, index, typeFunctionActive);
     });
 }
 
-function getDataFunction(type, index) {
+function getDataFunction(type, index, typeFunctionActive) {
     fetch(`/api/${type}`)
         .then((res) => res.json())
         .then((data) => {
             renderDataFunction(data, type);
             if (index == typeFunction.length - 1) {
-                $(".type-mission-function-normal[type=footprint]").click();
-                $(".type-mission-function-ifelse[type=footprint]").click();
+                $(
+                    `.type-mission-function-normal[type=${typeFunctionActive}]`
+                ).click();
+                $(
+                    `.type-mission-function-ifelse[type=${typeFunctionActive}]`
+                ).click();
             }
         });
 }
@@ -48,6 +53,7 @@ function handleRenderDataFunction() {
                 htmlDataFunction[type].join("");
             handleAddStep();
             handleEditFunctionType();
+            handleDeleteFunctionType();
         };
     });
 
@@ -64,12 +70,11 @@ function handleRenderDataFunction() {
                 htmlDataFunction[type].join("");
             handleAddStep();
             handleEditFunctionType();
+            handleDeleteFunctionType();
         };
     });
 }
-const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn  rounded-md">
-<i class="fa-regular fa-eye"></i>
-</button>`;
+const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md"><i class="fa-regular fa-eye"></i></button>`;
 
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
@@ -78,9 +83,9 @@ function renderDataFunction(data, type) {
             `<div function-id=${item.id} function-type="${
                 item.mode
             }" class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
-            <input type="hidden" value=${JSON.stringify(
+            <input type="hidden" value='${JSON.stringify(
                 item
-            )} class="value-function-item"/>
+            )}' class="value-function-item"/>
             <div class="flex">
                     <span class="type-mission-${item.mode}">${item.mode}|</span>
                     <span class="name-mission-${item.mode}">${
@@ -101,7 +106,7 @@ function renderDataFunction(data, type) {
                 item.id
             }" type="hidden" class="value-type-mission-function-item"/>
                 <div class="">
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md">
+                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                     ${item.mode == "position" ? buttonPosition : ""}
@@ -265,7 +270,7 @@ function addTypeMission(data) {
                 mission_shorthand: data.id,
                 method: "add",
             });
-            renderStep();
+            renderBlockStep();
         })
         .catch(function (res) {});
 }

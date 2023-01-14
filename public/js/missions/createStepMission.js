@@ -9,14 +9,14 @@ import displayPose from "../rosModule/displayPose.js";
 import { runMission } from "../rosModule/handleMission.js";
 
 import { toggerMessage } from "../main.js";
-import { valueGpio } from "./gpio.js";
-import { currentMission, renderStep } from "./handleStepMission.js";
-import { setDefaultValueFootprint } from "./footprint.js";
-import { changeImgMarkerDir, tabTypeMarker } from "./marker.js";
-import inputFunction from "./inputFunction.js";
-import { loaded, loading } from "./displayLoad.js";
+import { valueGpio } from "./function/gpio.js";
+import { currentMission, renderBlockStep } from "./handleStepMission.js";
+import { setDefaultValueFootprint } from "./function/footprint.js";
+import { changeImgMarkerDir, tabTypeMarker } from "./function/marker.js";
+import inputFunction from "./functionHandle/inputFunction.js";
+import { loaded, loading } from "./functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
-import { createMapPoint } from "./point.js";
+import { createMapPoint } from "./function/point.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -31,7 +31,7 @@ function start() {
     tabTypeMarker();
     changeImgMarkerDir();
 
-    renderStep();
+    renderBlockStep();
 
     handlePointMission();
     handleFootprintMission();
@@ -173,7 +173,7 @@ function handlePointMission() {
 
             const dataSaveStep = dataSaveSteps("add", type, nameType, idType);
 
-            renderStep();
+            renderBlockStep();
 
             toggerMessage("success", "add point successfully");
         };
@@ -201,7 +201,7 @@ function handlePointMission() {
                 .then(function (res) {
                     loaded();
                     console.log(res);
-                    renderStep();
+                    renderBlockStep();
                 })
                 .catch(function (res) {
                     console.log(res);
@@ -235,7 +235,7 @@ function handleFootprintMission() {
                 name_type: name_footprint.value,
             };
 
-            renderStep();
+            renderBlockStep();
 
             addFunctionStep("footprint", data);
 

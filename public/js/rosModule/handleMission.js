@@ -1,5 +1,5 @@
 import ros from "../main.js";
-import getValueWakeUpStop from "../missions/ftWakeUpStop.js";
+import getValueWakeUpStop from "../missions/wakeUpStop/ftWakeUpStop.js";
 
 function runMission(nameRobot, dataBodyMission) {
     const dataHeadMission = getValueWakeUpStop();

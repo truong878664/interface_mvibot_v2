@@ -1,23 +1,26 @@
-import validateInputSubmit from "../functionHandle/validateForm.js";
-import { $, toggerMessage } from "../main.js";
-import reloadWhenOrientation from "../reloadOnOrientation.js";
-import { mvibot_layer } from "../rosModule/classMvibot.js";
+import validateInputSubmit from "../../functionHandle/validateForm.js";
+import { $, toggerMessage } from "../../main.js";
+import reloadWhenOrientation from "../../reloadOnOrientation.js";
+import { mvibot_layer } from "../../rosModule/classMvibot.js";
 import clickSetPointMap, {
     convertToPosition,
-} from "../rosModule/clickSetPointMap.js";
-import createAxes from "../rosModule/createAxes.js";
-import createMap from "../rosModule/createMap.js";
-import createPoint from "../rosModule/createPoint.js";
-import createPose from "../rosModule/createPose.js";
-import createTfClient from "../rosModule/createTfClient.js";
-import displayPoint from "../rosModule/displayPoint.js";
-import displayPose from "../rosModule/displayPose.js";
-import setSizeMap from "../rosModule/getSizeMap.js";
-import { displayLayer, markerClient } from "../rosModule/layer/markerClient.js";
-import lockZ from "../rosModule/lockZ.js";
-import mathYaw from "../rosModule/mathYaw.js";
-import { markerClientPath } from "../rosModule/path/markerClientPath.js";
-import { loadDataFunction } from "./handleTypeMission.js";
+} from "../../rosModule/clickSetPointMap.js";
+import createAxes from "../../rosModule/createAxes.js";
+import createMap from "../../rosModule/createMap.js";
+import createPoint from "../../rosModule/createPoint.js";
+import createPose from "../../rosModule/createPose.js";
+import createTfClient from "../../rosModule/createTfClient.js";
+import displayPoint from "../../rosModule/displayPoint.js";
+import displayPose from "../../rosModule/displayPose.js";
+import setSizeMap from "../../rosModule/getSizeMap.js";
+import {
+    displayLayer,
+    markerClient,
+} from "../../rosModule/layer/markerClient.js";
+import lockZ from "../../rosModule/lockZ.js";
+import mathYaw from "../../rosModule/mathYaw.js";
+import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
+import { loadDataFunction } from "../handleTypeMission.js";
 
 export function createMapPoint() {
     let positionX = 0;
@@ -51,9 +54,6 @@ export function createMapPoint() {
         controlRotateZ
     );
 
-    const checkPoint = $(".check-click-point");
-    checkPoint.checked = false;
-
     const mapElement = $("#map");
     mapElement.innerHTML = "";
 
@@ -62,7 +62,6 @@ export function createMapPoint() {
 
     const viewer = createMap(heightMap, widthMap);
 
-    console.log(viewer);
     const tfClient = createTfClient();
     createAxes(viewer);
 
@@ -211,23 +210,33 @@ export function createMapPoint() {
         displayRotateZ.value = `${positionZElement.value}°`;
     }
 
+    const checkPoint = $(".check-click-point");
+
     checkPoint.onchange = () => {
         if (checkPoint.checked) {
-            lockZ(viewer);
-            mapElement.addEventListener("dblclick", clickSetPoint);
-            mapElement.addEventListener("mousemove", handleMouseMapMove);
-            mapElement.addEventListener("dblclick", clickSetPoint);
-            mapElement.style.cursor = "cell";
-            mapElement.addEventListener("touchmove", handleMouseMapMove);
-            mapElement.addEventListener("touchstart", tapHandler);
+            addEventTouch();
         } else {
-            mapElement.removeEventListener("dblclick", clickSetPoint);
-            mapElement.removeEventListener("mousemove", handleMouseMapMove);
-            mapElement.style.cursor = "default";
-            mapElement.removeEventListener("touchmove", handleMouseMapMove);
-            mapElement.removeEventListener("touchstart", tapHandler);
+            removeEventTouch();
         }
     };
+
+    function addEventTouch() {
+        lockZ(viewer);
+        mapElement.addEventListener("dblclick", clickSetPoint);
+        mapElement.addEventListener("mousemove", handleMouseMapMove);
+        mapElement.addEventListener("dblclick", clickSetPoint);
+        mapElement.style.cursor = "cell";
+        mapElement.addEventListener("touchmove", handleMouseMapMove);
+        mapElement.addEventListener("touchstart", tapHandler);
+    }
+
+    function removeEventTouch() {
+        mapElement.removeEventListener("dblclick", clickSetPoint);
+        mapElement.removeEventListener("mousemove", handleMouseMapMove);
+        mapElement.style.cursor = "default";
+        mapElement.removeEventListener("touchmove", handleMouseMapMove);
+        mapElement.removeEventListener("touchstart", tapHandler);
+    }
 
     const clickSetPoint = function (e) {
         const [positionXSet, positionYSet] = clickSetPointMap(
@@ -252,6 +261,12 @@ export function createMapPoint() {
 
     function handleMouseMapMove(e) {
         lockZ(viewer);
+    }
+    //check touch
+    if (checkPoint.checked) {
+        addEventTouch();
+    } else {
+        removeEventTouch();
     }
 
     var tapedTwice = false;

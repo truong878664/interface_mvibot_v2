@@ -23,10 +23,10 @@
             <label for="select-robot" class="absolute w-full h-full bg-[#0000004c]"></label>
             <div
                 class="absolute bg-[#fff] p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center">
-                <select id="" class="bg-transparent outline-none">
-                    <option>Choose Robot</option>
+                <select id="" class="bg-transparent outline-none robot-active">
+                    <option value="">Choose Robot</option>
                     @foreach ($allRobot as $robot)
-                        <option>{{ $robot['name_seri'] }}</option>
+                        <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
                     @endforeach
                 </select>
                 <button
@@ -34,7 +34,7 @@
             </div>
         </div>
         <script type="module" src="/js/missions.js"></script>
-        <script type="module" src="/js/missions/createMissions.js"></script>
+        <script type="module" src="/js/missions/createMission/createMissions.js"></script>
     </div>
 
     <script>

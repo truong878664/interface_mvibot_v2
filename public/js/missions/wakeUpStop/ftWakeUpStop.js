@@ -1,4 +1,4 @@
-import { $ } from "../main.js";
+import { $ } from "../../main.js";
 
 function getValueWakeUpStop() {
     const out_set_wake_up = $(".out_set_wake_up").value

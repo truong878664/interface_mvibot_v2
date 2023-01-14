@@ -7,7 +7,7 @@
             @include('frontend.blocks.mission.trackingMission.index')
         </div>
         <script type="module" src="/js/missions.js"></script>
-        <script type="module" src="/js/missions/trackingMission.js"></script>
+        <script type="module" src="/js/trackingMission/trackingMission.js"></script>
 
     </div>
     <script>
