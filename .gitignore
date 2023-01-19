@@ -1,5 +1,4 @@
 /node_modules
-/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -17,6 +16,7 @@ yarn-error.log
 /.idea
 /.vscode
 
+# /public/build
 # /public/css/
 # # /public/dist/
 # .tailwindcss-manifest.json
@@ -263,3 +263,7 @@ tailwindcss
 /public/dist/
 .tailwindcss-manifest.json
 tailwindcss
+/public/css/
+/public/dist/
+.tailwindcss-manifest.json
+tailwindcss.exe
