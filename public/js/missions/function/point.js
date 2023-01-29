@@ -85,6 +85,7 @@ export function createMapPoint() {
         fetch("/dashboard/missions/layer-active")
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 data.forEach((item) => {
                     const { z, w } = mathYaw(item.yawo);
                     const layer = new mvibot_layer(
@@ -368,6 +369,7 @@ export function createMapPoint() {
     };
 
     function storeData(url, data) {
+        console.log(data);
         fetch(url, {
             headers: {
                 Accept: "application/json",

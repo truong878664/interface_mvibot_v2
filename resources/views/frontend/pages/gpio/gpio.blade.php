@@ -389,7 +389,6 @@
 
         .in-pulldown-btn.active {
             background: #4FA095;
-
         }
     </style>
     <script>

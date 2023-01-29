@@ -4,7 +4,7 @@
         <div class="heading ">setting</div>
 
         <div class="w-full h-[calc(100%_-_38px)] flex">
-            <div class="w-1/5 h-full bg-stone-300">
+            <div class="w-1/5 h-full bg-stone-200">
                 {{-- setting item --}}
 
                 @include('frontend.blocks.setting.settingItem', [
@@ -36,7 +36,7 @@
                 ])
             </div>
 
-            <div class="w-4/5 h-full bg-stone-200 px-4 py-6 border-l border-solid">
+            <div class="w-4/5 h-full bg-stone-100 px-4 py-6 border-l border-solid">
                 {{-- setting detail --}}
                 @include('frontend.blocks.setting.settingTab.publicTopic')
                 {{-- @include('frontend.blocks.setting.settingTab.network') --}}

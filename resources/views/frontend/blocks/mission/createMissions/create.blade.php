@@ -2,14 +2,15 @@
     <div class="create-misisons-item bg-gradient-to-r from-[#0f6cbd] to-[#227dcd]" mission-id="{{ $itemMission->id }}">
         <div class="absolute top-4 left-4 flex justify-between z-30">
             <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center">
-                <i class="fa-regular fa-file-lines"></i>
+
+                @if ($itemMission->mission_shorthand)
+                    <i class="fa-regular fa-file-lines"></i>
+                @else
+                    <i class="fa-regular fa-file"></i>
+                @endif
             </div>
         </div>
         <div class="absolute top-4 right-4 justify-between z-30 flex flex-row-reverse ">
-            {{-- <button
-                class="rounded-full btn ml-2 bg-[#fff] text-[#0f6cbd] text-[20px] w-[30px] h-[30px] flex items-center justify-center">
-                <i class="fa-solid fa-ellipsis"></i>
-            </button> --}}
             <div class="flex">
                 <form method="post" action="delete/{{ $itemMission->id }}" class="action-delete-mission">
                     @method('delete')
@@ -22,10 +23,13 @@
                     class="rounded-full btn ml-2 bg-[#fff] text-[#0f6cbd] text-[12px] w-[30px] h-[30px] flex items-center justify-center edit-name-mission-btn">
                     <i class="fa-solid fa-pen"></i>
                 </button>
+
+                <button mission-id="{{ $itemMission->id }}"
+                    class="rounded-full btn ml-2 bg-[#fff] text-[#0f6cbd] text-[12px] w-[30px] h-[30px] flex items-center justify-center clone-mission-btn">
+                    <i class="fa-solid fa-clone"></i>
+                </button>
             </div>
         </div>
-
-
         <div class="h-full w-full">
             <a href="create-missions/{{ $itemMission->id }}"
                 class=" flex relative items-end w-full h-full text-[#fff] href-mission">
@@ -34,8 +38,6 @@
                     value="{{ $itemMission->name_mission }}" disabled />
             </a>
         </div>
-
-
         <div class="absolute select-mission-wrapper top-0 left-0 w-full h-full hidden">
             <input type="checkbox" class="select-mission hidden peer/item-mission" value="{{ $itemMission->id }}"
                 id="mission-{{ $itemMission->id }}">
@@ -45,7 +47,6 @@
                 <i class="fa-solid fa-check"></i>
             </label>
         </div>
-
     </div>
 @endforeach
 <input id="show-create-missions" type="checkbox" class="show-create-missions" hidden>

@@ -1,4 +1,4 @@
-import { $, $$ } from "../../main.js";
+import { $, $$, toggerMessage } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
 
 const missionCreateBtn = $(".create-missions-btn");
@@ -6,8 +6,8 @@ const mission = $("#name-mission");
 
 handleEditNameMission();
 handleDeleteMission();
-
-console.log($$(".create-misisons-item"));
+handleDeleteMultiMission();
+handleCloneMission();
 
 missionCreateBtn.addEventListener("click", () => {
     setTimeout(() => {
@@ -65,6 +65,7 @@ function getMission(ids) {
             console.log(allMission.join("") || "mission don't have data");
         });
 }
+
 function handleDeleteMission() {
     $$(".delete-mission-btn").forEach((element) => {
         element.onclick = (e) => {
@@ -104,8 +105,9 @@ function handleEditNameMission() {
                         method: "update-name",
                         name_mission: nameElement.value,
                     };
-                    updateMission(
+                    fetchApi(
                         `/api/mi/${missionItem.getAttribute("mission-id")}`,
+                        "PUT",
                         dataUpdate,
                         (data) => {
                             if (data.status != 200) {
@@ -121,9 +123,55 @@ function handleEditNameMission() {
     });
 }
 
-function updateMission(url, data, callback) {
+function handleDeleteMultiMission() {
+    $(".delete-btn").onclick = () => {
+        const idDelete = [];
+        $$(".select-mission").forEach((element) => {
+            if (element.checked) {
+                idDelete.push(element.value);
+                element.closest(".create-misisons-item").remove();
+            }
+        });
+        fetchApi(
+            "/api/mi/delete-multi",
+            "DELETE",
+            {
+                method: "delete",
+                idDelete: idDelete,
+            },
+            checkDelete
+        );
+
+        function checkDelete(data) {
+            if (data.status == 200) {
+                toggerMessage("success", data.message);
+            } else {
+                toggerMessage("error", data.message);
+            }
+        }
+    };
+}
+
+function handleCloneMission() {
+    $$(".clone-mission-btn").forEach((element) => {
+        element.onclick = (e) => {
+            const missionId = e.target.getAttribute("mission-id");
+            console.log(missionId);
+
+            fetchApi(
+                "/api/mi",
+                "POST",
+                { method: "clone", id: missionId },
+                (data) => console.log(data)
+            );
+            location.reload();
+        };
+    });
+}
+
+function fetchApi(url, method, data, callback = () => {}) {
     fetch(url, {
-        method: "PUT",
+        method: method,
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

@@ -77,6 +77,7 @@ function handleUpdateUser() {
     $(".change-username-btn").onclick = () => {
         username.removeAttribute("readonly");
         username.focus();
+        username.setSelectionRange(usernameValue.length, usernameValue.length);
         username.style.borderColor = "#FF7B54";
     };
 

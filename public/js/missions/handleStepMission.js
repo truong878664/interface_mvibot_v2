@@ -40,6 +40,7 @@ function renderBlockStep() {
                             <button class="step-item text-[#333] border border-[#333] bg-white btn move-down-step-btn"><i class="fa-solid fa-angle-down"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
+
             arraySteps?.forEach((arrayStep, index) => {
                 const typeMissionItem = arrayStep.split("^");
                 switch (typeMissionItem[1]) {
@@ -103,6 +104,7 @@ function renderBlockStep() {
                 }
             });
             $(".steps-wrapper").innerHTML = html.join("");
+
             scrollTop(".steps-wrapper");
             handleDeleteMission(shortHandMissionList);
             showStep();
@@ -121,7 +123,6 @@ function renderStepItem(data, html) {
             step.indexOf("#") + 1,
             step.indexOf("#", step.indexOf("#") + 1)
         );
-        const stepId = step.slice(step.lastIndexOf("#") + 1, step.length);
 
         return html.push(`
             <div class="hidden step-item step-${stepMode} step-hidden" index=${index}>
@@ -139,7 +140,6 @@ function handleDeleteMission(missionShorthand) {
     $$(".delete-mission-btn").forEach((element) => {
         element.onclick = (e) => {
             dbDelete(element, () => {
-                console.log(element);
                 const missionItem = e.target.closest(".mission-item");
                 const idDeleteMission = missionItem.getAttribute("id-mission");
 
@@ -369,14 +369,11 @@ function handleUpdateMission() {
         if (isValid && isData) {
             updateTypeMission(currentIdMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
-            renderBlockStep();
             $(`.cancel-normal`).click();
         }
     };
 
     $(".update-ifelse").onclick = () => {
-        console.log(currentIdMissionEdit);
-
         const isValid = validateInput(".name-ifelse-mission");
         const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
         const isData =
@@ -392,8 +389,6 @@ function handleUpdateMission() {
         if (isValid && isDataIf && isData) {
             updateTypeMission(currentIdMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
-            renderBlockStep();
-
             $(`.cancel-ifelse`).click();
         }
     };

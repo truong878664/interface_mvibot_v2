@@ -5,7 +5,7 @@
         <label for="create-point-checkbox" class="form-create-point-close"><i class="fa-solid fa-xmark"></i></label>
         <div class="mb-4">
             <label for="" class="text-2xl">Name point</label>
-            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="name_position">
+            <input required type="text" class="text-2xl px-4 py-1 input-submit w-full" name="name_position">
         </div>
 
         <div class="display-positon-wrapper">
@@ -43,13 +43,15 @@
 
         <div class="mb-4">
             <label for="" class="text-2xl">Mode</label>
-            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_position" value="normal">
+            <input required type="text" class="text-2xl px-4 py-1 input-submit w-full" name="mode_position"
+                value="normal">
         </div>
 
 
         <div class="mb-4">
             <label for="" class="text-2xl">Mode child</label>
-            <input required type="text" class="text-2xl px-4 py-1 input-submit" name="mode_child" value="-1">
+            <input required type="text" class="text-2xl px-4 py-1 input-submi w-full" name="mode_child"
+                value="-1">
         </div>
 
         <input type="text" value="" name="map" hidden />

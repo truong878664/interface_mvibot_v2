@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
+use App\Models\backend\Missions;
 use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,26 @@ class MiController extends Controller
      */
     public function store(Request $request)
     {
+        switch ($request->method) {
+            case 'clone':
+                $data = (Missions::where('id', $request->id)->first());
+                // unset($data['id'], $data['updated_at'], $data['created_at']);
+                // return ($data);
+                $data2 = [
+                    "mission_shorthand" => $data->mission_shorthand,
+                    "name_mission" => $data->name_mission . "(copy)",
+                    "steps_mission" => $data->steps_mission,
+                    "steps_mission_name" => $data->steps_mission_name,
+                    "stop" => $data->stop,
+                    "wake_up" => $data->wake_up,
+                    "created_ad" => $data->created_at,
+                    'updated_at' => $data->updated_ats
+                ];
+                return Missions::create($data2);
+
+                break;
+            default:
+        }
     }
 
     /**
@@ -53,13 +74,13 @@ class MiController extends Controller
             case "get-mission":
                 $list_id = explode(",", $request->list_id);
                 $dataMission = array_map(function ($item) {
-                    return Mi::where('id', $item)->first();
+                    return Missions::where('id', $item)->first();
                 }, $list_id);
 
                 return $dataMission;
 
             default:
-                return Mi::where('id', $type)->first();
+                return Missions::where('id', $type)->first();
         }
     }
 
@@ -85,21 +106,23 @@ class MiController extends Controller
     {
         switch ($request->method) {
             case "add":
-                $old_mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
+                $old_mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
                 $mission_shorthand = $request->mission_shorthand;
                 if (trim($old_mission_shorthand, " ") !== "") {
                     $new_mission_shorthand = $old_mission_shorthand . "+" . $mission_shorthand;
                 } else {
                     $new_mission_shorthand = $mission_shorthand;
                 }
-                Mi::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
+                Missions::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
+
                 break;
             case "update":
                 $update_mission_shorthand = $request->mission_shorthand;
-                Mi::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
+                Missions::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
+
                 break;
             case "move":
-                $mission_shorthand = Mi::where('id', $id)->first()->mission_shorthand;
+                $mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
                 $arrayIdBlockStep = explode("+", $mission_shorthand);
                 switch ($request->type) {
                     case 'left':
@@ -108,7 +131,7 @@ class MiController extends Controller
                         $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
                         array_splice($arrayIdBlockStep, $indexItemMove - 1, 0, $out);
 
-                        Mi::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        Missions::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
                         break;
                     case 'right':
                         $indexItemMove = array_search($request->id_move, $arrayIdBlockStep);
@@ -116,20 +139,24 @@ class MiController extends Controller
                         $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
                         array_splice($arrayIdBlockStep, $indexItemMove + 1, 0, $out);
 
-                        Mi::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        Missions::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
                         break;
                 }
+
                 break;
             case "update-name":
-                Mi::where('id', $id)->update(['name_mission' => $request->name_mission]);
-                return ['status' => 200];
+                Missions::where('id', $id)->update(['name_mission' => $request->name_mission]);
+                break;
             case "update-type-mission":
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                // return ['message' => 'translate step success', "status" => 200];
                 break;
         }
 
         $this->translateStepMissionName($id);
         $this->translateData($id);
-        return ['message' => 'save data success', "status " => 200];
+        return ['message' => 'save data success', "status" => 200];
     }
 
     /**
@@ -138,14 +165,28 @@ class MiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $type)
     {
-        //
+        switch ($type) {
+            case 'delete-multi':
+                if (count($request->idDelete)) {
+
+                    foreach ($request->idDelete as $id) {
+                        Missions::where('id', $id)->delete();
+                    }
+                    return ['message' => 'Delete missions success', 'status' => 200];
+                } else {
+                    return ['message' => 'No mission selected', 'status' => 100];
+                }
+
+            default:
+                return 123;
+        }
     }
 
     public function translateStepMissionName($id)
     {
-        $dataMission = Mi::where('id', $id)->first();
+        $dataMission = Missions::where('id', $id)->first();
         $mission_shorthand = $dataMission->mission_shorthand;
         if ($mission_shorthand != "") {
             $split_mission_shorthand = explode("+", $mission_shorthand);
@@ -154,15 +195,15 @@ class MiController extends Controller
                 $itemStep = TypeMission::where('id', $item)->first();
                 return $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
             }, $split_mission_shorthand);
-            Mi::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
+            Missions::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
         } else {
-            Mi::where("id", $id)->update(['steps_mission_name' => NULL]);
+            Missions::where("id", $id)->update(['steps_mission_name' => NULL]);
         }
     }
     public function translateData($id)
     {
 
-        $dataMission = Mi::where('id', $id)->first();
+        $dataMission = Missions::where('id', $id)->first();
         $step_name = $dataMission->steps_mission_name;
         if ($step_name != "") {
 
@@ -201,9 +242,9 @@ class MiController extends Controller
             }
 
             $dataStepMission = "[" . trim(implode('][', $data), " ") . "]";
-            Mi::where("id", $id)->update(['steps_mission' => $dataStepMission]);
+            Missions::where("id", $id)->update(['steps_mission' => $dataStepMission]);
         } else {
-            Mi::where("id", $id)->update(['steps_mission' => NULL]);
+            Missions::where("id", $id)->update(['steps_mission' => NULL]);
         }
     }
     public function translateStepItem($arrayStepMissionName)

@@ -45,8 +45,8 @@ function start() {
 start();
 
 function activeTab() {
-    const tabbar = $(".create-missions");
-    tabbar.classList.add("active");
+    const tabBar = $(".create-missions");
+    tabBar.classList.add("active");
 }
 
 function nextTabFunction() {
