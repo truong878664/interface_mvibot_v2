@@ -56,10 +56,7 @@ function deleteItem(e) {
             ).forEach((element) => {
                 element.remove();
             });
-            console.log(
-                $$(`.type-mission-function-item[function-type=${typeFunction}]`)
-            );
-
+            console.log(data);
             translatesStepsMission(currentMission);
             renderBlockStep();
         });

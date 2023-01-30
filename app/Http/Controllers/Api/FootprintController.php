@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionPosition;
+use App\Models\backend\Missions;
 use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
 
@@ -125,7 +126,7 @@ class FootprintController extends Controller
                 if (count($arrayDataNew) == 0) {
                     TypeMission::where('id', $item->id)->delete();
 
-                    $allMissions = Mi::all();
+                    $allMissions = Missions::all();
 
                     foreach ($allMissions as $mission) {
                         $mission_shorthand = explode('+', $mission->mission_shorthand);
@@ -135,7 +136,7 @@ class FootprintController extends Controller
                                 array_push($new_mission_shorthand, $mission_type_item);
                             }
                         }
-                        Mi::where('id', $mission->id)->update(['mission_shorthand' => implode("+",  $new_mission_shorthand)]);
+                        Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+",  $new_mission_shorthand)]);
                     }
                 } else {
                     TypeMission::where('id', $item->id)->update(['data' => implode("|", $arrayDataNew)]);
@@ -173,7 +174,7 @@ class FootprintController extends Controller
                 if (count($arrayDataIfNew) == 0 || (count($arrayDataThenNew) == 0 || count($arrayDataElseNew) == 0)) {
                     TypeMission::where('id', $item->id)->delete();
 
-                    $allMissions = Mi::all();
+                    $allMissions = Missions::all();
 
                     foreach ($allMissions as $mission) {
                         $mission_shorthand = explode('+', $mission->mission_shorthand);
@@ -183,7 +184,7 @@ class FootprintController extends Controller
                                 array_push($new_mission_shorthand, $mission_type_item);
                             }
                         }
-                        Mi::where('id', $mission->id)->update(['mission_shorthand' => implode("+",  $new_mission_shorthand)]);
+                        Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+",  $new_mission_shorthand)]);
                     }
                 } else {
                     TypeMission::where('id', $item->id)->update(['data' => $newData]);

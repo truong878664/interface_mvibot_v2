@@ -1,5 +1,4 @@
 import { $, $$, toggerMessage } from "../../main.js";
-import { resetDataGpio } from "../createStepMission.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
 import inputFunction from "../functionHandle/inputFunction.js";
@@ -7,6 +6,7 @@ import { loadDataFunction } from "../handleTypeMission.js";
 import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
+import { dataGpio, resetGpio, setLightGpio } from "./gpio2.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -50,23 +50,21 @@ export default function handleEditFunctionType() {
                 case "gpio":
                     $(".gpio-function-btn").click();
 
-                    const { name_gpio, time_out_gpio } = inputFunction("gpio");
+                    const name_gpio = $(".name_gpio2");
+                    const time_out_gpio = $(".time_out_gpio2");
 
                     name_gpio.value = valueFunction.name_gpio;
                     time_out_gpio.value = valueFunction.time_out;
 
-                    nameGpios.forEach((item) => {
-                        valueGpio[item] = [];
-                        const dataGpioDb = valueFunction[item]?.split(",");
-                        valueGpio[item].push(...(dataGpioDb || []));
-                        renderGpio(item);
-                    });
-                    checkboxInputGpio();
+                    for (const item in dataGpio) {
+                        dataGpio[item] = valueFunction[item]?.split(",") || [];
+                    }
+
+                    setLightGpio();
 
                     handleUpdateStep("gpio");
                     currentIdUpdate = valueFunction.id;
                     oldName = valueFunction.name_gpio;
-
                     break;
                 case "marker":
                     $(".marker-function-btn").click();
@@ -180,10 +178,11 @@ export default function handleEditFunctionType() {
 
             $$(".offset-s-001").forEach((element) => {
                 element.value = 0.01;
+                currentIdUpdate;
             });
 
             if (type == "gpio") {
-                resetDataGpio();
+                resetGpio();
             }
         }
     }
@@ -226,39 +225,33 @@ export default function handleEditFunctionType() {
                     return false;
                 }
             case "gpio":
-                const {
-                    name_gpio,
-                    time_out_gpio,
-                    out_set_gpio,
-                    out_reset_gpio,
-                    in_on_gpio,
-                    in_off_gpio,
-                    in_pullup_gpio,
-                    in_pulldown_gpio,
-                } = inputFunction("gpio");
+                const name_gpio = $(".name_gpio2");
+                const time_out_gpio = $(".time_out_gpio2");
 
                 if (
                     name_gpio.value &&
                     time_out_gpio.value &&
-                    (out_set_gpio.value ||
-                        out_reset_gpio.value ||
-                        in_on_gpio.value ||
-                        in_off_gpio.value ||
-                        in_pullup_gpio.value ||
-                        in_pulldown_gpio.value)
+                    (dataGpio.out_set.length ||
+                        dataGpio.out_reset.length ||
+                        dataGpio.in_on.length ||
+                        dataGpio.in_off.length ||
+                        dataGpio.in_pullup.length ||
+                        dataGpio.in_pulldown.length)
                 ) {
                     const data = {
                         type: "gpio",
                         name_gpio: name_gpio.value,
-                        time_out: time_out_gpio.value,
-                        out_set: out_set_gpio.value,
-                        out_reset: out_reset_gpio.value,
-                        in_on: in_on_gpio.value,
-                        in_off: in_off_gpio.value,
-                        in_pullup: in_pullup_gpio.value,
-                        in_pulldown: in_pulldown_gpio.value,
+                        time_out: time_out_gpio.value * 1,
+                        out_set: dataGpio.out_set.join(","),
+                        out_reset: dataGpio.out_reset.join(","),
+                        in_on: dataGpio.in_on.join(","),
+                        in_off: dataGpio.in_off.join(","),
+                        in_pullup: dataGpio.in_pullup.join(","),
+                        in_pulldown: dataGpio.in_pulldown.join(","),
                     };
+
                     updateStep(`/api/step/${currentIdUpdate}`, data);
+
                     $(".data-gpio-item.show")?.classList.remove("show");
 
                     oldName != name_gpio.value &&
@@ -389,7 +382,6 @@ export default function handleEditFunctionType() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(123);
                 translatesStepsMission(currentMission);
                 renderBlockStep();
             });

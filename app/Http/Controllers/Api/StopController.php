@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
+use App\Models\backend\Missions;
 use App\Models\backend\Stop;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,7 @@ class StopController extends Controller
         } else {
             Stop::insert($dataGpio);
         }
-        Mi::where('id', $id_mission)->update(['stop' => $data]);
+        Missions::where('id', $id_mission)->update(['stop' => $data]);
 
         return 123;
     }

@@ -56,6 +56,8 @@
                         class="point-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Position</span>
                     </div>
+
+
                 </div>
             </div>
 
@@ -87,7 +89,7 @@
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
                     {{-- function --}}
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
-                    @include('frontend.blocks.mission.createMissions.functionTab.gpio')
+                    @include('frontend.blocks.mission.createMissions.functionTab.gpio2')
                     @include('frontend.blocks.mission.createMissions.functionTab.marker')
                     @include('frontend.blocks.mission.createMissions.functionTab.sleep')
                     @include('frontend.blocks.mission.createMissions.functionTab.sound')

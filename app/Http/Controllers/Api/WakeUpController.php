@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
+use App\Models\backend\Missions;
 use App\Models\backend\WakeUp;
 use Illuminate\Http\Request;
 
@@ -63,7 +64,7 @@ class WakeUpController extends Controller
             WakeUp::insert($dataGpio);
         }
 
-        Mi::where('id', $id_mission)->update(['wake_up' => $data]);
+        Missions::where('id', $id_mission)->update(['wake_up' => $data]);
         return $dataGpio;
     }
 

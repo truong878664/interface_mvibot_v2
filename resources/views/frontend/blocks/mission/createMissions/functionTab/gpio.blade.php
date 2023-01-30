@@ -29,6 +29,6 @@
         </svg>
     </div>
 
-    @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'gpio'])
+    {{-- @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'gpio']) --}}
 
 </div>
