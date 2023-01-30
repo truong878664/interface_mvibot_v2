@@ -189,6 +189,10 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
 ```tsx
 mysql> FLUSH PRIVILEGES;
 ```
+```tsx
+mysql> exit;
+```
+
 
 # <strong> Add C++ -> MySql </strong>
 
