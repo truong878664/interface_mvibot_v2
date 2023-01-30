@@ -70,29 +70,7 @@ $(".submit-btn-gpio").onclick = () => {
         dataGpio[item] = [];
     }
 
-    $$(".input-gpio.in_on").forEach((element) => {
-        dataGpio.in_on.push(element.getAttribute("gpio"));
-    });
-
-    $$(".input-gpio.in_off").forEach((element) => {
-        dataGpio.in_off.push(element.getAttribute("gpio"));
-    });
-
-    $$(".input-gpio.in_pullup").forEach((element) => {
-        dataGpio.in_pullup.push(element.getAttribute("gpio"));
-    });
-
-    $$(".input-gpio.in_pulldown").forEach((element) => {
-        dataGpio.in_pulldown.push(element.getAttribute("gpio"));
-    });
-
-    $$(".output-gpio.out_set").forEach((element) => {
-        dataGpio.out_set.push(element.getAttribute("gpio"));
-    });
-
-    $$(".output-gpio.out_reset").forEach((element) => {
-        dataGpio.out_reset.push(element.getAttribute("gpio"));
-    });
+    setDateGpio(dataGpio);
 
     const name_gpio = $(".name_gpio2");
     const time_out_gpio = $(".time_out_gpio2");
@@ -159,5 +137,31 @@ export function resetGpio() {
             "out_reset",
             "out_set"
         );
+    });
+}
+
+export function setDateGpio(dataGpio) {
+    $$(".input-gpio.in_on").forEach((element) => {
+        dataGpio.in_on.push(element.getAttribute("gpio"));
+    });
+
+    $$(".input-gpio.in_off").forEach((element) => {
+        dataGpio.in_off.push(element.getAttribute("gpio"));
+    });
+
+    $$(".input-gpio.in_pullup").forEach((element) => {
+        dataGpio.in_pullup.push(element.getAttribute("gpio"));
+    });
+
+    $$(".input-gpio.in_pulldown").forEach((element) => {
+        dataGpio.in_pulldown.push(element.getAttribute("gpio"));
+    });
+
+    $$(".output-gpio.out_set").forEach((element) => {
+        dataGpio.out_set.push(element.getAttribute("gpio"));
+    });
+
+    $$(".output-gpio.out_reset").forEach((element) => {
+        dataGpio.out_reset.push(element.getAttribute("gpio"));
     });
 }

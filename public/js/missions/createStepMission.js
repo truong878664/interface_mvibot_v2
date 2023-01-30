@@ -17,13 +17,13 @@ import inputFunction from "./functionHandle/inputFunction.js";
 import { loaded, loading } from "./functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
 import { createMapPoint } from "./function/point.js";
+import sendMission from "./sendMission.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const showMaps = $$(".show-point-map");
 
 function start() {
-    activeTab();
     nextTabFunction();
 
     handleShowPointOnMap();
@@ -35,7 +35,7 @@ function start() {
 
     handlePointMission();
     handleFootprintMission();
-    // handleGpioMission();
+
     handleSleepMission();
     handleMarkerMission();
     setDefaultValueFootprint();
@@ -43,11 +43,6 @@ function start() {
     sendMission();
 }
 start();
-
-function activeTab() {
-    const tabBar = $(".create-missions");
-    tabBar.classList.add("active");
-}
 
 function nextTabFunction() {
     $$(".function-btn").forEach((item, index) => {
@@ -121,26 +116,6 @@ function removeMapTag() {
         $("#map-show-point").remove();
         $(".overlay").remove();
     });
-}
-
-//marker
-
-function sendMission() {
-    $(".send-mission-btn").onclick = () => {
-        fetch(`/api/mission/${currentMission}`)
-            .then((res) => res.json())
-
-            .then((data) => {
-                const nameRobot = $("#select-robot-option").value;
-                if (nameRobot == "Choose Robot") {
-                    toggerMessage("error", "please choose robot");
-                } else {
-                    const dataBodyMission = `&name>${data.name_mission}/time_out>-1/mode>normal/data>%normal_step#${data.steps_mission}`;
-                    runMission(nameRobot, dataBodyMission);
-                    toggerMessage("success", "send data to robot successfully");
-                }
-            });
-    };
 }
 
 ///
@@ -251,96 +226,6 @@ function handleFootprintMission() {
         }
     };
 }
-// function handleGpioMission() {
-//     $(".submit-btn-gpio").onclick = (e) => {
-//         e.preventDefault();
-
-//         const {
-//             name_gpio,
-//             time_out_gpio,
-//             out_set_gpio,
-//             out_reset_gpio,
-//             in_on_gpio,
-//             in_off_gpio,
-//             in_pullup_gpio,
-//             in_pulldown_gpio,
-//         } = inputFunction("gpio");
-
-//         if (
-//             name_gpio.value &&
-//             time_out_gpio.value &&
-//             (out_set_gpio.value ||
-//                 out_reset_gpio.value ||
-//                 in_on_gpio.value ||
-//                 in_off_gpio.value ||
-//                 in_pullup_gpio.value ||
-//                 in_pulldown_gpio.value)
-//         ) {
-//             const data = {
-//                 type: "gpio",
-//                 name_type: name_gpio.value,
-//                 time_out: time_out_gpio.value,
-//                 out_set: out_set_gpio.value,
-//                 out_reset: out_reset_gpio.value,
-//                 in_on: in_on_gpio.value,
-//                 in_off: in_off_gpio.value,
-//                 in_pullup: in_pullup_gpio.value,
-//                 in_pulldown: in_pulldown_gpio.value,
-//             };
-//             console.log(data);
-//             addFunctionStep("gpio", data);
-//             resetDataGpio();
-
-//             $(".data-gpio-item.show")?.classList.remove("show");
-//             toggerMessage("success", "save gpio successfully");
-//             loadDataFunction();
-//         } else {
-//             toggerMessage(
-//                 "error",
-//                 "Please enter name, timeout and at least one type of gpio"
-//             );
-//         }
-//     };
-// }
-
-// export function resetDataGpio() {
-//     const {
-//         name_gpio,
-//         time_out_gpio,
-//         out_set_gpio,
-//         out_reset_gpio,
-//         in_on_gpio,
-//         in_off_gpio,
-//         in_pullup_gpio,
-//         in_pulldown_gpio,
-//     } = inputFunction("gpio");
-
-//     name_gpio.value = "";
-//     time_out_gpio.value = -1;
-//     out_set_gpio.value = "";
-//     out_reset_gpio.value = "";
-//     in_on_gpio.value = "";
-//     in_off_gpio.value = "";
-//     in_pullup_gpio.value = "";
-//     in_pulldown_gpio.value = "";
-
-//     $$(".gpio_checkbox").forEach((element) => {
-//         element.checked = false;
-//     });
-
-//     $$(".gpio-io").forEach((element) => (element.style.fill = "#CCCCCC"));
-
-//     valueGpio.out_set = [];
-//     valueGpio.out_reset = [];
-//     valueGpio.in_on = [];
-//     valueGpio.in_off = [];
-//     valueGpio.in_pullup = [];
-//     valueGpio.in_pulldown = [];
-
-//     $$(".show-gpio-wrapper").forEach((item) => {
-//         item.innerHTML = "";
-//     });
-// }
 
 function handleSleepMission() {
     $(".submit-btn-sleep").onclick = (e) => {

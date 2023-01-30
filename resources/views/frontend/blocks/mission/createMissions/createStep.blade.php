@@ -24,6 +24,11 @@
                         class="ifelse-mission-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>If-Else mission</span>
                     </div>
+
+                    <div
+                        class="trycatch-mission-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>Try-catch mission</span>
+                    </div>
                 </div>
             </div>
             {{-- function --}}
@@ -87,6 +92,7 @@
                     {{-- type mission --}}
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.normal')
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
+                    @include('frontend.blocks.mission.createMissions.typeMissionTab.tryCatch')
                     {{-- function --}}
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
                     @include('frontend.blocks.mission.createMissions.functionTab.gpio2')

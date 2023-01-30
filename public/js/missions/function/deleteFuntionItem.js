@@ -42,6 +42,17 @@ function deleteItem(e) {
             }
         );
 
+    functionItem
+        .closest(".detail-type-mission-function")
+        .classList.contains("detail-type-mission-function-trycatch") &&
+        Array.from($(".detail-type-mission-function-trycatch").childNodes).find(
+            (node, index) => {
+                if (node.isEqualNode(functionItem)) {
+                    htmlDataFunction[typeFunction].splice(index, 1);
+                }
+            }
+        );
+
     fetch(`/api/${typeFunction}/${idFunction}`, {
         method: "DELETE",
         headers: {

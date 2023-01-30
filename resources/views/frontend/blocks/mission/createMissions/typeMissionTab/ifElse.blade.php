@@ -7,9 +7,6 @@
 
         <div class="my-8">
 
-            <input type="hidden" class="if-step-value" placeholder="if">
-            <input type="hidden" class="then-step-value" placeholder="then">
-            <input type="hidden" class="else-step-value" placeholder="else">
             {{-- if --}}
             <div class="flex items-center h-[46px]">
                 <label

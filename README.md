@@ -142,10 +142,6 @@ sudo apt update
 sudo apt install mysql-server
 ```
 
-```tsx
-sudo apt install mysql-server
-```
-
 -   Configuring MySQL
 
 Run the security script with sudo:
@@ -163,11 +159,7 @@ MySQL creates a root user account which you can use to manage your database
 -   Creating a Dedicated MySQL User and Granting Privileges
 
 ```tsx
-sudo mysql
-```
-
-```tsx
-mysql -u root -p
+sudo mysql -u root -p
 ```
 
 Enter your password...
@@ -184,26 +176,18 @@ To create a database with the name tutorial_database, type the following command
 mysql> CREATE DATABASE IF NOT EXISTS mvibot_database;
 ```
 
-```tsx
-mysql > exit;
-```
-
 Create new user
 
 ```tsx
-sudo mysql
+CREATE USER 'mvibot'@'localhost' IDENTIFIED BY 'Mvibot@v1';
 ```
 
 ```tsx
-mysql > mysql -u root -p
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
 ```
 
 ```tsx
-mysql > GRANT ALL PRIVILEGES ON *.* TO 'name_new_user'@'localhost' WITH GRANT OPTION;
-```
-
-```tsx
-mysql > FLUSH PRIVILEGES;
+mysql> FLUSH PRIVILEGES;
 ```
 
 # <strong> Add C++ -> MySql </strong>
@@ -244,36 +228,19 @@ press Ctrl + H
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong> -->
 
 ```tsx
-cd / mvibotApp / interface_mvibot_v2;
+cd/mvibotApp/interface_mvibot_v2;
 ```
 
 ```tsx
-mv.env.example.env;
+mv .env.example .env;
 ```
-
-```tsx
-gedit.env;
-```
-
-Update lines 11 to 16 as follows:
-
-```tsx
-DB_CONNECTION = mysql;
-DB_HOST = localhost;
-DB_PORT = 3306;
-DB_DATABASE = mvibot_database;
-DB_USERNAME = root;
-DB_PASSWORD = "your password sql";
-```
-
-Change these lines to reflect your new database settings.
 
 # <strong>Composer</strong>
 
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
 
 ```tsx
-cd / mvibotApp / interface_mvibot_v2;
+cd/mvibotApp/interface_mvibot_v2;
 ```
 
 ```tsx

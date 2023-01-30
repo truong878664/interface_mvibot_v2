@@ -6,7 +6,7 @@ import { loadDataFunction } from "../handleTypeMission.js";
 import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
-import { dataGpio, resetGpio, setLightGpio } from "./gpio2.js";
+import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio2.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -227,7 +227,7 @@ export default function handleEditFunctionType() {
             case "gpio":
                 const name_gpio = $(".name_gpio2");
                 const time_out_gpio = $(".time_out_gpio2");
-
+                setDateGpio(dataGpio);
                 if (
                     name_gpio.value &&
                     time_out_gpio.value &&

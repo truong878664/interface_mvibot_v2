@@ -44,7 +44,8 @@
 
 <style>
     .type-mission-function-normal.active,
-    .type-mission-function-ifelse.active {
+    .type-mission-function-ifelse.active,
+    .type-mission-function-trycatch.active {
         background-color: rgba(204, 204, 204, 0.5);
     }
 

@@ -18,6 +18,7 @@ handleRenderDataFunction();
 
 handleAddMissionNormal();
 handleAddMissionIfelse();
+handleAddMissionTrycatch();
 
 export function loadDataFunction(typeFunctionActive = "footprint") {
     typeFunction.map((item, index) => {
@@ -36,6 +37,9 @@ function getDataFunction(type, index, typeFunctionActive) {
                 ).click();
                 $(
                     `.type-mission-function-ifelse[type=${typeFunctionActive}]`
+                ).click();
+                $(
+                    `.type-mission-function-trycatch[type=${typeFunctionActive}]`
                 ).click();
             }
         });
@@ -73,7 +77,26 @@ function handleRenderDataFunction() {
             handleDeleteFunctionType();
         };
     });
+
+    $$(".type-mission-function-trycatch").forEach((element) => {
+        element.onclick = (e) => {
+            $(".type-mission-function-trycatch.active")?.classList.remove(
+                "active"
+            );
+
+            e.target.classList.add("active");
+
+            const type = e.target.getAttribute("type");
+            $(".detail-type-mission-function-trycatch").innerHTML =
+                htmlDataFunction[type].join("");
+            handleAddStep();
+            handleEditFunctionType();
+            handleDeleteFunctionType();
+        };
+    });
 }
+
+////
 const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md"><i class="fa-regular fa-eye"></i></button>`;
 
 function renderDataFunction(data, type) {
@@ -122,11 +145,14 @@ function renderDataFunction(data, type) {
         );
     });
 }
+
+//normal
 const nameNormalMission = $(".name-normal-mission");
 export const valueNormalMissionArray = [];
 
 const nameIfelseMission = $(".name-ifelse-mission");
 
+//ifelse
 export const valueItemIfelse = {
     if: [],
     then: [],
@@ -142,12 +168,30 @@ $$(".add-ifelse-step-btn").forEach((element) => {
     };
 });
 
+//trycatch
+const nameTryCatchMission = $(".name-trycatch-mission");
+
+export const valueItemTrycatch = {
+    try: [],
+    catch: [],
+};
+
+let currentTrycatch = "try";
+$$(".add-trycatch-step-btn").forEach((element) => {
+    element.onclick = (e) => {
+        currentTrycatch = e.target.getAttribute("type");
+        $(".add-trycatch-step-btn.active").classList.remove("active");
+        e.target.classList.add("active");
+    };
+});
+
 export function handleAddStep() {
     $$(".add-mission-step-item-btn").forEach((element) => {
         element.onclick = (e) => {
             let type = "";
             $(".normal-mission-btn.active") && (type = "normal");
             $(".ifelse-mission-btn.active") && (type = "ifelse");
+            $(".trycatch-mission-btn.active") && (type = "trycatch");
 
             const valueStep = e.target
                 .closest(".type-mission-function-item")
@@ -173,7 +217,7 @@ export function handleAddStep() {
                         valueItemIfelse[currentIf],
                         `.${currentIf}-steps-wrapper`
                     );
-                    console.log(valueItemIfelse);
+
                     handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
                     handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
                     handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");
@@ -186,6 +230,27 @@ export function handleAddStep() {
                     handleDeleteStep(
                         valueItemIfelse.else,
                         ".else-steps-wrapper"
+                    );
+                    break;
+                case "trycatch":
+                    valueItemTrycatch[currentTrycatch].push(valueStep);
+                    render(
+                        valueItemTrycatch[currentTrycatch],
+                        `.${currentTrycatch}-steps-wrapper`
+                    );
+                    handleMoveStep(valueItemTrycatch.try, ".try-steps-wrapper");
+                    handleMoveStep(
+                        valueItemTrycatch.catch,
+                        ".catch-steps-wrapper"
+                    );
+
+                    handleDeleteStep(
+                        valueItemTrycatch.try,
+                        ".try-steps-wrapper"
+                    );
+                    handleDeleteStep(
+                        valueItemTrycatch.catch,
+                        ".catch-steps-wrapper"
                     );
                     break;
             }
@@ -252,6 +317,42 @@ function handleAddMissionIfelse() {
         $(".then-steps-wrapper").innerHTML = "";
         $(".else-steps-wrapper").innerHTML = "";
         nameIfelseMission.value = "";
+    }
+}
+
+//add trycatch
+function handleAddMissionTrycatch() {
+    $(".add-mission-trycatch").onclick = () => {
+        const isValid = validateInput(".name-trycatch-mission");
+        const isDataTry = validateArray(valueItemTrycatch.try, ".try-label");
+        const isDataCatch = validateArray(
+            valueItemTrycatch.catch,
+            ".catch-label"
+        );
+        const dataSaveTypeMission = {
+            name: nameTryCatchMission.value,
+            type: "trycatch",
+            data: `${valueItemTrycatch.try.join(
+                "|"
+            )}?${valueItemTrycatch.catch.join("|")}`,
+        };
+        if (isValid && isDataTry && isDataCatch) {
+            addTypeMission(dataSaveTypeMission);
+            resetValueInputTrycatch();
+            // $$(".normal-border").forEach((item) => {
+            //     item.style.borderColor = "#ccc";
+            // });
+            console.log(dataSaveTypeMission);
+        }
+    };
+
+    function resetValueInputTrycatch() {
+        valueItemTrycatch.try.length = 0;
+        valueItemTrycatch.catch.length = 0;
+
+        $(".try-steps-wrapper").innerHTML = "";
+        $(".catch-steps-wrapper").innerHTML = "";
+        nameTryCatchMission.value = "";
     }
 }
 
