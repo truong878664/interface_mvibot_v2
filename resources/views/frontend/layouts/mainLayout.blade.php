@@ -8,67 +8,75 @@
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
-    <link rel="stylesheet" href="/build/assets/app.1f24bcbc.css">
-    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="/build/assets/app.b40f40f8.css">
+    @vite('resources/css/app.css')
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="header-left-wrapper">
-            <div class="connect-ros-btn connection-failed">
-                <i class="fa-solid fa-satellite-dish"></i>
+    <style>
+        .connection-failed {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+    </style>
+    <div class="root fixed top-0 left-0 bottom-0 right-0">
+        <header class="main-header">
+            <div class="header-left-wrapper">
+                <div class="connect-ros-btn connection-failed s">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                </div>
+                <h3 class="">Mvibot</h3>
+                <div class="message-map-wrapper">
+                </div>
             </div>
-            <h3 class="">Mvibot</h3>
-            <div class="message-map-wrapper">
+
+            <div class="user-wrapper">
+                <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
+                <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
+                    value="" />
+                <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
+                    <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
+
+                    @if (session('TypeUser') == 'admin')
+                        <div
+                            class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    @endif
+
+                </div>
             </div>
+        </header>
+
+        <section class="nav-bar">
+            <ul class="">
+                <div class="bar-item-top">
+                </div>
+                <li class="bar-item home ">
+                    <a href="{{ route('home') }}" class="flex justify-center">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="bar-item-title">Home</span>
+                    </a>
+                </li>
+                <li class="bar-item active dashboard">
+                    <a href="{{ route('dashboard.') }} "class="flex justify-center">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <span class="bar-item-title">Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <div class="container-content">
+            @yield('content')
         </div>
 
-        <div class="user-wrapper">
-            <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
-            <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
-                value="" />
-            <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
-                <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
-
-                @if (session('TypeUser') == 'admin')
-                    <div class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]"><i
-                            class="fa-solid fa-circle-check"></i>
-                    </div>
-                @endif
-
+        <div class="fixed top-[80px] right-4 z-[1000] text-2xl">
+            <div class="bg-green-400 px-[10px]">
+                <span id="message-success" class=" w-full h-full text-[#fff]"></span>
             </div>
-        </div>
-    </header>
-
-    <section class="nav-bar">
-        <ul class="">
-            <div class="bar-item-top">
+            <div class="bg-red-400 px-[10px]">
+                <span id="message-error" class=" w-full h-full text-[#fff]"></span>
             </div>
-            <li class="bar-item home ">
-                <a href="{{ route('home') }}" class="flex justify-center">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="bar-item-title">Home</span>
-                </a>
-            </li>
-            <li class="bar-item active dashboard">
-                <a href="{{ route('dashboard.') }} "class="flex justify-center">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <span class="bar-item-title">Dashboard</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-
-    <div class="container-content">
-        @yield('content')
-    </div>
-
-    <div class="fixed top-[80px] right-4 z-[1000] text-2xl">
-        <div class="bg-green-400 px-[10px]">
-            <span id="message-success" class=" w-full h-full text-[#fff]"></span>
-        </div>
-        <div class="bg-red-400 px-[10px]">
-            <span id="message-error" class=" w-full h-full text-[#fff]"></span>
         </div>
     </div>
 
@@ -90,6 +98,7 @@
 
     <script type="module" src="/js/mainLayout.js"></script>
     <script type="module" src="/js/main.js"></script>
+
 </body>
 
 </html>

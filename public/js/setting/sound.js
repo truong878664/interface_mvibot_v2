@@ -1,9 +1,6 @@
-import { $, $$ } from "../main.js";
+import { $, $$, toggerMessage } from "../main.js";
 import publishTopic from "../rosModule/topicString.js";
 
-// $(".add-sound").onclick = () => {
-//     handleRenderSound();
-// };
 handleRenderSound();
 
 function handleRenderSound() {
@@ -116,8 +113,11 @@ function handleSendSound() {
                 .querySelector(".source-sound")
                 .getAttribute("src");
             const hrefSource = window.location.origin + src;
+            const nameSound = src.slice(src.lastIndexOf('/')+1, src.length)
             console.log(hrefSource);
+
             publishTopic("nametopic", hrefSource);
+            toggerMessage('success',  `${nameSound} sound sent successfully`)
         };
     });
 }
@@ -128,9 +128,3 @@ function secondToMinute(time) {
     return [("0" + minutes).slice(-2), ("0" + seconds).slice(-2)];
 }
 
-{
-    /* <button
-    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-white hover:bg-main btn rounded-md hover:bg-[#e0e0e0]">
-    <i class="fa-solid fa-trash-can"></i>
-</button> */
-}

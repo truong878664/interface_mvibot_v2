@@ -227,7 +227,9 @@ export default function handleEditFunctionType() {
             case "gpio":
                 const name_gpio = $(".name_gpio2");
                 const time_out_gpio = $(".time_out_gpio2");
-                setDateGpio(dataGpio);
+                setDateGpio();
+                
+
                 if (
                     name_gpio.value &&
                     time_out_gpio.value &&
@@ -249,6 +251,7 @@ export default function handleEditFunctionType() {
                         in_pullup: dataGpio.in_pullup.join(","),
                         in_pulldown: dataGpio.in_pulldown.join(","),
                     };
+                   
 
                     updateStep(`/api/step/${currentIdUpdate}`, data);
 

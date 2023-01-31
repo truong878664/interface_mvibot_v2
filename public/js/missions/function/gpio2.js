@@ -140,7 +140,11 @@ export function resetGpio() {
     });
 }
 
-export function setDateGpio(dataGpio) {
+export function setDateGpio() {
+    for (const item in dataGpio) {
+        dataGpio[item] = [];
+    }
+    
     $$(".input-gpio.in_on").forEach((element) => {
         dataGpio.in_on.push(element.getAttribute("gpio"));
     });

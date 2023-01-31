@@ -5,6 +5,7 @@ function connectRos(ip) {
         url: `ws://${ip}:9090`,
     });
 
+
     ros.on("connection", function () {
         console.log("Connected to websocket server.");
         connected();
@@ -13,6 +14,7 @@ function connectRos(ip) {
     ros.on("error", function (error) {
         console.log("Error connecting to websocket server: ", error);
         connectionFailed();
+
     });
 
     ros.on("close", function () {

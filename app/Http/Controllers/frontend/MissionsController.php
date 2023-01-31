@@ -39,7 +39,7 @@ class MissionsController extends Controller
     {
         $robotNavigate = StatusRobot::where('mode', 'navigation')->get();
 
-        return view('frontend.pages.missions.trackingMission', compact('robotNavigate'));
+        return view('frontend.pages.trackingMission.trackingMission', compact('robotNavigate'));
     }
 
     public function createStepsMissions(Request $request)

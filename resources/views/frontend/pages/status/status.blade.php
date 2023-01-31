@@ -6,5 +6,4 @@
         </div>
     </div>
     <script type="module" src="/js/status/status.js"></script>
-    <script></script>
 @endsection

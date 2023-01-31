@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\GpioController;
+use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
@@ -48,3 +49,5 @@ Route::resource('type-mission', TypeMissionController::class);
 
 Route::resource('wake-up', WakeUpController::class)->only('store');
 Route::resource('stop', StopController::class)->only('store');
+
+Route::resource('input-gpio', InputGpioController::class)->only('index');

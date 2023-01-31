@@ -11,7 +11,8 @@ function toggerMessage(type, message) {
     setTimeout(() => {
         divMessage.innerText = "";
     }, 2000);
-    type = "error" && window.navigator.vibrate(200);
+
+
 }
 
 window.oncontextmenu = (e) => {

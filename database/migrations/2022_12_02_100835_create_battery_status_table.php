@@ -18,7 +18,7 @@ return new class extends Migration
                 $table->string('name_seri')->nullable()->unique();
                 $table->integer('soc')->nullable();
                 $table->float('vol')->nullable();
-                $table->integer('cycle')->nullable();
+                $table->float('cycle')->nullable();
                 $table->float('capacity_now')->nullable();
                 $table->float('capacity_max')->nullable();
                 $table->integer('charge')->nullable();
