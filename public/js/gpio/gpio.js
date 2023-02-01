@@ -1,4 +1,3 @@
-import { notEqual } from "assert";
 import { $, $$, toggerMessage } from "../main.js";
 import publishTopic from "../rosModule/topicString.js";
 
@@ -6,10 +5,11 @@ let currentTypeGpio = "";
 
 $$(".type-gpio-btn").forEach((element) => {
     element.onclick = (e) => {
-        currentTypeGpio = e.target.getAttribute("id");
-
-        $(".type-gpio-btn.active")?.classList.remove("active");
-        e.target.classList.add("active");
+        $$(".type-gpio-btn.active")?.forEach((element) => {
+            if (element != e.target) element.classList.remove("active");
+        });
+        e.target.classList.toggle("active");
+        currentTypeGpio = $(".type-gpio-btn.active")?.getAttribute("id") || "";
     };
 });
 
@@ -24,19 +24,25 @@ $$(".output-gpio").forEach((element) => {
 });
 
 let nameRobot;
+let updateGpio;
+
 $("#robot-gpio").onchange = (e) => {
     nameRobot = e.target.value;
+    clearInterval(updateGpio);
     if (nameRobot) {
-        setInterval(() => {
-            setInputGpio(nameRobot);
-
-        }, 1000);
+        setLightGpio(nameRobot);
+        updateGpio = setInterval(() => {
+            setLightGpio(nameRobot);
+            console.log(123);
+        }, 2000);
+    } else {
+        clearInterval(updateGpio);
+        resetLightGpioInput();
+        resetLightGpioOutput();
     }
 };
 
-
-
-function setInputGpio(nameRobot) {
+function setLightGpio(nameRobot) {
     fetch(`/api/input-gpio?name_seri=${nameRobot}`)
         .then((res) => res.json())
         .then((data) => {
@@ -48,7 +54,12 @@ function setInputGpio(nameRobot) {
                 in_off: [],
             };
 
-            data.data?.forEach((io, index) => {
+            const dataOutput = {
+                out_set: [],
+                out_reset: [],
+            };
+
+            data.dataInput?.forEach((io, index) => {
                 if (io == 1) {
                     dataInput.in_on.push(index);
                 } else if (io == 0) {
@@ -56,21 +67,51 @@ function setInputGpio(nameRobot) {
                 }
             });
 
-            setLightGpio(dataInput);
+            if (!currentTypeGpio) {
+                data.dataOutput?.forEach((io, index) => {
+                    if (io == 1) {
+                        dataOutput.out_set.push(index);
+                    } else if (io == 0) {
+                        dataOutput.out_reset.push(index);
+                    }
+                });
+                resetLightGpioOutput();
+                setLightGpioOutput(dataOutput);
+            }
+
+            resetLightGpioInput();
+            setLightGpioInput(dataInput);
         });
 
-
-
-    function setLightGpio(dataInput) {
-        console.log($$(`.input-gpio`))
-
+    function setLightGpioInput(dataInput) {
         for (const item in dataInput) {
             dataInput[item].forEach((light) => {
                 $(`.input-gpio[gpio="${light}"]`).classList.add(`${item}`);
             });
         }
     }
+
+    function setLightGpioOutput(dataOutput) {
+        for (const item in dataOutput) {
+            dataOutput[item].forEach((light) => {
+                $(`.output-gpio[gpio="${light}"]`).classList.add(`${item}`);
+            });
+        }
+    }
 }
+
+function resetLightGpioInput() {
+    $$(`.input-gpio`).forEach((io) => {
+        io.classList.remove("in_on", "in_off");
+    });
+}
+
+function resetLightGpioOutput() {
+    $$(`.output-gpio`).forEach((io) => {
+        io.classList.remove("out_set", "out_reset");
+    });
+}
+
 $(".send-gpio-btn").onclick = () => {
     if (nameRobot) {
         const dataGpio = {
@@ -97,10 +138,10 @@ $(".send-gpio-btn").onclick = () => {
         });
 
         const dataTopic = outSet.join("") + outReset.join("");
-        
-        if ((outSet.length || outReset.length)) {
+
+        if (outSet.length || outReset.length) {
             toggerMessage("success", "Send output successfully!");
-            publishTopic(nameTopic, dataTopic)
+            publishTopic(nameTopic, dataTopic);
         } else {
             toggerMessage("error", "Please set output IO!");
         }
@@ -108,7 +149,6 @@ $(".send-gpio-btn").onclick = () => {
         toggerMessage("error", "Please choose robot!");
     }
 };
-
 
 // note
 // clear robot

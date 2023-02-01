@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\InputGpio;
+use App\Models\backend\OutputGpio;
 use Illuminate\Http\Request;
 
 class InputGpioController extends Controller
@@ -16,12 +17,13 @@ class InputGpioController extends Controller
     public function index(Request $request)
     {
         $inputRobot = InputGpio::where('name_seri', $request->name_seri)->first();
-        if ($inputRobot ) {
+        $outputRobot = OutputGpio::where('name_seri',  $request->name_seri)->first();
+        if ($inputRobot ||  $outputRobot) {
 
 
             $data = [
                 'name_seri' => $inputRobot->name_seri,
-                'data' =>
+                'dataInput' =>
                 [
                     $inputRobot->in1,
                     $inputRobot->in2,
@@ -43,12 +45,34 @@ class InputGpioController extends Controller
                     $inputRobot->in18,
                     $inputRobot->in19,
                     $inputRobot->in20
+                ],
+                'dataOutput' =>
+                [
+                    $outputRobot->out1,
+                    $outputRobot->out2,
+                    $outputRobot->out3,
+                    $outputRobot->out4,
+                    $outputRobot->out5,
+                    $outputRobot->out6,
+                    $outputRobot->out7,
+                    $outputRobot->out8,
+                    $outputRobot->out9,
+                    $outputRobot->out10,
+                    $outputRobot->out11,
+                    $outputRobot->out12,
+                    $outputRobot->out13,
+                    $outputRobot->out14,
+                    $outputRobot->out15,
+                    $outputRobot->out16,
+                    $outputRobot->out17,
+                    $outputRobot->out18,
+                    $outputRobot->out19,
+                    $outputRobot->out20
                 ]
-
             ];
             return $data;
         } else {
-            return ['message' => 'dont have robot', 'status' =>400];
+            return ['message' => "ERR! Don't have robot", 'status' => 400];
         }
     }
 
