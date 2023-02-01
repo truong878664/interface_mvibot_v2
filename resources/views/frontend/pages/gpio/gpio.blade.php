@@ -2,24 +2,28 @@
 @section('content')
     <div class="heading dashboard-heading">gpio</div>
     <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
-        <div class="flex mx-4">
+        <div class="flex mx-4 items-center">
             <select name="" id="robot-gpio"
-                class="text-2xl border rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] text-white outline-none">
+                class="text-2xl border rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] h-full text-white px-4 outline-none">
                 <option value="">Select robot</option>
                 @foreach ($allRobot as $robot)
                     <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                 @endforeach
             </select>
             <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
+                class="ml-2 text-xl md:text-2xl rounded-md h-full px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
                 id='out_set'>
                 Out Set
             </button>
             <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
+                class="ml-2 text-xl md:text-2xl rounded-md h-full px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
                 id='out_reset'>
                 Out Reset
             </button>
+
+            <button
+            class=" ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
+
             {{-- <button
                 class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"
                 id='in_on'>
@@ -355,14 +359,13 @@
             </svg>
         </div>
 
-        <button
-            class="ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn m-10">Send</button>
-
-    </div>
+        
+           </div>
 
     <style>
         .gpio-io.in_off,
-        .gpio-io.out_reset {
+        .gpio-io.out_reset,
+        .gpio-io.out_reset_db {
             fill: #DC0000;
         }
 
@@ -372,7 +375,8 @@
         }
 
         .gpio-io.in_on,
-        .gpio-io.out_set {
+        .gpio-io.out_set,
+        .gpio-io.out_set_db {
             fill: #b2ed32;
         }
 

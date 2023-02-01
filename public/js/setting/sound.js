@@ -1,4 +1,5 @@
 import { $, $$, toggerMessage } from "../main.js";
+import { robotActive } from "../mainLayout.js";
 import publishTopic from "../rosModule/topicString.js";
 
 handleRenderSound();
@@ -113,11 +114,18 @@ function handleSendSound() {
                 .querySelector(".source-sound")
                 .getAttribute("src");
             const hrefSource = window.location.origin + src;
-            const nameSound = src.slice(src.lastIndexOf('/')+1, src.length)
-            console.log(hrefSource);
+            const nameSound = src.slice(src.lastIndexOf("/") + 1, src.length);
 
-            publishTopic("nametopic", hrefSource);
-            toggerMessage('success',  `${nameSound} sound sent successfully`)
+            const nameRobotActive = robotActive();
+            if (!nameRobotActive) {
+                toggerMessage("error", "Please choose robot!");
+            } else {
+                publishTopic("nametopic", hrefSource);
+                toggerMessage(
+                    "success",
+                    `${nameSound} sound sent successfully`
+                );
+            }
         };
     });
 }
@@ -127,4 +135,3 @@ function secondToMinute(time) {
     const seconds = Math.floor(time - minutes * 60);
     return [("0" + minutes).slice(-2), ("0" + seconds).slice(-2)];
 }
-

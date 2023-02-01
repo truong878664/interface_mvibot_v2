@@ -1,6 +1,6 @@
 <div class="setting-detail hidden">
-    <div class="w-1/2 mx-auto mt-10">
-        <table class="w-full border text-2xl" id="table-sound">
+    <div class="w-1/2 mx-auto mt-10 py-10 px-5 border-stone-300 border bg-stone-200">
+        <table class="w-full border text-2xl bg-white" id="table-sound">
             <tr class="text-center">
                 <th class="border border-solit border-[#ccc] py-2">STT</th>
                 <th class="border border-solit border-[#ccc] py-2">Name</th>

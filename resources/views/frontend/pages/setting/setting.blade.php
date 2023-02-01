@@ -12,9 +12,27 @@
                     'icon' => 'fa-solid fa-info',
                     'class' => 'active',
                 ])
+
+                @include('frontend.blocks.setting.settingItem', [
+                    'title' => 'Robot',
+                    'icon' => 'fa-solid fa-robot',
+                    'class' => '',
+                ])
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Public topic',
                     'icon' => 'fa-regular fa-paper-plane',
+                    'class' => '',
+                ])
+
+                @include('frontend.blocks.setting.settingItem', [
+                    'title' => 'Map active',
+                    'icon' => 'fa-regular fa-map',
+                    'class' => '',
+                ])
+
+                @include('frontend.blocks.setting.settingItem', [
+                    'title' => 'Mode',
+                    'icon' => 'fa-solid fa-arrows-rotate',
                     'class' => '',
                 ])
 
@@ -29,6 +47,7 @@
                     'icon' => 'fa-solid fa-user-gear',
                     'class' => '',
                 ])
+
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Reboot / Shutdown',
                     'icon' => 'fa-solid fa-power-off',
@@ -38,8 +57,11 @@
 
             <div class="w-4/5 h-full bg-stone-100 px-4 py-6 border-l border-solid">
                 {{-- setting detail --}}
-                @include('frontend.blocks.setting.settingTab.network')
+                @include('frontend.blocks.setting.settingTab.ip')
+                @include('frontend.blocks.setting.settingTab.robot')
                 @include('frontend.blocks.setting.settingTab.publicTopic')
+                @include('frontend.blocks.setting.settingTab.mapActive')
+                @include('frontend.blocks.setting.settingTab.modeRobot')
                 @include('frontend.blocks.setting.settingTab.sound')
                 @include('frontend.blocks.setting.settingTab.users')
                 @include('frontend.blocks.setting.settingTab.rebotShutdown')
@@ -52,4 +74,5 @@
     <script type="module" src="/js/setting/user.js"></script>
     <script type="module" src="/js/setting/sound.js"></script>
     <script type="module" src="/js/setting/ip.js"></script>
+    <script type="module" src="/js/setting/robot.js"></script>
 @endsection

@@ -5,6 +5,9 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
+
+showRobotActive();
+
 function connected() {
     connectRosBtn?.classList.remove("connection-failed");
     connectRosBtn?.classList.add("connected");
@@ -23,7 +26,6 @@ if (usernameLocal) {
     setAvatar(usernameLocal);
 } else {
     updateAvatarUser();
-
 }
 
 function activeNabBar() {
@@ -89,4 +91,23 @@ function setAvatar(username) {
     });
 }
 
-export { connected, connectionFailed, updateAvatarUser };
+function robotActive() {
+    return localStorage.getItem("robotActive");
+}
+
+function showRobotActive() {
+    const nameRobotActive = robotActive()
+    if (nameRobotActive) {
+        $(".robot-active-header").innerText = nameRobotActive;
+    } else {
+        $(".robot-active-header").innerText = "null";
+    }
+}
+
+export {
+    connected,
+    connectionFailed,
+    updateAvatarUser,
+    showRobotActive,
+    robotActive,
+};

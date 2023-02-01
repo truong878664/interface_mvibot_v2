@@ -9,7 +9,7 @@ if(ipLocal) {
     localStorage.setItem("ip", '127.0.1.1');
 }
 
-$(".set-ip-btn").onclick = () => {
+$(".set-ip-master-btn").onclick = () => {
     const ip = $(".address-ip").value;
     localStorage.setItem("ip", ip);
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/build/assets/app.fb99c7d4.css">
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 </head>
 
 <body>
@@ -24,7 +24,12 @@
                 <div class="connect-ros-btn connection-failed s">
                     <i class="fa-solid fa-satellite-dish"></i>
                 </div>
-                <h3 class="">Mvibot</h3>
+                <div class="flex items-center">
+                    <h3 class="">Mvibot</h3>
+                   <span class="mx-4 ">–</span>
+                    <span class="robot-active-header"></span>
+
+                </div>
                 <div class="message-map-wrapper">
                 </div>
             </div>
