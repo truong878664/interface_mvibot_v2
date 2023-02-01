@@ -95,6 +95,16 @@ input[type="color"] {
 input::placeholder {
     font-size: 1.3rem;
 }
+
+input::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+}
+/*for IE8 and below */
+input:focus,
+input:focus {
+    outline: none;
+}
 li {
     list-style: none;
 }

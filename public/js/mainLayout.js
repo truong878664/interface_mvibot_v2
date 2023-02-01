@@ -16,7 +16,15 @@ function connectionFailed() {
 }
 
 activeNabBar();
-updateAvatarUser();
+
+const usernameLocal = localStorage.getItem("username");
+
+if (usernameLocal) {
+    setAvatar(usernameLocal);
+} else {
+    updateAvatarUser();
+
+}
 
 function activeNabBar() {
     const currentPathname = window.location.pathname.replace("/", "");
@@ -61,17 +69,24 @@ function updateAvatarUser() {
         .then((res) => res.json())
         .then((data) => {
             const username = data.data.name;
-            $$(".name-user").forEach((element) => {
-                element.value = username;
-            });
-
-            $$(".avatar-img-key").forEach((element) => {
-                element.innerText = username.slice(0, 1);
-            });
-            $$(".bg-avatar").forEach((element) => {
-                element.style.backgroundColor = color[username.length];
-            });
+            localStorage.setItem("username", username);
+        })
+        .then(() => {
+            setAvatar(localStorage.getItem("username"));
         });
+}
+
+function setAvatar(username) {
+    $$(".name-user").forEach((element) => {
+        element.value = username;
+    });
+
+    $$(".avatar-img-key").forEach((element) => {
+        element.innerText = username.slice(0, 1);
+    });
+    $$(".bg-avatar").forEach((element) => {
+        element.style.backgroundColor = color[username.length];
+    });
 }
 
 export { connected, connectionFailed, updateAvatarUser };

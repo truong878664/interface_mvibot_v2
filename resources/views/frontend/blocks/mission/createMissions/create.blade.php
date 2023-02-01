@@ -1,8 +1,7 @@
 @foreach ($allMissions as $index => $itemMission)
     <div class="create-misisons-item bg-gradient-to-r from-[#0f6cbd] to-[#227dcd]" mission-id="{{ $itemMission->id }}">
         <div class="absolute top-4 left-4 flex justify-between z-30">
-            <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center">
-
+            <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center pointer-events-none">
                 @if ($itemMission->mission_shorthand)
                     <i class="fa-regular fa-file-lines"></i>
                 @else
@@ -34,7 +33,7 @@
             <a href="create-missions/{{ $itemMission->id }}"
                 class=" flex relative items-end w-full h-full text-[#fff] href-mission">
                 <input
-                    class="text-3xl bg-transparent border-[2px] rounded-lg border-transparent p-2 w-full name-mission"
+                    class="text-3xl bg-transparent border-[2px] rounded-lg border-transparent p-2 w-full pointer-events-none name-mission"
                     value="{{ $itemMission->name_mission }}" disabled />
             </a>
         </div>

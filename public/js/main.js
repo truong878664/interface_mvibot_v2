@@ -3,6 +3,7 @@ import { ip } from "../ip.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+
 const ros = connectRos(ip);
 
 function toggerMessage(type, message) {
@@ -19,6 +20,7 @@ window.oncontextmenu = (e) => {
     e.preventDefault();
     return false;
 };
+
 
 export { $, $$, toggerMessage };
 

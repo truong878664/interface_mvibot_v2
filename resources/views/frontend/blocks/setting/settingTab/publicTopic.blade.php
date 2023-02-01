@@ -1,4 +1,4 @@
-<div class="setting-detail flex">
+<div class="setting-detail flex hidden">
     <div class="inline-block mx-auto">
         @include('frontend.blocks.setting.selectRobot', ['tab' => 'public-topic'])
         <textarea id="public-data" class="block text-[16px] p-4 outline-none border" rows="10" cols="50"

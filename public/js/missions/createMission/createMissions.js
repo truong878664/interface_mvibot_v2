@@ -156,15 +156,15 @@ function handleCloneMission() {
     $$(".clone-mission-btn").forEach((element) => {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
-            console.log(missionId);
 
             fetchApi(
                 "/api/mi",
                 "POST",
                 { method: "clone", id: missionId },
-                (data) => console.log(data)
+                (data) => {
+                    location.reload();
+                }
             );
-            location.reload();
         };
     });
 }

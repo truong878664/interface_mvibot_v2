@@ -43,7 +43,7 @@
 
         </div>
 
-        <div class="flex-1 max-w-[1400px] mx-auto">
+        <div class="flex-1 max-w-[1400px] w-full mx-auto">
             <svg width="100%" height="100%" viewBox="0 0 639 227" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1_200)">
                     <rect width="639" height="227" fill="white" />
@@ -356,7 +356,7 @@
         </div>
 
         <button
-            class="ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
+            class="ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn m-10">Send</button>
 
     </div>
 
