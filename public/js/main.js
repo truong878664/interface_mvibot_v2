@@ -1,15 +1,15 @@
 import connectRos from "./rosModule/connectRos.js";
-// import { ip } from "../ip.js";
+import { ip } from "../ip.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-let ip;
-if (localStorage.getItem("ip")) {
-    ip = localStorage.getItem("ip");
-} else {
-    localStorage.setItem("ip", "192.168.0.2");
-    ip = localStorage.getItem("ip");
-}
+// let ip;
+// if (localStorage.getItem("ip")) {
+//     ip = localStorage.getItem("ip");
+// } else {
+//     localStorage.setItem("ip", "192.168.0.2");
+//     ip = localStorage.getItem("ip");
+// }
 const ros = connectRos(ip);
 
 function toggerMessage(type, message) {
