@@ -10,7 +10,7 @@
         <div class="w-full lg:flex h-3/4 lg:min-h-[300px]">
             {{-- point --}}
             <div
-                class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border-[2px] lg:min-h-[300px] border-solid relative border-stone-400">
+                class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border-[2px] lg:min-h-[300px] border-solid relative">
 
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] font-bold absolute w-full top-0">type mission
                 </p>
