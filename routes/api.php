@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
 use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
@@ -51,3 +52,5 @@ Route::resource('wake-up', WakeUpController::class)->only('store');
 Route::resource('stop', StopController::class)->only('store');
 
 Route::resource('input-gpio', InputGpioController::class)->only('index');
+
+Route::resource('status-robot', RobotController::class)->only('show');

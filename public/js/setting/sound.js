@@ -122,6 +122,7 @@ function handleSendSound() {
                 toggerMessage("error", "Please choose robot!");
             } else {
                 publishTopic("nametopic", hrefSource);
+                console.log(hrefSource)
                 toggerMessage(
                     "success",
                     `${nameSound} sound sent successfully`

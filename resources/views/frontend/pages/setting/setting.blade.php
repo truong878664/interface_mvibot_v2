@@ -76,4 +76,5 @@
     <script type="module" src="/js/setting/sound.js"></script>
     <script type="module" src="/js/setting/ip.js"></script>
     <script type="module" src="/js/setting/robot.js"></script>
+    <script type="module" src="/js/setting/settingRobot.js"></script>
 @endsection

@@ -219,7 +219,7 @@ class MiController extends Controller
                     case "normal":
                         $head = "&name>$dataItem[0]/time_out>-1/mode>normal/data>%normal_step#";
                         $body = $this->translateStepItem($dataItem[2]);
-                        array_push($data, $head . $body);
+                        array_push($data, $head . $body . '%');
                         break;
                     case "ifelse":
                         $head = "&name>$dataItem[0]/time_out>-1/mode>if_else/data>%condition#";
@@ -235,7 +235,7 @@ class MiController extends Controller
                         $dataStringThen = $dataThen ? "%if_step#$dataThen%" : "";
                         $dataStringElse = $dataElse ? "%else_step#$dataElse%" : "";
 
-                        $body =  "$dataStringIf$dataStringThen$dataStringElse@";
+                        $body =  "$dataStringIf$dataStringThen$dataStringElse";
                         array_push($data, $head . $body);
                         break;
                 }
