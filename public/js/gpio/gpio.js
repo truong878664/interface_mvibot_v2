@@ -144,8 +144,12 @@ $(".send-gpio-btn").onclick = () => {
         if (outSet.length || outReset.length) {
             toggerMessage("success", "Send output successfully!");
             publishTopic(nameTopic, dataTopic);
-            $(".type-gpio-btn.active").classList.remove("active");
+            $(".type-gpio-btn.active")?.classList.remove("active");
             currentTypeGpio = "";
+
+            $$('.output-gpio.output-send').forEach(item => {
+                item.classList.remove('output-send')
+            })
             console.log(dataTopic)
         } else {
             toggerMessage("error", "Please set output IO!");
