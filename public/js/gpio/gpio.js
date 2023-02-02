@@ -20,7 +20,7 @@ $$(".output-gpio").forEach((element) => {
             currentTypeGpio == "out_set" ? "null" : "out_set"
         );
         e.target.classList.toggle(currentTypeGpio);
-        e.target.classList.add('output-send')
+        e.target.classList.add("output-send");
     };
 });
 
@@ -142,8 +142,8 @@ $(".send-gpio-btn").onclick = () => {
         if (outSet.length || outReset.length) {
             toggerMessage("success", "Send output successfully!");
             publishTopic(nameTopic, dataTopic);
-            $('.type-gpio-btn.active').classList.remove('active')
-
+            $(".type-gpio-btn.active").classList.remove("active");
+            currentTypeGpio = "";
             console.log(dataTopic)
         } else {
             toggerMessage("error", "Please set output IO!");
