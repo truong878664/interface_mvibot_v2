@@ -241,7 +241,7 @@ class MiController extends Controller
                 }
             }
 
-            $dataStepMission = "[" . trim(implode('][', $data), " ") . "]";
+            $dataStepMission = trim(implode('][', $data), " ");
             Missions::where("id", $id)->update(['steps_mission' => $dataStepMission]);
         } else {
             Missions::where("id", $id)->update(['steps_mission' => NULL]);

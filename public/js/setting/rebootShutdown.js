@@ -6,23 +6,19 @@ import { robotActive } from "../mainLayout.js";
 // const robotSelect = $(".choose_robot.reboot-shutdown");
 const robotSelect = robotActive();
 
-
-
 $("#shutdown-btn").onclick = () => {
+    console.log(!!robotSelect);
     if (!robotSelect) {
-        toggerMessage('error', 'Please choose robot!')
+        toggerMessage("error", "Please choose robot!");
     } else {
         publishTopic(`${robotSelect}/robot_shutdown`, "1");
         toggerMessage("success", `Shutdown success`);
     }
-    setTimeout(() => {
-        robotSelect.style.borderColor = "transparent";
-    }, 2000);
 };
 
 $("#reboot-btn").onclick = () => {
-    if (robotSelect === "") {
-        robotSelect.style.borderColor = "#DC0000";
+    if (!robotSelect) {
+        toggerMessage("error", "Please choose robot!");
     } else {
         publishTopic(`${robotSelect}/robot_shutdown`, "2");
         toggerMessage("success", `Reboot success`);

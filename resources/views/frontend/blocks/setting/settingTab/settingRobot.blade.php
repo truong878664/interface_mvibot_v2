@@ -6,13 +6,11 @@
             <div class="w-full flex flex-col">
                 <label class="text-3xl block mb-4">MODE</label>
                 <div
-                    class="items-center mx-auto inline-flex items-center justify-center p-8 border-stone-300 border bg-stone-200">
-                    <input type="text" class="mr-4 h-[34px] px-4 text-2xl placeholder:text-2xl" value=""
-                        placeholder="Enter map active...">
-                    <button
-                        class="px-4 py-2 bg-main text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 float-right set-ip-master-btn">
-                        <span class="mr-2">Set map active</span>
-                    </button>
+                    class="items-center mx-auto inline-flex justify-center p-8 border-stone-300 border bg-stone-200">
+                    <div class="flex rounded-lg overflow-hidden">
+                        <div class="text-3xl px-4 h-[30px] leading-[30px] rounded-l-md text-[#fff] opacity-60 cursor-pointer bg-main hover:opacity-80 mode-item active">slam</div>
+                        <div class="text-3xl px-4 h-[30px] leading-[30px] rounded-r-md text-[#fff] opacity-60 cursor-pointer bg-main hover:opacity-80 mode-item">navigation</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,5 +30,9 @@
         </div>
     </div>
 </div>
-
+<style>
+    .mode-item.active {
+        opacity: 1;
+    }
+</style>
 

@@ -21,7 +21,7 @@
     <div class="root fixed top-0 left-0 bottom-0 right-0">
         <header class="main-header">
             <div class="header-left-wrapper">
-                <div class="connect-ros-btn connection-failed s">
+                <div class="connect-ros-btn connection-failed">
                     <i class="fa-solid fa-satellite-dish"></i>
                 </div>
                 <div class="flex items-center">

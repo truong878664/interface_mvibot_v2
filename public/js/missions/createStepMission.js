@@ -6,8 +6,6 @@ import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
 import displayPose from "../rosModule/displayPose.js";
 
-import { runMission } from "../rosModule/handleMission.js";
-
 import { toggerMessage } from "../main.js";
 import { valueGpio } from "./function/gpio.js";
 import { currentMission, renderBlockStep } from "./handleStepMission.js";

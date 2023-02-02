@@ -57,12 +57,13 @@ function getMission(ids) {
             const allMission = [];
             data.map((item) => {
                 return allMission.push(
-                    `${item.wake_up ? item.wake_up : ""}${
+                    `[${item.wake_up ? item.wake_up : ""}${
                         item.stop ? item.stop : ""
-                    }${item.steps_mission ? item.steps_mission : ""}`
+                    }${item.steps_mission ? item.steps_mission : ""}%@]`
                 );
             });
-            console.log(allMission.join("") || "mission don't have data");
+            const mission = allMission.join("")
+            console.log(mission || "mission don't have data");
         });
 }
 

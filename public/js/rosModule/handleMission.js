@@ -1,9 +1,9 @@
 import ros from "../main.js";
 import getValueWakeUpStop from "../missions/wakeUpStop/ftWakeUpStop.js";
 
-function runMission(nameRobot, dataBodyMission) {
+function publishMission(nameRobot, dataBodyMission) {
     const dataHeadMission = getValueWakeUpStop();
-    const dataFullMission = `${dataHeadMission}*${dataBodyMission}%@`;
+    const dataFullMission = `[${dataHeadMission}*${dataBodyMission}%@]`;
     // console.log(nameRobot);
     const nameRobotReplace = nameRobot.replace(" ", "");
     const mission_pub = new ROSLIB.Topic({
@@ -19,4 +19,4 @@ function runMission(nameRobot, dataBodyMission) {
     mission_pub.publish(mission_set);
 }
 
-export { runMission };
+export { publishMission };
