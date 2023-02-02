@@ -1,7 +1,7 @@
 import publishTopic from "../rosModule/topicString.js";
-import { toggerMessage } from "../main.js";
+import { $, toggerMessage } from "../main.js";
 import { robotActive } from "../mainLayout.js";
-import { $ } from "./setting.js";
+// import { $ } from "./setting.js";
 
 // const robotSelect = $(".choose_robot.reboot-shutdown");
 const robotSelect = robotActive();
