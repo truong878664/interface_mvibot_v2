@@ -13,7 +13,7 @@ rosrun tf2_web_republisher tf2_web_republisher
 
 ```tsx
 cd maps
-rosrun map_server map_server map30.yaml
+rosrun map_server map_server map22.yaml
 ```
 
 ---
