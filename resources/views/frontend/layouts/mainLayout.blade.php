@@ -8,7 +8,7 @@
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
-    <link rel="stylesheet" href="/build/assets/app.9e38096c.css">
+    <link rel="stylesheet" href="/build/assets/app.d4811adf.css">
     {{-- @vite('resources/css/app.css') --}}
 </head>
 

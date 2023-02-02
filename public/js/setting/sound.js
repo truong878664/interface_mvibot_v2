@@ -1,6 +1,7 @@
-import { $, $$, toggerMessage } from "../main.js";
+import { toggerMessage } from "../main.js";
 import { robotActive } from "../mainLayout.js";
 import publishTopic from "../rosModule/topicString.js";
+import { $, $$ } from "./setting.js";
 
 handleRenderSound();
 

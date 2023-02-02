@@ -1,4 +1,7 @@
-import { $, $$ } from "../main.js";
+
+export const $ = document.querySelector.bind(document)
+export const $$ = document.querySelectorAll.bind(document)
+
 
 $$(".setting-item").forEach((element, index) => {
     element.onclick = (e) => {

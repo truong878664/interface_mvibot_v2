@@ -19,7 +19,7 @@ $$(".output-gpio").forEach((element) => {
             currentTypeGpio == "out_reset" ? "null" : "out_reset",
             currentTypeGpio == "out_set" ? "null" : "out_set"
         );
-        e.target.classList.toggle(currentTypeGpio);
+        currentTypeGpio && e.target.classList.toggle(currentTypeGpio);
         e.target.classList.add("output-send");
     };
 });
@@ -40,6 +40,8 @@ $("#robot-gpio").onchange = (e) => {
         resetLightGpioInput();
         resetLightGpioOutput();
     }
+    $(".type-gpio-btn.active")?.classList.remove("active");
+    currentTypeGpio = "";
 };
 
 function setLightGpio(nameRobot) {

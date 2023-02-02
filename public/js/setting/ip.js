@@ -1,17 +1,19 @@
-import { $ } from "../main.js";
+import connectRos from "../rosModule/connectRos.js";
+import { $ } from "./setting.js";
+import {ip} from '../../ip.js'
+import publishTopic from '../rosModule/topicString.js'
 
-const ipLocal = localStorage.getItem("ip");
+$(".address-ip-master").value = ip
 
-if(ipLocal) {
-    $(".address-ip").value = ipLocal
-} else {
-    $(".address-ip").value = '127.0.1.1'
-    localStorage.setItem("ip", '127.0.1.1');
-}
 
 $(".set-ip-master-btn").onclick = () => {
-    const ip = $(".address-ip").value;
-    localStorage.setItem("ip", ip);
+    const ipMaster = $(".address-ip-master").value;
+    publishTopic('/ip_master', ipMaster)
+    // connectRos(ipNew)
+};
 
-    console.log(localStorage.getItem("ip"));
+$(".set-ip-node-btn").onclick = () => {
+    const ipNode = $(".address-ip-node").value;
+    publishTopic('/ip_node', ipNode)
+    // connectRos(ipNew)
 };

@@ -18,23 +18,23 @@
                     'icon' => 'fa-solid fa-robot',
                     'class' => '',
                 ])
+
+                @include('frontend.blocks.setting.settingItem', [
+                    'title' => 'Settings robot',
+                    'icon' => 'fa-solid fa-gears',
+                    'class' => '',
+                ])
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Public topic',
                     'icon' => 'fa-regular fa-paper-plane',
                     'class' => '',
                 ])
 
-                @include('frontend.blocks.setting.settingItem', [
+                {{-- @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Map active',
                     'icon' => 'fa-regular fa-map',
                     'class' => '',
-                ])
-
-                @include('frontend.blocks.setting.settingItem', [
-                    'title' => 'Mode',
-                    'icon' => 'fa-solid fa-arrows-rotate',
-                    'class' => '',
-                ])
+                ]) --}}
 
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Sound',
@@ -59,9 +59,10 @@
                 {{-- setting detail --}}
                 @include('frontend.blocks.setting.settingTab.ip')
                 @include('frontend.blocks.setting.settingTab.robot')
+                @include('frontend.blocks.setting.settingTab.settingRobot')
                 @include('frontend.blocks.setting.settingTab.publicTopic')
-                @include('frontend.blocks.setting.settingTab.mapActive')
-                @include('frontend.blocks.setting.settingTab.modeRobot')
+                {{-- @include('frontend.blocks.setting.settingTab.mapActive') --}}
+
                 @include('frontend.blocks.setting.settingTab.sound')
                 @include('frontend.blocks.setting.settingTab.users')
                 @include('frontend.blocks.setting.settingTab.rebotShutdown')
