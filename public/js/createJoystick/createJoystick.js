@@ -23,6 +23,20 @@ const createJoystick = function () {
         robotMoving = setInterval(function () {
             moveRobot(linear_speed, angular_speed);
         }, 100);
+
+        window.ontouchend = () => {
+            clearInterval(robotMoving);
+            moveRobot(0, 0);
+        };
+        window.ontouchcancel = (e) => {
+            clearInterval(robotMoving);
+            moveRobot(0, 0);
+        };
+
+        window.onpointerup = (e) => {
+            clearInterval(robotMoving);
+            moveRobot(0, 0);
+        };
     });
 
     manager.on("move", function (event, nipple) {
@@ -53,6 +67,13 @@ const createJoystick = function () {
         clearInterval(robotMoving);
         moveRobot(0, 0);
     };
+
+    window.onpointerup = (e) => {
+        clearInterval(robotMoving);
+        moveRobot(0, 0);
+    };
+
+   
 };
 
 let oldAngle;

@@ -17,6 +17,8 @@ import { loadDataFunction } from "./handleTypeMission.js";
 import { createMapPoint } from "./function/point.js";
 import sendMission from "./sendMission.js";
 
+// loadDataFunction();
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const showMaps = $$(".show-point-map");
@@ -42,6 +44,8 @@ function start() {
 }
 start();
 
+localStorage.setItem("isUpload", 0);
+
 function nextTabFunction() {
     $$(".function-btn").forEach((item, index) => {
         item.onclick = () => {
@@ -51,6 +55,15 @@ function nextTabFunction() {
             item.classList.add("active");
 
             item.classList.contains("point-function-btn") && createMapPoint();
+
+            if (
+                item.classList.contains("type-mission-btn") &&
+                localStorage.getItem("isUpload") * 1
+            ) {
+                console.log('upload');
+                loadDataFunction();
+                localStorage.setItem("isUpload", 0);
+            }
         };
     });
 }
@@ -218,7 +231,7 @@ function handleFootprintMission() {
             y2_footprint.value = "";
             name_footprint.value = "";
             toggerMessage("success", "save footprint successfully");
-            loadDataFunction();
+            localStorage.setItem("isUpload", 1);
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -242,7 +255,7 @@ function handleSleepMission() {
             time_sleep.value = "";
             name_sleep.value = "";
             toggerMessage("success", `save sleep successfully`);
-            loadDataFunction();
+            localStorage.setItem("isUpload", 1);
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -313,7 +326,7 @@ function handleMarkerMission() {
                     "success",
                     `save ${marker_type.value} successfully`
                 );
-                loadDataFunction();
+                localStorage.setItem("isUpload", 1);
             } else {
                 toggerMessage("error", "Please enter all inputs");
             }

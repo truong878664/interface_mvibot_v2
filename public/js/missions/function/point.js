@@ -361,8 +361,9 @@ export function createMapPoint() {
             time_out.value = -1;
             mode_position.value = "normal";
             mode_child.value = -1;
-            loadDataFunction();
             createMapPoint();
+
+            localStorage.setItem("isUpload", 1);
         } else {
             toggerMessage("error", "Please enter all inputs");
         }

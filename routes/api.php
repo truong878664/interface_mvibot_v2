@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\FootprintController;
+use App\Http\Controllers\Api\FunctionController;
 use App\Http\Controllers\Api\GpioController;
 use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
@@ -54,3 +55,4 @@ Route::resource('stop', StopController::class)->only('store');
 Route::resource('input-gpio', InputGpioController::class)->only('index');
 
 Route::resource('status-robot', RobotController::class)->only('show');
+Route::resource('function', FunctionController::class)->only('index');

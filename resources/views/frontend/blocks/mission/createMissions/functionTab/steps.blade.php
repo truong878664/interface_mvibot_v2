@@ -46,7 +46,7 @@
                 <i class="fa-solid fa-spinner"></i>
             </label>
         </div>
-        <div class="submit-btn-wrapper flex flex-col justify-end">
+        <div class="submit-btn-wrapper flex flex-col justify-center">
             {{-- switch --}}
             <div class="absolute top-2 right-2">
                 <label class="switch">

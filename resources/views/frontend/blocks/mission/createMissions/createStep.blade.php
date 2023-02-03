@@ -1,12 +1,12 @@
-<div class="w-full h-full flex-col flex justify-start">
-    <div class="flex items-center lg:mb-0">
-        <a href="{{ route('dashboard.missions.create-missions.') }}" class="mx-4">
+<div class="w-full h-full flex-col flex justify-start relative">
+    <div class="flex items-center lg:mb-0 absolute top-0 left-0 -translate-y-full z-50">
+        <a href="{{ route('dashboard.missions.create-missions.') }}" class="mx-4 bg-slate-300 px-4 rounded-md text-slate-400">
             <i class="fa-solid fa-angle-left"></i>
         </a>
-        <div class="create-mission-heading text-[20px]">{{ $itemRender->name_mission }}</div>
+        <div class="create-mission-heading text-[16px] font-bold">{{ $itemRender->name_mission }}</div>
     </div>
 
-    <div class="w-full h-full max-h-[calc(100vh_-_130px)] flex flex-col">
+    <div class="w-full h-full max-h-[calc(100vh_-_100px)] flex flex-col">
         <div class="w-full lg:flex h-3/4 lg:min-h-[300px]">
             {{-- point --}}
             <div
@@ -17,16 +17,16 @@
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     {{-- point item --}}
                     <div
-                        class="active normal-mission-btn function-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="active normal-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Normal mission</span>
                     </div>
                     <div
-                        class="ifelse-mission-btn function-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="ifelse-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>If-Else mission</span>
                     </div>
 
                     <div
-                        class="trycatch-mission-btn function-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="trycatch-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Try-catch mission</span>
                     </div>
                 </div>

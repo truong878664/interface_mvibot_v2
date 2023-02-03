@@ -41,9 +41,9 @@ class FootprintController extends Controller
     public function store(Request $request)
     {
         $name_type = $request->name_type;
-        $x1 = -$request->x1;
+        $x1 = $request->x1;
         $x2 = $request->x2;
-        $y1 = -$request->y1;
+        $y1 = $request->y1;
         $y2 = $request->y2;
 
         $dataFootprint = [

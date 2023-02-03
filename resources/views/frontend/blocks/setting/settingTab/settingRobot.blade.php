@@ -1,4 +1,4 @@
-<div class="setting-detail flex">
+<div class="setting-detail flex hidden">
     <div class="max-w-[700px] w-full mx-auto max-h-[calc(100vh_-_110px)] overflow-auto">
         <label class="name-robot-active font-bold block text-center">robot1</label>
         <hr />
@@ -22,66 +22,80 @@
             <div class="w-full flex flex-col">
                 <label class="text-3xl block mb-4">Robot parameters</label>
                 <div
-                    class="items-center mx-auto inline-flex justify-center p-8 border-stone-300 border bg-stone-200 flex-col">
+                    class="mx-auto inline-flex justify-center p-8 border-stone-300 border bg-stone-200 flex-col items-end">
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Wmax</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_wmax_input"
+                            id="robot_wmax">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_wmax-btn" type="robot_wmax">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Vmax</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_vmax_input"
+                            id="robot_vmax">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_vmax-btn" type="robot_vmax">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot AW</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_aw_input"
+                            id="robot_aw">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_aw-btn" type="robot_aw">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot AX</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_ax_input"
+                            id="robot_ax">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_ax-btn" type="robot_ax">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Gear</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_gear_input"
+                            id="robot_gear">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_gear-btn" type="robot_gear">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot L</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_l_input"
+                            id="robot_l">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_l-btn" type="robot_l">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>
 
                     <div class="flex items-center mb-4 para-item">
                         <label class="text-2xl mr-4 min-w-[100px] text-right">Robot R</label>
-                        <input type="text" class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input">
+                        <input type="number"
+                            class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_r_input"
+                            id="robot_r">
                         <button
-                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden">
+                            class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_r-btn" type="robot_r">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                     </div>

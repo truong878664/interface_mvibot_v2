@@ -99,8 +99,10 @@ $(".submit-btn-gpio").onclick = () => {
 
         addFunctionStep("gpio", data);
         toggerMessage("success", "save gpio successfully");
-        loadDataFunction();
+        
         resetGpio();
+        localStorage.setItem("isUpload", 1);
+
     } else {
         toggerMessage(
             "error",

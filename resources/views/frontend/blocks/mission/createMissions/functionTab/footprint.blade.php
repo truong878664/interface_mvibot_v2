@@ -7,30 +7,30 @@
         <div class="w-[22%]">
             <div class="mr-4 ">
                 <label for="" class="text-xl">X1</label>
-                <input required type="number" placeholder="mm"
+                <input required type="text" placeholder="m"
                     class="w-[40px] text-xl px-2 py-1 text-center placeholder:text-sm input-reset" step="0.01"
-                    name="x1_footprint">
+                    name="x1_footprint" value="">
             </div>
 
             <div class="mr-4 ">
                 <label for="" class="text-xl">X2</label>
-                <input required type="number" placeholder="mm"
+                <input required type="text" placeholder="m"
                     class="w-[40px] text-xl px-2 py-1 text-center placeholder:text-sm input-reset" step="0.01"
-                    name="x2_footprint">
+                    name="x2_footprint" value="">
             </div>
 
             <div class="mr-4 ">
                 <label for="" class="text-xl">Y1</label>
-                <input required type="number" placeholder="mm"
+                <input required type="text" placeholder="m"
                     class="w-[40px] text-xl px-2 py-1 text-center placeholder:text-sm input-reset" step="0.01"
-                    name="y1_footprint">
+                    name="y1_footprint" value="">
             </div>
 
             <div class="mr-4">
                 <label for="" class="text-xl">Y2</label>
-                <input required type="number" placeholder="mm"
+                <input required type="text" placeholder="m"
                     class="w-[40px] text-xl px-2 py-1 text-center placeholder:text-sm input-reset" step="0.01"
-                    name="y2_footprint">
+                    name="y2_footprint" value="">
             </div>
             <div class="mr-4">
                 <button

@@ -6,6 +6,7 @@ export default function inputFunction(type) {
             const y1_footprint = $('[name="y1_footprint"]');
             const y2_footprint = $('[name="y2_footprint"]');
             const name_footprint = $('[name="name_footprint"]');
+        
             return {
                 x1_footprint,
                 x2_footprint,

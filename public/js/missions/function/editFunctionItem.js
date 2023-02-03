@@ -36,10 +36,10 @@ export default function handleEditFunctionType() {
                         name_footprint,
                     } = inputFunction("footprint");
 
-                    x1_footprint.value = Math.abs(valueFunction.x1);
-                    x2_footprint.value = Math.abs(valueFunction.x2);
-                    y1_footprint.value = Math.abs(valueFunction.y1);
-                    y2_footprint.value = Math.abs(valueFunction.y2);
+                    x1_footprint.value = valueFunction.x1;
+                    x2_footprint.value = valueFunction.x2;
+                    y1_footprint.value = valueFunction.y1;
+                    y2_footprint.value = valueFunction.y2;
                     name_footprint.value = valueFunction.name_footprint;
                     handleUpdateStep("footprint");
 
@@ -228,7 +228,6 @@ export default function handleEditFunctionType() {
                 const name_gpio = $(".name_gpio2");
                 const time_out_gpio = $(".time_out_gpio2");
                 setDateGpio();
-                
 
                 if (
                     name_gpio.value &&
@@ -251,7 +250,6 @@ export default function handleEditFunctionType() {
                         in_pullup: dataGpio.in_pullup.join(","),
                         in_pulldown: dataGpio.in_pulldown.join(","),
                     };
-                   
 
                     updateStep(`/api/step/${currentIdUpdate}`, data);
 

@@ -3,6 +3,7 @@ import { ip } from "../ip.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+
 // let ip;
 // if (localStorage.getItem("ip")) {
 //     ip = localStorage.getItem("ip");

@@ -31,6 +31,7 @@ function getDataFunction(type, index, typeFunctionActive) {
         .then((res) => res.json())
         .then((data) => {
             renderDataFunction(data, type);
+            console.log('x')
             if (index == typeFunction.length - 1) {
                 $(
                     `.type-mission-function-normal[type=${typeFunctionActive}]`

@@ -18,39 +18,38 @@
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
-    <div class="root fixed top-0 left-0 bottom-0 right-0">
-        <header class="main-header">
-            <div class="header-left-wrapper">
-                <div class="connect-ros-btn connection-failed">
-                    <i class="fa-solid fa-satellite-dish"></i>
-                </div>
-                <div class="flex items-center">
-                    <h3 class="">Mvibot</h3>
-                   <span class="mx-4 ">–</span>
-                    <span class="robot-active-header"></span>
-
-                </div>
-                <div class="message-map-wrapper">
-                </div>
+    <header class="main-header">
+        <div class="header-left-wrapper">
+            <div class="connect-ros-btn connection-failed">
+                <i class="fa-solid fa-satellite-dish"></i>
             </div>
+            <div class="flex items-center">
+                <h3 class="">Mvibot</h3>
+                <span class="mx-4 ">–</span>
+                <span class="robot-active-header"></span>
 
-            <div class="user-wrapper">
-                <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
-                <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
-                    value="" />
-                <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
-                    <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
-
-                    @if (session('TypeUser') == 'admin')
-                        <div
-                            class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                    @endif
-
-                </div>
             </div>
-        </header>
+            <div class="message-map-wrapper">
+            </div>
+        </div>
+
+        <div class="user-wrapper">
+            <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
+            <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
+                value="" />
+            <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
+                <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
+
+                @if (session('TypeUser') == 'admin')
+                    <div class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </header>
+    <div class="">
 
         <section class="nav-bar">
             <ul class="">
@@ -83,6 +82,8 @@
                 <span id="message-error" class=" w-full h-full text-[#fff]"></span>
             </div>
         </div>
+
+
     </div>
 
     {{-- <script src="/js/library/jquery.min.js"></script>
