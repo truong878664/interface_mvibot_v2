@@ -1,9 +1,9 @@
-<div class="h-full w-full flex flex-col function-item hidden form-footprint">
+<div class="h-full w-full flex flex-col function-item hidden form-footprin">
     <div class="flex flex-col mr-[30px]">
         <label for="" class="text-xl">Name footpint</label>
         <input class="w-[200px] text-xl px-4 py-1 input-reset" type="text" name="name_footprint" required>
     </div>
-    <div class="flex w-full h-[calc(100%_-_100px)]">
+    <div class="flex w-full h-[calc(100%_-_100px)] ">
         <div class="w-[22%]">
             <div class="mr-4 ">
                 <label for="" class="text-xl">X1</label>

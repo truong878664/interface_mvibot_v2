@@ -67,7 +67,8 @@
             </div>
 
             {{-- deteil fc --}}
-            <div class="mb-2 bg-[#fff] h-[60%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] flex-1 lg:min-h-[300px]">
+            <div class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[1001] opacity-25 hidden" id="overlay-update-mission"></div>
+            <div class="mb-2 bg-[#fff] h-[60%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] flex-1 lg:min-h-[300px] z-[1003]">
                 <div class="h-full w-full relative">
                     <div class="absolute right-0 top-0">
                         <button class="w-[30px] h-[30px] bg-cover btn info-function-btn"

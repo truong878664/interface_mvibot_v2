@@ -7,6 +7,7 @@ import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio2.js";
+import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -23,6 +24,8 @@ export default function handleEditFunctionType() {
             const valueFunction = JSON.parse(
                 functionItem.querySelector(".value-function-item").value
             );
+
+            handleOverlayUpdate("show");
 
             switch (typeFunction) {
                 case "footprint":
@@ -133,6 +136,7 @@ export default function handleEditFunctionType() {
                     break;
                 case "position":
                     $(".point-function-btn").click();
+                    handleUpdateStep("position");
             }
         };
     });
@@ -160,6 +164,8 @@ export default function handleEditFunctionType() {
             handleResetData();
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
+            handleOverlayUpdate("hidden");
+
         };
 
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
@@ -168,6 +174,8 @@ export default function handleEditFunctionType() {
 
             loadDataFunction(type);
             refActiveTypeMission.click();
+            handleOverlayUpdate("hidden");
+
         };
 
         function handleResetData() {

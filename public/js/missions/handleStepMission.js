@@ -11,6 +11,7 @@ import {
 } from "./handleTypeMission.js";
 import translatesStepsMission from "./functionHandle/translatesStepsMission.js";
 import dbDelete from "./functionHandle/dbDelete.js";
+import handleOverlayUpdate from "./functionHandle/handleOverlayUpdate.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -244,6 +245,8 @@ function handleEditMission() {
 
             handleCancelUpdateMission();
             handleUpdateMission();
+            handleOverlayUpdate("show");
+
         };
     });
     function editTypeMission(data) {
@@ -334,6 +337,7 @@ function handleCancelUpdateMission() {
         showUpdateBtn(false, "normal");
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
+        handleOverlayUpdate('hidden')
     };
 
     $(`.cancel-ifelse`).onclick = () => {
@@ -350,6 +354,8 @@ function handleCancelUpdateMission() {
         render(valueItemIfelse.else, `.else-steps-wrapper`);
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
+        handleOverlayUpdate('hidden')
+
     };
 }
 

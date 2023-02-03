@@ -8,8 +8,8 @@
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
-    <link rel="stylesheet" href="/build/assets/app.d4811adf.css">
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="/build/assets/app.c03b085d.css">
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body>
@@ -74,7 +74,7 @@
             @yield('content')
         </div>
 
-        <div class="fixed top-[80px] right-4 z-[1000] text-2xl">
+        <div class="fixed top-[80px] right-4 z-[1004] text-2xl">
             <div class="bg-green-400 px-[10px]">
                 <span id="message-success" class=" w-full h-full text-[#fff]"></span>
             </div>

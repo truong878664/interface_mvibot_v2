@@ -21,30 +21,26 @@ handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
 export function loadDataFunction(typeFunctionActive = "footprint") {
-    typeFunction.map((item, index) => {
-        getDataFunction(item, index, typeFunctionActive);
-    });
+    fetch(`/api/function`)
+    .then((res) => res.json())
+    .then((data) => {
+        typeFunction.forEach(item => {
+            renderDataFunction(data[item], item);
+        })
+    })
+    .then(() => {
+        $(
+            `.type-mission-function-normal[type=${typeFunctionActive}]`
+        ).click();
+        $(
+            `.type-mission-function-ifelse[type=${typeFunctionActive}]`
+        ).click();
+        $(
+            `.type-mission-function-trycatch[type=${typeFunctionActive}]`
+        ).click();
+    })
 }
 
-function getDataFunction(type, index, typeFunctionActive) {
-    fetch(`/api/${type}`)
-        .then((res) => res.json())
-        .then((data) => {
-            renderDataFunction(data, type);
-            console.log('x')
-            if (index == typeFunction.length - 1) {
-                $(
-                    `.type-mission-function-normal[type=${typeFunctionActive}]`
-                ).click();
-                $(
-                    `.type-mission-function-ifelse[type=${typeFunctionActive}]`
-                ).click();
-                $(
-                    `.type-mission-function-trycatch[type=${typeFunctionActive}]`
-                ).click();
-            }
-        });
-}
 function handleRenderDataFunction() {
     $$(".type-mission-function-normal").forEach((element) => {
         element.onclick = (e) => {
