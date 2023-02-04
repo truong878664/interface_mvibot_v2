@@ -20,6 +20,7 @@ class FunctionController extends Controller
     public function index()
     {
 
+
         $data = [
             'footprint' => MissionFootprint::all(),
             'gpio' => MissionGpio::all(),

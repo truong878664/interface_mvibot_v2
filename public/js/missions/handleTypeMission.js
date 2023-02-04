@@ -22,23 +22,23 @@ handleAddMissionTrycatch();
 
 export function loadDataFunction(typeFunctionActive = "footprint") {
     fetch(`/api/function`)
-    .then((res) => res.json())
-    .then((data) => {
-        typeFunction.forEach(item => {
-            renderDataFunction(data[item], item);
+        .then((res) => res.json())
+        .then((data) => {
+            typeFunction.forEach((item) => {
+                renderDataFunction(data[item].reverse(), item);
+            });
         })
-    })
-    .then(() => {
-        $(
-            `.type-mission-function-normal[type=${typeFunctionActive}]`
-        ).click();
-        $(
-            `.type-mission-function-ifelse[type=${typeFunctionActive}]`
-        ).click();
-        $(
-            `.type-mission-function-trycatch[type=${typeFunctionActive}]`
-        ).click();
-    })
+        .then(() => {
+            $(
+                `.type-mission-function-normal[type=${typeFunctionActive}]`
+            ).click();
+            $(
+                `.type-mission-function-ifelse[type=${typeFunctionActive}]`
+            ).click();
+            $(
+                `.type-mission-function-trycatch[type=${typeFunctionActive}]`
+            ).click();
+        });
 }
 
 function handleRenderDataFunction() {

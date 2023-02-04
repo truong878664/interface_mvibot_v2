@@ -8,7 +8,8 @@
     <div class="flex flex-col">
         <label for="" class="text-xl">Time sleep</label>
         <div class="">
-            <input class="w-[40px] text-xl px-4 py-1 input-reset" type="number" name="time_sleep" required>
+            <input class="w-[40px] text-xl px-4 py-1 input-reset input-type-number" type="text" name="time_sleep"
+                required>
             <span class="text-xl">second</span>
         </div>
     </div>

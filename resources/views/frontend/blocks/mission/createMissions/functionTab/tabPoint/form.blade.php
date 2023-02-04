@@ -36,7 +36,7 @@
 
         <div class="mb-4">
             <label for="" class="text-2xl">Time out</label>
-            <input required type="text" class="w-[60px] text-2xl px-4 py-1 time-out text-center" name="time_out"
+            <input required type="text" class="w-[60px] text-2xl px-4 py-1 time-out text-center input-type-number" name="time_out"
                 value="-1">
             <span class="text-xl text-red-500"></span>
         </div>

@@ -1,5 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+import { toggerMessage } from "./main.js";
 
 activeNavTab();
 handleChangeImgMarker();
@@ -35,3 +36,23 @@ function handleInfoFunction() {
             $(".info-function-content").classList.toggle("hidden");
         });
 }
+
+$$(".input-type-number").forEach((item) => {
+    // item.oninput = (e) => {
+    //     const input = e.target.value;
+    //     console.log(input.split(""));
+    // };
+    item.onblur = (e) => {
+        const input = e.target.value;
+        const input1 = input.replace(/[^0-9\.]+/g, "");
+
+        if (input.indexOf("-") != -1) {
+            const input2 = -input1.replaceAll("-", "");
+            !isNaN(input2) ? (e.target.value = input2) : (e.target.value = 0);
+        } else {
+            !isNaN(input1)
+                ? (e.target.value = Number(input1))
+                : (e.target.value = 0);
+        }
+    };
+});
