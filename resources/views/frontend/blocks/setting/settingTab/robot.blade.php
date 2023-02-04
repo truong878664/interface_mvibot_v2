@@ -10,7 +10,7 @@
                             <i class="fa-solid fa-robot"></i>
                         </div>
                         <button
-                            class="rounded-full ml-2 bg-[#fff] text-[#0f6cbd] text-[15px] w-[30px] h-[30px] flex items-center justify-center btn delete-mission-btn">
+                            class="rounded-full ml-2 bg-[#fff] text-[#0f6cbd] text-[15px] w-[30px] h-[30px] flex items-center justify-center btn delete-robot-btn">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>

@@ -1,5 +1,5 @@
 <div class="w-full h-full flex-col flex justify-start relative">
-    <div class="flex items-center lg:mb-0 absolute top-0 left-0 -translate-y-full z-50">
+    <div class="flex items-center lg:mb-0 absolute top-0 left-0 -translate-y-full z-17">
         <a href="{{ route('dashboard.missions.create-missions.') }}" class="mx-4 bg-slate-300 px-4 rounded-md text-slate-400">
             <i class="fa-solid fa-angle-left"></i>
         </a>
@@ -67,8 +67,8 @@
             </div>
 
             {{-- deteil fc --}}
-            <div class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[1001] opacity-25 hidden" id="overlay-update-mission"></div>
-            <div class="mb-2 bg-[#fff] h-[60%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] flex-1 lg:min-h-[300px] z-[1003]">
+            <div class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden" id="overlay-update-mission"></div>
+            <div class="mb-2 bg-[#fff] h-[60%] p-4 lg:w-3/5 lg:h-full lg:mx-1 border-[1px] flex-1 lg:min-h-[300px] z-[20]">
                 <div class="h-full w-full relative">
                     <div class="absolute right-0 top-0">
                         <button class="w-[30px] h-[30px] bg-cover btn info-function-btn"
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <div class="w-full border-[1px] bg-[#fff] mt-5 z-20 h-2/5 relative">
+        <div class="w-full border-[1px] bg-[#fff] mt-5 z-18 h-2/5 relative">
             @include('frontend.blocks.mission.createMissions.functionTab.steps')
         </div>
     </div>

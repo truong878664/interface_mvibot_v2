@@ -13,7 +13,7 @@ function setMode() {
     robotActive && setModeRobot(robotActive);
     function setModeRobot(nameRobot) {
         $(".mode-item.active")?.classList.remove("active");
-        fetch(`/api/status-robot/${nameRobot}`)
+        fetch(`/api/robot/${nameRobot}`)
             .then((res) => res.json())
             .then((data) => {
                 $$(".mode-item").forEach((item) => {

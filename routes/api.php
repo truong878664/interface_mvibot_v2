@@ -54,5 +54,5 @@ Route::resource('stop', StopController::class)->only('store');
 
 Route::resource('input-gpio', InputGpioController::class)->only('index');
 
-Route::resource('status-robot', RobotController::class)->only('show');
+Route::resource('robot', RobotController::class);
 Route::resource('function', FunctionController::class)->only('index');

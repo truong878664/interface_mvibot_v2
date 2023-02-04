@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\StatusRobot;
 use App\Models\Robot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RobotController extends Controller
 {
@@ -80,8 +81,17 @@ class RobotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($name_seri)
     {
-        //
+        DB::table('sensor_status')->where('name_seri', $name_seri)->delete();
+        DB::table('robot_status')->where('name_seri', $name_seri)->delete();
+        DB::table('output_user_status')->where('name_seri', $name_seri)->delete();
+        DB::table('my_robot')->where('name_seri', $name_seri)->delete();
+        DB::table('motor_right_status')->where('name_seri', $name_seri)->delete();
+        DB::table('motor_left_status')->where('name_seri', $name_seri)->delete();
+        DB::table('input_user_status')->where('name_seri', $name_seri)->delete();
+        DB::table('battery_status')->where('name_seri', $name_seri)->delete();
+
+        return 123;
     }
 }

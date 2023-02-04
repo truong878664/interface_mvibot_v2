@@ -2,6 +2,7 @@ import { showRobotActive } from "../mainLayout.js";
 import { $, $$ } from "./setting.js";
 import publishTopic from "../rosModule/topicString.js";
 import { toggerMessage } from "../main.js";
+import dbDelete from "../missions/functionHandle/dbDelete.js";
 
 const robotActive = localStorage.getItem("robotActive");
 
@@ -20,7 +21,6 @@ $$(".robot-item").forEach((element) => {
         localStorage.setItem("robotActive", nameRobot);
 
         showRobotActive();
-        setModeRobot(nameRobot);
 
         $(".name-robot-active").innerText = nameRobot;
     };
@@ -36,3 +36,25 @@ $(".add-robot-btn").onclick = (e) => {
     nameRobotAdd && toggerMessage("success", "Add robot success!");
 };
 
+$$(".delete-robot-btn").forEach((item) => {
+    item.onclick = (e) => {
+        e.stopPropagation();
+        dbDelete(e.target, () => deleteRobot(e));
+    };
+});
+
+function deleteRobot(e) {
+    const nameRobotDelete = e.target
+        .closest(".robot-item")
+        .querySelector(".name-robot").value;
+
+    fetch(`/api/robot/${nameRobotDelete}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "DELETE",
+    })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+}

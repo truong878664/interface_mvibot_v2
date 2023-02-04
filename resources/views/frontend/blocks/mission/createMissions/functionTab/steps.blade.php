@@ -14,16 +14,6 @@
             padding: 20px 32px;
         }
 
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 100;
-        }
-
         .input-checkbox:checked+.form-checkbox {
             display: block;
         }
