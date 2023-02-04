@@ -13,7 +13,7 @@
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">Offset angle</label>
-                <input class=" input-reset w-[54px] text-xl px-4 py-1" type="number" step="0.01"
+                <input class=" input-reset w-[54px] text-xl px-4 py-1" type="text" step="0.01"
                     name="off_set_angle" required>
             </div>
 
@@ -23,25 +23,25 @@
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">sx1</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="number" required value="0.01"
+                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="text" required value="0.01"
                     step="0.01" name="sx1">
             </div>
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">sx2</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="number" required value="0.01"
+                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="text" required value="0.01"
                     step="0.01" name="sx2">
             </div>
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">sy1</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="number" required value="0.01"
+                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="text" required value="0.01"
                     step="0.01" name="sy1">
             </div>
 
             <div class="flex flex-col mr-2 items-center">
                 <label for="" class="text-xl">sy2</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="number" required value="0.01"
+                <input class="w-[54px] text-xl px-4 py-1 offset-s-001" type="text" required value="0.01"
                     step="0.01" name="sy2">
             </div>
 
