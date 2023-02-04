@@ -33,7 +33,11 @@ function setMode() {
                 $(".mode-item.active").classList.remove("active");
                 e.target.classList.add("active");
                 const mode = e.target.getAttribute("value");
-                mode != oldMode && publishTopic("/mode", mode);
+                mode != oldMode &&
+                    publishTopic(
+                        `/${robotActive}/set_config`,
+                        `(mode|${mode})`
+                    );
                 oldMode = mode;
             };
         });
@@ -59,8 +63,9 @@ function setParameter() {
 
     function sendRobotPara(e) {
         const type = e.target.getAttribute("type");
-        const data = $(`.${type}_input`).value;
-        publishTopic(`/${type}`, data);
+        const value = $(`.${type}_input`).value;
+        const data = `(${type}|${value})`;
+        publishTopic(`/${robotActive}/set_config`, data);
     }
 
     const types = [
@@ -73,11 +78,21 @@ function setParameter() {
         "robot_r",
     ];
 
-    types.forEach((type) => {
-        subscribeTopic(type, "std_msgs/String", showPara);
-    });
+    subscribeTopic(`/${robotActive}/set_config`, "std_msgs/String", showPara);
 
-    function showPara(data, name) {
-        $(`#${name}`).value = data.data * 1;
+    function showPara(data) {
+        const dataSetting = data.data
+            .replaceAll(")(", "+")
+            .replaceAll("(", "")
+            .replaceAll(")", "")
+            .split("+");
+        dataSetting?.forEach((item) => {
+            const type = item.split("|")[0];
+            const value = item.split("|")[1];
+
+            if (types.indexOf(type) != -1) {
+                $(`#${type}`).value = value;
+            }
+        });
     }
 }

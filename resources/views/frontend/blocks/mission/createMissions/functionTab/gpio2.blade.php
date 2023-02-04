@@ -7,7 +7,7 @@
 
         <div class="flex flex-col ml-2">
             <label for="" class="text-xl">Time out</label>
-            <input class="w-[40px] text-xl px-2 py-1 time_out_gpio2 text-center input-type-number" type="number" name="time_out"
+            <input class="w-[40px] text-xl px-2 py-1 time_out_gpio2 text-center input-type-number" type="text" name="time_out"
                 value="-1" required>
         </div>
     </div>

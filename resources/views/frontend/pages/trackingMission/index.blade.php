@@ -2,7 +2,6 @@
     <div class="map-tracking-wrapper bg-[#ccc]">
         <div class="map-tracking" id="map"></div>
         <div class="choose-robot-tracking">
-            <label for="">choose robot:</label>
             <input type="hidden" id="robot-navigation-json" value="{{ json_encode($robotNavigate) }}">
             <select name="" id="robot-navigation" class="obtion-robot">
                 <option value="">select robot</option>

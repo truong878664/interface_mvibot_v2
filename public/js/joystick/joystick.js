@@ -8,57 +8,71 @@ $("#list-robot").onchange = (e) => {
     cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
 };
 
-const rangeSlider = $("#rs-range-line");
-const rangeBullet = $("#rs-bullet");
+const speedMax = 0.3;
+const radMax = 0.314;
+
+const rangeSliderSpeed = $("#rs-range-line-speed");
+const rangeBulletSpeed = $("#rs-bullet-speed");
+
+const rangeSliderRad = $("#rs-range-line-rad");
+const rangeBulletRad = $("#rs-bullet-rad");
 
 const speedLocal = localStorage.getItem("speed");
+const radLocal = localStorage.getItem("rad");
 
 if (speedLocal) {
-    rangeSlider.value = speedLocal * 100;
-    // rangeBullet.innerText = speedLocal * 100;
-    // rangeBullet.setAttribute("speed", speedLocal * 100);
-    showSliderValue();
+    rangeSliderSpeed.value = (speedLocal / speedMax) * 100;
+    // rangeBulletSpeed.innerText = speedLocal * 100;
+    // rangeBulletSpeed.setAttribute("speed", speedLocal * 100);
+    showSliderSpeedValue();
+}
+if (radLocal) {
+    rangeSliderRad.value = (radLocal / radMax) * 100;
+    showSliderRadValue();
 }
 
-rangeSlider.addEventListener("input", showSliderValue, false);
+rangeSliderSpeed.addEventListener("input", showSliderSpeedValue, false);
+rangeSliderRad.addEventListener("input", showSliderRadValue, false);
 
-function showSliderValue() {
-    const speed = (rangeSlider.value / 100).toFixed(1);
-    rangeBullet.innerHTML = speed;
-    rangeBullet.setAttribute("speed", speed);
-    const bulletPosition = rangeSlider.value / rangeSlider.max;
-    const width = rangeSlider.offsetWidth;
+function showSliderSpeedValue() {
+    const speed = ((rangeSliderSpeed.value / 100) * speedMax).toFixed(2);
+    rangeBulletSpeed.innerText = speed;
+    rangeBulletSpeed.setAttribute("speed", speed);
 
-    rangeBullet.style.left = bulletPosition * (0.935 * width) + "px";
     localStorage.setItem("speed", speed);
+}
+
+function showSliderRadValue() {
+    const rad = ((rangeSliderRad.value / 100) * radMax).toFixed(3);
+
+    rangeBulletRad.innerText = rad;
+    rangeBulletRad.setAttribute("rad", rad);
+
+    localStorage.setItem("rad", rad);
 }
 
 const runRobot = [];
 
 let singleButton = true;
-let moving = false;
 
 $$(".button-move").forEach((element) => {
     element.onpointerdown = (e) => {
         if (singleButton) {
+            const speed = Number(rangeBulletSpeed.getAttribute("speed"));
+            const rad = Number(rangeBulletRad.getAttribute("rad"));
+
             switch (e.target.getAttribute("type")) {
                 case "up":
                     runRobot.push(
                         setInterval(() => {
-                            const speed = Number(
-                                rangeBullet.getAttribute("speed")
-                            );
                             moveRobot(speed, 0);
-                            moving = true;
                         }, 100)
                     );
+
                     break;
                 case "down":
                     runRobot.push(
                         setInterval(() => {
-                            const speed = Number(
-                                rangeBullet.getAttribute("speed")
-                            );
                             moveRobot(-speed, 0);
                         }, 100)
                     );
@@ -66,14 +80,14 @@ $$(".button-move").forEach((element) => {
                 case "left":
                     runRobot.push(
                         setInterval(() => {
-                            moveRobot(0, 0.314);
+                            moveRobot(0, rad);
                         }, 100)
                     );
                     break;
                 case "right":
                     runRobot.push(
                         setInterval(() => {
-                            moveRobot(0, -0.314);
+                            moveRobot(0, -rad);
                         }, 100)
                     );
                     break;
@@ -103,5 +117,4 @@ function clearIntervalAll(runRobot) {
     });
     singleButton = true;
     moveRobot(0, 0);
-    
 }
