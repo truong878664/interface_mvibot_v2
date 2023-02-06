@@ -1,5 +1,6 @@
 import connectRos from "./rosModule/connectRos.js";
 import { ip } from "../ip.js";
+import route from "./route.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -11,7 +12,10 @@ const $$ = document.querySelectorAll.bind(document);
 //     localStorage.setItem("ip", "192.168.0.2");
 //     ip = localStorage.getItem("ip");
 // }
-const ros = connectRos(ip);
+const ros = connectRos('192.168.85.238');
+
+route()
+
 
 function toggerMessage(type, message) {
     const divMessage = document.querySelector(`#message-${type}`);

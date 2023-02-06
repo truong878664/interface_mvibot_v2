@@ -114,7 +114,7 @@ class userController extends Controller
 
             case 'update':
                 $userLogged->update(['name' => $request->username]);
-                return ['message' => 'ok'];
+                return ['message' => 'ok', 'status' => 200];
         }
     }
 

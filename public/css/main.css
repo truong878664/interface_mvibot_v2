@@ -54,7 +54,7 @@
 }
 
 html {
-    font-family: var(--main-font);
+    font-family: "Montserrat";
     font-size: 62.5%;
     color: #1c2536;
     touch-action: none;
@@ -121,7 +121,9 @@ li {
 .text-white {
     color: #fff;
 }
-
+.bg-white {
+    background-color: white;
+}
 .heading {
     font-size: 1.6rem;
     font-weight: 600;
@@ -155,8 +157,12 @@ li {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.234);
 }
+
+::-webkit-scrollbar-track {
+    background: #cccccc;
+  }
 
 .btn {
     transform: translateZ(0) scale(1);
@@ -188,3 +194,4 @@ li {
     background-color: rgb(255, 223, 223);
     border-color: rgb(255, 223, 223);
 }
+

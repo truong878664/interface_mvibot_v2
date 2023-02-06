@@ -11,6 +11,7 @@ export default function handleDeleteFunctionType() {
         };
     });
 }
+const timeOut = [];
 
 function deleteItem(e) {
     const functionItem = e.target.closest(".type-mission-function-item");
@@ -67,8 +68,15 @@ function deleteItem(e) {
             ).forEach((element) => {
                 element.remove();
             });
-            console.log(data);
-            translatesStepsMission(currentMission);
-            renderBlockStep();
+
+            timeOut.forEach((time) => {
+                clearTimeout(time);
+            });
+            timeOut.push(
+                setTimeout(() => {
+                    translatesStepsMission(currentMission);
+                    renderBlockStep();
+                }, 1000)
+            );
         });
 }

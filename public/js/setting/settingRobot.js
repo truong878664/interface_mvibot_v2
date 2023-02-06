@@ -20,6 +20,7 @@ function setMode() {
                     item.getAttribute("value") == data.mode &&
                         item.classList.add("active");
                 });
+                console.log(data)
             })
             .then(() => {
                 changeModeRobot();
@@ -30,7 +31,7 @@ function setMode() {
         let oldMode = $(".mode-item.active")?.getAttribute("value");
         $$(".mode-item").forEach((item) => {
             item.onclick = (e) => {
-                $(".mode-item.active").classList.remove("active");
+                $(".mode-item.active")?.classList.remove("active");
                 e.target.classList.add("active");
                 const mode = e.target.getAttribute("value");
                 mode != oldMode &&

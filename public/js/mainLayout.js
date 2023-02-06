@@ -6,8 +6,6 @@ const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
 
-showRobotActive();
-
 function connected() {
     connectRosBtn?.classList.remove("connection-failed");
     connectRosBtn?.classList.add("connected");
@@ -95,19 +93,4 @@ function robotActive() {
     return localStorage.getItem("robotActive");
 }
 
-function showRobotActive() {
-    const nameRobotActive = robotActive()
-    if (nameRobotActive) {
-        $(".robot-active-header").innerText = nameRobotActive;
-    } else {
-        $(".robot-active-header").innerText = "null";
-    }
-}
-
-export {
-    connected,
-    connectionFailed,
-    updateAvatarUser,
-    showRobotActive,
-    robotActive,
-};
+export { connected, connectionFailed, updateAvatarUser, robotActive };

@@ -57,7 +57,7 @@ function renderBlockStep() {
                                 shortHandMissionList[index]
                             }>
                                 <i class="fa-solid fa-play"></i>
-                                <div class="step-item text-[#333] border border-[#333] bg-white ">normal|
+                                <div class="step-item text-[#333] border border-[#333] bg-white font-bold">normal|
                                 ${arrayStep.slice(0, arrayStep.indexOf("^"))}
                                 </div>
                                 ${htmlNormalText}
@@ -77,17 +77,17 @@ function renderBlockStep() {
                         renderStepItem(dataIfelse[2], htmlElse);
 
                         htmlIfelse.push(
-                            ` <div class="step-item bg-black text-[#fff]">if|
+                            ` <div class="step-item bg-black font-bold text-[#fff]">if|
                             ${arrayStep.slice(0, arrayStep.indexOf("^"))}
                             </div>${htmlIf.join("")}`
                         );
                         htmlIfelse.push(
-                            ` <div class="hidden step-item bg-black text-[#fff] step-hidden">then</div>${htmlThen.join(
+                            ` <div class="hidden step-item bg-black text-[#fff] font-bold step-hidden">then</div>${htmlThen.join(
                                 ""
                             )}`
                         );
                         htmlIfelse.push(
-                            ` <div class="hidden step-item bg-black text-[#fff] step-hidden">else</div>${htmlElse.join(
+                            ` <div class="hidden step-item bg-black text-[#fff] font-bold step-hidden">else</div>${htmlElse.join(
                                 ""
                             )}`
                         );
@@ -126,7 +126,7 @@ function renderStepItem(data, html) {
         );
 
         return html.push(`
-            <div class="hidden step-item step-${stepMode} step-hidden" index=${index}>
+            <div class="hidden step-item text-white step-${stepMode} step-hidden" index=${index}>
             <span class="stem-name">${stepMode}|${stepName}</span>
             </div>
             `);

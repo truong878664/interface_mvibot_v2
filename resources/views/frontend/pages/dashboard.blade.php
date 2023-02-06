@@ -16,18 +16,18 @@
         <x-dashboard-item route='dashboard.joystick.' icon='fa-solid fa-up-down-left-right' title='Joystick'
             describe='Move robot' color="#EB6440" />
 
-        <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
-            color="#10A19D" />
-
         <x-dashboard-item route='dashboard.mapping.' icon='fa-solid fa-map' title='Maping' describe='Learning map'
             color="#e62648" />
 
         <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-location-dot' title='localization'
             describe='Set localization for robot' color="#B01E68" />
+
         <x-dashboard-item route='dashboard.gpio.' icon='fa-solid fa-toggle-on' title='Gpio' describe='Set & reset Gpio'
             color="#4E6C50" />
+
+        <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
+            color="#10A19D" />
         {{-- 
-            
             <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-music' title='Music' describe='Set sound'
             color="#5BB318" /> 
             --}}

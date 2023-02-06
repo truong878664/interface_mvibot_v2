@@ -49,7 +49,12 @@ class RobotController extends Controller
      */
     public function show(Request $request, $robot)
     {
-        return StatusRobot::where('name_seri', $robot)->first();
+        $statusRobot = StatusRobot::where('name_seri', $robot)->first();
+        if ($statusRobot) {
+            return $statusRobot;
+        } else {
+            return ['message' => 'no robot'];
+        }
     }
 
     /**
@@ -83,8 +88,8 @@ class RobotController extends Controller
      */
     public function destroy($name_seri)
     {
-        DB::table('sensor_status')->where('name_seri', $name_seri)->delete();
         DB::table('robot_status')->where('name_seri', $name_seri)->delete();
+        DB::table('sensor_status')->where('name_seri', $name_seri)->delete();
         DB::table('output_user_status')->where('name_seri', $name_seri)->delete();
         DB::table('my_robot')->where('name_seri', $name_seri)->delete();
         DB::table('motor_right_status')->where('name_seri', $name_seri)->delete();
@@ -92,6 +97,6 @@ class RobotController extends Controller
         DB::table('input_user_status')->where('name_seri', $name_seri)->delete();
         DB::table('battery_status')->where('name_seri', $name_seri)->delete();
 
-        return 123;
+        return ['status' => 200];
     }
 }

@@ -70,8 +70,8 @@
             @include('frontend.blocks.setting.settingTab.usersTab.createAcc')
         </div>
         <button
-            class="text-[16px] px-4 rounded border-[1px] border-solid border-stone-500 float-right mt-4 btn hover:bg-stone-300">
-            <a href="{{ route('logout') }}"> Logout...</a>
+            class="text-[16px] px-4 rounded border-[1px] border-solid border-stone-500 float-right mt-4 btn hover:bg-stone-300 logout-btn">Logout...
         </button>
+        <a href="{{ route('logout') }}" class="hidden logout-href"></a>
     </div>
 </div>

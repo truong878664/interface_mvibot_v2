@@ -1,4 +1,3 @@
-import { showRobotActive } from "../mainLayout.js";
 import { $, $$ } from "./setting.js";
 import publishTopic from "../rosModule/topicString.js";
 import { toggerMessage } from "../main.js";
@@ -7,7 +6,7 @@ import dbDelete from "../missions/functionHandle/dbDelete.js";
 const robotActive = localStorage.getItem("robotActive");
 
 if (robotActive) {
-    $(`.robot-${robotActive}`).classList.add("active");
+    $(`.robot-${robotActive}`)?.classList.add("active");
     $(".name-robot-active").innerText = robotActive;
 } else {
     $(".name-robot-active").innerText = "No robots choose";
@@ -56,5 +55,7 @@ function deleteRobot(e) {
         method: "DELETE",
     })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            data.status == 200 && e.target.closest(".robot-item").remove();
+        });
 }

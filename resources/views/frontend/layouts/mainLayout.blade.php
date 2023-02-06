@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
-    <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
-    <link rel="stylesheet" href="/build/assets/app.c7cf176f.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/build/assets/app.a5b80939.css">
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
-<body>
+<body class="">
+
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -25,8 +26,6 @@
             </div>
             <div class="flex items-center">
                 <h3 class="">Mvibot</h3>
-                <span class="mx-4 ">–</span>
-                <span class="robot-active-header"></span>
 
             </div>
             <div class="message-map-wrapper">
@@ -35,17 +34,15 @@
 
         <div class="user-wrapper">
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
-            <input class="ml-10 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
-                value="" />
+            <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
+                value="{{ session('UserName') }}" />
             <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
                 <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
-
                 @if (session('TypeUser') == 'admin')
                     <div class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
                 @endif
-
             </div>
         </div>
     </header>
@@ -82,8 +79,6 @@
                 <span id="message-error" class=" w-full h-full text-[#fff]"></span>
             </div>
         </div>
-
-
     </div>
 
     {{-- <script src="/js/library/jquery.min.js"></script>

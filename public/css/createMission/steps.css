@@ -43,10 +43,10 @@
 }
 
 .arrow {
-    width: 30px;
+    /* width: 30px;
     height: 4px;
     background-color: aqua;
-    position: relative;
+    position: relative; */
 }
 
 .arrow::after {

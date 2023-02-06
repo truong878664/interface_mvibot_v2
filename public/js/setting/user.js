@@ -1,4 +1,4 @@
-import { toggerMessage, } from "../main.js";
+import { toggerMessage } from "../main.js";
 import { updateAvatarUser } from "../mainLayout.js";
 import { $, $$ } from "./setting.js";
 
@@ -7,6 +7,8 @@ handleUpdateUser();
 handleCreateNewUser();
 handleUpdatePassword();
 handleNormalUser();
+
+logout();
 
 function tabUser() {
     $$(".user-setting-btn").forEach((element, index) => {
@@ -103,7 +105,9 @@ function handleUpdateUser() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                if (data.status == 200) {
+                    localStorage.setItem("username", username.value);
+                }
             });
     }
 }
@@ -169,4 +173,11 @@ function handleNormalUser() {
         });
         $(".list-normal-user").innerHTML = html.join("");
     }
+}
+
+function logout() {
+    $(".logout-btn").onclick = (e) => {
+        localStorage.removeItem("username");
+        $(".logout-href").click();
+    };
 }
