@@ -12,9 +12,8 @@ const $$ = document.querySelectorAll.bind(document);
 //     localStorage.setItem("ip", "192.168.0.2");
 //     ip = localStorage.getItem("ip");
 // }
-const ros = connectRos('192.168.85.238');
+const ros = connectRos(id);
 
-route()
 
 
 function toggerMessage(type, message) {
