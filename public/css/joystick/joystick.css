@@ -1,0 +1,125 @@
+.button-move {
+    border-radius: 40%;
+    box-shadow: inset 0 0 0 2px #ddd;
+    background: linear-gradient(#bfbfbf, #fff) content-box,
+        linear-gradient(#fff, #979797) padding-box,
+        linear-gradient(#969696, #fbfbfb) border-box;
+    cursor: pointer;
+}
+
+.button-console-wrapper {
+    box-shadow: 0 -5px 5px rgba(255, 255, 255, 0.1),
+        0 5px 5px rgba(255, 255, 255, 0.05), inset 0 5px 5px rgba(0, 0, 0, 0.2),
+        inset 0 -5px 5px rgba(255, 255, 255, 0.05);
+}
+
+.button-move:active {
+    border-width: 2px;
+    border-color: #eee;
+    color: orange;
+    text-shadow: 0 0 16px orange;
+}
+
+.rs-range {
+    /* margin-top: 29px; */
+    width: 100%;
+    -webkit-appearance: none;
+    border: none;
+    background-color: transparent;
+}
+
+.rs-range:focus {
+    outline: none;
+}
+
+.rs-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #ccc;
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+
+.rs-range::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #ccc;
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+
+.rs-range::-webkit-slider-thumb {
+    box-shadow: none;
+    border: 0px solid #ccc;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 1);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+}
+
+.rs-range::-moz-range-thumb {
+    box-shadow: none;
+    border: 0px solid #ccc;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 1);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+}
+
+.rs-range::-moz-focus-outer {
+    border: 0;
+}
+
+.rs-label {
+    position: relative;
+    transform-origin: center center;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border-radius: 50%;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+    border: 2px solid rgb(126, 126, 126);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: rgb(129, 129, 129);
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 12px;
+    padding: 4px;
+    /* background: #010101; */
+    transform: translateX(-20%);
+    /* left: calc(50% - 12px); */
+}
+
+.rs-label-speed::after {
+    content: "m/s";
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
+
+}
+.rs-label-rad::after {
+    content: "rad/s";
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
+}

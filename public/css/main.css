@@ -195,3 +195,16 @@ li {
     border-color: rgb(255, 223, 223);
 }
 
+/* setting */
+.setting-item.active {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+.setting-item.active:hover {
+    background-color: var(--main-color);
+
+}
+
+/* joystick */
+
