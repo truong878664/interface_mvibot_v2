@@ -1,6 +1,5 @@
 import connectRos from "./rosModule/connectRos.js";
 import { ip } from "../ip.js";
-import route from "./route.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -12,7 +11,7 @@ const $$ = document.querySelectorAll.bind(document);
 //     localStorage.setItem("ip", "192.168.0.2");
 //     ip = localStorage.getItem("ip");
 // }
-const ros = connectRos(id);
+const ros = connectRos(ip);
 
 
 
