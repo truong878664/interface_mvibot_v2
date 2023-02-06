@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/main.css">
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/build/assets/app.c7cf176f.css">
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body>
