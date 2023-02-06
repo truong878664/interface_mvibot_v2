@@ -19,7 +19,7 @@
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
-    <header class="main-header">
+    <header class="main-header ajax">
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed">
                 <i class="fa-solid fa-satellite-dish"></i>
