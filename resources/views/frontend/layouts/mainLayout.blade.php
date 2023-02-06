@@ -52,7 +52,7 @@
             <ul class="">
                 <div class="bar-item-top">
                 </div>
-                <li class="bar-item home ">
+                <li class="bar-item home">
                     <a href="{{ route('home') }}" class="flex justify-center">
                         <i class="fa-solid fa-house"></i>
                         <span class="bar-item-title">Home</span>
@@ -99,7 +99,6 @@
 
     <script type="module" src="/js/mainLayout.js"></script>
     <script type="module" src="/js/main.js"></script>
-
 </body>
 
 </html>

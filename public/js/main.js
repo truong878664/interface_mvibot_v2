@@ -14,7 +14,6 @@ const $$ = document.querySelectorAll.bind(document);
 const ros = connectRos(ip);
 
 
-
 function toggerMessage(type, message) {
     const divMessage = document.querySelector(`#message-${type}`);
     divMessage.innerText = message;

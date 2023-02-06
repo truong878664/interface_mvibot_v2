@@ -49,19 +49,6 @@
     border-left: 2px solid var(--main-color);
 }
 
-.logout {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 16px 0px;
-    font-size: 2.7rem;
-    background-color: transparent;
-    border: none;
-    color: var(--white-color);
-    cursor: pointer;
-    color: #ccc;
-}
-
 /* user */
 .user-wrapper {
     display: flex;

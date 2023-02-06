@@ -19,10 +19,10 @@ return new class extends Migration
                 $table->string('name_footprint');
                 $table->string('mode')->default('footprint');
                 $table->integer('time_out')->default(-1);
-                $table->integer('x1');
-                $table->integer('y1');
-                $table->integer('x2');
-                $table->integer('y2');
+                $table->float('x1');
+                $table->float('y1');
+                $table->float('x2');
+                $table->float('y2');
             });
         }
     }

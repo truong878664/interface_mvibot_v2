@@ -4,15 +4,14 @@ import { $, $$ } from "./main.js";
 //     // link("/", ".home");
 // }
 
-// function link(link, element) {
-//     $(element).onclick = (e) => {
-        
-//         console.log(1)
-//         const xhttp = new XMLHttpRequest();
-//         xhttp.onload = function () {
-//             $("body").innerHTML = this.responseText;
-//         };
-//         xhttp.open("GET", link, true);
-//         xhttp.send();
-//     };
-// }
+function link(link, element) {
+    $(element).onclick = (e) => {
+        console.log(1)
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            $("body").innerHTML = this.responseText;
+        };
+        xhttp.open("GET", link, true);
+        xhttp.send();
+    };
+}
