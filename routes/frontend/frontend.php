@@ -11,6 +11,7 @@ use App\Http\Controllers\frontend\joystickController;
 use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
+use App\Http\Controllers\frontend\SoundController;
 use App\Http\Controllers\frontend\statusController;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
@@ -21,6 +22,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/', function () {
         return view('frontend.pages.home.home');
     })->name('home');
+
+    Route::get('/user', function () {
+        return view('frontend.pages.user.user');
+    })->name('user');
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
@@ -66,5 +71,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         )->name('location.');
 
         Route::get('gpio', [gpioPageController::class, 'index'])->name('gpio.');
+
+        Route::get('sound', [SoundController::class, 'index'])->name('sound.');
     });
 });

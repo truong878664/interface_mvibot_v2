@@ -1,4 +1,4 @@
-<div class="setting-detail flex hidden">
+<div class="setting-detail flex">
     <div class="mx-auto w-full max-w-[700px] mt-[50px] py-10 px-5 border-stone-300 border bg-stone-200">
         <div class="w-[calc(100%_+_20px)] -ml-[10px] flex flex-wrap cursor-pointer">
             @foreach ($allRobot as $robot)

@@ -165,17 +165,15 @@ export default function handleEditFunctionType() {
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
             handleOverlayUpdate("hidden");
-
         };
 
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
             e.preventDefault();
             dataUpdateStep(type) && handleResetData();
-
+            translatesStepsMission(currentMission);
             loadDataFunction(type);
             refActiveTypeMission.click();
             handleOverlayUpdate("hidden");
-
         };
 
         function handleResetData() {
@@ -227,6 +225,7 @@ export default function handleEditFunctionType() {
                             `${type}#${oldName}#${currentIdUpdate}`,
                             `${type}#${name_footprint.value}#${currentIdUpdate}`
                         );
+
                     return true;
                 } else {
                     toggerMessage("error", "Please enter all inputs");

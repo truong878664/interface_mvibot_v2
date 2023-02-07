@@ -25,6 +25,9 @@
         <x-dashboard-item route='dashboard.gpio.' icon='fa-solid fa-toggle-on' title='Gpio' describe='Set & reset Gpio'
             color="#4E6C50" />
 
+        <x-dashboard-item route='dashboard.sound.' icon='fa-solid fa-volume-high' title='Sound'
+            describe='Set sound for robot' color="#F48484" />
+
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
         {{-- 

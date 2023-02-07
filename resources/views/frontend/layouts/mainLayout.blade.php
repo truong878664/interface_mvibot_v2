@@ -8,7 +8,7 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/build/assets/app.a5b80939.css">
+    <link rel="stylesheet" href="/build/assets/app.8240b4e5.css">
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -64,6 +64,14 @@
                         <span class="bar-item-title">Dashboard</span>
                     </a>
                 </li>
+
+                <li class="bar-item user">
+                    <a href="{{ route('user') }} "class="flex justify-center">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span class="bar-item-title">User</span>
+                    </a>
+                </li>
+                
             </ul>
         </section>
 

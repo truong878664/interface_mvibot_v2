@@ -5,11 +5,23 @@ import publishTopic from "../rosModule/topicString.js";
 const robotActive = localStorage.getItem("robotActive");
 
 (function settingRobotStart() {
-    setMode();
+    setIp();
+    setModeIp();
     setParameter();
 })();
 
-function setMode() {
+function setIp() {
+    $(".set-ip-master-btn").onclick = () => {
+        const ipMaster = $(".address-ip-master").value;
+        publishTopic(`/${robotActive}/set_config`, `(ip_master|${ipMaster})`);
+    };
+
+    $(".set-ip-node-btn").onclick = () => {
+        const ipNode = $(".address-ip-node").value;
+        publishTopic(`/${robotActive}/set_config`, `(ip_node|${ipNode})`);
+    };
+}
+function setModeIp() {
     robotActive && setModeRobot(robotActive);
     function setModeRobot(nameRobot) {
         $(".mode-item.active")?.classList.remove("active");
@@ -20,7 +32,10 @@ function setMode() {
                     item.getAttribute("value") == data.mode &&
                         item.classList.add("active");
                 });
-                console.log(data)
+                console.log(data);
+
+                $(".address-ip-master").value = data.ip_master;
+                $(".address-ip-node").value = data.ip_node;
             })
             .then(() => {
                 changeModeRobot();

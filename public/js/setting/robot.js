@@ -19,7 +19,6 @@ $$(".robot-item").forEach((element) => {
 
         localStorage.setItem("robotActive", nameRobot);
 
-        showRobotActive();
 
         $(".name-robot-active").innerText = nameRobot;
     };

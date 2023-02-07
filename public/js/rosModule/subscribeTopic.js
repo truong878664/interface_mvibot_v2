@@ -8,3 +8,4 @@ export default function subscribeTopic(name, messageType, callback) {
     });
     listener.subscribe((data) => callback(data, name));
 }
+ 

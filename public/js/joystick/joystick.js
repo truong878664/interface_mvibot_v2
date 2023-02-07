@@ -60,7 +60,7 @@ $$(".button-move").forEach((element) => {
         if (singleButton) {
             const speed = Number(rangeBulletSpeed.getAttribute("speed"));
             const rad = Number(rangeBulletRad.getAttribute("rad"));
-
+            $('.joystick-wrapper').style.pointerEvents = 'none';
             switch (e.target.getAttribute("type")) {
                 case "up":
                     runRobot.push(
@@ -117,4 +117,5 @@ function clearIntervalAll(runRobot) {
     });
     singleButton = true;
     moveRobot(0, 0);
+    $('.joystick-wrapper').style.pointerEvents = 'auto';
 }

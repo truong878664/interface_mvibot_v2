@@ -1,18 +1,19 @@
 import { toggerMessage } from "../main.js";
 import { robotActive } from "../mainLayout.js";
-import publishTopic from "../rosModule/topicString.js";
-import { $, $$ } from "./setting.js";
+import publishTopicString from "../rosModule/topicString.js";
+import publishTopic from "../rosModule/pubicTopic.js";
+import { $, $$ } from "../setting/setting.js";
 
 handleRenderSound();
 
 function handleRenderSound() {
-    getPathSound();
     const pathSound = JSON.parse(document.querySelector(".pathSound").value);
     renderSound(pathSound);
     handleActionSound();
     setTimeSound();
 
     handleSendSound();
+    actionBtn();
 }
 
 function renderSound(pathSound) {
@@ -44,13 +45,8 @@ function renderSound(pathSound) {
             </td>
         </tr>`);
     });
-    const tr = ` <tr class="text-center">
-                    <th class="border border-solit border-[#ccc] py-2">STT</th>
-                    <th class="border border-solit border-[#ccc] py-2">Name</th>
-                    <th class="border border-solit border-[#ccc] py-2">Time</th>
-                    <th class="border border-solit border-[#ccc] py-2">Action</th>
-                </tr>`;
-    $("#table-sound").innerHTML = tr + html.join("");
+
+    $("#table-sound").innerHTML = $("#table-sound").innerHTML += html.join("");
 }
 
 function setTimeSound() {
@@ -117,12 +113,16 @@ function handleSendSound() {
             const hrefSource = window.location.origin + src;
             const nameSound = src.slice(src.lastIndexOf("/") + 1, src.length);
 
-            const nameRobotActive = robotActive();
+            const nameRobotActive = $("#robot-sound").value;
+
             if (!nameRobotActive) {
                 toggerMessage("error", "Please choose robot!");
             } else {
-                publishTopic("nametopic", hrefSource);
-                console.log(hrefSource)
+                publishTopicString(
+                    `/${nameRobotActive}/music_name`,
+                    hrefSource
+                );
+                console.log(hrefSource);
                 toggerMessage(
                     "success",
                     `${nameSound} sound sent successfully`
@@ -136,4 +136,51 @@ function secondToMinute(time) {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time - minutes * 60);
     return [("0" + minutes).slice(-2), ("0" + seconds).slice(-2)];
+}
+
+function actionBtn() {
+    $(".start-sound-btn").onclick = () => {
+        const nameRobotActive = $("#robot-sound").value;
+
+        if (!nameRobotActive) {
+            toggerMessage("error", "Please choose robot!");
+        } else {
+            publishTopic(
+                `/${nameRobotActive}/music_start`,
+                1.0,
+                "std_msgs/Float32"
+            );
+            toggerMessage("success", `successfully`);
+        }
+    };
+
+    $(".basic-sound-btn").onclick = () => {
+        const nameRobotActive = $("#robot-sound").value;
+
+        if (!nameRobotActive) {
+            toggerMessage("error", "Please choose robot!");
+        } else {
+            publishTopic(
+                `/${nameRobotActive}/music_start`,
+                2.0,
+                "std_msgs/Float32"
+            );
+            toggerMessage("success", `successfully`);
+        }
+    };
+
+    $(".custom-sound-btn").onclick = () => {
+        const nameRobotActive = $("#robot-sound").value;
+
+        if (!nameRobotActive) {
+            toggerMessage("error", "Please choose robot!");
+        } else {
+            publishTopic(
+                `/${nameRobotActive}/music_start`,
+                3.0,
+                "std_msgs/Float32"
+            );
+            toggerMessage("success", `successfully`);
+        }
+    };
 }
