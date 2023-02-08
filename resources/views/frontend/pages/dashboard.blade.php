@@ -1,7 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
-    <div class=" dashboard-content">
+    <div class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
         <x-dashboard-item route='dashboard.missions.create-missions.' icon='fa-solid fa-crosshairs' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
         <x-dashboard-item route='dashboard.missions.tracking-mission' icon='fa-solid fa-circle-right' title='Tracking Missions'
@@ -30,10 +30,5 @@
 
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
-        {{-- 
-            <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-music' title='Music' describe='Set sound'
-            color="#5BB318" /> 
-            --}}
-
     </div>
 @endsection

@@ -1,11 +1,11 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading missions-heading">Mission</div>
+    {{-- <div class="heading relative">Mission</div> --}}
 
-    <div class=" missions-content">
-        <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
+    <div class=" missions-content w-[calc(100%_-_8px)] h-[calc(100%_-_8px)] m-2">
+        {{-- <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions"> --}}
             @include('frontend.blocks.mission.createMissions.createStep')
-        </div>
+        {{-- </div> --}}
     </div>
     @include('frontend.blocks.message')
 

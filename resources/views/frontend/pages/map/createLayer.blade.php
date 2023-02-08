@@ -1,32 +1,22 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-full h-full flex flex-col max-h-[calc(100vh_-_48px)]">
-
-        <div class="heading map-heading">Map</div>
-        <div class="mx-4 mb-4 h-full flex flex-col">
-
+    <div class="flex flex-col w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-md overflow-hidden bg-stone-200">
+        <div class="h-full flex flex-col">
             <div class="flex-1 flex ">
 
                 <div class="w-5/6 h-full relative  overflow-hidden">
-                    <div class="w-full h-full absolute cursor-copy" id="map"></div>
+                    <div class="w-full h-full absolute cursor-copy rounded-md overflow-hidden" id="map"></div>
                     {{-- ===heading map=== --}}
                     <div class="absolute p-2 text-[1.5rem] w-full flex">
-                        <div class="">
-
-                            <a class="inline-block px-3 rounded hover:bg-[#ccc] w-[30px] mb-2"
-                                href="{{ route('dashboard.map.map') }}">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </a>
-                        </div>
-                        <div class="">
+                        <div class="text-xl">
                             <span>Map active:</span>
                             <span id="map-active">{{ $mapActive }}</span>
                         </div>
                         <div class="bg-[#fff] absolute top-3 right-3 w-[200px]">
                             <label for=""
-                                class="absolute bg-[#0f6cbd] rounded-sm select-none text-[#fff] top-0 w-full block h-[23px] text-center btn"
+                                class="absolute bg-[#0f6cbd] rounded-sm select-none text-[#fff] top-0 w-full block h-[23px] text-center"
                                 id="list-layer-btn">
-                                <span>saved layer list</span>
+                                <span>Saved layer list</span>
                                 <span class="text-xl float-right pr-4 leading-[23px]">
                                     <i class="fa-solid fa-chevron-down hidden" id="down-icon"></i>
                                     <i class="fa-solid fa-chevron-up hidden" id="up-icon"></i>
@@ -57,16 +47,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col mt-3 justify-end content-start w-[300px] px-5">
+                <div class="flex flex-col mt-3 justify-end content-start w-[300px] px-5 rounded-md">
                     <div class="">
                         <div for="" class="text-[1.4rem] w-full mb-9 relative">
-                            <span
-                                class="block w-full text-right text-[1.2rem] text-red-500 absolute top-0 right-1 -translate-y-full"
-                                id="msg-name-layer"></span>
                             <div class="flex items-center">
                                 <span class="pr-2 min-w-[77px] ">Name layer</span>
                                 <input type="text" class=" w-[200px] px-4" id="name_layer">
                             </div>
+                            <span
+                                class="block w-full text-right text-[1.2rem] text-red-500 absolute bottom-0 right-0 translate-y-full"
+                                id="msg-name-layer"></span>
                         </div>
                         <div class="w-full h-[1px] bg-slate-400 mb-4"></div>
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">

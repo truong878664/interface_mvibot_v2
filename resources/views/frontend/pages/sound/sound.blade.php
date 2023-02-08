@@ -1,8 +1,8 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading dashboard-heading">gpio</div>
-    <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
-        <div class="w-1/2 mx-auto mt-10 py-10 px-5 border-stone-300 border bg-stone-200">
+    <div class="heading dashboard-heading">Sound</div>
+    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 flex flex-col overflow-auto">
+        <div class="w-1/2 mx-auto py-10 px-5 border-stone-300 border bg-stone-200">
             <select name="" id="robot-sound"
                 class="text-2xl border rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] py-2 text-white px-4 outline-none mb-4">
                 <option value="">Select robot</option>
@@ -21,12 +21,12 @@
             </table>
             <div class="mt-4">
                 <button
-                    class="float-right text-xl md:text-3xl btn bg-green-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 start-sound-btn">Start 1.0</button>
+                    class="float-right text-xl md:text-3xl btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>
 
                 <button
-                    class="float-right text-xl md:text-3xl btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 basic-sound-btn">Basic 2.0</button>
+                    class="float-right text-xl md:text-3xl btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 basic-sound-btn">Basic</button>
                 <button
-                    class="float-right text-xl md:text-3xl btn bg-yellow-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 custom-sound-btn">Custom 3.0</button>
+                    class="float-right text-xl md:text-3xl btn bg-yellow-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 custom-sound-btn">Custom</button>
             </div>
 
 

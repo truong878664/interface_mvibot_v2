@@ -8,12 +8,14 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/build/assets/app.8240b4e5.css">
-    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="/build/assets/app.972af72c.css">
+    {{-- 
+        --}}
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    {{-- @vite('resources/css/app.css')  --}}
 </head>
 
-<body class="">
-
+<body class="fixed top-0 left-0 right-0 bottom-0">
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -46,8 +48,7 @@
             </div>
         </div>
     </header>
-    <div class="">
-
+    <div class="h-full w-full flex flex-col">
         <section class="nav-bar">
             <ul class="">
                 <div class="bar-item-top">
@@ -71,22 +72,26 @@
                         <span class="bar-item-title">User</span>
                     </a>
                 </li>
-                
+
             </ul>
         </section>
 
-        <div class="container-content">
+        <div class="container-conten w-[calc(100%_-_74px)] h-[calc(100%_-_44px)] mt-[44px] ml-[74px]">
             @yield('content')
         </div>
-
-        <div class="fixed top-[80px] right-4 z-[1004] text-2xl">
-            <div class="bg-green-400 px-[10px]">
-                <span id="message-success" class=" w-full h-full text-[#fff]"></span>
-            </div>
-            <div class="bg-red-400 px-[10px]">
-                <span id="message-error" class=" w-full h-full text-[#fff]"></span>
-            </div>
+    </div>
+    <div class="fixed top-[80px] right-4 z-[100] text-2xl">
+        <div class="bg-green-400 px-[10px]">
+            <span id="message-success" class=" w-full h-full text-[#fff]"></span>
         </div>
+        <div class="bg-red-400 px-[10px]">
+            <span id="message-error" class=" w-full h-full text-[#fff]"></span>
+        </div>
+    </div>
+
+    <div class="fixed bottom-10 left-10 z-10 flex">
+        <button class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i class="fa-solid fa-angle-left"></i></button>
+        <button class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 btn next-history-btn"><i class="fa-solid fa-angle-right"></i></button>
     </div>
 
     {{-- <script src="/js/library/jquery.min.js"></script>

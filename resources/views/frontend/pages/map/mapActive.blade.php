@@ -1,19 +1,17 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-full h-full flex flex-col max-h-[calc(100vh_-_48px)]">
+    <div class=" flex flex-col w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2">
         <div class="heading map-heading">Choose map active</div>
-        <div class="mx-4 mb-4 h-full flex flex-col bg-[#ccc] relative overflow-hidden ">
+        <div class="h-full flex flex-col bg-[#ccc] relative overflow-hidden rounded-md">
             <div class="w-full h-full" id="map-wrapper">
                 <div class="w-full h-full" id="map"></div>
             </div>
             {{-- select map --}}
-            <div class="absolute h-[30px]  m-4 px-2 rounded-sm flex">
-                <label class="text-[#fff] bg-[#0f6cbd] px-2">
+            <div class="absolute m-4 px-2 rounded-sm flex items-center">
+                <label class="text-[#fff] bg-[#0f6cbd] text-2xl px-2 py-2 rounded-md">
                     <input type="hidden" id="robot-navigation" value="1">
-
-                    <span for="">Choose map:</span>
                     <select name="" id="choose-map-active" class="bg-transparent outline-none">
-                        <option value="">select map</option>
+                        <option value="">Select map</option>
                         @php
                             $fileMapList = glob('../maps/*');
                         @endphp
@@ -28,8 +26,8 @@
                     </select>
                 </label>
                 <div class="mx-4">
-                    <button class="bg-[#0f6cbd] text-[#fff] px-3 rounded-sm btn" id="active-map-btn">Active map</button>
-                    <button class="bg-red-500 text-[#fff] px-3 rounded-sm btn" id="delete-map-btn">Delete map</button>
+                    <button class="bg-[#0f6cbd] text-[#fff] px-3 py-2 rounded-md text-2xl btn" id="active-map-btn">Active map</button>
+                    <button class="bg-red-500 text-[#fff] px-3 py-2 rounded-md text-2xl btn" id="delete-map-btn">Delete map</button>
                 </div>
             </div>
 

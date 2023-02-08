@@ -15,18 +15,17 @@
                         </button>
                     </div>
                     <span class="text-[#fff] mt-4 block">{{ $robot->name_seri }}</span>
-                    <input type="text" class="name-robot hidden"
-                        value="{{ $robot->name_seri }}">
+                    <input type="text" class="name-robot hidden" value="{{ $robot->name_seri }}">
                 </div>
             @endforeach
         </div>
-        <div class="float-right">
+        {{-- <div class="float-right">
             <input type="text" class="name-new-robot text-2xl h-[34px] w-[200px] px-4 hidden rounded-md">
             <button
             class="px-4 py-2 bg-main text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 add-robot-btn">
             <span class="mr-2">Add robot</span>
         </button>
-        </div>
+        </div> --}}
     </div>
     <style>
         .robot-item.active {
@@ -34,9 +33,7 @@
             opacity: 1;
         }
     </style>
-    <script>
-
-    </script>
+    <script></script>
 </div>
 
 {{-- 192.168.0.2 --}}

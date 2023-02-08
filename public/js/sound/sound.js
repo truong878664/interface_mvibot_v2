@@ -2,7 +2,7 @@ import { toggerMessage } from "../main.js";
 import { robotActive } from "../mainLayout.js";
 import publishTopicString from "../rosModule/topicString.js";
 import publishTopic from "../rosModule/pubicTopic.js";
-import { $, $$ } from "../setting/setting.js";
+import { $, $$ } from "../main.js";
 
 handleRenderSound();
 
@@ -11,7 +11,6 @@ function handleRenderSound() {
     renderSound(pathSound);
     handleActionSound();
     setTimeSound();
-
     handleSendSound();
     actionBtn();
 }
@@ -139,7 +138,7 @@ function secondToMinute(time) {
 }
 
 function actionBtn() {
-    $(".start-sound-btn").onclick = () => {
+    $(".stop-sound-btn").onclick = () => {
         const nameRobotActive = $("#robot-sound").value;
 
         if (!nameRobotActive) {
@@ -147,7 +146,7 @@ function actionBtn() {
         } else {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
-                1.0,
+                0.0,
                 "std_msgs/Float32"
             );
             toggerMessage("success", `successfully`);
@@ -162,7 +161,7 @@ function actionBtn() {
         } else {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
-                2.0,
+                3.0,
                 "std_msgs/Float32"
             );
             toggerMessage("success", `successfully`);
@@ -177,7 +176,7 @@ function actionBtn() {
         } else {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
-                3.0,
+                4.0,
                 "std_msgs/Float32"
             );
             toggerMessage("success", `successfully`);

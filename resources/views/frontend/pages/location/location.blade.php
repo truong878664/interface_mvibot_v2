@@ -1,23 +1,20 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-full h-full flex flex-col max-h-[calc(100vh_-_48px)]">
-
-        <div class="heading map-heading">Location</div>
-        <div class="mx-4 mb-4 h-full flex flex-col bg-[#ccc] relative overflow-hidden" id="map-wrapper">
+    <div class="flex flex-col w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-hidden border rounded-md">
+        <div class="h-full flex flex-col bg-[#ccc] relative overflow-hidden" id="map-wrapper">
             <div class="h-full w-full" id="map"></div>
             {{-- choose robot --}}
-            <label class="absolute h-[30px] bg-[#0f6cbd] text-[#fff] m-4 px-2 rounded-sm z-[1000]">
+            <label class="absolute bg-[#0f6cbd] text-[#fff] m-4 px-4 py-2 rounded-md inline-block text-2xl">
                 <input type="hidden" id="robot-navigation" value="{{ json_encode($robotNavigation) }}">
-                <span for="">Choose robot:</span>
                 <select name="" id="robot-navigation-name" class="bg-transparent outline-none">
-                    <option value="">select robot</option>
+                    <option value="">Select robot</option>
                     @foreach ($robotNavigation as $item)
                         <option value="{{ $item['name_seri'] }}" class="text-[#333]">{{ $item['name_seri'] }}</option>
                     @endforeach
                 </select>
             </label>
             {{-- switch --}}
-            <label class="switch">
+            <label class="switch m-4">
                 <input class="check-click-point" type="checkbox">
                 <span class="slider round"></span>
             </label>
@@ -48,7 +45,7 @@
                         min="-180" max="180" step="1" value="0">
                 </div>
                 <div class="self-end">
-                    <button id="send-location-btn" class="px-4 py-2 bg-[#0f6cbd] text-[#fff] rounded-sm">Send</button>
+                    <button id="send-location-btn" class="px-4 py-2 bg-[#0f6cbd] text-[#fff] rounded-md btn">Send</button>
                 </div>
             </div>
         </div>

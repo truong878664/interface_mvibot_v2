@@ -13,18 +13,17 @@
     flex-direction: column;
     min-width: 400px;
     overflow: hidden;
-    width: calc(100% / var(--column-status) - 16px * 2);
+    width: calc(100% / var(--column-status) - 10px * 2);
     background-color: rgb(241, 241, 241);
-    margin: 16px;
+    margin: 10px;
     box-shadow: 0 0 20px rgba(204, 204, 204, 0.514);
     padding: 16px 23px;
-}
-.status-item {
-    /* height: 400px; */
+    height: 320px;
 }
 
 .status-item {
     display: flex;
+
 }
 
 .status-header {

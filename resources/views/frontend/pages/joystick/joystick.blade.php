@@ -12,10 +12,10 @@
             </label>
         </div>
 
-        <div class="w-full flex-1 flex justify-evenly items-center ">
+        <div class="w-full flex-1 flex justify-evenly items-center">
             @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '400px'])
             <div class="relative">
-                <div class="mb-8 absolute w-full -top-[60px] -translate-y-full">
+                <div class="mb-8 absolute w-full -top-[30px] -translate-y-full">
                     <div class="range-slider relative mb-12">
                         <span id="rs-bullet-speed"
                             class="rs-label-speed rs-label absolute -left-2 top-0 -translate-x-full -translate-y-1/2 "

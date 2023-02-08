@@ -2,14 +2,12 @@
     --colum-dashboard: 4;
 }
 
-.dashboard-heading {
-}
-
 .dashboard-content {
     display: flex;
-    width: 90%;
     flex-wrap: wrap;
+    align-content: flex-start;
 }
+
 
 /* dashboard item */
 .dashboard-content-item {
@@ -18,9 +16,7 @@
     flex-direction: column;
     justify-content: center;
     width: calc(100% / var(--colum-dashboard) - 30px);
-    margin-left: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin: 15px;
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 0 10px rgba(150, 148, 148, 0.384);

@@ -1,30 +1,30 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="h-full w-full overflow-hidden">
+    <div class=" overflow-hidden w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2">
         <div class="heading ">setting</div>
-        <div class="w-full h-[calc(100%_-_38px)] flex">
-            <div class="w-1/5 h-full bg-[#dcdcdc] border-r-[1px] border-[#ababab]">
+        <div class="w-full h-[calc(100%_-_32px)] bg-[#e1e1e1] flex rounded-lg overflow-hidden border border-[#e5e5e5]">
+            <div class="w-1/5 h-full border-r-[1px] border-[#ccc]">
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Robot',
                     'icon' => 'fa-solid fa-robot',
-                    'class' => 'active',
+                    'class' => 'active robot-choose',
                 ])
 
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Settings robot',
                     'icon' => 'fa-solid fa-gears',
-                    'class' => '',
+                    'class' => 'hidden',
                 ])
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Public topic',
                     'icon' => 'fa-regular fa-paper-plane',
-                    'class' => '',
+                    'class' => 'hidden',
                 ])
 
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Reboot / Shutdown',
                     'icon' => 'fa-solid fa-power-off',
-                    'class' => '',
+                    'class' => 'hidden',
                 ])
             </div>
 

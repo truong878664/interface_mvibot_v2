@@ -2,9 +2,7 @@ import validateInputSubmit from "../../functionHandle/validateForm.js";
 import { $, toggerMessage } from "../../main.js";
 import reloadWhenOrientation from "../../reloadOnOrientation.js";
 import { mvibot_layer } from "../../rosModule/classMvibot.js";
-import clickSetPointMap, {
-    convertToPosition,
-} from "../../rosModule/clickSetPointMap.js";
+import clickSetPointMap from "../../rosModule/clickSetPointMap.js";
 import createAxes from "../../rosModule/createAxes.js";
 import createMap from "../../rosModule/createMap.js";
 import createPoint from "../../rosModule/createPoint.js";
@@ -20,7 +18,6 @@ import {
 import lockZ from "../../rosModule/lockZ.js";
 import mathYaw from "../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
-import { loadDataFunction } from "../handleTypeMission.js";
 
 export function createMapPoint() {
     let positionX = 0;
@@ -407,3 +404,10 @@ function removeAllEvent(element) {
 function resetInputValue(value, ...rest) {
     rest.forEach((item) => (item.value = value));
 }
+
+(function fullScreen() {
+    $(".fullscreen-btn").onclick = (e) => {
+        $('.point-function-item').classList.toggle('fullscreen')
+        createMapPoint()
+    };
+})();

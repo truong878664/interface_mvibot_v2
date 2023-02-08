@@ -75,8 +75,8 @@
 .container-content {
     margin-top: 48px;
     margin-left: 74px;
-    width: calc(100vw - 74px);
-    height: calc(100vh - 48px);
+    width: calc(100% - 74px);
+    height: calc(100% - 48px);
     /* max-height: calc(100vh - 48px);
     max-width: calc(100vw - 74px); */
     overflow-x: hidden;
@@ -119,7 +119,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 11;
     display: flex;
     justify-content: space-between;
     align-items: center;

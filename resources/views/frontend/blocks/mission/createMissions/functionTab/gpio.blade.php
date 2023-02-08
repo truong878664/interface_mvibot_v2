@@ -1,7 +1,7 @@
 <div class="hidden function-item h-full flex flex-col">
     <div class="flex">
         <div class="flex flex-col">
-            <label for="" class="text-xl">Name GPIO</label>
+            <label for="" class="text-xl">Name function GPIO</label>
             <input class="w-[200px] text-xl px-4 py-1 name_gpio input-reset" type="text" name="name_gpio" required>
         </div>
 

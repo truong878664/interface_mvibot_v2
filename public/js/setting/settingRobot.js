@@ -1,16 +1,16 @@
 import { $, $$ } from "../main.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import publishTopic from "../rosModule/topicString.js";
-
 const robotActive = localStorage.getItem("robotActive");
+settingRobotStart(robotActive)
 
-(function settingRobotStart() {
-    setIp();
-    setModeIp();
-    setParameter();
-})();
+export function settingRobotStart(robotActive) {
+    setIp(robotActive);
+    setModeIp(robotActive);
+    setParameter(robotActive);
+};
 
-function setIp() {
+function setIp(robotActive) {
     $(".set-ip-master-btn").onclick = () => {
         const ipMaster = $(".address-ip-master").value;
         publishTopic(`/${robotActive}/set_config`, `(ip_master|${ipMaster})`);
@@ -21,7 +21,7 @@ function setIp() {
         publishTopic(`/${robotActive}/set_config`, `(ip_node|${ipNode})`);
     };
 }
-function setModeIp() {
+function setModeIp(robotActive) {
     robotActive && setModeRobot(robotActive);
     function setModeRobot(nameRobot) {
         $(".mode-item.active")?.classList.remove("active");
@@ -38,11 +38,11 @@ function setModeIp() {
                 $(".address-ip-node").value = data.ip_node;
             })
             .then(() => {
-                changeModeRobot();
+                changeModeRobot(robotActive);
             });
     }
 
-    function changeModeRobot() {
+    function changeModeRobot(robotActive) {
         let oldMode = $(".mode-item.active")?.getAttribute("value");
         $$(".mode-item").forEach((item) => {
             item.onclick = (e) => {
@@ -60,7 +60,7 @@ function setModeIp() {
     }
 }
 
-function setParameter() {
+function setParameter(robotActive) {
     $$(".para-input").forEach((element) => {
         element.onfocus = (e) => {
             $$(".para-robot-btn:not(hidden)").forEach((element) => {

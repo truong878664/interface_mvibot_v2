@@ -1,6 +1,7 @@
-import { $, $$ } from "./setting.js";
+import { showSettingRobot } from "./setting.js";
+import { $, $$ } from "../main.js";
 import publishTopic from "../rosModule/topicString.js";
-import { toggerMessage } from "../main.js";
+// import { toggerMessage } from "../main.js";
 import dbDelete from "../missions/functionHandle/dbDelete.js";
 
 const robotActive = localStorage.getItem("robotActive");
@@ -14,25 +15,34 @@ if (robotActive) {
 $$(".robot-item").forEach((element) => {
     element.onclick = (e) => {
         $(".robot-item.active")?.classList.remove("active");
-        element.classList.add("active");
+        const robotActive2 = localStorage.getItem("robotActive");
+
         const nameRobot = element.querySelector(".name-robot").value;
-
-        localStorage.setItem("robotActive", nameRobot);
-
+        if (robotActive2 == nameRobot) {
+            element.classList.remove("active");
+            localStorage.removeItem("robotActive");
+            showSettingRobot();
+            console.log(nameRobot);
+        } else {
+            element.classList.add("active");
+            localStorage.setItem("robotActive", nameRobot);
+            showSettingRobot();
+            console.log(nameRobot);
+        }
 
         $(".name-robot-active").innerText = nameRobot;
     };
 });
 
-$(".add-robot-btn").onclick = (e) => {
-    $(".name-new-robot").classList.toggle("hidden");
-    $(".name-new-robot:not(.hidden)")?.focus();
+// $(".add-robot-btn").onclick = (e) => {
+//     $(".name-new-robot").classList.toggle("hidden");
+//     $(".name-new-robot:not(.hidden)")?.focus();
 
-    const nameRobotAdd = $(".name-new-robot.hidden")?.value;
+//     const nameRobotAdd = $(".name-new-robot.hidden")?.value;
 
-    nameRobotAdd && publishTopic("/name_seri", nameRobotAdd);
-    nameRobotAdd && toggerMessage("success", "Add robot success!");
-};
+//     nameRobotAdd && publishTopic("/name_seri", nameRobotAdd);
+//     nameRobotAdd && toggerMessage("success", "Add robot success!");
+// };
 
 $$(".delete-robot-btn").forEach((item) => {
     item.onclick = (e) => {

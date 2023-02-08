@@ -1,10 +1,7 @@
-<div class="setting-detail flex hidden">
-    <div class="max-w-[700px] w-full mx-auto max-h-[calc(100vh_-_110px)] overflow-auto">
+<div class="setting-detail flex hidden h-full">
+    <div class="max-w-[700px] w-full mx-auto overflow-auto">
         <label class="name-robot-active font-bold block text-center">robot1</label>
-        <hr />
-
-
-        <div class="w-full flex flex-col  mt-4">
+        <div class="w-full flex flex-col mt-4">
             <label class="text-3xl block mb-4">IP</label>
             <div class="mx-auto inline-flex items-center justify-center p-8 border-stone-300 border bg-stone-200">
                 <div class="w-full">

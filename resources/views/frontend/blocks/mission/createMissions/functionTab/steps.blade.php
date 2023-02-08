@@ -29,23 +29,26 @@
             align-items: flex-end;
         }
     </style>
-    <div class="h-full flex ">
+    <div class="h-full flex relative">
         <div class="flex-1 flex relative h-full">
-            <div class="steps-wrapper h-full overflow-auto flex flex-1 flex-wrap content-start"></div>
-            <label class="absolute right-0 top-0 animate-spin text-[#0f6cbd] hidden step-loading">
-                <i class="fa-solid fa-spinner"></i>
+            <div class="steps-wrapper h-full overflow-y-scroll flex flex-1 flex-wrap content-start bg-[#fff]"></div>
+            <label class="absolute right-0 top-0  text-[#0f6cbd] hidden step-loading mx-4">
+                <i class="fa-solid fa-spinner animate-spin"></i>
             </label>
         </div>
-        <div class="submit-btn-wrapper flex flex-col justify-center">
+
+        <div class="submit-btn-wrapper flex flex-col justify-end">
             {{-- switch --}}
             <div class="absolute top-2 right-2">
-                <label class="switch">
-                    <input class="check-show-step" type="checkbox">
-                    <span class="slider round"></span>
-                </label>
+                <div class="h-[34px] w-[100px]">
+                    <label class="switch">
+                        <input class="check-show-step" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                {{-- end switch --}}
             </div>
-            {{-- end switch --}}
-            <div class="flex flex-col lg:flex-row">
+            <div class="flex flex-col lg:flex-row mt-8">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
                 <label for="wake-up"
                     class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn">Wake
@@ -75,8 +78,7 @@
         <div class="select-robot-wrapper form-checkbox ">
             <input type="hidden" name="" id="current-wake-up" value="{{ $currentWakeUp }}">
             <label for="wake-up" class="overlay"></label>
-            <form method="POST" action="/dashboard/missions/add-wake-up" class="form-wrapper w-[500px]"
-                id="form-wake-up">
+            <div class="form-wrapper w-[500px]" id="form-wake-up">
                 <strong>Wake Up</strong>
                 <div class="flex flex-wrap justify-between">
                     @php
@@ -98,7 +100,7 @@
                         class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-wake-up-btn">Save</button>
                 </div>
 
-            </form>
+            </div>
         </div>
     </div>
 

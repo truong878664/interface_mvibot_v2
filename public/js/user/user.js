@@ -1,6 +1,6 @@
 import { toggerMessage } from "../main.js";
 import { updateAvatarUser } from "../mainLayout.js";
-import { $, $$ } from "../setting/setting.js";
+import { $, $$ } from "../main.js";
 
 tabUser();
 handleUpdateUser();

@@ -1,8 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading missions-heading">Mission</div>
-
-    <div class=" missions-content">
+    <div class="heading">Mission</div>
+    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             <div class="">
                 @include('frontend.blocks.mission.createMissions.index')

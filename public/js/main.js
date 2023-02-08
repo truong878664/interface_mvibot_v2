@@ -3,7 +3,6 @@ import { ip } from "../ip.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-
 // let ip;
 // if (localStorage.getItem("ip")) {
 //     ip = localStorage.getItem("ip");
@@ -28,6 +27,13 @@ window.oncontextmenu = (e) => {
     return false;
 };
 
+
+$('.back-history-btn').onclick = e => {
+    history.back()
+}
+$('.next-history-btn').onclick = e => {
+    history.forward()
+}
 
 export { $, $$, toggerMessage };
 
