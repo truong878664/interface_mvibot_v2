@@ -10,8 +10,8 @@ const $$ = document.querySelectorAll.bind(document);
 //     localStorage.setItem("ip", "192.168.0.2");
 //     ip = localStorage.getItem("ip");
 // }
-const ros = connectRos(window.location.hostname);
-// const ros = connectRos(ip);
+// const ros = connectRos(window.location.hostname);
+const ros = connectRos(ip);
 // console.log(window.location.hostname)
 
 function toggerMessage(type, message) {
