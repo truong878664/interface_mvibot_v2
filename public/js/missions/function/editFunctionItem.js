@@ -89,7 +89,7 @@ export default function handleEditFunctionType() {
 
                     handleUpdateStep("gpio_module");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_gpio_module;
+                    oldName = valueFunction.name_gpio;
                     break;
                 case "marker":
                     $(".marker-function-btn").click();
@@ -336,12 +336,12 @@ export default function handleEditFunctionType() {
                     updateStep(`/api/step/${currentIdUpdate}`, data);
 
                     $(".data-gpio-item.show")?.classList.remove("show");
-
-                    // oldName != name_gpio.value &&
-                    //     updateNameStepAtBlockStep(
-                    //         `${type}#${oldName}#${currentIdUpdate}`,
-                    //         `${type}#${name_gpio.value}#${currentIdUpdate}`
-                    //     );
+                    console.log(oldName);
+                    oldName != name_function_gpio_module.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_function_gpio_module.value}#${currentIdUpdate}`
+                        );
 
                     return true;
                 } else {
@@ -446,7 +446,7 @@ export default function handleEditFunctionType() {
         })
             .then(function (res) {
                 loaded();
-                console.log(res)
+                console.log(res);
                 res.status == 200
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");
@@ -457,6 +457,7 @@ export default function handleEditFunctionType() {
     }
 
     function updateNameStepAtBlockStep(stepOld, stepNew) {
+        console.log(stepOld, stepNew);
         fetch(`/api/type-mission/update-name-step`, {
             method: "PUT",
             headers: {
