@@ -313,6 +313,28 @@ class MiController extends Controller
                     return "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
 
                     break;
+                case 'gpio_module':
+                    $name_function_gpio_module = $item->name_gpio;
+                    $time_out = $item->time_out;
+                    $mode = $item->mode;
+                    $out_set = $item->out_set;
+                    $out_reset = $item->out_reset;
+                    $in_on = $item->in_on;
+                    $in_off = $item->in_off;
+                    $in_pullup = $item->in_pullup;
+                    $in_pulldown = $item->in_pulldown;
+
+                    $name_seri = "~name_seri=$item->name_gpio_module~";
+
+                    strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
+                    strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";
+                    strlen($in_on) ? $data_in_on = "~in_on=$in_on~" : $data_in_on = "";
+                    strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
+                    strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
+                    strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
+                    return "(name:$name_function_gpio_module|time_out:$time_out|mode:$mode|data:$name_seri$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
+
+                    break;
                 case 'marker':
                     $name_marker = $item->name_marker;
                     $time_out = $item->time_out;

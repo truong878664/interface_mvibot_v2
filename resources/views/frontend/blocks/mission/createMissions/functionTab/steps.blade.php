@@ -78,60 +78,25 @@
         <div class="select-robot-wrapper form-checkbox ">
             <input type="hidden" name="" id="current-wake-up" value="{{ $currentWakeUp }}">
             <label for="wake-up" class="overlay"></label>
-            <div class="form-wrapper w-[500px]" id="form-wake-up">
-                <strong>Wake Up</strong>
-                <div class="flex flex-wrap justify-between">
-                    @php
-                        $gpios = ['out_set', 'out_reset', 'in_on', 'in_off', 'in_pullup', 'in_pulldown'];
-                    @endphp
-                    @foreach ($gpios as $gpio)
-                        @include('frontend.blocks.mission.createMissions.functionTab.dataGpioItem', [
-                            'name_gpio_item' => $gpio,
-                            'type' => 'wake_up',
-                        ])
-                    @endforeach
-                </div>
-                @csrf
-                <input type="hidden" name="name_mission" value="{{ $itemRender->name_mission }}">
-                <div class="mt-4">
-                    <label for="wake-up"
-                        class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-wake-up">cancel</label>
-                    <button
-                        class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-wake-up-btn">Save</button>
-                </div>
+            <div class="form-wrapper max-w-[800px] w-full" id="wake-up-wrapper">
+                @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                    'type' => 'gpio_wake_up',
+                ])
 
+            </div>
+        </div>
+        <input type="checkbox" name="" id="stop" class="input-checkbox" hidden>
+        <div class="select-robot-wrapper form-checkbox">
+            <input type="hidden" name="" id="current-stop" value="{{ $currentStop }}">
+            <label for="stop" class="overlay"></label>
+            <div class="form-wrapper max-w-[800px] w-full" id="stop-wrapper">
+                @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                    'type' => 'gpio_stop',
+                ])
             </div>
         </div>
     </div>
 
-    <input type="checkbox" name="" id="stop" class="input-checkbox" hidden>
-    <div class="select-robot-wrapper form-checkbox">
-        <input type="hidden" name="" id="current-stop" value="{{ $currentStop }}">
-        <label for="stop" class="overlay"></label>
-        <form method="POST" action="/dashboard/missions/add-stop" class="form-wrapper w-[500px]" id="form-stop">
-            <strong>Stop</strong>
-            <div class="flex flex-wrap justify-between">
-                @php
-                    $gpios = ['out_set', 'out_reset', 'in_on', 'in_off', 'in_pullup', 'in_pulldown'];
-                @endphp
-                @foreach ($gpios as $gpio)
-                    @include('frontend.blocks.mission.createMissions.functionTab.dataGpioItem', [
-                        'name_gpio_item' => $gpio,
-                        'type' => 'stop',
-                    ])
-                @endforeach
-            </div>
-            <input type="hidden" name="name_mission" value="{{ $itemRender->name_mission }}">
-            @csrf
-            <div class="mt-4">
-                <label for="stop"
-                    class="text-xl md:text-3xl btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-stop">cancel</label>
-
-                <button
-                    class="float-right text-xl md:text-3xl btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
-            </div>
-        </form>
-    </div>
 
     @php
         $datas = explode('|', $itemRender->steps_mission_name);
