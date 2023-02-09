@@ -367,7 +367,6 @@ export function createMapPoint() {
     };
 
     function storeData(url, data) {
-        console.log(data);
         fetch(url, {
             headers: {
                 Accept: "application/json",

@@ -65,6 +65,10 @@
                         class="point-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Position</span>
                     </div>
+                    <div
+                        class="variable-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        <span>Variable</span>
+                    </div>
                 </div>
             </div>
 
@@ -103,6 +107,7 @@
                     @include('frontend.blocks.mission.createMissions.functionTab.sleep')
                     @include('frontend.blocks.mission.createMissions.functionTab.sound')
                     @include('frontend.blocks.mission.createMissions.functionTab.point')
+                    @include('frontend.blocks.mission.createMissions.functionTab.variable')
                 </div>
             </div>
         </div>

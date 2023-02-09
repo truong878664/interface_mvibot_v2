@@ -18,4 +18,5 @@
     {{-- <script type="module" src="/js/missions/wakeUpStop/wakeUpStop.js"></script> --}}
     <script type="module" src="/js/missions/wakeUpStop/gpioWakeupStop.js"></script>
     <script type="module" src="/js/missions/function/point.js"></script>
+    <script type="module" src="/js/missions/function/var.js"></script>
 @endsection

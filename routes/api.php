@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
 use App\Http\Controllers\Api\userController;
+use App\Http\Controllers\Api\VarController;
+use App\Http\Controllers\Api\VariableController;
 use App\Http\Controllers\Api\WakeUpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +49,7 @@ Route::resource('gpio', GpioController::class);
 Route::resource('gpio_module', GpioModuleController::class);
 Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
+Route::resource('variable', VariableController::class);
 
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);
@@ -58,3 +61,5 @@ Route::resource('input-gpio', InputGpioController::class)->only('index');
 
 Route::resource('robot', RobotController::class);
 Route::resource('function', FunctionController::class)->only('index');
+
+Route::resource('var', VarController::class);
