@@ -1,208 +1,233 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+import { $$, toggerMessage } from "../../main.js";
+import { addFunctionStep } from "../createStepMission.js";
 
-showFormGpio(".create-gpio_gpio");
-showFormGpio(".create-gpio_wake_up");
-showFormGpio(".create-gpio_stop");
-hiddenFormGpio();
+let currentTypeGpio = "";
 
-function showFormGpio(classElement) {
-    const allCreateGpioBtn = $$(classElement);
-    allCreateGpioBtn.forEach((element) => {
-        element.onclick = (e) => {
-            e.preventDefault();
-            $(".data-gpio-item.show")?.classList.remove("show");
-            element.parentElement.classList.add("show");
-            getValueCheckbox(element.parentElement);
-        };
-    });
-}
+$$(".type-gpio-btn").forEach((element) => {
+    element.onclick = (e) => {
+        currentTypeGpio = e.target.getAttribute("type");
 
-function hiddenFormGpio() {
-    $$(".hidden-form-gpio-item").forEach((element) => {
-        element.onclick = (e) => {
-            e.preventDefault();
-            $(".data-gpio-item.show").classList.remove("show");
-        };
-    });
-}
-export const valueGpio = {
-    out_set: [],
-    out_reset: [],
+        $$(".type-gpio-btn.active")?.forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        $$(`[type=${currentTypeGpio}]`).forEach((item) => {
+            item.classList.add("active");
+        });
+
+        const color = getComputedStyle(e.target).backgroundColor;
+
+        if (currentTypeGpio.indexOf("in") != -1) {
+            $$(".input-arrow").forEach((item, index) => {
+                item.style.fill = color;
+                $$(".input-name")[index].style.fill = color;
+                $$(".output-arrow")[index].style.fill = "black";
+                $$(".output-name")[index].style.fill = "black";
+            });
+        } else {
+            $$(".output-arrow").forEach((item, index) => {
+                item.style.fill = color;
+                $$(".output-name")[index].style.fill = color;
+                $$(".input-arrow")[index].style.fill = "black";
+                $$(".input-name")[index].style.fill = "black";
+            });
+        }
+    };
+});
+
+$$(".input-gpio").forEach((element) => {
+    element.onclick = (e) => {
+        if (currentTypeGpio.indexOf("in") != -1) {
+            e.target.classList.remove(
+                currentTypeGpio == "in_on" ? "null" : "in_on",
+                currentTypeGpio == "in_off" ? "null" : "in_off",
+                currentTypeGpio == "in_pullup" ? "null" : "in_pullup",
+                currentTypeGpio == "in_pulldown" ? "null" : "in_pulldown"
+            );
+            e.target.classList.toggle(currentTypeGpio);
+            e.target.classList.toggle(getTypeFunction());
+        }
+    };
+});
+
+$$(".output-gpio").forEach((element) => {
+    element.onclick = (e) => {
+        if (currentTypeGpio.indexOf("out") != -1) {
+            e.target.classList.remove(
+                currentTypeGpio == "out_reset" ? "null" : "out_reset",
+                currentTypeGpio == "out_set" ? "null" : "out_set"
+            );
+            e.target.classList.toggle(currentTypeGpio);
+            e.target.classList.toggle(getTypeFunction());
+        }
+    };
+});
+
+export const dataGpio = {
     in_on: [],
     in_off: [],
+    out_set: [],
+    out_reset: [],
     in_pullup: [],
     in_pulldown: [],
 };
 
-function getValueCheckbox(element) {
-    const allCheckBox = element.querySelectorAll(".gpio_checkbox");
-    Array.prototype.map.call(allCheckBox, (item) => {
-        item.onchange = (e) => {
-            const inputGpio = item
-                .closest(".data-gpio-item")
-                .querySelector("input");
-            const typeGpio = inputGpio.getAttribute("name");
-
-            const valueGpioItem = Number(e.target.value);
-
-            if (e.target.checked) {
-                valueGpio[typeGpio].push(valueGpioItem);
-            } else {
-                valueGpio[typeGpio].splice(
-                    valueGpio[typeGpio].indexOf(valueGpioItem),
-                    1
-                );
+export function setLightGpio() {
+    for (const item in dataGpio) {
+        dataGpio[item].forEach((light) => {
+            if (item.indexOf("out") != -1) {
+                $(`.output-gpio[gpio="${light}"]`).classList.add(`${item}`);
+            } else if (item.indexOf("in") != -1) {
+                $(`.input-gpio[gpio="${light}"]`).classList.add(`${item}`);
             }
-            renderGpio(typeGpio);
+        });
+    }
+}
+
+export function resetGpio() {
+    for (const item in dataGpio) {
+        dataGpio[item] = [];
+    }
+    $(".name_gpio").value = "";
+    $(".time_out_gpio").value = -1;
+
+    $$(".gpio-io").forEach((item) => {
+        item.classList.remove(
+            "in_on",
+            "in_off",
+            "in_pullup",
+            "in_pulldown",
+            "out_reset",
+            "out_set",
+            "gpio-normal",
+            "gpio-module"
+        );
+    });
+}
+
+export function setDateGpio(typeGpio) {
+    for (const item in dataGpio) {
+        dataGpio[item] = [];
+    }
+
+    $$(`.input-gpio.in_on.${typeGpio}`).forEach((element) => {
+        dataGpio.in_on.push(element.getAttribute("gpio"));
+    });
+
+    $$(`.input-gpio.in_off.${typeGpio}`).forEach((element) => {
+        dataGpio.in_off.push(element.getAttribute("gpio"));
+    });
+
+    $$(`.input-gpio.in_pullup.${typeGpio}`).forEach((element) => {
+        dataGpio.in_pullup.push(element.getAttribute("gpio"));
+    });
+
+    $$(`.input-gpio.in_pulldown.${typeGpio}`).forEach((element) => {
+        dataGpio.in_pulldown.push(element.getAttribute("gpio"));
+    });
+
+    $$(`.output-gpio.out_set.${typeGpio}`).forEach((element) => {
+        dataGpio.out_set.push(element.getAttribute("gpio"));
+    });
+
+    $$(`.output-gpio.out_reset.${typeGpio}`).forEach((element) => {
+        dataGpio.out_reset.push(element.getAttribute("gpio"));
+    });
+}
+
+$(".submit-btn-gpio").onclick = () => {
+    for (const item in dataGpio) {
+        dataGpio[item] = [];
+    }
+
+    setDateGpio("gpio-normal");
+
+    const name_gpio = $(".name_gpio");
+    const time_out_gpio = $(".time_out_gpio");
+
+    if (
+        name_gpio.value &&
+        time_out_gpio.value &&
+        (dataGpio.out_set.length ||
+            dataGpio.out_reset.length ||
+            dataGpio.in_on.length ||
+            dataGpio.in_off.length ||
+            dataGpio.in_pullup.length ||
+            dataGpio.in_pulldown.length)
+    ) {
+        const data = {
+            type: "gpio",
+            name_type: name_gpio.value,
+            time_out: time_out_gpio.value * 1,
+            out_set: dataGpio.out_set.join(","),
+            out_reset: dataGpio.out_reset.join(","),
+            in_on: dataGpio.in_on.join(","),
+            in_off: dataGpio.in_off.join(","),
+            in_pullup: dataGpio.in_pullup.join(","),
+            in_pulldown: dataGpio.in_pulldown.join(","),
         };
-    });
-}
 
-export function renderGpio(typeGpio) {
-    const html = [];
-    valueGpio[typeGpio].sort((x, y) => {
-        return Number(x) - Number(y);
-    });
+        addFunctionStep("gpio", data);
+        toggerMessage("success", "save gpio successfully");
 
-    valueGpio[typeGpio].map((item) => {
-        html.push(`<div class="item-gpio">${item}</div>`);
-    });
-    $(`.${typeGpio}_gpio_show`).innerHTML = html.join("");
-    $(`.${typeGpio}_gpio`).value = valueGpio[typeGpio].toString();
-
-    outputGpioLight();
-    inputGpioLight();
-}
-
-export function checkboxInputGpio() {
-    for (const [key, value] of Object.entries(valueGpio)) {
-        $$(`.${key}_gpio_checkbox`).forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-        value.forEach((item) => {
-            $$(`.${key}_gpio_checkbox`)[item].checked = true;
-        });
+        resetGpio();
+        localStorage.setItem("isUpload", 1);
+    } else {
+        toggerMessage(
+            "error",
+            "Please enter name, timeout and at least one type of gpio"
+        );
     }
-}
+};
 
-function outputGpioLight() {
-    const lightOutSetGpio = $(".out_set_gpio").value.split(",");
-    const lightOutReSetGpio = $(".out_reset_gpio").value.split(",");
-    $$(".gpio-io-output").forEach((light) => {
-        light.style.fill = "#cccccc";
-    });
-    lightOutSetGpio.forEach((item) => {
-        item != "" &&
-            ($(`#gpio-output-${Number(item) + 1}`).style.fill = "#00E7FF");
-    });
-
-    lightOutReSetGpio.forEach((item) => {
-        item != "" &&
-            ($(`#gpio-output-${Number(item) + 1}`).style.fill = "#DC0000");
-    });
-}
-
-function inputGpioLight() {
-    const lightInOnGpio = $(".in_on_gpio").value.split(",");
-    const lightInOffGpio = $(".in_off_gpio").value.split(",");
-    $$(".gpio-io-input").forEach((light) => {
-        light.style.fill = "#cccccc";
-    });
-    lightInOnGpio.forEach((item) => {
-        item != "" &&
-            ($(`#gpio-input-${Number(item) + 1}`).style.fill = "#00E7FF");
-    });
-
-    lightInOffGpio.forEach((item) => {
-        item != "" &&
-            ($(`#gpio-input-${Number(item) + 1}`).style.fill = "#DC0000");
-    });
-}
-
-const valueGpioOther = [
-    {
-        type: "wake_up",
-        out_set: [],
-        out_reset: [],
-        in_on: [],
-        in_off: [],
-        in_pullup: [],
-        in_pulldown: [],
-    },
-    {
-        type: "stop",
-        out_set: [],
-        out_reset: [],
-        in_on: [],
-        in_off: [],
-        in_pullup: [],
-        in_pulldown: [],
-    },
-];
-
-const currentWakeUp = JSON.parse($("#current-wake-up")?.value);
-const currentStop = JSON.parse($("#current-stop")?.value);
-
-export const nameGpios = [
-    "out_set",
-    "out_reset",
-    "in_on",
-    "in_off",
-    "in_pullup",
-    "in_pulldown",
-];
-
-nameGpios.forEach((nameGpio) => {
-    if (currentWakeUp.length > 0) {
-        const dataWakeUp =
-            currentWakeUp[0][nameGpio]?.split(",").map(Number) || [];
-        valueGpioOther[0][nameGpio] = dataWakeUp;
+$(".submit-btn-gpio-module").onclick = () => {
+    for (const item in dataGpio) {
+        dataGpio[item] = [];
     }
 
-    if (currentStop.length > 0) {
-        const dataStop = currentStop[0][nameGpio]?.split(",").map(Number) || [];
-        valueGpioOther[1][nameGpio] = dataStop;
-    }
-});
+    setDateGpio("gpio-module");
 
-valueGpioOther.forEach((itemOther) => {
-    nameGpios.forEach((nameGpio) => {
-        itemOther[nameGpio].forEach((gpio) => {
-            $$(`.${nameGpio}_${itemOther.type}_checkbox`)[gpio].checked = true;
-        });
-        if (itemOther[nameGpio]) {
-            const html = [];
-            itemOther[nameGpio].map((gpio) => {
-                html.push(`<div class="item-gpio">${gpio}</div>`);
-            });
-            $(`.${nameGpio}_${itemOther.type}_show`).innerHTML = html.join("");
-            $(`.${nameGpio}_${itemOther.type}`).value =
-                itemOther[nameGpio].toString();
-        }
-    });
-
-    $$(`.${itemOther.type}_checkbox`).forEach((item) => {
-        item.onchange = (e) => {
-            const inputGpio = item
-                .closest(".data-gpio-item")
-                .querySelector("input");
-            const type = inputGpio.getAttribute("name");
-            if (e.target.checked) {
-                itemOther[type].push(Number(item.defaultValue));
-            } else {
-                itemOther[type].splice(
-                    itemOther[type].indexOf(Number(item.defaultValue)),
-                    1
-                );
-            }
-            const html = [];
-            itemOther[type].map((gpio) => {
-                html.push(`<div class="item-gpio">${gpio}</div>`);
-            });
-            $(`.${type}_${itemOther.type}_show`).innerHTML = html.join("");
-
-            $(`.${type}_${itemOther.type}`).value = itemOther[type].toString();
+    const name_gpio_function_module = $(".name_function_gpio_module");
+    const time_out_gpio_module = $(".time_out_gpio_module");
+    const name_gpio_module = $(".name_gpio_module");
+    console.log(name_gpio_module.value)
+    if (
+        name_gpio_function_module.value &&
+        time_out_gpio_module.value &&
+        name_gpio_module.value &&
+        (dataGpio.out_set.length ||
+            dataGpio.out_reset.length ||
+            dataGpio.in_on.length ||
+            dataGpio.in_off.length ||
+            dataGpio.in_pullup.length ||
+            dataGpio.in_pulldown.length)
+    ) {
+        const data = {
+            type: "gpio-module",
+            name_type: name_gpio_function_module.value,
+            name_gpio_module: name_gpio_module.value,
+            time_out: time_out_gpio_module.value * 1,
+            out_set: dataGpio.out_set.join(","),
+            out_reset: dataGpio.out_reset.join(","),
+            in_on: dataGpio.in_on.join(","),
+            in_off: dataGpio.in_off.join(","),
+            in_pullup: dataGpio.in_pullup.join(","),
+            in_pulldown: dataGpio.in_pulldown.join(","),
         };
-    });
-});
+
+        addFunctionStep("gpio-module", data);
+        toggerMessage("success", "save gpio successfully");
+
+        resetGpio();
+        localStorage.setItem("isUpload", 1);
+    } else {
+        toggerMessage(
+            "error",
+            "Please enter name, timeout and at least one type of gpio"
+        );
+    }
+};
+
+function getTypeFunction() {
+    return $(".gpio-function-btn.active") ? "gpio-normal" : "gpio-module";
+}

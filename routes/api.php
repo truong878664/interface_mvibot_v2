@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
 use App\Http\Controllers\Api\GpioController;
+use App\Http\Controllers\Api\GpioModuleController;
 use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\MarkerController;
@@ -43,6 +44,7 @@ Route::resource('user', userController::class);
 
 Route::resource('footprint', FootprintController::class);
 Route::resource('gpio', GpioController::class);
+Route::resource('gpio-module', GpioModuleController::class);
 Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
 

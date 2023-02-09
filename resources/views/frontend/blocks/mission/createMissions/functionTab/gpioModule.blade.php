@@ -410,6 +410,6 @@
             background: #4FA095;
         }
     </style>
-    <script type="module" src="/js/missions/function/gpio2.js"></script>
+    <script type="module" src="/js/missions/function/gpio.js"></script>
 
 </div>

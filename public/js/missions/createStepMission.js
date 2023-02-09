@@ -7,7 +7,6 @@ import createPose from "../rosModule/createPose.js";
 import displayPose from "../rosModule/displayPose.js";
 
 import { toggerMessage } from "../main.js";
-import { valueGpio } from "./function/gpio.js";
 import { currentMission, renderBlockStep } from "./handleStepMission.js";
 import { setDefaultValueFootprint } from "./function/footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./function/marker.js";
@@ -16,8 +15,6 @@ import { loaded, loading } from "./functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
 import { createMapPoint } from "./function/point.js";
 import sendMission from "./sendMission.js";
-
-// loadDataFunction();
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);

@@ -1,12 +1,11 @@
 import { $, $$, toggerMessage } from "../../main.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
-import { checkboxInputGpio, nameGpios, renderGpio, valueGpio } from "./gpio.js";
 import inputFunction from "../functionHandle/inputFunction.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
-import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio2.js";
+import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
 import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 
 export default function handleEditFunctionType() {

@@ -45,7 +45,7 @@
                         <span>GPIO</span>
                     </div>
                     <div
-                        class="gpio-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="gpio-module-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>GPIO module</span>
                     </div>
                     <div
@@ -97,8 +97,8 @@
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.tryCatch')
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
-                    @include('frontend.blocks.mission.createMissions.functionTab.gpio2')
-                    @include('frontend.blocks.mission.createMissions.functionTab.gpioModule')
+                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', ['type' => 'gpio-normal'])
+                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', ['type'=>'gpio-module'])
                     @include('frontend.blocks.mission.createMissions.functionTab.marker')
                     @include('frontend.blocks.mission.createMissions.functionTab.sleep')
                     @include('frontend.blocks.mission.createMissions.functionTab.sound')
