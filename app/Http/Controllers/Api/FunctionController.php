@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionGpio;
+use App\Models\backend\MissionGpioModule;
 use App\Models\backend\MissionMarker;
 use App\Models\backend\MissionPosition;
 use App\Models\backend\MissionSleep;
@@ -27,6 +28,7 @@ class FunctionController extends Controller
             'marker' => MissionMarker::all(),
             'sleep' => MissionSleep::all(),
             'position' => MissionPosition::all(),
+            'gpio_module'=> MissionGpioModule::all()
         ];
         return $data;
     }

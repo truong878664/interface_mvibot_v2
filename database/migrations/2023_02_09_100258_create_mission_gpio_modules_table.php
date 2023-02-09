@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('mission_gpios_module')) {
-            Schema::create('mission_gpios_module', function (Blueprint $table) {
+        if (!Schema::hasTable('mission_gpio_modules')) {
+            Schema::create('mission_gpio_modules', function (Blueprint $table) {
                 $table->id();
                 $table->string('name_gpio');
                 $table->string('name_gpio_module');
                 $table->integer('time_out')->default(-1);
-                $table->string('mode')->default('gpioModule');
+                $table->string('mode')->default('gpio_module');
                 $table->string('out_set')->nullable();
                 $table->string('out_reset')->nullable();
                 $table->string('in_on')->nullable();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mission_gpios_module');
+        Schema::dropIfExists('mission_gpio_modules');
     }
 };

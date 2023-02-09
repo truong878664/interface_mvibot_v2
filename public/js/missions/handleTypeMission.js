@@ -1,6 +1,6 @@
 import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$ } from "../main.js";
-import handleDeleteFunctionType from "./function/deleteFuntionItem.js";
+import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
 import { currentMission, renderBlockStep } from "./handleStepMission.js";
 
@@ -10,8 +10,17 @@ export const htmlDataFunction = {
     marker: [],
     sleep: [],
     position: [],
+    gpio_module: [],
 };
-const typeFunction = ["footprint", "gpio", "marker", "sleep", "position"];
+
+const typeFunction = [
+    "footprint",
+    "gpio",
+    "marker",
+    "sleep",
+    "position",
+    "gpio_module",
+];
 
 loadDataFunction();
 handleRenderDataFunction();
@@ -27,6 +36,7 @@ export function loadDataFunction(typeFunctionActive = "footprint") {
             typeFunction.forEach((item) => {
                 renderDataFunction(data[item].reverse(), item);
             });
+            
         })
         .then(() => {
             $(

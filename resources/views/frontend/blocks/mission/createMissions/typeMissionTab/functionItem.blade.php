@@ -9,6 +9,9 @@
                 type="gpio">Gpio</button>
             <button
                 class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
+                type="gpio_module">Gpio module</button>
+            <button
+                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
                 type="marker">marker</button>
             <button
                 class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"

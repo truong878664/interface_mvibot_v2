@@ -45,7 +45,7 @@ $$(".input-gpio").forEach((element) => {
                 currentTypeGpio == "in_pulldown" ? "null" : "in_pulldown"
             );
             e.target.classList.toggle(currentTypeGpio);
-            e.target.classList.toggle(getTypeFunction());
+            e.target.classList.toggle(getModeFunction());
         }
     };
 });
@@ -58,7 +58,7 @@ $$(".output-gpio").forEach((element) => {
                 currentTypeGpio == "out_set" ? "null" : "out_set"
             );
             e.target.classList.toggle(currentTypeGpio);
-            e.target.classList.toggle(getTypeFunction());
+            e.target.classList.toggle(getModeFunction());
         }
     };
 });
@@ -73,12 +73,19 @@ export const dataGpio = {
 };
 
 export function setLightGpio() {
+    const gpio_mode = getModeFunction() + "_mode";
     for (const item in dataGpio) {
         dataGpio[item].forEach((light) => {
             if (item.indexOf("out") != -1) {
-                $(`.output-gpio[gpio="${light}"]`).classList.add(`${item}`);
+                $(`.output-gpio.${gpio_mode}[gpio="${light}"]`).classList.add(
+                    `${item}`,
+                    getModeFunction()
+                );
             } else if (item.indexOf("in") != -1) {
-                $(`.input-gpio[gpio="${light}"]`).classList.add(`${item}`);
+                $(`.input-gpio.${gpio_mode}[gpio="${light}"]`).classList.add(
+                    `${item}`,
+                    getModeFunction()
+                );
             }
         });
     }
@@ -99,8 +106,8 @@ export function resetGpio() {
             "in_pulldown",
             "out_reset",
             "out_set",
-            "gpio-normal",
-            "gpio-module"
+            "gpio_normal",
+            "gpio_module"
         );
     });
 }
@@ -140,7 +147,7 @@ $(".submit-btn-gpio").onclick = () => {
         dataGpio[item] = [];
     }
 
-    setDateGpio("gpio-normal");
+    setDateGpio("gpio_normal");
 
     const name_gpio = $(".name_gpio");
     const time_out_gpio = $(".time_out_gpio");
@@ -180,17 +187,16 @@ $(".submit-btn-gpio").onclick = () => {
     }
 };
 
-$(".submit-btn-gpio-module").onclick = () => {
+$(".submit-btn-gpio_module").onclick = () => {
     for (const item in dataGpio) {
         dataGpio[item] = [];
     }
 
-    setDateGpio("gpio-module");
+    setDateGpio("gpio_module");
 
     const name_gpio_function_module = $(".name_function_gpio_module");
     const time_out_gpio_module = $(".time_out_gpio_module");
     const name_gpio_module = $(".name_gpio_module");
-    console.log(name_gpio_module.value)
     if (
         name_gpio_function_module.value &&
         time_out_gpio_module.value &&
@@ -203,7 +209,7 @@ $(".submit-btn-gpio-module").onclick = () => {
             dataGpio.in_pulldown.length)
     ) {
         const data = {
-            type: "gpio-module",
+            type: "gpio_module",
             name_type: name_gpio_function_module.value,
             name_gpio_module: name_gpio_module.value,
             time_out: time_out_gpio_module.value * 1,
@@ -215,7 +221,7 @@ $(".submit-btn-gpio-module").onclick = () => {
             in_pulldown: dataGpio.in_pulldown.join(","),
         };
 
-        addFunctionStep("gpio-module", data);
+        addFunctionStep("gpio_module", data);
         toggerMessage("success", "save gpio successfully");
 
         resetGpio();
@@ -228,6 +234,6 @@ $(".submit-btn-gpio-module").onclick = () => {
     }
 };
 
-function getTypeFunction() {
-    return $(".gpio-function-btn.active") ? "gpio-normal" : "gpio-module";
+function getModeFunction() {
+    return $(".gpio-function-btn.active") ? "gpio_normal" : "gpio_module";
 }

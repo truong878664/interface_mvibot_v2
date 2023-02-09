@@ -52,8 +52,8 @@ export default function handleEditFunctionType() {
                 case "gpio":
                     $(".gpio-function-btn").click();
 
-                    const name_gpio = $(".name_gpio2");
-                    const time_out_gpio = $(".time_out_gpio2");
+                    const name_gpio = $(".name_gpio");
+                    const time_out_gpio = $(".time_out_gpio");
 
                     name_gpio.value = valueFunction.name_gpio;
                     time_out_gpio.value = valueFunction.time_out;
@@ -67,6 +67,29 @@ export default function handleEditFunctionType() {
                     handleUpdateStep("gpio");
                     currentIdUpdate = valueFunction.id;
                     oldName = valueFunction.name_gpio;
+                    break;
+                case "gpio_module":
+                    $(".gpio-module-function-btn").click();
+
+                    const name_function_gpio_module = $(
+                        ".name_function_gpio_module"
+                    );
+                    const name_gpio_module = $(".name_gpio_module");
+                    const time_out_gpio_module = $(".time_out_gpio_module");
+
+                    name_function_gpio_module.value = valueFunction.name_gpio;
+                    name_gpio_module.value = valueFunction.name_gpio_module;
+                    time_out_gpio_module.value = valueFunction.time_out;
+
+                    for (const item in dataGpio) {
+                        dataGpio[item] = valueFunction[item]?.split(",") || [];
+                    }
+
+                    setLightGpio();
+
+                    handleUpdateStep("gpio_module");
+                    currentIdUpdate = valueFunction.id;
+                    oldName = valueFunction.name_gpio_module;
                     break;
                 case "marker":
                     $(".marker-function-btn").click();
@@ -170,6 +193,7 @@ export default function handleEditFunctionType() {
             e.preventDefault();
             dataUpdateStep(type) && handleResetData();
             translatesStepsMission(currentMission);
+
             loadDataFunction(type);
             refActiveTypeMission.click();
             handleOverlayUpdate("hidden");
@@ -186,7 +210,7 @@ export default function handleEditFunctionType() {
                 currentIdUpdate;
             });
 
-            if (type == "gpio") {
+            if (type == "gpio" || type == "gpio_module") {
                 resetGpio();
             }
         }
@@ -231,9 +255,10 @@ export default function handleEditFunctionType() {
                     return false;
                 }
             case "gpio":
-                const name_gpio = $(".name_gpio2");
-                const time_out_gpio = $(".time_out_gpio2");
-                setDateGpio();
+                const name_gpio = $(".name_gpio");
+                const time_out_gpio = $(".time_out_gpio");
+
+                setDateGpio("gpio_normal");
 
                 if (
                     name_gpio.value &&
@@ -266,6 +291,57 @@ export default function handleEditFunctionType() {
                             `${type}#${oldName}#${currentIdUpdate}`,
                             `${type}#${name_gpio.value}#${currentIdUpdate}`
                         );
+
+                    return true;
+                } else {
+                    toggerMessage(
+                        "error",
+                        "Please enter name, timeout and at least one type of gpio"
+                    );
+                    return false;
+                }
+            case "gpio_module":
+                const name_function_gpio_module = $(
+                    ".name_function_gpio_module"
+                );
+                const name_gpio_module = $(".name_gpio_module");
+                const time_out_gpio_module = $(".time_out_gpio_module");
+
+                setDateGpio("gpio_module");
+
+                if (
+                    name_function_gpio_module.value &&
+                    time_out_gpio_module.value &&
+                    name_gpio_module.value &&
+                    (dataGpio.out_set.length ||
+                        dataGpio.out_reset.length ||
+                        dataGpio.in_on.length ||
+                        dataGpio.in_off.length ||
+                        dataGpio.in_pullup.length ||
+                        dataGpio.in_pulldown.length)
+                ) {
+                    const data = {
+                        type: "gpio_module",
+                        name_gpio: name_function_gpio_module.value,
+                        name_gpio_module: name_gpio_module.value,
+                        time_out: time_out_gpio_module.value * 1,
+                        out_set: dataGpio.out_set.join(","),
+                        out_reset: dataGpio.out_reset.join(","),
+                        in_on: dataGpio.in_on.join(","),
+                        in_off: dataGpio.in_off.join(","),
+                        in_pullup: dataGpio.in_pullup.join(","),
+                        in_pulldown: dataGpio.in_pulldown.join(","),
+                    };
+
+                    updateStep(`/api/step/${currentIdUpdate}`, data);
+
+                    $(".data-gpio-item.show")?.classList.remove("show");
+
+                    // oldName != name_gpio.value &&
+                    //     updateNameStepAtBlockStep(
+                    //         `${type}#${oldName}#${currentIdUpdate}`,
+                    //         `${type}#${name_gpio.value}#${currentIdUpdate}`
+                    //     );
 
                     return true;
                 } else {
@@ -359,6 +435,7 @@ export default function handleEditFunctionType() {
 
     function updateStep(url = "", stepSave) {
         loading();
+
         fetch(url, {
             headers: {
                 Accept: "application/json",
@@ -369,6 +446,7 @@ export default function handleEditFunctionType() {
         })
             .then(function (res) {
                 loaded();
+                console.log(res)
                 res.status == 200
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");

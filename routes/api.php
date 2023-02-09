@@ -44,7 +44,7 @@ Route::resource('user', userController::class);
 
 Route::resource('footprint', FootprintController::class);
 Route::resource('gpio', GpioController::class);
-Route::resource('gpio-module', GpioModuleController::class);
+Route::resource('gpio_module', GpioModuleController::class);
 Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
 

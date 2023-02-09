@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MissionGpioModule extends Model
 {
     use HasFactory;
-    protected $table = "mission_gpios_module";
+    protected $table = "mission_gpio_modules";
     protected $fillable = [
         'name_gpio',
         'name_gpio_module',
