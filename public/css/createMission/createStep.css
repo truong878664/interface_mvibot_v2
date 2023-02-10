@@ -425,6 +425,17 @@ input[type="number"] {
     background-color: #432c7a;
 }
 
+.step-item.step-variable {
+    background-color: #1F8A70;
+}
+
+.step-item.step-gpio_module {
+    background-color: #ee5e8b;
+}
+.step-item.step-sound {
+    background-color: #FFB100;
+}
+
 .step-item {
     position: relative;
     height: 30px;

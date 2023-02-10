@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
+use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
@@ -50,6 +51,7 @@ Route::resource('gpio_module', GpioModuleController::class);
 Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
 Route::resource('variable', VariableController::class);
+Route::resource('sound', SoundController::class);
 
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);

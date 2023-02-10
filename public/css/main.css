@@ -158,7 +158,8 @@ li {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.234);
+    background: #7b7b7b43;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track {

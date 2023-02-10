@@ -7,6 +7,8 @@ import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
 import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
+import { setColorSticker } from "./sound.js";
+import { resetVariable } from "./var.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -156,6 +158,53 @@ export default function handleEditFunctionType() {
                     currentIdUpdate = valueFunction.id;
                     oldName = valueFunction.name_sleep;
                     break;
+
+                case "variable":
+                    $(".variable-function-btn").click();
+                    const name_function_variable = $(".name_function_variable");
+                    const name_variable = $(".name_variable_input");
+                    const command_action = $(".command_action_input");
+                    const focus_value = $(".focus_value_input");
+
+                    name_function_variable.value =
+                        valueFunction.name_function_variable;
+                    name_variable.value = valueFunction.name_variable;
+                    command_action.value =
+                        valueFunction.command_action == "equal" ? "=" : "==";
+
+                    focus_value.value = valueFunction.focus_value;
+                    if (!isNaN(Number(valueFunction.focus_value))) {
+                        focus_value.removeAttribute("readonly");
+                    }
+
+                    handleUpdateStep("variable");
+                    currentIdUpdate = valueFunction.id;
+                    oldName = valueFunction.name_function_variable;
+                    break;
+
+                case "sound":
+                    $(".sound-function-btn").click();
+                    $(".sound-btn.active").classList.remove("active");
+
+                    $(".name_function_sound").value = valueFunction.name_sound;
+                    if (valueFunction.music_start == 1) {
+                        $(".sound-start-btn").classList.add("active");
+                        let mode;
+                        valueFunction.music_mode == 2 && (mode = "basic");
+                        valueFunction.music_mode == 3 && (mode = "error");
+                        valueFunction.music_mode == 4 && (mode = "custom");
+                        $(".sound-start-btn").setAttribute("data-mode", mode);
+
+                        setColorSticker(mode);
+                    } else {
+                        $(".sound-stop-btn").classList.add("active");
+                    }
+
+                    handleUpdateStep("sound");
+                    currentIdUpdate = valueFunction.id;
+                    oldName = valueFunction.name_sound;
+                    break;
+
                 case "position":
                     $(".point-function-btn").click();
                     handleUpdateStep("position");
@@ -212,6 +261,10 @@ export default function handleEditFunctionType() {
 
             if (type == "gpio" || type == "gpio_module") {
                 resetGpio();
+            }
+
+            if (type == "variable") {
+                resetVariable();
             }
         }
     }
@@ -424,6 +477,70 @@ export default function handleEditFunctionType() {
                             `${type}#${name_sleep.value}#${currentIdUpdate}`
                         );
 
+                    return true;
+                } else {
+                    toggerMessage("error", "Please enter all inputs");
+                    return false;
+                }
+
+            case "variable":
+                const name_function_variable = $(".name_function_variable");
+                const name_variable = $(".name_variable_input");
+                const command_action =
+                    $(".command_action_input").value == "="
+                        ? "equal"
+                        : "equal_as";
+                const focus_value = $(".focus_value_input");
+
+                if (name_variable && focus_value && name_function_variable) {
+                    const data = {
+                        type: "variable",
+                        name_function_variable: name_function_variable.value,
+                        command_action,
+                        name_variable: name_variable.value,
+                        focus_value: focus_value.value,
+                    };
+                    updateStep(`/api/step/${currentIdUpdate}`, data);
+                    oldName != name_function_variable.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_function_variable.value}#${currentIdUpdate}`
+                        );
+                    return true;
+                } else {
+                    toggerMessage("error", "Please enter all inputs");
+                    return false;
+                }
+
+            case "sound":
+                const name_sound = $(".name_function_sound").value;
+                const music_type = $(".sound-btn.active")?.getAttribute("type");
+                let music_mode;
+                const music_start = music_type == "start" ? 1 : 0;
+                if (music_type != "stop") {
+                    $(".sound-btn.active")?.getAttribute("data-mode") ==
+                        "basic" && (music_mode = 2);
+                    $(".sound-btn.active")?.getAttribute("data-mode") ==
+                        "error" && (music_mode = 3);
+                    $(".sound-btn.active")?.getAttribute("data-mode") ==
+                        "custom" && (music_mode = 4);
+                } else {
+                    music_mode = 0;
+                }
+                if (name_sound) {
+                    const data = {
+                        type: "sound",
+                        music_start,
+                        music_mode,
+                        name_sound,
+                    };
+
+                    updateStep(`/api/step/${currentIdUpdate}`, data);
+                    oldName != name_sound &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name_sound}#${currentIdUpdate}`
+                        );
                     return true;
                 } else {
                     toggerMessage("error", "Please enter all inputs");

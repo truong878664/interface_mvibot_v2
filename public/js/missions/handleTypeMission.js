@@ -11,6 +11,8 @@ export const htmlDataFunction = {
     sleep: [],
     position: [],
     gpio_module: [],
+    variable: [],
+    sound: [],
 };
 
 const typeFunction = [
@@ -20,6 +22,8 @@ const typeFunction = [
     "sleep",
     "position",
     "gpio_module",
+    "variable",
+    "sound",
 ];
 
 loadDataFunction();
@@ -36,7 +40,6 @@ export function loadDataFunction(typeFunctionActive = "footprint") {
             typeFunction.forEach((item) => {
                 renderDataFunction(data[item].reverse(), item);
             });
-            
         })
         .then(() => {
             $(
@@ -105,41 +108,51 @@ function handleRenderDataFunction() {
 
 ////
 const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md"><i class="fa-regular fa-eye"></i></button>`;
+// ${item.mode == "position" ? buttonPosition : ""}
 
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
+
     data.map((item) => {
+        const nameStep =
+            item.name_position ||
+            item.name_gpio ||
+            item.name_marker ||
+            item.name_sleep ||
+            item.name_footprint ||
+            item.name_function_variable ||
+            item.name_sound;
+
+        const description =
+            (item.marker_type && "Type: " + item.marker_type) ||
+            (item.music_start == 1 && "Type: start") ||
+            (item.music_start == 0 && "Type: stop") ||
+            "";
+
         htmlDataFunction[type].push(
-            `<div function-id=${item.id} function-type="${
-                item.mode
-            }" class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
-            <input type="hidden" value='${JSON.stringify(
-                item
-            )}' class="value-function-item"/>
-            <div class="flex">
-                    <span class="type-mission-${item.mode}">${item.mode}|</span>
-                    <span class="name-mission-${item.mode}">${
-                item.name_position ||
-                item.name_gpio ||
-                item.name_marker ||
-                item.name_sleep ||
-                item.name_footprint
-            }</span>
-                </div>
-                <input value="${item.mode}#${
-                item.name_position ||
-                item.name_gpio ||
-                item.name_marker ||
-                item.name_sleep ||
-                item.name_footprint
-            }#${
-                item.id
-            }" type="hidden" class="value-type-mission-function-item"/>
+            `<div function-id=${item.id} function-type="${item.mode}"
+                class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
+            <input type="hidden" 
+                value='${JSON.stringify(item)}' class="value-function-item"/>
+            <div class="flex flex-col">
+                    <span class="type-mission-${
+                        item.mode
+                    } font-bold font-3xl capitalize">${item.mode}</span>
+                    <div class="flex">
+                        <span class="mr-2">Name:</span>
+                        <span class="name-mission-${
+                            item.mode
+                        }">${nameStep}</span>
+                        </div>
+                    <span>${description}</span>
+            </div>
+                <input value="${item.mode}#${nameStep}#${item.id}" 
+            type="hidden" class="value-type-mission-function-item"/>
                 <div class="">
                     <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-                    ${item.mode == "position" ? buttonPosition : ""}
+                   
                     <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
                         <i class="fa-solid fa-pen"></i>
                     </button>
@@ -416,15 +429,6 @@ export function render(dataSteps, element) {
                 <span class="stem-name">${stepMode}|${stepName}</span>
                 <button id-move="${index}" class="move-btn move-right"><i class="fa-solid fa-angle-right"></i></button>
                 <button class="show-menu delete-step-btn" index="${index}"><i class="fa-solid fa-trash-can"></i></button>
-                <ul class="menu-right-click menu-click-${index}">
-                    <div class="menu-overlay"></div>
-                    ${
-                        stepMode != "position"
-                            ? '<li class="menu-item edit-step"><i class="fa-regular fa-pen-to-square"></i></i>edit</li>'
-                            : ""
-                    }
-                    <li class="menu-item delete-step" id-delete="${index}"><i class="fa-regular fa-trash-can"></i></i>delete</li>
-                </ul>
             </div>`
         );
     });

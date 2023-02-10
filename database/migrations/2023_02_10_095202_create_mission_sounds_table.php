@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('variables')) {
-
-            Schema::create('variables', function (Blueprint $table) {
+        if (!Schema::hasTable('mission_sounds')) {
+            Schema::create('mission_sounds', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_var');
+                $table->string('name_sound');
+                $table->string('time_out')->default(-1);
+                $table->string('mode')->default('sound');
+                $table->string('music_mode');
+                $table->string('music_start');
             });
         }
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variables');
+        Schema::dropIfExists('mission_sounds');
     }
 };

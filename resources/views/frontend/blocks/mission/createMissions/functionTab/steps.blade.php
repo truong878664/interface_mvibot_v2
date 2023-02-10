@@ -39,8 +39,9 @@
 
         <div class="submit-btn-wrapper flex flex-col justify-end">
             {{-- switch --}}
-            <div class="absolute top-2 right-2">
-                <div class="h-[34px] w-[100px]">
+            <div class="absolute top-2 right-2 flex">
+                <span class="mr-8 text-2xl">{{ $itemRender->name_mission }}</span>
+                <div class="h-[34px] w-[60px]">
                     <label class="switch">
                         <input class="check-show-step" type="checkbox">
                         <span class="slider round"></span>

@@ -8,9 +8,8 @@
     </div> --}}
 
     <div class="w-full h-full flex flex-col">
-        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1">
-            <div
-                class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative">
+        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 ">
+            <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
 
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] font-bold absolute w-full top-0">
                     type mission
@@ -32,8 +31,7 @@
                 </div>
             </div>
 
-            <div
-                class="mb-2 bg-[#fff] h-[20%] lg:w-1/5 lg:h-full border-[1px] overflow-hidden mx-1">
+            <div class="mb-2 bg-[#fff] h-[20%] lg:w-1/5 lg:h-full border-[1px] overflow-hidden mx-1 rounded-md">
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">function</p>
                 <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                     <div
@@ -57,7 +55,7 @@
                         <span>Sleep</span>
                     </div>
                     <div
-                        class="hidden sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sound</span>
                     </div>
 
@@ -69,13 +67,13 @@
                         class="variable-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Variable</span>
                     </div>
+                   
                 </div>
             </div>
 
             <div class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden"
                 id="overlay-update-mission"></div>
-            <div
-                class="mb-2 bg-[#fff] h-[60%] p-2 lg:w-3/5 lg:h-full border-[1px] flex-1 z-[20]">
+            <div class="mb-2 bg-[#fff] h-[60%] p-2 lg:w-3/5 lg:h-full border-[1px] flex-1 z-[20] rounded-md">
                 <div class="h-full w-full relative">
                     <div class="absolute right-0 top-0">
                         <button class="w-[30px] h-[30px] bg-cover btn info-function-btn"
@@ -101,19 +99,24 @@
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.tryCatch')
                     @include('frontend.blocks.mission.createMissions.functionTab.footprint')
-                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', ['type' => 'gpio_normal'])
-                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', ['type'=>'gpio_module'])
+                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                        'type' => 'gpio_normal',
+                    ])
+                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                        'type' => 'gpio_module',
+                    ])
                     @include('frontend.blocks.mission.createMissions.functionTab.marker')
                     @include('frontend.blocks.mission.createMissions.functionTab.sleep')
                     @include('frontend.blocks.mission.createMissions.functionTab.sound')
                     @include('frontend.blocks.mission.createMissions.functionTab.point')
                     @include('frontend.blocks.mission.createMissions.functionTab.variable')
+                    {{-- @include('frontend.blocks.mission.createMissions.functionTab.sound') --}}
                 </div>
             </div>
         </div>
 
-        <div class="w-full bg-[#fff] z-18 h-[calc(40%)] border">
-                @include('frontend.blocks.mission.createMissions.functionTab.steps')
+        <div class="w-full bg-[#fff] z-18 h-[calc(40%)] border rounded-md overflow-hidden">
+            @include('frontend.blocks.mission.createMissions.functionTab.steps')
         </div>
     </div>
 </div>

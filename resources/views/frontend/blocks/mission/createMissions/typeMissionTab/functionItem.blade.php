@@ -1,27 +1,35 @@
 <div class="w-full flex-1 flex justify-between overflow-hidden">
-    <div class="w-full lg:w-1/2 bg-slate-50 overflow-hidden relative shadow-md">
-        <div class="absolute top-0 w-full h-[30px] bg-slate-100 flex z-20">
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="footprint">footprint</button>
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="gpio">Gpio</button>
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="gpio_module">Gpio module</button>
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="marker">marker</button>
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="sleep">sleep</button>
-            <button
-                class="text-[14px] px-2 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.5)] type-mission-function-{{ $type }}"
-                type="position">point</button>
+    <div class="w-full lg:w-1/2 bg-slate-50 overflow-hidden relative shadow-md rounded-lg">
+        <div class="absolute top-0 w-full bg-slate-100 flex z-20 h-[30px]">
+            <div class="flex h-full w-full overflow-x-scroll">
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="footprint">Footprint</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="gpio">Gpio</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="gpio_module">Gpio module</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="marker">Marker</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="sleep">Sleep</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="position">Point</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="variable">Variable</button>
+                <button
+                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
+                    type="sound">Sound</button>
+            </div>
         </div>
         <div
-            class="w-full h-full overflow-auto pt-[30px] bg-[rgba(204,204,204,0.5)] text-xl detail-type-mission-function  detail-type-mission-function-{{ $type }}">
+            class="w-full h-full overflow-auto pt-[30px] bg-[rgba(204,204,204,0.5)] text-xl detail-type-mission-function detail-type-mission-function-{{ $type }}">
 
             <div class="point-id-1 flex justify-between items-center  px-5 py-3 mb-2 point-id-8">
                 <div class="flex">
@@ -32,7 +40,6 @@
                     <button class="text-3xl mr-2  bg-white btn"></button>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="flex">
@@ -49,7 +56,7 @@
     .type-mission-function-normal.active,
     .type-mission-function-ifelse.active,
     .type-mission-function-trycatch.active {
-        background-color: rgba(204, 204, 204, 0.5);
+        background-color: #ccc;
     }
 
     .not-allowed {

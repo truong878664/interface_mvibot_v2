@@ -8,6 +8,8 @@ use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionGpioModule;
 use App\Models\backend\MissionMarker;
 use App\Models\backend\MissionSleep;
+use App\Models\backend\MissionSound;
+use App\Models\backend\MissionVariable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +69,12 @@ class StepController extends Controller
                 break;
             case 'sleep':
                 return MissionSleep::where('id', $request->id)->get();
+                break;
+            case 'variable':
+                return MissionVariable::where('id', $request->id)->get();
+                break;
+            case 'sound':
+                return MissionSound::where('id', $request->id)->get();
                 break;
             default:
                 return ['status' => 200];

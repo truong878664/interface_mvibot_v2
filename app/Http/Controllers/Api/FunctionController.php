@@ -8,7 +8,10 @@ use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionGpioModule;
 use App\Models\backend\MissionMarker;
 use App\Models\backend\MissionPosition;
+use App\Models\backend\Missions;
 use App\Models\backend\MissionSleep;
+use App\Models\backend\MissionSound;
+use App\Models\backend\MissionVariable;
 use Illuminate\Http\Request;
 
 class FunctionController extends Controller
@@ -28,7 +31,9 @@ class FunctionController extends Controller
             'marker' => MissionMarker::all(),
             'sleep' => MissionSleep::all(),
             'position' => MissionPosition::all(),
-            'gpio_module'=> MissionGpioModule::all()
+            'gpio_module'=> MissionGpioModule::all(),
+            'variable'=> MissionVariable::all(),
+            'sound'=> MissionSound::all(),
         ];
         return $data;
     }

@@ -219,7 +219,7 @@ class MiController extends Controller
                     case "normal":
                         $head = "&name>$dataItem[0]/time_out>-1/mode>normal/data>%normal_step#";
                         $body = $this->translateStepItem($dataItem[2]);
-                        array_push($data, $head . $body . '%');
+                        array_push($data, $head . $body . '%@');
                         break;
                     case "ifelse":
                         $head = "&name>$dataItem[0]/time_out>-1/mode>if_else/data>%condition#";
@@ -235,13 +235,13 @@ class MiController extends Controller
                         $dataStringThen = $dataThen ? "%if_step#$dataThen%" : "";
                         $dataStringElse = $dataElse ? "%else_step#$dataElse%" : "";
 
-                        $body =  "$dataStringIf$dataStringThen$dataStringElse";
+                        $body =  "$dataStringIf$dataStringThen$dataStringElse@";
                         array_push($data, $head . $body);
                         break;
                 }
             }
 
-            $dataStepMission = trim(implode('][', $data), " ");
+            $dataStepMission = trim(implode('', $data), " ");
             Missions::where("id", $id)->update(['steps_mission' => $dataStepMission]);
         } else {
             Missions::where("id", $id)->update(['steps_mission' => NULL]);
@@ -365,6 +365,27 @@ class MiController extends Controller
                     strlen($sy2) ? $data_sy2 = "~sy2=$sy2~" : $data_sy2 = "";
 
                     return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
+                    break;
+                case 'variable':
+                    $name_function_variable = $item->name_function_variable;
+                    $time_out = $item->time_out;
+                    $mode = $item->mode;
+                    $command_action = $item->command_action;
+                    $name_variable = $item->name_variable;
+                    $focus_value = $item->focus_value;
+
+                    return "(name:$name_function_variable|time_out:$time_out|mode:$mode|data:~command_action=$command_action~~name_variable=$name_variable~~focus_value=$focus_value~)";
+                    break;
+
+                case 'sound':
+                    $name_sound = $item->name_sound;
+                    $time_out = $item->time_out;
+                    $mode = $item->mode;
+                    $music_start = $item->music_start;
+                    $music_mode = $item->music_mode;
+
+
+                    return "(name:$name_sound|time_out:$time_out|mode:$mode|data:~music_start=$music_start~~music_mode=$music_mode~)";
                     break;
             }
         }, $stepMissionData);

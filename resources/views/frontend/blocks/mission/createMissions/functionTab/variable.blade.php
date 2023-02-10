@@ -1,7 +1,7 @@
 <div class="hidden function-item">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function variable</label>
-        <input class="w-[200px] text-xl px-4 py-1  input-reset" type="text" name="name_function_variable" required>
+        <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_variable" type="text" name="" required>
     </div>
     <div class="flex flex-col m-4">
         <label for="" class="text-xl">Create variable</label>

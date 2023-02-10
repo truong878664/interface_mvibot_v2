@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\MissionVariable;
+use App\Models\backend\MissionSound;
 use Illuminate\Http\Request;
 
-class VariableController extends Controller
+class SoundController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class VariableController extends Controller
      */
     public function index()
     {
-        return MissionVariable::all();
+        return MissionSound::all();
     }
 
     /**
@@ -36,8 +36,8 @@ class VariableController extends Controller
      */
     public function store(Request $request)
     {
-        MissionVariable::create($request->all());
-        return ['message' => 'Save variable successfully', 'status' => 200];
+        MissionSound::create($request->all());
+        return ['message' => 'Save sound successfully', 'status' => 200];
     }
 
     /**
@@ -82,11 +82,11 @@ class VariableController extends Controller
      */
     public function destroy($id)
     {
-        $itemDelete = MissionVariable::where('id', $id)->first();
+        $itemDelete = MissionSound::where('id', $id)->first();
         // $itemName =  "$itemDelete->mode#$itemDelete->name_sleep#$itemDelete->id";
         // $this->updateStepDelete($itemName);
 
-        MissionVariable::where('id', $id)->delete();
-        return ['message' => 'delete variable success'];
+        MissionSound::where('id', $id)->delete();
+        return ['message' => 'delete sound success'];
     }
 }
