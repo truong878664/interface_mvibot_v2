@@ -56,8 +56,8 @@ Route::resource('sound', SoundController::class);
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);
 
-Route::resource('wake-up', WakeUpController::class)->only('store');
-Route::resource('stop', StopController::class)->only('store');
+Route::resource('wake_up', WakeUpController::class);
+Route::resource('stop', StopController::class);
 
 Route::resource('input-gpio', InputGpioController::class)->only('index');
 

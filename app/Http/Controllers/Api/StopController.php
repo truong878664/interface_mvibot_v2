@@ -15,9 +15,9 @@ class StopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Stop::where('id_mission', $request->id_mission)->first();
     }
 
     /**
@@ -38,31 +38,13 @@ class StopController extends Controller
      */
     public function store(Request $request)
     {
-        $id_mission = $request->id_mission;
-        $out_set = $request->out_set;
-        $out_reset = $request->out_reset;
-        $in_on = $request->in_on;
-        $in_off = $request->in_off;
-        $in_pullup = $request->in_pullup;
-        $in_pulldown = $request->in_pulldown;
-        $data = $request->data;
 
-        $dataGpio = [
-            "id_mission" => $id_mission,
-            "out_set" => $out_set,
-            "out_reset" => $out_reset,
-            "in_on" => $in_on,
-            "in_off" => $in_off,
-            "in_pullup" => $in_pullup,
-            "in_pulldown" => $in_pulldown,
-            "data" => $data
-        ];
-        if (Stop::where('id_mission', $id_mission)->count() > 0) {
-            Stop::where('id_mission', $id_mission)->update($dataGpio);
+        if (Stop::where('id_mission', $request->id_mission)->count() > 0) {
+            Stop::where('id_mission', $request->id_mission)->update($request->all());
         } else {
-            Stop::insert($dataGpio);
+            Stop::insert($request->all());
         }
-        Missions::where('id', $id_mission)->update(['stop' => $data]);
+        Missions::where('id', $request->id_mission)->update(['stop' => $request->data]);
 
         return 123;
     }

@@ -1,6 +1,6 @@
 <div class="hidden function-item w-full h-full point-function-item">
-    <div class="w-full h-full overflow-auto relative bg-red-200">
-        <div class="w-full h-full bg-[#ccc] overflow-hidden" id="map"></div>
+    <div class="w-full h-full overflow-auto relative">
+        <div class="w-full h-full bg-[#ccc] overflow-hidden rounded-md" id="map"></div>
 
         <div class="absolute top-0 left-0 text-lg">
             <?php

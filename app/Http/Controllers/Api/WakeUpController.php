@@ -15,9 +15,10 @@ class WakeUpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return WakeUp::where('id_mission', $request->id_mission)->first();
+        // return $request->id_mission;
     }
 
     /**
@@ -38,34 +39,15 @@ class WakeUpController extends Controller
      */
     public function store(Request $request)
     {
-        $id_mission = $request->id_mission;
-        $out_set = $request->out_set;
-        $out_reset = $request->out_reset;
-        $in_on = $request->in_on;
-        $in_off = $request->in_off;
-        $in_pullup = $request->in_pullup;
-        $in_pulldown = $request->in_pulldown;
-        $data = $request->data;
 
-        $dataGpio = [
-            "id_mission" => $id_mission,
-            "out_set" => $out_set,
-            "out_reset" => $out_reset,
-            "in_on" => $in_on,
-            "in_off" => $in_off,
-            "in_pullup" => $in_pullup,
-            "in_pulldown" => $in_pulldown,
-            "data" => $data,
-        ];
-
-        if (WakeUp::where('id_mission', $id_mission)->count() > 0) {
-            WakeUp::where('id_mission', $id_mission)->update($dataGpio);
+        if (WakeUp::where('id_mission', $request->id_mission)->count() > 0) {
+            WakeUp::where('id_mission', $request->id_mission)->update($request->all());
         } else {
-            WakeUp::insert($dataGpio);
+            WakeUp::insert($request->all());
         }
 
-        Missions::where('id', $id_mission)->update(['wake_up' => $data]);
-        return $dataGpio;
+        Missions::where('id', $request->id_mission)->update(['wake_up' => $request->data]);
+        return 1232;
     }
 
     /**
