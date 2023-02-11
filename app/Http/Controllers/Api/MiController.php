@@ -154,6 +154,8 @@ class MiController extends Controller
         }
 
         $this->translateStepMissionName($id);
+        $this->translateData($id);
+
         return ['message' => 'save data success', "status" => 200];
     }
 
@@ -240,7 +242,12 @@ class MiController extends Controller
             }
 
             $dataStepMission = trim(implode('', $data), " ");
-            Missions::where("id", $id)->update(['steps_mission' => $dataStepMission]);
+            $dataStepMissionRemoveVar = implode('--+',array_unique(explode('--+', $dataStepMission)));
+            $addFrontVar = str_replace("--+/front/", "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=", $dataStepMissionRemoveVar);
+            $addBackVar = str_replace("/back/--+", "~~focus_value=0~)",  $addFrontVar);
+            $fullStep = str_replace("--+", "",  $addBackVar);
+
+            Missions::where("id", $id)->update(['steps_mission' => $fullStep]);
         } else {
             Missions::where("id", $id)->update(['steps_mission' => NULL]);
         }
@@ -262,147 +269,7 @@ class MiController extends Controller
         };
 
 
-        // $stepMission = array_map(function ($items) {
-        //     $item = $items[0];
-        //     switch ($item->mode) {
-        //         case 'position':
-        //             $name_position = $item->name_position;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $x_position = $item->x;
-        //             $y_position = $item->y;
-        //             $z_position = $item->z;
-        //             $w_position = $item->w;
-        //             $mode_position = $item->mode_position;
-        //             return "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)";
-        //             break;
-        //         case 'sleep':
-        //             $name_sleep = $item->name_sleep;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $time_sleep = $item->time_sleep;
-        //             return "(name:$name_sleep|time_out:$time_out|mode:$mode|data:~time_sleep=$time_sleep~)";
-        //             break;
-        //         case 'footprint':
-        //             $name_footprint = $item->name_footprint;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $x1 = $item->x1;
-        //             $x2 = $item->x2;
-        //             $y1 = $item->y1;
-        //             $y2 = $item->y2;
-        //             return "(name:$name_footprint|time_out:$time_out|mode:$mode|data:~x1=$x1~~y1=$y1~~x2=$x2~~y2=$y2~)";
-        //             break;
-        //         case 'gpio':
-        //             $name_gpio = $item->name_gpio;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $out_set = $item->out_set;
-        //             $out_reset = $item->out_reset;
-        //             $in_on = $item->in_on;
-        //             $in_off = $item->in_off;
-        //             $in_pullup = $item->in_pullup;
-        //             $in_pulldown = $item->in_pulldown;
-
-        //             strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
-        //             strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";
-        //             strlen($in_on) ? $data_in_on = "~in_on=$in_on~" : $data_in_on = "";
-        //             strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
-        //             strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
-        //             strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
-        //             return "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
-
-        //             break;
-        //         case 'gpio_module':
-        //             $name_function_gpio_module = $item->name_gpio;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $out_set = $item->out_set;
-        //             $out_reset = $item->out_reset;
-        //             $in_on = $item->in_on;
-        //             $in_off = $item->in_off;
-        //             $in_pullup = $item->in_pullup;
-        //             $in_pulldown = $item->in_pulldown;
-
-        //             $name_seri = "~name_seri=$item->name_gpio_module~";
-
-        //             strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
-        //             strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";
-        //             strlen($in_on) ? $data_in_on = "~in_on=$in_on~" : $data_in_on = "";
-        //             strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
-        //             strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
-        //             strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
-        //             return "(name:$name_function_gpio_module|time_out:$time_out|mode:$mode|data:$name_seri$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
-
-        //             break;
-        //         case 'marker':
-        //             $name_marker = $item->name_marker;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $marker_type = $item->marker_type;
-        //             $marker_dir = $item->marker_dir;
-        //             $off_set_x1 = $item->off_set_x1;
-        //             $off_set_x2 = $item->off_set_x2;
-        //             $off_set_y1 = $item->off_set_y1;
-        //             $off_set_y2 = $item->off_set_y2;
-        //             $off_set_dis = $item->off_set_dis;
-        //             $off_set_angle = $item->off_set_angle;
-        //             $sx1 = $item->sx1;
-        //             $sx2 = $item->sx2;
-        //             $sy1 = $item->sy1;
-        //             $sy2 = $item->sy2;
-
-        //             strlen($marker_dir) ? $data_marker_dir = "~marker_dir=$marker_dir~" : $data_marker_dir = "";
-        //             strlen($off_set_x1) ? $data_off_set_x1 = "~off_set_x1=$off_set_x1~" : $data_off_set_x1 = "";
-        //             strlen($off_set_x2) ? $data_off_set_x2 = "~off_set_x2=$off_set_x2~" : $data_off_set_x2 = "";
-        //             strlen($off_set_y1) ? $data_off_set_y1 = "~off_set_y1=$off_set_y1~" : $data_off_set_y1 = "";
-        //             strlen($off_set_y2) ? $data_off_set_y2 = "~off_set_y2=$off_set_y2~" : $data_off_set_y2 = "";
-        //             strlen($off_set_dis) ? $data_off_set_dis = "~off_set_dis=$off_set_dis~" : $data_off_set_dis = "";
-        //             strlen($off_set_angle) ? $data_off_set_angle = "~off_set_angle=$off_set_angle~" : $data_off_set_angle = "";
-        //             strlen($sx1) ? $data_sx1 = "~sx1=$sx1~" : $data_sx1 = "";
-        //             strlen($sx2) ? $data_sx2 = "~sx2=$sx2~" : $data_sx2 = "";
-        //             strlen($sy1) ? $data_sy1 = "~sy1=$sy1~" : $data_sy1 = "";
-        //             strlen($sy2) ? $data_sy2 = "~sy2=$sy2~" : $data_sy2 = "";
-
-        //             return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
-        //             break;
-        //         case 'variable':
-        //             $name_function_variable = $item->name_function_variable;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $command_action = $item->command_action;
-        //             $name_variable = $item->name_variable;
-        //             $focus_value = $item->focus_value;
-
-        //             $newVarMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$name_variable~~focus_value=0~)";
-
-        //             if ((int)$focus_value == 0) {
-        //                 $newFocusMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$focus_value~~focus_value=0~)";
-        //             } else {
-        //                 $newFocusMission = "";
-        //             }
-
-        //             $varMission = "(name:$name_function_variable|time_out:$time_out|mode:$mode|data:~command_action=$command_action~~name_variable=$name_variable~~focus_value=$focus_value~)";
-        //             return $newVarMission . $newFocusMission . $varMission;
-        //             break;
-
-        //         case 'sound':
-        //             $name_sound = $item->name_sound;
-        //             $time_out = $item->time_out;
-        //             $mode = $item->mode;
-        //             $music_start = $item->music_start;
-        //             $music_mode = $item->music_mode;
-
-        //             return "(name:$name_sound|time_out:$time_out|mode:$mode|data:~music_start=$music_start~~music_mode=$music_mode~)";
-        //             break;
-        //     }
-        // }, $stepMissionData);
-
-        $stepMission = [];
-
-        $dataTestVariable = [];
-
-        foreach ($stepMissionData as $items) {
+        $stepMission = array_map(function ($items) {
             $item = $items[0];
             switch ($item->mode) {
                 case 'position':
@@ -414,14 +281,14 @@ class MiController extends Controller
                     $z_position = $item->z;
                     $w_position = $item->w;
                     $mode_position = $item->mode_position;
-                    array_push($stepMission, "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)");
+                    return "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)";
                     break;
                 case 'sleep':
                     $name_sleep = $item->name_sleep;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $time_sleep = $item->time_sleep;
-                    array_push($stepMission, "(name:$name_sleep|time_out:$time_out|mode:$mode|data:~time_sleep=$time_sleep~)");
+                    return "(name:$name_sleep|time_out:$time_out|mode:$mode|data:~time_sleep=$time_sleep~)";
                     break;
                 case 'footprint':
                     $name_footprint = $item->name_footprint;
@@ -431,7 +298,7 @@ class MiController extends Controller
                     $x2 = $item->x2;
                     $y1 = $item->y1;
                     $y2 = $item->y2;
-                    array_push($stepMission,  "(name:$name_footprint|time_out:$time_out|mode:$mode|data:~x1=$x1~~y1=$y1~~x2=$x2~~y2=$y2~)");
+                    return "(name:$name_footprint|time_out:$time_out|mode:$mode|data:~x1=$x1~~y1=$y1~~x2=$x2~~y2=$y2~)";
                     break;
                 case 'gpio':
                     $name_gpio = $item->name_gpio;
@@ -450,7 +317,7 @@ class MiController extends Controller
                     strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
                     strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
                     strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
-                    array_push($stepMission, "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)");
+                    return "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
 
                     break;
                 case 'gpio_module':
@@ -472,7 +339,7 @@ class MiController extends Controller
                     strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
                     strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
                     strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
-                    array_push($stepMission, "(name:$name_function_gpio_module|time_out:$time_out|mode:$mode|data:$name_seri$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)");
+                    return "(name:$name_function_gpio_module|time_out:$time_out|mode:$mode|data:$name_seri$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
 
                     break;
                 case 'marker':
@@ -504,7 +371,7 @@ class MiController extends Controller
                     strlen($sy1) ? $data_sy1 = "~sy1=$sy1~" : $data_sy1 = "";
                     strlen($sy2) ? $data_sy2 = "~sy2=$sy2~" : $data_sy2 = "";
 
-                    array_push($stepMission, "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)");
+                    return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
                     break;
                 case 'variable':
                     $name_function_variable = $item->name_function_variable;
@@ -514,32 +381,18 @@ class MiController extends Controller
                     $name_variable = $item->name_variable;
                     $focus_value = $item->focus_value;
 
-                    $newVar = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$name_variable~~focus_value=0~)";
+                    $newVarMission = "--+/front/$name_variable/back/--+";
+                    // $newVarMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$name_variable~~focus_value=0~)";
 
-                    if (!in_array($newVar, $dataTestVariable)) {
-                        $newVarMission = $newVar;
-                        array_push($dataTestVariable, $newVar);
-                    } else {
-                        $newVarMission = "";
-                    }
-
-                    $newFocus = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$focus_value~~focus_value=0~)";
-
-                    if (!in_array($newFocus, $dataTestVariable)) {
-                        $newFocusMission = $newFocus;
-                        array_push($dataTestVariable, $newFocus);
+                    if ((int)$focus_value == 0) {
+                        // $newFocusMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$focus_value~~focus_value=0~)";
+                        $newFocusMission = "--+/front/$name_variable/back/--+";
                     } else {
                         $newFocusMission = "";
                     }
 
-                    if ((int)$focus_value == 0) {
-                        $newFocusMission2 = $newFocusMission;
-                    } else {
-                        $newFocusMission2 = "";
-                    }
-
                     $varMission = "(name:$name_function_variable|time_out:$time_out|mode:$mode|data:~command_action=$command_action~~name_variable=$name_variable~~focus_value=$focus_value~)";
-                    array_push($stepMission, $newVarMission . $newFocusMission2 . $varMission);
+                    return $newVarMission . $newFocusMission . $varMission;
                     break;
 
                 case 'sound':
@@ -549,11 +402,10 @@ class MiController extends Controller
                     $music_start = $item->music_start;
                     $music_mode = $item->music_mode;
 
-                    array_push($stepMission, "(name:$name_sound|time_out:$time_out|mode:$mode|data:~music_start=$music_start~~music_mode=$music_mode~)");
+                    return "(name:$name_sound|time_out:$time_out|mode:$mode|data:~music_start=$music_start~~music_mode=$music_mode~)";
                     break;
             }
-        }
-
+        }, $stepMissionData);
 
         $dataStepMission = trim(implode($stepMission), " ");
 

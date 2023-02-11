@@ -8,7 +8,7 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/build/assets/app.a3fefbf3.css">
+    <link rel="stylesheet" href="/build/assets/app.291d5839.css">
     {{-- 
         --}}
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
@@ -19,10 +19,11 @@
 
 
     {{-- @php
-        $a = "s2";
-        dd((int)$a == 0);    
-
-
+        $a = "&name>1/time_out>-1/mode>normal/data>%normal_step#--+/front/a/back/--+(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=0~~focus_value=0~)(name:p|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=a~~focus_value=0~)--+/front/a/back/--+(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=b~~focus_value=0~)(name:3|time_out:-1|mode:variable|data:~command_action=equal_as~~name_variable=a~~focus_value=b~)--+/front/a/back/--+(name:1|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=a~~focus_value=8~)--+/front/b/back/--+(name:2|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=b~~focus_value=10~)--+/front/a/back/--+(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=0~~focus_value=0~)(name:p|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=a~~focus_value=0~)--+/front/a/back/--+(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=b~~focus_value=0~)(name:3|time_out:-1|mode:variable|data:~command_action=equal_as~~name_variable=a~~focus_value=b~)--+/front/a/back/--+(name:1|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=a~~focus_value=8~)--+/front/b/back/--+(name:2|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=b~~focus_value=10~)--+/front/A/back/--+(name:12|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=A~~focus_value=1~)--+/front/b/back/--+(name:1|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=b~~focus_value=1~)%@&name>x/time_out>-1/mode>if_else/data>%condition#--+/front/A/back/--+(name:12|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=A~~focus_value=1~)%%if_step#(name:F|time_out:-1|mode:sleep|data:~time_sleep=1~)%%else_step#--+/front/A/back/--+(name:12|time_out:-1|mode:variable|data:~command_action=equal~~name_variable=A~~focus_value=1~)%@";
+        $b =implode('--+',array_unique(explode('--+', $a)));
+        
+        $c = str_replace("--+/front/", "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=", $b);
+        // dd($c);
     @endphp --}}
     <style>
         .connection-failed {
@@ -88,18 +89,29 @@
             @yield('content')
         </div>
     </div>
-    <div class="fixed top-[80px] right-4 z-[100] text-2xl">
-        <div class="bg-green-400 px-[10px]">
-            <span id="message-success" class=" w-full h-full text-[#fff]"></span>
+    <div
+        class="fixed top-[10px] right-4 z-[100] text-2xl bg-[#ffffff] ">
+        {{-- <span class="text-[30px] w-[50px] h-[50px] border-[2px] border-green-400 rounded-md text-green-400 flex justify-center items-center">
+            <i class="fa-solid fa-check"></i>
+        </span> --}}
+        <div class="">
+            <div class="bg-green-400 px-[10px]">
+                <span id="message-success" class=" w-full h-full text-[#fff]"></span>
+            </div>
+            <div class="bg-red-400 px-[10px]">
+                <span id="message-error" class=" w-full h-full text-[#fff]"></span>
+            </div>
         </div>
-        <div class="bg-red-400 px-[10px]">
-            <span id="message-error" class=" w-full h-full text-[#fff]"></span>
-        </div>
+
     </div>
 
     <div class="fixed bottom-10 left-10 z-10 flex">
-        <button class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i class="fa-solid fa-angle-left"></i></button>
-        <button class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 btn next-history-btn"><i class="fa-solid fa-angle-right"></i></button>
+        <button
+            class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i
+                class="fa-solid fa-angle-left"></i></button>
+        <button
+            class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 btn next-history-btn"><i
+                class="fa-solid fa-angle-right"></i></button>
     </div>
 
     {{-- <script src="/js/library/jquery.min.js"></script>

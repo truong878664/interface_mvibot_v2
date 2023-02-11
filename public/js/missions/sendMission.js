@@ -9,12 +9,23 @@ export default function sendMission() {
 
             .then((data) => {
                 const nameRobot = $("#select-robot-option").value;
-                if (nameRobot == "Choose Robot") {
-                    toggerMessage("error", "please choose robot");
+                if (data.steps_mission !== null) {
+                    if (nameRobot == "Choose Robot") {
+                        toggerMessage("error", "please choose robot");
+                    } else {
+                        const dataBodyMission = `${data.steps_mission}`;
+
+                        publishMission(nameRobot, dataBodyMission);
+                        toggerMessage(
+                            "success",
+                            "send data to robot successfully"
+                        );
+                    }
                 } else {
-                    const dataBodyMission = `${data.steps_mission}`;
-                    publishMission(nameRobot, dataBodyMission);
-                    toggerMessage("success", "send data to robot successfully");
+                    toggerMessage(
+                        "error",
+                        "Currently no data please reload the page and try again"
+                    );
                 }
             });
     };
