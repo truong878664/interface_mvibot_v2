@@ -244,6 +244,8 @@ export default function handleEditFunctionType() {
             translatesStepsMission(currentMission);
 
             loadDataFunction(type);
+
+            $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
             handleOverlayUpdate("hidden");
         };

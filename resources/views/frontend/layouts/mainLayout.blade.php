@@ -8,14 +8,22 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/dist/css/app.css"> --}}
     <link rel="stylesheet" href="/css/main.css">
-    {{-- <link rel="stylesheet" href="/build/assets/app.972af72c.css"> --}}
+    <link rel="stylesheet" href="/build/assets/app.a3fefbf3.css">
     {{-- 
         --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css')  --}}
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0">
+
+
+    {{-- @php
+        $a = "s2";
+        dd((int)$a == 0);    
+
+
+    @endphp --}}
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
