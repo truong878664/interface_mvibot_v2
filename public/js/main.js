@@ -3,22 +3,13 @@ import { ip } from "../ip.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-// let ip;
-// if (localStorage.getItem("ip")) {
-//     ip = localStorage.getItem("ip");
-// } else {
-//     localStorage.setItem("ip", "192.168.0.2");
-//     ip = localStorage.getItem("ip");
-// }
 const ros = connectRos(window.location.hostname);
-// const ros = connectRos(ip);
-// console.log(window.location.hostname)
 
 function toggerMessage(type, message) {
-    const divMessage = document.querySelector(`#message-${type}`);
-    divMessage.innerText = message;
+    $(".notification").classList.add("notification-show", type);
+    $("#message").innerText = message;
     setTimeout(() => {
-        divMessage.innerText = "";
+        $(".notification").classList.remove("notification-show", type);
     }, 2000);
 }
 
@@ -27,13 +18,12 @@ window.oncontextmenu = (e) => {
     return false;
 };
 
-
-$('.back-history-btn').onclick = e => {
-    history.back()
-}
-$('.next-history-btn').onclick = e => {
-    history.forward()
-}
+$(".back-history-btn").onclick = (e) => {
+    history.back();
+};
+$(".next-history-btn").onclick = (e) => {
+    history.forward();
+};
 
 export { $, $$, toggerMessage };
 
