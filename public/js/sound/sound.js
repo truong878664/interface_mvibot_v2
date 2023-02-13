@@ -3,6 +3,7 @@ import { robotActive } from "../mainLayout.js";
 import publishTopicString from "../rosModule/topicString.js";
 import publishTopic from "../rosModule/pubicTopic.js";
 import { $, $$ } from "../main.js";
+import dbDelete from "../missions/functionHandle/dbDelete.js";
 
 handleRenderSound();
 
@@ -13,36 +14,51 @@ function handleRenderSound() {
     setTimeSound();
     handleSendSound();
     actionBtn();
+    handleDeleteSound();
 }
 
 function renderSound(pathSound) {
-    let i = 1;
+    let i = 8;
     const html = [];
     pathSound.map((item) => {
-        const nameSound = item.slice(item.indexOf("/") + 1, item.length);
+        const nameSound = item.slice(item.lastIndexOf("/") + 1, item.length);
+        let newName;
+        if (nameSound.length > 30) {
+            newName =
+                nameSound.slice(0, 20) +
+                "..." +
+                nameSound.slice(nameSound.length - 6, nameSound.length);
+        } else {
+            newName = nameSound;
+        }
 
-        return html.push(`
+        html.push(`
         <tr class="text-center sound-item">
             <td class="border border-solit border-[#ccc]">${i++}</td>
-            <td class="border border-solit border-[#ccc]">${nameSound}
-                <audio class="sound-${nameSound} audio-item">
+            <td class="border border-solit border-[#ccc]">${newName}
+                <audio class="sound-${newName} audio-item">
                     <source src="/${item}" type="audio/mpeg" class="source-sound">
                 </audio>
             </td>
             <td class="border border-solit border-[#ccc] time-sound">00:00</td>
             <td class="border border-solit border-[#ccc]">
+           
+                <button name-sound = ${nameSound} class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] delete-sound-btn">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
                 <button
-                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-white hover:bg-main btn rounded-md hover:bg-[#e0e0e0] play-sound-btn">
+                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] play-sound-btn">
                     <i class="fa-solid fa-play"></i>
                 </button>
                 
                 <button
-                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-white hover:bg-main btn rounded-md hover:bg-[#e0e0e0] send-sound-btn">
+                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] send-sound-btn">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
 
             </td>
         </tr>`);
+        return html;
     });
 
     $("#table-sound").innerHTML = $("#table-sound").innerHTML += html.join("");
@@ -131,6 +147,33 @@ function handleSendSound() {
     });
 }
 
+function handleDeleteSound() {
+    $$(".delete-sound-btn").forEach((element) => {
+        element.onclick = (e) => {
+            dbDelete(e.target, () => deleteSound(e));
+        };
+    });
+    function deleteSound(e) {
+        console.log(e);
+        const nameSound = e.target.getAttribute("name-sound");
+
+        fetch(`/api/sound-file/${nameSound}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status == 200) {
+                    e.target.closest(".sound-item").remove();
+                    toggerMessage("success", data.message);
+                }
+            });
+    }
+}
+
 function secondToMinute(time) {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time - minutes * 60);
@@ -198,5 +241,13 @@ $("#sound-file").onchange = (e) => {
               "..." +
               name.slice(name.length - 10, name.length)
             : name;
+};
 
+$(".upload-sound-submit").onclick = (e) => {
+    e.preventDefault();
+    if ($("#sound-file").value == "") {
+        $("#sound-file").click();
+    } else {
+        $("#form-upload-sound").submit();
+    }
 };

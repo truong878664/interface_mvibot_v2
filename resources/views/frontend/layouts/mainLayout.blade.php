@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/build/assets/app.d5b82de3.css">
+    {{-- <link rel="stylesheet" href="/build/assets/app.d5b82de3.css"> --}}
     
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    <script src="https://cdn.tailwindcss.com"></script>
     {{-- @vite('resources/css/app.css')  --}}
 </head>
 
@@ -74,7 +74,7 @@
             </ul>
         </section>
 
-        <div class="container-conten w-[calc(100%_-_74px)] h-[calc(100%_-_44px)] mt-[44px] ml-[74px]">
+        <div class="md:w-[calc(100%_-_74px)] md:h-[calc(100%_-_44px)]  md:mt-[44px] md:ml-[74px]">
             @yield('content')
         </div>
     </div>

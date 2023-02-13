@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
+use App\Http\Controllers\Api\SoundFileController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
@@ -65,3 +66,4 @@ Route::resource('robot', RobotController::class);
 Route::resource('function', FunctionController::class)->only('index');
 
 Route::resource('var', VarController::class);
+Route::resource('sound-file', SoundFileController::class)->only('destroy');

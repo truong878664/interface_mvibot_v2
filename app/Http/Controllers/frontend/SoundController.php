@@ -16,7 +16,18 @@ class SoundController extends Controller
 
     public function upload(Request $request)
     {
-        ($request->file('sound_file')->storeAs('sound', 'aaa.mp3', 'local'));
-        return back();
+
+        if (!$request->hasFile('sound')) {
+            return back();
+        }
+
+        $time = date("h:i:sa");
+        $sound = $request->file('sound');
+
+        $newName = str_replace(".mp3", "", str_replace(" ","_",str_replace("'","",$sound->getClientOriginalName())))."_". strtotime($time) . ".mp3";
+
+        $storedPath = $sound->move('sound/custom', $newName);
+
+        return  back();
     }
 }
