@@ -7,7 +7,6 @@
         @include('frontend.blocks.mission.createMissions.createStep')
         {{-- </div> --}}
     </div>
-    @include('frontend.blocks.message')
 
     <script type="module" src="/js/missions.js"></script>
     <script type="module" src="/js/missions/createStepMission.js"></script>

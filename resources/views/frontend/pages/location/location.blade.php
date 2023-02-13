@@ -50,7 +50,6 @@
             </div>
         </div>
     </div>
-    @include('frontend.blocks.message')
     <script src="/js/library/roslib.min.js"></script>
     <script src="/js/library/nipplejs.js"></script>
     <script type="module" src="/js/location/location.js"></script>
