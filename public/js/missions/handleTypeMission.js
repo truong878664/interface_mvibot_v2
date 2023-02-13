@@ -1,5 +1,5 @@
 import arrayMove from "../functionHandle/arrayMove.js";
-import { $, $$ } from "../main.js";
+import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
 import { currentMission, renderBlockStep } from "./handleStepMission.js";
@@ -354,14 +354,12 @@ function handleAddMissionTrycatch() {
             type: "trycatch",
             data: `${valueItemTrycatch.try.join(
                 "|"
-            )}?${valueItemTrycatch.catch.join("|")}`,
+            )}?|${valueItemTrycatch.catch.join("|")}`,
         };
+
         if (isValid && isDataTry && isDataCatch) {
             addTypeMission(dataSaveTypeMission);
             resetValueInputTrycatch();
-            // $$(".normal-border").forEach((item) => {
-            //     item.style.borderColor = "#ccc";
-            // });
             console.log(dataSaveTypeMission);
         }
     };
@@ -406,7 +404,9 @@ export function updateBlockStep(id, data) {
         body: JSON.stringify(data),
     })
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            toggerMessage('success', data.message)
+        })
         .catch((data) => console.log(data));
 }
 
@@ -527,7 +527,7 @@ export function validateInput(...rest) {
         const pattern = /^[a-zA-Z0-9]*$/;
 
         if ($(item).value == "" || !pattern.exec($(item).value)) {
-            $(item).style.borderColor = "red";
+            toggerMessage("error", "Please enter all input");
             return false;
         } else {
             return true;
@@ -539,10 +539,9 @@ export function validateInput(...rest) {
 
 export function validateArray(arr, element) {
     if (arr.length == 0) {
-        $(element).style.borderColor = "red";
+        toggerMessage("error", "Data cannot be empty");
         return false;
     } else {
-        $(element).style.borderColor = "#ccc";
         return true;
     }
 }

@@ -183,3 +183,20 @@ function actionBtn() {
         }
     };
 }
+
+$("#sound-file").onchange = (e) => {
+    const pathSound = e.target.value;
+
+    const name = pathSound.slice(
+        pathSound.lastIndexOf(`\\`) + 1,
+        pathSound.length
+    );
+
+    $(".name-sound-up").innerText =
+        name.length > 20
+            ? name.slice(0, 10) +
+              "..." +
+              name.slice(name.length - 10, name.length)
+            : name;
+
+};

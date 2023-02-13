@@ -12,7 +12,6 @@ $("#shutdown-btn").onclick = () => {
         toggerMessage("error", "Please choose robot!");
     } else {
         publishTopic(`${robotSelect}/robot_shutdown`, "1");
-        toggerMessage("success", `Shutdown success`);
     }
 };
 
@@ -21,6 +20,5 @@ $("#reboot-btn").onclick = () => {
         toggerMessage("error", "Please choose robot!");
     } else {
         publishTopic(`${robotSelect}/robot_shutdown`, "2");
-        toggerMessage("success", `Reboot success`);
     }
 };

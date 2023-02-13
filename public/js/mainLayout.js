@@ -1,5 +1,4 @@
 import { color } from "./color.js";
-// import { $, $$ } from "./main.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -47,22 +46,13 @@ xhttp.onload = function () {
         document.querySelector(
             ".message-map-wrapper"
         ).innerHTML = `<div class = "message-map-none" >
-                        <i class = "fa-solid fa-triangle-exclamation" ></i>
-                        <span> no active map </span>
-                    </div>`;
+                            <i class = "fa-solid fa-triangle-exclamation" ></i>
+                            <span> no active map </span>
+                        </div>`;
     }
 };
 xhttp.open("GET", "/dashboard/map/map-active", true);
 xhttp.send();
-
-// const logoutBtn = document.querySelector(".logout");
-// logoutBtn.onclick = () => {
-//     deleteCookie("username");
-//     deleteCookie("password");
-// };
-// const deleteCookie = function (cname) {
-//     document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-// };
 
 function updateAvatarUser() {
     fetch("/api/user/logged")

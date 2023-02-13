@@ -6,6 +6,8 @@ export default function subscribeTopic(name, messageType, callback) {
         name: `/${name}`,
         messageType: messageType,
     });
-    listener.subscribe((data) => callback(data, name));
+    listener.subscribe((data) => {
+        callback(data, name)
+    });
 }
- 
+

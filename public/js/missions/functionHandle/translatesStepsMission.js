@@ -1,3 +1,4 @@
+import { toggerMessage } from "../../main.js";
 import { renderBlockStep } from "../handleStepMission.js";
 
 export default function translatesStepsMission(id) {
@@ -11,7 +12,7 @@ export default function translatesStepsMission(id) {
     })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
             renderBlockStep();
+            toggerMessage('success', data.message)
         });
 }

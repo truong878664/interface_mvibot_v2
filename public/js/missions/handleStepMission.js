@@ -7,6 +7,7 @@ import {
     validateArray,
     validateInput,
     valueItemIfelse,
+    valueItemTrycatch,
     valueNormalMissionArray,
 } from "./handleTypeMission.js";
 import translatesStepsMission from "./functionHandle/translatesStepsMission.js";
@@ -102,6 +103,35 @@ function renderBlockStep() {
                         );
 
                         break;
+                    case "trycatch":
+                        const dataTryCatch = typeMissionItem[2].split("?");
+                        const htmlTryCatch = [];
+                        const htmlTry = [];
+                        const htmlCatch = [];
+
+                        renderStepItem(dataTryCatch[0], htmlTry);
+                        renderStepItem(dataTryCatch[1], htmlCatch);
+
+                        htmlTryCatch.push(`
+                                <div class="step-item bg-black font-bold text-[#fff]">Try|
+                                ${arrayStep.slice(0, arrayStep.indexOf("^"))}
+                                </div>${htmlTry.join("")}`);
+
+                        htmlTryCatch.push(`
+                                <div class="step-item border bg-black  font-bold text-[#fff] step-hidden">Catch</div>${htmlCatch.join(
+                                    ""
+                                )}`);
+
+                        html.push(
+                            `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" id-mission=${
+                                shortHandMissionList[index]
+                            }>
+                                <i class="fa-solid fa-play"></i>
+                                ${htmlTryCatch.join("")}
+                                ${buttonHandle}
+                            </div>`
+                        );
+                        break;
                 }
             });
             $(".steps-wrapper").innerHTML = html.join("");
@@ -151,7 +181,7 @@ function handleDeleteMission(missionShorthand) {
 
                 const dataMissionShorthand = {
                     mission_shorthand: missionShorthand.join("+"),
-                    method: "update",
+                    method: "delete",
                 };
                 updateBlockStep(currentMission, dataMissionShorthand);
                 missionItem.remove();
@@ -246,7 +276,6 @@ function handleEditMission() {
             handleCancelUpdateMission();
             handleUpdateMission();
             handleOverlayUpdate("show");
-
         };
     });
     function editTypeMission(data) {
@@ -305,6 +334,36 @@ function handleEditMission() {
                 handleDeleteStep(valueItemIfelse.then, ".then-steps-wrapper");
                 handleDeleteStep(valueItemIfelse.else, ".else-steps-wrapper");
                 break;
+            case "trycatch":
+                valueItemTrycatch.try.length = 0;
+                valueItemTrycatch.catch.length = 0;
+
+                $(".name-trycatch-mission").value = data.name;
+
+                const dataTryCatch = data.data.split("?");
+                const dataTry = dataTryCatch[0].split("|");
+                const dataCatch = dataTryCatch[1]
+                    .split("|")
+                    .filter((item) => item.length != 0);
+
+                valueItemTrycatch.try.push(...dataTry);
+                valueItemTrycatch.catch.push(...dataCatch);
+
+                $(".trycatch-mission-btn").click();
+                showUpdateBtn(true, "trycatch");
+
+                render(valueItemTrycatch.try, `.try-steps-wrapper`);
+                render(valueItemTrycatch.catch, `.catch-steps-wrapper`);
+
+                handleMoveStep(valueItemTrycatch.try, `.try-steps-wrapper`);
+                handleMoveStep(valueItemTrycatch.catch, `.catch-steps-wrapper`);
+
+                handleDeleteStep(valueItemTrycatch.try, `.try-steps-wrapper`);
+                handleDeleteStep(
+                    valueItemTrycatch.catch,
+                    `.catch-steps-wrapper`
+                );
+                break;
         }
     }
 }
@@ -337,7 +396,7 @@ function handleCancelUpdateMission() {
         showUpdateBtn(false, "normal");
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
-        handleOverlayUpdate('hidden')
+        handleOverlayUpdate("hidden");
     };
 
     $(`.cancel-ifelse`).onclick = () => {
@@ -354,8 +413,23 @@ function handleCancelUpdateMission() {
         render(valueItemIfelse.else, `.else-steps-wrapper`);
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
-        handleOverlayUpdate('hidden')
+        handleOverlayUpdate("hidden");
+    };
 
+    $(`.cancel-trycatch`).onclick = () => {
+        showUpdateBtn(false, "trycatch");
+        $(".name-trycatch-mission").value = "";
+
+        valueItemTrycatch.try.length = 0;
+        valueItemTrycatch.catch.length = 0;
+
+        $(".edit-step-btn.active")?.classList.remove("active");
+
+        render(valueItemTrycatch.try, `.try-steps-wrapper`);
+        render(valueItemTrycatch.catch, `.catch-steps-wrapper`);
+
+        $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
+        handleOverlayUpdate("hidden");
     };
 }
 
@@ -396,6 +470,27 @@ function handleUpdateMission() {
             updateTypeMission(currentIdMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
             $(`.cancel-ifelse`).click();
+        }
+    };
+
+    $(".update-trycatch").onclick = () => {
+        const isValid = validateInput(".name-trycatch-mission");
+        const isDataTry = validateArray(valueItemTrycatch.try, ".try-label");
+        const isDataCatch = validateArray(
+            valueItemTrycatch.catch,
+            ".catch-label"
+        );
+
+        const dataTypeMission = {
+            name: $(".name-trycatch-mission").value,
+            data: `${valueItemTrycatch.try.join(
+                "|"
+            )}?|${valueItemTrycatch.catch.join("|")}`,
+        };
+        if (isValid && isDataTry && isDataCatch) {
+            updateTypeMission(currentIdMissionEdit, dataTypeMission);
+            translatesStepsMission(currentMission);
+            $(`.cancel-trycatch`).click();
         }
     };
 }

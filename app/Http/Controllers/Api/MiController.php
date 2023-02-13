@@ -115,11 +115,16 @@ class MiController extends Controller
                 }
                 Missions::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
 
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                return ['message' => 'Add mission success!', "status" => 200];
                 break;
-            case "update":
+            case "delete":
                 $update_mission_shorthand = $request->mission_shorthand;
                 Missions::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
-
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                return ['message' => 'Delete mission success!', "status" => 200];
                 break;
             case "move":
                 $mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
@@ -143,20 +148,29 @@ class MiController extends Controller
                         break;
                 }
 
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                return ['message' => 'Move mission success!', "status" => 200];
                 break;
             case "update-name":
                 Missions::where('id', $id)->update(['name_mission' => $request->name_mission]);
+
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                return ['message' => 'Update1 mission success!', "status" => 200];
                 break;
             case "update-type-mission":
                 $this->translateStepMissionName($id);
                 $this->translateData($id);
+                return ['message' => 'Mission data is ready!', "status" => 200];
+
                 break;
         }
 
-        $this->translateStepMissionName($id);
-        $this->translateData($id);
+        // $this->translateStepMissionName($id);
+        // $this->translateData($id);
 
-        return ['message' => 'save data success', "status" => 200];
+        // return ['message' => 'Mission data is ready', "status" => 200];
     }
 
     /**
@@ -238,11 +252,26 @@ class MiController extends Controller
                         $body =  "$dataStringIf$dataStringThen$dataStringElse@";
                         array_push($data, $head . $body);
                         break;
+                    case "trycatch":
+                        $head = "&name>$dataItem[0]/time_out>-1/mode>try_catch/data>%condition#";
+
+                        $changeTryCatch = explode('?', $dataItem[2]);
+
+                        $dataTry = $this->translateStepItem($changeTryCatch[0]);
+                        $dataCatch = $this->translateStepItem($changeTryCatch[1]);
+
+
+                        $dataStringTry = "%try_step#$dataTry%";
+                        $dataStringCatch = "%catch_step#$dataCatch%";
+
+                        $body =  "$dataStringTry$dataStringCatch@";
+                        array_push($data, $head . $body);
+                        break;
                 }
             }
 
             $dataStepMission = trim(implode('', $data), " ");
-            $dataStepMissionRemoveVar = implode('--+',array_unique(explode('--+', $dataStepMission)));
+            $dataStepMissionRemoveVar = implode('--+', array_unique(explode('--+', $dataStepMission)));
             $addFrontVar = str_replace("--+/front/", "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=", $dataStepMissionRemoveVar);
             $addBackVar = str_replace("/back/--+", "~~focus_value=0~)",  $addFrontVar);
             $fullStep = str_replace("--+", "",  $addBackVar);
@@ -386,7 +415,7 @@ class MiController extends Controller
 
                     if ((int)$focus_value == 0) {
                         // $newFocusMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$focus_value~~focus_value=0~)";
-                        $newFocusMission = "--+/front/$name_variable/back/--+";
+                        $newFocusMission = "--+/front/$focus_value/back/--+";
                     } else {
                         $newFocusMission = "";
                     }

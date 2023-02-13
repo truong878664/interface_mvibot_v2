@@ -3,7 +3,7 @@ import createMap from "../rosModule/createMap.js";
 import createTfClient from "../rosModule/createTfClient.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
-import ros, { $, $$ } from "../main.js";
+import ros, { $, $$, toggerMessage } from "../main.js";
 import { mvibot_layer } from "../rosModule/classMvibot.js";
 import { markerClient, displayLayer } from "../rosModule/layer/markerClient.js";
 import {
@@ -106,14 +106,14 @@ $(".stop-mission-btn").onclick = (e) => {
     if (robotActive) {
         topicString(`${robotActive}/mission_action`, "0");
     } else {
-        alert("choose robot");
+        toggerMessage("error", "please choose robot");
     }
 };
 $(".continue-mission-btn").onclick = (e) => {
     if (robotActive) {
         topicString(`${robotActive}/mission_action`, "1");
     } else {
-        alert("choose robot");
+        toggerMessage("error", "please choose robot");
     }
 };
 

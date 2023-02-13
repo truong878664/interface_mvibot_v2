@@ -19,6 +19,23 @@
                     <th class="border border-solit border-[#ccc] py-2">Action</th>
                 </tr>
             </table>
+            <form class="mt-4 flex justify-center" action="/upload/sound" method="POST">
+                <label for="sound-file"
+                    class="flex flex-col items-center justify-center w-1/4 border-2 pb-4 border-gray-400 border-dashed rounded-lg cursor-pointer bg-[#dcdcdc] ">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+
+                        <p class="mb-2 text-xl text-gray-500 dark:text-gray-400">
+                            <span class="font-semibold">Click toupload (MP3)</span>
+                        </p>
+                        <span class="text-xl name-sound-up"></span>
+                    </div>
+                    <input id="sound-file" type="file" accept=".mp3" class="hidden" name="sound_file"/>
+                    <button class="float-right text-xl btn text-blue-400 bg-blue-200 px-8 py-1 rounded-full self-center">
+                        <i class="fa-solid fa-upload"></i>
+                    </button>
+                </label>
+                @csrf
+            </form>
             <div class="mt-4">
                 <button
                     class="float-right text-xl md:text-3xl btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>
@@ -43,15 +60,6 @@
             @endphp
 
             <input type="hidden" class="pathSound" value="">
-            {{-- <form action="">
-                <label for="dropzone-file"
-                    class="px-4 py-2 bg-[#0f6cbd] text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 float-right mt-2 add-sound">
-                    <i class="fa-solid fa-upload"></i>
-                    <span class="mr-2">Add sound</span>
-                    <input id="dropzone-file" type="file" class="hidden" />
-                </label>
-                <input type="submit" value="df">
-            </form> --}}
 
             <script>
                 (function getPathSound() {

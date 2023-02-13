@@ -64,9 +64,9 @@
                 <label for="select-robot" class="overlay"></label>
                 <div class="select-robot form-wrapper">
                     <select id="select-robot-option">
-                        <option>Choose Robot</option>
+                        <option value="">Choose Robot</option>
                         @foreach ($allRobot as $robot)
-                            <option>{{ $robot['name_seri'] }}</option>
+                            <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
                         @endforeach
                     </select>
                     <label for="select-robot"

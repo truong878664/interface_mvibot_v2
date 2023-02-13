@@ -1,5 +1,6 @@
-import { toggerMessage } from "../main.js";
+import { $$, toggerMessage } from "../main.js";
 import { publishMission } from "../rosModule/handleMission.js";
+import subscribeTopic from "../rosModule/subscribeTopic.js";
 import { currentMission } from "./handleStepMission.js";
 
 export default function sendMission() {
@@ -16,10 +17,6 @@ export default function sendMission() {
                         const dataBodyMission = `${data.steps_mission}`;
 
                         publishMission(nameRobot, dataBodyMission);
-                        toggerMessage(
-                            "success",
-                            "send data to robot successfully"
-                        );
                     }
                 } else {
                     toggerMessage(
@@ -30,3 +27,4 @@ export default function sendMission() {
             });
     };
 }
+

@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/build/assets/app.6b87491c.css">
-   
+    <link rel="stylesheet" href="/build/assets/app.d5b82de3.css">
+    
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css')  --}}
 </head>
@@ -89,6 +89,7 @@
 
     </div>
 
+    @include('frontend.blocks.robots')
     @include('frontend.blocks.message')
 
     {{-- <script src="/js/library/jquery.min.js"></script>

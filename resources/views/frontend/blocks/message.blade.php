@@ -26,7 +26,7 @@
     <div class="ml-4">
         <span class="font-bold">Notification</span>
         <div class="" style="">
-            <span id="message" class=" w-full h-full ">gekk</span>
+            <span id="message" class=" w-full h-full "></span>
         </div>
     </div>
     <button class="absolute top-0 right-0 text-stone-300 px-4 py-2 hover:text-stone-500 delete-message-btn"><i

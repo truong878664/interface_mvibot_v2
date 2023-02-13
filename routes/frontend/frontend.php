@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\mapController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\gpioPageController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\joystickController;
 use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
@@ -19,9 +20,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         return view('frontend.pages.auth.login');
     });
 
-    Route::get('/', function () {
-        return view('frontend.pages.home.home');
-    })->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/user', function () {
         return view('frontend.pages.user.user');

@@ -12,7 +12,7 @@ use App\Http\Controllers\backend\AuthController;
 use App\Http\Controllers\backend\gpioOtherController;
 use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
-
+use App\Http\Controllers\frontend\SoundController;
 
 Route::prefix('dashboard')->group(function () {
     Route::prefix('missions')->group(function () {
@@ -44,3 +44,4 @@ Route::post('/map-active', [mapController::class, 'addMapActive']);
 Route::post('/add-layer', [layerController::class, 'addLayer'])->name('add-layer');
 Route::post('/delete-layer', [layerController::class, 'deleteLayer'])->name('delete-layer');
 Route::get('/all-layer', [layerController::class, 'allLayer']);
+Route::post('/upload/sound', [SoundController::class, 'upload']);
