@@ -5,7 +5,8 @@ import topicsListening from "./rosModule/topicsListening.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const ros = connectRos('192.168.42.161');
+const ros = connectRos(window.location.hostname);
+
 let timeOut;
 function toggerMessage(type, message) {
     clearTimeout(timeOut);
