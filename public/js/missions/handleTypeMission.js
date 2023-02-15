@@ -33,7 +33,7 @@ handleAddMissionNormal();
 handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
-export function loadDataFunction(typeFunctionActive = "footprint") {
+export function loadDataFunction(typeFunctionActive = "gpio") {
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {

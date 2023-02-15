@@ -5,12 +5,18 @@ import topicsListening from "./rosModule/topicsListening.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const ros = connectRos(ip);
-
+const ros = connectRos('192.168.42.161');
+let timeOut;
 function toggerMessage(type, message) {
+    clearTimeout(timeOut);
+    $(".notification").classList.remove(
+        "notification-show",
+        "success",
+        "error"
+    );
     $(".notification").classList.add("notification-show", type);
     $("#message").innerText = message;
-    setTimeout(() => {
+    timeOut = setTimeout(() => {
         $(".notification").classList.remove("notification-show", type);
     }, 3000);
 }
@@ -34,7 +40,6 @@ window.oncontextmenu = (e) => {
     e.preventDefault();
     return false;
 };
-
 
 export { $, $$, toggerMessage };
 

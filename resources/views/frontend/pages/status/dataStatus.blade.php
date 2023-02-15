@@ -50,9 +50,11 @@
         $batteryCharge = $item['batteryCharge'];
         $activate = $item['activate'];
     @endphp
+
     <x-status-item nameRobot="{{ $nameRobot }}"
-        statusStatusRobot="{{ $statusRobot === 1 ? 'navigation' : 'mapping' }}" batteryPercent="{{ $batteryPercent }}%"
+        statusStatusRobot="{{ $statusRobot }}" batteryPercent="{{ $batteryPercent }}%"
         batteryCharge="{{ $batteryCharge }}" batteryTemperValue="{{ $batteryTemperValue }}°C"
         batteryA="{{ $batteryA }}A" batteryVoltValue="{{ $batteryVolt }}" :dataAccessory="$dataAccessory"
         activate="{{ $activate }}" />
+
 @endforeach

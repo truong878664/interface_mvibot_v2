@@ -52,6 +52,7 @@ $(".create-variable-btn").onclick = () => {
         fetchCustom("/api/var", "POST", (data) => console.log(data), {
             name_var: nameVariableElement.value,
         });
+
         nameVariableElement.value = "";
 
         updateVar();
@@ -59,6 +60,7 @@ $(".create-variable-btn").onclick = () => {
         errorBorder(nameVariableElement);
     }
 };
+
 
 $(".submit-btn-variable").onclick = () => {
     const name_function_variable = $(".name_function_variable").value;

@@ -31,7 +31,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::prefix('missions')->name('missions.')->group(function () {
             Route::get('/', [MissionsController::class, 'index']);
-            Route::get('/create-point', [MissionsController::class, 'createPoint'])->name('create-point');
+
+            Route::get('/type-mission', function () {
+                return view('frontend.pages.missions.typeMission');
+            })->name('type-mission');
+            // Route::get('/create-point', [MissionsController::class, 'createPoint'])->name('create-point');
             Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
             Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
 

@@ -28,11 +28,12 @@ class MissionsController extends Controller
         return view('frontend.pages.missions.createPoint', compact('mapActive'));
     }
 
-    public function createMissions()
+    public function createMissions(Request $request)
     {
         $allRobot = Robot::all();
-        $allMissions = Missions::all();
-        return view('frontend.pages.missions.createMissions', compact('allMissions', 'allRobot'));
+        $missions = Missions::where('type', $request->type)->get();
+        $type = $request->type;
+        return view('frontend.pages.missions.createMissions', compact('missions', 'allRobot' , 'type'));
     }
 
     public function trackingMission()

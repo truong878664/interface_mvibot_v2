@@ -1,9 +1,9 @@
-<div class="status-item-wrapper {{ $activate ? '' : 'inactivate' }}">
+<div class="status-item-wrapper {{ $activate ? '' : 'inactivate' }}{{$statusStatusRobot == 0 ? "disconnect" : ""}}">
     <div class="status-header">
         <div class="status-name-robot">{{ $nameRobot }}</div>
     </div>
     <div class="status-item">
-
+        
         <div class="status-battery">
             <div class="inner-circle"></div>
             <div class="outer-circle"></div>

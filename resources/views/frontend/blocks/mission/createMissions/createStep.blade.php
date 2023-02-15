@@ -8,7 +8,7 @@
     </div> --}}
 
     <div class="w-full h-full flex flex-col">
-        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 ">
+        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px]">
             <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
 
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] font-bold absolute w-full top-0">
@@ -35,7 +35,7 @@
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">function</p>
                 <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                     <div
-                        class="footprint-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
+                        class="footprint-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
                         <span>Footprint</span>
                     </div>
                     <div
@@ -47,20 +47,20 @@
                         <span>GPIO module</span>
                     </div>
                     <div
-                        class="marker-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="marker-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Marker</span>
                     </div>
                     <div
-                        class="sleep-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="sleep-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sleep</span>
                     </div>
                     <div
-                        class="sound-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="sound-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sound</span>
                     </div>
 
                     <div
-                        class="point-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="point-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Position</span>
                     </div>
                     <div

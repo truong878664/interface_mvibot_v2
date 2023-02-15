@@ -51,6 +51,7 @@ class MiController extends Controller
                     "steps_mission_name" => $data->steps_mission_name,
                     "stop" => $data->stop,
                     "wake_up" => $data->wake_up,
+                    "type" => $data->type,
                     "created_ad" => $data->created_at,
                     'updated_at' => $data->updated_ats
                 ];

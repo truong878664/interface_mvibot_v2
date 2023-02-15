@@ -31,9 +31,11 @@ $(".submit-btn-sound").onclick = () => {
     let music_mode;
     const music_start = music_type == "start" ? 1 : 0;
     if (music_type != "stop") {
-        $(".sound-btn.active")?.getAttribute("data-mode") == "basic" &&
+        $(".sound-btn.active")?.getAttribute("data-mode") == "buzzer1" &&
+            (music_mode = 1);
+        $(".sound-btn.active")?.getAttribute("data-mode") == "buzzer2" &&
             (music_mode = 2);
-        $(".sound-btn.active")?.getAttribute("data-mode") == "error" &&
+        $(".sound-btn.active")?.getAttribute("data-mode") == "basic" &&
             (music_mode = 3);
         $(".sound-btn.active")?.getAttribute("data-mode") == "custom" &&
             (music_mode = 4);

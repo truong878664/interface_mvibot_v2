@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
-    <link rel="stylesheet" href="/css/main.css">
-    {{-- <link rel="stylesheet" href="/build/assets/app.d5b82de3.css"> --}}
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- @vite('resources/css/app.css')  --}}
+    {{-- <link rel="stylesheet" href="/css/main.css"> --}}
+    <link rel="stylesheet" href="/buildCss/style.css">
+    <link rel="stylesheet" href="/build/assets/app.b1de68cc.css">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 </head>
 
-<body class="fixed top-0 left-0 right-0 bottom-0">
+<body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;

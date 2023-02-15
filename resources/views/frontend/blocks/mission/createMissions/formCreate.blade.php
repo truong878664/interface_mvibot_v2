@@ -5,6 +5,8 @@
         <div class="flex flex-col text-3xl">
             <label for="name-mission" class="mb-3">Name group missions</label>
             <input id="name-mission" type="text" class="px-4 py-2 mb-3" name="name_mission" required>
+            <input id="" type="text" class="hidden" name="type" value="{{$type}}" required>
+
         </div>
         <button
             class="ml-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn self-end">Create</button>

@@ -1,6 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Mission</div>
+
+    <div class="heading">Mission - {{ $type }}</div>
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             <div class="">
@@ -34,8 +35,4 @@
         <script type="module" src="/js/missions.js"></script>
         <script type="module" src="/js/missions/createMission/createMissions.js"></script>
     </div>
-
-    <script>
-        document.title = 'Create Mission | Mvibot'
-    </script>
 @endsection

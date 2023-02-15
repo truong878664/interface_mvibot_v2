@@ -52,12 +52,12 @@
             <div class="flex flex-col lg:flex-row mt-8">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
                 <label for="wake-up"
-                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn">Wake
+                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn type-mission-{{ $itemRender->type}}">Wake
                     up</label>
                 <label for="stop"
-                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn">Stop</label>
+                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn type-mission-{{ $itemRender->type}}">Stop</label>
                 <label for="select-robot"
-                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn ">Send</label>
+                    class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn">Send</label>
             </div>
             <input type="checkbox" name="" id="select-robot" class="input-checkbox" hidden>
             <div class="select-robot-wrapper form-checkbox">
@@ -69,7 +69,7 @@
                             <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
                         @endforeach
                     </select>
-                    <label for="select-robot"
+                    <label for="select-robot" type="{{$itemRender->type}}"
                         class="mb-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-mission-btn">Send</label>
                 </div>
             </div>

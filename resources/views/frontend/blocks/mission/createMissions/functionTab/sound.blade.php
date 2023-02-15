@@ -11,14 +11,19 @@
                 type='start' value="1" data-mode="basic" style="--color: rgb(56 189 248);">Start</button>
 
             <ul class="absolute top-full text-2xl w-full mt-2 hidden mode-sound">
-                <li class="mt-1 flex justify-between pl-4 pr-2 text-center rounded-md bg-sky-400 btn mode-music-btn"
-                    mode="basic" value="2">
-                    <span class="pointer-events-none">basic</span>
+                <li class="mt-1 flex justify-between pl-4 pr-2 text-center rounded-md bg-red-400 btn mode-music-btn"
+                    mode="buzzer1" value="1">
+                    <span class="pointer-events-none">buzzer1</span>
                     <i class="fa-solid fa-music text-sm"></i>
                 </li>
                 <li class="mt-1 flex justify-between pl-4 pr-2 text-center rounded-md bg-red-400 btn mode-music-btn"
-                    mode="error" value="3">
-                    <span class="pointer-events-none">error</span>
+                    mode="buzzer2" value="2">
+                    <span class="pointer-events-none">buzzer2</span>
+                    <i class="fa-solid fa-music text-sm"></i>
+                </li>
+                <li class="mt-1 flex justify-between pl-4 pr-2 text-center rounded-md bg-sky-400 btn mode-music-btn"
+                    mode="basic" value="3">
+                    <span class="pointer-events-none">basic</span>
                     <i class="fa-solid fa-music text-sm"></i>
                 </li>
                 <li class="mt-1 flex justify-between pl-4 pr-2 text-center rounded-md bg-yellow-400  btn mode-music-btn"

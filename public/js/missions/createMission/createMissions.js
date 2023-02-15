@@ -106,6 +106,8 @@ function handleEditNameMission() {
                         method: "update-name",
                         name_mission: nameElement.value,
                     };
+
+                    console.log(missionItem)
                     fetchApi(
                         `/api/mi/${missionItem.getAttribute("mission-id")}`,
                         "PUT",
@@ -157,7 +159,7 @@ function handleCloneMission() {
     $$(".clone-mission-btn").forEach((element) => {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
-
+            
             fetchApi(
                 "/api/mi",
                 "POST",

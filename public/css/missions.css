@@ -91,3 +91,8 @@
 .form-create-point-wrapper {
     display: none;
 }
+
+
+.type-mission-error {
+    display: none;
+}

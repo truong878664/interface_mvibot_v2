@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('mission_shorthand')->nullable();
             $table->text('wake_up')->nullable();
             $table->text('stop')->nullable();
+            $table->text('type')->nullable();
             $table->timestamps();
         });
     }

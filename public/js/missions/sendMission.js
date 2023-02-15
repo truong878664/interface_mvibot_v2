@@ -1,22 +1,36 @@
 import { $$, toggerMessage } from "../main.js";
 import { publishMission } from "../rosModule/handleMission.js";
-import subscribeTopic from "../rosModule/subscribeTopic.js";
 import { currentMission } from "./handleStepMission.js";
 
 export default function sendMission() {
-    $(".send-mission-btn").onclick = () => {
+    $(".send-mission-btn").onclick = (e) => {
         fetch(`/api/mi/${currentMission}`)
             .then((res) => res.json())
 
             .then((data) => {
-                const nameRobot = $("#select-robot-option").value;
+                const type = e.target.getAttribute("type");
+
+                const nameRobot = $("#select-robot-option").value.replaceAll(
+                    " ",
+                    ""
+                );
                 if (data.steps_mission !== null) {
-                    if (nameRobot == "Choose Robot") {
+                    if (!nameRobot) {
                         toggerMessage("error", "please choose robot");
                     } else {
                         const dataBodyMission = `${data.steps_mission}`;
+                        let topic;
+                        type == "normal" &&
+                            (topic = `/${nameRobot}/data_coordinates`);
 
-                        publishMission(nameRobot, dataBodyMission);
+                        type == "error" &&
+                            (topic = `/${nameRobot}/mission_error`);
+
+                        type == "battery" &&
+                            (topic = `/${nameRobot}/mission_battery`);
+
+                        console.log(topic)
+                        publishMission(topic, dataBodyMission);
                     }
                 } else {
                     toggerMessage(
@@ -27,4 +41,3 @@ export default function sendMission() {
             });
     };
 }
-

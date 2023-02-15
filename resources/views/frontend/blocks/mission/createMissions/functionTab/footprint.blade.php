@@ -5,7 +5,7 @@
     </div>
     <div class="flex w-full h-[calc(100%_-_100px)] ">
         <div class="w-[22%]">
-            <div class="mr-4 ">
+            <div class="mr-4">
                 <label for="" class="text-xl">X1</label>
                 <input required type="text" placeholder="m"
                     class="w-[40px] text-xl px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
