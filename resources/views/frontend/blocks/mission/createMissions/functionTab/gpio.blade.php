@@ -28,9 +28,9 @@
                     <label for="">GPIO module</label>
                     <label class="relative inline-flex items-center cursor-pointer ml-4">
                         <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
-                            class="checkbox-is-gpio sr-only peer/{{$type}}">
+                            class="checkbox-is-gpio sr-only peer/wake_up">
                         <div
-                            class="w-11 h-[16px] bg-gray-200 peer-focus/{{$type}}:outline-none peer-focus/{{$type}}:ring-2 peer-focus/{{$type}}:ring-blue-300 dark:peer-focus/{{$type}}:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/{{$type}}:after:translate-x-full peer-checked/{{$type}}:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/{{$type}}:bg-blue-600">
+                            class="w-11 h-[16px] bg-gray-200 peer-focus/wake_up:outline-none peer-focus/wake_up:ring-2 peer-focus/wake_up:ring-blue-300 dark:peer-focus/wake_up:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/wake_up:after:translate-x-full peer-checked/wake_up:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/wake_up:bg-blue-600">
                         </div>
                     </label> 
                 </div>
@@ -42,9 +42,9 @@
                     <label for="">GPIO module</label>
                     <label class="relative inline-flex items-center cursor-pointer ml-4">
                         <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
-                            class="checkbox-is-gpio sr-only peer/{{$type}}">
+                            class="checkbox-is-gpio sr-only peer/stop">
                         <div
-                            class="w-11 h-[16px] bg-gray-200 peer-focus/{{$type}}:outline-none peer-focus/{{$type}}:ring-2 peer-focus/{{$type}}:ring-blue-300 dark:peer-focus/{{$type}}:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/{{$type}}:after:translate-x-full peer-checked/{{$type}}:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/{{$type}}:bg-blue-600">
+                            class="w-11 h-[16px] bg-gray-200 peer-focus/stop:outline-none peer-focus/stop:ring-2 peer-focus/stop:ring-blue-300 dark:peer-focus/stop:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/stop:after:translate-x-full peer-checked/stop:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/stop:bg-blue-600">
                         </div>
                     </label>
                 </div>

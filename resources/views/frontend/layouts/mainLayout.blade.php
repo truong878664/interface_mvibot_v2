@@ -8,7 +8,7 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-2daf6bc1.css">
+    <link rel="stylesheet" href="/build/assets/app-08981008.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
