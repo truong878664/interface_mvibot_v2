@@ -34,7 +34,7 @@
 
                     @php
                         $pathsSoundSystem = ['/sound/system/sound3.mp3', '/sound/system/sound4.mp3', '/sound/system/start1.mp3', '/sound/system/start2.mp3', '/sound/system/start3.mp3', '/sound/system/start4.mp3', '/sound/system/start5.mp3'];
-                        $namesSoundSystem = ['Sound 1', 'Ring', 'Startup sound 1', 'Startup sound 2', 'Startup sound  3', 'Startup sound 4', 'Startup sound 5'];
+                        $namesSoundSystem = ['sound3.mp3', 'sound4.mp3', 'start1.mp3', 'start2.mp3', 'start3.mp3', 'start4.mp3', 'start5.mp3'];
                     @endphp
 
                     @foreach ($pathsSoundSystem as $index => $sound)

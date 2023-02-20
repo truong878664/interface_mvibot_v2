@@ -17,7 +17,8 @@ return new class extends Migration
             Schema::create('wake_up', function (Blueprint $table) {
                 $table->id();
                 $table->string('id_mission');
-                $table->string('type')->default('wake_up');
+                $table->string('mode')->default('wake_up');
+                $table->string('type')->default('gpio');
                 $table->string('out_set')->nullable();
                 $table->string('out_reset')->nullable();
                 $table->string('in_on')->nullable();
@@ -25,6 +26,7 @@ return new class extends Migration
                 $table->string('in_pullup')->nullable();
                 $table->string('in_pulldown')->nullable();
                 $table->string('data')->nullable();
+                $table->string('name_seri')->nullable();
             });
         }
     }

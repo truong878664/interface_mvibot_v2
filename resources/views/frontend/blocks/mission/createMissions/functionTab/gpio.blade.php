@@ -22,11 +22,34 @@
                     type="text" name="time_out" value="-1" required>
             </div>
         @elseif($type == 'gpio_wake_up')
-            <div class="font-bold">Wake UP</div>
+            <div class="flex justify-between w-full">
+                <div class="font-bold">Wake UP</div>
+                <div class="flex items-center text-2xl mr-4">
+                    <label for="">GPIO module</label>
+                    <label class="relative inline-flex items-center cursor-pointer ml-4">
+                        <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
+                            class="checkbox-is-gpio sr-only peer/{{$type}}">
+                        <div
+                            class="w-11 h-[16px] bg-gray-200 peer-focus/{{$type}}:outline-none peer-focus/{{$type}}:ring-2 peer-focus/{{$type}}:ring-blue-300 dark:peer-focus/{{$type}}:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/{{$type}}:after:translate-x-full peer-checked/{{$type}}:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/{{$type}}:bg-blue-600">
+                        </div>
+                    </label> 
+                </div>
+            </div>
         @elseif($type == 'gpio_stop')
-            <div class="font-bold">Stop</div>
+            <div class="flex justify-between w-full">
+                <div class="font-bold">Stop</div>
+                <div class="flex items-center text-2xl mr-4">
+                    <label for="">GPIO module</label>
+                    <label class="relative inline-flex items-center cursor-pointer ml-4">
+                        <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
+                            class="checkbox-is-gpio sr-only peer/{{$type}}">
+                        <div
+                            class="w-11 h-[16px] bg-gray-200 peer-focus/{{$type}}:outline-none peer-focus/{{$type}}:ring-2 peer-focus/{{$type}}:ring-blue-300 dark:peer-focus/{{$type}}:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/{{$type}}:after:translate-x-full peer-checked/{{$type}}:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/{{$type}}:bg-blue-600">
+                        </div>
+                    </label>
+                </div>
+            </div>
         @endif
-
     </div>
     <div class="w-full h-full flex flex-col">
         <div class="">
@@ -60,6 +83,12 @@
                 type='in_pulldown'>
                 In Pulldown
             </button>
+
+            @if ($type == 'gpio_wake_up' || $type == 'gpio_stop')
+                <input
+                    class="ml-2 text-xl transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
+                    type="text" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" />
+            @endif
 
         </div>
         <div class="flex-1">

@@ -254,7 +254,7 @@ class MiController extends Controller
                         array_push($data, $head . $body);
                         break;
                     case "trycatch":
-                        $head = "&name>$dataItem[0]/time_out>-1/mode>try_catch/data>%condition#";
+                        $head = "&name>$dataItem[0]/time_out>-1/mode>try_catch/data>";
 
                         $changeTryCatch = explode('?', $dataItem[2]);
 

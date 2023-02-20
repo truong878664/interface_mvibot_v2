@@ -8,8 +8,9 @@
     <title>MViBot</title>
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app.b1de68cc.css">
+    <link rel="stylesheet" href="/build/assets/app.5ee83503.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
@@ -73,7 +74,7 @@
             </ul>
         </section>
 
-        <div class="md:w-[calc(100%_-_74px)] md:h-[calc(100%_-_44px)]  md:mt-[44px] md:ml-[74px]">
+        <div class="w-full h-[calc(100%_-_128px)] md:w-[calc(100%_-_74px)] md:h-[calc(100%_-_44px)] mt-[44px] md:ml-[74px]">
             @yield('content')
         </div>
     </div>

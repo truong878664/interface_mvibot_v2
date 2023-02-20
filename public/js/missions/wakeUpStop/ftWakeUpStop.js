@@ -1,7 +1,11 @@
-import { $ } from "../../main.js";
+// import { $ } from "../../main.js";
 import { dataGpioWakeUpStop } from "./gpioWakeUpStop.js";
 
-function getValueWakeUpStop() {
+function getValueWakeUpStop(type, name_seri) {
+    
+    const type_new = type ? type : 'gpio'
+    const name_seri_data =  type ? `~name_seri=${name_seri}~` : "";
+
     const out_set_wake_up =
         dataGpioWakeUpStop.wake_up.out_set.length != 0
             ? `~out_set=${dataGpioWakeUpStop.wake_up.out_set}~`
@@ -78,13 +82,13 @@ function getValueWakeUpStop() {
         stop = "";
     } else if (!isWakeUp) {
         wake_up = "";
-        stop = `(name:stop|time_out:-1|mode:gpio|data:${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
+        stop = `(name:stop|time_out:-1|mode:${type_new}|data:${name_seri_data}${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
     } else if (!isStop) {
         stop = "";
-        wake_up = `(name:wake_up|time_out:-1|mode:gpio|data:${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
+        wake_up = `(name:wake_up|time_out:-1|mode:${type_new}|data:${name_seri_data}${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
     } else {
-        wake_up = `(name:wake_up|time_out:-1|mode:gpio|data:${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
-        stop = `(name:stop|time_out:-1|mode:gpio|data:${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
+        wake_up = `(name:wake_up|time_out:-1|mode:${type_new}|data:${name_seri_data}${out_set_wake_up}${out_reset_wake_up}${in_on_wake_up}${in_off_wake_up}${in_pullup_wake_up}${in_pulldown_wake_up})`;
+        stop = `(name:stop|time_out:-1|mode:${type_new}|data:${name_seri_data}${out_set_stop}${out_reset_stop}${in_on_stop}${in_off_stop}${in_pullup_stop}${in_pulldown_stop})`;
     }
     const dataHeader = [wake_up, stop];
     return dataHeader;

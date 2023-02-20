@@ -21,19 +21,48 @@ export const dataGpioWakeUpStop = {
         in_pulldown: [],
     },
 };
+
+const isModule = {
+    gpio_wake_up: false,
+    gpio_stop: false,
+};
+
 setDateGpioWakeUpDatabase();
+handleGpioModule();
+
 function setDateGpioWakeUpDatabase() {
     fetchCustom(`/api/wake_up?id_mission=${currentMission}`, "GET", (data) => {
         for (const item in dataGpioWakeUpStop.wake_up) {
             dataGpioWakeUpStop.wake_up[item] = data[item]?.split(",") || [];
         }
+
         setLightGpioWakeUpStop("wake_up", dataGpioWakeUpStop);
+        if (data.type == "gpio_module") {
+            $("#gpio_wake_up").checked = true;
+            isModule.gpio_wake_up = true;
+            $(
+                ".name_gpio_module_wakeup-stop[type-gpio=gpio_wake_up]"
+            ).classList.remove("hidden");
+            $(".name_gpio_module_wakeup-stop[type-gpio=gpio_wake_up]").value =
+                data.name_seri;
+        }
     });
 
     fetchCustom(`/api/stop?id_mission=${currentMission}`, "GET", (data) => {
         for (const item in dataGpioWakeUpStop.stop) {
             dataGpioWakeUpStop.stop[item] = data[item]?.split(",") || [];
         }
+
+        if (data.type == "gpio_module") {
+            $("#gpio_stop").checked = true;
+            isModule.gpio_stop = true;
+            $(
+                ".name_gpio_module_wakeup-stop[type-gpio=gpio_stop]"
+            ).classList.remove("hidden");
+            $(".name_gpio_module_wakeup-stop[type-gpio=gpio_stop]").value =
+                data.name_seri;
+        }
+
         setLightGpioWakeUpStop("stop", dataGpioWakeUpStop);
     });
 }
@@ -92,7 +121,17 @@ function setDateGpioWakeUp(typeGpio) {
         resolve(dataGpioWakeUpStop[typeGpio]);
     });
     getDataGpioWakeUpStop.then((dataGpio) => {
-        const [wake_up, stop] = getValueWakeUpStop();
+        const type =
+            typeGpio == "wake_up"
+                ? isModule.gpio_wake_up && "gpio_module"
+                : isModule.gpio_stop && "gpio_module";
+
+        const name_seri = $(
+            `.name_gpio_module_wakeup-stop[type-gpio=gpio_${typeGpio}]`
+        ).value;
+
+        const [wake_up, stop] = getValueWakeUpStop(type, name_seri);
+
         const data = {
             id_mission: currentMission,
             out_set: dataGpio.out_set.join(","),
@@ -102,8 +141,10 @@ function setDateGpioWakeUp(typeGpio) {
             in_pullup: dataGpio.in_pullup.join(","),
             in_pulldown: dataGpio.in_pulldown.join(","),
             data: typeGpio == "wake_up" ? wake_up : stop,
+            type: type ? type : "gpio",
+            name_seri: type ? name_seri : null,
         };
-        console.log(data.data)
+
         fetchCustom(
             `/api/${typeGpio}`,
             "POST",
@@ -116,14 +157,13 @@ function setDateGpioWakeUp(typeGpio) {
 $(".save-wake-up-btn").onclick = () => {
     resetGpioWakeUp();
     setDateGpioWakeUp("wake_up");
-    $('.cancel-wake-up').click()
+    $(".cancel-wake-up").click();
 };
 
 $(".save-stop-btn").onclick = () => {
     resetGpioWakeUp();
     setDateGpioWakeUp("stop");
-    $('.cancel-stop').click()
-
+    $(".cancel-stop").click();
 };
 
 function resetGpioWakeUp(typeGpio) {
@@ -146,4 +186,20 @@ function setLightGpioWakeUpStop(typeGpio, dataGpioWakeUpStop) {
             }
         });
     }
+}
+
+function handleGpioModule() {
+    $$(".checkbox-is-gpio").forEach((element) => {
+        element.onchange = (e) => {
+            const type = e.target.getAttribute("type-gpio");
+            $(
+                `.name_gpio_module_wakeup-stop[type-gpio=${type}]`
+            ).classList.toggle("hidden");
+
+            e.target.checked
+                ? (isModule[e.target.id] = true)
+                : (isModule[e.target.id] = false);
+            console.log(isModule);
+        };
+    });
 }

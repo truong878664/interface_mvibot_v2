@@ -127,10 +127,29 @@ class RobotSeeder extends Seeder
 
             ]
         );
-        
+
         DB::table('map_active')->insert(
             [
                 'name_map_active' => 'map22'
+            ]
+        );
+
+        DB::table('robot_config_status')->insert(
+
+            [
+                'name_seri' => 'Mb23_946',
+                "robot_R" => "0.0805",
+                "robot_L" => "0.594",
+                "robot_ax" => "1.0",
+                "robot_aw" => "3.0",
+                "robot_vmax" => "0.5",
+                "robot_wmax" => "0.314",
+                "robot_volume" => "20",
+                "serial_camera1" => "143322071201",
+                "serial_camera2" => "148522074025",
+                "mode" => "navigation",
+                "ip_master" => "192.168.0.2",
+                "ip_node" => "192.168.0.2",
             ]
         );
     }

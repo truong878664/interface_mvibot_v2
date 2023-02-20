@@ -1,11 +1,7 @@
 import ros from "../main.js";
-import getValueWakeUpStop from "../missions/wakeUpStop/ftWakeUpStop.js";
 
-function publishMission(nameTopic, dataBodyMission) {
-    const [wake_up, stop] = getValueWakeUpStop();
-    const dataHeadMission = wake_up + stop;
-    const dataFullMission = `[${dataHeadMission}*${dataBodyMission}]`;
-    // console.log(nameTopic);
+function publishMission(nameTopic, dataMission) {
+
     const mission_pub = new ROSLIB.Topic({
         ros: ros,
         name: nameTopic,
@@ -13,10 +9,10 @@ function publishMission(nameTopic, dataBodyMission) {
         queue_size: 1,
     });
     const mission_set = new ROSLIB.Message({
-        data: dataFullMission,
+        data: dataMission,
     });
 
-    console.log(dataFullMission);
+    console.log(dataMission);
     mission_pub.publish(mission_set);
 }
 

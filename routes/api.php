@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ConfigRobotController;
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
 use App\Http\Controllers\Api\GpioController;
@@ -67,3 +68,4 @@ Route::resource('function', FunctionController::class)->only('index');
 
 Route::resource('var', VarController::class);
 Route::resource('sound-file', SoundFileController::class)->only('destroy');
+Route::resource('config-status', ConfigRobotController::class)->only('index');

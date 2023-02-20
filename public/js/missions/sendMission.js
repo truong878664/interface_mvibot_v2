@@ -18,7 +18,11 @@ export default function sendMission() {
                     if (!nameRobot) {
                         toggerMessage("error", "please choose robot");
                     } else {
+                        const dataHeadMission = data.wake_up ? data.wake_up : "" + data.stop ? data.stop : "";
                         const dataBodyMission = `${data.steps_mission}`;
+
+                        const dataFullMission = `[${dataHeadMission}*${dataBodyMission}]`;
+
                         let topic;
                         type == "normal" &&
                             (topic = `/${nameRobot}/data_coordinates`);
@@ -29,8 +33,8 @@ export default function sendMission() {
                         type == "battery" &&
                             (topic = `/${nameRobot}/mission_battery`);
 
-                        console.log(topic)
-                        publishMission(topic, dataBodyMission);
+
+                        publishMission(topic, dataFullMission);
                     }
                 } else {
                     toggerMessage(
