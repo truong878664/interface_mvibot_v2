@@ -1,6 +1,11 @@
-<div class="setting-detail flex hidden h-full">
+<div class="setting-detail flex flex-col hidden h-full">
+    <div class="text-center flex justify-center items-center">
+        <label class="name-robot-active font-bold block text-center"></label>
+        <button class="ml-6 w-[30px] h-[30px] flex justify-center items-center bg-stone-300 rounded-md btn refresh-param-btn">
+            <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+    </div>
     <div class="max-w-[700px] w-full mx-auto overflow-auto">
-        <label class="name-robot-active font-bold block text-center">robot1</label>
         <div class="w-full flex flex-col setting-param-item mt-4">
             <label class="text-2xl block mb-4">IP</label>
             <div class="flex mx-auto items-end relative">

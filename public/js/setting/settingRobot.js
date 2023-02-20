@@ -1,8 +1,11 @@
-import { $, $$ } from "../main.js";
+import { $, $$, toggerMessage } from "../main.js";
+import { robotActive } from "../mainLayout.js";
 import publishTopic from "../rosModule/topicString.js";
 
 const oldParam = {};
 let oldMode;
+
+
 
 export function settingRobotStart(robot) {
     fetch(`/api/config-status?name_seri=${robot}`)
@@ -15,6 +18,11 @@ export function settingRobotStart(robot) {
             handleSaveParam(robot);
         });
 }
+$('.refresh-param-btn').onclick = () => {
+    settingRobotStart(robotActive())
+    toggerMessage('success', "Updated all parameters")
+}
+
 
 function renderParameter(data) {
     for (const para in data) {
