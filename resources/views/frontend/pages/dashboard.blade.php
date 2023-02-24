@@ -17,6 +17,9 @@
         <x-dashboard-item route='dashboard.status.status' icon='fa-solid fa-gauge-high' title='Status'
             describe='Status information of the robot' color="#f4ba23" />
 
+        <x-dashboard-item route='dashboard.battery' icon='fa-solid fa-signal' title='Status details' describe='All status'
+            color="#03C988" />
+
         <x-dashboard-item route='dashboard.joystick.' icon='fa-solid fa-up-down-left-right' title='Joystick'
             describe='Move robot' color="#EB6440" />
 
@@ -31,9 +34,6 @@
 
         <x-dashboard-item route='dashboard.sound.' icon='fa-solid fa-volume-high' title='Sound'
             describe='Set sound for robot' color="#F48484" />
-
-        <x-dashboard-item route='dashboard.sound.' icon='fa-solid fa-car-battery' title='Battery' describe='Battery details'
-            color="#03C988" />
 
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />

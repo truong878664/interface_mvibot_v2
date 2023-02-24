@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot</title>
+    {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-08981008.css">
+    <link rel="stylesheet" href="/build/assets/app-fc16ef69.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
@@ -25,8 +26,7 @@
                 <i class="fa-solid fa-satellite-dish"></i>
             </div>
             <div class="flex items-center">
-                <h3 class="">Mvibot</h3>
-
+                <h3 class="font-bold">Mvibot</h3>
             </div>
             <div class="message-map-wrapper">
             </div>

@@ -1,11 +1,11 @@
 @php
-    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500', 'error' => 'from-red-500 to-red-600', 'battery' => 'from-[#0f6cbd] to-[#227dcd]'];
-    $colorButton = ['normal' => 'text-green-500', 'error' => 'text-red-800', 'battery' => 'text-[#0f6cbd]'];
-    $colorBg = ['normal' => 'bg-green-400', 'error' => 'bg-red-400', 'battery' => 'bg-blue-400'];
+    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500', 'error' => 'from-red-500 to-red-600', 'battery' => 'from-[#0f6cbd] to-[#227dcd]', 'gpio' => 'from-[#FFB84C] to-[#F0A04B]'];
+    $colorButton = ['normal' => 'text-green-500', 'error' => 'text-red-800', 'battery' => 'text-[#0f6cbd]', 'gpio' => 'text-[#F99417]'];
+    $colorBg = ['normal' => 'bg-green-400', 'error' => 'bg-red-400', 'battery' => 'bg-blue-400', 'gpio' => 'bg-yellow-400'];
 @endphp
 
 @foreach ($missions as $index => $itemMission)
-    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{$itemMission->id }}">
+    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{ $itemMission->id }}">
         <div class="absolute top-4 left-4 flex justify-between z-30">
             <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center pointer-events-none">
                 @if ($itemMission->mission_shorthand)

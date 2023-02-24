@@ -76,7 +76,7 @@
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
 
                         <p class="mb-2 text-xl text-gray-500 dark:text-gray-400">
-                            <span class="font-semibold">Click toupload (MP3)</span>
+                            <span class="font-semibold">Click toupload (MP3 <2MB) </span>
                         </p>
                         <span class="text-xl name-sound-up"></span>
                     </div>
@@ -89,11 +89,6 @@
                     </button>
                 </label>
             </form>
-
-
-
-
-
 
             @php
                 function getSound()

@@ -554,7 +554,6 @@ export default function handleEditFunctionType() {
 
     function updateStep(url = "", stepSave) {
         loading();
-
         fetch(url, {
             headers: {
                 Accept: "application/json",

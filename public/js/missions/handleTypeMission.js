@@ -2,6 +2,7 @@ import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
+import { loaded, loading } from "./functionHandle/displayLoad.js";
 import { currentMission, renderBlockStep } from "./handleStepMission.js";
 
 export const htmlDataFunction = {
@@ -395,6 +396,7 @@ function addTypeMission(data) {
 }
 
 export function updateBlockStep(id, data) {
+    loading();
     fetch(`/api/mi/${id}`, {
         headers: {
             Accept: "application/json",
@@ -405,7 +407,8 @@ export function updateBlockStep(id, data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            toggerMessage('success', data.message)
+            loaded();
+            toggerMessage("success", data.message);
         })
         .catch((data) => console.log(data));
 }

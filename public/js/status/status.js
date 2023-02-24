@@ -1,5 +1,5 @@
 import { $$ } from "../main.js";
-document.title = "Mvibot – Status Robot";
+
 // setPercentBattery();
 // setColorTemper();
 const xhttp = new XMLHttpRequest();

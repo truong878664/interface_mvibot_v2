@@ -8,11 +8,11 @@
     </div> --}}
 
     <div class="w-full h-full flex flex-col">
-        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px]">
+        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px] ">
             <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
 
-                <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] font-bold absolute w-full top-0">
-                    type mission
+                <p class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-{{$itemRender->type}}">
+                    type mission - {{$itemRender->type}}
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     <div
@@ -32,7 +32,7 @@
             </div>
 
             <div class="mb-2 bg-[#fff] h-[20%] lg:w-1/5 lg:h-full border-[1px] overflow-hidden mx-1 rounded-md">
-                <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333]">function</p>
+                <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] ">function</p>
                 <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                     <div
                         class="footprint-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
@@ -51,7 +51,7 @@
                         <span>Marker</span>
                     </div>
                     <div
-                        class="sleep-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="sleep-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sleep</span>
                     </div>
                     <div
@@ -125,4 +125,18 @@
     .function-btn.active {
         background: rgba(204, 204, 204, 70%)
     }
+
+    .bg-gpio {
+        background-color: rgba(242, 146, 28, 0.5);
+    }
+    .bg-battery {
+        background-color: rgba(28, 146, 242, 0.5);
+    }
+    .bg-error {
+        background-color: rgba(255, 39, 39, 0.5);
+    }
+    .bg-normal {
+        background-color: rgba(25, 200, 28, 0.5);
+    }
+
 </style>

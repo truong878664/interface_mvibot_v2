@@ -37,7 +37,7 @@ function activeNabBar() {
     }
     $(`.bar-item.active`)?.classList.remove("active");
     $(`.${currentPage}`)?.classList.add("active");
-    document.title = `Mvibot – ${currentPage}`;
+    // document.title = `Mvibot – ${currentPage}`;
 }
 
 const xhttp = new XMLHttpRequest();

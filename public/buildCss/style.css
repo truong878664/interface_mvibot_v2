@@ -801,7 +801,7 @@
     display: block;
 }
 .form-create-point-wrapper,
-.type-mission-error {
+.type-mission-error, .type-mission-gpio {
     display: none;
 }
 .type-marker {

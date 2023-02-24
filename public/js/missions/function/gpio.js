@@ -1,4 +1,4 @@
-import { $$, toggerMessage } from "../../main.js";
+import { $, $$, toggerMessage } from "../../main.js";
 import { addFunctionStep } from "../createStepMission.js";
 
 let currentTypeGpio = "";
@@ -97,6 +97,8 @@ export function resetGpio() {
     }
     $(".name_gpio").value = "";
     $(".time_out_gpio").value = -1;
+    $(".name_function_gpio_module").value = "";
+    $(".name_gpio_module").value = "";
 
     $$(".gpio-io").forEach((item) => {
         item.classList.remove(

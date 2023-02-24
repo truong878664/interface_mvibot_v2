@@ -4,9 +4,9 @@
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div class="w-full flex flex-wrap">
             @php
-                $typeMission = ['normal', 'error', 'battery'];
-                $nameMission = ['normal mission', 'error mission', 'battery mission'];
-                $color = ['from-green-500 to-green-400', 'from-red-500 to-red-400', 'from-blue-500 to-blue-600']
+                $typeMission = ['normal', 'error', 'battery', 'gpio'];
+                $nameMission = ['normal mission', 'error mission', 'battery mission' , 'gpio mission'];
+                $color = ['from-green-500 to-green-400', 'from-red-500 to-red-400', 'from-blue-500 to-blue-600', 'from-yellow-500 to-orange-600']
             @endphp
 
             @foreach ($nameMission as $index => $mission)

@@ -83,9 +83,9 @@ class VariableController extends Controller
     public function destroy($id)
     {
         $itemDelete = MissionVariable::where('id', $id)->first();
-        // $itemName =  "$itemDelete->mode#$itemDelete->name_sleep#$itemDelete->id";
-        // $this->updateStepDelete($itemName);
-
+        $itemName =  "$itemDelete->mode#$itemDelete->name_function_variable#$itemDelete->id";
+         //function at controller.php
+        $this->updateStepDelete($itemName);
         MissionVariable::where('id', $id)->delete();
         return ['message' => 'delete variable success'];
     }

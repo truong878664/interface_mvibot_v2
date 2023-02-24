@@ -101,7 +101,6 @@ class StepController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $dataUpdate = $request->all();
         unset($dataUpdate['type']);
         DB::table("mission_$request->type" . "s")->where('id', $id)->update($dataUpdate);

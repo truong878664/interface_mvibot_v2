@@ -1,7 +1,8 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="w-full h-full flex flex-col">
-        <div class="flex justify-between mt-3">
+        <div class="flex justify-between mt-3 ml-4">
+            {{-- 
             <label for="" class="bg-[#0f6cbd] flex items-center text-[#fff] px-4 rounded-lg py-2">
                 <select class="outline-none bg-[#0f6cbd] rounded" id="list-robot">
                     <option value="">Chose robot</option>
@@ -10,6 +11,8 @@
                     @endforeach
                 </select>
             </label>
+            --}}
+            @include('frontend.blocks.selectRobot', ['robots' => $allRobot, 'id' => 'list-robot'])
         </div>
 
         <div class="w-full flex-1 flex justify-evenly items-center">

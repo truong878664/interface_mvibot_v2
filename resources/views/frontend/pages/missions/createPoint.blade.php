@@ -8,7 +8,4 @@
     </div>
     <script type="module" src="/js/missions.js"></script>
     <script type="module" src="/js/missions/createPoint.js"></script>
-    <script>
-        document.title = 'Create Point | Mvibot'
-    </script>
 @endsection

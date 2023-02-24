@@ -1,5 +1,6 @@
 import { $, $$ } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import { htmlDataFunction } from "../handleTypeMission.js";
@@ -53,7 +54,8 @@ function deleteItem(e) {
                 }
             }
         );
-
+        
+    loading();
     fetch(`/api/${typeFunction}/${idFunction}`, {
         method: "DELETE",
         headers: {
@@ -63,6 +65,8 @@ function deleteItem(e) {
     })
         .then((res) => res.json())
         .then((data) => {
+            console.log(data);
+            loaded();
             $$(
                 `.type-mission-function-item[function-id='${idFunction}'][function-type=${typeFunction}]`
             ).forEach((element) => {

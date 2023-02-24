@@ -107,9 +107,10 @@ class GpioModuleController extends Controller
     public function destroy($id)
     {
         $itemDelete = MissionGpioModule::where('id', $id)->first();
-        // $itemName =  "$itemDelete->mode#$itemDelete->name_gpio#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name_gpio#$itemDelete->id";
 
-        // $this->updateStepDelete($itemName);
+        //function at controller.php
+        $this->updateStepDelete($itemName);
 
         MissionGpioModule::where('id', $id)->delete();
         return ['message' => 'delete gpio success'];

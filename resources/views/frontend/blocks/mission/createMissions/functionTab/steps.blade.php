@@ -37,10 +37,10 @@
             </label>
         </div>
 
-        <div class="submit-btn-wrapper flex flex-col justify-end">
+        <div class="submit-btn-wrapper flex flex-col justify-end min-w-[240px] items-end">
             {{-- switch --}}
             <div class="absolute top-2 right-2 flex">
-                <span class="mr-8 text-2xl">{{ $itemRender->name_mission }}</span>
+                <span class="mr-8 text-2xl">{{ $itemRender->name_mission }} | <span class="font-bold">{{ $itemRender->type }}</span></span>
                 <div class="h-[34px] w-[60px]">
                     <label class="switch">
                         <input class="check-show-step" type="checkbox">
@@ -132,4 +132,9 @@
         }
 
         .sleep-edit {}
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.8;
+        }
     </style>

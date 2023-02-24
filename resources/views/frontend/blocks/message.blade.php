@@ -18,7 +18,7 @@
 @endif --}}
 {{--  --}}
 <div
-    class="-translate-y-[120%] notification fixed top-[10px] left-1/2 -translate-x-1/2 z-[100] text-2xl bg-[#ffffff] px-4 py-2 min-w-[200px] h-[60px] rounded-lg flex items-center shadow-md ">
+    class="-translate-y-[120%] notification fixed top-[10px] left-1/2 -translate-x-1/2 z-[100] text-2xl bg-[#ffffff] px-4 py-2 min-w-[200px] h-[60px] rounded-lg flex items-center shadow-md">
     <span class="text-[30px] rounded-md  flex justify-center items-center w-[30px]">
         <i class="fa-solid fa-check success-icon"></i>
         <i class="fa-solid fa-xmark error-icon"></i>
@@ -40,7 +40,7 @@
             transition: transform 100ms ease-in;
         }
 
-        .error {
+        .notification.error {
             color: rgb(239 68 68);
         }
 

@@ -12,7 +12,6 @@ use App\Models\backend\StatusRobot;
 use App\Models\backend\Stop;
 use App\Models\backend\WakeUp;
 use App\Models\Robot;
-use Illuminate\Support\Facades\DB;
 
 class MissionsController extends Controller
 {

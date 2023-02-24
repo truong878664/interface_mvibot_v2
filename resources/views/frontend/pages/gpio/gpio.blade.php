@@ -3,13 +3,9 @@
     <div class="heading dashboard-heading">gpio</div>
     <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
         <div class="flex mx-4 items-center">
-            <select name="" id="robot-gpio"
-                class="text-2xl border rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] h-full text-white px-4 outline-none">
-                <option value="">Select robot</option>
-                @foreach ($allRobot as $robot)
-                    <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
-                @endforeach
-            </select>
+
+            @include('frontend.blocks.selectRobot', ['robots' => $allRobot, 'id' => 'robot-gpio'])
+
             <button
                 class="ml-2 text-xl md:text-2xl rounded-md h-full px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
                 id='out_set'>
@@ -22,7 +18,7 @@
             </button>
 
             <button
-            class=" ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
+                class=" ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
 
             {{-- <button
                 class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"
@@ -359,8 +355,8 @@
             </svg>
         </div>
 
-        
-           </div>
+
+    </div>
 
     <style>
         .gpio-io.in_off,

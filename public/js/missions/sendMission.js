@@ -18,22 +18,28 @@ export default function sendMission() {
                     if (!nameRobot) {
                         toggerMessage("error", "please choose robot");
                     } else {
-                        const dataHeadMission = data.wake_up ? data.wake_up : "" + data.stop ? data.stop : "";
+                        const wake_up = data.wake_up ? data.wake_up : "";
+                        const stop = data.stop ? data.stop : "";
+                        const dataHeadMission = `${wake_up}${stop}`;
                         const dataBodyMission = `${data.steps_mission}`;
 
                         const dataFullMission = `[${dataHeadMission}*${dataBodyMission}]`;
 
                         let topic;
-                        type == "normal" &&
+
+                        type === "normal" &&
                             (topic = `/${nameRobot}/data_coordinates`);
 
-                        type == "error" &&
+                        type === "error" &&
                             (topic = `/${nameRobot}/mission_error`);
 
-                        type == "battery" &&
+                        type === "battery" &&
                             (topic = `/${nameRobot}/mission_battery`);
 
+                        type === "gpio" &&
+                            (topic = `/${nameRobot}/mission_gpio`);
 
+                        console.log("Topic: ", topic);
                         publishMission(topic, dataFullMission);
                     }
                 } else {

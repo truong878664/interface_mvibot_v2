@@ -9,6 +9,7 @@ class StatusRobot extends Model
 {
     use HasFactory;
     protected $table = "robot_status";
-    // protected $fillable = ['name_map_active'];
+    protected $fillable = ['name_seri','status','mode','mode_status','ip_node','ip_master','type_connect'];
     public $timestamps = false;
 }
+

@@ -25,8 +25,7 @@ class SoundController extends Controller
         $sound = $request->file('sound');
 
         $newName = str_replace(".mp3", "", str_replace(" ","_",str_replace("'","",$sound->getClientOriginalName())))."_". strtotime($time) . ".mp3";
-
-        $storedPath = $sound->move('sound/custom', $newName);
+        $sound->move('sound/custom', $newName);
 
         return  back();
     }

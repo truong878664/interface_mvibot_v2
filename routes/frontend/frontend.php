@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\layerController;
 use App\Http\Controllers\backend\mapController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\frontend\BatteryController;
 use App\Http\Controllers\frontend\DashboardController;
 use App\Http\Controllers\frontend\gpioPageController;
 use App\Http\Controllers\frontend\HomeController;
@@ -56,6 +57,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('/', [statusController::class, 'index'])->name('status');
             Route::get('item-status', [statusController::class, 'allStatus']);
         });
+
+        Route::get('/battery', [BatteryController::class, 'index'])->name('battery');
+
         Route::prefix('joystick')->name('joystick.')->group(function () {
             Route::get('/', [joystickController::class, 'index']);
         });
