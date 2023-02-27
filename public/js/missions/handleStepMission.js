@@ -22,6 +22,7 @@ export const currentMission = location.pathname.slice(
     location.pathname.length
 );
 
+
 translatesStepsMission(currentMission);
 
 function renderBlockStep() {
@@ -29,7 +30,6 @@ function renderBlockStep() {
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())
         .then((data) => {
-            loaded();
             const steps_mission_name = data.steps_mission_name;
 
             const shortHandMissionList = data.mission_shorthand?.split("+");
@@ -134,7 +134,10 @@ function renderBlockStep() {
                         break;
                 }
             });
-            $(".steps-wrapper").innerHTML = html.join("");
+
+            html.length
+                ? ($(".steps-wrapper").innerHTML = html.join(""))
+                : messageEmpty($(".steps-wrapper"), "Mission empty!");
 
             scrollTop(".steps-wrapper");
             handleDeleteMission(shortHandMissionList);
@@ -142,6 +145,7 @@ function renderBlockStep() {
             showAllStep();
             handleEditMission();
             handleMoveBlockStep();
+            loaded();
         });
 }
 
@@ -183,8 +187,14 @@ function handleDeleteMission(missionShorthand) {
                     mission_shorthand: missionShorthand.join("+"),
                     method: "delete",
                 };
+
                 updateBlockStep(currentMission, dataMissionShorthand);
+                const stepWrapper = e.target.closest(".steps-wrapper");
                 missionItem.remove();
+
+                !stepWrapper.children.length &&
+                    messageEmpty(stepWrapper, "Mission empty!");
+
                 notAllowMove();
             });
         };
@@ -283,7 +293,7 @@ function handleEditMission() {
             case "normal":
                 valueNormalMissionArray.length = 0;
                 valueNormalMissionArray.push(...data.data.split("|"));
-
+                
                 $(".normal-mission-btn").click();
                 $(".name-normal-mission").value = data.name;
 
@@ -376,13 +386,17 @@ function getMission(id, callback) {
 
 function showUpdateBtn(isShow, type) {
     if (isShow) {
-        $(`.cancel-${type}`).classList.remove("hidden");
-        $(`.update-${type}`).classList.remove("hidden");
-        $(`.add-mission-${type}`).classList.add("hidden");
+        // $(`.cancel-${type}`).classList.remove("hidden");
+        // $(`.update-${type}`).classList.remove("hidden");
+        // $(`.add-mission-${type}`).classList.add("hidden");
+        $(`.update-wrapper-${type}`).classList.remove("hidden")
+        $(`.add-wrapper-${type}`).classList.add("hidden")
     } else {
-        $(`.cancel-${type}`).classList.add("hidden");
-        $(`.update-${type}`).classList.add("hidden");
-        $(`.add-mission-${type}`).classList.remove("hidden");
+        $(`.update-wrapper-${type}`).classList.add("hidden")
+        $(`.add-wrapper-${type}`).classList.remove("hidden")
+        // $(`.cancel-${type}`).classList.add("hidden");
+        // $(`.update-${type}`).classList.add("hidden");
+        // $(`.add-mission-${type}`).classList.remove("hidden");
     }
 }
 
@@ -547,4 +561,17 @@ function updateTypeMission(id, data) {
     });
 }
 
-export { renderBlockStep };
+
+function messageEmpty(element, message) {
+    const emptyElement = `<span class="text-[60px] w-full h-full flex justify-center items-center p-4 text-slate-300">
+                            <div class="relative">
+                                <i class="fa-solid fa-box-open "></i>
+                            </div>
+                            <span class="text-[20px]">${message}</span>
+                            </span>`;
+    element.innerHTML = emptyElement;
+}
+
+
+
+export { renderBlockStep, messageEmpty };

@@ -12,7 +12,7 @@
             <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
 
                 <p class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-{{$itemRender->type}}">
-                    type mission - {{$itemRender->type}}
+                    type mission - <span data="{{$itemRender->type}}" class="type-mission">{{$itemRender->type}}</span>
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     <div

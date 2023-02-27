@@ -54,7 +54,7 @@ function deleteItem(e) {
                 }
             }
         );
-        
+
     loading();
     fetch(`/api/${typeFunction}/${idFunction}`, {
         method: "DELETE",
@@ -66,7 +66,6 @@ function deleteItem(e) {
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
-            loaded();
             $$(
                 `.type-mission-function-item[function-id='${idFunction}'][function-type=${typeFunction}]`
             ).forEach((element) => {
@@ -82,5 +81,6 @@ function deleteItem(e) {
                     renderBlockStep();
                 }, 1000)
             );
+            loaded();
         });
 }

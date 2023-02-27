@@ -28,7 +28,7 @@ export default function sendMission() {
                         let topic;
 
                         type === "normal" &&
-                            (topic = `/${nameRobot}/data_coordinates`);
+                            (topic = `/${nameRobot}/mission_normal`);
 
                         type === "error" &&
                             (topic = `/${nameRobot}/mission_error`);

@@ -57,7 +57,7 @@ function nextTabFunction() {
                 item.classList.contains("type-mission-btn") &&
                 localStorage.getItem("isUpload") * 1
             ) {
-                console.log('upload');
+                console.log("upload");
                 loadDataFunction();
                 localStorage.setItem("isUpload", 0);
             }
@@ -154,16 +154,12 @@ function handlePointMission() {
             const nameType = itemPoint.querySelector(".name_type").value;
             const idType = itemPoint.querySelector(".id_type").value;
 
-            const dataSaveStep = dataSaveSteps("add", type, nameType, idType);
-
             renderBlockStep();
 
             toggerMessage("success", "add point successfully");
         };
     });
-    function dataSaveSteps(method, type, name_type, id_type) {
-        return { method, type, name_type, id_type };
-    }
+    
     handleDeletePoint();
     function handleDeletePoint() {
         $$(".delete-point-btn").forEach((element) => {
@@ -182,9 +178,8 @@ function handlePointMission() {
                 method: "DELETE",
             })
                 .then(function (res) {
-                    loaded();
-                    console.log(res);
                     renderBlockStep();
+                    loaded();
                 })
                 .catch(function (res) {
                     console.log(res);
@@ -329,4 +324,4 @@ function handleMarkerMission() {
             }
         };
     });
-} 
+}

@@ -8,19 +8,22 @@ export default function topicsListening() {
             const name_seri = allRobot[i].value;
 
             //sub mission
-            subscribeTopic(
-                `/${name_seri}/data_coordinates`,
-                "std_msgs/String",
-                (data, name) => {
-                    if (data.data) {
-                        toggerMessage(
-                            "success",
-                            "The robot has received 1 mission!"
-                        );
+            const missionTopic = ['mission_normal','mission_error','mission_battery','mission_gpio']
+            for (let i = 0; i < missionTopic.length ; i++) {
+                subscribeTopic(
+                    `/${name_seri}/${missionTopic[i]}`,
+                    "std_msgs/String",
+                    (data, name) => {
+                        if (data.data) {
+                            toggerMessage(
+                                "success",
+                                "The robot has received 1 mission!"
+                            );
+                        }
+                        console.log(data);
                     }
-                    console.log(data);
-                }
-            );
+                );
+            }
 
             //sub tracking mission
             subscribeTopic(

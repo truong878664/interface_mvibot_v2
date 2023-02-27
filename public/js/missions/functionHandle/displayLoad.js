@@ -1,10 +1,18 @@
 const sendMissionBtn = $("label[for=select-robot]");
 
-export function loading() {
-    $(".step-loading").classList.remove("hidden");
-    sendMissionBtn.classList.add("disabled");
+export function loading(element = '.step-render') {
+    $(element).querySelector(".loader-wrapper")?.remove();
+
+    const loadedWrapper =  document.createElement('div')
+    loadedWrapper.classList.add('loader-wrapper')
+    loadedWrapper.innerHTML = '<span class="loader"></span>'
+
+    $(element).appendChild(loadedWrapper);
 }
-export function loaded() {
-    $(".step-loading").classList.add("hidden");
-    sendMissionBtn.classList.remove("disabled");
+export function loaded(element = '.step-render') {
+    setTimeout(() => {
+        $(element).querySelector(".loader-wrapper")?.remove();
+    }, 600) 
 }
+
+

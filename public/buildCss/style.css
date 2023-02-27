@@ -801,7 +801,8 @@
     display: block;
 }
 .form-create-point-wrapper,
-.type-mission-error, .type-mission-gpio {
+.type-mission-error,
+.type-mission-gpio {
     display: none;
 }
 .type-marker {
@@ -2132,3 +2133,43 @@ li {
 .setting-item.active:hover {
     background-color: var(--main-color);
 }
+
+/* load */
+
+.loader-wrapper {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(172, 172, 172, 0.1);
+    z-index: 30;
+}
+.loader {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--main-color);
+    position: relative;
+    z-index: 31;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 0;
+    background: var(--main-color);
+    transform: rotate(0deg) translate(20px);
+    animation: rotate 1s ease infinite;
+  }
+  .loader:after {
+    animation-delay: 0.5s
+  }
+  @keyframes rotate {
+    100% {transform: rotate(360deg) translate(20px)
+  }
+  }  

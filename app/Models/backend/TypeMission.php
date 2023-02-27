@@ -9,7 +9,7 @@ class TypeMission extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'type', 'data'
+        'name', 'type', 'data', "type_mission"
     ];
     public $timestamps = false;
 }

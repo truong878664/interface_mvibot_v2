@@ -3,7 +3,11 @@ import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
 import { loaded, loading } from "./functionHandle/displayLoad.js";
-import { currentMission, renderBlockStep } from "./handleStepMission.js";
+import {
+    currentMission,
+    messageEmpty,
+    renderBlockStep,
+} from "./handleStepMission.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -29,6 +33,7 @@ const typeFunction = [
 
 loadDataFunction();
 handleRenderDataFunction();
+renderTypeMissionItem();
 
 handleAddMissionNormal();
 handleAddMissionIfelse();
@@ -64,8 +69,12 @@ function handleRenderDataFunction() {
             e.target.classList.add("active");
 
             const type = e.target.getAttribute("type");
-            $(".detail-type-mission-function-normal").innerHTML =
-                htmlDataFunction[type].join("");
+
+            const typeNormal = $(".detail-type-mission-function-normal");
+            htmlDataFunction[type].length
+                ? (typeNormal.innerHTML = htmlDataFunction[type].join(""))
+                : messageEmpty(typeNormal, "Function empty!");
+
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
@@ -81,8 +90,11 @@ function handleRenderDataFunction() {
             e.target.classList.add("active");
 
             const type = e.target.getAttribute("type");
-            $(".detail-type-mission-function-ifelse").innerHTML =
-                htmlDataFunction[type].join("");
+            const typeIfelse = $(".detail-type-mission-function-ifelse");
+
+            htmlDataFunction[type].length
+                ? (typeIfelse.innerHTML = htmlDataFunction[type].join(""))
+                : messageEmpty(typeIfelse, "Function empty!");
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
@@ -98,8 +110,13 @@ function handleRenderDataFunction() {
             e.target.classList.add("active");
 
             const type = e.target.getAttribute("type");
-            $(".detail-type-mission-function-trycatch").innerHTML =
-                htmlDataFunction[type].join("");
+
+            const typeTrycatch = $(".detail-type-mission-function-trycatch");
+
+            htmlDataFunction[type].length
+                ? (typeTrycatch.innerHTML = htmlDataFunction[type].join(""))
+                : messageEmpty(typeTrycatch, "Function empty!");
+
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
@@ -136,9 +153,9 @@ function renderDataFunction(data, type) {
             <input type="hidden" 
                 value='${JSON.stringify(item)}' class="value-function-item"/>
             <div class="flex flex-col">
-                    <span class="type-mission-${
+                    <span class=" font-bold font-3xl capitalize">${
                         item.mode
-                    } font-bold font-3xl capitalize">${item.mode}</span>
+                    }</span>
                     <div class="flex">
                         <span class="mr-2">Name:</span>
                         <span class="name-mission-${
@@ -148,7 +165,7 @@ function renderDataFunction(data, type) {
                     <span>${description}</span>
             </div>
                 <input value="${item.mode}#${nameStep}#${item.id}" 
-            type="hidden" class="value-type-mission-function-item"/>
+                    type="hidden" class="value-type-mission-function-item"/>
                 <div class="">
                     <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
                         <i class="fa-solid fa-xmark"></i>
@@ -165,6 +182,68 @@ function renderDataFunction(data, type) {
             </div>`
         );
     });
+}
+
+export function renderTypeMissionItem() {
+    loading(".type-mission-item-wrapper-normal");
+    fetch("/api/type-mission")
+        .then((res) => res.json())
+        .then((data) => {
+            const htmlTypeMission = {
+                normal: [],
+                ifelse: [],
+                trycatch: [],
+            };
+            data.map((item) => {
+                const itemHtml = `
+                    <div function-id=${item.id} function-type="${item.mode}"
+                        class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8">
+                        <input type="hidden" value="${JSON.stringify(item)}"
+                            class="" />
+                        <div class="flex flex-col">
+                            <span class="font-bold font-3xl capitalize">
+                                ${item.type}
+                            </span>
+                            <div class="flex">
+                                <span class="mr-2">Name:</span>
+                                <span class="">${item.name}</span>
+                            </div>
+                        </div>
+                        <input value="${item.data}"
+                            type="hidden" class="" />
+                        <div class="">
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>`;
+
+                const currentTypeMission =
+                    $(".type-mission").getAttribute("data");
+
+                item.type_mission === currentTypeMission &&
+                    htmlTypeMission[item.type].push(itemHtml);
+
+                return htmlTypeMission;
+            });
+
+            for (const type in htmlTypeMission) {
+                const itemTypeMission = $(`.type-mission-item-wrapper-${type}`);
+                htmlTypeMission[type].length
+                    ? (itemTypeMission.innerHTML =
+                          htmlTypeMission[type].join(""))
+                    : messageEmpty(itemTypeMission, "Type mission empty!");
+            }
+            loaded(".type-mission-item-wrapper-normal");
+        });
 }
 
 //normal
@@ -291,6 +370,7 @@ function handleAddMissionNormal() {
             name: nameNormalMission.value,
             type: "normal",
             data: valueNormalMissionArray.join("|"),
+            type_mission: $(".type-mission").getAttribute("data"),
         };
 
         if (isValid && isData) {
@@ -319,6 +399,7 @@ function handleAddMissionIfelse() {
             data: `${valueItemIfelse.if.join("|")}?|${valueItemIfelse.then.join(
                 "|"
             )}?|${valueItemIfelse.else.join("|")}`,
+            type_mission: $(".type-mission").getAttribute("data"),
         };
         if (isValid && isDataIf && isData) {
             addTypeMission(dataSaveTypeMission);
@@ -356,6 +437,7 @@ function handleAddMissionTrycatch() {
             data: `${valueItemTrycatch.try.join(
                 "|"
             )}?|${valueItemTrycatch.catch.join("|")}`,
+            type_mission: $(".type-mission").getAttribute("data"),
         };
 
         if (isValid && isDataTry && isDataCatch) {
@@ -407,8 +489,8 @@ export function updateBlockStep(id, data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            loaded();
             toggerMessage("success", data.message);
+            loaded();
         })
         .catch((data) => console.log(data));
 }
@@ -512,7 +594,6 @@ export function handleDeleteStep(data, wrapperItem) {
                     1
                 );
                 stepItem.closest(".step-item").remove();
-
                 $(wrapperItem)
                     .querySelectorAll(".step-item")
                     .forEach((element, index) => {

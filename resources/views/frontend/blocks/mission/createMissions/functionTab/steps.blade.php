@@ -29,12 +29,9 @@
             align-items: flex-end;
         }
     </style>
-    <div class="h-full flex relative">
+    <div class="h-full flex relative step-render">
         <div class="flex-1 flex relative h-full">
             <div class="steps-wrapper h-full overflow-y-scroll flex flex-1 flex-wrap content-start bg-[#fff]"></div>
-            <label class="absolute right-0 top-0  text-[#0f6cbd] hidden step-loading mx-4">
-                <i class="fa-solid fa-spinner animate-spin"></i>
-            </label>
         </div>
 
         <div class="submit-btn-wrapper flex flex-col justify-end min-w-[240px] items-end">
