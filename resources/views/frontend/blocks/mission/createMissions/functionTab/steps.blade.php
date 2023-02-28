@@ -42,11 +42,11 @@
             display: none;
         }
         
-        .is-full .full, .not-full {
+        .is-full .true-full, .not-full {
             display: block;
         }
         
-        .is-full .not-full, .full {
+        .is-full .not-full, .true-full {
             display: none;
         }
 
@@ -71,7 +71,7 @@
                     </div>
                     <button class="mt-8 text-center px-2 btn full-screen-step-btn">
                         <i class="fa-solid fa-expand not-full"></i>
-                        <i class="fa-solid fa-compress full"></i>
+                        <i class="fa-solid fa-compress true-full"></i>
                     </button>
                 </div>
                 {{-- end switch --}}

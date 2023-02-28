@@ -10,7 +10,7 @@
     <div class="w-full h-full flex flex-col">
         <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px] ">
             <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
-
+                <input type="text" value="{{$itemRender->id}}" class="hidden" id="current-id-mission">
                 <p class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-{{$itemRender->type}}">
                     type mission - <span data="{{$itemRender->type}}" class="type-mission">{{$itemRender->type}}</span>
                 </p>

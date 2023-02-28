@@ -17,11 +17,7 @@ import handleOverlayUpdate from "./functionHandle/handleOverlayUpdate.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-export const currentMission = location.pathname.slice(
-    location.pathname.lastIndexOf("/") + 1,
-    location.pathname.length
-);
-
+export const currentMission = $('#current-id-mission').value
 
 translatesStepsMission(currentMission);
 

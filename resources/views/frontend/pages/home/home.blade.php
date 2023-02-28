@@ -30,5 +30,6 @@
                 <h4 class=" mr-4">Learn <span class="font-bold">visual</span> maps</h4>
             </div>
         </div>
+        
     </div>
 @endsection

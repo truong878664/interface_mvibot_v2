@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mvibot – Login</title>
-    <link rel="stylesheet" href="/css/main.css">
+    {{-- <link rel="stylesheet" href="/css/main.css"> --}}
+    <link rel="stylesheet" href="/buildCss/style.css">
+
 </head>
 
 <body>

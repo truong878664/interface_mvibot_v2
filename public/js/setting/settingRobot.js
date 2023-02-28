@@ -32,6 +32,7 @@ function renderParameter(data) {
                 ($(".number-volume").innerText = data[para]);
         }
         if (para === "mode") {
+            console.log(data[para])
             $(".mode-item.active")?.classList.remove("active");
             $(`.mode-item[value=${data[para]}]`).classList.add("active");
         }
