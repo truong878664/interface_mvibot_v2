@@ -1,5 +1,10 @@
 @import "../fonts/fontawesome-free-6.2.0-web/css/all.min.css";
 
+.abc {
+    display: none;
+}
+
+
 /* component */
 @import "status.css";
 @import "button.css";
