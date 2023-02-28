@@ -6,14 +6,10 @@ export default function sendMission() {
     $(".send-mission-btn").onclick = (e) => {
         fetch(`/api/mi/${currentMission}`)
             .then((res) => res.json())
-
             .then((data) => {
                 const type = e.target.getAttribute("type");
 
-                const nameRobot = $("#select-robot-option").value.replaceAll(
-                    " ",
-                    ""
-                );
+                const nameRobot = $("#select-robot-option").value.replaceAll(" ","");
                 if (data.steps_mission !== null) {
                     if (!nameRobot) {
                         toggerMessage("error", "please choose robot");

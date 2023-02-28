@@ -8,6 +8,7 @@ import {
     messageEmpty,
     renderBlockStep,
 } from "./handleStepMission.js";
+import handleRenderTypeMission from "./typeMission/handleRenderTypeMission.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -33,11 +34,15 @@ const typeFunction = [
 
 loadDataFunction();
 handleRenderDataFunction();
-renderTypeMissionItem();
+
+handleRenderTypeMission();
 
 handleAddMissionNormal();
 handleAddMissionIfelse();
 handleAddMissionTrycatch();
+
+
+
 
 export function loadDataFunction(typeFunctionActive = "gpio") {
     fetch(`/api/function`)
@@ -184,69 +189,7 @@ function renderDataFunction(data, type) {
     });
 }
 
-export function renderTypeMissionItem() {
-    loading(".type-mission-item-wrapper-normal");
-    fetch("/api/type-mission")
-        .then((res) => res.json())
-        .then((data) => {
-            const htmlTypeMission = {
-                normal: [],
-                ifelse: [],
-                trycatch: [],
-            };
-            data.map((item) => {
-                const itemHtml = `
-                    <div type-mission-id=${item.id} mission-type="${item.type}"
-                        class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-item">
-                        <input type="hidden" value="${JSON.stringify(
-                            item
-                        )}" class="" />
-                        <div class="flex flex-col">
-                            <span class="font-bold font-3xl capitalize">
-                                ${item.type}
-                            </span>
-                            <div class="flex">
-                                <span class="mr-2">Name:</span>
-                                <span class="">${item.name}</span>
-                            </div>
-                        </div>
-                        <input value="${item.data}"
-                            type="hidden" class="" />
-                        <div class="">
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-type-mission-btn">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
 
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-type-mission-btn">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-type-mission-btn">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>`;
-
-                const currentTypeMission =
-                    $(".type-mission").getAttribute("data");
-
-                item.type_mission === currentTypeMission &&
-                    htmlTypeMission[item.type].push(itemHtml);
-
-                return htmlTypeMission;
-            });
-
-            for (const type in htmlTypeMission) {
-                const itemTypeMission = $(`.type-mission-item-wrapper-${type}`);
-                htmlTypeMission[type].length
-                    ? (itemTypeMission.innerHTML =
-                          htmlTypeMission[type].join(""))
-                    : messageEmpty(itemTypeMission, "Type mission empty!");
-            }
-            handleAddTypeMission();
-            loaded(".type-mission-item-wrapper-normal");
-        });
-}
 
 //normal
 const nameNormalMission = $(".name-normal-mission");
@@ -379,7 +322,7 @@ function handleAddMissionNormal() {
             if (isValid && isData) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputNormal();
-                renderTypeMissionItem();
+                handleRenderTypeMission();
             }
         };
     });
@@ -602,20 +545,6 @@ export function handleMoveStep(data, wrapperItem) {
         };
     });
 }
-function handleAddTypeMission() {
-    $$(".add-type-mission-btn").forEach((element) => {
-        element.onclick = (e) => {
-            const itemTypeMission = e.target.closest(".type-mission-item");
-            const idTypeMission =
-                itemTypeMission.getAttribute("type-mission-id");
-            updateBlockStep(currentMission, {
-                mission_shorthand: idTypeMission,
-                method: "add",
-            });
-            renderBlockStep();
-        };
-    });
-}
 
 export function handleDeleteStep(data, wrapperItem) {
     $(wrapperItem)
@@ -642,7 +571,8 @@ export function validateInput(...rest) {
         $(item).oninput = (e) => {
             e.target.style.borderColor = "#ccc";
         };
-        const pattern = /^[a-zA-Z0-9]*$/;
+
+        const pattern = /^[a-zA-Z0-9_]*$/;
 
         if ($(item).value == "" || !pattern.exec($(item).value)) {
             toggerMessage("error", "Please enter all input");

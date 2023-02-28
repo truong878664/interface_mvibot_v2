@@ -1,6 +1,5 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-import { toggerMessage } from "./main.js";
 
 activeNavTab();
 handleChangeImgMarker();

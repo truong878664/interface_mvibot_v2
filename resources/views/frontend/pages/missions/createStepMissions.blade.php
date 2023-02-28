@@ -13,5 +13,4 @@
     <script type="module" src="/js/missions/function/point.js"></script>
     <script type="module" src="/js/missions/function/var.js"></script>
     <script type="module" src="/js/missions/function/sound.js"></script>
-    <script type="module" src="/js/missions/fullScreenStep.js"></script>
 @endsection

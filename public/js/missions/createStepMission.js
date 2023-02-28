@@ -159,7 +159,7 @@ function handlePointMission() {
             toggerMessage("success", "add point successfully");
         };
     });
-    
+
     handleDeletePoint();
     function handleDeletePoint() {
         $$(".delete-point-btn").forEach((element) => {
