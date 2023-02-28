@@ -2188,3 +2188,8 @@ li {
         transform: rotate(360deg) translate(20px);
     }
 }
+
+.missions-content.editing .edit-function-item-btn,
+.missions-content.editing .delete-function-item-btn {
+    display: none;
+}

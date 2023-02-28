@@ -92,7 +92,11 @@
     display: none;
 }
 
-
 .type-mission-error {
+    display: none;
+}
+
+.missions-content.editing .edit-function-item-btn,
+.missions-content.editing .delete-function-item-btn {
     display: none;
 }

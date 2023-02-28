@@ -19,6 +19,8 @@
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
+
+        
     </style>
     <header class="main-header ajax">
         <div class="header-left-wrapper">
@@ -74,11 +76,12 @@
             </ul>
         </section>
 
-        <div class="w-full h-[calc(100%_-_128px)] md:w-[calc(100%_-_74px)] md:h-[calc(100%_-_44px)] mt-[44px] md:ml-[74px]">
+        <div
+            class="w-full h-[calc(100%_-_128px)] md:w-[calc(100%_-_74px)] md:h-[calc(100%_-_44px)] mt-[44px] md:ml-[74px]">
             @yield('content')
         </div>
     </div>
-  
+
     <div class="fixed bottom-10 left-10 z-[21] flex">
         <button
             class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i
