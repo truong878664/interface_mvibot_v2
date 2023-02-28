@@ -9,8 +9,8 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-25d3302f.css">
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    {{-- <link rel="stylesheet" href="/build/assets/app-25d3302f.css"> --}}
+    <script src="https://cdn.tailwindcss.com"></script>
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -79,7 +79,7 @@
         </div>
     </div>
   
-    <div class="fixed bottom-10 left-10 z-10 flex">
+    <div class="fixed bottom-10 left-10 z-[21] flex">
         <button
             class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i
                 class="fa-solid fa-angle-left"></i></button>

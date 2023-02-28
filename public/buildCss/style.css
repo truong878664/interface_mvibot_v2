@@ -1998,7 +1998,21 @@ input[type="number"] {
     .create-point-btn {
         align-self: flex-end;
     }
+
+    
 }
+
+@media ( max-height: 859px ) and ( max-width: 768px) {
+    .mb-step-full-screen {
+        position: absolute !important;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        z-index: 20;
+    }
+ }
+
 @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
@@ -2155,9 +2169,9 @@ li {
     background: var(--main-color);
     position: relative;
     z-index: 31;
-  }
-  .loader:before,
-  .loader:after {
+}
+.loader:before,
+.loader:after {
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -2165,11 +2179,12 @@ li {
     background: var(--main-color);
     transform: rotate(0deg) translate(20px);
     animation: rotate 1s ease infinite;
-  }
-  .loader:after {
-    animation-delay: 0.5s
-  }
-  @keyframes rotate {
-    100% {transform: rotate(360deg) translate(20px)
-  }
-  }  
+}
+.loader:after {
+    animation-delay: 0.5s;
+}
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg) translate(20px);
+    }
+}

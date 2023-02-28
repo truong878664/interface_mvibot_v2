@@ -196,10 +196,11 @@ export function renderTypeMissionItem() {
             };
             data.map((item) => {
                 const itemHtml = `
-                    <div function-id=${item.id} function-type="${item.mode}"
-                        class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8">
-                        <input type="hidden" value="${JSON.stringify(item)}"
-                            class="" />
+                    <div type-mission-id=${item.id} mission-type="${item.type}"
+                        class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-item">
+                        <input type="hidden" value="${JSON.stringify(
+                            item
+                        )}" class="" />
                         <div class="flex flex-col">
                             <span class="font-bold font-3xl capitalize">
                                 ${item.type}
@@ -212,15 +213,15 @@ export function renderTypeMissionItem() {
                         <input value="${item.data}"
                             type="hidden" class="" />
                         <div class="">
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-type-mission-btn">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
 
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-type-mission-btn">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
 
-                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
+                            <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-type-mission-btn">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -242,6 +243,7 @@ export function renderTypeMissionItem() {
                           htmlTypeMission[type].join(""))
                     : messageEmpty(itemTypeMission, "Type mission empty!");
             }
+            handleAddTypeMission();
             loaded(".type-mission-item-wrapper-normal");
         });
 }
@@ -359,25 +361,28 @@ export function handleAddStep() {
 }
 
 function handleAddMissionNormal() {
-    $(".add-mission-normal").onclick = () => {
-        const isValid = validateInput(".name-normal-mission");
-        const isData = validateArray(
-            valueNormalMissionArray,
-            ".normal-steps-wrapper"
-        );
+    $$(".add-mission-normal").forEach((element) => {
+        element.onclick = (e) => {
+            const isValid = validateInput(".name-normal-mission");
+            const isData = validateArray(
+                valueNormalMissionArray,
+                ".normal-steps-wrapper"
+            );
 
-        const dataSaveTypeMission = {
-            name: nameNormalMission.value,
-            type: "normal",
-            data: valueNormalMissionArray.join("|"),
-            type_mission: $(".type-mission").getAttribute("data"),
+            const dataSaveTypeMission = {
+                name: nameNormalMission.value,
+                type: "normal",
+                data: valueNormalMissionArray.join("|"),
+                type_mission: $(".type-mission").getAttribute("data"),
+            };
+            const typeSave = e.target.getAttribute("type");
+            if (isValid && isData) {
+                addTypeMission(dataSaveTypeMission, typeSave);
+                resetValueInputNormal();
+                renderTypeMissionItem();
+            }
         };
-
-        if (isValid && isData) {
-            addTypeMission(dataSaveTypeMission);
-            resetValueInputNormal();
-        }
-    };
+    });
 }
 function resetValueInputNormal() {
     valueNormalMissionArray.length = 0;
@@ -386,29 +391,36 @@ function resetValueInputNormal() {
 }
 
 function handleAddMissionIfelse() {
-    $(".add-mission-ifelse").onclick = () => {
-        const isValid = validateInput(".name-ifelse-mission");
-        const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
-        const isData =
-            validateArray(valueItemIfelse.then, ".then-label") ||
-            validateArray(valueItemIfelse.else, ".else-label");
+    $$(".add-mission-ifelse").forEach((element) => {
+        element.onclick = (e) => {
+            const isValid = validateInput(".name-ifelse-mission");
+            const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
+            const isData =
+                validateArray(valueItemIfelse.then, ".then-label") ||
+                validateArray(valueItemIfelse.else, ".else-label");
 
-        const dataSaveTypeMission = {
-            name: nameIfelseMission.value,
-            type: "ifelse",
-            data: `${valueItemIfelse.if.join("|")}?|${valueItemIfelse.then.join(
-                "|"
-            )}?|${valueItemIfelse.else.join("|")}`,
-            type_mission: $(".type-mission").getAttribute("data"),
+            const dataSaveTypeMission = {
+                name: nameIfelseMission.value,
+                type: "ifelse",
+                data: `${valueItemIfelse.if.join(
+                    "|"
+                )}?|${valueItemIfelse.then.join(
+                    "|"
+                )}?|${valueItemIfelse.else.join("|")}`,
+                type_mission: $(".type-mission").getAttribute("data"),
+            };
+            const typeSave = e.target.getAttribute("type");
+
+            if (isValid && isDataIf && isData) {
+                addTypeMission(dataSaveTypeMission, typeSave);
+                resetValueInputIfelse();
+                $$(".normal-border").forEach((item) => {
+                    item.style.borderColor = "#ccc";
+                });
+                renderTypeMissionItem();
+            }
         };
-        if (isValid && isDataIf && isData) {
-            addTypeMission(dataSaveTypeMission);
-            resetValueInputIfelse();
-            $$(".normal-border").forEach((item) => {
-                item.style.borderColor = "#ccc";
-            });
-        }
-    };
+    });
 
     function resetValueInputIfelse() {
         valueItemIfelse.if.length = 0;
@@ -424,28 +436,34 @@ function handleAddMissionIfelse() {
 
 //add trycatch
 function handleAddMissionTrycatch() {
-    $(".add-mission-trycatch").onclick = () => {
-        const isValid = validateInput(".name-trycatch-mission");
-        const isDataTry = validateArray(valueItemTrycatch.try, ".try-label");
-        const isDataCatch = validateArray(
-            valueItemTrycatch.catch,
-            ".catch-label"
-        );
-        const dataSaveTypeMission = {
-            name: nameTryCatchMission.value,
-            type: "trycatch",
-            data: `${valueItemTrycatch.try.join(
-                "|"
-            )}?|${valueItemTrycatch.catch.join("|")}`,
-            type_mission: $(".type-mission").getAttribute("data"),
-        };
+    $$(".add-mission-trycatch").forEach((element) => {
+        element.onclick = (e) => {
+            const isValid = validateInput(".name-trycatch-mission");
+            const isDataTry = validateArray(
+                valueItemTrycatch.try,
+                ".try-label"
+            );
+            const isDataCatch = validateArray(
+                valueItemTrycatch.catch,
+                ".catch-label"
+            );
+            const dataSaveTypeMission = {
+                name: nameTryCatchMission.value,
+                type: "trycatch",
+                data: `${valueItemTrycatch.try.join(
+                    "|"
+                )}?|${valueItemTrycatch.catch.join("|")}`,
+                type_mission: $(".type-mission").getAttribute("data"),
+            };
+            const typeSave = e.target.getAttribute("type");
 
-        if (isValid && isDataTry && isDataCatch) {
-            addTypeMission(dataSaveTypeMission);
-            resetValueInputTrycatch();
-            console.log(dataSaveTypeMission);
-        }
-    };
+            if (isValid && isDataTry && isDataCatch) {
+                addTypeMission(dataSaveTypeMission, typeSave);
+                resetValueInputTrycatch();
+                renderTypeMissionItem();
+            }
+        };
+    });
 
     function resetValueInputTrycatch() {
         valueItemTrycatch.try.length = 0;
@@ -457,7 +475,7 @@ function handleAddMissionTrycatch() {
     }
 }
 
-function addTypeMission(data) {
+function addTypeMission(data, typeSave) {
     fetch("/api/type-mission", {
         headers: {
             Accept: "application/json",
@@ -468,11 +486,13 @@ function addTypeMission(data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            updateBlockStep(currentMission, {
-                mission_shorthand: data.id,
-                method: "add",
-            });
-            renderBlockStep();
+            if (typeSave === "add") {
+                updateBlockStep(currentMission, {
+                    mission_shorthand: data.id,
+                    method: "add",
+                });
+                renderBlockStep();
+            }
         })
         .catch(function (res) {});
 }
@@ -579,6 +599,20 @@ export function handleMoveStep(data, wrapperItem) {
                     Number(itemPrevious.getAttribute("index")) - 1
                 );
             }
+        };
+    });
+}
+function handleAddTypeMission() {
+    $$(".add-type-mission-btn").forEach((element) => {
+        element.onclick = (e) => {
+            const itemTypeMission = e.target.closest(".type-mission-item");
+            const idTypeMission =
+                itemTypeMission.getAttribute("type-mission-id");
+            updateBlockStep(currentMission, {
+                mission_shorthand: idTypeMission,
+                method: "add",
+            });
+            renderBlockStep();
         };
     });
 }

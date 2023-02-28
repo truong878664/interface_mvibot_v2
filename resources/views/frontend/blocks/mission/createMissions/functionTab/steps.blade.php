@@ -28,8 +28,32 @@
         .add-wake-up-btn {
             align-items: flex-end;
         }
+
+        .full-screen {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            z-index: 20;
+        }
+
+        .full-screen .edit-step-btn {
+            display: none;
+        }
+        
+        .is-full .full, .not-full {
+            display: block;
+        }
+        
+        .is-full .not-full, .full {
+            display: none;
+        }
+
+
+
     </style>
-    <div class="h-full flex relative step-render">
+    <div class="h-full flex step-render relative bg-[#fff] step-block-wrapper mb-step-full-screen">
         <div class="flex-1 flex relative h-full">
             <div class="steps-wrapper h-full overflow-y-scroll flex flex-1 flex-wrap content-start bg-[#fff]"></div>
         </div>
@@ -38,11 +62,17 @@
             {{-- switch --}}
             <div class="absolute top-2 right-2 flex">
                 <span class="mr-8 text-2xl">{{ $itemRender->name_mission }} | <span class="font-bold">{{ $itemRender->type }}</span></span>
-                <div class="h-[34px] w-[60px]">
-                    <label class="switch">
-                        <input class="check-show-step" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
+                <div class="flex flex-col justify-center">
+                    <div class="h-[34px] w-[60px]">
+                        <label class="switch">
+                            <input class="check-show-step" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <button class="mt-8 text-center px-2 btn full-screen-step-btn">
+                        <i class="fa-solid fa-expand not-full"></i>
+                        <i class="fa-solid fa-compress full"></i>
+                    </button>
                 </div>
                 {{-- end switch --}}
             </div>
