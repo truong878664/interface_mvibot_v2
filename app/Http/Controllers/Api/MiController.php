@@ -125,7 +125,7 @@ class MiController extends Controller
                 Missions::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
                 $this->translateStepMissionName($id);
                 $this->translateData($id);
-                return ['message' => 'Delete mission success!', "status" => 200];
+                return ['message' => 'Update mission success!', "status" => 200];
                 break;
             case "move":
                 $mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;

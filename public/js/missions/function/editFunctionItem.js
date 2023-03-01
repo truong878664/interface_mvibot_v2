@@ -1,5 +1,5 @@
 import { $, $$, toggerMessage } from "../../main.js";
-import { loaded, loading } from "../functionHandle/displayLoad.js";
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import inputFunction from "../functionHandle/inputFunction.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 import updateStepValue from "../functionHandle/updateStepValue.js";

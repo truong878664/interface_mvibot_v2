@@ -1,4 +1,4 @@
-import { loaded, loading } from "./displayLoad.js";
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 
 export default function updateStepValue(id) {
     loading();

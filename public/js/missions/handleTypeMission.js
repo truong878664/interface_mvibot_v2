@@ -2,7 +2,7 @@ import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
-import { loaded, loading } from "./functionHandle/displayLoad.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 import {
     currentMission,
     messageEmpty,
@@ -41,10 +41,8 @@ handleAddMissionNormal();
 handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
-
-
-
 export function loadDataFunction(typeFunctionActive = "gpio") {
+    loading(".detail-type-mission-function-normal");
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
@@ -62,6 +60,7 @@ export function loadDataFunction(typeFunctionActive = "gpio") {
             $(
                 `.type-mission-function-trycatch[type=${typeFunctionActive}]`
             ).click();
+            loaded(".detail-type-mission-function-normal");
         });
 }
 
@@ -188,8 +187,6 @@ function renderDataFunction(data, type) {
         );
     });
 }
-
-
 
 //normal
 const nameNormalMission = $(".name-normal-mission");

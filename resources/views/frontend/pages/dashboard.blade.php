@@ -1,10 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
-    <div class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
-        {{-- <x-dashboard-item route='dashboard.missions.create-missions.' icon='fa-solid fa-crosshairs' title='Create missions'
-            describe='Assign tasks to robots' color="#0f6cbd" /> --}}
-
+    <ul class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
         <x-dashboard-item route='dashboard.missions.type-mission' icon='fa-solid fa-crosshairs' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 
@@ -35,7 +32,11 @@
         <x-dashboard-item route='dashboard.sound.' icon='fa-solid fa-volume-high' title='Sound'
             describe='Set sound for robot' color="#F48484" />
 
+        <x-dashboard-item route='dashboard.wifi' icon='fa-solid fa-wifi' title='Wifi'
+            describe='Wifi connection for robot' color="#3795BD" />
+
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
-    </div>
+    </ul>
+
 @endsection

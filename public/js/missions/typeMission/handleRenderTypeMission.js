@@ -1,7 +1,8 @@
-import { loaded, loading } from "../functionHandle/displayLoad.js";
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import { currentMission, messageEmpty, renderBlockStep } from "../handleStepMission.js";
 import { updateBlockStep } from "../handleTypeMission.js";
-import handleDeleteTypeMission from "./handleDeleteMission.js";
+import handleDeleteTypeMission from "./handleDeleteTypeMission.js";
+import handleUpdateTypeMission from "./handleUpdateTypeMisison.js";
 
 export default function handleRenderTypeMission() {
     loading(".type-mission-item-wrapper-normal");
@@ -64,7 +65,7 @@ export default function handleRenderTypeMission() {
             }
             handleAddTypeMission();
             handleDeleteTypeMission();
-
+            handleUpdateTypeMission()
             loaded(".type-mission-item-wrapper-normal");
         });
 }

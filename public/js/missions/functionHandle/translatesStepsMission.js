@@ -1,6 +1,6 @@
 import { $, toggerMessage } from "../../main.js";
 import { renderBlockStep } from "../handleStepMission.js";
-import { loaded, loading } from "./displayLoad.js";
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 
 export default function translatesStepsMission(id) {
     loading()

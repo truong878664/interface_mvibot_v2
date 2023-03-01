@@ -11,7 +11,7 @@ import { currentMission, renderBlockStep } from "./handleStepMission.js";
 import { setDefaultValueFootprint } from "./function/footprint.js";
 import { changeImgMarkerDir, tabTypeMarker } from "./function/marker.js";
 import inputFunction from "./functionHandle/inputFunction.js";
-import { loaded, loading } from "./functionHandle/displayLoad.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
 import { createMapPoint } from "./function/point.js";
 import sendMission from "./sendMission.js";

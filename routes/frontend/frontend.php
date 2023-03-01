@@ -68,7 +68,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('/', [mappingController::class, 'index']);
         });
 
-
+        Route::get('wifi', function () {
+            return view('frontend.pages.wifi.wifi');
+        })->name('wifi');
 
         Route::get('setting', [SettingController::class, 'index'])->name('setting.');
 

@@ -1,6 +1,6 @@
 import { $, $$ } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
-import { loaded, loading } from "../functionHandle/displayLoad.js";
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import { htmlDataFunction } from "../handleTypeMission.js";

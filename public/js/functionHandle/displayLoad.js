@@ -1,4 +1,4 @@
-const sendMissionBtn = $("label[for=select-robot]");
+import { $ } from "../main.js";
 
 export function loading(element = '.step-render') {
     $(element).querySelector(".loader-wrapper")?.remove();
@@ -14,5 +14,5 @@ export function loaded(element = '.step-render') {
         $(element).querySelector(".loader-wrapper")?.remove();
     }, 600) 
 }
-
+``
 

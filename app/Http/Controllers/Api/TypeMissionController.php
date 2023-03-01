@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
+use App\Models\backend\Missions;
 use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
 
@@ -93,6 +94,20 @@ class TypeMissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TypeMission::where('id', $id)->delete();
+
+        $allMission =  Missions::select('mission_shorthand', 'id')->get();
+
+        foreach ($allMission as $mission) {
+            $arr_mission_shorthand = explode('+', $mission->mission_shorthand);
+            $new_mission_shorthand =  array_filter($arr_mission_shorthand, function ($id_type_mission) use ($id) {
+                return $id_type_mission !== $id;
+            });
+
+            Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+", $new_mission_shorthand)]);
+        }
+        
+        return ['message' => 'Delete type mission success', 'deleted' => true];
     }
+    // return $allMission;
 }

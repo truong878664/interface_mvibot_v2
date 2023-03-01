@@ -1,7 +1,7 @@
 <div class="w-full flex-1 flex justify-between overflow-hidden">
     <div class="w-full lg:w-1/2 overflow-hidden relative shadow-md rounded-lg mr-1">
         <div class="absolute top-0 w-full flex z-20 h-[30px]">
-            <div class="flex h-full w-full overflow-x-scroll">
+            <div class="flex h-full w-full overflow-x-scroll bg-[#e5e5e5]">
                 <button
                     class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
                     type="gpio">Gpio</button>

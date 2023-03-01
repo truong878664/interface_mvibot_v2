@@ -1,4 +1,4 @@
-import { loaded, loading } from "./functionHandle/displayLoad.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 
 import translatesStepsMission from "./functionHandle/translatesStepsMission.js";
 import handleMoveBlockStep from "./blockStep/handleMoveBlockStep.js";
@@ -22,9 +22,9 @@ function renderBlockStep() {
         .then((res) => res.json())
         .then((data) => {
             const steps_mission_name = data.steps_mission_name;
-
+            
             const shortHandMissionList = data.mission_shorthand?.split("+");
-
+            
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
 
