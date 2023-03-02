@@ -67,6 +67,12 @@ class MissionsController extends Controller
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive'));
     }
 
+    public function typeMission(Request $request) {
+        $type = $request->type;
+
+        return view('frontend.pages.missions.typeMission', compact('type'));
+    }
+
     public function addPointToStepsMission($idMission)
     {
         //     function missionStepNameToArray($idMission)
@@ -177,4 +183,5 @@ class MissionsController extends Controller
 
         //     Missions::where('id', $idMission)->update(['steps_mission' => $dataStepMission]);
     }
+
 }

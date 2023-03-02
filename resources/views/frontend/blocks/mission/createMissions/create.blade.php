@@ -5,7 +5,7 @@
 @endphp
 
 @foreach ($missions as $index => $itemMission)
-    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{ $itemMission->id }}">
+    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{ $itemMission->id }}" >
         <div class="absolute top-4 left-4 flex justify-between z-30">
             <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center pointer-events-none">
                 @if ($itemMission->mission_shorthand)

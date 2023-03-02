@@ -4,7 +4,7 @@
         <div class="w-full h-[calc(50%_-_4px)] mb-1 bg-cover bg-no-repeat px-4 flex"
             style="background-image:url('/img/home/background1.png');">
             <div class="w-1/2 h-full">
-                <h3 class="text-[#fff] text-[30px] font-bold">Maruei VietNam Precsion</h3>
+                <h3 class="text-[#fff] text-[30px] font-bold">Maruei VietNam Precision</h3>
                 <div class="w-full h-[calc(100%_-_60px)] bg-no-repeat bg-contain"
                     style="background-image:url('/img/home/robotimg.png');">
                 </div>

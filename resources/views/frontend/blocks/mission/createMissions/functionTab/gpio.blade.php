@@ -1,5 +1,5 @@
 <div
-    class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item hidden' : '' }} h-full overflow-hidden flex flex-col">
+    class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item hidden' : '' }} h-full w-full flex flex-col">
     <div class="flex mb-4">
         @if ($type != 'gpio_wake_up' && $type != 'gpio_stop')
             <div class="flex flex-col">
@@ -27,12 +27,12 @@
                 <div class="flex items-center text-2xl mr-4">
                     <label for="">GPIO module</label>
                     <label class="relative inline-flex items-center cursor-pointer ml-4">
-                        <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
+                        <input type="checkbox" value="" id="{{ $type }}" type-gpio="{{ $type }}"
                             class="checkbox-is-gpio sr-only peer/wake_up">
                         <div
                             class="w-11 h-[16px] bg-gray-200 peer-focus/wake_up:outline-none peer-focus/wake_up:ring-2 peer-focus/wake_up:ring-blue-300 dark:peer-focus/wake_up:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/wake_up:after:translate-x-full peer-checked/wake_up:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/wake_up:bg-blue-600">
                         </div>
-                    </label> 
+                    </label>
                 </div>
             </div>
         @elseif($type == 'gpio_stop')
@@ -41,7 +41,7 @@
                 <div class="flex items-center text-2xl mr-4">
                     <label for="">GPIO module</label>
                     <label class="relative inline-flex items-center cursor-pointer ml-4">
-                        <input type="checkbox" value="" id="{{$type}}" type-gpio="{{ $type }}"
+                        <input type="checkbox" value="" id="{{ $type }}" type-gpio="{{ $type }}"
                             class="checkbox-is-gpio sr-only peer/stop">
                         <div
                             class="w-11 h-[16px] bg-gray-200 peer-focus/stop:outline-none peer-focus/stop:ring-2 peer-focus/stop:ring-blue-300 dark:peer-focus/stop:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/stop:after:translate-x-full peer-checked/stop:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/stop:bg-blue-600">
@@ -91,8 +91,8 @@
             @endif
 
         </div>
-        <div class="flex-1">
-            <svg width="100%" height="100%" viewBox="0 0 639 227" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="flex-1 max-h-[calc(100%_-_80px)] overflow-hidden">
+            <svg height="100%" width="100%" fill="none"  viewBox="0 0 639 227" class="" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1_200)">
                     <rect width="639" height="227" fill="white" />
                     <path d="M7 0L7 227L632 227V0L7 0Z" fill="white" />

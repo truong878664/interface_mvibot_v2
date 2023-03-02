@@ -15,6 +15,13 @@
                     'icon' => 'fa-solid fa-gears',
                     'class' => 'hidden',
                 ])
+
+                @include('frontend.blocks.setting.settingItem', [
+                    'title' => 'Wifi',
+                    'icon' => 'fa-solid fa-wifi',
+                    'class' => 'hidden',
+                ])
+
                 @include('frontend.blocks.setting.settingItem', [
                     'title' => 'Public topic',
                     'icon' => 'fa-regular fa-paper-plane',
@@ -31,6 +38,7 @@
             <div class="w-4/5 h-full bg-[#ececec] px-4 py-6 border-l border-solid">
                 @include('frontend.blocks.setting.settingTab.robot')
                 @include('frontend.blocks.setting.settingTab.settingRobot')
+                @include('frontend.blocks.setting.settingTab.wifi')
                 @include('frontend.blocks.setting.settingTab.publicTopic')
                 @include('frontend.blocks.setting.settingTab.rebotShutdown')
             </div>
@@ -41,4 +49,5 @@
     <script type="module" src="/js/setting/setting.js"></script>
     <script type="module" src="/js/setting/robot.js"></script>
     <script type="module" src="/js/setting/settingRobot.js"></script>
+    <script type="module" src="/js/setting/wifi.js"></script>
 @endsection

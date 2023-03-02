@@ -2,7 +2,7 @@
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <ul class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
-        <x-dashboard-item route='dashboard.missions.type-mission' icon='fa-solid fa-crosshairs' title='Create missions'
+        <x-dashboard-item route='dashboard.missions.select' icon='fa-solid fa-crosshairs' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 
         <x-dashboard-item route='dashboard.missions.tracking-mission' icon='fa-solid fa-circle-right' title='Tracking Missions'

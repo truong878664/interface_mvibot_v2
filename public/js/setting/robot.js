@@ -4,11 +4,12 @@ import publishTopic from "../rosModule/topicString.js";
 // import { toggerMessage } from "../main.js";
 import dbDelete from "../missions/functionHandle/dbDelete.js";
 
-const robotActive = localStorage.getItem("robotActive");
+export const robotActive = localStorage.getItem("robotActive");
 
 if (robotActive) {
     $(`.robot-${robotActive}`)?.classList.add("active");
     $(".name-robot-active").innerText = robotActive;
+
 } else {
     $(".name-robot-active").innerText = "No robots choose";
 }
