@@ -357,7 +357,7 @@ function handleAddMissionIfelse() {
                 $$(".normal-border").forEach((item) => {
                     item.style.borderColor = "#ccc";
                 });
-                renderTypeMissionItem();
+                handleRenderTypeMission();
             }
         };
     });
@@ -400,7 +400,7 @@ function handleAddMissionTrycatch() {
             if (isValid && isDataTry && isDataCatch) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputTrycatch();
-                renderTypeMissionItem();
+                handleRenderTypeMission();
             }
         };
     });

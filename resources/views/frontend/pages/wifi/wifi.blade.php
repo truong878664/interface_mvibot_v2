@@ -22,7 +22,9 @@
                     class="w-full min-h-[200px] max-h-full rounded-xl bg-[#D9D9D9] pl-[40px] relative wifi-wrapper pb-10 overflow-auto">
                 </div>
 
-                <div class="overlay fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-20 hidden"></div>
+                <div class="overlay fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-20 hidden">
+
+                </div>
                 <div
                     class="absolute w-full max-w-[600px] bg-[#E3E3E3] top-16 left-1/2 -translate-x-1/2 rounded-2xl shadow-lg p-10 hidden form-enter-password z-[21]">
                     <div class="flex justify-between">
@@ -58,4 +60,3 @@
     </style>
     <script type="module" src="/js/wifi/index.js"></script>
 @endsection
-

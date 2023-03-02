@@ -9,10 +9,13 @@
 
     <div class="w-full h-full flex flex-col">
         <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px] ">
-            <div class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
-                <input type="text" value="{{$itemRender->id}}" class="hidden" id="current-id-mission">
-                <p class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-{{$itemRender->type}}">
-                    type mission - <span data="{{$itemRender->type}}" class="type-mission">{{$itemRender->type}}</span>
+            <div
+                class="mb-2 bg-[#fff] h-[20%] overflow-y-hidden lg:w-1/5 lg:h-full border border-solid relative rounded-md">
+                <input type="text" value="{{ $itemRender->id }}" class="hidden" id="current-id-mission">
+                <p
+                    class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-{{ $itemRender->type }}">
+                    type mission - <span data="{{ $itemRender->type }}"
+                        class="type-mission">{{ $itemRender->type }}</span>
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
                     <div
@@ -31,11 +34,11 @@
                 </div>
             </div>
 
-            <div class="mb-2 bg-[#fff] h-[20%] lg:w-1/5 lg:h-full border-[1px] overflow-hidden mx-1 rounded-md">
+            {{-- <div class="mb-2 bg-[#fff] h-[20%] lg:w-1/5 lg:h-full border-[1px] overflow-hidden mx-1 rounded-md hidden">
                 <p class="text-2xl text-center bg-[rgba(15,108,189,0.52)] text-[#333] ">function</p>
                 <div class="overflow-y-auto overflow-x-hidden h-full pb-[20px]">
                     <div
-                        class="footprint-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
+                        class="footprint-function-btn type-mission-{{ $itemRender->type }} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] ">
                         <span>Footprint</span>
                     </div>
                     <div
@@ -47,7 +50,7 @@
                         <span>GPIO module</span>
                     </div>
                     <div
-                        class="marker-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="marker-function-btn type-mission-{{ $itemRender->type }} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Marker</span>
                     </div>
                     <div
@@ -55,26 +58,85 @@
                         <span>Sleep</span>
                     </div>
                     <div
-                        class="sound-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="sound-function-btn type-mission-{{ $itemRender->type }} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Sound</span>
                     </div>
 
                     <div
-                        class="point-function-btn type-mission-{{ $itemRender->type}} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="point-function-btn type-mission-{{ $itemRender->type }} function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Position</span>
                     </div>
                     <div
                         class="variable-function-btn function-btn text-2xl mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Variable</span>
                     </div>
-                   
-                </div>
-            </div>
 
-            <div class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden"
-                id="overlay-update-mission"></div>
+                </div>
+            </div> --}}
+            <div id="overlay-update-mission"
+                class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden"></div>
+
             <div class="mb-2 bg-[#fff] h-[60%] p-2 lg:w-3/5 lg:h-full border-[1px] flex-1 z-[20] rounded-md">
-                <div class="h-full w-full relative">
+                <div class="w-full h-[30px] flex items-center">
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 footprint-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-seedling "></i>
+                        </span>
+                        Footprint
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 gpio-function-btn function-btn">
+                        <span class="text-green-500">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </span>
+                        GPIO
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 gpio-module-function-btn function-btn">
+                        <span class="text-blue-500">
+
+                            <i class="fa-regular fa-lightbulb"></i>
+                        </span>
+                        GPIO module
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 marker-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                        <span class="text-sky-500">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </span>
+                        Marker
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 sleep-function-btn function-btn">
+                        <span class="text-red-600">
+                            <i class="fa-solid fa-mattress-pillow"></i>
+                        </span>
+                        Sleep
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 sound-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                        <span class="text-purple-600">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </span>
+                        Sound
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 point-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                        <span class="text-stone-600">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+                        Position
+                    </button>
+
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 variable-function-btn function-btn">
+                        <span class="text-orange-600">
+                            <i class="fa-solid fa-xmark"></i>
+                        </span>
+                        Variable
+                    </button>
+
+                </div>
+                <div class="h-[calc(100%_-_30px)] w-full relative bg-stone-100">
                     <div class="absolute right-0 top-0">
                         <button class="w-[30px] h-[30px] bg-cover btn info-function-btn"
                             style="background-image: url(/icon/info_icon.svg)">
@@ -126,17 +188,34 @@
         background: rgba(204, 204, 204, 70%)
     }
 
+    .function-item-2.active {
+        background: rgb(245, 245, 244);
+    }
+
+    .function-item-2.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translateY(50%);
+        width: 100%;
+        height: 30%;
+        background: rgb(245, 245, 244);
+    }
+
     .bg-gpio {
         background-color: rgba(242, 146, 28, 0.5);
     }
+
     .bg-battery {
         background-color: rgba(28, 146, 242, 0.5);
     }
+
     .bg-error {
         background-color: rgba(255, 39, 39, 0.5);
     }
+
     .bg-normal {
         background-color: rgba(25, 200, 28, 0.5);
     }
-
 </style>
