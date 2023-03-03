@@ -38,13 +38,8 @@ class GpioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        if ($request->time_out) {
-            $time_out = $request->time_out;
-        } else {
-            $time_out = -1;
-        }
-
+    {        
+        $time_out = $request->time_out;
         $name_type = $request->name_type;
         $out_set = $request->out_set;
         $out_reset = $request->out_reset;

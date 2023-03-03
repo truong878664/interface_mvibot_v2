@@ -32,9 +32,6 @@
         <x-dashboard-item route='dashboard.sound.' icon='fa-solid fa-volume-high' title='Sound'
             describe='Set sound for robot' color="#F48484" />
 
-        <x-dashboard-item route='dashboard.wifi' icon='fa-solid fa-wifi' title='Wifi'
-            describe='Wifi connection for robot' color="#3795BD" />
-
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
     </ul>

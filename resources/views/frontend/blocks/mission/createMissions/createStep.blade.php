@@ -39,7 +39,7 @@
 
             <div class="mb-2 bg-[#fff] h-[calc(80%_-_6px)] p-2 lg:w-[85%] lg:h-full border-[1px] flex-1 z-[20] rounded-md">
                 <div class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden">
-                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn {{$itemRender->type==="error" ? 'hidden' : ""}} function-btn">
                         <span class="mr-2 text-yellow-500">
                             <i class="fa-solid fa-box"></i>
                         </span>
@@ -66,7 +66,7 @@
                         </span>
                     </button>
 
-                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex marker-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex marker-function-btn {{$itemRender->type==="error" ? 'hidden' : ""}} function-btn">
                         <span class="mr-2 text-sky-500">
                             <i class="fa-solid fa-map-pin"></i>
                         </span>
@@ -84,7 +84,7 @@
                         </span>
                     </button>
 
-                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sound-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sound-function-btn {{$itemRender->type==="error" ? 'hidden' : ""}} function-btn">
                         <span class="mr-2 text-purple-600">
                             <i class="fa-solid fa-volume-high"></i>
                         </span>
@@ -93,7 +93,7 @@
                             </span>
                     </button>
 
-                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex point-function-btn type-mission-{{ $itemRender->type }} function-btn">
+                    <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex point-function-btn {{$itemRender->type==="error" ? 'hidden' : ""}} function-btn">
                         <span class="mr-2 text-stone-600">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>
@@ -182,5 +182,9 @@
 
     .bg-normal {
         background-color: rgba(25, 200, 28, 0.5);
+    }
+
+    .type-mission-error {
+        /* display: none; */
     }
 </style>
