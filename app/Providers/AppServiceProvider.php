@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Robot;
+use App\Models\backend\Robot;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $robots = Robot::all();
+        try {
+            $robots = Robot::all();
+        } catch (\Illuminate\Database\QueryException $e) {
+            $robots = [];
+        }
         View::share('robots', $robots);
     }
 }

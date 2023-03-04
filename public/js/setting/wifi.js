@@ -219,3 +219,6 @@ function loadingWifi(load) {
         ? $(".loader-wifi").classList.remove("hidden")
         : $(".loader-wifi").classList.add("hidden");
 }
+
+$('[data-status]').dataset.status = 'pending'
+console.log($('[data-status]'))

@@ -71,7 +71,7 @@
                             disabled>Connect</button>
                     </div>
 
-                    <div class="w-full h-[60px] rounded-xl bg-[#D9D9D9] mt-7 flex items-center px-10">
+                    <div data-status="pending" class="w-full h-[60px] rounded-xl bg-[#D9D9D9] mt-7 flex items-center px-10">
                         <span class="font-bold mr-4">Password</span>
                         <input class="flex-1 text-[16px] bg-transparent border-none outline-none tracking-[2px] py-4"
                             type="password" name="" id="password-wifi">

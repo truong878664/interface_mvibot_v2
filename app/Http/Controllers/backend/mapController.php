@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Layer;
 use App\Models\backend\Map;
-use App\Models\Robot;
+use App\Models\backend\Robot;
 use Illuminate\Http\Request;
 
 class mapController extends Controller

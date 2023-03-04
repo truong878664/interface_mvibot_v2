@@ -97,7 +97,7 @@ curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 Verify the hash of the downloaded PHP composer script with the signatures present at the official page:
 
 ```tsx
-HASH = `curl -sS https://composer.github.io/installer.sig`;
+HASH=`curl -sS https://composer.github.io/installer.sig`;
 ```
 
 Then, validate if the PHP Composer installer can be safely executed or not:

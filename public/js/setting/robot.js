@@ -17,8 +17,8 @@ $$(".robot-item").forEach((element) => {
     element.onclick = (e) => {
         $(".robot-item.active")?.classList.remove("active");
         const robotActive2 = localStorage.getItem("robotActive");
-
         const nameRobot = element.querySelector(".name-robot").value;
+
         if (robotActive2 == nameRobot) {
             element.classList.remove("active");
             localStorage.removeItem("robotActive");
@@ -30,6 +30,7 @@ $$(".robot-item").forEach((element) => {
             showSettingRobot();
             console.log(nameRobot);
         }
+        
 
         $(".name-robot-active").innerText = nameRobot;
     };

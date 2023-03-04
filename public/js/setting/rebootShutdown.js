@@ -4,10 +4,10 @@ import { robotActive } from "../mainLayout.js";
 // import { $ } from "./setting.js";
 
 // const robotSelect = $(".choose_robot.reboot-shutdown");
-const robotSelect = robotActive();
 
 $("#shutdown-btn").onclick = () => {
-    console.log(!!robotSelect);
+    const robotSelect = robotActive();
+    
     if (!robotSelect) {
         toggerMessage("error", "Please choose robot!");
     } else {
@@ -16,6 +16,8 @@ $("#shutdown-btn").onclick = () => {
 };
 
 $("#reboot-btn").onclick = () => {
+    const robotSelect = robotActive();
+
     if (!robotSelect) {
         toggerMessage("error", "Please choose robot!");
     } else {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\StatusRobot;
-use App\Models\Robot;
+use App\Models\backend\Robot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

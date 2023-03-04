@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Robot;
+use App\Models\backend\Robot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
