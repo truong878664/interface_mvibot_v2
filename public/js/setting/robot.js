@@ -1,57 +1,55 @@
 import { showSettingRobot } from "./setting.js";
 import { $, $$ } from "../main.js";
-import publishTopic from "../rosModule/topicString.js";
-// import { toggerMessage } from "../main.js";
 import dbDelete from "../missions/functionHandle/dbDelete.js";
 
-export const robotActive = localStorage.getItem("robotActive");
-
-if (robotActive) {
-    $(`.robot-${robotActive}`)?.classList.add("active");
-    $(".name-robot-active").innerText = robotActive;
-
-} else {
-    $(".name-robot-active").innerText = "No robots choose";
+export default function robot() {
+    checkRobotActiveStart();
+    selectRobot();
+    handleDeleteRobot();
 }
-$$(".robot-item").forEach((element) => {
-    element.onclick = (e) => {
-        $(".robot-item.active")?.classList.remove("active");
-        const robotActive2 = localStorage.getItem("robotActive");
-        const nameRobot = element.querySelector(".name-robot").value;
 
-        if (robotActive2 == nameRobot) {
-            element.classList.remove("active");
-            localStorage.removeItem("robotActive");
-            showSettingRobot();
-            console.log(nameRobot);
-        } else {
-            element.classList.add("active");
-            localStorage.setItem("robotActive", nameRobot);
-            showSettingRobot();
-            console.log(nameRobot);
-        }
-        
+const robotActive = localStorage.getItem("robotActive");
+function checkRobotActiveStart() {
+    if (robotActive) {
+        $(`.robot-${robotActive}`)?.classList.add("active");
+        $(".name-robot-active").innerText = robotActive;
+    } else {
+        $(".name-robot-active").innerText = "No robots choose";
+    }
+}
 
-        $(".name-robot-active").innerText = nameRobot;
-    };
-});
+function selectRobot() {
+    $$(".robot-item").forEach((element) => {
+        element.onclick = (e) => {
+            $(".robot-item.active")?.classList.remove("active");
+            const robotActive2 = localStorage.getItem("robotActive");
+            const nameRobot = element.querySelector(".name-robot").value;
 
-// $(".add-robot-btn").onclick = (e) => {
-//     $(".name-new-robot").classList.toggle("hidden");
-//     $(".name-new-robot:not(.hidden)")?.focus();
+            if (robotActive2 == nameRobot) {
+                element.classList.remove("active");
+                localStorage.removeItem("robotActive");
+                showSettingRobot();
+                console.log(nameRobot);
+            } else {
+                element.classList.add("active");
+                localStorage.setItem("robotActive", nameRobot);
+                showSettingRobot();
+                console.log(nameRobot);
+            }
 
-//     const nameRobotAdd = $(".name-new-robot.hidden")?.value;
+            $(".name-robot-active").innerText = nameRobot;
+        };
+    });
+}
 
-//     nameRobotAdd && publishTopic("/name_seri", nameRobotAdd);
-//     nameRobotAdd && toggerMessage("success", "Add robot success!");
-// };
-
-$$(".delete-robot-btn").forEach((item) => {
-    item.onclick = (e) => {
-        e.stopPropagation();
-        dbDelete(e.target, () => deleteRobot(e));
-    };
-});
+function handleDeleteRobot() {
+    $$(".delete-robot-btn").forEach((item) => {
+        item.onclick = (e) => {
+            e.stopPropagation();
+            dbDelete(e.target, () => deleteRobot(e));
+        };
+    });
+}
 
 function deleteRobot(e) {
     const nameRobotDelete = e.target

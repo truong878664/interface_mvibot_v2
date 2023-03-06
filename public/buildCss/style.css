@@ -2138,12 +2138,11 @@ li {
     border-color: #ffdfdf;
     color: red;
 }
-.setting-item.active {
-    color: #fff;
-}
+
 .setting-item.active,
 .setting-item.active:hover {
-    background-color: var(--main-color);
+    background-color: #DCD4D1;
+    
 }
 
 /* load */

@@ -18,23 +18,15 @@ function handleRenderSound() {
 }
 
 function renderSound(pathSound) {
-    let i = 8;
+    let indexBeginSound = 8;
     const html = [];
     pathSound.map((item) => {
         const nameSound = item.slice(item.lastIndexOf("/") + 1, item.length);
-        let newName;
-        if (nameSound.length > 30) {
-            newName =
-                nameSound.slice(0, 20) +
-                "..." +
-                nameSound.slice(nameSound.length - 6, nameSound.length);
-        } else {
-            newName = nameSound;
-        }
+        const newName = summaryName(nameSound);
 
         html.push(`
         <tr class="text-center sound-item">
-            <td class="border border-solit border-[#ccc]">${i++}</td>
+            <td class="border border-solit border-[#ccc]">${indexBeginSound++}</td>
             <td class="border border-solit border-[#ccc]">${newName}
                 <audio class="sound-${newName} audio-item">
                     <source src="/${item}" type="audio/mpeg" class="source-sound">
@@ -227,6 +219,7 @@ function actionBtn() {
     };
 }
 
+
 $("#sound-file").onchange = (e) => {
     const pathSound = e.target.value;
 
@@ -251,4 +244,14 @@ $(".upload-sound-submit").onclick = (e) => {
         $("#form-upload-sound").submit();
     }
 };
- 
+
+function summaryName(nameSound) {
+    let newName;
+    const frontName = nameSound.slice(0, 20);
+    const backName = nameSound.slice(nameSound.length - 6, nameSound.length);
+
+    nameSound.length > 30
+        ? (newName = frontName + "..." + backName)
+        : (newName = nameSound);
+    return newName;
+}

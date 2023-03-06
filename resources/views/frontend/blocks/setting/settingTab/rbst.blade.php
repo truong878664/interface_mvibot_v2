@@ -1,4 +1,4 @@
-<div class="setting-detail flex flex-col hidden h-full">
+<div class="flex flex-col hidden h-full">
     <div class="text-center flex justify-center items-center">
         <label class="name-robot-active font-bold block text-center"></label>
         <button class="ml-6 w-[30px] h-[30px] flex justify-center items-center bg-stone-300 rounded-md btn refresh-param-btn">
@@ -10,7 +10,7 @@
             <label class="text-2xl block mb-4">IP</label>
             <div class="flex mx-auto items-end relative">
 
-                <div class="inline-flex items-center justify-center px-8 pb-8 border-stone-300 border bg-stone-200">
+                <div class="inline-flex items-center justify-center px-8 pb-8 rounded-md bg-[#F2EAE8]">
                     <div class="w-full">
                         <span class="text-2xl ">IP master</span>
                         <div class="w-full mb-10">

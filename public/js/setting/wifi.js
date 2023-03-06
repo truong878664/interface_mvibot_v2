@@ -4,27 +4,36 @@ import { robotActive } from "../mainLayout.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import publishTopicString from "../rosModule/topicString.js";
 
-resetWifi();
-
 let timeoutWifi;
-$$(".name-robot").forEach((element) => {
-    const robot = element.value;
-    subscribeTopic(
-        `/${robot}/robot_list_wifi`,
-        "std_msgs/String",
-        (data, nameTopic) => {
-            clearTimeout(timeoutWifi);
-            const nameRobotActive = robotActive();
-            if (nameTopic.indexOf(nameRobotActive) !== -1) {
-                parseWifi(data.data);
-                timeoutWifi = setTimeout(() => {
-                    removeWifi();
-                }, 3000);
-            }
-        }
-    );
-});
 
+let nameWifi;
+const passwordWifi = $("#password-wifi");
+const formPassword = $(".form-enter-password");
+
+export default function wifi() {
+    resetWifi();
+    subscribeTopicWifi(); 
+}
+
+function subscribeTopicWifi() {
+    $$(".name-robot").forEach((element) => {
+        const robot = element.value;
+        subscribeTopic(
+            `/${robot}/robot_list_wifi`,
+            "std_msgs/String",
+            (data, nameTopic) => {
+                clearTimeout(timeoutWifi);
+                const nameRobotActive = robotActive();
+                if (nameTopic.indexOf(nameRobotActive) !== -1) {
+                    parseWifi(data.data);
+                    timeoutWifi = setTimeout(() => {
+                        removeWifi();
+                    }, 3000);
+                }
+            }
+        );
+    });
+}
 function parseWifi(data) {
     const arrayWifi = data
         .slice(1, data.length - 1)
@@ -39,10 +48,6 @@ function parseWifi(data) {
     });
     renderWifi(listWifi);
 }
-
-let nameWifi;
-const passwordWifi = $("#password-wifi");
-const formPassword = $(".form-enter-password");
 
 function renderWifiConnected(wifi) {
     $(".wifi-connect-item").classList.remove("hidden");
@@ -117,6 +122,15 @@ function showPasswordWifi() {
             }
         };
     });
+
+    $(".show-password-btn").onclick = (e) => {
+        const typeInputPass = passwordWifi.getAttribute("type");
+        e.target.classList.toggle("active");
+        passwordWifi.setAttribute(
+            "type",
+            typeInputPass === "text" ? "password" : "text"
+        );
+    };
 }
 
 function handleCancelWifi() {
@@ -149,15 +163,6 @@ function handleConnectWifi() {
         }, 1000);
     };
 }
-
-$(".show-password-btn").onclick = (e) => {
-    const typeInputPass = passwordWifi.getAttribute("type");
-    e.target.classList.toggle("active");
-    passwordWifi.setAttribute(
-        "type",
-        typeInputPass === "text" ? "password" : "text"
-    );
-};
 
 function sendWifi(nameWifi, password) {
     loading(".wifi-wrapper");
@@ -206,11 +211,11 @@ function removeWifi() {
 function resetWifi() {
     $(".reset-wifi-btn").onclick = () => {
         console.log(123);
-        loadingWifi(true)
+        loadingWifi(true);
     };
 
     setTimeout(() => {
-        loadingWifi(false)
+        loadingWifi(false);
     }, 4000);
 }
 
@@ -219,6 +224,3 @@ function loadingWifi(load) {
         ? $(".loader-wifi").classList.remove("hidden")
         : $(".loader-wifi").classList.add("hidden");
 }
-
-$('[data-status]').dataset.status = 'pending'
-console.log($('[data-status]'))

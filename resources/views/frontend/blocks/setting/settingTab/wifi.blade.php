@@ -2,7 +2,7 @@
     <div class="max-w-[700px] w-full h-full mx-auto overflow-auto">
         <div class="w-full h-[calc(100%_-_32px)] flex rounded-lg overflow-hidden text-2xl relative wifi-container">
             <div class=" w-full max-w-[800px] h-[calc(100%_-_200px)] mx-auto mt-10 relative">
-                <div class="w-full h-[80px] rounded-lg bg-[#D9D9D9]  pl-[40px] pr-10 mb-[40px]">
+                <div class="w-full h-[80px] rounded-lg bg-[#F2EAE8]  pl-[40px] pr-10 mb-[40px]">
                     <div class="flex justify-between items-center h-full wifi-connect-item hidden">
                         <div class="">
                             <label for="" class="text-sky-600"><i class="fa-solid fa-check"></i></label>
@@ -33,7 +33,7 @@
                 </div>
 
                 <div
-                    class="w-full min-h-[100px] max-h-full rounded-xl bg-[#D9D9D9] pl-[40px] relative wifi-wrapper pb-10 overflow-auto">
+                    class="w-full min-h-[100px] max-h-full rounded-lg bg-[#F2EAE8] pl-[40px] relative wifi-wrapper pb-10 overflow-auto">
 
                     <div class="w-full h-[60px] border-b border-[rgba(67,67,67,0.1)] flex justify-between items-center hover:bg-[#cccccc39] cursor-pointer wifi-item hidden"
                         name-wifi="${item.ssid}">
@@ -62,7 +62,7 @@
 
                 </div>
                 <div
-                    class="absolute w-full max-w-[600px] bg-[#E3E3E3] top-16 left-1/2 -translate-x-1/2 rounded-2xl shadow-lg p-10 hidden form-enter-password z-[21]">
+                    class="absolute w-full max-w-[600px] bg-[#efefef] top-16 left-1/2 -translate-x-1/2 rounded-2xl shadow-lg p-10 hidden form-enter-password z-[21]">
                     <div class="flex justify-between">
                         <button class="mt-2 btn cancel-wifi-btn font-bold">Cancle</button>
                         <label class="font-bold text-[16px]">Enter password for "<span
@@ -71,7 +71,7 @@
                             disabled>Connect</button>
                     </div>
 
-                    <div data-status="pending" class="w-full h-[60px] rounded-xl bg-[#D9D9D9] mt-7 flex items-center px-10">
+                    <div data-status="pending" class="w-full h-[60px] rounded-xl bg-[#e6e6e6] mt-7 flex items-center px-10">
                         <span class="font-bold mr-4">Password</span>
                         <input class="flex-1 text-[16px] bg-transparent border-none outline-none tracking-[2px] py-4"
                             type="password" name="" id="password-wifi">

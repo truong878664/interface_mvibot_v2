@@ -412,10 +412,8 @@ class MiController extends Controller
                     $focus_value = $item->focus_value;
 
                     $newVarMission = "--+/front/$name_variable/back/--+";
-                    // $newVarMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$name_variable~~focus_value=0~)";
 
                     if ((int)$focus_value == 0) {
-                        // $newFocusMission = "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=$focus_value~~focus_value=0~)";
                         $newFocusMission = "--+/front/$focus_value/back/--+";
                     } else {
                         $newFocusMission = "";
