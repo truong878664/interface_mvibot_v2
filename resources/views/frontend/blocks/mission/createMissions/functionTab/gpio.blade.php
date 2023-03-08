@@ -5,13 +5,13 @@
             <div class="flex flex-col">
                 <label for="" class="text-xl">Name function GPIO</label>
                 <input
-                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_function_gpio_module' : 'name_gpio' }} input-reset"
+                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_function_gpio_module' : 'name_gpio' }} input-reset valid-input"
                     type="text" name="name_gpio" required>
             </div>
             <div class="flex flex-col ml-2 {{ $type == 'gpio_module' ? '' : 'hidden' }}">
                 <label for="" class="text-xl">Name GPIO module</label>
                 <input
-                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset"
+                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     type="text" name="name_gpio" required>
             </div>
 

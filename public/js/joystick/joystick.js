@@ -8,34 +8,34 @@ $("#list-robot").onchange = (e) => {
     cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
 };
 
-const speedMax = 0.3;
-const radMax = 0.314;
+const SPEED_MAX = 0.3;
+const RAD_MAX = 0.314;
 
-const rangeSliderSpeed = $("#rs-range-line-speed");
-const rangeBulletSpeed = $("#rs-bullet-speed");
+const [rangeSliderSpeed, rangeBulletSpeed] = [
+    $("#rs-range-line-speed"),
+    $("#rs-bullet-speed"),
+];
 
-const rangeSliderRad = $("#rs-range-line-rad");
-const rangeBulletRad = $("#rs-bullet-rad");
+const [rangeSliderRad, rangeBulletRad] = [
+    $("#rs-range-line-rad"),
+    $("#rs-bullet-rad"),
+];
 
 const speedLocal = localStorage.getItem("speed");
 const radLocal = localStorage.getItem("rad");
 
-if (speedLocal) {
-    rangeSliderSpeed.value = (speedLocal / speedMax) * 100;
-    // rangeBulletSpeed.innerText = speedLocal * 100;
-    // rangeBulletSpeed.setAttribute("speed", speedLocal * 100);
+speedLocal &&
+    (rangeSliderSpeed.value = (speedLocal / SPEED_MAX) * 100) &&
     showSliderSpeedValue();
-}
-if (radLocal) {
-    rangeSliderRad.value = (radLocal / radMax) * 100;
+radLocal &&
+    (rangeSliderRad.value = (radLocal / RAD_MAX) * 100) &&
     showSliderRadValue();
-}
 
 rangeSliderSpeed.addEventListener("input", showSliderSpeedValue, false);
 rangeSliderRad.addEventListener("input", showSliderRadValue, false);
 
 function showSliderSpeedValue() {
-    const speed = ((rangeSliderSpeed.value / 100) * speedMax).toFixed(2);
+    const speed = ((rangeSliderSpeed.value / 100) * SPEED_MAX).toFixed(2);
     rangeBulletSpeed.innerText = speed;
     rangeBulletSpeed.setAttribute("speed", speed);
 
@@ -43,7 +43,7 @@ function showSliderSpeedValue() {
 }
 
 function showSliderRadValue() {
-    const rad = ((rangeSliderRad.value / 100) * radMax).toFixed(3);
+    const rad = ((rangeSliderRad.value / 100) * RAD_MAX).toFixed(3);
 
     rangeBulletRad.innerText = rad;
     rangeBulletRad.setAttribute("rad", rad);
@@ -60,7 +60,7 @@ $$(".button-move").forEach((element) => {
         if (singleButton) {
             const speed = Number(rangeBulletSpeed.getAttribute("speed"));
             const rad = Number(rangeBulletRad.getAttribute("rad"));
-            $('.joystick-wrapper').style.pointerEvents = 'none';
+            $(".joystick-wrapper").style.pointerEvents = "none";
             switch (e.target.getAttribute("type")) {
                 case "up":
                     runRobot.push(
@@ -117,5 +117,5 @@ function clearIntervalAll(runRobot) {
     });
     singleButton = true;
     moveRobot(0, 0);
-    $('.joystick-wrapper').style.pointerEvents = 'auto';
+    $(".joystick-wrapper").style.pointerEvents = "auto";
 }

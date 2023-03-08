@@ -1,7 +1,7 @@
 <div class="hidden function-item">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function sound</label>
-        <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_sound" type="text" required>
+        <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_sound valid-input" type="text" required>
     </div>
 
     <div class="flex ml-4 mt-8">

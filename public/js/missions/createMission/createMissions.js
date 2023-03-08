@@ -1,4 +1,5 @@
 import { $, $$, toggerMessage } from "../../main.js";
+import publishTopicString from "../../rosModule/topicString.js";
 import dbDelete from "../functionHandle/dbDelete.js";
 
 const missionCreateBtn = $(".create-missions-btn");
@@ -8,6 +9,7 @@ handleEditNameMission();
 handleDeleteMission();
 handleDeleteMultiMission();
 handleCloneMission();
+handleResetMission();
 
 missionCreateBtn.addEventListener("click", () => {
     setTimeout(() => {
@@ -62,7 +64,7 @@ function getMission(ids) {
                     }${item.steps_mission ? item.steps_mission : ""}%@]`
                 );
             });
-            const mission = allMission.join("")
+            const mission = allMission.join("");
             console.log(mission || "mission don't have data");
         });
 }
@@ -107,7 +109,7 @@ function handleEditNameMission() {
                         name_mission: nameElement.value,
                     };
 
-                    console.log(missionItem)
+                    console.log(missionItem);
                     fetchApi(
                         `/api/mi/${missionItem.getAttribute("mission-id")}`,
                         "PUT",
@@ -159,7 +161,7 @@ function handleCloneMission() {
     $$(".clone-mission-btn").forEach((element) => {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
-            
+
             fetchApi(
                 "/api/mi",
                 "POST",
@@ -183,4 +185,22 @@ function fetchApi(url, method, data, callback = () => {}) {
     })
         .then((res) => res.json())
         .then((data) => callback(data));
+}
+
+function handleResetMission() {
+    const resetMissionBtn = $(".reset-mission-btn");
+    resetMissionBtn.onclick = (e) => {
+        const type = e.target.dataset.type;
+        const robotReset = $(".robot-reset").value;
+        if (!robotReset) {
+            toggerMessage("error", "Please choose robot to reset!");
+            return;
+        }
+
+        publishTopicString(`/${robotReset}/mission_${type}`, "");
+
+        $("#reset-mission").checked = false;
+
+        toggerMessage("success", `Reset mission "${type.toUpperCase()}" for robot "${robotReset}" successfully!`);
+    };
 }

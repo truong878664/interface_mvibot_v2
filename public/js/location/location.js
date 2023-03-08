@@ -15,8 +15,9 @@ import showLaser from "../rosModule/showLaser.js";
 import showUrd from "../rosModule/showUrd.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 
-const heightMap = $("#map").offsetHeight;
-const widthMap = $("#map").offsetWidth;
+const mapElement = $("#map");
+const heightMap = mapElement.offsetHeight;
+const widthMap = mapElement.offsetWidth;
 const tfClient = createTfClient();
 
 let viewer = createMap(heightMap, widthMap);
@@ -147,18 +148,18 @@ const checkPoint = $(".check-click-point");
 checkPoint.onchange = () => {
     if (checkPoint.checked) {
         lockZ(viewer);
-        $("#map").addEventListener("dblclick", clickSetPoint);
-        $("#map").addEventListener("mousemove", handleMouseMapMove);
-        $("#map").style.cursor = "cell";
-        $("#map").addEventListener("touchstart", tapHandler);
-        $("#map").addEventListener("touchmove", handleMouseMapMove);
+        mapElement.addEventListener("dblclick", clickSetPoint);
+        mapElement.addEventListener("mousemove", handleMouseMapMove);
+        mapElement.style.cursor = "cell";
+        mapElement.addEventListener("touchstart", tapHandler);
+        mapElement.addEventListener("touchmove", handleMouseMapMove);
     } else {
-        $("#map").removeEventListener("dblclick", clickSetPoint);
-        $("#map").removeEventListener("mousemove", handleMouseMapMove);
-        $("#map").removeEventListener("touchmove", handleMouseMapMove);
+        mapElement.removeEventListener("dblclick", clickSetPoint);
+        mapElement.removeEventListener("mousemove", handleMouseMapMove);
+        mapElement.removeEventListener("touchmove", handleMouseMapMove);
 
-        $("#map").style.cursor = "default";
-        $("#map").removeEventListener("touchstart", tapHandler);
+        mapElement.style.cursor = "default";
+        mapElement.removeEventListener("touchstart", tapHandler);
     }
 };
 const clickSetPoint = function (e) {

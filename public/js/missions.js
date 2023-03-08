@@ -1,3 +1,5 @@
+import { toggerMessage } from "./main.js";
+
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -37,21 +39,40 @@ function handleInfoFunction() {
 }
 
 $$(".input-type-number").forEach((item) => {
-    // item.oninput = (e) => {
-    //     const input = e.target.value;
-    //     console.log(input.split(""));
-    // };
     item.onblur = (e) => {
         const input = e.target.value;
-        const input1 = input.replace(/[^0-9\.]+/g, "");
+        const inputValid = input.replace(/[^0-9\.]+/g, "");
 
-        if (input.indexOf("-") != -1) {
-            const input2 = -input1.replaceAll("-", "");
-            !isNaN(input2) ? (e.target.value = input2) : (e.target.value = 0);
-        } else {
-            !isNaN(input1)
-                ? (e.target.value = Number(input1))
-                : (e.target.value = 0);
-        }
+        const isValid = input.indexOf("-") != -1;
+
+        e.target.value = !isNaN(inputValid)
+            ? isValid
+                ? -inputValid
+                : Number(inputValid)
+            : 0;
     };
 });
+
+validateNameFunction();
+function validateNameFunction() {
+    $$(".valid-input").forEach((element) => {
+        element.addEventListener("input", () => valid(element));
+    });
+
+    function valid(element) {
+        const pattern = /^[a-zA-Z0-9_]*$/;
+        const isValid = element.value == "" || !pattern.exec(element.value);
+        const buttonCreate = element
+            .closest(".function-item")
+            .querySelector("[data-valid]");
+
+        isValid &&
+            toggerMessage(
+                "error",
+                "Please enter all input & does not contain special characters like (!@#$%^&*()+-=)"
+            );
+
+        buttonCreate.dataset.valid = isValid && "disable";
+    }
+}
+

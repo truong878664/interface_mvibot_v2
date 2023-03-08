@@ -41,7 +41,7 @@
                 <div class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden">
                     <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn {{$itemRender->type==="error" ? 'hidden' : ""}} function-btn">
                         <span class="mr-2 text-yellow-500">
-                            <i class="fa-solid fa-box"></i>
+                            <i class="fa-solid fa-arrows-to-dot"></i>
                         </span>
                         <span>
                             Footprint
@@ -104,7 +104,7 @@
 
                     <button class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex variable-function-btn function-btn">
                         <span class="mr-2 text-orange-600">
-                            <i class="fa-solid fa-xmark"></i>
+                            <i class="fa-solid fa-square-root-variable"></i>
                         </span>
                         <span>
                             Variable

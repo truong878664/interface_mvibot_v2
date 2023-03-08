@@ -8,10 +8,10 @@ export default function volume() {
 }
 
 function uiVolume() {
-    inputVolumeElement.oninput = (e) => {
-        const valueVolume = e.target.value;
-        uiIcon(valueVolume);
-    };
+    inputVolumeElement.addEventListener("input", (e) => {
+        const valueVolume = parseInt(e.target.value);
+        !isNaN(valueVolume) && uiIcon(valueVolume);
+    });
 }
 
 function setVolume() {
@@ -22,21 +22,19 @@ function setVolume() {
     };
 }
 
+const VOLUME_HIGH = 66;
+const VOLUME_MEDIUM = 33;
+const VOLUME_OFF = 0;
+const iconVolume = $("[data-volume]");
+
 export function uiIcon(valueVolume) {
-    const iconVolume = $("[data-volume]");
-    $(".value-volume").innerText = valueVolume;
-    switch (true) {
-        case parseInt(valueVolume) > 66:
-            iconVolume.dataset.volume = "high-vl";
-            break;
-        case parseInt(valueVolume) > 33:
-            iconVolume.dataset.volume = "medium-vl";
-            break;
-        case parseInt(valueVolume) == 0:
-            iconVolume.dataset.volume = "";
-            break;
-        default:
-            iconVolume.dataset.volume = "low-vl";
-            break;
-    }
+    iconVolume.dataset.volume =
+        valueVolume > VOLUME_HIGH
+            ? "high-vl"
+            : valueVolume > VOLUME_MEDIUM
+            ? "medium-vl"
+            : valueVolume == VOLUME_OFF
+            ? "off-vl"
+            : "low-vl";
+    $(".value-volume").textContent = valueVolume;
 }

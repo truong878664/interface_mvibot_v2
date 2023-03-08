@@ -198,13 +198,14 @@ function handleFootprintMission() {
             name_footprint,
         } = inputFunction("footprint");
 
-        if (
+        const isAllInputFootprintFilled =
             x1_footprint.value &&
             x2_footprint.value &&
             y1_footprint.value &&
             y2_footprint.value &&
-            name_footprint.value
-        ) {
+            name_footprint.value;
+
+        if (isAllInputFootprintFilled) {
             const data = {
                 x1: Number(x1_footprint.value),
                 x2: Number(x2_footprint.value),
@@ -274,16 +275,16 @@ function handleMarkerMission() {
                 sy1,
                 sy2,
             } = inputFunction("marker");
-
-            if (
+            const isAllInputsMarkerFilled =
                 name_marker.value &&
                 (off_set_x1 ? off_set_x1.value : true) &&
                 (off_set_x2 ? off_set_x2.value : true) &&
                 (off_set_y1 ? off_set_y1.value : true) &&
                 (off_set_y2 ? off_set_y2.value : true) &&
                 (off_set_dis ? off_set_dis.value : true) &&
-                (off_set_angle ? off_set_angle.value : true)
-            ) {
+                (off_set_angle ? off_set_angle.value : true);
+                
+            if (isAllInputsMarkerFilled) {
                 const data = {
                     type: "marker",
                     name_type: name_marker?.value,

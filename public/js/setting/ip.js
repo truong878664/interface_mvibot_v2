@@ -51,10 +51,11 @@ function setIp() {
 
         function setIpNode() {
             const ipNode = [];
-            Array.from($(".ip-node-partial")).map((item) => {
+            Array.from($$(".ip-node-partial")).map((item) => {
                 ipNode.push(item.value);
                 return ipNode;
             });
+            
             publishTopicString(
                 `/${robot}/set_config`,
                 `(ip_node|${ipNode.join(".")})`

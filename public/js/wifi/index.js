@@ -4,19 +4,15 @@ import { $, $$ } from "../main.js";
 let nameWifi;
 const passwordWifi = $("#password-wifi");
 const formPassword = $(".form-enter-password");
-const wifi = [
-    "wifi_123",
-    "wifi_34",
-    "wifi-123_5g",
-    "wifi_123_1xx"
-];
-const wifiConnected = 'mvp_wifi_abc'
+const wifi = ["wifi_123", "wifi_34", "wifi-123_5g", "wifi_123_1xx"];
+const wifiConnected = "mvp_wifi_abc";
 
 renderWifi();
-renderWifiConnected(wifiConnected)
+renderWifiConnected(wifiConnected);
+showPassword
 
 function renderWifiConnected(wifi) {
-    $('.wifi-connected').innerText = wifi
+    $(".wifi-connected").innerText = wifi;
 }
 
 function renderWifi() {
@@ -86,11 +82,13 @@ function handleConnectWifi() {
     };
 }
 
-$(".show-password-btn").onclick = (e) => {
-    const typeInputPass = passwordWifi.getAttribute("type");
-    e.target.classList.toggle('active')
-    passwordWifi.setAttribute(
-        "type",
-        typeInputPass === "text" ? "password" : "text"
-    );
+const showPassword = () => {
+    $(".show-password-btn").onclick = (e) => {
+        const typeInputPass = passwordWifi.getAttribute("type");
+        e.target.classList.toggle("active");
+        passwordWifi.setAttribute(
+            "type",
+            typeInputPass === "text" ? "password" : "text"
+        );
+    };
 };

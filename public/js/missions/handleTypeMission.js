@@ -565,14 +565,10 @@ export function handleDeleteStep(data, wrapperItem) {
 
 export function validateInput(...rest) {
     const result = rest.map((item) => {
-        $(item).oninput = (e) => {
-            e.target.style.borderColor = "#ccc";
-        };
-
         const pattern = /^[a-zA-Z0-9_]*$/;
 
         if ($(item).value == "" || !pattern.exec($(item).value)) {
-            toggerMessage("error", "Please enter all input");
+            toggerMessage("error", "Please enter all input & does not contain special characters like (!@#$%^&*()+-=)");
             return false;
         } else {
             return true;

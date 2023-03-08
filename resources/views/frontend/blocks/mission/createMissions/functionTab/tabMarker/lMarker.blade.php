@@ -3,7 +3,7 @@
         <div class="flex items-stretch">
             <div class="flex flex-col mb-2">
                 <label for="" class="text-xl">Name function Marker</label>
-                <input name="name_marker" class=" input-reset w-[100px] text-xl px-4 py-1" type="text" required>
+                <input name="name_marker" class=" input-reset w-[100px] text-xl px-4 py-1 valid-input" type="text" required>
             </div>
 
             <div class="flex flex-col mb-2 ml-2">

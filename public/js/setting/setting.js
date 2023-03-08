@@ -19,30 +19,31 @@ ip();
 volume();
 
 function handleTabSetting() {
-    $$(".setting-item").forEach((element, index) => {
-        element.onclick = (e) => {
-            $(".setting-item.active").classList.remove("active");
-            e.target.classList.add("active");
-            $$(".setting-detail").forEach((element) => {
-                element.classList.add("hidden");
-            });
-            $$(".setting-detail")[index].classList.remove("hidden");
-        };
-    });
+    $(".setting-item-wrapper").onclick = (e) => {
+        const settingItem = e.target.closest(".setting-item");
+        if (!settingItem) return;
+
+        $(".setting-item.active").classList.remove("active");
+        settingItem.classList.add("active");
+
+        $$(".setting-detail").forEach((element) => {
+            element.classList.add("hidden");
+        });
+
+        $$(".setting-detail")[settingItem.dataset.index].classList.remove(
+            "hidden"
+        );
+    };
 }
 
 export function showSettingRobot() {
     const robotActive = localStorage.getItem("robotActive");
-    if (robotActive) {
-        $$(".setting-item:not(.robot-choose)").forEach((element) => {
-            element.classList.remove("hidden");
-        });
-        handleParameterRobot(robotActive);
-    } else {
-        $$(".setting-item:not(.robot-choose)").forEach((element) => {
-            element.classList.add("hidden");
-        });
-    }
+
+    $$(".setting-item:not(.robot-choose)").forEach((element) => {
+        element.classList.toggle("hidden", !robotActive);
+    });
+
+    robotActive && handleParameterRobot(robotActive);
 }
 
 function handleParameterRobot(robot) {
@@ -51,34 +52,52 @@ function handleParameterRobot(robot) {
         .then((data) => {
             renderParameterRobot(data);
         });
-}
 
-function renderParameterRobot(data) {
+    function renderParameterRobot(data) {
+        setModeStart(data.mode);
+        setIpStart(data.ip_master, data.ip_node);
+        setVolumeStart(data.robot_volume);
+        setParameterStart(data);
 
-    setModeStart(data.mode)
-    setIpStart(data.ip_master, data.ip_node)
-    setVolumeStart(data.robot_volume)
-    setParameterStart(data)
+        function setModeStart(mode) {
+            $(`[name=mode-value][value=${mode}`).checked = true;
+        }
+        function setIpStart(ipMaster, ipNode) {
+            const ipMasterPartial = ipMaster.split(".");
+            const ipNodePartial = ipNode.split(".");
 
-    function setModeStart(mode) {
-        $(`[name=mode-value][value=${mode}`).checked = true;
-    }
-    function setIpStart(ipMaster, ipNode) {
-        const ipMasterPartial = ipMaster.split(".")
-        const ipNodePartial = ipNode.split(".")
+            $$(".ip-master-partial").forEach((element, index) => {
+                element.value = ipMasterPartial[index];
+            });
+            $$(".ip-node-partial").forEach((element, index) => {
+                element.value = ipNodePartial[index];
+            });
+        }
+        function setVolumeStart(volume) {
+            $(".input-volume").value = volume;
+            uiIcon(volume);
+        }
+        function setParameterStart(data) {
+            const {
+                robot_L,
+                robot_R,
+                robot_aw,
+                robot_ax,
+                robot_vmax,
+                robot_wmax,
+            } = data;
 
-        $$('.ip-master-partial').forEach((element, index) => {
-            element.value = ipMasterPartial[index]
-        })
-        $$('.ip-node-partial').forEach((element, index) => {
-            element.value = ipNodePartial[index]
-        })
-    }
-    function setVolumeStart(volume) {
-        $('.input-volume').value = volume
-        uiIcon(volume)
-    }
-    function setParameterStart(data) {
-        console.log(data)
+            Object.entries({
+                robot_L,
+                robot_R,
+                robot_aw,
+                robot_ax,
+                robot_vmax,
+                robot_wmax,
+            }).forEach(
+                ([key, value]) =>
+                    ($(`[name=${key}]`).value = (value * 1).toFixed(4))
+            );
+        }
     }
 }

@@ -2,10 +2,10 @@
 @section('content')
     <div class="heading dashboard-heading">User</div>
     <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
-        <div class="w-full mx-auto mt-10 max-w-[500px]">
+        <div class="w-full h-full mx-auto mt-10 max-w-[500px] overflow-auto">
             <div class="flex items-center">
                 <div
-                    class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full transparent bg-avatar flex justify-center items-center shadow-lg relative after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400">
+                    class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full m-3 transparent bg-avatar flex justify-center items-center shadow-lg relative after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400">
                     <span class="lg:text-[80px] font-[300] uppercase avatar-img-key text-white avatar-img-key"></span>
                     @if (session('TypeUser') == 'admin')
                         <div

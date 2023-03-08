@@ -3,24 +3,13 @@ import { $, toggerMessage } from "../main.js";
 import { robotActive } from "../mainLayout.js";
 
 export default function power() {
-    $("#shutdown-btn").onclick = () => {
+    const robotAction = (action) => {
         const robotSelect = robotActive();
-
-        if (!robotSelect) {
-            toggerMessage("error", "Please choose robot!");
-        } else {
-            publishTopic(`${robotSelect}/robot_shutdown`, "1");
-        }
+        !robotSelect
+            ? toggerMessage("error", "Please choose robot!")
+            : publishTopic(`${robotSelect}/robot_shutdown`, action);
     };
 
-    $("#reboot-btn").onclick = () => {
-        const robotSelect = robotActive();
-
-        if (!robotSelect) {
-            toggerMessage("error", "Please choose robot!");
-        } else {
-            publishTopic(`${robotSelect}/robot_shutdown`, "2");
-        }
-    };
+    $("#shutdown-btn").onclick = () => robotAction("1");
+    $("#reboot-btn").onclick = () => robotAction("2");
 }
-

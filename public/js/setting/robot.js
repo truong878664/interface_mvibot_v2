@@ -10,35 +10,27 @@ export default function robot() {
 
 const robotActive = localStorage.getItem("robotActive");
 function checkRobotActiveStart() {
-    if (robotActive) {
-        $(`.robot-${robotActive}`)?.classList.add("active");
-        $(".name-robot-active").innerText = robotActive;
-    } else {
-        $(".name-robot-active").innerText = "No robots choose";
-    }
+    $(`.robot-${robotActive}`)?.classList.toggle("active", robotActive);
 }
 
 function selectRobot() {
-    $$(".robot-item").forEach((element) => {
-        element.onclick = (e) => {
+    const robotItems = $$(".robot-item");
+    robotItems.forEach((element) => {
+        element.addEventListener("click", (e) => {
             $(".robot-item.active")?.classList.remove("active");
-            const robotActive2 = localStorage.getItem("robotActive");
+            const robotActive = localStorage.getItem("robotActive");
             const nameRobot = element.querySelector(".name-robot").value;
+            const isActive = robotActive === nameRobot;
 
-            if (robotActive2 == nameRobot) {
-                element.classList.remove("active");
-                localStorage.removeItem("robotActive");
-                showSettingRobot();
-                console.log(nameRobot);
-            } else {
-                element.classList.add("active");
-                localStorage.setItem("robotActive", nameRobot);
-                showSettingRobot();
-                console.log(nameRobot);
-            }
+            isActive
+                ? localStorage.removeItem("robotActive")
+                : localStorage.setItem("robotActive", nameRobot);
 
+            element.classList.toggle("active", !isActive);
+
+            showSettingRobot();
             $(".name-robot-active").innerText = nameRobot;
-        };
+        });
     });
 }
 

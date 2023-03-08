@@ -12,10 +12,12 @@ const formPassword = $(".form-enter-password");
 
 export default function wifi() {
     resetWifi();
-    subscribeTopicWifi(); 
+    subscribeTopicWifi();
+    otherWifi()
 }
 
 function subscribeTopicWifi() {
+    let dataWifiScan;
     $$(".name-robot").forEach((element) => {
         const robot = element.value;
         subscribeTopic(
@@ -23,13 +25,18 @@ function subscribeTopicWifi() {
             "std_msgs/String",
             (data, nameTopic) => {
                 clearTimeout(timeoutWifi);
+           
                 const nameRobotActive = robotActive();
                 if (nameTopic.indexOf(nameRobotActive) !== -1) {
-                    parseWifi(data.data);
+                    JSON.stringify(dataWifiScan) !== JSON.stringify(data) &&
+                        parseWifi(data.data);
+
                     timeoutWifi = setTimeout(() => {
                         removeWifi();
+                        dataWifiScan = "";
                     }, 3000);
                 }
+                dataWifiScan = data;
             }
         );
     });
@@ -101,6 +108,7 @@ function renderWifi(wifi) {
         htmlWifi.push(wifiItem);
         return htmlWifi;
     });
+
     $(".wifi-wrapper").innerHTML = htmlWifi.join("");
     showPasswordWifi();
     handleConnectWifi();
@@ -108,20 +116,25 @@ function renderWifi(wifi) {
     loaded(".wifi-wrapper");
 }
 
+const overlay = $(".overlay");
 function showPasswordWifi() {
-    $$(".wifi-item").forEach((wifiItem) => {
-        wifiItem.onclick = (e) => {
-            nameWifi = wifiItem.getAttribute("name-wifi");
-            if (wifiItem.getAttribute("security") === "lock") {
-                $(".label-wifi").innerText = nameWifi;
-                formPassword.classList.remove("hidden");
-                $(".overlay").classList.remove("hidden");
-                passwordWifi.focus();
-            } else {
-                sendWifi(nameWifi, "");
-            }
-        };
-    });
+    $(".wifi-wrapper").onclick = (e) => {
+        const wifiItem = e.target.closest(".wifi-item");
+        if (!wifiItem) {
+            return;
+        }
+        nameWifi = wifiItem.getAttribute("name-wifi");
+        if (wifiItem.getAttribute("security") === "lock") {
+            $(".label-wifi").innerText = nameWifi;
+            formPassword.classList.remove("hidden");
+            overlay.classList.remove("hidden");
+            passwordWifi.focus();
+        } else {
+            sendWifi(nameWifi, "");
+        }
+    };
+
+   
 
     $(".show-password-btn").onclick = (e) => {
         const typeInputPass = passwordWifi.getAttribute("type");
@@ -133,12 +146,8 @@ function showPasswordWifi() {
     };
 }
 
-function handleCancelWifi() {
-    $(".cancel-wifi-btn").onclick = () => {
-        formPassword.classList.add("hidden");
-        $(".overlay").classList.add("hidden");
-    };
-}
+handleCancelWifi()
+
 
 function handleConnectWifi() {
     passwordWifi.oninput = (e) => {
@@ -152,7 +161,7 @@ function handleConnectWifi() {
 
         sendWifi(nameWifi, password);
         formPassword.classList.add("hidden");
-        $(".overlay").classList.add("hidden");
+        overlay.classList.add("hidden");
 
         passwordWifi.value = "";
         $(".connect-wifi-btn").setAttribute("disabled", true);
@@ -209,18 +218,36 @@ function removeWifi() {
 }
 
 function resetWifi() {
+    let timeOut;
     $(".reset-wifi-btn").onclick = () => {
-        console.log(123);
         loadingWifi(true);
-    };
+        clearTimeout(timeOut);
+        timeOut = setTimeout(() => {
+            loadingWifi(false);
+        }, 4000);
 
-    setTimeout(() => {
-        loadingWifi(false);
-    }, 4000);
+        // /name_seri/scan_wifi
+        const robot = robotActive();
+        publishTopicString(`/${robot}/scan_wifi`, "1");
+    };
 }
 
+const loaderWifi = $(".loader-wifi");
 function loadingWifi(load) {
-    load
-        ? $(".loader-wifi").classList.remove("hidden")
-        : $(".loader-wifi").classList.add("hidden");
+    loaderWifi.classList.toggle("hidden", !load);
+}
+
+function otherWifi() {
+    $(".other-wifi-btn").onclick = (e) => {
+        formPassword.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+    };    
+}
+
+
+function handleCancelWifi() {
+    $(".cancel-wifi-btn").onclick = () => {
+        formPassword.classList.add("hidden");
+        overlay.classList.add("hidden");
+    };
 }

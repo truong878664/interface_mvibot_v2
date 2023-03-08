@@ -17,7 +17,6 @@
         </div>
     </div>
 </div>
-{{-- <script src="/js/library/nipplejs.js"></script> --}}
 
 <style>
     .joystick-wrapper {
