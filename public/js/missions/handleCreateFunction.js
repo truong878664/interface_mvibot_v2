@@ -1,4 +1,5 @@
 import { $, $$ } from "../main.js";
+import { createMapPosition } from "./function/point.js";
 
 let tabFunctionActive;
 
@@ -13,8 +14,8 @@ export default function handleCreateFunction() {
 
 function createFunction(e) {
     const type = e.target.dataset.type;
-    console.log(type);
     handleShowFormFunction(true, type);
+    type === "position" && createMapPosition();
 }
 
 export function handleShowFormFunction(isShow, typeFunction) {
@@ -28,7 +29,8 @@ export function handleShowFormFunction(isShow, typeFunction) {
 }
 
 function handleHideFormFunction() {
-    $(".hide-form-function-btn").onclick = (e) => {
+    $(".function-item-form-wrapper").onclick = function (e) {
+        if (e.target !== this) return;
         handleShowFormFunction(false, tabFunctionActive);
     };
 }

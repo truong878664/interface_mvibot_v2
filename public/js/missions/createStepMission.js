@@ -13,7 +13,6 @@ import { changeImgMarkerDir, tabTypeMarker } from "./function/marker.js";
 import inputFunction from "./functionHandle/inputFunction.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
-import { createMapPoint } from "./function/point.js";
 import sendMission from "./sendMission.js";
 import handleCreateFunction from "./handleCreateFunction.js";
 
@@ -47,26 +46,6 @@ start();
 localStorage.setItem("isUpload", 0);
 
 function nextTabFunction() {
-    // $$(".function-btn").forEach((item, index) => {
-    //     item.onclick = () => {
-    //         $(".function-btn.active").classList.remove("active");
-    //         $(".function-item:not(.hidden)")?.classList.add("hidden");
-    //         $$(".function-item")[index].classList.remove("hidden");
-    //         item.classList.add("active");
-
-    //         item.classList.contains("point-function-btn") && createMapPoint();
-
-    //         if (
-    //             item.classList.contains("type-mission-btn") &&
-    //             localStorage.getItem("isUpload") * 1
-    //         ) {
-    //             console.log("upload");
-    //             loadDataFunction();
-    //             localStorage.setItem("isUpload", 0);
-    //         }
-    //     };
-    // });
-
     $(".type-mission-btn-wrapper").onclick = (e) => {
         const typeMissionBtn = e.target.closest(".type-mission-btn");
         if (!typeMissionBtn) return;
@@ -164,7 +143,7 @@ export function addFunctionStep(type, data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            $(".hide-form-function-btn").click();
+            $(".function-item-form-wrapper").click();
             loadDataFunction()
         })
         .catch(function (res) {

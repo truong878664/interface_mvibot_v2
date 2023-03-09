@@ -19,10 +19,7 @@
         }
 
         #select-robot-option {
-            height: 46px;
-            padding: 4px 8px;
-            font-family: var(--main-font);
-            font-size: 2rem;
+            padding: 4px;
         }
 
         .add-wake-up-btn {
@@ -131,7 +128,7 @@
             <div class="select-robot-wrapper form-checkbox">
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
-                    <select id="select-robot-option text-2xl ">
+                    <select id="select-robot-option" class="text-2xl">
                         <option value="">Choose Robot</option>
                         @foreach ($allRobot as $robot)
                             <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>

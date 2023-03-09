@@ -161,10 +161,6 @@
         <div
             class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center function-item-form-wrapper hidden">
             <div class="w-[80%] h-[80%]  bg-[#fff] rounded-md p-4 function-item-form relative">
-                <button class="absolute top-0 right-0 px-4 text-stone-600 hide-form-function-btn">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-
                 @include('frontend.blocks.mission.createMissions.functionTab.gpio', [
                     'type' => 'gpio',
                 ])

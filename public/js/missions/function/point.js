@@ -20,7 +20,7 @@ import mathYaw from "../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
 import { addFunctionStep } from "../createStepMission.js";
 
-export function createMapPoint() {
+export function createMapPosition() {
     let positionX = 0;
     let positionY = 0;
     let rotateZ = 0;
@@ -107,6 +107,7 @@ export function createMapPoint() {
         ".point-submit-btn",
         ".time-out"
     );
+
     function setPosition() {
         controlPositionX.addEventListener("input", (e) => {
             positionX = Number(e.target.value);
@@ -354,7 +355,6 @@ export function createMapPoint() {
             mode_position.value &&
             mode_child.value
         ) {
-           
             addFunctionStep("position", dataPosition);
             name_position.value = "";
             time_out.value = -1;
@@ -406,9 +406,3 @@ function resetInputValue(value, ...rest) {
     rest.forEach((item) => (item.value = value));
 }
 
-(function fullScreen() {
-    $(".fullscreen-btn").onclick = (e) => {
-        $('.point-function-item').classList.toggle('fullscreen')
-        createMapPoint()
-    };
-})();

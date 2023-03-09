@@ -10,6 +10,7 @@ import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 import { setColorSticker } from "./sound.js";
 import { resetVariable } from "./var.js";
 import { handleShowFormFunction } from "../handleCreateFunction.js";
+import { createMapPosition } from "./point.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -210,6 +211,7 @@ export default function handleEditFunctionType() {
                 case "position":
                     $(".point-function-btn").click();
                     handleUpdateStep("position");
+                    createMapPosition()
             }
         };
     });
@@ -550,6 +552,9 @@ export default function handleEditFunctionType() {
                     toggerMessage("error", "Please enter all inputs");
                     return false;
                 }
+                case "position":
+                    console.log(13)    
+                break
         }
         updateStepValue(currentMission);
     }
