@@ -36,8 +36,8 @@ class VariableController extends Controller
      */
     public function store(Request $request)
     {
-        MissionVariable::create($request->all());
-        return ['message' => 'Save variable successfully', 'status' => 200];
+       return MissionVariable::create($request->all());
+        // return ['message' => 'Save variable successfully', 'status' => 200];
     }
 
     /**

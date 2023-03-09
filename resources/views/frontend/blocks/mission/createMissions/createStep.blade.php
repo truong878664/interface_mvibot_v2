@@ -9,26 +9,31 @@
                     type mission - <span data="{{ $itemRender->type }}"
                         class="type-mission">{{ $itemRender->type }}</span>
                 </p>
-                <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full">
-                    <div
-                        class="active normal-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full type-mission-btn-wrapper">
+                    <div data-index="0"
+                        class="active normal-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Normal mission</span>
                     </div>
-                    <div
-                        class="ifelse-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                    <div data-index="1"
+                        class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>If-Else mission</span>
                     </div>
 
-                    <div
-                        class="trycatch-mission-btn function-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                    <div data-index="2"
+                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
                         <span>Try-catch mission</span>
                     </div>
                 </div>
             </div>
             {{-- END TYPE MISISON --}}
 
+            {{-- overlay idit --}}
+            <div id="overlay-update-mission"
+                class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden"></div>
+            {{-- end overlay idit --}}
+
             {{-- DETAIL TYPE MISISON --}}
-            <div class="bg-[#fff] mr-1 p-2 w-2/5 flex-1 z-[20] rounded-md border">
+            <div class="bg-[#fff] mr-1 p-2 w-2/5 flex-1 z-[20] rounded-md border type-mission-update-wrapper">
                 <div class="h-full w-full relative mt-[4px]">
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.normal')
                     @include('frontend.blocks.mission.createMissions.typeMissionTab.ifElse')
@@ -37,20 +42,12 @@
             </div>
             {{-- END DETAIL TYPE MISISON --}}
 
-            <div class="bg-[#fff] p-2 w-2/5 flex-1 z-[20] rounded-md border">
-                <div class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden">
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn">
-                        <span class="mr-2 text-yellow-500">
-                            <i class="fa-solid fa-arrows-to-dot"></i>
-                        </span>
-                        <span>
-                            Footprint
-                        </span>
-                    </button>
+            <div class="bg-[#fff] p-2 w-2/5 flex-1 z-[20] rounded-md border function-mission-update-wrapper">
+                <div
+                    class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden function-mission-btn-wrapper">
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-function-btn function-btn">
+                    <button data-index="0"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
                         <span class="mr-2 text-green-500">
                             <i class="fa-solid fa-lightbulb"></i>
                         </span>
@@ -59,8 +56,8 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-module-function-btn function-btn">
+                    <button data-index="1"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-module-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-blue-500">
                             <i class="fa-regular fa-lightbulb"></i>
                         </span>
@@ -69,8 +66,18 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex marker-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn">
+                    <button data-index="2"
+                    class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
+                    <span class="mr-2 text-yellow-500">
+                        <i class="fa-solid fa-arrows-to-dot"></i>
+                    </span>
+                    <span>
+                        Footprint
+                    </span>
+                </button>
+
+                    <button data-index="3"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex marker-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-sky-500">
                             <i class="fa-solid fa-map-pin"></i>
                         </span>
@@ -79,8 +86,8 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sleep-function-btn function-btn">
+                    <button data-index="4"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sleep-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-red-600">
                             <i class="fa-solid fa-mattress-pillow"></i>
                         </span>
@@ -89,8 +96,8 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sound-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn">
+                    <button data-index="5"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sound-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-purple-600">
                             <i class="fa-solid fa-volume-high"></i>
                         </span>
@@ -99,8 +106,8 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex point-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn">
+                    <button data-index="6"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex point-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-stone-600">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>
@@ -109,8 +116,8 @@
                         </span>
                     </button>
 
-                    <button
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex variable-function-btn function-btn">
+                    <button data-index="7"
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex variable-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-orange-600">
                             <i class="fa-solid fa-square-root-variable"></i>
                         </span>
@@ -121,20 +128,55 @@
 
                 </div>
                 <div class="h-[calc(100%_-_34px)] w-full relative mt-[4px]">
-                    @include('frontend.blocks.mission.createMissions.functionTab.footprint')
-                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
-                        'type' => 'gpio_normal',
+
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'gpio',
                     ])
-                    @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
                         'type' => 'gpio_module',
                     ])
-                    @include('frontend.blocks.mission.createMissions.functionTab.marker')
-                    @include('frontend.blocks.mission.createMissions.functionTab.sleep')
-                    @include('frontend.blocks.mission.createMissions.functionTab.sound')
-                    @include('frontend.blocks.mission.createMissions.functionTab.point')
-                    @include('frontend.blocks.mission.createMissions.functionTab.variable')
-                    {{-- @include('frontend.blocks.mission.createMissions.functionTab.sound') --}}
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'footprint',
+                    ])
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'marker',
+                    ])
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'sleep',
+                    ])
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'sound',
+                    ])
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'position',
+                    ])
+                    @include('frontend.blocks.mission.createMissions.functionTab.functionItem', [
+                        'type' => 'variable',
+                    ])
+
                 </div>
+            </div>
+        </div>
+
+        <div
+            class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center function-item-form-wrapper hidden">
+            <div class="w-[80%] h-[80%]  bg-[#fff] rounded-md p-4 function-item-form relative">
+                <button class="absolute top-0 right-0 px-4 text-stone-600 hide-form-function-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                @include('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                    'type' => 'gpio',
+                ])
+                @include('frontend.blocks.mission.createMissions.functionTab.gpio', [
+                    'type' => 'gpio_module',
+                ])
+                @include('frontend.blocks.mission.createMissions.functionTab.footprint')
+                @include('frontend.blocks.mission.createMissions.functionTab.marker')
+                @include('frontend.blocks.mission.createMissions.functionTab.sleep')
+                @include('frontend.blocks.mission.createMissions.functionTab.sound')
+                @include('frontend.blocks.mission.createMissions.functionTab.point')
+                @include('frontend.blocks.mission.createMissions.functionTab.variable')
             </div>
         </div>
 
@@ -145,9 +187,6 @@
 </div>
 
 
-{{-- OTHER --}}
-<div id="overlay-update-mission" class="fixed top-0 left-0 right-0 bottom-0 bg-black z-[19] opacity-25 hidden"></div>
-</div>
 <style>
     .type-mission-btn.active {
         background-color: rgb(216, 216, 216) !important;
@@ -176,5 +215,21 @@
 
     .type-mission-error {
         /* display: none; */
+    }
+
+    .function-item-form {
+        animation: zoom 100ms linear;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(50%);
+        }
+
+        to {
+            transform: scale(100%);
+        }
     }
 </style>

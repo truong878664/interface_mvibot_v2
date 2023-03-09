@@ -1,5 +1,6 @@
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
+import { addFunctionStep } from "../createStepMission.js";
 
 $$(".sound-btn").forEach((element) => {
     element.onclick = (e) => {
@@ -49,13 +50,11 @@ $(".submit-btn-sound").onclick = () => {
         name_sound,
     };
     if (name_sound) {
-        fetchCustom("/api/sound", "POST", handleSaveSuccessSound, dataSound);
-
-        function handleSaveSuccessSound(data) {
-            toggerMessage("success", data.message);
-
-            localStorage.setItem("isUpload", 1);
-
+        // fetchCustom("/api/sound", "POST", handleSaveSuccessSound, dataSound);
+        addFunctionStep('sound', dataSound)
+        handleSaveSuccessSound()
+        function handleSaveSuccessSound() {
+            toggerMessage("success", "Save sound successfully!");
             $(".name_function_sound").value = "";
             $(".sound-stop-btn.active")?.classList.remove("active");
             $(".sound-start-btn").classList.add("active");

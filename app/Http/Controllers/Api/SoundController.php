@@ -36,8 +36,8 @@ class SoundController extends Controller
      */
     public function store(Request $request)
     {
-        MissionSound::create($request->all());
-        return ['message' => 'Save sound successfully', 'status' => 200];
+       return MissionSound::create($request->all());
+        // return ['message' => 'Save sound successfully', 'status' => 200];
     }
 
     /**

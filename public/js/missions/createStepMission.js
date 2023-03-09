@@ -15,6 +15,7 @@ import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
 import { createMapPoint } from "./function/point.js";
 import sendMission from "./sendMission.js";
+import handleCreateFunction from "./handleCreateFunction.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -38,31 +39,55 @@ function start() {
     setDefaultValueFootprint();
 
     sendMission();
+
+    handleCreateFunction();
 }
 start();
 
 localStorage.setItem("isUpload", 0);
 
 function nextTabFunction() {
-    $$(".function-btn").forEach((item, index) => {
-        item.onclick = () => {
-            $(".function-btn.active").classList.remove("active");
-            $(".function-item:not(.hidden)")?.classList.add("hidden");
-            $$(".function-item")[index].classList.remove("hidden");
-            item.classList.add("active");
+    // $$(".function-btn").forEach((item, index) => {
+    //     item.onclick = () => {
+    //         $(".function-btn.active").classList.remove("active");
+    //         $(".function-item:not(.hidden)")?.classList.add("hidden");
+    //         $$(".function-item")[index].classList.remove("hidden");
+    //         item.classList.add("active");
 
-            item.classList.contains("point-function-btn") && createMapPoint();
+    //         item.classList.contains("point-function-btn") && createMapPoint();
 
-            if (
-                item.classList.contains("type-mission-btn") &&
-                localStorage.getItem("isUpload") * 1
-            ) {
-                console.log("upload");
-                loadDataFunction();
-                localStorage.setItem("isUpload", 0);
-            }
-        };
-    });
+    //         if (
+    //             item.classList.contains("type-mission-btn") &&
+    //             localStorage.getItem("isUpload") * 1
+    //         ) {
+    //             console.log("upload");
+    //             loadDataFunction();
+    //             localStorage.setItem("isUpload", 0);
+    //         }
+    //     };
+    // });
+
+    $(".type-mission-btn-wrapper").onclick = (e) => {
+        const typeMissionBtn = e.target.closest(".type-mission-btn");
+        if (!typeMissionBtn) return;
+        $(".type-mission-btn.active").classList.remove("active");
+        typeMissionBtn.classList.add("active");
+        $(".type-mission-tab:not(.hidden)")?.classList.add("hidden");
+        $$(".type-mission-tab")[typeMissionBtn.dataset.index].classList.remove(
+            "hidden"
+        );
+    };
+
+    $(".function-mission-btn-wrapper").onclick = (e) => {
+        const functionMissionBtn = e.target.closest(".function-mission-btn");
+        if (!functionMissionBtn) return;
+        $(".function-mission-btn.active")?.classList.remove("active");
+        functionMissionBtn.classList.add("active");
+        $(".function-list-item:not(.hidden)")?.classList.add("hidden");
+        $$(".function-list-item")[
+            functionMissionBtn.dataset.index
+        ].classList.remove("hidden");
+    };
 }
 
 function handleShowPointOnMap() {
@@ -137,8 +162,10 @@ export function addFunctionStep(type, data) {
         method: "POST",
         body: JSON.stringify(data),
     })
-        .then(function (res) {
-            console.log(res);
+        .then((res) => res.json())
+        .then((data) => {
+            $(".hide-form-function-btn").click();
+            loadDataFunction()
         })
         .catch(function (res) {
             console.log(res);
@@ -283,7 +310,7 @@ function handleMarkerMission() {
                 (off_set_y2 ? off_set_y2.value : true) &&
                 (off_set_dis ? off_set_dis.value : true) &&
                 (off_set_angle ? off_set_angle.value : true);
-                
+
             if (isAllInputsMarkerFilled) {
                 const data = {
                     type: "marker",

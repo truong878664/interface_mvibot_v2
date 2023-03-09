@@ -1,25 +1,16 @@
 import { $, $$ } from "../../main.js";
 
-export default function handleOverlayUpdate(type) {
-    if (type == "show") {
-        $("#overlay-update-mission").classList.remove("hidden");
-        $(".missions-content").classList.add("editing");
-        disableFunctionItem(true)
-    } else if (type == "hidden") {
-        $("#overlay-update-mission").classList.add("hidden");
-        $(".missions-content").classList.remove("editing");
-        disableFunctionItem(false)
-    }
+export default function handleOverlayUpdate(type, typeMission) {
+    const isShow = type === "show";
+
+    // $(`.${typeMission}-update-wrapper`).dataset.update = isShow && "yes";
+    $("#overlay-update-mission").classList.toggle("hidden", !isShow);
+    // disableFunctionItem(isShow);
+    $(".missions-content").classList.toggle("editing", isShow);
 }
 
 function disableFunctionItem(disable) {
-    if (disable) {
-        $$(".function-item-2").forEach((element) => {
-            element.classList.add("disabled");
-        });
-    } else {
-        $$(".function-item-2").forEach((element) => {
-            element.classList.remove("disabled");
-        });
-    }
+    $$(".function-item-2").forEach((element) => {
+        element.classList.toggle("disabled", disable);
+    });
 }

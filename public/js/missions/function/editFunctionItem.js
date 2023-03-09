@@ -9,6 +9,7 @@ import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
 import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 import { setColorSticker } from "./sound.js";
 import { resetVariable } from "./var.js";
+import { handleShowFormFunction } from "../handleCreateFunction.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -26,7 +27,8 @@ export default function handleEditFunctionType() {
                 functionItem.querySelector(".value-function-item").value
             );
 
-            handleOverlayUpdate("show");
+            // handleOverlayUpdate("show", "function-mission"); 
+            handleShowFormFunction(true, typeFunction)
 
             switch (typeFunction) {
                 case "footprint":
@@ -235,7 +237,7 @@ export default function handleEditFunctionType() {
             handleResetData();
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
-            handleOverlayUpdate("hidden");
+            handleShowFormFunction(false, type)
         };
 
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
@@ -247,7 +249,7 @@ export default function handleEditFunctionType() {
 
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
-            handleOverlayUpdate("hidden");
+            handleShowFormFunction(false, type)
         };
 
         function handleResetData() {

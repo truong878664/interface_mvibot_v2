@@ -18,6 +18,7 @@ import {
 import lockZ from "../../rosModule/lockZ.js";
 import mathYaw from "../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
+import { addFunctionStep } from "../createStepMission.js";
 
 export function createMapPoint() {
     let positionX = 0;
@@ -353,7 +354,8 @@ export function createMapPoint() {
             mode_position.value &&
             mode_child.value
         ) {
-            storeData("/api/position", dataPosition);
+           
+            addFunctionStep("position", dataPosition);
             name_position.value = "";
             time_out.value = -1;
             mode_position.value = "normal";

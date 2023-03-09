@@ -38,7 +38,7 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        MissionPosition::create($request->all());
+       return MissionPosition::create($request->all());
     }
 
     /**

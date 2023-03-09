@@ -62,6 +62,7 @@ function validateNameFunction() {
     function valid(element) {
         const pattern = /^[a-zA-Z0-9_]*$/;
         const isValid = element.value == "" || !pattern.exec(element.value);
+
         const buttonCreate = element
             .closest(".function-item")
             .querySelector("[data-valid]");
@@ -75,4 +76,3 @@ function validateNameFunction() {
         buttonCreate.dataset.valid = isValid && "disable";
     }
 }
-

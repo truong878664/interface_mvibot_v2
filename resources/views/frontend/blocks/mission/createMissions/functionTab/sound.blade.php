@@ -1,4 +1,4 @@
-<div class="hidden function-item">
+<div class="hidden function-item function-mission-tab" data-type="sound">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function sound</label>
         <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_sound valid-input" type="text" required>

@@ -3,11 +3,7 @@ import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
-import {
-    currentMission,
-    messageEmpty,
-    renderBlockStep,
-} from "./handleStepMission.js";
+import { currentMission, renderBlockStep } from "./handleStepMission.js";
 import handleRenderTypeMission from "./typeMission/handleRenderTypeMission.js";
 
 export const htmlDataFunction = {
@@ -29,11 +25,10 @@ const typeFunction = [
     "position",
     "gpio_module",
     "variable",
-    "sound",
+    "sound", 
 ];
 
 loadDataFunction();
-handleRenderDataFunction();
 
 handleRenderTypeMission();
 
@@ -41,100 +36,30 @@ handleAddMissionNormal();
 handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
-export function loadDataFunction(typeFunctionActive = "gpio") {
+export function loadDataFunction() {
     loading(".detail-type-mission-function-normal");
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
             typeFunction.forEach((item) => {
-                renderDataFunction(data[item].reverse(), item);
+                renderDataFunction(data[item], item);
             });
         })
         .then(() => {
-            $(
-                `.type-mission-function-normal[type=${typeFunctionActive}]`
-            ).click();
-            $(
-                `.type-mission-function-ifelse[type=${typeFunctionActive}]`
-            ).click();
-            $(
-                `.type-mission-function-trycatch[type=${typeFunctionActive}]`
-            ).click();
-            loaded(".detail-type-mission-function-normal");
+            typeFunction.forEach((item) => {
+                $(`.function-list-item-${item}`).innerHTML =
+                    htmlDataFunction[item].join("");
+            });
+        })
+        .then(() => {
+            handleAddStep();
+            handleEditFunctionType();
+            handleDeleteFunctionType();
         });
 }
 
-function handleRenderDataFunction() {
-    $$(".type-mission-function-normal").forEach((element) => {
-        element.onclick = (e) => {
-            $(".type-mission-function-normal.active")?.classList.remove(
-                "active"
-            );
-            e.target.classList.add("active");
-
-            const type = e.target.getAttribute("type");
-
-            const typeNormal = $(".detail-type-mission-function-normal");
-            htmlDataFunction[type].length
-                ? (typeNormal.innerHTML = htmlDataFunction[type].join(""))
-                : messageEmpty(typeNormal, "Function empty!");
-
-            handleAddStep();
-            handleEditFunctionType();
-            handleDeleteFunctionType();
-        };
-    });
-
-    $$(".type-mission-function-ifelse").forEach((element) => {
-        element.onclick = (e) => {
-            $(".type-mission-function-ifelse.active")?.classList.remove(
-                "active"
-            );
-
-            e.target.classList.add("active");
-
-            const type = e.target.getAttribute("type");
-            const typeIfelse = $(".detail-type-mission-function-ifelse");
-
-            htmlDataFunction[type].length
-                ? (typeIfelse.innerHTML = htmlDataFunction[type].join(""))
-                : messageEmpty(typeIfelse, "Function empty!");
-            handleAddStep();
-            handleEditFunctionType();
-            handleDeleteFunctionType();
-        };
-    });
-
-    $$(".type-mission-function-trycatch").forEach((element) => {
-        element.onclick = (e) => {
-            $(".type-mission-function-trycatch.active")?.classList.remove(
-                "active"
-            );
-
-            e.target.classList.add("active");
-
-            const type = e.target.getAttribute("type");
-
-            const typeTrycatch = $(".detail-type-mission-function-trycatch");
-
-            htmlDataFunction[type].length
-                ? (typeTrycatch.innerHTML = htmlDataFunction[type].join(""))
-                : messageEmpty(typeTrycatch, "Function empty!");
-
-            handleAddStep();
-            handleEditFunctionType();
-            handleDeleteFunctionType();
-        };
-    });
-}
-
-////
-const buttonPosition = `<button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md"><i class="fa-regular fa-eye"></i></button>`;
-// ${item.mode == "position" ? buttonPosition : ""}
-
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
-
     data.map((item) => {
         const nameStep =
             item.name_position ||
@@ -153,7 +78,7 @@ function renderDataFunction(data, type) {
 
         htmlDataFunction[type].push(
             `<div function-id=${item.id} function-type="${item.mode}"
-                class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-function-item">
+                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl">
             <input type="hidden" 
                 value='${JSON.stringify(item)}' class="value-function-item"/>
             <div class="flex flex-col">
@@ -189,17 +114,22 @@ function renderDataFunction(data, type) {
 }
 
 //normal
-const nameNormalMission = $(".name-normal-mission");
 export const valueNormalMissionArray = [];
-
-const nameIfelseMission = $(".name-ifelse-mission");
-
-//ifelse
+export const valueItemTrycatch = {
+    try: [],
+    catch: [],
+};
 export const valueItemIfelse = {
     if: [],
     then: [],
     else: [],
 };
+
+const nameIfelseMission = $(".name-ifelse-mission");
+const nameNormalMission = $(".name-normal-mission");
+const nameTryCatchMission = $(".name-trycatch-mission");
+
+//ifelse
 
 let currentIf = "if";
 $$(".add-ifelse-step-btn").forEach((element) => {
@@ -211,13 +141,6 @@ $$(".add-ifelse-step-btn").forEach((element) => {
 });
 
 //trycatch
-const nameTryCatchMission = $(".name-trycatch-mission");
-
-export const valueItemTrycatch = {
-    try: [],
-    catch: [],
-};
-
 let currentTrycatch = "try";
 $$(".add-trycatch-step-btn").forEach((element) => {
     element.onclick = (e) => {
@@ -568,7 +491,10 @@ export function validateInput(...rest) {
         const pattern = /^[a-zA-Z0-9_]*$/;
 
         if ($(item).value == "" || !pattern.exec($(item).value)) {
-            toggerMessage("error", "Please enter all input & does not contain special characters like (!@#$%^&*()+-=)");
+            toggerMessage(
+                "error",
+                "Please enter all input & does not contain special characters like (!@#$%^&*()+-=)"
+            );
             return false;
         } else {
             return true;

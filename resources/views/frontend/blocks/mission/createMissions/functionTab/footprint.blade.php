@@ -1,4 +1,4 @@
-<div class="h-full w-full flex flex-col function-item hidden form-footprin">
+<div class="h-full w-full flex flex-col function-item form-footprint function-mission-tab hidden" data-type="footprint">
     <div class="flex flex-col mr-[30px]">
         <label for="" class="text-xl">Name function footpint</label>
         <input class="w-[200px] text-xl px-4 py-1 input-reset valid-input" type="text" name="name_footprint" required>

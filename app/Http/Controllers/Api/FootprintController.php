@@ -55,7 +55,7 @@ class FootprintController extends Controller
             "y2" => $y2,
         ];
 
-        MissionFootprint::create($dataFootprint);
+        return MissionFootprint::create($dataFootprint);
     }
 
     /**
