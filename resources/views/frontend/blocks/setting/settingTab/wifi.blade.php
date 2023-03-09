@@ -68,11 +68,11 @@
                 <div class="absolute w-full max-w-[600px] bg-[#efefef] top-16 left-1/2 -translate-x-1/2 rounded-2xl shadow-lg p-10 hidden form-enter-password z-[21]">
                     <div class="flex justify-between">
                         <button class="mt-2 btn cancel-wifi-btn font-bold">Cancle</button>
-                        <label class="font-bold text-[16px]">Enter password for "<span class="label-wifi">null</span>"</label>
+                        <label class="font-bold text-[16px]">Enter password <span class="label-wifi"></span></label>
                         <button class="mt-2 btn connect-wifi-btn disabled:opacity-50 font-bold" disabled>Connect</button>
                     </div>
 
-                    <div class="w-full h-[60px] rounded-xl bg-[#e6e6e6] mt-7 flex items-center px-10 name-wifi hidden">
+                    <div class="w-full h-[60px] rounded-xl bg-[#e6e6e6] mt-7 flex items-center px-10  name-wifi-wrapper hidden">
                         <span class="font-bold mr-4">Name</span>
                         <input class="flex-1 text-[16px] bg-transparent border-none outline-none tracking-[2px] py-4" type="text" name="" id="name-wifi">
                     </div>
