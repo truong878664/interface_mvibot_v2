@@ -1,11 +1,12 @@
 import createJoystick from "./createJoystick/createJoystick.js";
 import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
-import { $ } from "./main.js";
+import { $, $$ } from "./main.js";
 import { cmd_vel_listener } from "./rosModule/moveRobot.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
 import reloadWhenOrientation from "./reloadOnOrientation.js";
+import { createMoveAction } from "./joystick/joystick.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -19,6 +20,8 @@ createAxes(viewer);
 
 createJoystick();
 changeTopic();
+
+createMoveAction();
 
 function changeTopic() {
     cmd_vel_listener.name = `${robotActive}/cmd_vel`;
@@ -60,3 +63,16 @@ $("#create_map_btn").onclick = () => {
         nameMap.value = "";
     }
 };
+
+changeJoystick();
+function changeJoystick() {
+    $$(".choose-joystick-btn").forEach((element, index) => {
+        element.onclick = (e) => {
+            $("[data-active=active]").dataset.active = "";
+            e.target.dataset.active = "active";
+            console.log( $(".action-move-robot-wrapper:not(.hidden)"))
+            $(".action-move-robot-wrapper:not(.hidden)").classList.add("hidden");
+            $$(".action-move-robot-wrapper")[index].classList.remove("hidden");
+        };
+    });
+}
