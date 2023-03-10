@@ -70,7 +70,7 @@ class MarkerController extends Controller
             'sy2' => $sy2,
         ];
 
-        MissionMarker::create($dataMarker);
+       return MissionMarker::create($dataMarker);
     }
 
     /**

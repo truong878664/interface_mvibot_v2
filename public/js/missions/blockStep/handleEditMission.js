@@ -25,7 +25,7 @@ export default function handleEditMission() {
             
             handleCancelUpdateMission();
             handleUpdateMission(currentIdMissionEdit);
-            handleOverlayUpdate("show");
+            handleOverlayUpdate("show", "type-mission");
         };
     });
     

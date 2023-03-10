@@ -20,8 +20,9 @@ export function handleCancelUpdateMission() {
         render(valueNormalMissionArray, ".normal-steps-wrapper");
         showUpdateBtn(false, "normal");
 
+        
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
-        handleOverlayUpdate("hidden");
+        handleOverlayUpdate("hidden", "type-mission");
     };
 
     $(`.cancel-ifelse`).onclick = () => {
@@ -38,7 +39,7 @@ export function handleCancelUpdateMission() {
         render(valueItemIfelse.else, `.else-steps-wrapper`);
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
-        handleOverlayUpdate("hidden");
+        handleOverlayUpdate("hidden", "type-mission");
     };
 
     $(`.cancel-trycatch`).onclick = () => {
@@ -54,7 +55,7 @@ export function handleCancelUpdateMission() {
         render(valueItemTrycatch.catch, `.catch-steps-wrapper`);
 
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
-        handleOverlayUpdate("hidden");
+        handleOverlayUpdate("hidden", "type-mission");
     };
 }
 
@@ -65,7 +66,6 @@ export function handleUpdateMission(idTypeMissionEdit) {
             valueNormalMissionArray,
             ".normal-steps-wrapper"
         );
-
         const dataTypeMission = {
             name: $(".name-normal-mission").value,
             data: valueNormalMissionArray.join("|"),

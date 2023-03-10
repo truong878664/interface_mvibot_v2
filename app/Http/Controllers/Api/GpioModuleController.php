@@ -57,7 +57,7 @@ class GpioModuleController extends Controller
             "in_pulldown" => $in_pulldown,
         ];
 
-        MissionGpioModule::create($dataGpio);
+       return MissionGpioModule::create($dataGpio);
     }
 
     /**

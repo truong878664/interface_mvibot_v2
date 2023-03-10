@@ -2156,7 +2156,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(172, 172, 172, 0.1);
+    background-color: transparent;
     z-index: 30;
 }
 .loader {

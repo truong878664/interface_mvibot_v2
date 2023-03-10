@@ -3,7 +3,7 @@ import dbDelete from "../functionHandle/dbDelete.js";
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
-import { htmlDataFunction } from "../handleTypeMission.js";
+import handleRenderTypeMission from "../typeMission/handleRenderTypeMission.js";
 
 export default function handleDeleteFunctionType() {
     $$(".delete-function-item-btn").forEach((element) => {
@@ -18,42 +18,8 @@ function deleteItem(e) {
     const functionItem = e.target.closest(".type-mission-function-item");
     const typeFunction = functionItem.getAttribute("function-type");
     const idFunction = functionItem.getAttribute("function-id");
-    const fullNameFunction = functionItem.querySelector(
-        ".value-type-mission-function-item"
-    ).value;
 
-    functionItem
-        .closest(".detail-type-mission-function")
-        .classList.contains("detail-type-mission-function-normal") &&
-        Array.from($(".detail-type-mission-function-normal").childNodes).find(
-            (node, index) => {
-                if (node.isEqualNode(functionItem)) {
-                    htmlDataFunction[typeFunction].splice(index, 1);
-                }
-            }
-        );
-
-    functionItem
-        .closest(".detail-type-mission-function")
-        .classList.contains("detail-type-mission-function-ifelse") &&
-        Array.from($(".detail-type-mission-function-ifelse").childNodes).find(
-            (node, index) => {
-                if (node.isEqualNode(functionItem)) {
-                    htmlDataFunction[typeFunction].splice(index, 1);
-                }
-            }
-        );
-
-    functionItem
-        .closest(".detail-type-mission-function")
-        .classList.contains("detail-type-mission-function-trycatch") &&
-        Array.from($(".detail-type-mission-function-trycatch").childNodes).find(
-            (node, index) => {
-                if (node.isEqualNode(functionItem)) {
-                    htmlDataFunction[typeFunction].splice(index, 1);
-                }
-            }
-        );
+    functionItem.remove()
 
     loading();
     fetch(`/api/${typeFunction}/${idFunction}`, {
@@ -65,13 +31,7 @@ function deleteItem(e) {
     })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
-            $$(
-                `.type-mission-function-item[function-id='${idFunction}'][function-type=${typeFunction}]`
-            ).forEach((element) => {
-                element.remove();
-            });
-
+            console.log(data)
             timeOut.forEach((time) => {
                 clearTimeout(time);
             });
@@ -79,6 +39,7 @@ function deleteItem(e) {
                 setTimeout(() => {
                     translatesStepsMission(currentMission);
                     renderBlockStep();
+                    handleRenderTypeMission()
                 }, 1000)
             );
             loaded();

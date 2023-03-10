@@ -17,7 +17,7 @@ export default function handleRenderTypeMission() {
             data.map((item) => {
                 const itemHtml = `
                     <div type-mission-id=${item.id} mission-type="${item.type}"
-                        class="flex justify-between items-center bg-[rgba(204,204,204,0.53)] px-5 py-3 mb-2 point-id-8 type-mission-item">
+                        class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item">
                         <input type="hidden" value="${JSON.stringify(
                             item
                         )}" class="" />

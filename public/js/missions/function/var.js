@@ -1,5 +1,6 @@
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
+import { addFunctionStep } from "../createStepMission.js";
 
 updateVar();
 
@@ -61,7 +62,6 @@ $(".create-variable-btn").onclick = () => {
     }
 };
 
-
 $(".submit-btn-variable").onclick = () => {
     const name_function_variable = $(".name_function_variable").value;
     const name_variable = $(".name_variable_input").value;
@@ -78,21 +78,18 @@ $(".submit-btn-variable").onclick = () => {
             name_variable,
             focus_value,
         };
-        console.log(dataVariable);
 
-        fetchCustom(
-            "/api/variable",
-            "POST",
-            handleSaveSuccessVariable,
-            dataVariable
-        );
-
-        function handleSaveSuccessVariable(data) {
-            toggerMessage("success", data.message);
-            resetVariable()
-            
-            localStorage.setItem("isUpload", 1);
-            
+        addFunctionStep("variable", dataVariable);
+        // fetchCustom(
+        //     "/api/variable",
+        //     "POST",
+        //     handleSaveSuccessVariable,
+        //     dataVariable
+        // );
+        handleSaveSuccessVariable();
+        function handleSaveSuccessVariable() {
+            toggerMessage("success", "Save sound successfully!");
+            resetVariable();
         }
     } else {
         toggerMessage("error", "Please enter all input");

@@ -47,7 +47,7 @@ class SleepController extends Controller
             "time_sleep" => $time_sleep,
         ];
 
-        MissionSleep::create($dataSleep);
+       return  MissionSleep::create($dataSleep);
     }
 
     /**
