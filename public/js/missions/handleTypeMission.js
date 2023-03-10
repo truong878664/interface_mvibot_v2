@@ -25,7 +25,7 @@ const typeFunction = [
     "position",
     "gpio_module",
     "variable",
-    "sound", 
+    "sound",
 ];
 
 loadDataFunction();
@@ -58,9 +58,26 @@ export function loadDataFunction() {
         });
 }
 
+const BUTTON_ACTION_FUNCTION = `
+<div class="min-w-[120px]">
+    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
+        <i class="fa-solid fa-pen"></i>
+    </button>
+    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+</div>
+`;
+
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
-    data.map((item) => {
+
+    const listFunction = JSON.parse(JSON.stringify(data));
+
+    data.map((item, index) => {
         const nameStep =
             item.name_position ||
             item.name_gpio ||
@@ -70,47 +87,69 @@ function renderDataFunction(data, type) {
             item.name_function_variable ||
             item.name_sound;
 
-        const description =
-            (item.marker_type && "Type: " + item.marker_type) ||
-            (item.music_start == 1 && "Type: start") ||
-            (item.music_start == 0 && "Type: stop") ||
-            "";
+        const dataFunctionDetail = dataRenderFunction(listFunction, index);
 
         htmlDataFunction[type].push(
-            `<div function-id=${item.id} function-type="${item.mode}"
-                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl">
-            <input type="hidden" 
-                value='${JSON.stringify(item)}' class="value-function-item"/>
-            <div class="flex flex-col">
-                    <span class=" font-bold font-3xl capitalize">${
-                        item.mode
-                    }</span>
-                    <div class="flex">
-                        <span class="mr-2">Name:</span>
-                        <span class="name-mission-${
-                            item.mode
-                        }">${nameStep}</span>
+            `<div data-id=${item.id} function-id=${item.id} function-type="${
+                item.mode
+            }"
+            class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl">
+                <input type="hidden" value='${JSON.stringify(
+                    item
+                )}' class="value-function-item"/>
+                    <div class="flex flex-col">
+                        <div class="flex">
+                            <span class=" font-bold font-3xl capitalize">${
+                                item.mode
+                            }</span>
+                                ${
+                                    item.mode === "position"
+                                        ? `<div class="rounded-full bg-black" style="background-color:${item.color_position};width:15px;height:15px;"></div>`
+                                        : ""
+                                }
                         </div>
-                    <span>${description}</span>
-            </div>
-                <input value="${item.mode}#${nameStep}#${item.id}" 
-                    type="hidden" class="value-type-mission-function-item"/>
-                <div class="">
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                   
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
+                        <div class="flex">
+                           <span class="mr-2">Name:</span>
+                            <span class="text-sky-600 font-bold name-mission-${
+                                item.mode
+                            }">${nameStep}</span>
+                        </div>
+                    <span>${dataFunctionDetail}</span>
+                    </div>
+                <input value="${item.mode}#${nameStep}#${
+                item.id
+            }" type="hidden" class="value-type-mission-function-item"/>
+                ${BUTTON_ACTION_FUNCTION}                
             </div>`
         );
     });
+
+    function dataRenderFunction(listFunction, index) {
+        delete listFunction[index].id;
+        delete listFunction[index].mode;
+        delete listFunction[index].time_out;
+
+        delete listFunction[index].name_position;
+        delete listFunction[index].name_gpio;
+        delete listFunction[index].name_marker;
+        delete listFunction[index].name_sleep;
+        delete listFunction[index].name_footprint;
+        delete listFunction[index].name_function_variable;
+        delete listFunction[index].name_sound;
+        delete listFunction[index].color_position;
+        delete listFunction[index].created_at;
+        delete listFunction[index].updated_at;
+
+        const data = Object.entries(listFunction[index]).map((item) => {
+            if (item[1]) {
+                return `<span class="font-bold">${item[0]}</span>: ${item[1]}`;
+            } else {
+                return "";
+            }
+        });
+        ;
+        return data.filter((item) => item).join(" <strong>|</strong> ");
+    }
 }
 
 //normal

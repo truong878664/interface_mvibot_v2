@@ -104,7 +104,7 @@ export function createMapPosition() {
     validateInputSubmit(
         ".input-submit",
         ".form-create-point",
-        ".point-submit-btn",
+        ".submit-btn-position",
         ".time-out"
     );
 
@@ -316,7 +316,7 @@ export function createMapPosition() {
         positionX = positionXSet;
         positionY = positionYSet;
     };
-    $(".point-submit-btn").onclick = (e) => {
+    $(".submit-btn-position").onclick = (e) => {
         e.preventDefault();
         console.log(123);
         const name_position = $('[name="name_position"]');
@@ -360,7 +360,7 @@ export function createMapPosition() {
             time_out.value = -1;
             mode_position.value = "normal";
             mode_child.value = -1;
-            createMapPoint();
+            // createMapPoint();
 
             localStorage.setItem("isUpload", 1);
         } else {

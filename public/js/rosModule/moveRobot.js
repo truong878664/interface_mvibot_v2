@@ -5,6 +5,8 @@ export const cmd_vel_listener = new ROSLIB.Topic({
     name: "/cmd_vel",
     messageType: "geometry_msgs/Twist",
 });
+
+console.log(cmd_vel_listener.name)
 function moveRobot(linear, angular) {
     console.log(linear, angular)
     var twist = new ROSLIB.Message({

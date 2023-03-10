@@ -14,3 +14,4 @@ function createPoint(viewer, tfClient) {
     });
 }
 export default createPoint;
+ 

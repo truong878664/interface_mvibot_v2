@@ -11,6 +11,9 @@ import { setColorSticker } from "./sound.js";
 import { resetVariable } from "./var.js";
 import { handleShowFormFunction } from "../handleCreateFunction.js";
 import { createMapPosition } from "./point.js";
+import displayPoint from "../../rosModule/displayPoint.js";
+import displayPose from "../../rosModule/displayPose.js";
+import createPose from "../../rosModule/createPose.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -210,8 +213,12 @@ export default function handleEditFunctionType() {
 
                 case "position":
                     $(".point-function-btn").click();
+                    console.log(valueFunction)
                     handleUpdateStep("position");
                     createMapPosition()
+                    // createPose(view, tfClient, valueFunction.color)
+                    displayPoint(valueFunction.x, valueFunction.y);
+                    displayPose(valueFunction.x, valueFunction.y, valueFunction.z, valueFunction.w);
             }
         };
     });
@@ -465,7 +472,6 @@ export default function handleEditFunctionType() {
                     toggerMessage("error", "Please enter all inputs");
                     return false;
                 }
-
             case "sleep":
                 const { name_sleep, time_sleep } = inputFunction("sleep");
 
@@ -488,7 +494,6 @@ export default function handleEditFunctionType() {
                     toggerMessage("error", "Please enter all inputs");
                     return false;
                 }
-
             case "variable":
                 const name_function_variable = $(".name_function_variable");
                 const name_variable = $(".name_variable_input");
@@ -517,7 +522,6 @@ export default function handleEditFunctionType() {
                     toggerMessage("error", "Please enter all inputs");
                     return false;
                 }
-
             case "sound":
                 const name_sound = $(".name_function_sound").value;
                 const music_type = $(".sound-btn.active")?.getAttribute("type");

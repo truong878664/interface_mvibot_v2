@@ -58,10 +58,10 @@
 
         <div class="relative w-full h-[30px]">
             <input type="text" value="" name="map" hidden />
-            <button
-            class="text-xl md:text-3xl btn bg-[#0f6cbd] absolute right-0 text-[#fff] self-end px-4 py-2 rounded-md point-submit-btn submit-btn-position">Create</button>
-            
-            {{-- @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'position']) --}}
+            {{-- <button
+            class="text-xl md:text-3xl btn bg-[#0f6cbd] absolute right-0 text-[#fff] self-end px-4 py-2 rounded-md point-submit-btn submit-btn-position">Create</button> --}}
+             
+            @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'position'])
         </div>
 
     </div>

@@ -7,6 +7,7 @@ import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
 import reloadWhenOrientation from "./reloadOnOrientation.js";
 import { createMoveAction } from "./joystick/joystick.js";
+import publishTopicString from "./rosModule/topicString.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -24,13 +25,11 @@ changeTopic();
 createMoveAction();
 
 function changeTopic() {
-    cmd_vel_listener.name = `${robotActive}/cmd_vel`;
     $("#robot-mapping").onchange = (e) => {
-        robotActive = e.target.value;
-        if (robotActive) {
-            changeTopicMoveRobot(robotActive);
-            changTopicOccupancy(robotActive);
-        }
+        const robot = e.target.value;
+        robotActive = robot;
+        changeTopicMoveRobot(robot);
+        robot && changTopicOccupancy(robot);
     };
 }
 function changeTopicMoveRobot(robotActive) {
@@ -70,9 +69,80 @@ function changeJoystick() {
         element.onclick = (e) => {
             $("[data-active=active]").dataset.active = "";
             e.target.dataset.active = "active";
-            console.log( $(".action-move-robot-wrapper:not(.hidden)"))
-            $(".action-move-robot-wrapper:not(.hidden)").classList.add("hidden");
+            console.log($(".action-move-robot-wrapper:not(.hidden)"));
+            $(".action-move-robot-wrapper:not(.hidden)").classList.add(
+                "hidden"
+            );
             $$(".action-move-robot-wrapper")[index].classList.remove("hidden");
         };
     });
+}
+
+handleSendTopic();
+function handleSendTopic() {
+    const MAX = 16;
+
+    const timeIntervalSendTopic = [];
+    const timeOutSendTopic = [];
+
+    const timeOutRemoveEnd = [];
+
+    const inputTopicElement = $(".input-range-topic");
+    const labelTopicElement = $(".label-range-topic");
+
+    setLabelRange(MAX);
+
+    inputTopicElement.oninput = (e) => {
+        clearTimeout(timeOutRemoveEnd);
+        clearTimeout(timeOutSendTopic);
+
+        const valueInput = e.target.value;
+        const valueSend = Math.floor((parseInt(valueInput) * MAX) / 100);
+
+        sendTopic(valueSend);
+        setLabelRange(valueSend);
+
+        clearSendTopic()
+
+        timeOutSendTopic.push(
+            setTimeout(() => {
+                timeIntervalSendTopic.push(
+                    setInterval(() => {
+                        sendTopic(valueSend);
+                    }, 100)
+                );
+            }, 100)
+        );
+    };
+
+    inputTopicElement.addEventListener("pointerup", () => {
+        clearSendTopic()
+    });
+
+    inputTopicElement.addEventListener("pointerdown", (e) => {
+        const valueInput = e.target.value;
+        const valueSend = Math.floor((parseInt(valueInput) * MAX) / 100);
+        timeIntervalSendTopic.push(
+            setInterval(() => {
+                sendTopic(valueSend);
+            }, 100)
+        );
+    });
+
+    window.addEventListener("pointerup", () => {
+        clearSendTopic()
+    });
+
+    function sendTopic(valueSend) {
+        const nameTopic = `${robotActive}/zzz`;
+        publishTopicString(nameTopic, valueSend);
+    }
+    function setLabelRange(value) {
+        labelTopicElement.textContent = value;
+    }
+
+    function clearSendTopic() {
+        timeIntervalSendTopic.forEach(item => clearInterval(item))
+        timeOutSendTopic.forEach(item => clearTimeout(item))
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Map;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionGpioModule;
@@ -23,14 +24,14 @@ class FunctionController extends Controller
      */
     public function index()
     {
-
+        $mapActive = Map::first();
 
         $data = [
             'footprint' => MissionFootprint::all(),
             'gpio' => MissionGpio::all(),
             'marker' => MissionMarker::all(),
             'sleep' => MissionSleep::all(),
-            'position' => MissionPosition::all(),
+            'position' => MissionPosition::where('map', $mapActive->name_map_active)->get(),
             'gpio_module'=> MissionGpioModule::all(),
             'variable'=> MissionVariable::all(),
             'sound'=> MissionSound::all(),

@@ -47,7 +47,7 @@
                     class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden function-mission-btn-wrapper">
 
                     <button data-index="0"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
                         <span class="mr-2 text-green-500">
                             <i class="fa-solid fa-lightbulb"></i>
                         </span>
@@ -57,7 +57,7 @@
                     </button>
 
                     <button data-index="1"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex gpio-module-function-btn function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-blue-500">
                             <i class="fa-regular fa-lightbulb"></i>
                         </span>
@@ -67,7 +67,7 @@
                     </button>
 
                     <button data-index="2"
-                    class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex footprint-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
+                    class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                     <span class="mr-2 text-yellow-500">
                         <i class="fa-solid fa-arrows-to-dot"></i>
                     </span>
@@ -77,7 +77,7 @@
                 </button>
 
                     <button data-index="3"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex marker-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-sky-500">
                             <i class="fa-solid fa-map-pin"></i>
                         </span>
@@ -87,7 +87,7 @@
                     </button>
 
                     <button data-index="4"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sleep-function-btn function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sleep-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-red-600">
                             <i class="fa-solid fa-mattress-pillow"></i>
                         </span>
@@ -97,7 +97,7 @@
                     </button>
 
                     <button data-index="5"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex sound-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sound-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-purple-600">
                             <i class="fa-solid fa-volume-high"></i>
                         </span>
@@ -107,7 +107,7 @@
                     </button>
 
                     <button data-index="6"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex point-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex position-function-btn point-function-btn {{ $itemRender->type === 'error' ? 'hidden' : '' }} function-btn function-mission-btn">
                         <span class="mr-2 text-stone-600">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>
@@ -117,7 +117,7 @@
                     </button>
 
                     <button data-index="7"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn rounded-md function-item-2 flex variable-function-btn function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex variable-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-orange-600">
                             <i class="fa-solid fa-square-root-variable"></i>
                         </span>
@@ -189,8 +189,18 @@
     }
 
     .function-btn.active {
-        background: rgb(245, 245, 244);
+
         font-weight: bold;
+        
+    }
+
+    .type-mission-function-item.highline {
+        border: 2px solid var(--main-color);
+        border-radius: 10px;
+    }
+
+    .function-item-2.active {
+        border-top: 2px solid var(--main-color);
     }
 
     .bg-gpio {

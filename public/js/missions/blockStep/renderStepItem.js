@@ -7,9 +7,10 @@ export default function renderStepItem(data, html) {
             step.indexOf("#") + 1,
             step.indexOf("#", step.indexOf("#") + 1)
         );
-
+        const id = step.slice(step.lastIndexOf("#") + 1, step.length)
+        
         return html.push(`
-            <div class="hidden step-item text-white step-${stepMode} step-hidden" index=${index}>
+            <div data-id=${id} data-mode=${stepMode} class="hidden step-item-function btn step-item text-white step-${stepMode} step-hidden" index=${index}>
             <span class="stem-name">${stepMode}|${stepName}</span>
             </div>
         `);

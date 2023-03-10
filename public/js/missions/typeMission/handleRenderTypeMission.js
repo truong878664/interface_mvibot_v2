@@ -14,7 +14,9 @@ export default function handleRenderTypeMission() {
                 ifelse: [],
                 trycatch: [],
             };
+
             data.map((item) => {
+        
                 const itemHtml = `
                     <div type-mission-id=${item.id} mission-type="${item.type}"
                         class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item">
@@ -28,7 +30,7 @@ export default function handleRenderTypeMission() {
                             <div class="flex">
                                 <span class="mr-2">Name:</span>
                                 <span class="">${item.name}</span>
-                            </div>
+                                </div>
                         </div>
                         <input value="${item.data}"
                             type="hidden" class="" />
