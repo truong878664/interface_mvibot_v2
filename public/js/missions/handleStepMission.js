@@ -16,7 +16,8 @@ export const currentMission = $("#current-id-mission").value;
 translatesStepsMission(currentMission);
 fullScreenBlockStep();
 
-function renderBlockStep() {
+function renderBlockStep(translate = false) {
+    translate && translatesStepsMission(currentMission);
     loading();
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())

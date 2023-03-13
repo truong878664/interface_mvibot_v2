@@ -91,6 +91,7 @@
                 class="fa-solid fa-angle-right"></i></button>
 
     </div>
+    
 
     @include('frontend.blocks.robots')
     @include('frontend.blocks.message')

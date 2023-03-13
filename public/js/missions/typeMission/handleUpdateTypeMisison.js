@@ -8,11 +8,11 @@ export default function handleUpdateTypeMission() {
         element.onclick = (e) => {
             const typeMissionItem = (e.target.closest('.type-mission-item'))
             const typeMissionId = typeMissionItem.getAttribute('type-mission-id')
-            
             getMission(typeMissionId, editTypeMission);
             handleCancelUpdateMission();
             handleUpdateMission(typeMissionId);
             handleOverlayUpdate("show", 'type-mission');
+            
         }
     });
 }

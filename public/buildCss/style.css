@@ -2105,11 +2105,11 @@ li {
     width: 3px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #7b7b7b43;
-    border-radius: 4px;
+    background: #9a9a9a;
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: #ccc;
+    background: rgb(236, 236, 236);
 }
 .btn {
     transform: translateZ(0) scale(1);
@@ -2192,4 +2192,17 @@ li {
 .missions-content.editing .add-type-mission-btn,
 .missions-content.editing .delete-function-item-btn {
     display: none;
+}
+
+
+@keyframes zoom {
+    from {
+        opacity: 0;
+        transform: scale(50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(100%);
+    }
 }

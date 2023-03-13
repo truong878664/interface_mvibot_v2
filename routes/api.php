@@ -65,7 +65,7 @@ Route::resource('stop', StopController::class);
 Route::resource('input-gpio', InputGpioController::class)->only('index');
 
 Route::resource('robot', RobotController::class);
-Route::resource('function', FunctionController::class)->only('index');
+Route::resource('function', FunctionController::class);
 
 Route::resource('var', VarController::class);
 Route::resource('sound-file', SoundFileController::class)->only('destroy');

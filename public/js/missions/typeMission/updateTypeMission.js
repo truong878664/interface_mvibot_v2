@@ -9,6 +9,7 @@ import {
     valueItemTrycatch,
     valueNormalMissionArray,
 } from "../handleTypeMission.js";
+import handleRenderTypeMission from "./handleRenderTypeMission.js";
 import showUpdateBtn from "./showUpdateBtn.js";
 
 export function handleCancelUpdateMission() {
@@ -74,6 +75,7 @@ export function handleUpdateMission(idTypeMissionEdit) {
         if (isValid && isData) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
+            handleRenderTypeMission()
             $(`.cancel-normal`).click();
         }
     };
@@ -94,6 +96,7 @@ export function handleUpdateMission(idTypeMissionEdit) {
         if (isValid && isDataIf && isData) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
+            handleRenderTypeMission()
             $(`.cancel-ifelse`).click();
         }
     };
@@ -115,6 +118,7 @@ export function handleUpdateMission(idTypeMissionEdit) {
         if (isValid && isDataTry && isDataCatch) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
+            handleRenderTypeMission()
             $(`.cancel-trycatch`).click();
         }
     };

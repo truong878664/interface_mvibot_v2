@@ -11,16 +11,16 @@
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full type-mission-btn-wrapper">
                     <div data-index="0"
-                        class="active normal-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="active normal-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>Normal mission</span>
                     </div>
                     <div data-index="1"
-                        class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>If-Else mission</span>
                     </div>
 
                     <div data-index="2"
-                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)]">
+                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>Try-catch mission</span>
                     </div>
                 </div>
@@ -224,18 +224,10 @@
     }
 
     .function-item-form {
-        animation: zoom 100ms linear;
+        animation: zoom 200ms linear;
         -webkit-animation-timing-function: linear;
         animation-timing-function: linear;
     }
 
-    @keyframes zoom {
-        from {
-            transform: scale(50%);
-        }
-
-        to {
-            transform: scale(100%);
-        }
-    }
+   
 </style>

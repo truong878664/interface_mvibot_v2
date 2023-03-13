@@ -7,6 +7,7 @@ use App\Models\backend\Mi;
 use App\Models\backend\Missions;
 use App\Models\backend\TypeMission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TypeMissionController extends Controller
 {
@@ -38,7 +39,25 @@ class TypeMissionController extends Controller
      */
     public function store(Request $request)
     {
-        return TypeMission::create($request->all());
+        switch ($request->method) {
+            case 'multi':
+                $idTypeMission = $request->idSelects;
+
+                $typeMissions = DB::table('type_missions')->whereIn("id", $idTypeMission)->get();
+                foreach ($typeMissions as $typeMission) {
+                    $newTypeMission = $typeMission;
+                    unset($newTypeMission->id);
+                    $newTypeMission->name = $typeMission->name . "_copy";
+                    DB::table('type_missions')->insert((array) $newTypeMission);
+                };
+                return ['message' => 'copy successfully!'];
+                break;
+
+            default:
+
+                return TypeMission::create($request->all());
+                break;
+        }
     }
 
     /**
@@ -92,22 +111,43 @@ class TypeMissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        TypeMission::where('id', $id)->delete();
-
         $allMission =  Missions::select('mission_shorthand', 'id')->get();
 
-        foreach ($allMission as $mission) {
-            $arr_mission_shorthand = explode('+', $mission->mission_shorthand);
-            $new_mission_shorthand =  array_filter($arr_mission_shorthand, function ($id_type_mission) use ($id) {
-                return $id_type_mission !== $id;
-            });
 
-            Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+", $new_mission_shorthand)]);
+        switch ($request->method) {
+            case 'multi':
+                $deletes = $request->deletes;
+                DB::table('type_missions')->whereIn('id', $deletes)->delete();
+                
+                foreach ($allMission as $mission) {
+                    $arr_mission_shorthand = explode('+', $mission->mission_shorthand);
+
+                        $new_mission_shorthand =  array_filter($arr_mission_shorthand, function ($id_type_mission) use ($deletes) {
+                            return !in_array($id_type_mission, $deletes);
+                        });
+                        
+                        Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+", $new_mission_shorthand)]);
+                }
+
+                return ['message'=>'Delete type mission success!'];
+                break;
+            default:
+                TypeMission::where('id', $id)->delete();
+
+
+                foreach ($allMission as $mission) {
+                    $arr_mission_shorthand = explode('+', $mission->mission_shorthand);
+                    $new_mission_shorthand =  array_filter($arr_mission_shorthand, function ($id_type_mission) use ($id) {
+                        return $id_type_mission !== $id;
+                    });
+
+                    Missions::where('id', $mission->id)->update(['mission_shorthand' => implode("+", $new_mission_shorthand)]);
+                }
+
+                return ['message' => 'Delete type mission success', 'deleted' => true];
+                break;
         }
-        
-        return ['message' => 'Delete type mission success', 'deleted' => true];
     }
-    // return $allMission;
 }

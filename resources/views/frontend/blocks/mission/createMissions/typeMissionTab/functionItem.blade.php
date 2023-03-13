@@ -1,56 +1,27 @@
 <div class="w-full flex-1 flex justify-between overflow-hidden  mb-2">
-    <div class="w-full lg:w-1/2 overflow-hidden relative rounded-lg mr-1 hidden">
-        <div class="absolute top-0 w-full flex z-20 h-[30px] ">
-            <div class="flex h-full w-full overflow-x-scroll bg-[#e5e5e5]">
-                <button
-                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="gpio">Gpio</button>
-                <button
-                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="gpio_module">Gpio module</button>
-                <button
-                    class="type-mission-{{ $itemRender->type }} text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="footprint">Footprint</button>
-                <button
-                    class="type-mission-{{ $itemRender->type }} text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="marker">Marker</button>
-                <button
-                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="sleep">Sleep</button>
-                <button
-                    class="type-mission-{{ $itemRender->type }} text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="position">Point</button>
-                <button
-                    class="text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="variable">Variable</button>
-                <button
-                    class="type-mission-{{ $itemRender->type }} text-[14px] whitespace-nowrap rounded-tl-lg rounded-tr-lg px-3 h-full bg-[rgba(204,204,204,0.2)] mr-[1px] hover:bg-[rgba(204,204,204,0.2)] type-mission-function-{{ $type }}"
-                    type="sound">Sound</button>
-            </div>
-        </div>
-        <div
-            class="w-full h-full overflow-auto pt-[30px] bg-[rgba(204,204,204,0.5)] text-xl detail-type-mission-function detail-type-mission-function-{{ $type }}">
+    <div class="w-full h-full overflow-auto bg-[#fff] text-xl ">
 
-            <div class="point-id-1 flex justify-between items-center  px-5 py-3 mb-2 point-id-8">
-                <div class="flex">
-                    <span class="type-funciton bg-[rgba(204,204,204,0.53)]"></span>
-                    <span class="name-function"></span>
-                </div>
-                <div class="h-[30px] w-[30px]">
-                    <button class="text-3xl mr-2  bg-white btn"></button>
-                </div>
+        
+        <div data-type="{{$type}}" class="bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 text-[20px] h-[40px] rounded-md shadow-sm shadow-[#ccc] flex items-center text-xl">
+            <div class="mr-8">
+                <i class="fa-solid fa-turn-up rotate-180 translate-y-"></i>
+                <input type="checkbox" id="checkall-{{$type}}" data-type="{{$type}}" class=" ml-4 w-[12px] h-[12px] accent-[#f5b933] check-all-input-type-mission">
+                <label for="checkall-{{$type}}" class="font-bold">Check all</label>
             </div>
+            <span>With selected: </span>
+            <button data-type="{{$type}}" class="ml-4 btn delete-multi-type-mission-btn">
+                <i class="fa-regular fa-trash-can text-red-500"></i>
+                <span class="font-bold">Delete</span>
+            </button>
+            
+            <button data-type="{{$type}}" class=" ml-4 btn copy-multi-type-mission-btn">
+                <i class="fa-regular fa-copy text-sky-600 "></i>
+                <span class="font-bold">Copy</span>
+            </button>
         </div>
+        <div class="type-mission-item-wrapper-{{ $type }} w-full"></div>
     </div>
 
-    <div class="w-full h-full overflow-hidden relative flex flex-col border">
-        <div class="w-full flex-1 h-full type-mission-wrapper">
-            <div
-                class="w-full h-full overflow-auto bg-[#fff] text-xl type-mission-item-wrapper-{{ $type }}">
-            </div>
-        </div>
-    </div>
-   
 </div>
 
 <style>
@@ -68,3 +39,4 @@
         display: none;
     }
 </style>
+
