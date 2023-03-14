@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_markers')) {
             Schema::create('mission_markers', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_marker');
+                $table->string('name');
                 $table->integer('time_out')->default(-1);
                 $table->string('mode')->default('marker');
                 $table->string('marker_type');

@@ -27,7 +27,7 @@ $$(".mode-music-btn").forEach((element) => {
 });
 
 $(".submit-btn-sound").onclick = () => {
-    const name_sound = $(".name_function_sound").value;
+    const name = $(".name_function_sound").value;
     const music_type = $(".sound-btn.active")?.getAttribute("type");
     let music_mode;
     const music_start = music_type == "start" ? 1 : 0;
@@ -47,9 +47,9 @@ $(".submit-btn-sound").onclick = () => {
     const dataSound = {
         music_start,
         music_mode,
-        name_sound,
+        name,
     };
-    if (name_sound) {
+    if (name) {
         // fetchCustom("/api/sound", "POST", handleSaveSuccessSound, dataSound);
         addFunctionStep('sound', dataSound)
         handleSaveSuccessSound()

@@ -63,15 +63,15 @@ $(".create-variable-btn").onclick = () => {
 };
 
 $(".submit-btn-variable").onclick = () => {
-    const name_function_variable = $(".name_function_variable").value;
+    const name = $(".name_function_variable").value;
     const name_variable = $(".name_variable_input").value;
     const command_action =
         $(".command_action_input").value == "=" ? "equal" : "equal_as";
     const focus_value = $(".focus_value_input").value;
 
-    if (name_variable && focus_value && name_function_variable) {
+    if (name_variable && focus_value && name) {
         const dataVariable = {
-            name_function_variable,
+            name,
             time_out: -1,
             mode: "variable",
             command_action,

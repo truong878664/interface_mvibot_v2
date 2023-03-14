@@ -9,7 +9,7 @@ class MissionMarker extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_marker',
+        'name',
         'time_out',
         'mode',
         'marker_type',

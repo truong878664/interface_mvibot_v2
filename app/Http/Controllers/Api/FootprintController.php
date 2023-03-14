@@ -48,7 +48,7 @@ class FootprintController extends Controller
         $y2 = $request->y2;
 
         $dataFootprint = [
-            "name_footprint" => $name_type,
+            "name" => $name_type,
             "x1" => $x1,
             "y1" => $y1,
             "x2" => $x2,
@@ -102,7 +102,7 @@ class FootprintController extends Controller
     {
 
         $itemDelete = MissionFootprint::where('id', $id)->first();
-        $itemName =  "$itemDelete->mode#$itemDelete->name_footprint#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
 
         //function at controller.php
         $this->updateStepDelete($itemName);

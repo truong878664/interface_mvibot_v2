@@ -46,7 +46,7 @@ class MiController extends Controller
                 // return ($data);
                 $data2 = [
                     "mission_shorthand" => $data->mission_shorthand,
-                    "name_mission" => $data->name_mission . "(copy)",
+                    "name" => $data->name . "(copy)",
                     "steps_mission" => $data->steps_mission,
                     "steps_mission_name" => $data->steps_mission_name,
                     "stop" => $data->stop,
@@ -154,7 +154,7 @@ class MiController extends Controller
                 return ['message' => 'Move mission success!', "status" => 200];
                 break;
             case "update-name":
-                Missions::where('id', $id)->update(['name_mission' => $request->name_mission]);
+                Missions::where('id', $id)->update(['name' => $request->name]);
 
                 $this->translateStepMissionName($id);
                 $this->translateData($id);

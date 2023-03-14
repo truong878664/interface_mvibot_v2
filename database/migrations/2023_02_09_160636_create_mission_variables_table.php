@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_variables')) {
             Schema::create('mission_variables', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_function_variable');
+                $table->string('name');
                 $table->integer('time_out')->default(-1);
                 $table->string('mode')->default('variable');
                 $table->string('command_action')->nullable();

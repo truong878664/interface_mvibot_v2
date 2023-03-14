@@ -40,7 +40,7 @@ class GpioController extends Controller
     public function store(Request $request)
     {        
         $time_out = $request->time_out;
-        $name_type = $request->name_type;
+        $name = $request->name_type;
         $out_set = $request->out_set;
         $out_reset = $request->out_reset;
         $in_on = $request->in_on;
@@ -49,7 +49,7 @@ class GpioController extends Controller
         $in_pulldown = $request->in_pulldown;
 
         $dataGpio = [
-            "name_gpio" => $name_type,
+            "name" => $name,
             "time_out" => $time_out,
             "out_set" => $out_set,
             "out_reset" => $out_reset,
@@ -105,7 +105,7 @@ class GpioController extends Controller
     public function destroy($id)
     {
         $itemDelete = MissionGpio::where('id', $id)->first();
-        $itemName =  "$itemDelete->mode#$itemDelete->name_gpio#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
         //function at controller.php
         $this->updateStepDelete($itemName);
 

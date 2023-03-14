@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MissionVariable extends Model
 {
     use HasFactory;
-    protected $fillable = ['name_function_variable', 'time_out', 'mode', 'command_action', 'name_variable', 'focus_value'];
+    protected $fillable = ['name', 'time_out', 'mode', 'command_action', 'name_variable', 'focus_value'];
     public $timestamps = false;
 
 }

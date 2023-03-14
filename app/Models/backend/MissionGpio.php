@@ -9,7 +9,7 @@ class MissionGpio extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_gpio',
+        'name',
         'time_out',
         'mode',
         'out_set',

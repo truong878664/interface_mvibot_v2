@@ -319,7 +319,7 @@ export function createMapPosition() {
     $(".submit-btn-position").onclick = (e) => {
         e.preventDefault();
         console.log(123);
-        const name_position = $('[name="name_position"]');
+        const name = $('[name="name_position"]');
         const x = $('[name="x"]');
         const y = $('[name="y"]');
         const z = $('[name="z"]');
@@ -331,7 +331,7 @@ export function createMapPosition() {
         const map = $(".name-map-active");
 
         const dataPosition = {
-            name_position: name_position.value,
+            name: name.value,
             x: x.value,
             y: y.value,
             z: z.value,
@@ -345,7 +345,7 @@ export function createMapPosition() {
         };
 
         if (
-            name_position.value &&
+            name.value &&
             x.value &&
             y.value &&
             z.value &&
@@ -356,7 +356,7 @@ export function createMapPosition() {
             mode_child.value
         ) {
             addFunctionStep("position", dataPosition);
-            name_position.value = "";
+            name.value = "";
             time_out.value = -1;
             mode_position.value = "normal";
             mode_child.value = -1;

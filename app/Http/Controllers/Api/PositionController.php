@@ -84,7 +84,7 @@ class PositionController extends Controller
     public function destroy($id)
     {
         $itemDelete = MissionPosition::where('id', $id)->first();
-        $itemName =  "$itemDelete->mode#$itemDelete->name_position#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
 
          //function at controller.php
         $this->updateStepDelete($itemName);

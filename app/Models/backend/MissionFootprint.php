@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MissionFootprint extends Model
 {
     use HasFactory;
-    protected $fillable = ['name_footprint','x1', 'y1', 'x2', 'y2'];
+    protected $fillable = ['name','x1', 'y1', 'x2', 'y2'];
     public $timestamps = false;
 }

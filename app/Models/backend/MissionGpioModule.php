@@ -10,7 +10,7 @@ class MissionGpioModule extends Model
     use HasFactory;
     protected $table = "mission_gpio_modules";
     protected $fillable = [
-        'name_gpio',
+        'name',
         'name_gpio_module',
         'time_out',
         'mode',
