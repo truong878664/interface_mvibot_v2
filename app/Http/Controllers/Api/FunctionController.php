@@ -114,14 +114,23 @@ class FunctionController extends Controller
      */
     public function destroy(Request $request, $function)
     {
+        $deletes = $request->deletes;
 
         // $idFunction = $request->idSelects;
         // $table = $request->table;
 
         // $functions = DB::table($table)->whereIn("id", $idFunction)->get();
 
-        // $itemDelete = MissionFootprint::where('id', $id)->first();
-        // $itemName =  "$itemDelete->mode#$itemDelete->name_footprint#$itemDelete->id";
+        $functions = DB::table($function)->whereIn('id', $deletes)->get();
+        $a = [];
+        foreach ($functions as $function2) {
+            $name = $function2->name_footprint || $function2->name_marker || $function2->name_gpio || $function2->name_position || $function2->name_sleep || $function2->name_sounds || $function2->name_variable;
+            $itemName =  "$function2->mode#$function2->name_function_variable#$function2->id";
+
+            array_push($a, $name);
+            // $this->updateStepDelete($itemName);
+
+        }
 
 
 
@@ -129,7 +138,7 @@ class FunctionController extends Controller
         // $this->updateStepDelete($itemName);
 
 
-        $deletes = $request->deletes;
-        DB::table($function)->whereIn('id', $deletes)->delete();
+        // DB::table($function)->whereIn('id', $deletes)->delete();
+        return $a;
     }
 }

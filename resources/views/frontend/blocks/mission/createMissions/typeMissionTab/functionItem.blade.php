@@ -9,12 +9,12 @@
                 <label for="checkall-{{$type}}" class="font-bold">Check all</label>
             </div>
             <span>With selected: </span>
-            <button data-type="{{$type}}" class="ml-4 btn delete-multi-type-mission-btn">
+            <button data-type="{{$type}}" class="ml-4 btn delete-multi-type-mission-btn multi-btn disabled:opacity-50 multi-btn">
                 <i class="fa-regular fa-trash-can text-red-500"></i>
                 <span class="font-bold">Delete</span>
             </button>
             
-            <button data-type="{{$type}}" class=" ml-4 btn copy-multi-type-mission-btn">
+            <button data-type="{{$type}}" class=" ml-4 btn copy-multi-type-mission-btn multi-btn disabled:opacity-50 multi-btn">
                 <i class="fa-regular fa-copy text-sky-600 "></i>
                 <span class="font-bold">Copy</span>
             </button>

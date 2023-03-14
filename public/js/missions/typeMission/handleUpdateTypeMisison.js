@@ -12,7 +12,6 @@ export default function handleUpdateTypeMission() {
             handleCancelUpdateMission();
             handleUpdateMission(typeMissionId);
             handleOverlayUpdate("show", 'type-mission');
-            
         }
     });
 }

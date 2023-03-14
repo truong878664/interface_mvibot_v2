@@ -31,8 +31,7 @@ export default function handleEditFunctionType() {
                 functionItem.querySelector(".value-function-item").value
             );
 
-            // handleOverlayUpdate("show", "function-mission"); 
-            handleShowFormFunction(true, typeFunction)
+            handleShowFormFunction(true, typeFunction);
 
             switch (typeFunction) {
                 case "footprint":
@@ -213,12 +212,17 @@ export default function handleEditFunctionType() {
 
                 case "position":
                     $(".point-function-btn").click();
-                    console.log(valueFunction)
+                    console.log(valueFunction);
                     handleUpdateStep("position");
-                    createMapPosition()
+                    createMapPosition();
                     // createPose(view, tfClient, valueFunction.color)
                     displayPoint(valueFunction.x, valueFunction.y);
-                    displayPose(valueFunction.x, valueFunction.y, valueFunction.z, valueFunction.w);
+                    displayPose(
+                        valueFunction.x,
+                        valueFunction.y,
+                        valueFunction.z,
+                        valueFunction.w
+                    );
             }
         };
     });
@@ -246,7 +250,7 @@ export default function handleEditFunctionType() {
             handleResetData();
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
-            handleShowFormFunction(false, type)
+            handleShowFormFunction(false, type);
         };
 
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
@@ -258,7 +262,7 @@ export default function handleEditFunctionType() {
 
             $(`.submit-btn-${type}`).classList.remove("hidden");
             refActiveTypeMission.click();
-            handleShowFormFunction(false, type)
+            handleShowFormFunction(false, type);
         };
 
         function handleResetData() {
@@ -272,13 +276,9 @@ export default function handleEditFunctionType() {
                 currentIdUpdate;
             });
 
-            if (type == "gpio" || type == "gpio_module") {
-                resetGpio();
-            }
+            (type == "gpio" || type == "gpio_module") && resetGpio();
 
-            if (type == "variable") {
-                resetVariable();
-            }
+            type == "variable" && resetVariable();
         }
     }
 
@@ -556,9 +556,9 @@ export default function handleEditFunctionType() {
                     toggerMessage("error", "Please enter all inputs");
                     return false;
                 }
-                case "position":
-                    console.log(13)    
-                break
+            case "position":
+                console.log(13);
+                break;
         }
         updateStepValue(currentMission);
     }

@@ -16,7 +16,6 @@ export default function renderDataFunction(data, type) {
     </div>
     `;
 
-
     htmlDataFunction[type].length = 0;
 
     const listFunction = JSON.parse(JSON.stringify(data));
@@ -35,8 +34,8 @@ export default function renderDataFunction(data, type) {
 
         htmlDataFunction[type].push(
             `<div data-id=${item.id} function-id=${item.id} function-type="${item.mode}"
-            class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc]">
-            <input type="hidden" value='${JSON.stringify(item)}' class="value-function-item"/>
+                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc]">
+                <input type="hidden" value='${JSON.stringify(item)}' class="value-function-item"/>
                 <div class="flex">
                     <input data-select-function-id=${item.id} data-type="${item.mode}" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">

@@ -21,7 +21,6 @@ export function handleCancelUpdateMission() {
         render(valueNormalMissionArray, ".normal-steps-wrapper");
         showUpdateBtn(false, "normal");
 
-        
         $(".delete-mission-btn.not-allowed")?.classList.remove("not-allowed");
         handleOverlayUpdate("hidden", "type-mission");
     };

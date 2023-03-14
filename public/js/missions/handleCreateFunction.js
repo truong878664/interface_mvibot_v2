@@ -26,11 +26,12 @@ export function handleShowFormFunction(isShow, typeFunction) {
     );
 
     isShow && (tabFunctionActive = typeFunction);
-}
+} 
 
 function handleHideFormFunction() {
     $(".function-item-form-wrapper").onclick = function (e) {
         if (e.target !== this) return;
         handleShowFormFunction(false, tabFunctionActive);
+    
     };
 }

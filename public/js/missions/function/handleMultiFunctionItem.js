@@ -70,7 +70,10 @@ function handleDeleteMultiFunction() {
         fetchCustom(
             `/api/function/mission_${type}s`,
             "DELETE",
-            (data) => toggerMessage("success", data.message),
+            (data) => {
+                // toggerMessage("success", data.message)
+                console.log(data)
+            },
             { deletes: idSelects }
         );
 
