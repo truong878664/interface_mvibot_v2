@@ -21,12 +21,12 @@ class CreateMissionsController extends Controller
     }
     public function createMissions(Request $request)
     {
-        $name_mission = $request->input('name_mission');
+        $name = $request->name;
         $type = $request->type;
         $created_at = Carbon::now();
 
         $data = [
-            "name_mission" => $name_mission,
+            "name" => $name,
             "created_at" => $created_at,
             "type" => $type
         ];

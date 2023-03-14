@@ -40,7 +40,7 @@
                 class=" flex relative items-end w-full h-full text-[#fff] href-mission">
                 <input
                     class="text-3xl bg-transparent border-[2px] rounded-lg border-transparent p-2 w-full pointer-events-none name-mission"
-                    value="{{ $itemMission->name_mission }}" disabled />
+                    value="{{ $itemMission->name }}" disabled />
 
             </a>
         </div>

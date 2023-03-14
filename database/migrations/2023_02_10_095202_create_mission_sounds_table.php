@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_sounds')) {
             Schema::create('mission_sounds', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_sound');
+                $table->string('name');
                 $table->string('time_out')->default(-1);
                 $table->string('mode')->default('sound');
                 $table->string('music_mode');

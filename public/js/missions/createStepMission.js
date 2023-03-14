@@ -133,6 +133,7 @@ function removeMapTag() {
 ///
 
 export function addFunctionStep(type, data) {
+    
     fetch(`/api/${type}`, {
         headers: {
             Accept: "application/json",

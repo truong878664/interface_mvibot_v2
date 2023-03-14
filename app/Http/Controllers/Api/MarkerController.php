@@ -55,7 +55,7 @@ class MarkerController extends Controller
 
 
         $dataMarker = [
-            'name_marker' => $name_type,
+            'name' => $name_type,
             'marker_type' => $marker_type,
             'marker_dir' => $marker_dir,
             'off_set_x1' => $off_set_x1,
@@ -117,7 +117,7 @@ class MarkerController extends Controller
     {
         $itemDelete = MissionMarker::where('id', $id)->first();
 
-        $itemName =  "$itemDelete->mode#$itemDelete->name_marker#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
 
         //function at controller.php
         $this->updateStepDelete($itemName);

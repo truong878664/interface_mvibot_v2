@@ -177,6 +177,8 @@ $(".submit-btn-gpio").onclick = () => {
         };
 
         addFunctionStep("gpio", data);
+
+        console.log(data)
         toggerMessage("success", "save gpio successfully");
 
         resetGpio();

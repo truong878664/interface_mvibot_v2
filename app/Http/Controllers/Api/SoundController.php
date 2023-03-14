@@ -83,7 +83,7 @@ class SoundController extends Controller
     public function destroy($id)
     {
         $itemDelete = MissionSound::where('id', $id)->first();
-        $itemName =  "$itemDelete->mode#$itemDelete->name_sound#$itemDelete->id";
+        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
 
         //function at controller.php
         $this->updateStepDelete($itemName);

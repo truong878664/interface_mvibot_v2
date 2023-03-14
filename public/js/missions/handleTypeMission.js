@@ -61,15 +61,6 @@ export function loadDataFunction() {
 function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
     data.map((item) => {
-        const nameStep =
-            item.name_position ||
-            item.name_gpio ||
-            item.name_marker ||
-            item.name_sleep ||
-            item.name_footprint ||
-            item.name_function_variable ||
-            item.name_sound;
-
         const description =
             (item.marker_type && "Type: " + item.marker_type) ||
             (item.music_start == 1 && "Type: start") ||
@@ -89,11 +80,11 @@ function renderDataFunction(data, type) {
                         <span class="mr-2">Name:</span>
                         <span class="name-mission-${
                             item.mode
-                        }">${nameStep}</span>
+                        }">${item.name}</span>
                         </div>
                     <span>${description}</span>
             </div>
-                <input value="${item.mode}#${nameStep}#${item.id}" 
+                <input value="${item.mode}#${item.name}#${item.id}" 
                     type="hidden" class="value-type-mission-function-item"/>
                 <div class="">
                     <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">

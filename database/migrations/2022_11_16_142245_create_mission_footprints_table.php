@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_footprints')) {
             Schema::create('mission_footprints', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_footprint');
+                $table->string('name');
                 $table->string('mode')->default('footprint');
                 $table->integer('time_out')->default(-1);
                 $table->float('x1', 5, 3);

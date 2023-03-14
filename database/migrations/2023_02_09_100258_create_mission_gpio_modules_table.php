@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_gpio_modules')) {
             Schema::create('mission_gpio_modules', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_gpio');
+                $table->string('name');
                 $table->string('name_gpio_module');
                 $table->integer('time_out')->default(-1);
                 $table->string('mode')->default('gpio_module');

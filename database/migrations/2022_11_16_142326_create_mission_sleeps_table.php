@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('mission_sleeps')) {
             Schema::create('mission_sleeps', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_sleep');
+                $table->string('name');
                 $table->integer('time_out')->default(-1);
                 $table->string('mode')->default('sleep');
                 $table->integer('time_sleep');

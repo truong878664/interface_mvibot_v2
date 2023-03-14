@@ -106,7 +106,7 @@ function handleEditNameMission() {
                 if (oldName != nameElement.value && nameElement.value != "") {
                     const dataUpdate = {
                         method: "update-name",
-                        name_mission: nameElement.value,
+                        name: nameElement.value,
                     };
 
                     console.log(missionItem);

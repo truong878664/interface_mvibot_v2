@@ -17,7 +17,7 @@ return new class extends Migration
 
             Schema::create('mission_positions', function (Blueprint $table) {
                 $table->id();
-                $table->string('name_position');
+                $table->string('name');
                 $table->integer('time_out')->default(-1);
                 $table->string('mode')->default('position');
                 $table->float('x');
