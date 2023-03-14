@@ -303,7 +303,7 @@ class MiController extends Controller
             $item = $items[0];
             switch ($item->mode) {
                 case 'position':
-                    $name_position = $item->name_position;
+                    $name_position = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $x_position = $item->x;
@@ -314,14 +314,14 @@ class MiController extends Controller
                     return "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)";
                     break;
                 case 'sleep':
-                    $name_sleep = $item->name_sleep;
+                    $name_sleep = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $time_sleep = $item->time_sleep;
                     return "(name:$name_sleep|time_out:$time_out|mode:$mode|data:~time_sleep=$time_sleep~)";
                     break;
                 case 'footprint':
-                    $name_footprint = $item->name_footprint;
+                    $name_footprint = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $x1 = $item->x1;
@@ -331,7 +331,7 @@ class MiController extends Controller
                     return "(name:$name_footprint|time_out:$time_out|mode:$mode|data:~x1=$x1~~y1=$y1~~x2=$x2~~y2=$y2~)";
                     break;
                 case 'gpio':
-                    $name_gpio = $item->name_gpio;
+                    $name_gpio = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $out_set = $item->out_set;
@@ -351,7 +351,7 @@ class MiController extends Controller
 
                     break;
                 case 'gpio_module':
-                    $name_function_gpio_module = $item->name_gpio;
+                    $name_function_gpio_module = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $out_set = $item->out_set;
@@ -361,7 +361,7 @@ class MiController extends Controller
                     $in_pullup = $item->in_pullup;
                     $in_pulldown = $item->in_pulldown;
 
-                    $name_seri = "~name_seri=$item->name_gpio_module~";
+                    $name_seri = "~name_seri=$item->name~";
 
                     strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
                     strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";
@@ -373,7 +373,7 @@ class MiController extends Controller
 
                     break;
                 case 'marker':
-                    $name_marker = $item->name_marker;
+                    $name_marker = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $marker_type = $item->marker_type;
@@ -404,11 +404,11 @@ class MiController extends Controller
                     return "(name:$name_marker|time_out:$time_out|mode:$mode|data:~marker_type=$marker_type~$data_marker_dir$data_off_set_x1$data_off_set_x2$data_off_set_y1$data_off_set_y2$data_off_set_dis$data_off_set_angle$data_sx1$data_sx2$data_sy1$data_sy2)";
                     break;
                 case 'variable':
-                    $name_function_variable = $item->name_function_variable;
+                    $name_function_variable = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $command_action = $item->command_action;
-                    $name_variable = $item->name_variable;
+                    $name_variable = $item->name;
                     $focus_value = $item->focus_value;
 
                     $newVarMission = "--+/front/$name_variable/back/--+";
@@ -424,7 +424,7 @@ class MiController extends Controller
                     break;
 
                 case 'sound':
-                    $name_sound = $item->name_sound;
+                    $name_sound = $item->name;
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $music_start = $item->music_start;

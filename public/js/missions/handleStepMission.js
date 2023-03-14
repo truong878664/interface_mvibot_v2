@@ -17,6 +17,7 @@ translatesStepsMission(currentMission);
 fullScreenBlockStep();
 
 function renderBlockStep(translate = false) {
+    console.log('123')
     translate && translatesStepsMission(currentMission);
     loading();
     fetch(`/api/mi/${currentMission}`)

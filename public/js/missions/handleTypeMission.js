@@ -311,6 +311,7 @@ function addTypeMission(data, typeSave) {
 
 export function updateBlockStep(id, data) {
     loading();
+
     fetch(`/api/mi/${id}`, {
         headers: {
             Accept: "application/json",

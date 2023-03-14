@@ -69,8 +69,7 @@ class FunctionController extends Controller
         foreach ($functions as $function) {
             $newFunction = $function;
             unset($newFunction->id);
-            $nameFunction = ($function->mode === 'variable') ? 'name_function_' . $function->mode : (($function->mode === 'gpio_module') ? 'name_gpio' : ('name_' . $function->mode));
-            $newFunction->$nameFunction = $function->$nameFunction . "_copy";
+            $newFunction->name= $function->name . "_copy";
             DB::table($table)->insert((array) $newFunction);
         };
         return ['message' => 'copy successfully!'];
@@ -120,29 +119,15 @@ class FunctionController extends Controller
     {
         $deletes = $request->deletes;
 
-        // $idFunction = $request->idSelects;
-        // $table = $request->table;
-
-        // $functions = DB::table($table)->whereIn("id", $idFunction)->get();
 
         $functions = DB::table($function)->whereIn('id', $deletes)->get();
-        $a = [];
+        
         foreach ($functions as $function2) {
-            $name = $function2->name_footprint || $function2->name_marker || $function2->name_gpio || $function2->name_position || $function2->name_sleep || $function2->name_sounds || $function2->name_variable;
-            $itemName =  "$function2->mode#$function2->name_function_variable#$function2->id";
-
-            array_push($a, $name);
-            // $this->updateStepDelete($itemName);
-
+            $itemName =  "$function2->mode#$function2->name#$function2->id";
+            $this->updateStepDelete($itemName);
         }
 
-
-
-        // //function at controller.php
-        // $this->updateStepDelete($itemName);
-
-
-        // DB::table($function)->whereIn('id', $deletes)->delete();
-        return $a;
+        DB::table($function)->whereIn('id', $deletes)->delete();
+        return ['message'=> 'delete function item successfully!', 'deleted' => true];
     }
 }

@@ -1,5 +1,6 @@
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
+import { renderBlockStep } from "../handleStepMission.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 
 export default function handleMultiFunction() {
@@ -59,7 +60,7 @@ function removeFunctionChecked(type) {
 function handleDeleteMultiFunction() {
     const deleteBtns = $$(".delete-multi-function-btn");
     deleteBtns.forEach((element) =>
-        element.addEventListener("click", deleteFunction)
+        element.onclick=  deleteFunction
     );
     function deleteFunction(e) {
         const type = this.dataset.type;
@@ -71,8 +72,9 @@ function handleDeleteMultiFunction() {
             `/api/function/mission_${type}s`,
             "DELETE",
             (data) => {
-                // toggerMessage("success", data.message)
-                console.log(data)
+                toggerMessage("success", data.message)
+
+                data.deleted && renderBlockStep(true)
             },
             { deletes: idSelects }
         );
