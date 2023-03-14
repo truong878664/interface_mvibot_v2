@@ -21,14 +21,7 @@ export default function renderDataFunction(data, type) {
     const listFunction = JSON.parse(JSON.stringify(data));
 
     data.map((item, index) => {
-        const nameStep =
-            item.name_position ||
-            item.name_gpio ||
-            item.name_marker ||
-            item.name_sleep ||
-            item.name_footprint ||
-            item.name_function_variable ||
-            item.name_sound;
+        
 
         const dataFunctionDetail = dataRenderFunction(listFunction, index);
 
@@ -47,10 +40,10 @@ export default function renderDataFunction(data, type) {
                         </div>
                         <div class="flex">
                             <span class="mr-2">Name:</span>
-                            <span class="text-sky-600 font-bold name-mission-${item.mode}">${nameStep}</span>
+                            <span class="text-sky-600 font-bold name-mission-${item.mode}">${item.name}</span>
                         </div>
                         <span>${dataFunctionDetail}</span>
-                        <input value="${item.mode}#${nameStep}#${item.id}" type="hidden" class="value-type-mission-function-item"/>
+                        <input value="${item.mode}#${item.name}#${item.id}" type="hidden" class="value-type-mission-function-item"/>
                     </div>
                 </div>
                 ${BUTTON_ACTION_FUNCTION}                
@@ -62,14 +55,8 @@ export default function renderDataFunction(data, type) {
         delete listFunction[index].id;
         delete listFunction[index].mode;
         delete listFunction[index].time_out;
+        delete listFunction[index].name;
 
-        delete listFunction[index].name_position;
-        delete listFunction[index].name_gpio;
-        delete listFunction[index].name_marker;
-        delete listFunction[index].name_sleep;
-        delete listFunction[index].name_footprint;
-        delete listFunction[index].name_function_variable;
-        delete listFunction[index].name_sound;
         delete listFunction[index].color_position;
         delete listFunction[index].created_at;
         delete listFunction[index].updated_at;

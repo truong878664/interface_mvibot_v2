@@ -61,55 +61,6 @@ export function loadDataFunction() {
         });
 }
 
-<<<<<<< HEAD
-
-=======
-function renderDataFunction(data, type) {
-    htmlDataFunction[type].length = 0;
-    data.map((item) => {
-        const description =
-            (item.marker_type && "Type: " + item.marker_type) ||
-            (item.music_start == 1 && "Type: start") ||
-            (item.music_start == 0 && "Type: stop") ||
-            "";
-
-        htmlDataFunction[type].push(
-            `<div function-id=${item.id} function-type="${item.mode}"
-                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl">
-            <input type="hidden" 
-                value='${JSON.stringify(item)}' class="value-function-item"/>
-            <div class="flex flex-col">
-                    <span class=" font-bold font-3xl capitalize">${
-                        item.mode
-                    }</span>
-                    <div class="flex">
-                        <span class="mr-2">Name:</span>
-                        <span class="name-mission-${
-                            item.mode
-                        }">${item.name}</span>
-                        </div>
-                    <span>${description}</span>
-            </div>
-                <input value="${item.mode}#${item.name}#${item.id}" 
-                    type="hidden" class="value-type-mission-function-item"/>
-                <div class="">
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                   
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-
-                    <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-            </div>`
-        );
-    });
-}
->>>>>>> layout-mission
 
 //normal
 export const valueNormalMissionArray = [];

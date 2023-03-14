@@ -49,11 +49,11 @@ export default function handleEditFunctionType() {
                     x2_footprint.value = valueFunction.x2;
                     y1_footprint.value = valueFunction.y1;
                     y2_footprint.value = valueFunction.y2;
-                    name_footprint.value = valueFunction.name_footprint;
+                    name_footprint.value = valueFunction.name;
                     handleUpdateStep("footprint");
 
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_footprint;
+                    oldName = valueFunction.name;
 
                     break;
                 case "gpio":
@@ -62,7 +62,7 @@ export default function handleEditFunctionType() {
                     const name_gpio = $(".name_gpio");
                     const time_out_gpio = $(".time_out_gpio");
 
-                    name_gpio.value = valueFunction.name_gpio;
+                    name_gpio.value = valueFunction.name;
                     time_out_gpio.value = valueFunction.time_out;
 
                     for (const item in dataGpio) {
@@ -73,7 +73,7 @@ export default function handleEditFunctionType() {
 
                     handleUpdateStep("gpio");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_gpio;
+                    oldName = valueFunction.name;
                     break;
                 case "gpio_module":
                     $(".gpio-module-function-btn").click();
@@ -84,7 +84,7 @@ export default function handleEditFunctionType() {
                     const name_gpio_module = $(".name_gpio_module");
                     const time_out_gpio_module = $(".time_out_gpio_module");
 
-                    name_function_gpio_module.value = valueFunction.name_gpio;
+                    name_function_gpio_module.value = valueFunction.name;
                     name_gpio_module.value = valueFunction.name_gpio_module;
                     time_out_gpio_module.value = valueFunction.time_out;
 
@@ -96,7 +96,7 @@ export default function handleEditFunctionType() {
 
                     handleUpdateStep("gpio_module");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_gpio;
+                    oldName = valueFunction.name;
                     break;
                 case "marker":
                     $(".marker-function-btn").click();
@@ -119,7 +119,7 @@ export default function handleEditFunctionType() {
                     } = inputFunction("marker");
 
                     name_marker
-                        ? (name_marker.value = valueFunction.name_marker)
+                        ? (name_marker.value = valueFunction.name)
                         : "";
                     marker_type
                         ? (marker_type.value = valueFunction.marker_type)
@@ -151,17 +151,17 @@ export default function handleEditFunctionType() {
                     sy2 ? (sy2.value = valueFunction.sy2) : "";
                     handleUpdateStep("marker");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_marker;
+                    oldName = valueFunction.name;
                     break;
                 case "sleep":
                     $(".sleep-function-btn").click();
                     const { name_sleep, time_sleep } = inputFunction("sleep");
 
-                    name_sleep.value = valueFunction.name_sleep;
+                    name_sleep.value = valueFunction.name;
                     time_sleep.value = valueFunction.time_sleep;
                     handleUpdateStep("sleep");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_sleep;
+                    oldName = valueFunction.name;
                     break;
 
                 case "variable":
@@ -172,7 +172,7 @@ export default function handleEditFunctionType() {
                     const focus_value = $(".focus_value_input");
 
                     name_function_variable.value =
-                        valueFunction.name_function_variable;
+                        valueFunction.name;
                     name_variable.value = valueFunction.name_variable;
                     command_action.value =
                         valueFunction.command_action == "equal" ? "=" : "==";
@@ -184,14 +184,14 @@ export default function handleEditFunctionType() {
 
                     handleUpdateStep("variable");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_function_variable;
+                    oldName = valueFunction.name;
                     break;
 
                 case "sound":
                     $(".sound-function-btn").click();
                     $(".sound-btn.active").classList.remove("active");
 
-                    $(".name_function_sound").value = valueFunction.name_sound;
+                    $(".name_function_sound").value = valueFunction.name;
                     if (valueFunction.music_start == 1) {
                         $(".sound-start-btn").classList.add("active");
                         let mode;
@@ -207,7 +207,7 @@ export default function handleEditFunctionType() {
 
                     handleUpdateStep("sound");
                     currentIdUpdate = valueFunction.id;
-                    oldName = valueFunction.name_sound;
+                    oldName = valueFunction.name;
                     break;
 
                 case "position":

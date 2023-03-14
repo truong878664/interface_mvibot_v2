@@ -26,18 +26,22 @@ class FunctionController extends Controller
     public function index()
     {
         $mapActive = Map::first();
+        if($mapActive) {
 
-        $data = [
-            'footprint' => MissionFootprint::all(),
-            'gpio' => MissionGpio::all(),
-            'marker' => MissionMarker::all(),
-            'sleep' => MissionSleep::all(),
-            'position' => MissionPosition::where('map', $mapActive->name_map_active)->get(),
-            'gpio_module' => MissionGpioModule::all(),
-            'variable' => MissionVariable::all(),
-            'sound' => MissionSound::all(),
-        ];
-        return $data;
+            $data = [
+                'footprint' => MissionFootprint::all(),
+                'gpio' => MissionGpio::all(),
+                'marker' => MissionMarker::all(),
+                'sleep' => MissionSleep::all(),
+                'position' => MissionPosition::where('map', $mapActive->name_map_active)->get(),
+                'gpio_module' => MissionGpioModule::all(),
+                'variable' => MissionVariable::all(),
+                'sound' => MissionSound::all(),
+            ];
+            return $data;
+        } else {
+            return ['message' => 'dont have map'];
+        }
     }
 
     /**
