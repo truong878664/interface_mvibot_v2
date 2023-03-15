@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MViBot</title>
+    <title>MViBot | {{ isset($title) ? $title : '' }}</title>
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
@@ -61,7 +61,8 @@
                         <i class="fa-regular fa-bookmark"></i>
                     </div>
                 </button>
-                <div class="absolute top-full w-[200px] bg-[#fff] shadow-sm shadow-[#ccc] text-[#000] text-2xl p-4 rounded-md hidden">
+                <div
+                    class="absolute top-full w-[200px] bg-[#fff] shadow-sm shadow-[#ccc] text-[#000] text-2xl p-4 rounded-md hidden">
                     <span>Bookmark add</span>
                     <div class="flex my-2">
                         <label for="name-bookmark" class="mr-2">name</label>
@@ -69,7 +70,8 @@
                     </div>
                     <div class="flex justify-end items-center">
                         <button class="btn float-right btn self-end px-4 py-1 rounded-full border mr-2">Remove</button>
-                        <button class="btn float-right btn bg-sky-400 text-[#fff] border self-end px-4 py-1 rounded-full">Done</button>
+                        <button
+                            class="btn float-right btn bg-sky-400 text-[#fff] border self-end px-4 py-1 rounded-full">Done</button>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ export default function bookmark() {
     const dataBookmark = JSON.parse(localStorage.getItem("bookmarks"));
     renderBookmark(dataBookmark);
     checkIsBookmark(dataBookmark);
+    console.log(document.title)
 }
 
 function handleAddBookmark() {
@@ -81,7 +82,7 @@ function renderBookmark(data) {
     $(".bookmark-wrapper").innerHTML = htmlBookmark.join("");
 }
 function checkIsBookmark(data) {
-    const pathName = location.pathname;
+    const pathName = location.pathname + location.search;
     const isBookmark = !!data.find((item) => item.link === pathName);
     isBookmark && ($(".bookmark-btn").dataset.bookmark = "active");
 }

@@ -11,7 +11,8 @@ class mappingController extends Controller
     public function index()
     {
         $robotSlam = StatusRobot::where('mode', 'slam')->get()->toArray();
+        $title = "Mapping";
         
-        return view('frontend.pages.mapping.mapping', compact('robotSlam'));
+        return view('frontend.pages.mapping.mapping', compact('robotSlam', 'title'));
     }
 }

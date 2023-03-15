@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index() {
         $robots = BackendRobot::all();
-        return view('frontend.pages.home.home', compact('robots'));
+        $title = 'home';
+        return view('frontend.pages.home.home', compact('robots', 'title'));
     }
 }

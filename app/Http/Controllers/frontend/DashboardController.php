@@ -10,6 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.dashboard');
+        $title = "Dashboard";
+        return view('frontend.pages.dashboard', compact('title'));
     }
 }

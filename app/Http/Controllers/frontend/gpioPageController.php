@@ -12,6 +12,7 @@ class gpioPageController extends Controller
     {
 
         $allRobot = BackendRobot::all();
-        return view('frontend.pages.gpio.gpio', compact('allRobot'));
+        $title = "Gpio";
+        return view('frontend.pages.gpio.gpio', compact('allRobot', 'title'));
     }
 }

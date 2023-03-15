@@ -40,6 +40,8 @@ return new class extends Migration
         Schema::table('mission_variables', function(Blueprint $table) {
             $table->renameColumn( 'name_function_variable', 'name');
         });
+
+      
     }
 
     /**

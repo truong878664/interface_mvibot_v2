@@ -10,7 +10,9 @@ class locationController extends Controller
 {
     public  function index()
     {
+        $title = "Localization";
+        
         $robotNavigation = StatusRobot::where('mode', 'navigation')->get();
-        return view('frontend.pages.location.location', compact('robotNavigation'));
+        return view('frontend.pages.location.location', compact('robotNavigation', 'title'));
     }
 }

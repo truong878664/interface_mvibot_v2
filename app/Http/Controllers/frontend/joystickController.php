@@ -11,6 +11,7 @@ class joystickController extends Controller
     public function index()
     {
         $allRobot = BackendRobot::all()->toArray();
-        return view('frontend.pages.joystick.joystick', compact('allRobot'));
+        $title = "joystick";
+        return view('frontend.pages.joystick.joystick', compact('allRobot', 'title'));
     }
 }
