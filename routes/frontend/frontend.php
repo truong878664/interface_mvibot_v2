@@ -24,7 +24,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/user', function () {
-        return view('frontend.pages.user.user');
+        $title = "user";
+        return view('frontend.pages.user.user', compact('title'));
     })->name('user');
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
@@ -33,13 +34,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::prefix('missions')->name('missions.')->group(function () {
             Route::get('/', [MissionsController::class, 'index']);
 
-            Route::get('/select-mission', function() {
-                return view('frontend.pages.missions.selectMission');
+            Route::get('/select-mission', function () {
+                $title = "select mission";
+                return view('frontend.pages.missions.selectMission', compact('title'));
             })->name('select');
 
             Route::get('/type-mission',  [MissionsController::class, 'typeMission'])->name('type-mission');
 
-            // Route::get('/create-point', [MissionsController::class, 'createPoint'])->name('create-point');
             Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
             Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
 

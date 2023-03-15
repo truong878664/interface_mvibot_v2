@@ -11,7 +11,8 @@ class SoundController extends Controller
     public function index()
     {
         $allRobot = Robot::all();
-        return view('frontend.pages.sound.sound', compact('allRobot'));
+        $title = "sound";
+        return view('frontend.pages.sound.sound', compact('allRobot', 'title'));
     }
 
     public function upload(Request $request)

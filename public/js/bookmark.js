@@ -1,23 +1,49 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const iconBookmark = {
+    home: "fa-solid fa-house",
+    dashboard: "fa-solid fa-gamepad",
+    user: "fa-solid fa-user-gear",
+    mission: "fa-solid fa-crosshairs",
+    tracking_mission: "fa-solid fa-circle-right",
+    select_mission: "fa-solid fa-circle-right",
+    map: "fa-solid fa-map-location-dot",
+    status: "fa-solid fa-gauge-high",
+    status_detail: "fa-solid fa-signal",
+    joystick: "fa-solid fa-up-down-left-right",
+    mapping: "fa-solid fa-map",
+    localization: "fa-solid fa-location-dot",
+    gpio: "fa-solid fa-toggle-on",
+    sound: "fa-solid fa-volume-high",
+    setting: "dashboard-content-item-icon",
+    other: "fa-solid fa-book-bookmark",
+};
+
 export default function bookmark() {
     handleAddBookmark();
     const dataBookmark = JSON.parse(localStorage.getItem("bookmarks"));
     renderBookmark(dataBookmark);
     checkIsBookmark(dataBookmark);
-    console.log(document.title)
 }
 
 function handleAddBookmark() {
     $(".bookmark-btn").onclick = (e) => {
+        const title = document.title;
+
         const isActiveBookmark = e.target.dataset.bookmark === "active";
         e.target.dataset.bookmark = isActiveBookmark ? "" : "active";
         const pathName = location.pathname + location.search;
+        const nameBookmark = title.slice(title.indexOf("|") + 1, title.length);
+        const nameBookmarkChange = nameBookmark
+            .trim()
+            .toLowerCase()
+            .replaceAll("-", "_").replaceAll(" ", "_")
+        console.log();
         const dataBookmark = {
             color: "#" + Math.floor(Math.random() * 16777215).toString(16),
-            name: 'Mvibot',
-            icon: "fa-solid fa-book-bookmark",
+            name: nameBookmark || "Mvibot",
+            icon: iconBookmark[nameBookmarkChange] || iconBookmark.other,
             link: pathName,
         };
         !isActiveBookmark

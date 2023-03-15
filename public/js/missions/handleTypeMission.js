@@ -351,6 +351,7 @@ export function render(dataSteps, element) {
         );
     });
     stepsWrapper.innerHTML = htmlStep.join("");
+    stepsWrapper.scrollTop = stepsWrapper.scrollHeight - stepsWrapper.clientHeight;
 }
 
 export function handleMoveStep(data, wrapperItem) {

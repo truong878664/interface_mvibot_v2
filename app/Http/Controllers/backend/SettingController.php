@@ -13,6 +13,7 @@ class SettingController extends Controller
     {
         $allRobot = Robot::all();
         $normalUser = User::where('type', 'user')->get();
-        return view('frontend.pages.setting.setting', compact('allRobot', 'normalUser'));
+        $title = 'Setting';
+        return view('frontend.pages.setting.setting', compact('allRobot', 'normalUser', 'title'));
     }
 }

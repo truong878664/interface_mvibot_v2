@@ -27,7 +27,8 @@ class statusController extends Controller
     {
         $this->getDataStatus();
         $dataStatus = $this->dataStatus;
-        return view('frontend.pages.status.status', compact('dataStatus'));
+        $title = "status";
+        return view('frontend.pages.status.status', compact('dataStatus', 'title'));
     }
     public function allStatus()
     {

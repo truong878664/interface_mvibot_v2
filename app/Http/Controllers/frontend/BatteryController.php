@@ -10,7 +10,7 @@ class BatteryController extends Controller
 {
     public function index() {
         $allRobot = BackendRobot::all()->toArray();
-        $title = "status-details";
+        $title = "status-detail";
         return view('frontend.pages.battery.battery' , compact('allRobot', 'title'));
     }
 }

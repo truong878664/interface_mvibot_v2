@@ -66,7 +66,7 @@ class MissionsController extends Controller
         $map = new mapController();
         $mapActive = $map->mapActive();
 
-        $title = "Create mission";
+        $title = "Mission - $itemRender->name";
 
         return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title'));
     }

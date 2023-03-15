@@ -28,8 +28,6 @@ function start() {
     tabTypeMarker();
     changeImgMarkerDir();
 
-    // renderBlockStep();
-
     handlePointMission();
     handleFootprintMission();
 
