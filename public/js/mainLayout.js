@@ -1,3 +1,4 @@
+import bookmark from "./bookmark.js";
 import { color } from "./color.js";
 
 const $ = document.querySelector.bind(document);
@@ -16,6 +17,7 @@ function connectionFailed() {
 }
 
 activeNabBar();
+bookmark()
 
 const usernameLocal = localStorage.getItem("username");
 

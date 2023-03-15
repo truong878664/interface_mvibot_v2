@@ -9,8 +9,8 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    {{-- <link rel="stylesheet" href="/build/assets/app-c154897e.css"> --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/build/assets/app-aa3f273b.css">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -20,9 +20,29 @@
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
-        
+        .text-clamp-2 {
+            display: block;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* số dòng hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .icon-bookmark-btn {
+            display: none;
+        }
+
+        [data-bookmark=""] .unactive-bookmark {
+            display: block;
+        }
+
+        [data-bookmark="active"] .active-bookmark {
+            display: block;
+        }
     </style>
-    <header class="main-header ajax">
+    <header class="main-header">
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed">
                 <i class="fa-solid fa-satellite-dish"></i>
@@ -32,8 +52,15 @@
             </div>
             <div class="message-map-wrapper">
             </div>
+            <button data-bookmark="" class="btn text-yellow-400 bookmark-btn">
+                <div class="icon-bookmark-btn active-bookmark pointer-events-none">
+                    <i class="fa-solid  fa-bookmark"></i>
+                </div>
+                <div class="icon-bookmark-btn unactive-bookmark pointer-events-none">
+                    <i class="fa-regular fa-bookmark"></i>
+                </div>
+            </button>
         </div>
-
         <div class="user-wrapper">
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
             <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
@@ -51,8 +78,7 @@
     <div class="h-full w-full flex flex-col">
         <section class="nav-bar">
             <ul class="">
-                <div class="bar-item-top">
-                </div>
+                <div class="bar-item-top"></div>
                 <li class="bar-item home">
                     <a href="{{ route('home') }}" class="flex justify-center">
                         <i class="fa-solid fa-house"></i>
@@ -72,7 +98,24 @@
                         <span class="bar-item-title">User</span>
                     </a>
                 </li>
+            </ul>
 
+            <hr>
+
+            <ul class="flex flex-col items-center h-full overflow-x-hidden overflow-y-auto bookmark-wrapper">
+
+                {{-- @for ($i = 0; $i < 25; $i++)
+                    <li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[100px] shadow-sm shadow-[#ccc] hover:shadow-md">
+                        <a href="" class="flex flex-col items-center h-full">
+                            <div class="leading-[0px] icon-bookmark">
+                                <i class="fa-solid fa-book-bookmark "></i>
+                            </div>
+                            <div class="w-full flex-1 flex justify-center items-center">
+                                <p class="text-base text-center text-clamp-2">mission {{ $i }}</p>
+                            </div>
+                        </a>
+                    </li>
+                @endfor --}}
             </ul>
         </section>
 
@@ -91,7 +134,14 @@
                 class="fa-solid fa-angle-right"></i></button>
 
     </div>
-    
+
+    <script>
+        const iconBookmark = document.querySelectorAll('.icon-bookmark')
+        iconBookmark.forEach(element => {
+            const color = ('#' + Math.floor(Math.random() * 16777215).toString(16))
+            element.style.color = color
+        });
+    </script>
 
     @include('frontend.blocks.robots')
     @include('frontend.blocks.message')

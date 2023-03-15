@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\ConfigRobotController;
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
@@ -71,3 +72,5 @@ Route::resource('var', VarController::class);
 Route::resource('sound-file', SoundFileController::class)->only('destroy');
 Route::resource('config-status', ConfigRobotController::class)->only('index');
 Route::resource('status', StatusController::class)->only('show');
+
+Route::resource('bookmark', BookmarkController::class);
