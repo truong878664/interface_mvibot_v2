@@ -57,6 +57,12 @@ return new class extends Migration
                 $table->renameColumn('name_function_variable', 'name');
             }
         });
+
+        Schema::table('missions', function (Blueprint $table) {
+            if (Schema::hasColumn('missions', 'name_mission')) {
+                $table->renameColumn('name_mission', 'name');
+            }
+        });
     }
 
     /**
