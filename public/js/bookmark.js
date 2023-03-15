@@ -2,10 +2,10 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 export default function bookmark() {
-    handleAddBookmark()
-    // renderBookmark();
-    const dataBookmark = JSON.parse(localStorage.getItem('bookmarks'))
-    renderBookmark(dataBookmark)
+    handleAddBookmark();
+    const dataBookmark = JSON.parse(localStorage.getItem("bookmarks"));
+    renderBookmark(dataBookmark);
+    checkIsBookmark(dataBookmark);
 }
 
 function handleAddBookmark() {
@@ -15,13 +15,14 @@ function handleAddBookmark() {
         const pathName = location.pathname + location.search;
         const dataBookmark = {
             color: "#" + Math.floor(Math.random() * 16777215).toString(16),
-            name: 123,
+            name: 'Mvibot',
             icon: "fa-solid fa-book-bookmark",
             link: pathName,
         };
         !isActiveBookmark
             ? saveBookmark(dataBookmark)
             : deleteBookmark(pathName);
+
         !isActiveBookmark && getBookmark();
     };
 }
@@ -85,4 +86,14 @@ function checkIsBookmark(data) {
     isBookmark && ($(".bookmark-btn").dataset.bookmark = "active");
 }
 
-function deleteBookmark(pathName) {}
+function deleteBookmark(pathName) {
+    fetch("/api/bookmark/delete", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pathName }),
+    })
+        .then((res) => res.json())
+        .then((data) => getBookmark());
+}
