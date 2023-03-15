@@ -305,7 +305,7 @@ export default function handleEditFunctionType() {
                         x2: x2_footprint.value,
                         y1: y1_footprint.value,
                         y2: y2_footprint.value,
-                        name_footprint: name_footprint.value,
+                        name: name_footprint.value,
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
 
@@ -338,7 +338,7 @@ export default function handleEditFunctionType() {
                 ) {
                     const data = {
                         type: "gpio",
-                        name_gpio: name_gpio.value,
+                        name: name_gpio.value,
                         time_out: time_out_gpio.value * 1,
                         out_set: dataGpio.out_set.join(","),
                         out_reset: dataGpio.out_reset.join(","),
@@ -388,7 +388,7 @@ export default function handleEditFunctionType() {
                 ) {
                     const data = {
                         type: "gpio_module",
-                        name_gpio: name_function_gpio_module.value,
+                        name: name_function_gpio_module.value,
                         name_gpio_module: name_gpio_module.value,
                         time_out: time_out_gpio_module.value * 1,
                         out_set: dataGpio.out_set.join(","),
@@ -445,7 +445,7 @@ export default function handleEditFunctionType() {
                 ) {
                     const data = {
                         type: "marker",
-                        name_marker: name_marker.value,
+                        name: name_marker.value,
                         marker_type: marker_type.value,
                         marker_dir: marker_dir?.value,
                         off_set_x1: Number(off_set_x1?.value),
@@ -478,7 +478,7 @@ export default function handleEditFunctionType() {
                 if (name_sleep.value && time_sleep.value) {
                     const data = {
                         type: "sleep",
-                        name_sleep: name_sleep.value,
+                        name: name_sleep.value,
                         time_sleep: Number(time_sleep.value),
                     };
                     updateStep(`/api/step/${currentIdUpdate}`, data);
@@ -506,7 +506,7 @@ export default function handleEditFunctionType() {
                 if (name_variable && focus_value && name_function_variable) {
                     const data = {
                         type: "variable",
-                        name_function_variable: name_function_variable.value,
+                        name: name_function_variable.value,
                         command_action,
                         name_variable: name_variable.value,
                         focus_value: focus_value.value,
@@ -542,7 +542,7 @@ export default function handleEditFunctionType() {
                         type: "sound",
                         music_start,
                         music_mode,
-                        name_sound,
+                        name,
                     };
 
                     updateStep(`/api/step/${currentIdUpdate}`, data);
