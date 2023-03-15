@@ -1,3 +1,4 @@
+
 import bookmark from "./bookmark.js";
 import { color } from "./color.js";
 
@@ -5,7 +6,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
-
+bookmark()
 function connected() {
     connectRosBtn?.classList.remove("connection-failed");
     connectRosBtn?.classList.add("connected");
@@ -17,7 +18,6 @@ function connectionFailed() {
 }
 
 activeNabBar();
-bookmark()
 
 const usernameLocal = localStorage.getItem("username");
 

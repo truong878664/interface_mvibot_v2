@@ -52,14 +52,29 @@
             </div>
             <div class="message-map-wrapper">
             </div>
-            <button data-bookmark="" class="btn text-yellow-400 bookmark-btn">
-                <div class="icon-bookmark-btn active-bookmark pointer-events-none">
-                    <i class="fa-solid  fa-bookmark"></i>
+            <div class="relative">
+                <button data-bookmark="" class="btn text-yellow-400 bookmark-btn">
+                    <div class="icon-bookmark-btn active-bookmark pointer-events-none">
+                        <i class="fa-solid  fa-bookmark"></i>
+                    </div>
+                    <div class="icon-bookmark-btn unactive-bookmark pointer-events-none">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </div>
+                </button>
+                <div class="absolute top-full w-[200px] bg-[#fff] shadow-sm shadow-[#ccc] text-[#000] text-2xl p-4 rounded-md hidden">
+                    <span>Bookmark add</span>
+                    <div class="flex my-2">
+                        <label for="name-bookmark" class="mr-2">name</label>
+                        <input id="name-bookmark" type="text" class="w-full px-2" value="Mvibot">
+                    </div>
+                    <div class="flex justify-end items-center">
+                        <button class="btn float-right btn self-end px-4 py-1 rounded-full border mr-2">Remove</button>
+                        <button class="btn float-right btn bg-sky-400 text-[#fff] border self-end px-4 py-1 rounded-full">Done</button>
+                    </div>
                 </div>
-                <div class="icon-bookmark-btn unactive-bookmark pointer-events-none">
-                    <i class="fa-regular fa-bookmark"></i>
-                </div>
-            </button>
+            </div>
+
+
         </div>
         <div class="user-wrapper">
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>

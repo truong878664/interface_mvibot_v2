@@ -117,6 +117,7 @@
                 <h4 class=" mr-4"><span class="font-bold">Simple </span>robot control </h4>
             </div>
         </div> --}}
+        <script type="module" src="/js/home/home.js"></script>
         <style>
             .animation-text {
                 position: relative;
