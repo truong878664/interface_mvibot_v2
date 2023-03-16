@@ -1,4 +1,4 @@
-<form class="flex h-full w-full justify-between hidden marker-item">
+<div class="flex h-full w-full justify-between hidden marker-item">
 
     <div class="w-1/2 ">
         <div class="flex items-stretch">
@@ -81,6 +81,6 @@
 
     {{-- @include('frontend.blocks.mission.createMissions.functionTab.idMission') --}}
 
-    @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'marker'])
+    {{-- @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'bar_marker']) --}}
 
-</form>
+</div>

@@ -24,6 +24,7 @@
         @include('frontend.blocks.mission.createMissions.functionTab.tabMarker.barMarker')
         @include('frontend.blocks.mission.createMissions.functionTab.tabMarker.noneMarkerDis')
         @include('frontend.blocks.mission.createMissions.functionTab.tabMarker.noneMarkerAngle')
+        @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'marker'])
     </div>
 </div>
 <style>

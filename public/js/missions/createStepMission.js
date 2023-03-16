@@ -41,8 +41,6 @@ function start() {
 }
 start();
 
-localStorage.setItem("isUpload", 0);
-
 function nextTabFunction() {
     $(".type-mission-btn-wrapper").onclick = (e) => {
         const typeMissionBtn = e.target.closest(".type-mission-btn");
@@ -131,7 +129,6 @@ function removeMapTag() {
 ///
 
 export function addFunctionStep(type, data) {
-    
     fetch(`/api/${type}`, {
         headers: {
             Accept: "application/json",
@@ -143,7 +140,7 @@ export function addFunctionStep(type, data) {
         .then((res) => res.json())
         .then((data) => {
             $(".function-item-form-wrapper").click();
-            loadDataFunction()
+            loadDataFunction();
         })
         .catch(function (res) {
             console.log(res);
@@ -229,7 +226,7 @@ function handleFootprintMission() {
             y2_footprint.value = "";
             name_footprint.value = "";
             toggerMessage("success", "save footprint successfully");
-            localStorage.setItem("isUpload", 1);
+
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -253,7 +250,6 @@ function handleSleepMission() {
             time_sleep.value = "";
             name_sleep.value = "";
             toggerMessage("success", `save sleep successfully`);
-            localStorage.setItem("isUpload", 1);
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -261,73 +257,65 @@ function handleSleepMission() {
 }
 
 function handleMarkerMission() {
-    $$(".submit-btn-marker").forEach((element) => {
-        element.onclick = (e) => {
-            e.preventDefault();
+    $(".submit-btn-marker").onclick = (e) => {
+        const {
+            name_marker,
+            marker_type,
+            marker_dir,
+            off_set_x1,
+            off_set_x2,
+            off_set_y1,
+            off_set_y2,
+            off_set_dis,
+            off_set_angle,
+            sx1,
+            sx2,
+            sy1,
+            sy2,
+        } = inputFunction("marker");
+        const isAllInputsMarkerFilled =
+            name_marker.value &&
+            (off_set_x1 ? off_set_x1.value : true) &&
+            (off_set_x2 ? off_set_x2.value : true) &&
+            (off_set_y1 ? off_set_y1.value : true) &&
+            (off_set_y2 ? off_set_y2.value : true) &&
+            (off_set_dis ? off_set_dis.value : true) &&
+            (off_set_angle ? off_set_angle.value : true);
 
-            const {
-                name_marker,
-                marker_type,
-                marker_dir,
-                off_set_x1,
-                off_set_x2,
-                off_set_y1,
-                off_set_y2,
-                off_set_dis,
-                off_set_angle,
-                sx1,
-                sx2,
-                sy1,
-                sy2,
-            } = inputFunction("marker");
-            const isAllInputsMarkerFilled =
-                name_marker.value &&
-                (off_set_x1 ? off_set_x1.value : true) &&
-                (off_set_x2 ? off_set_x2.value : true) &&
-                (off_set_y1 ? off_set_y1.value : true) &&
-                (off_set_y2 ? off_set_y2.value : true) &&
-                (off_set_dis ? off_set_dis.value : true) &&
-                (off_set_angle ? off_set_angle.value : true);
+        if (isAllInputsMarkerFilled) {
+            const data = {
+                type: "marker",
+                name_type: name_marker?.value,
+                marker_type: marker_type.value,
+                marker_dir: marker_dir?.value,
+                off_set_x1: off_set_x1?.value,
+                off_set_x2: off_set_x2?.value,
+                off_set_y1: off_set_y1?.value,
+                off_set_y2: off_set_y2?.value,
+                off_set_dis: off_set_dis?.value,
+                off_set_angle: off_set_angle?.value,
+                sx1: sx1?.value,
+                sx2: sx2?.value,
+                sy1: sy1?.value,
+                sy2: sy2?.value,
+            };
+            addFunctionStep("marker", data);
 
-            if (isAllInputsMarkerFilled) {
-                const data = {
-                    type: "marker",
-                    name_type: name_marker?.value,
-                    marker_type: marker_type.value,
-                    marker_dir: marker_dir?.value,
-                    off_set_x1: off_set_x1?.value,
-                    off_set_x2: off_set_x2?.value,
-                    off_set_y1: off_set_y1?.value,
-                    off_set_y2: off_set_y2?.value,
-                    off_set_dis: off_set_dis?.value,
-                    off_set_angle: off_set_angle?.value,
-                    sx1: sx1?.value,
-                    sx2: sx2?.value,
-                    sy1: sy1?.value,
-                    sy2: sy2?.value,
-                };
-                addFunctionStep("marker", data);
+            name_marker ? (name_marker.value = "") : "";
+            off_set_x1 ? (off_set_x1.value = "") : "";
+            off_set_x2 ? (off_set_x2.value = "") : "";
+            off_set_y1 ? (off_set_y1.value = "") : "";
+            off_set_y2 ? (off_set_y2.value = "") : "";
+            off_set_dis ? (off_set_dis.value = "") : "";
+            off_set_angle ? (off_set_angle.value = "") : "";
 
-                name_marker ? (name_marker.value = "") : "";
-                off_set_x1 ? (off_set_x1.value = "") : "";
-                off_set_x2 ? (off_set_x2.value = "") : "";
-                off_set_y1 ? (off_set_y1.value = "") : "";
-                off_set_y2 ? (off_set_y2.value = "") : "";
-                off_set_dis ? (off_set_dis.value = "") : "";
-                off_set_angle ? (off_set_angle.value = "") : "";
-
-                sx1.value = 0.01;
-                sx2.value = 0.01;
-                sy1.value = 0.01;
-                sy2.value = 0.01;
-                toggerMessage(
-                    "success",
-                    `save ${marker_type.value} successfully`
-                );
-                localStorage.setItem("isUpload", 1);
-            } else {
-                toggerMessage("error", "Please enter all inputs");
-            }
-        };
-    });
+            sx1.value = 0.01;
+            sx2.value = 0.01;
+            sy1.value = 0.01;
+            sy2.value = 0.01;
+            toggerMessage("success", `save ${marker_type.value} successfully`);
+        } else {
+            toggerMessage("error", "Please enter all inputs");
+        }
+    };
 }

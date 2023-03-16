@@ -23,7 +23,7 @@ export default function handleRenderTypeMission() {
             data.reverse().map((item) => {
                 const itemHtml = `
                     <div type-mission-id=${item.id} mission-type="${item.type}"
-                        class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item shadow-sm shadow-[#ccc]">
+                        class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item shadow-sm shadow-[#ccc] last:mb-[50px]">
                         <input type="hidden" value="${JSON.stringify(
                             item
                         )}" class="" />

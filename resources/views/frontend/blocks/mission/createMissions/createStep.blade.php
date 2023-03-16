@@ -1,7 +1,56 @@
+<style>
+    .type-mission-btn.active {
+        background-color: rgb(216, 216, 216) !important;
+    }
+
+    .function-btn.active {
+
+        font-weight: bold;
+        
+    }
+
+    .type-mission-function-item.highline {
+        border: 2px solid var(--main-color);
+        border-radius: 10px;
+    }
+
+    .function-item-2.active {
+        border-top: 2px solid var(--main-color);
+    }
+
+    .bg-gpio {
+        background-color: rgba(242, 146, 28, 0.5);
+    }
+
+    .bg-battery {
+        background-color: rgba(28, 146, 242, 0.5);
+    }
+
+    .bg-error {
+        background-color: rgba(255, 39, 39, 0.5);
+    }
+
+    .bg-normal {
+        background-color: rgba(25, 200, 28, 0.5);
+    }
+
+    .type-mission-error {
+        /* display: none; */
+    }
+
+    .function-item-form {
+        animation: zoom 200ms linear;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+    }
+
+   
+</style>
+
 <div class="w-full h-full flex-col flex justify-start relative ">
     <div class="w-full h-full flex flex-col">
 
-        <div class="w-full lg:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px]">
+        <div class="w-full md:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px]">
             {{-- TYPE MISSION --}}
             <div class="bg-[#fff] mr-1 w-1/5 relative rounded-md border">
                 <input type="text" value="{{ $itemRender->id }}" class="hidden" id="current-id-mission">
@@ -183,51 +232,3 @@
 </div>
 
 
-<style>
-    .type-mission-btn.active {
-        background-color: rgb(216, 216, 216) !important;
-    }
-
-    .function-btn.active {
-
-        font-weight: bold;
-        
-    }
-
-    .type-mission-function-item.highline {
-        border: 2px solid var(--main-color);
-        border-radius: 10px;
-    }
-
-    .function-item-2.active {
-        border-top: 2px solid var(--main-color);
-    }
-
-    .bg-gpio {
-        background-color: rgba(242, 146, 28, 0.5);
-    }
-
-    .bg-battery {
-        background-color: rgba(28, 146, 242, 0.5);
-    }
-
-    .bg-error {
-        background-color: rgba(255, 39, 39, 0.5);
-    }
-
-    .bg-normal {
-        background-color: rgba(25, 200, 28, 0.5);
-    }
-
-    .type-mission-error {
-        /* display: none; */
-    }
-
-    .function-item-form {
-        animation: zoom 200ms linear;
-        -webkit-animation-timing-function: linear;
-        animation-timing-function: linear;
-    }
-
-   
-</style>

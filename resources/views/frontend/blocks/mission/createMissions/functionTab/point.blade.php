@@ -18,10 +18,6 @@
 
         </div>
         <div class="absolute top-0 right-0 text-lg flex mt-2 mr-2">
-            <button class="btn text-3xl h-[34px] w-[34px] flex justify-center items-center mr-4 fullscreen-btn">
-                <i class="fa-solid fa-expand full"></i>
-                <i class="fa-solid fa-compress hide"></i>
-            </button>
             <div class="w-[60px] h-[34px]">
                 <label class="switch">
                     <input class="check-click-point" type="checkbox">

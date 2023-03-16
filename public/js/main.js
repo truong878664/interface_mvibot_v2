@@ -1,5 +1,4 @@
 import connectRos from "./rosModule/connectRos.js";
-import { ip } from "../ip.js";
 import topicsListening from "./rosModule/topicsListening.js";
 
 const $ = document.querySelector.bind(document);

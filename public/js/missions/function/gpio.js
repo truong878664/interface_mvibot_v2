@@ -182,7 +182,6 @@ $(".submit-btn-gpio").onclick = () => {
         toggerMessage("success", "save gpio successfully");
 
         resetGpio();
-        localStorage.setItem("isUpload", 1);
     } else {
         toggerMessage(
             "error",
@@ -229,7 +228,6 @@ $(".submit-btn-gpio_module").onclick = () => {
         toggerMessage("success", "save gpio successfully");
 
         resetGpio();
-        localStorage.setItem("isUpload", 1);
     } else {
         toggerMessage(
             "error",

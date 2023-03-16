@@ -20,11 +20,11 @@ import mathYaw from "../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
 import { addFunctionStep } from "../createStepMission.js";
 
-export function createMapPosition() {
-    let positionX = 0;
-    let positionY = 0;
-    let rotateZ = 0;
-    let rotateW = 1;
+export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
+    let positionX = x;
+    let positionY = y;
+    let rotateZ = z;
+    let rotateW = w;
     let rotateZdeg = 0;
 
     removeAllEvent("#position-x");
@@ -274,24 +274,26 @@ export function createMapPosition() {
     let oldY;
     let isTouch = false;
     function tapHandler(e) {
-        isTouch = !!(
-            Math.abs(e.touches[0].pageX - oldX) < 70 &&
-            Math.abs(e.touches[0].pageY - oldY) < 70
-        );
+        if (e.touches.length < 2) {
+            isTouch = !!(
+                Math.abs(e.touches[0].pageX - oldX) < 70 &&
+                Math.abs(e.touches[0].pageY - oldY) < 70
+            );
 
-        oldX = e.touches[0].pageX;
-        oldY = e.touches[0].pageY;
+            oldX = e.touches[0].pageX;
+            oldY = e.touches[0].pageY;
 
-        if (!tapedTwice) {
-            tapedTwice = true;
-            setTimeout(function () {
-                tapedTwice = false;
-                isTouch = false;
-            }, 300);
-            return false;
+            if (!tapedTwice) {
+                tapedTwice = true;
+                setTimeout(function () {
+                    tapedTwice = false;
+                    isTouch = false;
+                }, 300);
+                return false;
+            }
+            e.preventDefault();
+            isTouch && touchSetPoint(e);
         }
-        e.preventDefault();
-        isTouch && touchSetPoint(e);
     }
 
     const touchSetPoint = function (e) {
@@ -394,6 +396,8 @@ export function createMapPosition() {
                 );
             });
     }
+
+    return { viewer, tfClient };
 }
 
 function removeAllEvent(element) {
@@ -405,4 +409,3 @@ function removeAllEvent(element) {
 function resetInputValue(value, ...rest) {
     rest.forEach((item) => (item.value = value));
 }
-

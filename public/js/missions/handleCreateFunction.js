@@ -24,14 +24,13 @@ export function handleShowFormFunction(isShow, typeFunction) {
         "hidden",
         !isShow
     );
-
+    !isShow && ($(".update-btn-wrapper:not(.hidden)")?.querySelector('.update-cancel-btn').click());
     isShow && (tabFunctionActive = typeFunction);
-} 
+}
 
 function handleHideFormFunction() {
     $(".function-item-form-wrapper").onclick = function (e) {
         if (e.target !== this) return;
         handleShowFormFunction(false, tabFunctionActive);
-    
     };
 }

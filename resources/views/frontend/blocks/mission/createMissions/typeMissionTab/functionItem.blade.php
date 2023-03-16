@@ -1,7 +1,5 @@
-<div class="w-full flex-1 flex justify-between overflow-hidden  mb-2">
-    <div class="w-full h-full overflow-auto bg-[#fff] text-xl ">
-
-        
+<div class="w-full flex-1 flex justify-between overflow-hidden mb-2 relative">
+    <div class="w-full h-full bg-[#fff] text-xl absolute top-0">
         <div data-type="{{$type}}" class="bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 text-[20px] h-[40px] rounded-md shadow-sm shadow-[#ccc] flex items-center text-xl">
             <div class="mr-8">
                 <i class="fa-solid fa-turn-up rotate-180 translate-y-"></i>
@@ -19,9 +17,8 @@
                 <span class="font-bold">Copy</span>
             </button>
         </div>
-        <div class="type-mission-item-wrapper-{{ $type }} w-full"></div>
+        <div class="type-mission-item-wrapper-{{ $type }} w-full h-full overflow-auto"></div>
     </div>
-
 </div>
 
 <style>

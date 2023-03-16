@@ -14,15 +14,14 @@ import { createMapPosition } from "./point.js";
 import displayPoint from "../../rosModule/displayPoint.js";
 import displayPose from "../../rosModule/displayPose.js";
 import createPose from "../../rosModule/createPose.js";
+import qToYaw from "../../rosModule/qToYawn.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
     let oldName;
-    let refActiveTypeMission;
 
     $$(".edit-function-item-btn").forEach((element) => {
         element.onclick = (e) => {
-            refActiveTypeMission = $(".function-btn.active");
             const functionItem = e.target.closest(
                 ".type-mission-function-item"
             );
@@ -118,9 +117,7 @@ export default function handleEditFunctionType() {
                         sy2,
                     } = inputFunction("marker");
 
-                    name_marker
-                        ? (name_marker.value = valueFunction.name)
-                        : "";
+                    name_marker ? (name_marker.value = valueFunction.name) : "";
                     marker_type
                         ? (marker_type.value = valueFunction.marker_type)
                         : "";
@@ -149,7 +146,9 @@ export default function handleEditFunctionType() {
                     sx2 ? (sx2.value = valueFunction.sx2) : "";
                     sy1 ? (sy1.value = valueFunction.sy1) : "";
                     sy2 ? (sy2.value = valueFunction.sy2) : "";
+
                     handleUpdateStep("marker");
+
                     currentIdUpdate = valueFunction.id;
                     oldName = valueFunction.name;
                     break;
@@ -171,8 +170,7 @@ export default function handleEditFunctionType() {
                     const command_action = $(".command_action_input");
                     const focus_value = $(".focus_value_input");
 
-                    name_function_variable.value =
-                        valueFunction.name;
+                    name_function_variable.value = valueFunction.name;
                     name_variable.value = valueFunction.name_variable;
                     command_action.value =
                         valueFunction.command_action == "equal" ? "=" : "==";
@@ -214,34 +212,44 @@ export default function handleEditFunctionType() {
                     $(".point-function-btn").click();
                     console.log(valueFunction);
                     handleUpdateStep("position");
-                    createMapPosition();
-                    // createPose(view, tfClient, valueFunction.color)
-                    displayPoint(valueFunction.x, valueFunction.y);
-                    displayPose(
-                        valueFunction.x,
-                        valueFunction.y,
-                        valueFunction.z,
-                        valueFunction.w
-                    );
+
+                    const { x, y, z, w, name, time_out, mode_position, color_position, mode_child } = valueFunction;
+
+                    const { viewer, tfClient } = createMapPosition(x, y, z, w);
+
+                    createPose(viewer, tfClient, color_position);
+                    displayPoint(x, y);
+                    displayPose(x, y, z, w);
+
+                    showControlPosition(x, y, z, w)
+                    showInfoPosition(name, time_out, mode_position, color_position, mode_child)
+                    function showControlPosition(x, y, z, w) {
+                        const yaw = qToYaw(z, w);
+                        $("#inx").value = x;
+                        $("#position-x").value = x;
+                        $("#iny").value = y;
+                        $("#position-y").value = y;
+                        $(".number-rotate-z").value = yaw;
+                        $("#rotate-z").value = yaw;
+                    }
+
+                    function showInfoPosition(name, time_out, mode_position, color_position, mode_child) {
+                        $('[name=name_position]').value = name
+                        $('[name=color_position]').value = color_position
+                        $('[name=mode_position]').value = mode_position
+                        $('[name=time_out]').value = time_out
+                        $('[name=mode_child]').value = mode_child
+                    }
             }
         };
     });
 
     function handleUpdateStep(type) {
         let updateBtnWrapper;
-        if (type == "marker") {
-            updateBtnWrapper = $(".marker-item:not(.hidden)").querySelector(
-                `.${type}-update-btn-wrapper`
-            );
-            updateBtnWrapper.classList.remove("hidden");
-            $(".marker-item:not(.hidden)")
-                .querySelector(`.submit-btn-marker`)
-                .classList.add("hidden");
-        } else {
-            updateBtnWrapper = $(`.${type}-update-btn-wrapper`);
-            updateBtnWrapper.classList.remove("hidden");
-            $(`.submit-btn-${type}`).classList.add("hidden");
-        }
+
+        updateBtnWrapper = $(`.${type}-update-btn-wrapper`);
+        updateBtnWrapper.classList.remove("hidden");
+        $(`.submit-btn-${type}`).classList.add("hidden");
 
         updateBtnWrapper.querySelector(`.${type}-update-cancel`).onclick = (
             e
@@ -249,7 +257,6 @@ export default function handleEditFunctionType() {
             e.preventDefault();
             handleResetData();
             $(`.submit-btn-${type}`).classList.remove("hidden");
-            refActiveTypeMission.click();
             handleShowFormFunction(false, type);
         };
 
@@ -261,7 +268,7 @@ export default function handleEditFunctionType() {
             loadDataFunction(type);
 
             $(`.submit-btn-${type}`).classList.remove("hidden");
-            refActiveTypeMission.click();
+
             handleShowFormFunction(false, type);
         };
 
@@ -542,7 +549,7 @@ export default function handleEditFunctionType() {
                         type: "sound",
                         music_start,
                         music_mode,
-                        name,
+                        name: name_sound,
                     };
 
                     updateStep(`/api/step/${currentIdUpdate}`, data);
@@ -557,7 +564,7 @@ export default function handleEditFunctionType() {
                     return false;
                 }
             case "position":
-                console.log(13);
+                console.log("asdfasdf");
                 break;
         }
         updateStepValue(currentMission);

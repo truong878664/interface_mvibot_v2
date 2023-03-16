@@ -22,8 +22,8 @@
                     <div class="text-[30px] ml-4 w-[102px] text-center value-volume">20</div>
                 </div>
                 <input id="rs-range-line-speed" class="rs-range-speed rs-range w-full input-volume" type="range" value="20"
-                    step="1" min="0" max="100">
-
+                    step="1" min="0" max="150">
+                    
             </div>
             <button
                 class="float-right px-6 py-2 bg-main text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 mt-8 set-volume-btn">Ok</button>

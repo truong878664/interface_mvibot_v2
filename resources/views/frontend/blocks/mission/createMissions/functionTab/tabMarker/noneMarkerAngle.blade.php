@@ -1,4 +1,4 @@
-<form class="flex h-full w-full justify-between hidden marker-item">
+<div class="flex h-full w-full justify-between hidden marker-item">
     <div class="w-1/2 ">
         <div class="flex items-stretch">
             <div class="flex flex-col mb-2">
@@ -57,6 +57,6 @@
 
     <button
         class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md submit-btn-marker">Add</button> --}}
-    @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'marker'])
+    {{-- @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'none_marker_angle']) --}}
 
-</form>
+</div>

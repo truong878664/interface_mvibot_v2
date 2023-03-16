@@ -18,12 +18,12 @@ function setVolume() {
     $(".set-volume-btn").onclick = () => {
         const inputVolume = inputVolumeElement.value;
         const robot = robotActive();
-        publishTopicString(`/${robot}/set_config`, `(volume|${inputVolume})`);
+        publishTopicString(`/${robot}/set_config`, `(robot_volume|${inputVolume})`);
     };
 }
 
-const VOLUME_HIGH = 66;
-const VOLUME_MEDIUM = 33;
+const VOLUME_HIGH = 100;
+const VOLUME_MEDIUM = 50;
 const VOLUME_OFF = 0;
 const iconVolume = $("[data-volume]");
 

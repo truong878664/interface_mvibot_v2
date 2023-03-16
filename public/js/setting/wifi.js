@@ -41,33 +41,20 @@ function subscribeTopicWifi() {
         );
     });
 }
-function parseWifi(data) {
-    const arrayWifi = data
-        .slice(1, data.length - 1)
-        .replaceAll("\\", " ")
-        .replaceAll("=", '":"')
-        .split(")(");
-    const listWifi = arrayWifi.map((wifi) => {
-        const wifiItem = wifi.split("~").filter((item) => item);
-        const data = `{"${wifiItem.join('","')}"}`;
-
-        return JSON.parse(data);
-    });
-    renderWifi(listWifi);
-}
-
+ 
 function renderWifiConnected(wifi) {
+    const WIFI_HEIGH = 66;
+    const WIFI_MEDIUM = 33;
+
     $(".wifi-connect-item").classList.remove("hidden");
     $(".wifi-connected").innerText = wifi.ssid;
-    //
-    let speed;
-    if (parseInt(wifi.signal) > 66) {
-        speed = "height";
-    } else if (parseInt(wifi.signal) > 33) {
-        speed = "medium";
-    } else {
-        speed = "low";
-    }
+
+    const speed =
+        parseInt(wifi.signal) > WIFI_HEIGH
+            ? "height"
+            : parseInt(wifi.signal) > WIFI_MEDIUM
+            ? "medium"
+            : "low";
 
     $(".wifi-icon-connected").id = speed;
 }
@@ -198,7 +185,7 @@ function wifiIcon(signal) {
                10.1907 18.5719 9.89388 19.9863 9.89808C21.4006 9.90228 22.7978 10.2074 24.0852 10.793C24.9447 11.1841 25.7421 11.6942 26.4547 12.3066C27.0436
                 12.8127 27.9263 12.8801 28.5102 12.3681V12.3681Z" />
         <path class="height" fill="#9a9a9a"
-        d="M33.7825 7.51599C34.3573 6.99541 34.4044 6.10346 33.8448 5.56666C32.171 3.96105 30.2278 2.65629 28.1007 1.71396C25.5448 0.58174 22.7801 -0.00213281
+            d="M33.7825 7.51599C34.3573 6.99541 34.4044 6.10346 33.8448 5.56666C32.171 3.96105 30.2278 2.65629 28.1007 1.71396C25.5448 0.58174 22.7801 -0.00213281
          19.9847 5.85337e-06C17.1893 0.00214452 14.4255 0.590247 11.8714 1.72637C9.74564 2.67196 7.80452 3.97969 6.13312 5.58786C5.57433 6.12552 5.62286
           7.01739 6.19839 7.5371V7.5371C6.77392 8.0568 7.65805 8.00678 8.22297 7.47557C9.62704 6.15529 11.2457 5.07815 13.0127 4.29213C15.2082 3.31552
            17.584 2.80999 19.9868 2.80815C22.3897 2.80632 24.7663 3.30821 26.9633 4.28145C28.7315 5.06477 30.3518 6.13943 31.7578 7.45756C32.3236

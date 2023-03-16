@@ -85,7 +85,6 @@ function changeTopic() {
         deletePath(robotActive);
 
         robotActive = e.target.value;
-
         if (robotActive) {
             cmd_vel_listener.name = `${robotActive}/cmd_vel`;
 
@@ -97,6 +96,8 @@ function changeTopic() {
 
             robotPathTopic(robotActive);
         } else {
+            cmd_vel_listener.name = `/cmd_vel`;
+
             clearInterval(displayPathFs);
         }
     };
