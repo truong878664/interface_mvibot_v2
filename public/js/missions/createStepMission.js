@@ -15,6 +15,7 @@ import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { loadDataFunction } from "./handleTypeMission.js";
 import sendMission from "./sendMission.js";
 import handleCreateFunction from "./handleCreateFunction.js";
+import { resetPosition } from "./function/point.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -141,6 +142,7 @@ export function addFunctionStep(type, data) {
         .then((data) => {
             $(".function-item-form-wrapper").click();
             loadDataFunction();
+            resetPosition()
         })
         .catch(function (res) {
             console.log(res);

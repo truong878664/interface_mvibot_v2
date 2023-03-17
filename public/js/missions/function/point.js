@@ -320,7 +320,6 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
     };
     $(".submit-btn-position").onclick = (e) => {
         e.preventDefault();
-        console.log(123);
         const name = $('[name="name_position"]');
         const x = $('[name="x"]');
         const y = $('[name="y"]');
@@ -363,8 +362,6 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
             mode_position.value = "normal";
             mode_child.value = -1;
             // createMapPoint();
-
-            localStorage.setItem("isUpload", 1);
         } else {
             toggerMessage("error", "Please enter all inputs");
         }
@@ -408,4 +405,25 @@ function removeAllEvent(element) {
 
 function resetInputValue(value, ...rest) {
     rest.forEach((item) => (item.value = value));
+}
+
+export function resetPosition() {
+    $(".number-position-x").value = 0;
+    $(".number-position-y").value = 0;
+    $(".number-rotate-z").value = 0;
+    $("#position-x").value = 0;
+    $("#position-y").value = 0;
+    $("#rotate-z").value = 0;
+
+    $("#inx").value = 0;
+    $("#iny").value = 0;
+    $("#position-x").value = 0;
+    $("#position-y").value = 0;
+
+    $('[name="name_position"]').value = "";
+    $('.time-out-position[name="time_out"]').value = "-1";
+    $('[name="color_position"]').value = "#EA047E";
+    $('[name="mode_position"]').value = "normal";
+    $('[name="mode_child"]').value = "-1";
+    $("#create-point-checkbox").checked = false;
 }

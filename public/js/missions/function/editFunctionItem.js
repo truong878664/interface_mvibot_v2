@@ -6,11 +6,10 @@ import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
-import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 import { setColorSticker } from "./sound.js";
 import { resetVariable } from "./var.js";
 import { handleShowFormFunction } from "../handleCreateFunction.js";
-import { createMapPosition } from "./point.js";
+import { createMapPosition, resetPosition } from "./point.js";
 import displayPoint from "../../rosModule/displayPoint.js";
 import displayPose from "../../rosModule/displayPose.js";
 import createPose from "../../rosModule/createPose.js";
@@ -19,8 +18,8 @@ import qToYaw from "../../rosModule/qToYawn.js";
 export default function handleEditFunctionType() {
     let currentIdUpdate;
     let oldName;
-
-    $$(".edit-function-item-btn").forEach((element) => {
+    const editFunctionItemBtns = $$(".edit-function-item-btn")
+    editFunctionItemBtns.forEach((element) => {
         element.onclick = (e) => {
             const functionItem = e.target.closest(
                 ".type-mission-function-item"
@@ -210,10 +209,18 @@ export default function handleEditFunctionType() {
 
                 case "position":
                     $(".point-function-btn").click();
-                    console.log(valueFunction);
-                    handleUpdateStep("position");
 
-                    const { x, y, z, w, name, time_out, mode_position, color_position, mode_child } = valueFunction;
+                    const {
+                        x,
+                        y,
+                        z,
+                        w,
+                        name,
+                        time_out,
+                        mode_position,
+                        color_position,
+                        mode_child,
+                    } = valueFunction;
 
                     const { viewer, tfClient } = createMapPosition(x, y, z, w);
 
@@ -221,8 +228,14 @@ export default function handleEditFunctionType() {
                     displayPoint(x, y);
                     displayPose(x, y, z, w);
 
-                    showControlPosition(x, y, z, w)
-                    showInfoPosition(name, time_out, mode_position, color_position, mode_child)
+                    showControlPosition(x, y, z, w);
+                    showInfoPosition(
+                        name,
+                        time_out,
+                        mode_position,
+                        color_position,
+                        mode_child
+                    );
                     function showControlPosition(x, y, z, w) {
                         const yaw = qToYaw(z, w);
                         $("#inx").value = x;
@@ -233,13 +246,24 @@ export default function handleEditFunctionType() {
                         $("#rotate-z").value = yaw;
                     }
 
-                    function showInfoPosition(name, time_out, mode_position, color_position, mode_child) {
-                        $('[name=name_position]').value = name
-                        $('[name=color_position]').value = color_position
-                        $('[name=mode_position]').value = mode_position
-                        $('[name=time_out]').value = time_out
-                        $('[name=mode_child]').value = mode_child
+                    function showInfoPosition(
+                        name,
+                        time_out,
+                        mode_position,
+                        color_position,
+                        mode_child
+                    ) {
+                        $("[name=name_position]").value = name;
+                        $("[name=color_position]").value = color_position;
+                        $("[name=mode_position]").value = mode_position;
+                        $("[name=time_out]").value = time_out;
+                        $("[name=mode_child]").value = mode_child;
                     }
+
+                    handleUpdateStep("position");
+
+                    currentIdUpdate = valueFunction.id;
+                    oldName = valueFunction.name;
             }
         };
     });
@@ -283,9 +307,10 @@ export default function handleEditFunctionType() {
                 currentIdUpdate;
             });
 
-            (type == "gpio" || type == "gpio_module") && resetGpio();
+            (type === "gpio" || type == "gpio_module") && resetGpio();
 
-            type == "variable" && resetVariable();
+            type === "variable" && resetVariable();
+            type === 'position' && resetPosition()
         }
     }
 
@@ -553,6 +578,7 @@ export default function handleEditFunctionType() {
                     };
 
                     updateStep(`/api/step/${currentIdUpdate}`, data);
+                    console.log(currentIdUpdate);
                     oldName != name_sound &&
                         updateNameStepAtBlockStep(
                             `${type}#${oldName}#${currentIdUpdate}`,
@@ -564,7 +590,60 @@ export default function handleEditFunctionType() {
                     return false;
                 }
             case "position":
-                console.log("asdfasdf");
+                const name = $('[name="name_position"]');
+                const x = $('[name="x"]');
+                const y = $('[name="y"]');
+                const z = $('[name="z"]');
+                const w = $('[name="w"]');
+                const time_out = $('[name="time_out"]');
+                const color_position = $('[name="color_position"]');
+                const mode_position = $('[name="mode_position"]');
+                const mode_child = $('[name="mode_child"]');
+                const map = $(".name-map-active");
+
+                const dataPosition = {
+                    type: "position",
+                    name: name.value,
+                    x: x.value,
+                    y: y.value,
+                    z: z.value,
+                    w: w.value,
+                    time_out: time_out.value,
+                    color_position: color_position.value,
+                    mode_position: mode_position.value,
+                    mode_child: mode_child.value,
+                    map: map.innerText,
+                    mode: "position",
+                };
+
+                const isValid =
+                    !!(name.value &&
+                    x.value &&
+                    y.value &&
+                    z.value &&
+                    w.value &&
+                    time_out.value &&
+                    color_position.value &&
+                    mode_position.value &&
+                    mode_child.value);
+
+                console.log('valid',isValid);
+
+                if (isValid) {
+                    console.log("oldname", oldName);
+                    updateStep(`/api/step/${currentIdUpdate}`, dataPosition);
+
+                    oldName != name.value &&
+                        updateNameStepAtBlockStep(
+                            `${type}#${oldName}#${currentIdUpdate}`,
+                            `${type}#${name.value}#${currentIdUpdate}`
+                        );
+
+                    name.value = "";
+                    time_out.value = -1;
+                    mode_position.value = "normal";
+                    mode_child.value = -1;
+                }
                 break;
         }
         updateStepValue(currentMission);

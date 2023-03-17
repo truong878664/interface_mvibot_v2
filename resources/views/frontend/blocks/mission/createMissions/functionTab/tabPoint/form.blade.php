@@ -35,27 +35,33 @@
 
         <div class="mb-4">
             <label for="" class="text-2xl">Time out</label>
-            <input required type="text" class="w-[60px] text-2xl px-4 py-1 time-out text-center input-type-number" name="time_out"
-                value="-1">
+            <input required type="text" class="w-[60px] text-2xl px-4 py-1 time-out text-center input-type-number time-out-position"
+                name="time_out" value="-1">
             <span class="text-xl text-red-500"></span>
         </div>
 
-            <div class="mb-4 ">
-                <label for="" class="text-2xl">Mode</label>
-                <input required type="text" class="text-2xl px-4 py-1 input-submit w-[100px]" name="mode_position"
-                    value="normal">
-            </div>
+        <div class="mb-4 ">
+            <label for="" class="text-2xl">Mode</label>
+            <select name="mode_position" class="text-2xl px-4 py-1 input-submit w-[100px] bg-[#fff] border outline-none" id="">
+                <option value="normal">Normal</option>
+                <option value="high">High</option>
+            </select>
+        </div>
 
 
-            <div class="mb-4">
-                <label for="" class="text-2xl">Mode child</label>
-                <input required type="text" class="text-2xl px-4 py-1 input-submit w-[100px]" name="mode_child"
-                    value="-1">
-            </div>
+        <div class="mb-4">
+            <label for="" class="text-2xl">Mode child</label>
+
+
+            <input required type="text" class="text-2xl px-4 py-1 input-submit w-[100px]" name="mode_child"
+                value="-1">
+        </div>
 
         <div class="relative w-full h-[40px]">
             <input type="text" value="" name="map" hidden />
-            @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'position'])
+            @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', [
+                'type' => 'position',
+            ])
         </div>
 
     </div>

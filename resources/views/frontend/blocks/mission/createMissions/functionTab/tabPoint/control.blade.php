@@ -1,4 +1,4 @@
-<div class="absolute bottom-0 left-0 w-full  bg-[#fffff03c] flex">
+<div class="absolute bottom-0 left-0 w-full  bg-[#fffff03c] flex justify-between">
     <div class="mission-point-control-item positon-x position">
         <div class="">
 

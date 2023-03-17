@@ -35,7 +35,7 @@ export default function renderDataFunction(data, type) {
                         <div class="flex">
                             <span class=" font-bold font-3xl capitalize">${item.mode}</span>
                             ${item.mode === "position"
-                                ?`<div class="rounded-full bg-black" style="background-color:${item.color_position};width:15px;height:15px;"></div>`
+                                ?`<div class="rounded-full border shadow-sm shadow-[#ccc] ml-2" style="background-color:${item.color_position};width:15px;height:15px;"></div>`
                                 : ""}
                         </div>
                         <div class="flex">
@@ -65,7 +65,7 @@ export default function renderDataFunction(data, type) {
             if (item[1]) {
                 switch (item[0]) {
                     case 'time_sleep':
-                        return `Sleep <span class="font-bold">${item[1]}</span> seconds`;                        
+                        return `Sleep <span class="font-bold">${item[1]}</span> seconds`;           
                     default:
                         return `<span class="font-bold">${item[0]}</span> <span>: ${item[1]}</span>`;
                 }
