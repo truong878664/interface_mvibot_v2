@@ -38,12 +38,14 @@
         .full-screen .edit-step-btn {
             display: none;
         }
-        
-        .is-full .true-full, .not-full {
+
+        .is-full .true-full,
+        .not-full {
             display: block;
         }
-        
-        .is-full .not-full, .true-full {
+
+        .is-full .not-full,
+        .true-full {
             display: none;
         }
 
@@ -89,7 +91,6 @@
             pointer-events: none;
             opacity: 0.8;
         }
-
     </style>
     <div class="h-full flex step-render relative bg-[#fff] step-block-wrapper mb-step-full-screen">
         <div class="flex-1 flex relative h-full">
@@ -99,7 +100,8 @@
         <div class="submit-btn-wrapper flex flex-col justify-end min-w-[240px] items-end">
             {{-- switch --}}
             <div class="absolute top-2 right-2 flex">
-                <span class="mr-8 text-2xl">{{ $itemRender->name }} | <span class="font-bold">{{ $itemRender->type }}</span></span>
+                <span class="mr-8 text-2xl">{{ $itemRender->name }} | <span
+                        class="font-bold">{{ $itemRender->type }}</span></span>
                 <div class="flex flex-col justify-center">
                     <div class="h-[34px] w-[60px]">
                         <label class="switch">
@@ -128,6 +130,9 @@
             <div class="select-robot-wrapper form-checkbox">
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
+                    <div class="">
+                        
+                    </div>
                     <select id="select-robot-option" class="text-2xl">
                         <option value="">Choose Robot</option>
                         @foreach ($allRobot as $robot)
@@ -158,5 +163,3 @@
         $dataStepJson = json_encode(explode('||', $stringStep_mission));
         echo "<input hidden class='data-steps-value' type='text' value='$dataStepJson'>";
     @endphp
-
-   

@@ -109,6 +109,7 @@ export function resetVariable() {
     $(".focus_value_input").value = "";
 }
 
+
 function updateVar() {
     const itemKeyboard = `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border focus_value_value var-item-value" type="focus_value" value="keyboard"><i class="fa-regular fa-keyboard"></i></li>`;
     fetchCustom("/api/var", "GET", (data) => {

@@ -86,5 +86,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('gpio', [gpioPageController::class, 'index'])->name('gpio.');
 
         Route::get('sound', [SoundController::class, 'index'])->name('sound.');
+
+        Route::get('hook-status', function () {
+            $title = "hook";
+            return view('frontend.pages.hook.hook', compact('title'));
+        })->name('hook');
     });
 });

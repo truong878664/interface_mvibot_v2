@@ -2,20 +2,16 @@
     <div class="flex justify-between items-end">
         <div class="flex flex-col">
             <label for="" class="text-xl">Name try-catch</label>
-            <input class="w-[200px] text-xl px-4 py-1 input-reset name-trycatch-mission" type="text" name=""
+            <input class="w-[200px] text-xl px-4 py-1 name-trycatch-mission" type="text" name=""
                 required>
         </div>
 
         @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', [
             'type' => 'trycatch',
         ])
-
     </div>
 
-
     <div class=" h-[calc(100%_-_42px)] flex flex-col">
-
-
         {{-- try --}}
         <div class="flex items-center h-[46px]">
             <label

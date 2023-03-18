@@ -17,6 +17,9 @@
         <x-dashboard-item route='dashboard.battery' icon='fa-solid fa-signal' title='Status details' describe='All status'
             color="#03C988" />
 
+        <x-dashboard-item route='dashboard.hook' icon='fa-solid fa-trailer' title='Hook status' describe='Hook status'
+            color="#B46060" />
+
         <x-dashboard-item route='dashboard.joystick.' icon='fa-solid fa-up-down-left-right' title='Joystick'
             describe='Move robot' color="#EB6440" />
 
@@ -35,5 +38,4 @@
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
     </ul>
-
 @endsection

@@ -263,11 +263,7 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
         lockZ(viewer);
     }
     //check touch
-    if (checkPoint.checked) {
-        addEventTouch();
-    } else {
-        removeEventTouch();
-    }
+    checkPoint.checked ? addEventTouch() : removeEventTouch();
 
     var tapedTwice = false;
     let oldX;

@@ -168,10 +168,10 @@ class MiController extends Controller
                 break;
         }
 
-        // $this->translateStepMissionName($id);
-        // $this->translateData($id);
+        $this->translateStepMissionName($id);
+        $this->translateData($id);
 
-        // return ['message' => 'Mission data is ready', "status" => 200];
+        return ['message' => 'Mission data is ready', "status" => 200];
     }
 
     /**

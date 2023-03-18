@@ -13,8 +13,8 @@ function mathYaw(yaw) {
     const qw =
         Math.cos(roll / 2) * Math.cos(pitch / 2) * Math.cos(yaw / 2) +
         Math.sin(roll / 2) * Math.sin(pitch / 2) * Math.sin(yaw / 2);
-    const z = qz;
-    const w = qw;
+    const z = qz.toFixed(3);
+    const w = qw.toFixed(3);
     return { z, w };
 }
 

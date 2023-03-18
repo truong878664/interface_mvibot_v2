@@ -643,10 +643,14 @@ export default function handleEditFunctionType() {
                     time_out.value = -1;
                     mode_position.value = "normal";
                     mode_child.value = -1;
+                    return true;
+
+                } else {
+                    toggerMessage("error", "Please enter all inputs");
+                    return false;
                 }
-                break;
         }
-        updateStepValue(currentMission);
+        // updateStepValue(currentMission);
     }
 
     function updateStep(url = "", stepSave) {

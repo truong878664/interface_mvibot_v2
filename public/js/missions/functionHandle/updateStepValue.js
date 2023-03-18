@@ -1,6 +1,7 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 
 export default function updateStepValue(id) {
+    console.log(id);
     loading();
     fetch(`/api/mi/${id}`, {
         headers: {

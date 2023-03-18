@@ -38,8 +38,8 @@ export function convertToPosition(xEvent, yEvent, viewer) {
 
     const t = -zCamera / a3;
 
-    const xCameraConvert = xCamera + xClickConvert + a1 * t;
-    const yCameraConvert = yCamera + yClickConvert + a2 * t;
+    const xCameraConvert = Number((xCamera + xClickConvert + a1 * t).toFixed(2));
+    const yCameraConvert = Number((yCamera + yClickConvert + a2 * t).toFixed(2));
     return [xCameraConvert, yCameraConvert];
 }
 

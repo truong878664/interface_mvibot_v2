@@ -2,7 +2,7 @@
     <div class="flex justify-between items-end">
         <div class="flex flex-col">
             <label for="" class="text-xl">Name if-else</label>
-            <input class="w-[200px] text-xl px-4 py-1 input-reset name-ifelse-mission" type="text" name="" required>
+            <input class="w-[200px] text-xl px-4 py-1 name-ifelse-mission" type="text" name="" required>
         </div>
 
         @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', ['type'=>'ifelse'])
