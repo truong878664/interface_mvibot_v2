@@ -2,7 +2,13 @@
 @section('content')
     <div class="flex w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-auto border shadow-sm shadow-[#ccc]">
         <div class="h-full w-1/4">
-            <input type="range" class="w-full change-hook">
+            <select name=""  id="robot-hook"
+                class="ml-4 mt-4 text-2xl borde rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] py-2 text-white px-4 outline-none inline-block">
+                <option value="">Select robot</option>
+                @foreach ($robots as $robot)
+                    <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="w-3/4 flex justify-center items-center overflow-hidden">
@@ -26,13 +32,7 @@
         document.querySelectorAll('.img-item').forEach(element => {
             element.style.height = height
         });
-        const MAX_ROTATE = 90
-        const MIN_ROTATE = -90
-        const hook = document.querySelector('.hook-img')
-        const rangeHook = document.querySelector('.change-hook')
-        rangeHook.oninput = (e) => {
-            const value = e.target.value
-            hook.style.rotate = -(value * (MAX_ROTATE - MIN_ROTATE) / 100 - 90) + "deg"
-        }
     </script>
+
+    <script type="module" src="/js/hook/hook.js"></script>
 @endsection

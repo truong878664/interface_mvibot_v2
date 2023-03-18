@@ -15,6 +15,7 @@ use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Http\Controllers\frontend\SoundController;
 use App\Http\Controllers\frontend\statusController;
+use App\Models\backend\Robot;
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', function () {
@@ -89,6 +90,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::get('hook-status', function () {
             $title = "hook";
+            // $allRobot = Robot::all();
             return view('frontend.pages.hook.hook', compact('title'));
         })->name('hook');
     });
