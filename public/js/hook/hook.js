@@ -1,22 +1,37 @@
 import publishTopic from "../rosModule/pubicTopic.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 
-const MAX_ROTATE = 90;
-const MIN_ROTATE = -90;
 const hook = document.querySelector(".hook-img");
-const rangeHook = document.querySelector(".change-hook");
 const selectRobotHook = document.querySelector("#robot-hook");
+const hookWrapper = document.querySelector(".hook-wrapper");
+
 let listener;
+let listenHook;
 
 selectRobotHook.onchange = (e) => {
     console.log(e.target.value);
     const robot = e.target.value;
-
+    listenHook?.unsubscribe();
     listener?.unsubscribe();
-    listener = subscribeTopic(
-        `${robot}/hook_encoder`,
+    hookWrapper.dataset.status = "disabled";
+
+    listenHook = subscribeTopic(
+        `${robot}/hook_switch`,
         "std_msgs/Float32",
-        handleUiHook
+        (data, name) => {
+            if (data?.data === 0.0) {
+                hookWrapper.dataset.status = "disabled";
+                listener?.unsubscribe();
+                setRotateHook(0);
+            } else {
+                hookWrapper.dataset.status = "";
+                listener = subscribeTopic(
+                    `${robot}/hook_encoder`,
+                    "std_msgs/Float32",
+                    handleUiHook
+                );
+            }
+        }
     );
 };
 function handleUiHook(data, name) {
@@ -38,3 +53,10 @@ function setRotateHook(deg) {
 //     deg === 90 && (right = false);
 //     deg === -90 && (right = true);
 // }, 1000);
+
+// let data = 1.0;
+
+// setInterval(() => {
+//     publishTopic("Mb23_946/hook_switch", data, "std_msgs/Float32");
+//     data = data === 1.0 ? 0.0 : 1.0;
+// }, 3000);

@@ -352,6 +352,7 @@ class MiController extends Controller
                     break;
                 case 'gpio_module':
                     $name_function_gpio_module = $item->name;
+
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $out_set = $item->out_set;
@@ -361,7 +362,7 @@ class MiController extends Controller
                     $in_pullup = $item->in_pullup;
                     $in_pulldown = $item->in_pulldown;
 
-                    $name_seri = "~name_seri=$item->name~";
+                    $name_seri = "~name_seri=$item->name_gpio_module~";
 
                     strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
                     strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";

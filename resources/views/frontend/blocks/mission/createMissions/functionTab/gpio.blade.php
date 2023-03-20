@@ -10,9 +10,18 @@
             </div>
             <div class="flex flex-col ml-2 {{ $type == 'gpio_module' ? '' : 'hidden' }}">
                 <label for="" class="text-xl">Name GPIO module</label>
-                <input
+                {{-- <input
                     class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
-                    type="text" name="name_gpio" required>
+                    type="text" name="name_gpio" required> --}}
+
+
+                <select class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input" name="name_gpio" id="">
+                    
+                    @foreach ($robots as $robot)
+                    <option value="{{$robot->name_seri}}">{{$robot->name_seri}}</option>
+                        
+                    @endforeach
+                </select>
             </div>
 
             <div class="flex flex-col ml-2">
