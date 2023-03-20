@@ -391,32 +391,34 @@ function handleDbTouch() {
     let oldY;
     let isTouch = false;
     function tapHandler(e) {
-        isTouch = !!(
-            Math.abs(e.touches[0].pageX - oldX) < 4 &&
-            Math.abs(e.touches[0].pageY - oldY) < 4
-        );
-        oldX = e.touches[0].pageX;
-        oldY = e.touches[0].pageY;
+        if (e.touches.length < 2) {
+            isTouch = !!(
+                Math.abs(e.touches[0].pageX - oldX) < 70 &&
+                Math.abs(e.touches[0].pageY - oldY) < 70
+            );
+            oldX = e.touches[0].pageX;
+            oldY = e.touches[0].pageY;
 
-        if (!tapedTwice) {
-            tapedTwice = true;
-            setTimeout(function () {
-                tapedTwice = false;
-                isTouch = false;
-            }, 300);
-            return false;
-        }
+            if (!tapedTwice) {
+                tapedTwice = true;
+                setTimeout(function () {
+                    tapedTwice = false;
+                    isTouch = false;
+                }, 300);
+                return false;
+            }
 
-        if (tapedTwice && isTouch) {
-            e.preventDefault();
-            if (nameLayerElement.value === "") {
-                $("#msg-name-layer").innerText = "please enter this field";
-                nameLayerElement.oninput = () => {
-                    $("#msg-name-layer").innerText = "";
-                };
-            } else {
-                console.log(1);
-                checkNameLayer(nameLayerElement.value, e);
+            if (tapedTwice && isTouch) {
+                e.preventDefault();
+                if (nameLayerElement.value === "") {
+                    $("#msg-name-layer").innerText = "please enter this field";
+                    nameLayerElement.oninput = () => {
+                        $("#msg-name-layer").innerText = "";
+                    };
+                } else {
+                    console.log(1);
+                    checkNameLayer(nameLayerElement.value, e);
+                }
             }
         }
     }
