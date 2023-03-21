@@ -82,7 +82,7 @@ function renderBookmark(data) {
     const htmlBookmark = [];
     const origin = location.origin;
 
-    data.map((item) => {
+    data?.map((item) => {
         htmlBookmark.push(
             `
                 <li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md">
@@ -108,7 +108,7 @@ function renderBookmark(data) {
 }
 function checkIsBookmark(data) {
     const pathName = location.pathname + location.search;
-    const isBookmark = !!data.find((item) => item.link === pathName);
+    const isBookmark = !!data?.find((item) => item.link === pathName);
     isBookmark && ($(".bookmark-btn").dataset.bookmark = "active");
 }
 

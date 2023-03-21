@@ -1,5 +1,5 @@
 import validateInputSubmit from "../../functionHandle/validateForm.js";
-import { $, toggerMessage } from "../../main.js";
+import ros, { $, toggerMessage } from "../../main.js";
 import reloadWhenOrientation from "../../reloadOnOrientation.js";
 import { mvibot_layer } from "../../rosModule/classMvibot.js";
 import clickSetPointMap from "../../rosModule/clickSetPointMap.js";
@@ -19,6 +19,7 @@ import lockZ from "../../rosModule/lockZ.js";
 import mathYaw from "../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../rosModule/path/markerClientPath.js";
 import { addFunctionStep } from "../createStepMission.js";
+import { handleShowFormFunction } from "../handleCreateFunction.js";
 
 export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
     let positionX = x;
@@ -220,6 +221,8 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
         }
     };
 
+    const events = ["dblclick", "mousemove", "touchmove", "touchstart"];
+
     function addEventTouch() {
         lockZ(viewer);
         mapElement.addEventListener("dblclick", clickSetPoint);
@@ -314,8 +317,16 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
         positionX = positionXSet;
         positionY = positionYSet;
     };
+
+    const mode_position_other = $("[name=mode_position_other]");
+
+    $('[name="mode_position"]').onchange = (e) => {
+        const valueMode = e.target.value;
+        const isOther = valueMode === "other";
+        mode_position_other.dataset.modePosition = isOther ? "other" : "";
+    };
+
     $(".submit-btn-position").onclick = (e) => {
-        e.preventDefault();
         const name = $('[name="name_position"]');
         const x = $('[name="x"]');
         const y = $('[name="y"]');
@@ -326,6 +337,14 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
         const mode_position = $('[name="mode_position"]');
         const mode_child = $('[name="mode_child"]');
         const map = $(".name-map-active");
+        e.preventDefault();
+
+        let mode_position_value;
+        if (mode_position.value === "other") {
+            mode_position_value = mode_position_other.value;
+        } else {
+            mode_position_value = mode_position.value;
+        }
 
         const dataPosition = {
             name: name.value,
@@ -335,7 +354,7 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
             w: w.value,
             time_out: time_out.value,
             color_position: color_position.value,
-            mode_position: mode_position.value,
+            mode_position: mode_position_value,
             mode_child: mode_child.value,
             map: map.innerText,
             mode: "position",
@@ -349,7 +368,7 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
             w.value &&
             time_out.value &&
             color_position.value &&
-            mode_position.value &&
+            mode_position_value &&
             mode_child.value
         ) {
             addFunctionStep("position", dataPosition);
@@ -357,6 +376,9 @@ export function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
             time_out.value = -1;
             mode_position.value = "normal";
             mode_child.value = -1;
+            mode_position_other.dataset.modePosition = "";
+            mode_position_other.value = "";
+            console.log(mode_position_other.dataset.modePosition);
             // createMapPoint();
         } else {
             toggerMessage("error", "Please enter all inputs");
@@ -422,4 +444,217 @@ export function resetPosition() {
     $('[name="mode_position"]').value = "normal";
     $('[name="mode_child"]').value = "-1";
     $("#create-point-checkbox").checked = false;
+}
+
+$(".show-all-map-btn").onclick = (e) => {
+    handleShowFormFunction(true, "position");
+    showListPosition(true);
+
+    const mapShowAll = new Promise((resolve, reject) => {
+        const { viewer, tfClient } = createMapPosition();
+        resolve({ viewer, tfClient });
+    });
+    mapShowAll.then(({ viewer, tfClient }) => {
+        fetch("/api/position")
+            .then((res) => res.json())
+            .then((data) => {
+                const htmlListPoint = [];
+                data.map((position) => {
+                    htmlListPoint.push(`
+                    <li class="w-full flex items-center justify-between my-2">
+                        <div class="">
+                        <span class="mr-1">Name:</span>
+                        <span class="font-bold">${position.name}</span>
+                        </div>
+                        <div class="ml-2 w-[20px] h-[20px] rounded-full" style="background-color: ${position.color_position};"></div>
+                    </li>
+                    `);
+                    return htmlListPoint;
+                });
+                $("[data-list-position]").innerHTML = htmlListPoint.join("");
+                return data;
+            })
+            .then((data) => {
+                data.forEach((position) => {
+                    showPoint(
+                        position.x,
+                        position.y,
+                        viewer,
+                        tfClient,
+                        `point_pub_${position.id}`
+                    );
+                    showPoint(
+                        position.x,
+                        position.y,
+                        viewer,
+                        tfClient,
+                        `point_pub_${position.id}`
+                    );
+                    showPoint(
+                        position.x,
+                        position.y,
+                        viewer,
+                        tfClient,
+                        `point_pub_${position.id}`
+                    );
+                    showPoint(
+                        position.x,
+                        position.y,
+                        viewer,
+                        tfClient,
+                        `point_pub_${position.id}`
+                    );
+                    showPoint(
+                        position.x,
+                        position.y,
+                        viewer,
+                        tfClient,
+                        `point_pub_${position.id}`
+                    );
+
+                    showPose(
+                        position.x,
+                        position.y,
+                        position.z,
+                        position.w,
+                        viewer,
+                        tfClient,
+                        position.color_position,
+                        `/pose_pub_${position.id}`
+                    );
+                    showPose(
+                        position.x,
+                        position.y,
+                        position.z,
+                        position.w,
+                        viewer,
+                        tfClient,
+                        position.color_position,
+                        `/pose_pub_${position.id}`
+                    );
+                    showPose(
+                        position.x,
+                        position.y,
+                        position.z,
+                        position.w,
+                        viewer,
+                        tfClient,
+                        position.color_position,
+                        `/pose_pub_${position.id}`
+                    );
+                    showPose(
+                        position.x,
+                        position.y,
+                        position.z,
+                        position.w,
+                        viewer,
+                        tfClient,
+                        position.color_position,
+                        `/pose_pub_${position.id}`
+                    );
+                    showPose(
+                        position.x,
+                        position.y,
+                        position.z,
+                        position.w,
+                        viewer,
+                        tfClient,
+                        position.color_position,
+                        `/pose_pub_${position.id}`
+                    );
+                });
+            });
+    });
+};
+
+function showPoint(x, y, viewer, tfClient, nameTopic = "/point_pub") {
+    new ROS3D.Point({
+        ros: ros,
+        rootObject: viewer.scene,
+        tfClient: tfClient,
+        topic: nameTopic,
+        color: "#FD841F",
+        queue_size: 1,
+        throttle_rate: 1000,
+        radius: 0.1,
+    });
+
+    const point_pub = new ROSLIB.Topic({
+        ros: ros,
+        name: nameTopic,
+        messageType: "geometry_msgs/PointStamped",
+        queue_size: 0.1,
+    });
+    const point_msg = new ROSLIB.Message({
+        header: {
+            frame_id: "/map",
+        },
+        point: {
+            x: x,
+            y: y,
+            z: 0,
+        },
+    });
+    point_pub.publish(point_msg);
+}
+
+function showPose(
+    x,
+    y,
+    z,
+    w,
+    viewer,
+    tfClient,
+    color,
+    nameTopic = "/pose_pub"
+) {
+    new ROS3D.Pose({
+        ros: ros,
+        rootObject: viewer.scene,
+        tfClient: tfClient,
+        color: color,
+        topic: nameTopic,
+        headDiameter: 0.3,
+        shaftDiameter: 0.1,
+        length: 2,
+    });
+
+    const pose_pub = new ROSLIB.Topic({
+        ros: ros,
+        name: nameTopic,
+        messageType: "geometry_msgs/PoseStamped",
+        queue_size: 1,
+    });
+    const pose_msg = new ROSLIB.Message({
+        header: {
+            frame_id: "/map",
+        },
+        pose: {
+            position: {
+                x: x,
+                y: y,
+                z: 0,
+            },
+
+            orientation: {
+                x: 0,
+                y: 0,
+                z: z,
+                w: w,
+            },
+        },
+    });
+    pose_pub.publish(pose_msg);
+}
+
+export function showListPosition(show) {
+    $("[data-type-position]").dataset.typePosition = show ? "show" : "";
+    $("[data-list-position]").dataset.listPosition = show ? "show" : "";
+    $("[data-status-switch]").dataset.statusSwitch = show ? "hidden" : "";
+}
+
+export function resetMapPosition() {
+    $("#map").remove();
+    $(".map-position-wrapper").innerHTML =
+        '<div id="map" class="w-full h-full"></div>';
 }

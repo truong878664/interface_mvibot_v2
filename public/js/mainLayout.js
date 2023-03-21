@@ -37,6 +37,7 @@ function activeNabBar() {
     } else {
         currentPage = "home";
     }
+    console.log(currentPage);
     $(`.bar-item.active`)?.classList.remove("active");
     $(`.${currentPage}`)?.classList.add("active");
 }

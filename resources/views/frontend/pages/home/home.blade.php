@@ -13,7 +13,7 @@
                 </h1>
 
                 </h1>
-                <span class="text-[30px]">ready for the furute</span>
+                <span class="text-[30px]">ready for the future</span>
 
 
 

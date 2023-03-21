@@ -93,11 +93,18 @@
                 canvas.width = width * 2;
                 canvas.height = width * 0.8727 * 1.2;
                 const imageData = ctx.createImageData(WIDTH, HEIGHT);
+                console.log(pgmData.pixels);
                 for (let i = 0; i < pgmData.pixels.length; i++) {
                     imageData.data[i * 4] = pgmData.pixels[i];
                     imageData.data[i * 4 + 1] = pgmData.pixels[i];
                     imageData.data[i * 4 + 2] = pgmData.pixels[i];
                     imageData.data[i * 4 + 3] = 255;
+                    // console.log(pgmData.pixels[i]);
+
+                    // imageData.data[i * 4] = pgmData.pixels[i];
+                    // imageData.data[i * 4 + 1] = pgmData.pixels[i];
+                    // imageData.data[i * 4 + 2] = pgmData.pixels[i];
+                    // imageData.data[i * 4 + 3] = 255;
                 }
                 imgData = imageData
                 ctx.putImageData(imageData, left, right);
@@ -166,7 +173,7 @@
                 console.log(deltaX, deltaY)
 
                 // Vẽ lại hình ảnh ở vị trí mới
-                
+
                 // Cập nhật vị trí chuột mới
                 mouse.x = event.offsetX;
                 mouse.y = event.offsetY;

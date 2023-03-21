@@ -1,4 +1,4 @@
-import { $, $$ } from "../main.js";
+import { $, $$, toggerMessage } from "../main.js";
 import createAxes from "../rosModule/createAxes.js";
 import createMap from "../rosModule/createMap.js";
 import createTfClient from "../rosModule/createTfClient.js";
@@ -29,32 +29,32 @@ $("#choose-map-active").onchange = (e) => {
 
 $("#active-map-btn").onclick = () => {
     const mapActive = $("#choose-map-active").value;
-    topicString("/request_action", `active_map|~name_map=${mapActive}~`);
-    $("#msg").innerHTML = `<div class="px-4 py-2 bg-green-500">
-                                Map activated
-                            </div>`;
-    removeMsg();
+    if (mapActive) {
+        topicString("/request_action", `active_map|~name_map=${mapActive}~`);
+        toggerMessage("success", "Map activated");
+    } else {
+        toggerMessage("error", "Choose map!");
+    }
 };
 
 $("#delete-map-btn").onclick = () => {
     const mapActive = $("#choose-map-active").value;
-    topicString("/request_action", `delete_map|~name_map=${mapActive}~`);
-    $("#msg").innerHTML = `<div class="px-4 py-2 bg-red-500">
-                                Map deleted
-                            </div>`;
-    $("#map").remove();
-    $("#map-wrapper").innerHTML = `<div class="w-full h-full" id="map"></div>`;
-    createMapMapActive("/map_selector");
-    removeMsg();
+    if (mapActive) {
+        topicString("/request_action", `delete_map|~name_map=${mapActive}~`);
+        $("#map").remove();
+        toggerMessage("success", "Map deleted");
 
-    $$(".map-item").forEach((item) => {
-        if (mapActive === item.innerText.trim()) {
-            item.remove();
-        }
-    });
+        $(
+            "#map-wrapper"
+        ).innerHTML = `<div class="w-full h-full" id="map"></div>`;
+        createMapMapActive("/map_selector");
+
+        $$(".map-item").forEach((item) => {
+            if (mapActive === item.innerText.trim()) {
+                item.remove();
+            }
+        });
+    } else {
+        toggerMessage("error", "Choose map!");
+    }
 };
-function removeMsg() {
-    setTimeout(() => {
-        $("#msg").innerHTML = "";
-    }, 3000);
-}

@@ -1,5 +1,5 @@
 import { $, $$ } from "../main.js";
-import { createMapPosition } from "./function/point.js";
+import { createMapPosition, resetMapPosition, showListPosition } from "./function/point.js";
 
 let tabFunctionActive;
 
@@ -24,8 +24,17 @@ export function handleShowFormFunction(isShow, typeFunction) {
         "hidden",
         !isShow
     );
-    !isShow && ($(".update-btn-wrapper:not(.hidden)")?.querySelector('.update-cancel-btn').click());
+    !isShow &&
+        $(".update-btn-wrapper:not(.hidden)")
+            ?.querySelector(".update-cancel-btn")
+            .click();
     isShow && (tabFunctionActive = typeFunction);
+
+    !isShow && typeFunction === "position" && showListPosition(false);
+
+    !isShow && ($(".check-click-point").checked = false);
+    
+    !isShow && resetMapPosition()
 }
 
 function handleHideFormFunction() {
@@ -34,3 +43,5 @@ function handleHideFormFunction() {
         handleShowFormFunction(false, tabFunctionActive);
     };
 }
+
+

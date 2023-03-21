@@ -19,5 +19,12 @@
             <i class="fa-regular fa-copy text-sky-600"></i>
             <span class="font-bold">Copy</span>
         </button>
+
+        @if ($type === 'position')
+        <button class="disabled:opacity-50 ml-4 btn show-all-map-btn multi-btn" data-type="{{$type}}">
+            <i class="fa-regular fa-eye text-yellow-600"></i>
+            <span class="font-bold">Show all position</span>
+        </button>
+        @endif
     </div>
 </div>

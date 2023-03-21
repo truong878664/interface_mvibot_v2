@@ -18,7 +18,7 @@ import qToYaw from "../../rosModule/qToYawn.js";
 export default function handleEditFunctionType() {
     let currentIdUpdate;
     let oldName;
-    const editFunctionItemBtns = $$(".edit-function-item-btn")
+    const editFunctionItemBtns = $$(".edit-function-item-btn");
     editFunctionItemBtns.forEach((element) => {
         element.onclick = (e) => {
             const functionItem = e.target.closest(
@@ -255,7 +255,15 @@ export default function handleEditFunctionType() {
                     ) {
                         $("[name=name_position]").value = name;
                         $("[name=color_position]").value = color_position;
-                        $("[name=mode_position]").value = mode_position;
+
+                        if (mode_position === "normal" || mode_position === "line_follow" ) {
+                            $("[name=mode_position]").value = mode_position;
+                        } else {
+                            $("[name=mode_position]").value = 'other'
+                            $("[name=mode_position_other]").dataset.modePosition = "other";
+                            $("[name=mode_position_other]").value = mode_position;
+                            console.log($("[name=mode_position]").value);
+                        }
                         $("[name=time_out]").value = time_out;
                         $("[name=mode_child]").value = mode_child;
                     }
@@ -310,7 +318,7 @@ export default function handleEditFunctionType() {
             (type === "gpio" || type == "gpio_module") && resetGpio();
 
             type === "variable" && resetVariable();
-            type === 'position' && resetPosition()
+            type === "position" && resetPosition();
         }
     }
 
@@ -598,10 +606,19 @@ export default function handleEditFunctionType() {
                 const time_out = $('[name="time_out"]');
                 const color_position = $('[name="color_position"]');
                 const mode_position = $('[name="mode_position"]');
+                const mode_position_other = $("[name=mode_position_other]");
                 const mode_child = $('[name="mode_child"]');
                 const map = $(".name-map-active");
 
-                const dataPosition = {
+
+                let mode_position_value;
+                if (mode_position.value === "other") {
+                    mode_position_value = mode_position_other.value;
+                } else {
+                    mode_position_value = mode_position.value;
+                }
+
+                const dataPosition = { 
                     type: "position",
                     name: name.value,
                     x: x.value,
@@ -610,25 +627,23 @@ export default function handleEditFunctionType() {
                     w: w.value,
                     time_out: time_out.value,
                     color_position: color_position.value,
-                    mode_position: mode_position.value,
+                    mode_position: mode_position_value,
                     mode_child: mode_child.value,
                     map: map.innerText,
                     mode: "position",
                 };
 
-                const isValid =
-                    !!(name.value &&
+                const isValid = !!(
+                    name.value &&
                     x.value &&
                     y.value &&
                     z.value &&
                     w.value &&
                     time_out.value &&
                     color_position.value &&
-                    mode_position.value &&
-                    mode_child.value);
-
-                console.log('valid',isValid);
-
+                    mode_position_value &&
+                    mode_child.value
+                );
                 if (isValid) {
                     console.log("oldname", oldName);
                     updateStep(`/api/step/${currentIdUpdate}`, dataPosition);
@@ -644,7 +659,6 @@ export default function handleEditFunctionType() {
                     mode_position.value = "normal";
                     mode_child.value = -1;
                     return true;
-
                 } else {
                     toggerMessage("error", "Please enter all inputs");
                     return false;

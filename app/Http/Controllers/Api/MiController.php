@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
 use App\Models\backend\Missions;
+use App\Models\backend\Stop;
 use App\Models\backend\TypeMission;
+use App\Models\backend\WakeUp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -188,12 +190,20 @@ class MiController extends Controller
 
                     foreach ($request->idDelete as $id) {
                         Missions::where('id', $id)->delete();
+                        Stop::where('id_mission', $id)->delete();
+                        WakeUp::where('id_mission', $id)->delete();
+                        DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $id)->delete();
                     }
                     return ['message' => 'Delete missions success', 'status' => 200];
                 } else {
                     return ['message' => 'No mission selected', 'status' => 100];
                 }
-
+            case 'delete':
+                $idDelete = $request->idDelete;
+                Missions::where('id', $idDelete)->delete();
+                Stop::where('id_mission', $idDelete)->delete();
+                WakeUp::where('id_mission', $idDelete)->delete();
+                DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $idDelete)->delete();
             default:
                 return 123;
         }

@@ -10,6 +10,7 @@ use \Carbon\Carbon;
 use App\Http\Controllers\frontend\MissionsController;
 use App\Models\backend\Stop;
 use App\Models\backend\WakeUp;
+use Illuminate\Support\Facades\DB;
 
 class CreateMissionsController extends Controller
 {
@@ -38,10 +39,11 @@ class CreateMissionsController extends Controller
     {
         $deleteId = $request->id;
         Missions::where('id', $deleteId)->delete();
+        DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/".$deleteId)->delete();
 
         Stop::where('id_mission', $deleteId)->delete();
         WakeUp::where('id_mission', $deleteId)->delete();
-        return back();
+        return back()->with('');
     }
 
     public function addPointToMission(Request $request)

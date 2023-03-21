@@ -1,7 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <div class=" flex flex-col w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2">
-        <div class="heading map-heading">Choose map active</div>
         <div class="h-full flex flex-col bg-[#ccc] relative overflow-hidden rounded-md">
             <div class="w-full h-full" id="map-wrapper">
                 <div class="w-full h-full" id="map"></div>
@@ -25,10 +24,22 @@
                         @endforeach
                     </select>
                 </label>
+
                 <div class="mx-4">
                     <button class="bg-[#0f6cbd] text-[#fff] px-3 py-2 rounded-md text-2xl btn" id="active-map-btn">Active map</button>
-                    <button class="bg-red-500 text-[#fff] px-3 py-2 rounded-md text-2xl btn" id="delete-map-btn">Delete map</button>
+                    <label class="bg-red-500 text-[#fff] px-3 py-2 rounded-md text-2xl btn" for="delete-map">Delete map</label>
+
                 </div>
+                <input type="checkbox" name="" class="peer/delete-map hidden" id="delete-map">
+                <label for="delete-map" class="fixed top-0 z-10 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] hidden peer-checked/delete-map:flex justify-center items-center">
+                    <div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
+                        <p>Do you want to delete this map?</p>
+                        <div class="flex justify-evenly mt-4">
+                            <label for="delete-map" class="bg-yellow-500 text-[#fff] px-3 py-2 rounded-md btn">Cancel</label>
+                            <label for="delete-map" class="bg-red-500 text-[#fff] px-3 py-2 rounded-md btn" id="delete-map-btn">Submit</label>
+                        </div>
+                    </div>
+                </label>
             </div>
 
         </div>

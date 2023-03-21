@@ -40,12 +40,16 @@
             <span class="text-xl text-red-500"></span>
         </div>
 
-        <div class="mb-4 ">
+        <div class="mb-4 flex items-center">
             <label for="" class="text-2xl">Mode</label>
-            <select name="mode_position" class="text-2xl px-4 py-1 input-submit w-[100px] bg-[#fff] border outline-none" id="">
-                <option value="normal">Normal</option>
-                <option value="high">High</option>
-            </select>
+            <div class="ml-2">
+                <select name="mode_position" class="text-2xl px-4 py-1 input-submit bg-[#fff] border outline-none" id="">
+                    <option value="normal">Normal</option>
+                    <option value="line_follow">Line follow</option>
+                    <option value="other">other...</option>
+                </select>
+                <input type="text" data-mode-position="" name="mode_position_other" class="text-2xl w-[80px] px-4 py-1 hidden data-[mode-position=other]:inline-block input-reset">
+            </div>
         </div>
 
 

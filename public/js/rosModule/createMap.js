@@ -24,7 +24,7 @@ function createMap(
 
     viewer = new ROS3D.Viewer(optionViewer);
 
-    const a = new ROS3D.OccupancyGridClient({
+    new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,
         continuous: true,

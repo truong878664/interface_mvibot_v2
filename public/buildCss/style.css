@@ -1,4 +1,6 @@
 @import url(../fonts/fontawesome-free-6.2.0-web/css/all.min.css);
+@import url(../icon/icomoon/style.css);
+
 :root {
     --column-status: 4;
 }
