@@ -918,6 +918,11 @@
     color: var(--white-color);
     margin: 8px 4px;
     padding: 4px 8px;
+
+}
+
+.step-item:not(.step-item-function):not(.btn) {
+    min-width: 100px;
 }
 .form-submit-steps {
     display: flex;
@@ -2207,4 +2212,13 @@ li {
         opacity: 1;
         transform: scale(100%);
     }
+}
+
+
+.not-allowed {
+    pointer-events: none;
+    background-color: rgb(126, 126, 126);
+    color: #fff;
+    border-color: rgb(126, 126, 126);
+    display: none;
 }

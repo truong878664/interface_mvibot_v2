@@ -55,7 +55,6 @@ function handleAddBookmark() {
 }
 
 function saveBookmark(data) {
-    console.log(123)
     fetch("/api/bookmark", {
         method: "POST",
         headers: {

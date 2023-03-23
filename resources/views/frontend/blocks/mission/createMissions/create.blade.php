@@ -5,7 +5,7 @@
 @endphp
 
 @foreach ($missions as $index => $itemMission)
-    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{ $itemMission->id }}" >
+    <div class="create-misisons-item bg-gradient-to-r {{ $colorMisisonItem[$type] }}" mission-id="{{ $itemMission->id }}">
         <div class="absolute top-4 left-4 flex justify-between z-30">
             <div class="text-[30px] w-[30px] h-[30px] flex items-center justify-center pointer-events-none">
                 @if ($itemMission->mission_shorthand)
@@ -17,13 +17,10 @@
         </div>
         <div class="absolute top-4 right-4 justify-between z-30 flex flex-row-reverse ">
             <div class="flex">
-                <form method="post" action="delete/{{ $itemMission->id }}" class="action-delete-mission">
-                    @method('delete')
-                    <button
-                        class="rounded-full ml-2 bg-[#fff] {{ $colorButton[$type] }} text-[15px] w-[30px] h-[30px] flex items-center justify-center btn delete-mission-btn"><i
-                            class="fa-regular fa-trash-can"></i></button>
-                    @csrf
-                </form>
+
+                <button data-id="{{ $itemMission->id }}"
+                    class="rounded-full ml-2 bg-[#fff] {{ $colorButton[$type] }} text-[15px] w-[30px] h-[30px] flex items-center justify-center btn delete-mission-btn"><i
+                        class="fa-regular fa-trash-can"></i></button>
                 <button
                     class="rounded-full btn ml-2 bg-[#fff] {{ $colorButton[$type] }} text-[12px] w-[30px] h-[30px] flex items-center justify-center edit-name-mission-btn">
                     <i class="fa-solid fa-pen"></i>

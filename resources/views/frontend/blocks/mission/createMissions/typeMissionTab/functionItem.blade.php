@@ -7,9 +7,9 @@
                 <label for="checkall-{{$type}}" class="font-bold">Check all</label>
             </div>
             <span>With selected: </span>
-            <button data-type="{{$type}}" class="ml-4 btn delete-multi-type-mission-btn multi-btn disabled:opacity-50 multi-btn">
+            <button data-type="{{$type}}" class="ml-4 btn delete-multi-type-mission-btn multi-btn disabled:opacity-50 px-2 rounded-sm multi-btn">
                 <i class="fa-regular fa-trash-can text-red-500"></i>
-                <span class="font-bold">Delete</span>
+                <span class="font-bold pointer-events-none">Delete</span>
             </button>
             
             <button data-type="{{$type}}" class=" ml-4 btn copy-multi-type-mission-btn multi-btn disabled:opacity-50 multi-btn">
@@ -21,19 +21,4 @@
     </div>
 </div>
 
-<style>
-    .type-mission-function-normal.active,
-    .type-mission-function-ifelse.active,
-    .type-mission-function-trycatch.active {
-        background-color: #ccc;
-    }
-
-    .not-allowed {
-        pointer-events: none;
-        background-color: rgb(126, 126, 126);
-        color: #fff;
-        border-color: rgb(126, 126, 126);
-        display: none;
-    }
-</style>
 

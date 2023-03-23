@@ -1,7 +1,9 @@
 import { $, $$, toggerMessage } from "../../main.js";
 import publishTopicString from "../../rosModule/topicString.js";
 import dbDelete from "../functionHandle/dbDelete.js";
-
+import { getBookmark } from "../../bookmark.js";
+import confirmationForm from "../../functionHandle/confirmationForm.js";
+import { publishMission } from "../../rosModule/handleMission.js";
 const missionCreateBtn = $(".create-missions-btn");
 const mission = $("#name-mission");
 
@@ -40,18 +42,21 @@ $(".send-btn").onclick = (e) => {
         }
     });
 
-    if ($(".robot-active").value != "" && idSelect.length != 0) {
-        getMission(idSelect);
+    const robotActive = $(".robot-active").value;
+    if (robotActive != "" && idSelect.length != 0) {
+        getMission(idSelect, robotActive);
         $("#select-robot").checked = false;
         $(".select-btn").click();
 
         $$(".select-mission").forEach((item) => {
             item.checked = false;
         });
+    } else {
+        toggerMessage("error", "Please choose mission and Robot!");
     }
 };
 
-function getMission(ids) {
+function getMission(ids, robotActive) {
     const list_id = ids.join(",");
     fetch(`/api/mi/get-mission?list_id=${list_id}`)
         .then((res) => res.json())
@@ -61,75 +66,54 @@ function getMission(ids) {
                 return allMission.push(
                     `[${item.wake_up ? item.wake_up : ""}${
                         item.stop ? item.stop : ""
-                    }${item.steps_mission ? item.steps_mission : ""}%@]`
+                    }*${item.steps_mission ? item.steps_mission : ""}]`
                 );
             });
-            const mission = allMission.join("");
-            console.log(mission || "mission don't have data");
+            const missionNew = allMission.filter((item) => {
+                return (item !== '[*]');
+            });
+
+            const mission = missionNew.join("");
+            if (!mission) {
+                toggerMessage("error", "Mission don't have data!");
+                return;
+            }
+            let topic;
+            data[0].type === "normal" &&
+                (topic = `/${robotActive}/mission_normal`);
+
+            data[0].type === "error" &&
+                (topic = `/${robotActive}/mission_error`);
+
+            data[0].type === "battery" &&
+                (topic = `/${robotActive}/mission_battery`);
+
+            data[0].type === "gpio" && (topic = `/${robotActive}/mission_gpio`);
+
+            publishMission(topic, mission);
         });
 }
 
 function handleDeleteMission() {
     $$(".delete-mission-btn").forEach((element) => {
-        element.onclick = (e) => {
-            e.preventDefault();
-            dbDelete(e.target, () => {
-                handleDelete(e);
-            });
-            function handleDelete(e) {
-                e.target.closest(".action-delete-mission").submit();
-            }
-        };
+        element.addEventListener("click", deleteMission);
     });
 }
 
 function handleEditNameMission() {
     $$(".edit-name-mission-btn").forEach((element) => {
-        element.onclick = (e) => {
-            const missionItem = e.target.closest(".create-misisons-item");
-            const nameElement = missionItem.querySelector(".name-mission");
-            const oldName = nameElement.value;
-            const hrefElement = missionItem.querySelector(".href-mission");
-            hrefElement.onclick = (e) => e.preventDefault();
-            nameElement.disabled = false;
-            nameElement.focus();
-            nameElement.style.borderColor = "#fff";
-
-            nameElement.setSelectionRange(oldName.length, oldName.length);
-
-            nameElement.onblur = () => {
-                nameElement.style.borderColor = "transparent";
-                setTimeout(() => {
-                    hrefElement.onclick = () => true;
-                }, 500);
-                nameElement.disabled = true;
-                if (oldName != nameElement.value && nameElement.value != "") {
-                    const dataUpdate = {
-                        method: "update-name",
-                        name: nameElement.value,
-                    };
-
-                    console.log(missionItem);
-                    fetchApi(
-                        `/api/mi/${missionItem.getAttribute("mission-id")}`,
-                        "PUT",
-                        dataUpdate,
-                        (data) => {
-                            if (data.status != 200) {
-                                nameElement.value = oldName;
-                            }
-                        }
-                    );
-                } else {
-                    nameElement.value = oldName;
-                }
-            };
-        };
+        element.addEventListener("click", editNameMission);
     });
 }
 
 function handleDeleteMultiMission() {
     $(".delete-btn").onclick = () => {
+        confirmationForm({
+            message: "Do you want to delete these missions?",
+            callback: deleteMulti,
+        });
+    };
+    function deleteMulti() {
         const idDelete = [];
         $$(".select-mission").forEach((element) => {
             if (element.checked) {
@@ -154,20 +138,22 @@ function handleDeleteMultiMission() {
                 toggerMessage("error", data.message);
             }
         }
-    };
+    }
 }
 
 function handleCloneMission() {
     $$(".clone-mission-btn").forEach((element) => {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
-
+            const missionItem = e.target.closest(".create-misisons-item");
+            const missionItemClone = missionItem.cloneNode(true);
             fetchApi(
                 "/api/mi",
                 "POST",
                 { method: "clone", id: missionId },
                 (data) => {
                     location.reload();
+                    console.log(missionItemClone);
                 }
             );
         };
@@ -201,6 +187,74 @@ function handleResetMission() {
 
         $("#reset-mission").checked = false;
 
-        toggerMessage("success", `Reset mission "${type.toUpperCase()}" for robot "${robotReset}" successfully!`);
+        toggerMessage(
+            "success",
+            `Reset mission "${type.toUpperCase()}" for robot "${robotReset}" successfully!`
+        );
+    };
+}
+
+function deleteMission(e) {
+    e.preventDefault();
+    dbDelete(e.target, () => {
+        handleDelete(e);
+    });
+    function handleDelete(e) {
+        const idDelete = e.target.dataset.id;
+        fetchApi(
+            "/api/mi/delete",
+            "DELETE",
+            {
+                method: "delete",
+                idDelete: idDelete,
+            },
+            (data) => {
+                if (data.deleted) {
+                    e.target.closest(".create-misisons-item").remove();
+                    getBookmark();
+                }
+            }
+        );
+    }
+}
+
+function editNameMission(e) {
+    const missionItem = e.target.closest(".create-misisons-item");
+    const nameElement = missionItem.querySelector(".name-mission");
+    const oldName = nameElement.value;
+    const hrefElement = missionItem.querySelector(".href-mission");
+    hrefElement.onclick = (e) => e.preventDefault();
+    nameElement.disabled = false;
+    nameElement.focus();
+    nameElement.style.borderColor = "#fff";
+
+    nameElement.setSelectionRange(oldName.length, oldName.length);
+
+    nameElement.onblur = () => {
+        nameElement.style.borderColor = "transparent";
+        setTimeout(() => {
+            hrefElement.onclick = () => true;
+        }, 500);
+        nameElement.disabled = true;
+        if (oldName != nameElement.value && nameElement.value != "") {
+            const dataUpdate = {
+                method: "update-name",
+                name: nameElement.value,
+            };
+
+            console.log(missionItem);
+            fetchApi(
+                `/api/mi/${missionItem.getAttribute("mission-id")}`,
+                "PUT",
+                dataUpdate,
+                (data) => {
+                    if (data.status != 200) {
+                        nameElement.value = oldName;
+                    }
+                }
+            );
+        } else {
+            nameElement.value = oldName;
+        }
     };
 }

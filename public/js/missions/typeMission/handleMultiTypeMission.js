@@ -1,5 +1,6 @@
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { toggerMessage } from "../../main.js";
+import dbDelete from "../functionHandle/dbDelete.js";
 import { renderBlockStep } from "../handleStepMission.js";
 import handleRenderTypeMission from "./handleRenderTypeMission.js";
 
@@ -60,20 +61,26 @@ function getItemChecked(type) {
 function handleDeleteMultiTypeMission() {
     const deleteBtns = $$(".delete-multi-type-mission-btn");
     console.log(deleteBtns);
-    deleteBtns.forEach((element) =>
-        element.addEventListener("click", deleteFunction)
+    deleteBtns.forEach(
+        (element) =>
+            // element.addEventListener("click", deleteFunction)
+            (element.onclick = (e) => {
+                dbDelete(e.target, () => {
+                    deleteFunction(e);
+                });
+            })
     );
+
     function deleteFunction(e) {
-        const type = this.dataset.type;
+        const type = e.target.closest('[data-type]').dataset.type;
         const idSelects = getItemChecked(type);
         removeFunctionChecked(type);
-
         fetchCustom(
             `/api/type-mission/delete`,
             "DELETE",
             (data) => {
                 toggerMessage("success", data.message);
-                renderBlockStep(true)
+                renderBlockStep(true);
             },
             { deletes: idSelects, method: "multi" }
         );

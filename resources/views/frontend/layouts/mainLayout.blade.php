@@ -9,7 +9,7 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-4b174640.css">
+    <link rel="stylesheet" href="/build/assets/app-9b4eafc9.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
@@ -29,18 +29,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        .icon-bookmark-btn {
-            display: none;
-        }
-
-        [data-bookmark=""] .unactive-bookmark {
-            display: block;
-        }
-
-        [data-bookmark="active"] .active-bookmark {
-            display: block;
-        }
     </style>
     <header class="main-header">
         <div class="header-left-wrapper">
@@ -53,11 +41,11 @@
             <div class="message-map-wrapper">
             </div>
             <div class="relative">
-                <button data-bookmark="" class="btn text-yellow-400 bookmark-btn">
-                    <div class="icon-bookmark-btn active-bookmark pointer-events-none">
+                <button data-bookmark="" class="btn text-yellow-400 bookmark-btn group/bookmark">
+                    <div class="icon-bookmark-btn active-bookmark pointer-events-none hidden group-data-[bookmark=active]/bookmark:block">
                         <i class="fa-solid  fa-bookmark"></i>
                     </div>
-                    <div class="icon-bookmark-btn unactive-bookmark pointer-events-none">
+                    <div class="icon-bookmark-btn unactive-bookmark pointer-events-none hidden group-data-[bookmark='']/bookmark:block">
                         <i class="fa-regular fa-bookmark"></i>
                     </div>
                 </button>
@@ -121,18 +109,6 @@
 
             <ul class="flex flex-col items-center h-full overflow-x-hidden overflow-y-auto bookmark-wrapper">
 
-                {{-- @for ($i = 0; $i < 25; $i++)
-                    <li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[100px] shadow-sm shadow-[#ccc] hover:shadow-md">
-                        <a href="" class="flex flex-col items-center h-full">
-                            <div class="leading-[0px] icon-bookmark">
-                                <i class="fa-solid fa-book-bookmark "></i>
-                            </div>
-                            <div class="w-full flex-1 flex justify-center items-center">
-                                <p class="text-base text-center text-clamp-2">mission {{ $i }}</p>
-                            </div>
-                        </a>
-                    </li>
-                @endfor --}}
             </ul>
         </section>
 

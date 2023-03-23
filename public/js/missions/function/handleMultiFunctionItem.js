@@ -1,5 +1,6 @@
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
+import dbDelete from "../functionHandle/dbDelete.js";
 import { renderBlockStep } from "../handleStepMission.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 
@@ -60,21 +61,30 @@ function removeFunctionChecked(type) {
 function handleDeleteMultiFunction() {
     const deleteBtns = $$(".delete-multi-function-btn");
     deleteBtns.forEach((element) =>
-        element.onclick=  deleteFunction
+        // element.onclick=  deleteFunction
+
+        // element.addEventListener("click", deleteFunction)
+        {
+            element.onclick = (e) => {
+                dbDelete(e.target, () => {
+                    deleteFunction(e);
+                });
+            };
+        }
     );
     function deleteFunction(e) {
-        const type = this.dataset.type;
+        const type = e.target.closest('[data-type]').dataset.type;
         const idSelects = getItemChecked(type);
         removeFunctionChecked(type);
 
-        console.log(idSelects)
+        console.log(idSelects);
         fetchCustom(
             `/api/function/mission_${type}s`,
             "DELETE",
             (data) => {
-                toggerMessage("success", data.message)
+                toggerMessage("success", data.message);
 
-                data.deleted && renderBlockStep(true)
+                data.deleted && renderBlockStep(true);
             },
             { deletes: idSelects }
         );
@@ -91,15 +101,13 @@ function handleCopyFunction() {
     function copyFunction(e) {
         const type = this.dataset.type;
         const idSelects = getItemChecked(type);
-        console.log(idSelects)
-        
-        fetchCustom(
-            `/api/function`,
-            "POST",
-            () => loadDataFunction(),
-            { idSelects, table: `mission_${type}s` }
-        );
-        
+        console.log(idSelects);
+
+        fetchCustom(`/api/function`, "POST", () => loadDataFunction(), {
+            idSelects,
+            table: `mission_${type}s`,
+        });
+
         $(`.check-all-input[data-type=${type}`).checked = false;
     }
 }

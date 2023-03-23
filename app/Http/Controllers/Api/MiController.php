@@ -204,6 +204,7 @@ class MiController extends Controller
                 Stop::where('id_mission', $idDelete)->delete();
                 WakeUp::where('id_mission', $idDelete)->delete();
                 DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $idDelete)->delete();
+                return ['message' => 'Delete mission success', 'deleted' => true];
             default:
                 return 123;
         }

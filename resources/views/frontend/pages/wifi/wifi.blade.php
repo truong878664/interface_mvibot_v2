@@ -1,16 +1,63 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
+    <div class=""></div>
     <div class="relative overflow-hidden w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2">
-        <canvas id="map-test" class="bg-red-100 w-full h-full"></canvas>
-        <div class="absolute top-0 left-0">
+        {{-- <canvas id="map-test" class="bg-red-100 w-full h-full "></canvas>
+        <div class="absolute top-0 left-0 ">
             <input type="range" min="0" max="100" class="change-canvas">
             <input type="range" min="0" max="100" class="change-left">
             <input type="range" min="0" max="100" class="change-right">
+        </div> --}}
 
-        </div>
+        <button id="submit-btn" class="bg-blue-400 p-4 btn">tesst</button>
     </div>
 
+
+
     <script>
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+        $('#submit-btn').onclick = () => {
+            showActive({
+                message: 'Do you want do submit this?',
+                callback: deleteMission
+            })
+        }
+
+        function deleteMission() {
+            console.log(123);
+        }
+
+        function showActive({ message = 'Do you want to delete?',callback}) {
+            const divElement = document.createElement('div')
+            divElement.classList.add('fixed', 'top-0', 'z-10', 'left-0', 'right-0', 'bottom-0', 'bg-[rgba(0,0,0,0.2)]',
+                'form-submit-again', 'flex', 'justify-center', 'items-center')
+            divElement.innerHTML = `<div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
+                <p>${message}</p>
+                <div class="flex justify-evenly mt-4">
+                    <button class="bg-yellow-500 text-[#fff] px-3 py-2 rounded-md btn" id='cancel-form-again-btn'>Cancel</button>
+                    <button class="bg-red-500 text-[#fff] px-3 py-2 rounded-md btn" id='submit-form-again-btn'>Submit</button>
+                </div>
+            </div>`
+            document.body.appendChild(divElement)
+            const formSubmitAgain = document.querySelector('.form-submit-again')
+            const submitFormAgainBtn = document.querySelector('#submit-form-again-btn')
+            const cancelFormAgainBtn = document.querySelector('#cancel-form-again-btn')
+
+            cancelFormAgainBtn.addEventListener('click', hidenFormAgain)
+            submitFormAgainBtn.addEventListener('click', () => {
+                hidenFormAgain()
+                callback()
+            })
+            formSubmitAgain.addEventListener('click', hidenFormAgain)
+
+            function hidenFormAgain() {
+                formSubmitAgain.remove()
+            }
+        }
+    </script>
+
+    {{-- <script>
         function readPGM(path) {
             return new Promise((resolve, reject) => {
                 // Tạo một XMLHttpRequest để tải tệp PGM
@@ -181,5 +228,5 @@
                 ctx.putImageData(imgData, deltaX, deltaY);
             }
         });
-    </script>
+    </script> --}}
 @endsection

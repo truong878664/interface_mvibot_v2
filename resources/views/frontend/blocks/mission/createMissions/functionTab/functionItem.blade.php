@@ -10,9 +10,9 @@
             <label for="checkall-{{$type}}" class="font-bold">Check all</label>
         </div>
         <span>With selected: </span>
-        <button class="disabled:opacity-50 ml-4 btn delete-multi-function-btn multi-btn" data-type="{{$type}}">
-            <i class="fa-regular fa-trash-can text-red-500"></i>
-            <span class="font-bold">Delete</span>
+        <button class="disabled:opacity-50 ml-4 btn delete-multi-function-btn multi-btn px-2 rounded-sm" data-type="{{$type}}">
+            <i class="fa-regular fa-trash-can text-red-500 pointer-events-none"></i>
+            <span class="font-bold pointer-events-none">Delete</span>
         </button>
 
         <button class="disabled:opacity-50 ml-4 btn copy-multi-function-btn multi-btn" data-type="{{$type}}">
