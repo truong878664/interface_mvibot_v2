@@ -10,11 +10,12 @@ import {
     displayLayer,
     deleteAllLayer,
 } from "../rosModule/layer/markerClient.js";
-import { mvibot_layer } from "../rosModule/classMvibot.js";
+import { mvibot_layer, mvibot_color } from "../rosModule/classMvibot.js";
 import { convertToPosition } from "../rosModule/clickSetPointMap.js";
 import lockZ from "../rosModule/lockZ.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -93,7 +94,6 @@ function getLayer() {
             });
 
             countLayerDb = data.length;
-            // console.log(data.length);
             return data;
         })
         .then((data) => {
@@ -165,6 +165,38 @@ function handleClickSetPositionLayer(x, y) {
     renderLayer(dataLayerSaveDatabase);
 }
 
+function selectLayer() {
+    let oldColor;
+    let oldIndex;
+    Array.from($$(".layer-item-show"))
+        .reverse()
+        .forEach((element, index) => {
+            element.onclick = function (e) {
+                const currentLayer = e.target.closest(".layer-item-show");
+                const isCurrentLayerActive =
+                    currentLayer.dataset.status === "active";
+
+                const layerActive = $(".layer-item-show[data-status=active]");
+                (layerActive || isCurrentLayerActive) &&
+                    (layerActive.dataset.status = "");
+                element.dataset.status = isCurrentLayerActive ? "" : "active";
+
+                if (mvibot_layer_active[oldIndex])
+                    mvibot_layer_active[oldIndex].color = oldColor;
+                oldColor = mvibot_layer_active[index].color;
+                oldIndex = index;
+
+                const colorSelect = new mvibot_color(0, 1, 0, 0.3);
+
+                mvibot_layer_active[index].color = isCurrentLayerActive
+                    ? oldColor
+                    : colorSelect;
+
+                displayLayer(mvibot_layer_active);
+            };
+        });
+}
+
 function handleChangeRange() {
     $("#type-layer").onchange = (e) => {
         dataLayerModel.type_layer = e.target.value;
@@ -219,6 +251,7 @@ const deleteLayer = (id) => {
     deleteAllLayer(mvibot_layer_active);
     mvibot_layer_active.splice(id + countLayerDb, 1);
     dataLayerSaveDatabase.splice(id, 1);
+
     displayLayer(mvibot_layer_active);
     renderLayer(dataLayerSaveDatabase);
 };
@@ -250,6 +283,13 @@ function handleDeleteLayer() {
 function handleSaveLayer() {
     $("#save-layer-btn").onclick = (e) => {
         e.preventDefault();
+
+        //unactive layer
+        const layerActive = $(".layer-item-show[data-status=active]");
+        if (layerActive) {
+            layerActive.click();
+        }
+
         fetch("/api/layer", {
             headers: {
                 Accept: "application/json",
@@ -429,7 +469,7 @@ function renderListLayer(mvibot_layer_active) {
     const layer_active = [...mvibot_layer_active].reverse();
     layer_active.map((item) => {
         html.push(`
-            <div class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.43)] cursor-pointer">
+            <div data-status="" data-name="${item.name_layer}" class="px-4 py-2 flex justify-between items-center hover:bg-[rgba(204,204,204,0.2)] cursor-pointer data-[status=active]:bg-[rgba(204,204,204,0.43)]  layer-item-show">
                 <span class="">${item.name_layer}</span>
                 <button class="text-[rgba(51,51,51,0.38)] hover:text-[#333] delete-layer-db-btn" layer-delete="${item.name_layer}">
                     <i class="fa-solid fa-xmark"></i>
@@ -439,13 +479,19 @@ function renderListLayer(mvibot_layer_active) {
     });
     $("#list-layer-item").innerHTML = html.join("");
     HandleDeleteLayer();
+    selectLayer();
 }
 
 function HandleDeleteLayer() {
     $$(".delete-layer-db-btn").forEach((element) => {
         element.onclick = (e) => {
             const nameLayer = e.target.getAttribute("layer-delete");
-            deleteLayerDb(nameLayer);
+            confirmationForm({
+                message: "Do you want to delete this layer?",
+                callback: () => {
+                    deleteLayerDb(nameLayer);
+                },
+            });
         };
     });
 }

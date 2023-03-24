@@ -44,6 +44,8 @@ function setRotateHook(deg) {
     hook.style.rotate = -deg + "deg";
 }
 
+
+
 // let deg = 0;
 // let right = true;
 // setInterval(() => {
