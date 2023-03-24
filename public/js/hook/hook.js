@@ -23,6 +23,7 @@ selectRobotHook.onchange = (e) => {
                 hookWrapper.dataset.status = "disabled";
                 listener?.unsubscribe();
                 setRotateHook(0);
+                console.log();
             } else {
                 hookWrapper.dataset.status = "";
                 listener = subscribeTopic(
@@ -43,20 +44,20 @@ function setRotateHook(deg) {
     hook.style.rotate = -deg + "deg";
 }
 
-let deg = 0;
-let right = true;
-setInterval(() => {
-    const rad = deg * (Math.PI / 180);
+// let deg = 0;
+// let right = true;
+// setInterval(() => {
+//     const rad = deg * (Math.PI / 180);
 
-    publishTopic("Mb23_946/hook_encoder", rad, "std_msgs/Float32");
-    right ? deg++ : deg--;
-    deg === 90 && (right = false);
-    deg === -90 && (right = true);
-}, 1000);
+//     publishTopic("Mb23_946/hook_encoder", rad, "std_msgs/Float32");
+//     right ? deg++ : deg--;
+//     deg === 90 && (right = false);
+//     deg === -90 && (right = true);
+// }, 1000);
 
-let data = 0.0;
+// let data = 0.0;
 
-setInterval(() => {
-    publishTopic("Mb23_946/hook_switch", data, "std_msgs/Float32");
-    // data = data === 1.0 ? 0.0 : 1.0;
-}, 3000);
+// setInterval(() => {
+//     publishTopic("Mb23_946/hook_switch", data, "std_msgs/Float32");
+//     data = data === 1.0 ? 0.0 : 1.0;
+// }, 3000);
