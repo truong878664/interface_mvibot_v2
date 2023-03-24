@@ -1,3 +1,4 @@
+import confirmationForm from "../../functionHandle/confirmationForm.js";
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
@@ -60,24 +61,18 @@ function removeFunctionChecked(type) {
 
 function handleDeleteMultiFunction() {
     const deleteBtns = $$(".delete-multi-function-btn");
-    deleteBtns.forEach((element) =>
-        // element.onclick=  deleteFunction
+    deleteBtns.forEach((element) => {
+        element.onclick = (e) =>
+            confirmationForm({
+                message: "Do you want to delete these items?",
+                callback: () => deleteFunction(e),
+            });
+    });
 
-        // element.addEventListener("click", deleteFunction)
-        {
-            element.onclick = (e) => {
-                dbDelete(e.target, () => {
-                    deleteFunction(e);
-                });
-            };
-        }
-    );
     function deleteFunction(e) {
-        const type = e.target.closest('[data-type]').dataset.type;
+        const type = e.target.closest("[data-type]").dataset.type;
         const idSelects = getItemChecked(type);
         removeFunctionChecked(type);
-
-        console.log(idSelects);
         fetchCustom(
             `/api/function/mission_${type}s`,
             "DELETE",

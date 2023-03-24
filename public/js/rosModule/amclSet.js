@@ -1,6 +1,7 @@
 import ros from "../main.js";
 
 export default function amclSet(nameRobot, x, y, z, w) {
+    console.log('start');
     const amcl_pub = new ROSLIB.Topic({
         ros: ros,
         name: `${nameRobot}/initialpose_web`,

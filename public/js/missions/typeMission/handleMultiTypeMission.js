@@ -1,3 +1,4 @@
+import confirmationForm from "../../functionHandle/confirmationForm.js";
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { toggerMessage } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
@@ -61,18 +62,16 @@ function getItemChecked(type) {
 function handleDeleteMultiTypeMission() {
     const deleteBtns = $$(".delete-multi-type-mission-btn");
     console.log(deleteBtns);
-    deleteBtns.forEach(
-        (element) =>
-            // element.addEventListener("click", deleteFunction)
-            (element.onclick = (e) => {
-                dbDelete(e.target, () => {
-                    deleteFunction(e);
-                });
-            })
-    );
+    deleteBtns.forEach((element) => {
+        element.onclick = (e) =>
+            confirmationForm({
+                message: "Do you want to delete these items?",
+                callback: () => deleteFunction(e),
+            });
+    });
 
     function deleteFunction(e) {
-        const type = e.target.closest('[data-type]').dataset.type;
+        const type = e.target.closest("[data-type]").dataset.type;
         const idSelects = getItemChecked(type);
         removeFunctionChecked(type);
         fetchCustom(

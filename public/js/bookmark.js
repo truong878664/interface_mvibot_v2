@@ -16,7 +16,7 @@ const iconBookmark = {
     localization: "fa-solid fa-location-dot",
     gpio: "fa-solid fa-toggle-on",
     sound: "fa-solid fa-volume-high",
-    setting: "dashboard-content-item-icon",
+    setting: "fa-solid fa-gear",
     other: "fa-solid fa-book-bookmark",
 };
 

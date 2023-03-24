@@ -19,6 +19,7 @@ import showLaser from "../rosModule/showLaser.js";
 import { cmd_vel_listener } from "../rosModule/moveRobot.js";
 import topicString from "../rosModule/topicString.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -110,9 +111,19 @@ $(".stop-mission-btn").onclick = (e) => {
         toggerMessage("error", "please choose robot");
     }
 };
+
+$(".refresh-mission-btn").onclick = () => {
+    toggerMessage("error", "The function is under development!");
+};
+
 $(".continue-mission-btn").onclick = (e) => {
     if (robotActive) {
-        topicString(`${robotActive}/mission_action`, "1");
+        confirmationForm({
+            message: `Do you want to continue robot ${robotActive}?`,
+            callback: () => {
+                topicString(`${robotActive}/mission_action`, "1");
+            },
+        });
     } else {
         toggerMessage("error", "please choose robot");
     }

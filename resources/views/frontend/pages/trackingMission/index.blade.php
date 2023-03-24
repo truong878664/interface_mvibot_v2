@@ -19,5 +19,6 @@
         <button class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-mission-btn">Stop</button>
         <button
             class=" btn bg-green-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 continue-mission-btn">Continue</button>
+        <button class=" btn bg-main text-[#fff] self-end px-4 py-1 rounded-md mr-4 refresh-mission-btn">Refresh</button>
     </div>
 </div>

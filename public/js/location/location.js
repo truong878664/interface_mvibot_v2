@@ -1,4 +1,4 @@
-import ros, { $ } from "../main.js";
+import ros, { $, toggerMessage } from "../main.js";
 import amclSet from "../rosModule/amclSet.js";
 import clickSetPointMap from "../rosModule/clickSetPointMap.js";
 import createAxes from "../rosModule/createAxes.js";
@@ -14,6 +14,7 @@ import mathYaw from "../rosModule/mathYaw.js";
 import showLaser from "../rosModule/showLaser.js";
 import showUrd from "../rosModule/showUrd.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -123,10 +124,15 @@ function displayLocation() {
 
 $("#send-location-btn").onclick = () => {
     if (robotActive) {
-        amclSet(robotActive, x, y, rotateZ, rotateW);
-        alert("publish success");
+        confirmationForm({
+            message: `Do you want to set up this localization for robot: ${robotActive}?`,
+            callback: () => {
+                amclSet(robotActive, x, y, rotateZ, rotateW);
+                toggerMessage("success", "Set location success!");
+            },
+        });
     } else {
-        alert("choose robot");
+        toggerMessage("error", "Please choose robot");
     }
 };
 
@@ -181,15 +187,17 @@ function handleMouseMapMove(e) {
 
 var tapedTwice = false;
 function tapHandler(e) {
-    if (!tapedTwice) {
-        tapedTwice = true;
-        setTimeout(function () {
-            tapedTwice = false;
-        }, 300);
-        return false;
+    if (e.touches.length < 2) {
+        if (!tapedTwice) {
+            tapedTwice = true;
+            setTimeout(function () {
+                tapedTwice = false;
+            }, 300);
+            return false;
+        }
+        e.preventDefault();
+        touchSetPoint(e);
     }
-    e.preventDefault();
-    touchSetPoint(e);
 }
 
 const touchSetPoint = function (e) {
