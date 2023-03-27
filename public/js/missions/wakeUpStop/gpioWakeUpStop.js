@@ -1,7 +1,8 @@
-import { $ } from "../../main.js";
+import { $, toggerMessage } from "../../main.js";
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { currentMission } from "../handleStepMission.js";
 import getValueWakeUpStop from "./ftWakeUpStop.js";
+import { loading, loaded } from "../../functionHandle/displayLoad.js";
 
 export const dataGpioWakeUpStop = {
     wake_up: {
@@ -144,11 +145,14 @@ function setDateGpioWakeUp(typeGpio) {
             type: type ? type : "gpio",
             name_seri: type ? name_seri : null,
         };
-
+        loading()
         fetchCustom(
             `/api/${typeGpio}`,
             "POST",
-            (data) => console.log(data),
+            (data) => {
+                loaded()
+                toggerMessage('success', `Save data ${typeGpio} successfully!`)
+            },
             data
         );
     });

@@ -118,11 +118,11 @@
             </div>
             <div class="flex flex-col lg:flex-row mt-8 text-2xl font-bold">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
-                <label for="wake-up"
-                    class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn type-mission-{{ $itemRender->type }}">Wake
+                <label for="wake-up" data-type-mission="{{ $itemRender->type }}"
+                    class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden  ">Wake
                     up</label>
-                <label for="stop"
-                    class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn type-mission-{{ $itemRender->type }}">Stop</label>
+                <label for="stop" data-type-mission="{{ $itemRender->type }}"
+                    class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden ">Stop</label>
                 <label for="select-robot"
                     class="mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn">Send</label>
             </div>
