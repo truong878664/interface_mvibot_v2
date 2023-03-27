@@ -101,6 +101,11 @@ export function resetGpio() {
     $(".name_gpio_module").value = "";
 
     $$(".gpio-io").forEach((item) => {
+        const isWakeUp = item.closest("#wake_up-wrapper");
+        const isStop = item.closest("#stop-wrapper");
+        if (isWakeUp || isStop) {
+            return;
+        }
         item.classList.remove(
             "in_on",
             "in_off",
@@ -178,7 +183,7 @@ $(".submit-btn-gpio").onclick = () => {
 
         addFunctionStep("gpio", data);
 
-        console.log(data)
+        console.log(data);
         toggerMessage("success", "save gpio successfully");
 
         resetGpio();

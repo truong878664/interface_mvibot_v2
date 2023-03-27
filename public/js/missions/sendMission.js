@@ -9,18 +9,15 @@ export default function sendMission() {
             .then((data) => {
                 const type = e.target.getAttribute("type");
 
-                const nameRobot = $("#select-robot-option").value.replaceAll(" ","");
+                const nameRobot = $("#select-robot-option").value.replaceAll(
+                    " ",
+                    ""
+                );
                 if (data.steps_mission !== null) {
                     if (!nameRobot) {
                         toggerMessage("error", "please choose robot");
                     } else {
-                        const wake_up = data.wake_up ? data.wake_up : "";
-                        const stop = data.stop ? data.stop : "";
-                        const dataHeadMission = `${wake_up}${stop}`;
-                        const dataBodyMission = `${data.steps_mission}`;
-
-                        const dataFullMission = `[${dataHeadMission}*${dataBodyMission}]`;
-
+                        const dataFullMission = translateDataMission(data);
                         let topic;
 
                         type === "normal" &&
@@ -47,4 +44,12 @@ export default function sendMission() {
             });
     };
 }
- 
+export function translateDataMission(data) {
+    const wake_up = data.wake_up ? data.wake_up : "";
+    const stop = data.stop ? data.stop : "";
+    const dataHeadMission = `${wake_up}${stop}`;
+    const dataBodyMission = `${data.steps_mission}`;
+
+    const dataFullMission = `[${dataHeadMission}*${dataBodyMission}]`;
+    return dataFullMission;
+}

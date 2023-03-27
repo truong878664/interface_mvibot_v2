@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class MiController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -107,6 +108,7 @@ class MiController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         switch ($request->method) {
             case "add":
                 $old_mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
@@ -228,7 +230,6 @@ class MiController extends Controller
     }
     public function translateData($id)
     {
-
         $dataMission = Missions::where('id', $id)->first();
         $step_name = $dataMission->steps_mission_name;
         if ($step_name != "") {
@@ -240,15 +241,15 @@ class MiController extends Controller
             }
 
             $data = [];
-            foreach ($dataChange as $dataItem) {
+            foreach ($dataChange as $index => $dataItem) {
                 switch ($dataItem[1]) {
                     case "normal":
-                        $head = "&name>$dataItem[0]/time_out>-1/mode>normal/data>%normal_step#";
+                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>normal/data>%normal_step#";
                         $body = $this->translateStepItem($dataItem[2]);
                         array_push($data, $head . $body . '%@');
                         break;
                     case "ifelse":
-                        $head = "&name>$dataItem[0]/time_out>-1/mode>if_else/data>%condition#";
+                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>if_else/data>%condition#";
 
                         $changeDataIfelse = explode('?', $dataItem[2]);
 
@@ -265,7 +266,7 @@ class MiController extends Controller
                         array_push($data, $head . $body);
                         break;
                     case "trycatch":
-                        $head = "&name>$dataItem[0]/time_out>-1/mode>try_catch/data>";
+                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>try_catch/data>";
 
                         $changeTryCatch = explode('?', $dataItem[2]);
 
@@ -283,7 +284,9 @@ class MiController extends Controller
             }
 
             $dataStepMission = trim(implode('', $data), " ");
+
             $dataStepMissionRemoveVar = implode('--+', array_unique(explode('--+', $dataStepMission)));
+
             $addFrontVar = str_replace("--+/front/", "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=", $dataStepMissionRemoveVar);
             $addBackVar = str_replace("/back/--+", "~~focus_value=0~)",  $addFrontVar);
             $fullStep = str_replace("--+", "",  $addBackVar);
@@ -448,7 +451,6 @@ class MiController extends Controller
         }, $stepMissionData);
 
         $dataStepMission = trim(implode($stepMission), " ");
-
 
         return $dataStepMission;
     }

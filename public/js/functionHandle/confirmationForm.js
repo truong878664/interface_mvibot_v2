@@ -2,11 +2,15 @@ export default function confirmationForm({
     message = "Do you want to delete?",
     callback,
 }) {
+    const checkForm = document.querySelector(".confirmation-form");
+    if (checkForm) {
+        return;
+    }
     const divElement = document.createElement("div");
     divElement.classList.add(
         "fixed",
         "top-0",
-        "z-[100]",
+        "z-[30]",
         "left-0",
         "right-0",
         "bottom-0",

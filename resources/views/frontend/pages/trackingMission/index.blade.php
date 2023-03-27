@@ -3,7 +3,7 @@
         <div class="map-tracking" id="map"></div>
         <div class="choose-robot-tracking">
             <input type="hidden" id="robot-navigation-json" value="{{ json_encode($robotNavigate) }}">
-            <select name="" id="robot-navigation" class="obtion-robot">
+            <select name="" id="robot-navigation" class="obtion-robot text-2xl">
                 <option value="">select robot</option>
                 @foreach ($robotNavigate as $item)
                     <option value="{{ $item->name_seri }}">{{ $item->name_seri }}</option>
@@ -16,9 +16,9 @@
         @include('frontend.blocks.joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
     </div>
     <div class="absolute right-3 top-3">
-        <button class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-mission-btn">Stop</button>
+        <button class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 text-2xl font-bold stop-mission-btn">Stop</button>
         <button
-            class=" btn bg-green-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 continue-mission-btn">Continue</button>
-        <button class=" btn bg-main text-[#fff] self-end px-4 py-1 rounded-md mr-4 refresh-mission-btn">Refresh</button>
+            class=" btn bg-green-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 text-2xl font-bold continue-mission-btn">Continue</button>
+        <button class=" btn bg-main text-[#fff] self-end px-4 py-1 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">Refresh</button>
     </div>
 </div>

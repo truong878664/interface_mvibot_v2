@@ -1,6 +1,7 @@
 import publishTopic from "../rosModule/topicString.js";
 import { robotActive } from "../mainLayout.js";
 import { $, $$ } from "../main.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 export default function parameter() {
     const SPEED_MATH_INITIAL = 0.001;
@@ -73,12 +74,17 @@ export default function parameter() {
         ).toFixed(4);
     }
 
-    sendParameterBtn.addEventListener("click", handleSendParameter);
+    sendParameterBtn.addEventListener("click", () => {
+        confirmationForm({
+            message: "Do you want to set parameter?",
+            callback: handleSendParameter,
+        });
+    });
 
     function handleSendParameter() {
         const dataParameter = [];
         Object.keys(parameterChange).forEach((key) => {
-            const valueParameter = $(`[name=${key}]`).value
+            const valueParameter = $(`[name=${key}]`).value;
             dataParameter.push(`(${key}:${valueParameter * 1})`);
             delete parameterChange[key];
         });

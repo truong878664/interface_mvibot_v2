@@ -1,13 +1,15 @@
 import createJoystick from "./createJoystick/createJoystick.js";
 import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
-import { $, $$ } from "./main.js";
+import { $, $$, toggerMessage } from "./main.js";
 import { cmd_vel_listener } from "./rosModule/moveRobot.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
 import reloadWhenOrientation from "./reloadOnOrientation.js";
 import { createMoveAction } from "./joystick/joystick.js";
 import publishTopicString from "./rosModule/topicString.js";
+import confirmationForm from "./functionHandle/confirmationForm.js";
+import subscribeTopic from "./rosModule/subscribeTopic.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -58,8 +60,19 @@ $("#create_map_btn").onclick = () => {
             $("#error_create_map").innerText = "";
         };
     } else {
-        changeMapActive(robotActive, nameMap.value);
-        nameMap.value = "";
+
+        if (!robotActive) {
+            toggerMessage('error', 'Choose robot to save map!')
+            return
+        }
+        confirmationForm({
+            message: `Do you want to save this map with the name ${nameMap.value}?`,
+            callback: () => {
+                changeMapActive(robotActive, nameMap.value);
+                nameMap.value = "";
+            },
+        });
+      
     }
 };
 
@@ -102,7 +115,7 @@ function handleSendTopic() {
         sendTopic(valueSend);
         setLabelRange(valueSend);
 
-        clearSendTopic()
+        clearSendTopic();
 
         timeOutSendTopic.push(
             setTimeout(() => {
@@ -116,7 +129,7 @@ function handleSendTopic() {
     };
 
     inputTopicElement.addEventListener("pointerup", () => {
-        clearSendTopic()
+        clearSendTopic();
     });
 
     inputTopicElement.addEventListener("pointerdown", (e) => {
@@ -130,7 +143,7 @@ function handleSendTopic() {
     });
 
     window.addEventListener("pointerup", () => {
-        clearSendTopic()
+        clearSendTopic();
     });
 
     function sendTopic(valueSend) {
@@ -142,7 +155,21 @@ function handleSendTopic() {
     }
 
     function clearSendTopic() {
-        timeIntervalSendTopic.forEach(item => clearInterval(item))
-        timeOutSendTopic.forEach(item => clearTimeout(item))
+        timeIntervalSendTopic.forEach((item) => clearInterval(item));
+        timeOutSendTopic.forEach((item) => clearTimeout(item));
     }
 }
+
+subscribeTopic(
+    `/request_action`,
+    "std_msgs/String",
+    (data, name) => {
+        if (data.data.indexOf('save_map' !== -1)) {
+            toggerMessage(
+                "success",
+                "Map saved!"
+            );
+        }
+        console.log(data);
+    }
+);

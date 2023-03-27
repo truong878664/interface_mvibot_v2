@@ -4,7 +4,7 @@
     <div class="form-create-point pb-5">
         <div class="mb-4">
             <label for="" class="text-2xl">Name point</label>
-            <input required type="text" class="text-2xl px-4 py-1 flex-1 input-submit" name="name_position">
+            <input required type="text" class="text-2xl px-4 py-1 flex-1 input-submit" name="name_position" autocomplete="off">
         </div>
 
         <div class="display-positon-wrapper">

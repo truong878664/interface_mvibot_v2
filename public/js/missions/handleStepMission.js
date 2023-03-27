@@ -7,6 +7,7 @@ import { showAllStep, showStep } from "./blockStep/showStep.js";
 import renderStepItem from "./blockStep/renderStepItem.js";
 import handleEditMission from "./blockStep/handleEditMission.js";
 import fullScreenBlockStep from "./blockStep/fullScreenStep.js";
+import showMissionCode from "./blockStep/showMissionCode.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -15,6 +16,7 @@ export const currentMission = $("#current-id-mission").value;
 
 translatesStepsMission(currentMission);
 fullScreenBlockStep();
+showMissionCode()
 
 function renderBlockStep(translate = false) {
     console.log('123')
