@@ -48,7 +48,6 @@ export function loadDataFunction() {
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
             typeFunction.forEach((item) => {
                 renderDataFunction(data[item], item);
             });

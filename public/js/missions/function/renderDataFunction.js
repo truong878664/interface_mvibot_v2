@@ -19,17 +19,17 @@ export default function renderDataFunction(data, type) {
 
     const listFunction = JSON.parse(JSON.stringify(data));
 
-    data.sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-            return -1;
-        }
-        if (nameA > nameB) {
-            return 1;
-        }
-        return 0;
-    });
+    // data.sort((a, b) => {
+    //     const nameA = a.name.toUpperCase();
+    //     const nameB = b.name.toUpperCase();
+    //     if (nameA < nameB) {
+    //         return -1;
+    //     }
+    //     if (nameA > nameB) {
+    //         return 1;
+    //     }
+    //     return 0;
+    // });
     
     data.map((item, index) => {
         const dataFunctionDetail = dataRenderFunction(listFunction, index);
