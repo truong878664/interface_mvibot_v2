@@ -191,11 +191,13 @@ export default function handleEditFunctionType() {
                     if (valueFunction.music_start == 1) {
                         $(".sound-start-btn").classList.add("active");
                         let mode;
-                        valueFunction.music_mode == 2 && (mode = "basic");
-                        valueFunction.music_mode == 3 && (mode = "error");
+                        
+                        valueFunction.music_mode == 1 && (mode = "buzzer1");
+                        valueFunction.music_mode == 2 && (mode = "buzzer2");
+                        valueFunction.music_mode == 3 && (mode = "basic");
                         valueFunction.music_mode == 4 && (mode = "custom");
                         $(".sound-start-btn").setAttribute("data-mode", mode);
-
+                        console.log(mode);
                         setColorSticker(mode);
                     } else {
                         $(".sound-stop-btn").classList.add("active");
@@ -208,7 +210,7 @@ export default function handleEditFunctionType() {
 
                 case "position":
                     $(".point-function-btn").click();
-
+                    $(".create-point-btn").textContent = "Update";
                     const {
                         x,
                         y,
@@ -302,7 +304,6 @@ export default function handleEditFunctionType() {
             dataUpdateStep(type) && handleResetData();
 
             $(`.submit-btn-${type}`).classList.remove("hidden");
-
             handleShowFormFunction(false, type);
         };
 
@@ -570,15 +571,21 @@ export default function handleEditFunctionType() {
                 let music_mode;
                 const music_start = music_type == "start" ? 1 : 0;
                 if (music_type != "stop") {
-                    $(".sound-btn.active")?.getAttribute("data-mode") ==
-                        "basic" && (music_mode = 2);
-                    $(".sound-btn.active")?.getAttribute("data-mode") ==
-                        "error" && (music_mode = 3);
-                    $(".sound-btn.active")?.getAttribute("data-mode") ==
-                        "custom" && (music_mode = 4);
+                    const mode = $(".sound-btn.active")?.dataset.mode;
+                    music_mode =
+                        mode === "buzzer1"
+                            ? 1
+                            : mode === "buzzer2"
+                            ? 2
+                            : mode === "basic"
+                            ? 3
+                            : mode === "custom"
+                            ? 4
+                            : undefined;
                 } else {
                     music_mode = 0;
                 }
+
                 if (name_sound) {
                     const data = {
                         type: "sound",
@@ -587,8 +594,9 @@ export default function handleEditFunctionType() {
                         name: name_sound,
                     };
 
+                    console.log(data);
+
                     updateStep(`/api/step/${currentIdUpdate}`, data);
-                    console.log(currentIdUpdate);
                     oldName != name_sound &&
                         updateNameStepAtBlockStep(
                             `${type}#${oldName}#${currentIdUpdate}`,
@@ -659,6 +667,7 @@ export default function handleEditFunctionType() {
                     time_out.value = -1;
                     mode_position.value = "normal";
                     mode_child.value = -1;
+
                     return true;
                 } else {
                     toggerMessage("error", "Please enter all inputs");
@@ -679,12 +688,12 @@ export default function handleEditFunctionType() {
             body: JSON.stringify(stepSave),
         })
             .then(function (res) {
-                loaded(); 
+                loaded();
                 res.status == 200
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");
                 translatesStepsMission(currentMission);
-                loadDataFunction()
+                loadDataFunction();
             })
             .catch(function (res) {
                 console.log(res);

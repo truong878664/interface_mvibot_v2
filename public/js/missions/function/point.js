@@ -461,10 +461,10 @@ $(".show-all-map-btn").onclick = (e) => {
                 const htmlListPoint = [];
                 data.map((position) => {
                     htmlListPoint.push(`
-                    <li class="w-full flex items-center justify-between my-2">
+                    <li class="w-full flex items-center justify-between my-1 text-2xl">
                         <div class="">
                         <span class="mr-1">Name:</span>
-                        <span class="font-bold">${position.name}</span>
+                        <span class="font-bold text-blue-800">${position.name}</span>
                         </div>
                         <div class="ml-2 w-[20px] h-[20px] rounded-full" style="background-color: ${position.color_position};"></div>
                     </li>
@@ -475,93 +475,28 @@ $(".show-all-map-btn").onclick = (e) => {
                 return data;
             })
             .then((data) => {
+                const NUMBER_PUB = 5
                 data.forEach((position) => {
-                    showPoint(
-                        position.x,
-                        position.y,
-                        viewer,
-                        tfClient,
-                        `point_pub_${position.id}`
-                    );
-                    showPoint(
-                        position.x,
-                        position.y,
-                        viewer,
-                        tfClient,
-                        `point_pub_${position.id}`
-                    );
-                    showPoint(
-                        position.x,
-                        position.y,
-                        viewer,
-                        tfClient,
-                        `point_pub_${position.id}`
-                    );
-                    showPoint(
-                        position.x,
-                        position.y,
-                        viewer,
-                        tfClient,
-                        `point_pub_${position.id}`
-                    );
-                    showPoint(
-                        position.x,
-                        position.y,
-                        viewer,
-                        tfClient,
-                        `point_pub_${position.id}`
-                    );
+                    for (let i = 0; i < NUMBER_PUB; i++) {
+                        showPoint(
+                            position.x,
+                            position.y,
+                            viewer,
+                            tfClient,
+                            `point_pub_${position.id}`
+                        );
 
-                    showPose(
-                        position.x,
-                        position.y,
-                        position.z,
-                        position.w,
-                        viewer,
-                        tfClient,
-                        position.color_position,
-                        `/pose_pub_${position.id}`
-                    );
-                    showPose(
-                        position.x,
-                        position.y,
-                        position.z,
-                        position.w,
-                        viewer,
-                        tfClient,
-                        position.color_position,
-                        `/pose_pub_${position.id}`
-                    );
-                    showPose(
-                        position.x,
-                        position.y,
-                        position.z,
-                        position.w,
-                        viewer,
-                        tfClient,
-                        position.color_position,
-                        `/pose_pub_${position.id}`
-                    );
-                    showPose(
-                        position.x,
-                        position.y,
-                        position.z,
-                        position.w,
-                        viewer,
-                        tfClient,
-                        position.color_position,
-                        `/pose_pub_${position.id}`
-                    );
-                    showPose(
-                        position.x,
-                        position.y,
-                        position.z,
-                        position.w,
-                        viewer,
-                        tfClient,
-                        position.color_position,
-                        `/pose_pub_${position.id}`
-                    );
+                        showPose(
+                            position.x,
+                            position.y,
+                            position.z,
+                            position.w,
+                            viewer,
+                            tfClient,
+                            position.color_position,
+                            `/pose_pub_${position.id}`
+                        );
+                    }
                 });
             });
     });

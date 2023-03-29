@@ -112,7 +112,7 @@ export function handleUpdateMission(idTypeMissionEdit) {
                 "|"
             )}?|${valueItemTrycatch.catch.join("|")}`,
         };
-        if (isValid && isDataTry && isDataCatch) {
+        if (isValid) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
             translatesStepsMission(currentMission);
             handleRenderTypeMission()

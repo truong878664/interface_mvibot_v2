@@ -35,6 +35,7 @@ export function handleShowFormFunction(isShow, typeFunction) {
     !isShow && ($(".check-click-point").checked = false);
     
     !isShow && resetMapPosition()
+    !isShow && ($('.create-point-btn').textContent = "Create")
 }
 
 function handleHideFormFunction() {

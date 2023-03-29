@@ -32,14 +32,17 @@ $(".submit-btn-sound").onclick = () => {
     let music_mode;
     const music_start = music_type == "start" ? 1 : 0;
     if (music_type != "stop") {
-        $(".sound-btn.active")?.getAttribute("data-mode") == "buzzer1" &&
-            (music_mode = 1);
-        $(".sound-btn.active")?.getAttribute("data-mode") == "buzzer2" &&
-            (music_mode = 2);
-        $(".sound-btn.active")?.getAttribute("data-mode") == "basic" &&
-            (music_mode = 3);
-        $(".sound-btn.active")?.getAttribute("data-mode") == "custom" &&
-            (music_mode = 4);
+        const mode = $(".sound-btn.active")?.dataset.mode;
+        music_mode =
+            mode === "buzzer1"
+                ? 1
+                : mode === "buzzer2"
+                ? 2
+                : mode === "basic"
+                ? 3
+                : mode === "custom"
+                ? 4
+                : undefined;
     } else {
         music_mode = 0;
     }
@@ -50,9 +53,8 @@ $(".submit-btn-sound").onclick = () => {
         name,
     };
     if (name) {
-        // fetchCustom("/api/sound", "POST", handleSaveSuccessSound, dataSound);
-        addFunctionStep('sound', dataSound)
-        handleSaveSuccessSound()
+        addFunctionStep("sound", dataSound);
+        handleSaveSuccessSound();
         function handleSaveSuccessSound() {
             toggerMessage("success", "Save sound successfully!");
             $(".name_function_sound").value = "";
@@ -74,7 +76,10 @@ export function setColorSticker(type) {
         case "basic":
             color = "--color: rgb(56 189 248);";
             break;
-        case "error":
+        case "buzzer1":
+            color = "--color: rgb(248 113 113);";
+            break;
+        case "buzzer2":
             color = "--color: rgb(248 113 113);";
             break;
         case "custom":

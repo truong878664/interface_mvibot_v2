@@ -45,7 +45,7 @@ $$(".input-gpio").forEach((element) => {
                 currentTypeGpio === "in_pulldown" ? "null" : "in_pulldown"
             );
             e.target.classList.toggle(currentTypeGpio);
-            e.target.classList.toggle(getModeFunction());
+            e.target.classList.add(getModeFunction());
         }
     };
 });
@@ -58,7 +58,7 @@ $$(".output-gpio").forEach((element) => {
                 currentTypeGpio === "out_set" ? "null" : "out_set"
             );
             e.target.classList.toggle(currentTypeGpio);
-            e.target.classList.toggle(getModeFunction());
+            e.target.classList.add(getModeFunction());
         }
     };
 });
@@ -123,7 +123,6 @@ export function setDateGpio(typeGpio) {
     for (const item in dataGpio) {
         dataGpio[item] = [];
     }
-
     $$(`.input-gpio.in_on.${typeGpio}`).forEach((element) => {
         dataGpio.in_on.push(element.getAttribute("gpio"));
     });

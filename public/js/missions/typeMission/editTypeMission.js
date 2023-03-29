@@ -1,5 +1,13 @@
-import { valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "../function/addFunction.js";
-import { handleDeleteStep, handleMoveStep, render } from "../handleTypeMission.js";
+import {
+    valueItemIfelse,
+    valueItemTrycatch,
+    valueNormalMissionArray,
+} from "../function/addFunction.js";
+import {
+    handleDeleteStep,
+    handleMoveStep,
+    render,
+} from "../handleTypeMission.js";
 import showUpdateBtn from "./showUpdateBtn.js";
 
 export default function editTypeMission(data) {
@@ -12,14 +20,8 @@ export default function editTypeMission(data) {
             $(".name-normal-mission").value = data.name;
 
             render(valueNormalMissionArray, ".normal-steps-wrapper");
-            handleMoveStep(
-                valueNormalMissionArray,
-                ".normal-steps-wrapper"
-            );
-            handleDeleteStep(
-                valueNormalMissionArray,
-                ".normal-steps-wrapper"
-            );
+            handleMoveStep(valueNormalMissionArray, ".normal-steps-wrapper");
+            handleDeleteStep(valueNormalMissionArray, ".normal-steps-wrapper");
             showUpdateBtn(true, "normal");
 
             break;
@@ -65,7 +67,10 @@ export default function editTypeMission(data) {
             $(".name-trycatch-mission").value = data.name;
 
             const dataTryCatch = data.data.split("?");
-            const dataTry = dataTryCatch[0].split("|");
+            const dataTry = dataTryCatch[0]
+                .split("|")
+                .filter((item) => item.length != 0);
+
             const dataCatch = dataTryCatch[1]
                 .split("|")
                 .filter((item) => item.length != 0);
@@ -83,10 +88,7 @@ export default function editTypeMission(data) {
             handleMoveStep(valueItemTrycatch.catch, `.catch-steps-wrapper`);
 
             handleDeleteStep(valueItemTrycatch.try, `.try-steps-wrapper`);
-            handleDeleteStep(
-                valueItemTrycatch.catch,
-                `.catch-steps-wrapper`
-            );
+            handleDeleteStep(valueItemTrycatch.catch, `.catch-steps-wrapper`);
             break;
     }
 }

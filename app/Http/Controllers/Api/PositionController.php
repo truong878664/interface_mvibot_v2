@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Map;
 use App\Models\backend\Mi;
 use App\Models\backend\MissionPosition;
 use App\Models\backend\Missions;
@@ -18,7 +19,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return MissionPosition::all();
+        $mapActive = Map::first();
+        return MissionPosition::where('map', $mapActive->name_map_active)->get();
     }
 
     /**
