@@ -45,6 +45,8 @@ export const map = $(".name-map-active");
 
 let mode_position_value;
 
+export const name_sound = $(".name_function_sound");
+
 export default function getDataFunction(typeFunction) {
     let isValid, data;
     switch (typeFunction) {
@@ -161,7 +163,6 @@ export default function getDataFunction(typeFunction) {
             };
             break;
         case "position":
-
             $('[name="mode_position"]').onchange = (e) => {
                 const valueMode = e.target.value;
                 const isOther = valueMode === "other";
@@ -200,6 +201,34 @@ export default function getDataFunction(typeFunction) {
                 mode: "position",
             };
             break;
+        case "sound":
+            const music_type = $(".sound-btn.active")?.getAttribute("type");
+            let music_mode;
+            const music_start = music_type == "start" ? 1 : 0;
+            if (music_type != "stop") {
+                const mode = $(".sound-btn.active")?.dataset.mode;
+                music_mode =
+                    mode === "buzzer1"
+                        ? 1
+                        : mode === "buzzer2"
+                        ? 2
+                        : mode === "basic"
+                        ? 3
+                        : mode === "custom"
+                        ? 4
+                        : undefined;
+            } else {
+                music_mode = 0;
+            }
+
+            isValid = !!name_sound.value;
+
+            data = {
+                music_start,
+                music_mode,
+                name: name_sound.value,
+            };
+
         default:
             break;
     }

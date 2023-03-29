@@ -1,19 +1,4 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
-export function tabTypeMarker() {
-    const allradios = $$("input[name='marker']");
-    const xBtns = $$(".x-btn");
-    xBtns.forEach((xBtn) => {
-        xBtn.addEventListener("click", () => {
-            allradios.forEach((element) => {
-                element.checked = false;
-            });
-        });
-    });
-}
-
-export function changeImgMarkerDir() {
+export default function changeImgMarkerDir() {
     const markerDirs = $$(".marker_dir_input");
     const illustrationImgs = $$(".illustration-img");
 
