@@ -18,7 +18,6 @@ export default function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
 
     const listFunction = JSON.parse(JSON.stringify(data));
-
     // data.sort((a, b) => {
     //     const nameA = a.name.toUpperCase();
     //     const nameB = b.name.toUpperCase();
@@ -30,6 +29,7 @@ export default function renderDataFunction(data, type) {
     //     }
     //     return 0;
     // });
+    // console.log(data);
     
     data.map((item, index) => {
         const dataFunctionDetail = dataRenderFunction(listFunction, index);

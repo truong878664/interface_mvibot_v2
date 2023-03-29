@@ -71,8 +71,6 @@ export function handleUpdateMission(idTypeMissionEdit) {
 
         if (isValid && isData) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
-            translatesStepsMission(currentMission);
-            handleRenderTypeMission()
             $(`.cancel-normal`).click();
         }
     };
@@ -92,8 +90,6 @@ export function handleUpdateMission(idTypeMissionEdit) {
         };
         if (isValid && isDataIf && isData) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
-            translatesStepsMission(currentMission);
-            handleRenderTypeMission()
             $(`.cancel-ifelse`).click();
         }
     };
@@ -114,8 +110,6 @@ export function handleUpdateMission(idTypeMissionEdit) {
         };
         if (isValid) {
             updateTypeMission(idTypeMissionEdit, dataTypeMission);
-            translatesStepsMission(currentMission);
-            handleRenderTypeMission()
             $(`.cancel-trycatch`).click();
         }
     };
@@ -129,5 +123,10 @@ function updateTypeMission(id, data) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-    });
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            translatesStepsMission(currentMission);
+            handleRenderTypeMission();
+        });
 }
