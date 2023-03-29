@@ -1,5 +1,6 @@
 import { $, $$ } from "../main.js";
-import { createMapPosition, resetMapPosition, showListPosition } from "./function/point.js";
+import { resetMapPosition, showListPosition } from "./function/position/point.js";
+import createMapPosition from "./function/position/createPosition.js";
 
 let tabFunctionActive;
 

@@ -4,15 +4,20 @@ import inputFunction from "../functionHandle/inputFunction.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
-import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
-import { setColorSticker } from "./sound.js";
-import { resetVariable } from "./var.js";
+
 import { handleShowFormFunction } from "../handleCreateFunction.js";
-import { createMapPosition, resetPosition } from "./point.js";
 import displayPoint from "../../rosModule/displayPoint.js";
 import displayPose from "../../rosModule/displayPose.js";
 import createPose from "../../rosModule/createPose.js";
 import qToYaw from "../../rosModule/qToYawn.js";
+import resetGpio from "./gpio/resetGpio.js";
+import { setLightGpio } from "./gpio/setLightGpio.js";
+import { dataGpio } from "./gpio/gpio.js";
+import setDataGpio from "./gpio/setDataGpio.js";
+import createMapPosition from "./position/createPosition.js";
+import resetPosition from "./position/resetPosition.js";
+import resetVariable from "./variable/resetVariable.js";
+import setColorSticker from "./sound/setColorSticker.js";
 
 export default function handleEditFunctionType() {
     let currentIdUpdate;
@@ -198,7 +203,6 @@ export default function handleEditFunctionType() {
                         valueFunction.music_mode == 3 && (mode = "basic");
                         valueFunction.music_mode == 4 && (mode = "custom");
                         $(".sound-start-btn").setAttribute("data-mode", mode);
-                        console.log(mode);
                         setColorSticker(mode);
                     } else {
                         $(".sound-stop-btn").classList.add("active");
@@ -368,7 +372,7 @@ export default function handleEditFunctionType() {
                 const name_gpio = $(".name_gpio");
                 const time_out_gpio = $(".time_out_gpio");
 
-                setDateGpio("gpio_normal");
+                setDataGpio("gpio_normal");
 
                 if (
                     name_gpio.value &&
@@ -417,7 +421,7 @@ export default function handleEditFunctionType() {
                 const name_gpio_module = $(".name_gpio_module");
                 const time_out_gpio_module = $(".time_out_gpio_module");
 
-                setDateGpio("gpio_module");
+                setDataGpio("gpio_module");
 
                 if (
                     name_function_gpio_module.value &&

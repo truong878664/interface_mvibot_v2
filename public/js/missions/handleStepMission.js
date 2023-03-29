@@ -43,7 +43,6 @@ function highlineStepItem() {
 
         $(`.${modeStep}-function-btn`).click();
 
-        console.log(modeStep);
         const itemActive = functionList.querySelector(
             `[function-id="${idStep}"]`
         );

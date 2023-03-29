@@ -96,12 +96,7 @@ export function handleUpdateMission(idTypeMissionEdit) {
 
     $(".update-trycatch").onclick = () => {
         const isValid = validateInput(".name-trycatch-mission");
-        const isDataTry = validateArray(valueItemTrycatch.try, ".try-label");
-        const isDataCatch = validateArray(
-            valueItemTrycatch.catch,
-            ".catch-label"
-        );
-
+        
         const dataTypeMission = {
             name: $(".name-trycatch-mission").value,
             data: `${valueItemTrycatch.try.join(
