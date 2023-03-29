@@ -2,11 +2,12 @@ import arrayMove from "../functionHandle/arrayMove.js";
 import { $, $$, toggerMessage } from "../main.js";
 import handleDeleteFunctionType from "./function/deleteFunctionItem.js";
 import handleEditFunctionType from "./function/editFunctionItem.js";
-import { loaded, loading } from "../functionHandle/displayLoad.js";
-import { currentMission, renderBlockStep } from "./handleStepMission.js";
+import { currentMission } from "./handleStepMission.js";
 import handleRenderTypeMission from "./typeMission/handleRenderTypeMission.js";
 import deleteMultiFunction from "./function/handleMultiFunctionItem.js";
 import renderDataFunction from "./function/renderDataFunction.js";
+import handleAddStep, { valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "./function/addFunction.js";
+import updateBlockStep from "./blockStep/updateBlockStep.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -18,6 +19,11 @@ export const htmlDataFunction = {
     variable: [],
     sound: [],
 };
+
+const nameIfelseMission = $(".name-ifelse-mission");
+const nameNormalMission = $(".name-normal-mission");
+const nameTryCatchMission = $(".name-trycatch-mission");
+
 
 const typeFunction = [
     "footprint",
@@ -62,116 +68,6 @@ export function loadDataFunction() {
 }
 
 
-//normal
-export const valueNormalMissionArray = [];
-export const valueItemTrycatch = {
-    try: [],
-    catch: [],
-};
-export const valueItemIfelse = {
-    if: [],
-    then: [],
-    else: [],
-};
-
-const nameIfelseMission = $(".name-ifelse-mission");
-const nameNormalMission = $(".name-normal-mission");
-const nameTryCatchMission = $(".name-trycatch-mission");
-
-//ifelse
-
-let currentIf = "if";
-$$(".add-ifelse-step-btn").forEach((element) => {
-    element.onclick = (e) => {
-        currentIf = e.target.getAttribute("type");
-        $(".add-ifelse-step-btn.active").classList.remove("active");
-        e.target.classList.add("active");
-    };
-});
-
-//trycatch
-let currentTrycatch = "try";
-$$(".add-trycatch-step-btn").forEach((element) => {
-    element.onclick = (e) => {
-        currentTrycatch = e.target.getAttribute("type");
-        $(".add-trycatch-step-btn.active").classList.remove("active");
-        e.target.classList.add("active");
-    };
-});
-
-export function handleAddStep() {
-    $$(".add-mission-step-item-btn").forEach((element) => {
-        element.onclick = (e) => {
-            let type = "";
-            $(".normal-mission-btn.active") && (type = "normal");
-            $(".ifelse-mission-btn.active") && (type = "ifelse");
-            $(".trycatch-mission-btn.active") && (type = "trycatch");
-
-            const valueStep = e.target
-                .closest(".type-mission-function-item")
-                .querySelector(".value-type-mission-function-item").value;
-
-            switch (type) {
-                case "normal":
-                    valueNormalMissionArray.push(valueStep);
-                    render(valueNormalMissionArray, ".normal-steps-wrapper");
-                    handleMoveStep(
-                        valueNormalMissionArray,
-                        ".normal-steps-wrapper"
-                    );
-                    handleDeleteStep(
-                        valueNormalMissionArray,
-                        ".normal-steps-wrapper"
-                    );
-                    break;
-
-                case "ifelse":
-                    valueItemIfelse[currentIf].push(valueStep);
-                    render(
-                        valueItemIfelse[currentIf],
-                        `.${currentIf}-steps-wrapper`
-                    );
-
-                    handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
-                    handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
-                    handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");
-
-                    handleDeleteStep(valueItemIfelse.if, ".if-steps-wrapper");
-                    handleDeleteStep(
-                        valueItemIfelse.then,
-                        ".then-steps-wrapper"
-                    );
-                    handleDeleteStep(
-                        valueItemIfelse.else,
-                        ".else-steps-wrapper"
-                    );
-                    break;
-                case "trycatch":
-                    valueItemTrycatch[currentTrycatch].push(valueStep);
-                    render(
-                        valueItemTrycatch[currentTrycatch],
-                        `.${currentTrycatch}-steps-wrapper`
-                    );
-                    handleMoveStep(valueItemTrycatch.try, ".try-steps-wrapper");
-                    handleMoveStep(
-                        valueItemTrycatch.catch,
-                        ".catch-steps-wrapper"
-                    );
-
-                    handleDeleteStep(
-                        valueItemTrycatch.try,
-                        ".try-steps-wrapper"
-                    );
-                    handleDeleteStep(
-                        valueItemTrycatch.catch,
-                        ".catch-steps-wrapper"
-                    );
-                    break;
-            }
-        };
-    });
-}
-
 function handleAddMissionNormal() {
     $$(".add-mission-normal").forEach((element) => {
         element.onclick = (e) => {
@@ -191,7 +87,6 @@ function handleAddMissionNormal() {
             if (isValid && isData) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputNormal();
-                handleRenderTypeMission();
             }
         };
     });
@@ -229,7 +124,6 @@ function handleAddMissionIfelse() {
                 $$(".normal-border").forEach((item) => {
                     item.style.borderColor = "#ccc";
                 });
-                handleRenderTypeMission();
             }
         };
     });
@@ -256,7 +150,7 @@ function handleAddMissionTrycatch() {
                 ".try-label"
             );
             const isDataCatch = validateArray(
-                valueItemTrycatch.catch,
+                valueItemTrycatch.catch, 
                 ".catch-label"
             );
             const dataSaveTypeMission = {
@@ -269,10 +163,9 @@ function handleAddMissionTrycatch() {
             };
             const typeSave = e.target.getAttribute("type");
 
-            if (isValid && isDataTry && isDataCatch) {
+            if (isValid) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputTrycatch();
-                handleRenderTypeMission();
             }
         };
     });
@@ -303,29 +196,11 @@ function addTypeMission(data, typeSave) {
                     mission_shorthand: data.id,
                     method: "add",
                 });
-                renderBlockStep();
+                
             }
+            handleRenderTypeMission();
         })
-        .catch(function (res) {});
-}
-
-export function updateBlockStep(id, data) {
-    loading();
-
-    fetch(`/api/mi/${id}`, {
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "PUT",
-        body: JSON.stringify(data),
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            toggerMessage("success", data.message);
-            loaded();
-        })
-        .catch((data) => console.log(data));
+        .catch((error) => {});
 }
 
 export function render(dataSteps, element) {

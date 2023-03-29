@@ -63,7 +63,7 @@
                         {{ Session::get('fail') }}
                     </span>
                 @endif
-                <button class="login-btn"><i class="fa-solid fa-arrow-right-long"></i></button>
+                <button class="login-btn btn"><i class="fa-solid fa-arrow-right-long"></i></button>
                 @csrf
             </form>
         </div>

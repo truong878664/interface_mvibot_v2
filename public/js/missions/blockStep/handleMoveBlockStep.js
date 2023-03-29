@@ -1,7 +1,7 @@
 import { currentMission } from "../handleStepMission.js";
-import { updateBlockStep } from "../handleTypeMission.js";
 import notAllowMove from "./notAllowMove.js";
 import resetIndex from "./resetIndex.js";
+import updateBlockStep from "./updateBlockStep.js";
 
 export default function handleMoveBlockStep(shortHandMissionList) {
     notAllowMove();

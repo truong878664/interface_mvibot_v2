@@ -61,7 +61,6 @@ function getItemChecked(type) {
 
 function handleDeleteMultiTypeMission() {
     const deleteBtns = $$(".delete-multi-type-mission-btn");
-    console.log(deleteBtns);
     deleteBtns.forEach((element) => {
         element.onclick = (e) =>
             confirmationForm({

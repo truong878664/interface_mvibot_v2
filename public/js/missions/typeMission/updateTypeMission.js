@@ -2,15 +2,13 @@ import handleOverlayUpdate from "../functionHandle/handleOverlayUpdate.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission } from "../handleStepMission.js";
 import {
-    render,
-    validateArray,
-    validateInput,
     valueItemIfelse,
     valueItemTrycatch,
     valueNormalMissionArray,
-} from "../handleTypeMission.js";
+} from "../function/addFunction.js";
 import handleRenderTypeMission from "./handleRenderTypeMission.js";
 import showUpdateBtn from "./showUpdateBtn.js";
+import { render, validateArray, validateInput } from "../handleTypeMission.js";
 
 export function handleCancelUpdateMission() {
     $(`.cancel-normal`).onclick = () => {

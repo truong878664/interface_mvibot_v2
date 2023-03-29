@@ -270,8 +270,8 @@ class MiController extends Controller
 
                         $changeTryCatch = explode('?', $dataItem[2]);
 
-                        $dataTry = $this->translateStepItem($changeTryCatch[0]);
-                        $dataCatch = $this->translateStepItem($changeTryCatch[1]);
+                        $dataTry = $changeTryCatch[0] === "|" ? "" : $this->translateStepItem($changeTryCatch[0]);
+                        $dataCatch = $changeTryCatch[1] === "|" ? "" : $this->translateStepItem($changeTryCatch[1]);
 
 
                         $dataStringTry = "%try_step#$dataTry%";

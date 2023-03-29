@@ -39,10 +39,10 @@ $$(".input-gpio").forEach((element) => {
     element.onclick = (e) => {
         if (currentTypeGpio.indexOf("in") != -1) {
             e.target.classList.remove(
-                currentTypeGpio == "in_on" ? "null" : "in_on",
-                currentTypeGpio == "in_off" ? "null" : "in_off",
-                currentTypeGpio == "in_pullup" ? "null" : "in_pullup",
-                currentTypeGpio == "in_pulldown" ? "null" : "in_pulldown"
+                currentTypeGpio === "in_on" ? "null" : "in_on",
+                currentTypeGpio === "in_off" ? "null" : "in_off",
+                currentTypeGpio === "in_pullup" ? "null" : "in_pullup",
+                currentTypeGpio === "in_pulldown" ? "null" : "in_pulldown"
             );
             e.target.classList.toggle(currentTypeGpio);
             e.target.classList.toggle(getModeFunction());
@@ -54,8 +54,8 @@ $$(".output-gpio").forEach((element) => {
     element.onclick = (e) => {
         if (currentTypeGpio.indexOf("out") != -1) {
             e.target.classList.remove(
-                currentTypeGpio == "out_reset" ? "null" : "out_reset",
-                currentTypeGpio == "out_set" ? "null" : "out_set"
+                currentTypeGpio === "out_reset" ? "null" : "out_reset",
+                currentTypeGpio === "out_set" ? "null" : "out_set"
             );
             e.target.classList.toggle(currentTypeGpio);
             e.target.classList.toggle(getModeFunction());

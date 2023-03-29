@@ -2,7 +2,6 @@ import { $, $$, toggerMessage } from "../../main.js";
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import inputFunction from "../functionHandle/inputFunction.js";
 import { loadDataFunction } from "../handleTypeMission.js";
-import updateStepValue from "../functionHandle/updateStepValue.js";
 import { currentMission, renderBlockStep } from "../handleStepMission.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { dataGpio, resetGpio, setDateGpio, setLightGpio } from "./gpio.js";
@@ -256,12 +255,18 @@ export default function handleEditFunctionType() {
                         $("[name=name_position]").value = name;
                         $("[name=color_position]").value = color_position;
 
-                        if (mode_position === "normal" || mode_position === "line_follow" ) {
+                        if (
+                            mode_position === "normal" ||
+                            mode_position === "line_follow"
+                        ) {
                             $("[name=mode_position]").value = mode_position;
                         } else {
-                            $("[name=mode_position]").value = 'other'
-                            $("[name=mode_position_other]").dataset.modePosition = "other";
-                            $("[name=mode_position_other]").value = mode_position;
+                            $("[name=mode_position]").value = "other";
+                            $(
+                                "[name=mode_position_other]"
+                            ).dataset.modePosition = "other";
+                            $("[name=mode_position_other]").value =
+                                mode_position;
                             console.log($("[name=mode_position]").value);
                         }
                         $("[name=time_out]").value = time_out;
@@ -295,9 +300,6 @@ export default function handleEditFunctionType() {
         updateBtnWrapper.querySelector(`.${type}-update-btn`).onclick = (e) => {
             e.preventDefault();
             dataUpdateStep(type) && handleResetData();
-            translatesStepsMission(currentMission);
-
-            loadDataFunction(type);
 
             $(`.submit-btn-${type}`).classList.remove("hidden");
 
@@ -610,7 +612,6 @@ export default function handleEditFunctionType() {
                 const mode_child = $('[name="mode_child"]');
                 const map = $(".name-map-active");
 
-
                 let mode_position_value;
                 if (mode_position.value === "other") {
                     mode_position_value = mode_position_other.value;
@@ -618,7 +619,7 @@ export default function handleEditFunctionType() {
                     mode_position_value = mode_position.value;
                 }
 
-                const dataPosition = { 
+                const dataPosition = {
                     type: "position",
                     name: name.value,
                     x: x.value,
@@ -678,11 +679,12 @@ export default function handleEditFunctionType() {
             body: JSON.stringify(stepSave),
         })
             .then(function (res) {
-                loaded();
-                console.log(res);
+                loaded(); 
                 res.status == 200
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");
+                translatesStepsMission(currentMission);
+                loadDataFunction()
             })
             .catch(function (res) {
                 console.log(res);

@@ -1,10 +1,8 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
+import updateBlockStep from "../blockStep/updateBlockStep.js";
 import {
     currentMission,
-    messageEmpty,
-    renderBlockStep,
 } from "../handleStepMission.js";
-import { updateBlockStep } from "../handleTypeMission.js";
 import handleDeleteTypeMission from "./handleDeleteTypeMission.js";
 import handleMultiTypeMission from "./handleMultiTypeMission.js";
 import handleUpdateTypeMission from "./handleUpdateTypeMisison.js";
@@ -89,7 +87,6 @@ function handleAddTypeMission() {
                 mission_shorthand: idTypeMission,
                 method: "add",
             });
-            renderBlockStep();
         };
     });
 }

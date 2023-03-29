@@ -1,4 +1,5 @@
-import { handleDeleteStep, handleMoveStep, render, valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "../handleTypeMission.js";
+import { valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "../function/addFunction.js";
+import { handleDeleteStep, handleMoveStep, render } from "../handleTypeMission.js";
 import showUpdateBtn from "./showUpdateBtn.js";
 
 export default function editTypeMission(data) {

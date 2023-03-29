@@ -37,7 +37,6 @@ function activeNabBar() {
     } else {
         currentPage = "home";
     }
-    console.log(currentPage);
     $(`.bar-item.active`)?.classList.remove("active");
     $(`.${currentPage}`)?.classList.add("active");
 }
@@ -61,7 +60,6 @@ function updateAvatarUser() {
         .then((res) => res.json())
         .then((data) => {
             const username = data.data.name;
-            localStorage.setItem("username", username);
         })
         .then(() => {
             setAvatar(localStorage.getItem("username"));
