@@ -50,12 +50,15 @@ function setIconSortFunction() {
     $$(".sort-btn.active").forEach((element) => {
         element.classList.remove("active");
     });
-    const { typeSort, sort } = JSON.parse(localStorage.getItem("sortFunction"));
-    const typeSortElement = document.querySelectorAll(
-        `[data-type-sort="${typeSort}"]`
-    );
-    typeSortElement.forEach((element) => {
-        element.dataset.sort = sort;
-        element.classList.add("active");
-    });
+    const sortData = localStorage.getItem("sortFunction");
+    if (sortData) {
+        const { typeSort, sort } = JSON.parse(sortData);
+        const typeSortElement = document.querySelectorAll(
+            `[data-type-sort="${typeSort}"]`
+        );
+        typeSortElement.forEach((element) => {
+            element.dataset.sort = sort;
+            element.classList.add("active");
+        });
+    }
 }

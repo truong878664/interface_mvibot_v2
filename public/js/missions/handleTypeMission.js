@@ -46,13 +46,22 @@ handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
 export function loadDataFunction() {
-    const {typeSort, sort} = JSON.parse(localStorage.getItem('sortFunction'))
+    const dataSort = localStorage.getItem('sortFunction')
+    let typeSort2, sort2
+    if(dataSort) {
+        const {typeSort, sort} = JSON.parse(localStorage.getItem('sortFunction'))
+        typeSort2 = typeSort
+        sort2 = sort
+    } else {
+        typeSort2 = "name"
+        sort2 = "asc"
+    }
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
             typeFunction.forEach((item) => {
                 const dataFunction = [...data[item]];
-                sortFunction({ data: dataFunction, type: typeSort, sort: sort });
+                sortFunction({ data: dataFunction, type: typeSort2, sort: sort2 });
                 renderDataFunction(dataFunction, item);
             });
         })
