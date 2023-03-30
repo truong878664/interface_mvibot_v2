@@ -4,12 +4,14 @@ import { $, $$, toggerMessage } from "../../main.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission } from "../handleStepMission.js";
 import { loadDataFunction } from "../handleTypeMission.js";
+import sortFunction from "./sortFunction/sortFunction.js";
 
 export default function handleMultiFunction() {
     checkAll();
     handleCheckAll();
     handleDeleteMultiFunction();
     handleCopyFunction();
+    sortFunction()
 }
 
 function checkAll() {
@@ -78,7 +80,7 @@ function handleDeleteMultiFunction() {
             "DELETE",
             (data) => {
                 toggerMessage("success", data.message);
-                data.deleted && translatesStepsMission(currentMission);
+                data.deleted && translatesStepsMission({ id: currentMission });
             },
             { deletes: idSelects }
         );

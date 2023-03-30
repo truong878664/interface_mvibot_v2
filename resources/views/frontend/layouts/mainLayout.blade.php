@@ -9,7 +9,7 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-4e640582.css">
+    <link rel="stylesheet" href="/build/assets/app-b4af2e93.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
@@ -82,7 +82,7 @@
     </header>
     <div class="h-full w-full flex flex-col">
         <section class="nav-bar">
-            <ul class="">
+            <ul class="main-nav-bar">
                 <div class="bar-item-top"></div>
                 <li class="bar-item home">
                     <a href="{{ route('home') }}" class="flex justify-center">
@@ -107,7 +107,7 @@
 
             <hr>
 
-            <ul class="flex flex-col items-center h-full overflow-x-hidden overflow-y-auto bookmark-wrapper">
+            <ul class="flex-col items-center h-full overflow-x-hidden overflow-y-auto bookmark-wrapper hidden md:flex">
 
             </ul>
         </section>

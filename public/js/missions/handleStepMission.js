@@ -8,7 +8,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 export const currentMission = $("#current-id-mission").value;
 
-translatesStepsMission(currentMission);
+translatesStepsMission({id: currentMission});
 fullScreenBlockStep();
 showMissionCode()
 

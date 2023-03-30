@@ -6,7 +6,6 @@ import {
     valueItemTrycatch,
     valueNormalMissionArray,
 } from "../function/addFunction.js";
-import handleRenderTypeMission from "./handleRenderTypeMission.js";
 import showUpdateBtn from "./showUpdateBtn.js";
 import { render, validateArray, validateInput } from "../handleTypeMission.js";
 
@@ -121,7 +120,6 @@ function updateTypeMission(id, data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            translatesStepsMission(currentMission);
-            handleRenderTypeMission();
+            translatesStepsMission({id:currentMission});
         });
 }

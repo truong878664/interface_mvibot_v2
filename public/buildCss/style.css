@@ -1963,7 +1963,7 @@ input[type="number"] {
     .bar-item-top {
         display: none;
     }
-    .nav-bar ul {
+    .nav-bar .main-nav-bar {
         display: flex;
         justify-content: space-around;
         width: 100%;

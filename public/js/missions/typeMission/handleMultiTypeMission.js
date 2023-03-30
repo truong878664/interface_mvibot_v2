@@ -79,7 +79,7 @@ function handleDeleteMultiTypeMission() {
             "DELETE",
             (data) => {
                 toggerMessage("success", data.message);
-                translatesStepsMission(currentMission)
+                translatesStepsMission({id:currentMission})
             },
             { deletes: idSelects, method: "multi" }
         );

@@ -47,7 +47,7 @@ export default function updateDataFunction(type) {
                     ? toggerMessage("success", "Update step success")
                     : toggerMessage("error", "ERR!, please try again");
 
-                translatesStepsMission(currentMission);
+                translatesStepsMission({ id: currentMission, renderBlockType: isChangeName });
                 loadDataFunction();
                 loaded();
             })

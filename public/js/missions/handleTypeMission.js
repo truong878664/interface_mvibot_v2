@@ -6,9 +6,13 @@ import { currentMission } from "./handleStepMission.js";
 import handleRenderTypeMission from "./typeMission/handleRenderTypeMission.js";
 import deleteMultiFunction from "./function/handleMultiFunctionItem.js";
 import renderDataFunction from "./function/renderDataFunction.js";
-import handleAddStep, { valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "./function/addFunction.js";
+import handleAddStep, {
+    valueItemIfelse,
+    valueItemTrycatch,
+    valueNormalMissionArray,
+} from "./function/addFunction.js";
 import updateBlockStep from "./blockStep/updateBlockStep.js";
-import sort from "../functionHandle/sort.js";
+import sortFunction from "../functionHandle/sort.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -25,7 +29,6 @@ const nameIfelseMission = $(".name-ifelse-mission");
 const nameNormalMission = $(".name-normal-mission");
 const nameTryCatchMission = $(".name-trycatch-mission");
 
-
 const typeFunction = [
     "footprint",
     "gpio",
@@ -38,24 +41,21 @@ const typeFunction = [
 ];
 
 loadDataFunction();
-
-handleRenderTypeMission();
-
 handleAddMissionNormal();
 handleAddMissionIfelse();
 handleAddMissionTrycatch();
- 
+
 export function loadDataFunction() {
+    const {typeSort, sort} = JSON.parse(localStorage.getItem('sortFunction'))
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
             typeFunction.forEach((item) => {
-                const dataFunction = [...data[item]]
-                // console.log(dataFunction);
-                sort({data:dataFunction, type: 'name', sort: 'asc'})
+                const dataFunction = [...data[item]];
+                sortFunction({ data: dataFunction, type: typeSort, sort: sort });
                 renderDataFunction(dataFunction, item);
             });
-        }) 
+        })
         .then(() => {
             typeFunction.forEach((item) => {
                 $(`.function-list-item-${item}`).innerHTML =
@@ -66,11 +66,11 @@ export function loadDataFunction() {
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
-        }).then(() => {
-            deleteMultiFunction()
+        })
+        .then(() => {
+            deleteMultiFunction();
         });
 }
-
 
 function handleAddMissionNormal() {
     $$(".add-mission-normal").forEach((element) => {
@@ -154,7 +154,7 @@ function handleAddMissionTrycatch() {
                 ".try-label"
             );
             const isDataCatch = validateArray(
-                valueItemTrycatch.catch, 
+                valueItemTrycatch.catch,
                 ".catch-label"
             );
             const dataSaveTypeMission = {
@@ -200,7 +200,6 @@ function addTypeMission(data, typeSave) {
                     mission_shorthand: data.id,
                     method: "add",
                 });
-                
             }
             handleRenderTypeMission();
         })
@@ -230,7 +229,8 @@ export function render(dataSteps, element) {
         );
     });
     stepsWrapper.innerHTML = htmlStep.join("");
-    stepsWrapper.scrollTop = stepsWrapper.scrollHeight - stepsWrapper.clientHeight;
+    stepsWrapper.scrollTop =
+        stepsWrapper.scrollHeight - stepsWrapper.clientHeight;
 }
 
 export function handleMoveStep(data, wrapperItem) {

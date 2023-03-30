@@ -35,7 +35,7 @@ function deleteItem(e) {
             });
             timeOut.push(
                 setTimeout(() => {
-                    translatesStepsMission(currentMission);
+                    translatesStepsMission({id: currentMission});
                 }, 1000)
             );
             loaded();
