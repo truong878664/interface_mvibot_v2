@@ -2,8 +2,7 @@ import { $, $$ } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
-import { currentMission, renderBlockStep } from "../handleStepMission.js";
-import handleRenderTypeMission from "../typeMission/handleRenderTypeMission.js";
+import { currentMission } from "../handleStepMission.js";
 
 export default function handleDeleteFunctionType() {
     $$(".delete-function-item-btn").forEach((element) => {
@@ -31,15 +30,12 @@ function deleteItem(e) {
     })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data)
             timeOut.forEach((time) => {
                 clearTimeout(time);
             });
             timeOut.push(
                 setTimeout(() => {
                     translatesStepsMission(currentMission);
-                    renderBlockStep();
-                    handleRenderTypeMission()
                 }, 1000)
             );
             loaded();

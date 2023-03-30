@@ -1,8 +1,8 @@
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import fetchCustom from "../../functionHandle/fetchCustom.js";
 import { $, $$, toggerMessage } from "../../main.js";
-import dbDelete from "../functionHandle/dbDelete.js";
-import { renderBlockStep } from "../handleStepMission.js";
+import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
+import { currentMission } from "../handleStepMission.js";
 import { loadDataFunction } from "../handleTypeMission.js";
 
 export default function handleMultiFunction() {
@@ -78,8 +78,7 @@ function handleDeleteMultiFunction() {
             "DELETE",
             (data) => {
                 toggerMessage("success", data.message);
-
-                data.deleted && renderBlockStep(true);
+                data.deleted && translatesStepsMission(currentMission);
             },
             { deletes: idSelects }
         );

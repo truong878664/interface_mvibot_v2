@@ -1,9 +1,10 @@
 import { $, toggerMessage } from "../../main.js";
-import { renderBlockStep } from "../handleStepMission.js";
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
+import handleRenderTypeMission from "../typeMission/handleRenderTypeMission.js";
+import renderBlockStep from "../blockStep/renderBlockStep.js";
 
 export default function translatesStepsMission(id) {
-    loading()
+    loading();
     fetch(`/api/mi/${id}`, {
         method: "PUT",
         headers: {
@@ -14,8 +15,9 @@ export default function translatesStepsMission(id) {
     })
         .then((res) => res.json())
         .then((data) => {
-            loaded()
+            loaded();
             renderBlockStep();
+            handleRenderTypeMission();
             toggerMessage("success", data.message);
         });
 }

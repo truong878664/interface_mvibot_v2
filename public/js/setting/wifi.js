@@ -41,7 +41,22 @@ function subscribeTopicWifi() {
         );
     });
 }
- 
+
+function parseWifi(data) {
+    const arrayWifi = data
+    .slice(1, data.length - 1)
+    .replaceAll("\\", " ")
+    .replaceAll("=", '":"')
+    .split(")(");
+    const listWifi = arrayWifi.map((wifi) => {
+        const wifiItem = wifi.split("~").filter((item) => item);
+        const data = `{"${wifiItem.join('","')}"}`;
+        
+        return JSON.parse(data);
+    });
+    renderWifi(listWifi);
+}
+
 function renderWifiConnected(wifi) {
     const WIFI_HEIGH = 66;
     const WIFI_MEDIUM = 33;

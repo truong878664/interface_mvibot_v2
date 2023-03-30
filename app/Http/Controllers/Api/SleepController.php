@@ -39,11 +39,11 @@ class SleepController extends Controller
      */
     public function store(Request $request)
     {
-        $name_type = $request->name_type;
+        $name = $request->name;
         $time_sleep = $request->time_sleep;
 
         $dataSleep = [
-            "name" => $name_type,
+            "name" => $name,
             "time_sleep" => $time_sleep,
         ];
 

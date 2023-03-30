@@ -36,7 +36,7 @@ class GpioModuleController extends Controller
     public function store(Request $request)
     {   
         $time_out = $request->time_out;
-        $name = $request->name_type;
+        $name = $request->name;
         $name_gpio_module = $request->name_gpio_module;
         $out_set = $request->out_set;
         $out_reset = $request->out_reset;

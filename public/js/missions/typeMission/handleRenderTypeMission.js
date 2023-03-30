@@ -29,14 +29,10 @@ export default function handleRenderTypeMission() {
                         <div class="flex">
                             <input type="checkbox" data-select-type-mission-id="${item.id}" data-type="${item.type}" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] type-mission-item-select">
                             <div class="flex flex-col">
-                                <span class="font-bold font-3xl capitalize">${
-                                    item.type
-                                }</span>
+                                <span class="font-bold font-3xl capitalize">${item.type}</span>
                                 <div class="flex">
                                     <span class="mr-2">Name:</span>
-                                    <span class="font-bold text-sky-600">${
-                                        item.name
-                                    }</span>
+                                    <span class="font-bold text-sky-600">${item.name}</span>
                                 </div>
                             </div>
                         </div>

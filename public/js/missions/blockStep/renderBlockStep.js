@@ -6,8 +6,8 @@ import handleMoveBlockStep from "./handleMoveBlockStep.js";
 import renderStepItem from "./renderStepItem.js";
 import { showAllStep, showStep } from "./showStep.js";
 
-export default function renderBlockStep(translate = false) {
-    translate && translatesStepsMission(currentMission);
+export default function renderBlockStep() {
+    console.log('render block step...');
     loading();
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())

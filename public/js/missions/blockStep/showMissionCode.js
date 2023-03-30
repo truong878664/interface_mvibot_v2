@@ -25,7 +25,6 @@ export default function showMissionCode() {
             .then((res) => res.json())
             .then((data) => {
                 const stepMission = data.steps_mission;
-                console.log(stepMission);
                 if (!stepMission) {
                     toggerMessage('error', "Empty mission!")
                     return
@@ -73,7 +72,6 @@ export default function showMissionCode() {
         const copyMissionBtn = $(".copy-mission-btn");
         copyMissionBtn &&
             (copyMissionBtn.onclick = (e) => {
-                console.log(123);
                 const dataFullMission = translateDataMission(data);
                 navigator.clipboard.writeText(dataFullMission);
                 toggerMessage("success", "Copied!");

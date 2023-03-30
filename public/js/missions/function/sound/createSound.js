@@ -2,7 +2,6 @@ import { toggerMessage } from "../../../main.js";
 import getDataFunction from "../getDataFunction.js";
 import saveFunctionItem from "../saveFunction.js";
 import resetSound from "./resetSound.js";
-import setColorSticker from "./setColorSticker.js";
 
 export default function createSound() {
     $(".submit-btn-sound").onclick = () => {

@@ -1,3 +1,4 @@
+import { $ } from "../../main.js";
 import { dataGpio } from "./gpio/gpio.js";
 export const name_gpio = $(".name_gpio");
 export const time_out_gpio = $(".time_out_gpio");
@@ -47,6 +48,12 @@ let mode_position_value;
 
 export const name_sound = $(".name_function_sound");
 
+export const name_variable = $(".name_function_variable");
+export const name_var = $(".name_variable_input");
+export const command_action = $(".command_action_input")
+
+export const focus_value = $(".focus_value_input");
+
 export default function getDataFunction(typeFunction) {
     let isValid, data;
     switch (typeFunction) {
@@ -62,7 +69,7 @@ export default function getDataFunction(typeFunction) {
                     dataGpio.in_pulldown.length);
             data = {
                 type: "gpio",
-                name_type: name_gpio.value,
+                name: name_gpio.value,
                 time_out: time_out_gpio.value * 1,
                 out_set: dataGpio.out_set.join(","),
                 out_reset: dataGpio.out_reset.join(","),
@@ -85,7 +92,7 @@ export default function getDataFunction(typeFunction) {
                     dataGpio.in_pulldown.length);
             data = {
                 type: "gpio_module",
-                name_type: name_gpio_function_module.value,
+                name: name_gpio_function_module.value,
                 name_gpio_module: name_gpio_module.value,
                 time_out: time_out_gpio_module.value * 1,
                 out_set: dataGpio.out_set.join(","),
@@ -108,24 +115,11 @@ export default function getDataFunction(typeFunction) {
                 x2: Number(x2_footprint.value),
                 y1: Number(y1_footprint.value),
                 y2: Number(y2_footprint.value),
-                name_type: name_footprint.value,
+                name: name_footprint.value,
             };
             break;
         case "marker":
-            formElement = $(".marker-item:not(.hidden)");
-            name_marker = formElement.querySelector('[name="name_marker"]');
-            marker_type = formElement.querySelector('[name="marker_type"]');
-            marker_dir = formElement.querySelector('[name="marker_dir"]');
-            off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
-            off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
-            off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
-            off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
-            off_set_dis = formElement.querySelector('[name="off_set_dis"]');
-            off_set_angle = formElement.querySelector('[name="off_set_angle"]');
-            sx1 = formElement.querySelector('[name="sx1"]');
-            sx2 = formElement.querySelector('[name="sx2"]');
-            sy1 = formElement.querySelector('[name="sy1"]');
-            sy2 = formElement.querySelector('[name="sy2"]');
+            setTabMarkerActive()
 
             isValid =
                 name_marker.value &&
@@ -138,7 +132,7 @@ export default function getDataFunction(typeFunction) {
 
             data = {
                 type: "marker",
-                name_type: name_marker?.value,
+                name: name_marker?.value,
                 marker_type: marker_type.value,
                 marker_dir: marker_dir?.value,
                 off_set_x1: off_set_x1?.value,
@@ -159,7 +153,7 @@ export default function getDataFunction(typeFunction) {
             data = {
                 type: "sleep",
                 time_sleep: time_sleep.value,
-                name_type: name_sleep.value,
+                name: name_sleep.value,
             };
             break;
         case "position":
@@ -228,9 +222,45 @@ export default function getDataFunction(typeFunction) {
                 music_mode,
                 name: name_sound.value,
             };
+            break;
+        case "variable":
+            const command_action_value = command_action.value === "=" ? "equal" : "equal_as";
 
+            isValid =
+                name_var.value && focus_value.value && name_variable.value;
+
+            data = {
+                name: name_variable.value,
+                time_out: -1,
+                mode: "variable",
+                command_action: command_action_value,
+                name_variable: name_var.value,
+                focus_value: focus_value.value,
+            };
+
+            break;
         default:
             break;
     }
     return { isValid: !!isValid, data };
+}
+
+
+
+export function setTabMarkerActive() {
+    const formElement = document.querySelector(".marker-item:not(.hidden)");
+    name_marker = formElement.querySelector('[name="name_marker"]');
+    marker_type = formElement.querySelector('[name="marker_type"]');
+    marker_dir = formElement.querySelector('[name="marker_dir"]');
+    off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
+    off_set_x2 = formElement.querySelector('[name="off_set_x2"]');
+    off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
+    off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
+    off_set_dis = formElement.querySelector('[name="off_set_dis"]');
+    off_set_angle = formElement.querySelector('[name="off_set_angle"]');
+    sx1 = formElement.querySelector('[name="sx1"]');
+    sx2 = formElement.querySelector('[name="sx2"]');
+    sy1 = formElement.querySelector('[name="sy1"]');
+    sy2 = formElement.querySelector('[name="sy2"]');
+
 }

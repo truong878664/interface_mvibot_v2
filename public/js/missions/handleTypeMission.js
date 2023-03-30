@@ -8,6 +8,7 @@ import deleteMultiFunction from "./function/handleMultiFunctionItem.js";
 import renderDataFunction from "./function/renderDataFunction.js";
 import handleAddStep, { valueItemIfelse, valueItemTrycatch, valueNormalMissionArray } from "./function/addFunction.js";
 import updateBlockStep from "./blockStep/updateBlockStep.js";
+import sort from "../functionHandle/sort.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -49,9 +50,12 @@ export function loadDataFunction() {
         .then((res) => res.json())
         .then((data) => {
             typeFunction.forEach((item) => {
-                renderDataFunction(data[item], item);
+                const dataFunction = [...data[item]]
+                // console.log(dataFunction);
+                sort({data:dataFunction, type: 'name', sort: 'asc'})
+                renderDataFunction(dataFunction, item);
             });
-        })
+        }) 
         .then(() => {
             typeFunction.forEach((item) => {
                 $(`.function-list-item-${item}`).innerHTML =

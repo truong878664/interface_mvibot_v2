@@ -39,7 +39,7 @@ class MarkerController extends Controller
      */
     public function store(Request $request)
     {
-        $name_type = $request->name_type;
+        $name = $request->name;
         $marker_type = $request->marker_type;
         $marker_dir = $this->checkDataMarker($request->marker_dir);
         $off_set_x1 = $this->checkDataMarker($request->off_set_x1);
@@ -55,7 +55,7 @@ class MarkerController extends Controller
 
 
         $dataMarker = [
-            'name' => $name_type,
+            'name' => $name,
             'marker_type' => $marker_type,
             'marker_dir' => $marker_dir,
             'off_set_x1' => $off_set_x1,
