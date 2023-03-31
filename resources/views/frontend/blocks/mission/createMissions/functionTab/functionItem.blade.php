@@ -43,7 +43,7 @@
         @if ($type === 'position')
         <button class="disabled:opacity-50 ml-4 btn show-all-map-btn multi-btn" data-type="{{$type}}">
             <i class="fa-regular fa-eye text-yellow-600"></i>
-            <span class="font-bold hidden xl:inline-block">Show all position</span>
+            <span class="font-bold hidden xl:inline-block">Show all point</span>
         </button>
         @endif
     </div>
