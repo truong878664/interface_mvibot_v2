@@ -10,6 +10,8 @@ import position from "./function/position/position.js";
 import sleep from "./function/sleep/sleep.js";
 import sound from "./function/sound/sound.js";
 import variable from "./function/variable/variable.js";
+import wakeUp from "./wakeUpStop/wakeUp.js";
+import stop from "./wakeUpStop/stop.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -20,14 +22,15 @@ function start() {
     sendMission();
 
     handleCreateFunction();
-    gpio()
-    footprint()
-    marker()
-    position()
-    sleep()
-    sound()
-    variable()
-    
+    gpio();
+    footprint();
+    marker();
+    position();
+    sleep();
+    sound();
+    variable();
+    wakeUp();
+    stop();
 }
 start();
 
@@ -54,5 +57,3 @@ function nextTabFunction() {
         ].classList.remove("hidden");
     };
 }
-
-

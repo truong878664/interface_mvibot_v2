@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\Mi;
 use App\Models\backend\Missions;
 use App\Models\backend\Stop;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 
 class StopController extends Controller
@@ -17,7 +18,8 @@ class StopController extends Controller
      */
     public function index(Request $request)
     {
-        return Stop::where('id_mission', $request->id_mission)->first();
+        $stop = Stop::where('id_mission', $request->id_mission)->where('type', $request->type)->first();
+        return $stop ? $stop : [];
     }
 
     /**
@@ -39,12 +41,18 @@ class StopController extends Controller
     public function store(Request $request)
     {
 
-        if (Stop::where('id_mission', $request->id_mission)->count() > 0) {
-            Stop::where('id_mission', $request->id_mission)->update($request->all());
+        if (Stop::where('id_mission', $request->id_mission)->where('type', $request->type)->count() > 0) {
+            Stop::where('id_mission', $request->id_mission)->where('type', $request->type)->update($request->all());
         } else {
             Stop::insert($request->all());
         }
-        Missions::where('id', $request->id_mission)->update(['stop' => $request->data]);
+
+        $data = Stop::where('id_mission', $request->id_mission)->get();
+        if(count($data) === 2) {
+            Missions::where('id', $request->id_mission)->update(['stop' => $data[0]['data'] . $data[1]['data']]);
+        } else {
+            Missions::where('id', $request->id_mission)->update(['stop' => $data[0]['data']]);
+        }
 
         return 123;
     }

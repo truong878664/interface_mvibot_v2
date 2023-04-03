@@ -17,8 +17,10 @@ class WakeUpController extends Controller
      */
     public function index(Request $request)
     {
-        return WakeUp::where('id_mission', $request->id_mission)->first();
+        $wake_up =  WakeUp::where('id_mission', $request->id_mission)->where('type', $request->type)->first();
         // return $request->id_mission;
+        return $wake_up ? $wake_up : [];
+
     }
 
     /**
@@ -40,13 +42,20 @@ class WakeUpController extends Controller
     public function store(Request $request)
     {
 
-        if (WakeUp::where('id_mission', $request->id_mission)->count() > 0) {
-            WakeUp::where('id_mission', $request->id_mission)->update($request->all());
+        if (WakeUp::where('id_mission', $request->id_mission)->where('type', $request->type)->count() > 0) {
+            WakeUp::where('id_mission', $request->id_mission)->where('type', $request->type)->update($request->all());
         } else {
             WakeUp::insert($request->all());
         }
+        $data = WakeUp::where('id_mission', $request->id_mission)->get();
 
-        Missions::where('id', $request->id_mission)->update(['wake_up' => $request->data]);
+        if(count($data) === 2) {
+            Missions::where('id', $request->id_mission)->update(['wake_up' => $data[0]['data'] . $data[1]['data']]);
+        } else {
+            Missions::where('id', $request->id_mission)->update(['wake_up' => $data[0]['data']]);
+        }
+
+
         return 1232;
     }
 
