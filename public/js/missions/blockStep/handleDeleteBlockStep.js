@@ -17,7 +17,7 @@ export default function handleDeleteBlockMission(missionShorthand) {
                     mission_shorthand: missionShorthand.join("+"),
                     method: "update",
                 };
-                updateBlockStep(currentMission, dataMissionShorthand);
+                updateBlockStep(currentMission, dataMissionShorthand, false);
                 const stepWrapper = e.target.closest(".steps-wrapper");
                 missionItem.remove();
 

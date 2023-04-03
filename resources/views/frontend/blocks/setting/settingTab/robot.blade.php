@@ -1,7 +1,7 @@
 <div class="setting-detail flex">
     <div class="mx-auto w-full max-w-[700px] mt-[50px] py-10 px-5 rounded-md bg-[#F2EAE8]">
         <div class="w-[calc(100%_+_20px)] -ml-[10px] flex flex-wrap cursor-pointer">
-            @foreach ($allRobot as $robot)
+            @foreach ($robots as $robot)
                 <div
                     class="w-[calc(100%_/_1_-_20px)] md:w-[calc(100%_/_4_-_20px)] bg-[#0f6cbd] mx-[10px] mb-8 rounded-md text-[17px]  px-4 py-2 relative opacity-70 hover:opacity-100  overflow-hidden robot-item robot-{{ $robot->name_seri }}">
                     <div class="flex justify-between">

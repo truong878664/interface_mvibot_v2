@@ -1,15 +1,41 @@
 import { $, $$ } from "../main.js";
 let dataOld;
-let currentRobot = $("#robot-status").children[1].value;
+let currentRobot = "no_robot";
 updateStatus();
 
+setInterval(() => {
+    updateStatus();
+}, 2000);
+
+$("#robot-status").onchange = (e) => {
+    currentRobot = e.target.value ? e.target.value : "no_robot";
+
+    if (currentRobot === "no_robot") {
+        dataOld = "";
+        $("[data-status-robot]").dataset.statusRobot = "no";
+    }
+    updateStatus();
+};
+
 function updateStatus() {
+    if (currentRobot === "no_robot") {
+        $$(".parameter-status").forEach((para) => {
+            para.textContent = "-";
+        });
+
+        return;
+    }
+
     fetch(`/api/status/${currentRobot}`)
-        .then((res) => res.json())
+        .then((res) => res?.json())
         .then((data) => {
             if (JSON.stringify(data) === JSON.stringify(dataOld)) {
                 return;
             }
+
+            $("[data-status-robot]").dataset.statusRobot =
+                data.status === 0 ? "no" : "yes";
+
             $$(".no")?.forEach((element) => {
                 element.classList.remove("no");
             });
@@ -55,14 +81,8 @@ function updateStatus() {
                     }
                 }
             }
+        })
+        .catch((error) => {
+            console.log(error);
         });
 }
-
-setInterval(() => {
-    updateStatus();
-}, 2000);
-
-$("#robot-status").onchange = (e) => {
-    e.target.value && (currentRobot = e.target.value);
-    updateStatus();
-};

@@ -42,7 +42,7 @@ $(".send-btn").onclick = (e) => {
         }
     });
 
-    const robotActive = $(".robot-active").value;
+    const robotActive = $("#robot-active").value;
     if (robotActive != "" && idSelect.length != 0) {
         getMission(idSelect, robotActive);
         $("#select-robot").checked = false;
@@ -177,7 +177,7 @@ function handleResetMission() {
     const resetMissionBtn = $(".reset-mission-btn");
     resetMissionBtn.onclick = (e) => {
         const type = e.target.dataset.type;
-        const robotReset = $(".robot-reset").value;
+        const robotReset = $("#robot-reset")?.value;
         if (!robotReset) {
             toggerMessage("error", "Please choose robot to reset!");
             return;

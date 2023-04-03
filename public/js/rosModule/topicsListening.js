@@ -2,13 +2,14 @@ import { $, toggerMessage } from "../main.js";
 import subscribeTopic from "./subscribeTopic.js";
 
 export default function topicsListening() {
-    const allRobot = $("#robots")?.children;
+    const allRobot = JSON.parse($('#all-my-robots')?.value);
+   
     if (allRobot) {
         for (let i = 0; i < allRobot.length; i++) {
-            const name_seri = allRobot[i].value;
-
+            const name_seri = allRobot[i].name_seri;
+            console.log(name_seri);
             //sub mission
-            const missionTopic = ['mission_normal','mission_error','mission_battery','mission_gpio']
+            const missionTopic = ['mission_normal','mission_error','mission_battery']
             for (let i = 0; i < missionTopic.length ; i++) {
                 subscribeTopic(
                     `/${name_seri}/${missionTopic[i]}`,

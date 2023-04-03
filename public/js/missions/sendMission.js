@@ -30,7 +30,7 @@ export default function sendMission() {
                             (topic = `/${nameRobot}/mission_battery`);
 
                         type === "gpio" &&
-                            (topic = `/${nameRobot}/mission_gpio`);
+                            (topic = `/${nameRobot}/mission_normal`);
 
                         console.log("Topic: ", topic);
                         publishMission(topic, dataFullMission);

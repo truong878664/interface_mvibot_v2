@@ -1,4 +1,4 @@
-import ros, { $, toggerMessage } from "../main.js";
+import ros, { $, $$, toggerMessage } from "../main.js";
 import amclSet from "../rosModule/amclSet.js";
 import clickSetPointMap from "../rosModule/clickSetPointMap.js";
 import createAxes from "../rosModule/createAxes.js";
@@ -87,6 +87,7 @@ $("#inz").onchange = (e) => {
 // remove laser
 $("#robot-navigation-name").onchange = (e) => {
     robotActive = e.target.value;
+    console.log(robotActive);
     if (robotActive) {
         for (let i = 0; i < robotNavigationChange.length; i++) {
             if (robotActive == robotNavigationChange[i].name_seri) {

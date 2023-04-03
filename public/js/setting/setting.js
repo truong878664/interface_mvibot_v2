@@ -1,4 +1,4 @@
-import { $, $$ } from "../main.js";
+import { $, $$, toggerMessage } from "../main.js";
 import wifi from "./wifi.js";
 import robot from "./robot.js";
 import parameter from "./parameter.js";
@@ -48,10 +48,12 @@ export function showSettingRobot() {
 
 function handleParameterRobot(robot) {
     fetch(`/api/config-status?name_seri=${robot}`)
-        .then((res) => res.json())
+        .then((res) => res?.json())
         .then((data) => {
             renderParameterRobot(data);
-        });
+        }).catch(error => {
+            toggerMessage('error', error)
+        })
 
     function renderParameterRobot(data) {
         setModeStart(data.mode);

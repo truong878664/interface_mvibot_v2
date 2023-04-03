@@ -1,24 +1,23 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading dashboard-heading">gpio</div>
-    <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
+    <div class="w-[calc(100%_-_10px)] m-2  h-[calc(100%_-_10px)] flex flex-col">
         <div class="flex mx-4 items-center">
 
-            @include('frontend.blocks.selectRobot', ['robots' => $allRobot, 'id' => 'robot-gpio'])
+            @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'robot-gpio'])
 
             <button
-                class="ml-2 text-xl md:text-2xl rounded-md h-full px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
+                class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
                 id='out_set'>
                 Out Set
             </button>
             <button
-                class="ml-2 text-xl md:text-2xl rounded-md h-full px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
+                class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
                 id='out_reset'>
                 Out Reset
             </button>
 
             <button
-                class=" ml-10 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
+                class="ml-10 text-2xl rounded-md px-4 py-1 border font-bold border-[#0f6cbd] bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
 
             {{-- <button
                 class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"

@@ -1234,9 +1234,6 @@ input:checked + .slider:before {
     width: 100%;
 }
 .choose-robot-tracking {
-    background: var(--main-color);
-    color: #fff;
-    padding: 4px 6px;
     position: absolute;
     top: 0;
 }

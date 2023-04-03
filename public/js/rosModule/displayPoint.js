@@ -2,6 +2,7 @@ import ros from "../main.js";
 import uniqueCode from "./uniqueCode.js";
 
 function displayPoint(x, y, topic = "") {
+
     const point_pub = new ROSLIB.Topic({
         ros: ros,
         name: `/point_pub_${uniqueCode}`,

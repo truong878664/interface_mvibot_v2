@@ -4,13 +4,12 @@
     <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 flex flex-col overflow-auto">
         <div class="w-1/2 mx-auto py-10 px-5 border-stone-300 border bg-stone-200 min-w-[500px]">
             <div class="flex justify-between items-center mb-8">
-                <select name="" id="robot-sound"
-                    class="text-2xl borde rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] py-2 text-white px-4 outline-none inline-block">
-                    <option value="">Select robot</option>
-                    @foreach ($allRobot as $robot)
-                        <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
-                    @endforeach
-                </select>
+
+                @include('frontend.blocks.selectRobot', [
+                    'type' => 'robot',
+                    'id' => 'robot-sound',
+                ])
+
                 <div class="inline-block">
                     <button
                         class="float-right text-xl md:text-3xl btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>

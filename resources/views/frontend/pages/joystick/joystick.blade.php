@@ -2,21 +2,10 @@
 @section('content')
     <div class="w-full h-full flex flex-col">
         <div class="flex justify-between mt-3 ml-4">
-            {{-- 
-            <label for="" class="bg-[#0f6cbd] flex items-center text-[#fff] px-4 rounded-lg py-2">
-                <select class="outline-none bg-[#0f6cbd] rounded" id="list-robot">
-                    <option value="">Chose robot</option>
-                    @foreach ($allRobot as $robot)
-                        <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
-                    @endforeach
-                </select>
-            </label>
-            --}}
-            @include('frontend.blocks.selectRobot', ['robots' => $allRobot, 'id' => 'list-robot'])
+            @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'list-robot'])
         </div>
 
-        <div class="w-full flex-1 flex justify-evenly items-center">
-            @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '400px'])
+        <div class="w-full flex-1 flex  justify-evenly items-center">
             <div class="relative">
                 <div class="mb-8 absolute w-full -top-[30px] -translate-y-full">
                     <div class="range-slider relative mb-12">
@@ -57,6 +46,7 @@
                     </div>
                 </div>
             </div>
+            @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '400px'])
         </div>
     </div>
     <script type="module" src="/js/joystick/joystick.js"></script>

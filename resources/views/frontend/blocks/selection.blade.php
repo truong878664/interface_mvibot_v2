@@ -1,13 +1,3 @@
-{{-- <label for=""
-    class="bg-[#0f6cbd] items-center text-[#fff] px-4 rounded-lg py-2 inline-flex text-2xl font-bold mx-2 mt-2">
-    <select class="outline-none bg-[#0f6cbd] rounded" id="{{ $id }}">
-        <option value="">Chose robot</option>
-        
-        @foreach ($robotArray as $robot)
-        <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
-        @endforeach
-    </select>
-</label> --}}
 <style>
     .dropdown {
         position: relative;
@@ -74,50 +64,24 @@
     }
 </style>
 
-@php
-    $title = 'No robot';
-    $placeHolder = 'Select robot';
-    if ($type === 'robot') {
-        $robotArray = json_decode($robots, true);
-    } elseif ($type === 'module_gpio') {
-        $robotArray = json_decode($moduleGpios, true);
-        $title = 'No module gpio';
-        $placeHolder = 'Select module gpio';
-    } elseif ($type === 'robot_slam') {
-        $robotArray = json_decode($robotsSlam, true);
-        $title = 'No robot slam';
-    } elseif ($type === 'robot_navigation') {
-        $robotArray = json_decode($robotsNavigation, true);
-        $title = 'No robot navigation';
-    } elseif ($type === 'all_robot') {
-        $robotArray = json_decode($allRobots, true);
-    } else {
-        $robotArray = [];
-    }
-@endphp
-
-<div class="text-2xl mx-2 mt-2 user-select-none">
+<div class="text-2xl">
     <div class="group/dropdown dropdown">
         <div class="">
-            <input class="text-box bg-[#fff] text-[#000] shadow-md" type="text" placeholder="{{ $placeHolder }}"
+            <input class="text-box bg-[#fff] text-[#000] shadow-md" type="text" placeholder="Select map"
                 id="{{ $id }}" readonly>
-            <div
-                class="absolute top-0 right-[10px] text-3xl text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
+            <div class="absolute top-0 right-[10px] text-3xl text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
                 <i class="fa-solid fa-caret-down"></i>
             </div>
         </div>
         <div class="options">
-            @foreach ($robotArray as $robot)
-                <div onclick="show('{{ $robot['name_seri'] }}', this)">
-                    <i class="fa-solid fa-caret-right mr-4 text-[#0f6cbd]"></i>
-                    {{ $robot['name_seri'] }}
-                </div>
+            @foreach ($datas as $data)
+                <div class="{{$id.'-item'}}" data-map="{{ $data[$nameArray]}}" onclick="show('{{ $data[$nameArray]}}', this)"><i
+                        class="fa-solid fa-caret-right mr-4 text-[#0f6cbd]"></i>{{ $data[$nameArray] }}</div> 
             @endforeach
             <div onclick="show('', this)"> - {{ $title }} - </div>
         </div>
     </div>
 </div>
-
 <script>
     function show(value, element) {
         const inputSelect = element.closest('.dropdown').querySelector('.text-box')
@@ -125,12 +89,11 @@
         inputSelect.dispatchEvent(new Event('change'));
     }
 
-    document.querySelectorAll(".dropdown").forEach(dropdown => {
-        dropdown.onclick = (e) => {
-            e.preventDefault()
+    document.querySelectorAll(".dropdown").forEach(dropdown => { 
+        dropdown.onclick = function() {
             dropdown.classList.toggle("active")
-
         }
-
     });
 </script>
+
+

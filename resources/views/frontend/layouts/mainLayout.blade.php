@@ -9,8 +9,8 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-b4af2e93.css">
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    {{-- <link rel="stylesheet" href="/build/assets/app-f811b736.css"> --}}
+    <script src="https://cdn.tailwindcss.com"></script>
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -42,10 +42,12 @@
             </div>
             <div class="relative">
                 <button data-bookmark="" class="btn text-yellow-400 bookmark-btn group/bookmark">
-                    <div class="icon-bookmark-btn active-bookmark pointer-events-none hidden group-data-[bookmark=active]/bookmark:block">
+                    <div
+                        class="icon-bookmark-btn active-bookmark pointer-events-none hidden group-data-[bookmark=active]/bookmark:block">
                         <i class="fa-solid  fa-bookmark"></i>
                     </div>
-                    <div class="icon-bookmark-btn unactive-bookmark pointer-events-none hidden group-data-[bookmark='']/bookmark:block">
+                    <div
+                        class="icon-bookmark-btn unactive-bookmark pointer-events-none hidden group-data-[bookmark='']/bookmark:block">
                         <i class="fa-regular fa-bookmark"></i>
                     </div>
                 </button>
@@ -127,7 +129,7 @@
                 class="fa-solid fa-angle-right"></i></button>
 
     </div>
-
+    <input type="hidden" value="{{ $allRobots }}" id="all-my-robots">
     <script>
         const iconBookmark = document.querySelectorAll('.icon-bookmark')
         iconBookmark.forEach(element => {

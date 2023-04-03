@@ -1,3 +1,4 @@
+import confirmationForm from "../functionHandle/confirmationForm.js";
 import { $, $$, toggerMessage } from "../main.js";
 import createAxes from "../rosModule/createAxes.js";
 import createMap from "../rosModule/createMap.js";
@@ -37,10 +38,20 @@ $("#active-map-btn").onclick = () => {
     }
 };
 
-$("#delete-map-btn").onclick = () => {
-    const mapActive = $("#choose-map-active").value;
-    if (mapActive) {
-        topicString("/request_action", `delete_map|~name_map=${mapActive}~`);
+$(".delete-map-active-btn").onclick = () => {
+    confirmationForm({
+        message: "Do you want to delete this map?",
+        callback: deleteMap,
+    });
+};
+
+function deleteMap() {
+    const mapDelete = $("#choose-map-active");
+    if (mapDelete.value) {
+        topicString(
+            "/request_action",
+            `delete_map|~name_map=${mapDelete.value}~`
+        );
         $("#map").remove();
         toggerMessage("success", "Map deleted");
 
@@ -49,12 +60,9 @@ $("#delete-map-btn").onclick = () => {
         ).innerHTML = `<div class="w-full h-full" id="map"></div>`;
         createMapMapActive("/map_selector");
 
-        $$(".map-item").forEach((item) => {
-            if (mapActive === item.innerText.trim()) {
-                item.remove();
-            }
-        });
+        $(`.choose-map-active-item[data-map=${mapDelete.value}]`).remove();
+        mapDelete.value = "";
     } else {
         toggerMessage("error", "Choose map!");
     }
-};
+}

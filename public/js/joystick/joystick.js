@@ -7,10 +7,10 @@ createMoveAction();
 
 export function createMoveAction() {
     const listRobot = $("#list-robot");
-    
+
     listRobot &&
         listRobot.addEventListener("change", (e) => {
-            console.log(e.target.value)
+            console.log(e.target.value);
             cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
         });
 

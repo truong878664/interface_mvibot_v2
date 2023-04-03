@@ -1,14 +1,17 @@
 import { currentMission } from "../handleStepMission.js";
+import disabledSendMission from "./disabledSendMission.js";
 import notAllowMove from "./notAllowMove.js";
 import resetIndex from "./resetIndex.js";
 import updateBlockStep from "./updateBlockStep.js";
 
 export default function handleMoveBlockStep(shortHandMissionList) {
     notAllowMove();
-
+    
     let timeoutDelete;
     $$(".move-block-step-btn").forEach((element) => {
         element.onclick = (e) => {
+            disabledSendMission({ disabled: true });
+            
             const typeMove = e.target.getAttribute("type");
             clearTimeout(timeoutDelete);
             const missionItem = e.target.closest(".mission-item");
@@ -28,11 +31,16 @@ export default function handleMoveBlockStep(shortHandMissionList) {
             const dataBlockStep = updateDataBlockStep();
 
             timeoutDelete = setTimeout(() => {
-                updateBlockStep(currentMission, {
-                    mission_shorthand: dataBlockStep.join("+"),
-                    method: "update",
-                });
-            }, 1000);
+                updateBlockStep(
+                    currentMission,
+                    {
+                        mission_shorthand: dataBlockStep.join("+"),
+                        method: "update",
+                    },
+                    false
+                );
+                disabledSendMission({ disabled: false });
+            }, 2000);
             notAllowMove();
         };
     });
@@ -46,4 +54,3 @@ function updateDataBlockStep() {
     });
     return step;
 }
-

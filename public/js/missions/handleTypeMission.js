@@ -56,6 +56,7 @@ export function loadDataFunction() {
         typeSort2 = "name"
         sort2 = "asc"
     }
+    
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {

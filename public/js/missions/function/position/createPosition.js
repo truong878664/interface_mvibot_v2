@@ -157,8 +157,9 @@ export default function createMapPosition(x = 0, y = 0, z = 0, w = 1) {
             rotateZdeg = e.target.value;
             const degInput = (Number(e.target.value) / 180) * Math.PI;
             const { z, w } = mathYaw(degInput);
-            rotateZ = z;
-            rotateW = w;
+
+            rotateZ = z * 1;
+            rotateW = w * 1;
             displayPoint(positionX, positionY);
             displayPose(positionX, positionY, rotateZ, rotateW);
             displayValue(positionX, positionY, rotateZdeg);
@@ -365,7 +366,7 @@ export function createPosition() {
         if (isValid) {
             console.log(data);
             saveFunctionItem("position", data);
-            resetPosition()
+            resetPosition();
             // createMapPoint();
         } else {
             toggerMessage("error", "Please enter all inputs");

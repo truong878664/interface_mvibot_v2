@@ -16,6 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('my_robot')) {
             Schema::create('my_robot', function (Blueprint $table) {
                 $table->string('name_seri')->unique();
+                $table->string('type');
             });
         }
     }

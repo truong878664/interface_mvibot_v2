@@ -7,7 +7,7 @@ import renderStepItem from "./renderStepItem.js";
 import { showAllStep, showStep } from "./showStep.js";
 
 export default function renderBlockStep() {
-    console.log('render block step...');
+    console.log("render block step...");
     loading();
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())
@@ -19,11 +19,13 @@ export default function renderBlockStep() {
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
 
-            const buttonHandle = `<button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
+            const BUTTON_HANDLE = `<button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn move-block-step-btn move-up-step-btn" type="up"><i class="fa-solid fa-angle-up"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn move-block-step-btn move-down-step-btn" type="down"><i class="fa-solid fa-angle-down"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
                             <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
+
+            const ICON_FRONT = `<span class="cursor-pointer"><i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical ml-1"></i></span>`;
 
             arraySteps?.forEach((arrayStep, index) => {
                 const typeMissionItem = arrayStep.split("^");
@@ -39,12 +41,12 @@ export default function renderBlockStep() {
                                 shortHandMissionList &&
                                 shortHandMissionList[index]
                             }>
-                                <i class="fa-solid fa-play"></i>
+                                ${ICON_FRONT}
                                 <div class="step-item text-[#333] border border-[#333] bg-white font-bold">normal|
                                 ${arrayStep.slice(0, arrayStep.indexOf("^"))}
                                 </div>
                                 ${htmlNormalText}
-                                ${buttonHandle}
+                                ${BUTTON_HANDLE}
                             </div>`
                         );
                         break;
@@ -78,9 +80,9 @@ export default function renderBlockStep() {
                             `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
                                 shortHandMissionList[index]
                             }>
-                                <i class="fa-solid fa-play"></i>
+                                ${ICON_FRONT}
                                 ${htmlIfelse.join("")}
-                                ${buttonHandle}
+                                ${BUTTON_HANDLE}
                             </div>`
                         );
 
@@ -108,9 +110,9 @@ export default function renderBlockStep() {
                             `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
                                 shortHandMissionList[index]
                             }>
-                                <i class="fa-solid fa-play"></i>
+                                ${ICON_FRONT}
                                 ${htmlTryCatch.join("")}
-                                ${buttonHandle}
+                                ${BUTTON_HANDLE}
                             </div>`
                         );
                         break;
@@ -130,7 +132,6 @@ export default function renderBlockStep() {
             loaded();
         });
 }
-
 
 function scrollTop(element) {
     $(element).scrollTop = $(".steps-wrapper").scrollHeight;

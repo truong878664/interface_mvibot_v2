@@ -2,13 +2,16 @@
 @section('content')
     <div class="flex w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-auto border shadow-sm shadow-[#ccc]">
         <div class="h-full w-1/4">
-            <select name=""  id="robot-hook"
+            {{-- <select name=""  id="robot-hook"
                 class="ml-4 mt-4 text-2xl borde rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] py-2 text-white px-4 outline-none inline-block">
                 <option value="">Select robot</option>
                 @foreach ($robots as $robot)
                     <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                 @endforeach
-            </select>
+            </select> --}}
+
+            @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'robot-hook'])
+
         </div>
 
         <div class="w-3/4 flex justify-center items-center overflow-hidden data-[status=disabled]:opacity-50 hook-wrapper" data-status="disabled">

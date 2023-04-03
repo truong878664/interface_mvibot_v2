@@ -6,15 +6,18 @@
             <div class="">
                 @include('frontend.blocks.mission.createMissions.index')
             </div>
+
+            {{-- <label for="select-robot" class="mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn">Send</label> --}}
+
             <div class="fixed bottom-10 right-10 flex">
-                <label for="reset-mission" class=" btn bg-red-400 text-[#fff] self-end px-4 py-1 rounded-md mr-4 ">Reset
+                <label for="reset-mission" class=" btn bg-red-400 text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold">Reset
                     misison</label>
 
-                <button class=" btn bg-sky-400 text-[#fff] self-end px-4 py-1 rounded-md mr-4 select-btn">Select</button>
+                <button class=" btn bg-sky-400 text-[#fff] self-end px-4 py-2 rounded-md mr-4 select-btn text-2xl font-bold">Select</button>
                 <div class="flex hidden action-select">
                     <button
-                        class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 delete-btn">Delete</button>
-                    <label for="select-robot" class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-1 rounded-md mr-4 ">
+                        class=" btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 delete-btn text-2xl font-bold">Delete</button>
+                    <label for="select-robot" class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold">
                         <span>Send</span>
                     </label>
                 </div>
@@ -28,14 +31,17 @@
             <div
                 class="absolute bg-[#fff] p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center">
                 <div class="flex">
-                    <select id="" class="bg-transparent outline-none robot-active border rounded-md">
+                    {{-- <select id="" class="bg-transparent outline-none robot-active border rounded-md">
                         <option value="">Choose Robot</option>
                         @foreach ($allRobot as $robot)
                         <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
+
+                    @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-active'])
+
                     <button
-                    class="ml-2 text-xl md:text-3xl rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-btn">Send</button>
+                    class="ml-2 text-2xl font-bold rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-btn">Send</button>
                 </div>
             </div>
         </div>
@@ -44,14 +50,18 @@
             <label for="reset-mission" class="absolute w-full h-full bg-[#0000004c]"></label>
             <div
                 class="absolute bg-[#fff] p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center flex-col">
-                <div class="flex">
-                    <select id="" class="bg-transparent outline-none border rounded-md robot-reset">
+                <div class="flex items-center">
+
+                    @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-reset'])
+
+
+                    {{-- <select id="" class="bg-transparent outline-none border rounded-md robot-reset">
                         <option value="">Choose Robot</option>
                         @foreach ($allRobot as $robot)
                             <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
                         @endforeach
-                    </select>
-                    <button class="block btn bg-red-400 text-[#fff] self-end px-4 py-1 rounded-md reset-mission-btn"
+                    </select> --}}
+                    <button class="block btn text-2xl font-bold bg-red-400 py-2 text-[#fff] self-end px-4 rounded-md reset-mission-btn"
                         data-type="{{ $type }}">Reset</button>
                 </div>
             </div>

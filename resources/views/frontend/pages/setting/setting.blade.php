@@ -65,7 +65,7 @@
 
                 @foreach ($settingItems as $index => $item)
                     <div data-index="{{ $index }}"
-                        class="text-[16px] mx-4 mt-2 px-4 rounded-xl py-4 text-[#333] cursor-pointer flex items-center bg-[#dcd4d138] hover:bg-[#e4dcda] setting-item {{ $item['class'] }}">
+                        class="text-[16px] mx-4 mt-2 px-4 rounded-xl py-4 text-[#333] cursor-pointer flex items-center bg-[#dcd4d138] hover:bg-[#e4dcda] setting-item {{ $item['class'] }} last:mb-[100px]">
                         <label
                             class="w-[40px] h-[40px] flex justify-center items-center rounded-xl bg-[{{ $item['color'] }}] text-white shadow-md text-[22px] pointer-events-none">
                             <i class=" pointer-events-none select-none {{ $item['icon'] }}"></i>

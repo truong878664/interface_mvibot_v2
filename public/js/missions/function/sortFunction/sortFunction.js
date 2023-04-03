@@ -3,7 +3,7 @@ import { loadDataFunction } from "../../handleTypeMission.js";
 
 let sortNumber = 0;
 let timeClearSort;
-const MAX_TIMES_SORT = 10;
+const MAX_TIMES_SORT = 5;
 
 export default function sortFunction() {
     setIconSortFunction();
@@ -43,7 +43,7 @@ function handleSort(e) {
     clearTimeout(timeClearSort);
     timeClearSort = setTimeout(() => {
         sortNumber = 0;
-    }, 4000);
+    }, 2000);
 }
 
 function setIconSortFunction() {

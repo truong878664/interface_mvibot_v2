@@ -9,13 +9,15 @@ let oldMode;
 
 function settingRobotStart(robot) {
     fetch(`/api/config-status?name_seri=${robot}`)
-        .then((res) => res.json())
+        .then((res) => res?.json())
         .then((data) => {
-            oldMode = data.mode;
+            oldMode = data?.mode;
             renderParameter(data);
             handleChangeModeRobot();
             handleChangeParam();
             handleSaveParam(robot);
+        }).catch((error)=> {
+            toggerMessage('error', error)
         });
 }
 $('.refresh-param-btn').onclick = () => {

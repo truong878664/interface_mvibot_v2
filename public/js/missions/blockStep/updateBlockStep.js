@@ -2,7 +2,7 @@ import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import { toggerMessage } from "../../main.js";
 import renderBlockStep from "./renderBlockStep.js";
 
-export default function updateBlockStep(id, data) {
+export default function updateBlockStep(id, data, isRender = true) {
     loading();
     fetch(`/api/mi/${id}`, {
         headers: {
@@ -14,7 +14,7 @@ export default function updateBlockStep(id, data) {
     })
         .then((res) => res.json())
         .then((data) => {
-            renderBlockStep();
+            isRender && renderBlockStep();
             toggerMessage("success", data.message);
             loaded();
         })
