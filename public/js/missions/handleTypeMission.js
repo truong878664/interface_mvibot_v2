@@ -287,7 +287,6 @@ export function handleMoveStep(data, wrapperItem) {
         .querySelectorAll(".move-right")
         .forEach((element) => {
             element.onclick = (e) => {
-                console.log(data, element.closest(".step-item"));
                 let moveIndex =
                     e.target.closest(".step-item").getAttribute("index") * 1;
 
