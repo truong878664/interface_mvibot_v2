@@ -423,7 +423,7 @@ class MiController extends Controller
                     $time_out = $item->time_out;
                     $mode = $item->mode;
                     $command_action = $item->command_action;
-                    $name_variable = $item->name;
+                    $name_variable = $item->name_variable;
                     $focus_value = $item->focus_value;
 
                     $newVarMission = "--+/front/$name_variable/back/--+";
