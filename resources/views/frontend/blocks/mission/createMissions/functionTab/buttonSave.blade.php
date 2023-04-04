@@ -2,7 +2,7 @@
     @if ($type == 'gpio_wake_up')
         <div class="mt-4">
             <label for="wake-up"
-                class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-wake-up">cancel</label>
+                class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-wake_up">cancel</label>
             <button
                 class="float-right btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-wake-up-btn">Save</button>
         </div>

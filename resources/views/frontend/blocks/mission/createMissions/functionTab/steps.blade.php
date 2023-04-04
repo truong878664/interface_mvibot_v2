@@ -9,7 +9,7 @@
             top: 50%;
             left: 50%;
             transform: translateX(-50%) translateY(-60%);
-            z-index: 1000;
+            z-index: 100;
             border-radius: 4px;
             padding: 20px 32px;
         }

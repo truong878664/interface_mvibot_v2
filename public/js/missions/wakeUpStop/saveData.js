@@ -4,9 +4,8 @@ import { toggerMessage } from "../../main.js";
 import { currentMission } from "../handleStepMission.js";
 import translateWS from "./translateWS.js";
 
-export default function saveDataToDB({data, type}) {
-
-    const dataRobot = translateWS({data, type})
+export default function saveDataToDB({ data, type }) {
+    const dataRobot = translateWS({ data, type });
     const dataSave = {
         id_mission: currentMission,
         out_set: data.out_set.join(","),
@@ -20,13 +19,12 @@ export default function saveDataToDB({data, type}) {
         name_seri: data.name_seri ? data.name_seri : null,
     };
 
-    loading()
     fetchCustom(
         `/api/${type}`,
         "POST",
         () => {
-            loaded()
-            toggerMessage('success', `Save data ${type} successfully!`)
+            toggerMessage("success", `Save data ${type} successfully!`);
+            $(`.cancel-${type}`).click();
         },
         dataSave
     );

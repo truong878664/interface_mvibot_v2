@@ -9,7 +9,8 @@ export default function translateWS({ data, type }) {
     const in_pulldown =
         data.in_pulldown.length != 0 ? `~in_pulldown=${data.in_pulldown}~` : "";
 
-    const name_seri = data.nameSeri ? `~name_seri=${data.nameSeri}` : "";
+    const name_seri = data.name_seri ? `~name_seri=${data.name_seri}~` : "";
+
     const isValid = !!(
         out_set ||
         out_reset ||

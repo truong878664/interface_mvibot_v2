@@ -121,7 +121,8 @@ class Controller extends BaseController
 
                     $newData = implode("|", $arrayDataTryNew) . "?" . implode("|", $arrayDataCatchNew);
 
-                    if (count($arrayDataTryNew) == 0 || (count($arrayDataCatchNew) == 0)) {
+                    // if (count($arrayDataTryNew) == 0 || (count($arrayDataCatchNew) == 0)) {
+                    if (count($arrayDataTryNew) == 0) {
                         TypeMission::where('id', $item->id)->delete();
                         $allMissions = Missions::all();
 

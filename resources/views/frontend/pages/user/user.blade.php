@@ -1,12 +1,17 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
+    @php
+        $userName = session('UserName');
+        $key = substr($userName, 0, 1);
+        $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
+        $color = $colors[strlen($userName)];
+    @endphp
     <div class="heading dashboard-heading">User</div>
     <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
         <div class="w-full h-full mx-auto mt-10 max-w-[500px] overflow-auto">
             <div class="flex items-center">
-                <div
-                    class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full m-3 transparent bg-avatar flex justify-center items-center shadow-lg relative after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400">
-                    <span class="lg:text-[80px] font-[300] uppercase avatar-img-key text-white avatar-img-key"></span>
+                <div key="{{ $key }}" style="background-color: {{$color}};"
+                    class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full m-3 transparent bg-avatar flex justify-center items-center shadow-lg after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400 text-white avatar-img-key before:content-[attr(key)] relative before:absolute before:top-1/2 before:left-1/2 before:font-bold before:-translate-x-1/2 before:-translate-y-1/2 before:text-[80px] before:uppercase">
                     @if (session('TypeUser') == 'admin')
                         <div
                             class="absolute text-cyan-400 text-[30px] top-0 right-0 bg-[#fff] rounded-full leading-[0px] z-30">
@@ -16,12 +21,8 @@
                 </div>
                 <input
                     class="ml-10 text-[22px] font-bold name-user w-1/2 border-2 bg-transparent change-username px-3 rounded-xl border-transparent"
-                    readonly value="admin" />
-                <div
-                    class="w-[30px] h-[30px] rounded-full border border-stone-400 bg-stone-300 flex justify-center items-center cursor-pointer text-[#fff] text-xl btn ml-5 change-username-btn">
-                    <i class="fa-solid fa-pen"></i>
+                    readonly value="{{ session('UserName') }}" />
 
-                </div>
             </div>
 
             <div class="mt-16">

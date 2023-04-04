@@ -67,7 +67,7 @@
                 </div>
                 <div class="absolute w-full max-w-[600px] bg-[#efefef] top-16 left-1/2 -translate-x-1/2 rounded-2xl shadow-lg p-10 hidden form-enter-password z-[21]">
                     <div class="flex justify-between">
-                        <button class="mt-2 btn cancel-wifi-btn font-bold">Cancle</button>
+                        <button class="mt-2 btn cancel-wifi-btn font-bold">Cancel</button>
                         <label class="font-bold text-[16px]">Enter password <span class="label-wifi"></span></label>
                         <button class="mt-2 btn connect-wifi-btn disabled:opacity-50 font-bold" disabled>Connect</button>
                     </div>

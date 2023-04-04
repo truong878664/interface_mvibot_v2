@@ -1,4 +1,3 @@
-
 import bookmark from "./bookmark.js";
 import { color } from "./color.js";
 
@@ -6,7 +5,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const connectRosBtn = $(".connect-ros-btn");
-bookmark()
+bookmark();
 function connected() {
     connectRosBtn?.classList.remove("connection-failed");
     connectRosBtn?.classList.add("connected");
@@ -19,13 +18,7 @@ function connectionFailed() {
 
 activeNabBar();
 
-const usernameLocal = localStorage.getItem("username");
 
-if (usernameLocal) {
-    setAvatar(usernameLocal);
-} else {
-    updateAvatarUser();
-}
 
 function activeNabBar() {
     const currentPathname = window.location.pathname.replace("/", "");
@@ -55,32 +48,9 @@ xhttp.onload = function () {
 xhttp.open("GET", "/dashboard/map/map-active", true);
 xhttp.send();
 
-function updateAvatarUser() {
-    fetch("/api/user/logged")
-        .then((res) => res.json())
-        .then((data) => {
-            const username = data.data.name;
-        })
-        .then(() => {
-            setAvatar(localStorage.getItem("username"));
-        });
-}
-
-function setAvatar(username) {
-    $$(".name-user").forEach((element) => {
-        element.value = username;
-    });
-
-    $$(".avatar-img-key").forEach((element) => {
-        element.innerText = username.slice(0, 1);
-    });
-    $$(".bg-avatar").forEach((element) => {
-        element.style.backgroundColor = color[username.length];
-    });
-}
 
 function robotActive() {
     return localStorage.getItem("robotActive");
 }
 
-export { connected, connectionFailed, updateAvatarUser, robotActive };
+export { connected, connectionFailed, robotActive };

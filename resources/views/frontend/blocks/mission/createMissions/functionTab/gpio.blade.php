@@ -19,7 +19,7 @@
                     class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     name="name_gpio" id="">
 
-                    @foreach ($robots as $robot)
+                    @foreach ($allRobots as $robot)
                         <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                     @endforeach
                 </select>
@@ -35,16 +35,6 @@
             <div class="w-full">
                 <div class="flex justify-between w-full">
                     <div class="font-bold">Wake UP</div>
-                    {{-- <div class="flex items-center text-2xl mr-4">
-                        <label for="">GPIO module</label>
-                        <label class="relative inline-flex items-center cursor-pointer ml-4">
-                            <input type="checkbox" value="" id="{{ $type }}"
-                                type-gpio="{{ $type }}" class="checkbox-is-gpio sr-only peer/wake_up">
-                            <div
-                                class="w-11 h-[16px] bg-gray-200 peer-focus/wake_up:outline-none peer-focus/wake_up:ring-2 peer-focus/wake_up:ring-blue-300 dark:peer-focus/wake_up:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/wake_up:after:translate-x-full peer-checked/wake_up:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/wake_up:bg-blue-600">
-                            </div>
-                        </label>
-                    </div> --}}
                 </div>
                 <div class="flex">
                     <button data-type-ws-btn="gpio_wake_up" data-module="gpio"
@@ -58,34 +48,24 @@
                 </div>
             </div>
         @elseif($type == 'gpio_stop')
-        <div class="w-full">
-            <div class="flex justify-between w-full">
-                <div class="font-bold">Stop</div>
-                <div class="flex items-center text-2xl mr-4">
-                    <label for="">GPIO module</label>
-                    {{-- <label class="relative inline-flex items-center cursor-pointer ml-4">
-                        <input type="checkbox" value="" id="{{ $type }}" type-gpio="{{ $type }}"
-                            class="checkbox-is-gpio sr-only peer/stop">
-                        <div
-                            class="w-11 h-[16px] bg-gray-200 peer-focus/stop:outline-none peer-focus/stop:ring-2 peer-focus/stop:ring-blue-300 dark:peer-focus/stop:ring-blue-600 rounded-full peer dark:bg-gray-300 peer-checked/stop:after:translate-x-full peer-checked/stop:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-300 peer-checked/stop:bg-blue-600">
-                        </div>
-                    </label> --}}
+            <div class="w-full">
+                <div class="flex justify-between w-full">
+                    <div class="font-bold">Stop</div>
+                </div>
+                <div class="flex">
+                    <button data-type-ws-btn="gpio_stop" data-module="gpio"
+                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] active">
+                        Stop normal
+                    </button>
+                    <button data-type-ws-btn="gpio_stop" data-module="gpio_module"
+                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff]">
+                        Stop module
+                    </button>
                 </div>
             </div>
-            <div class="flex">
-                <button data-type-ws-btn="gpio_stop" data-module="gpio"
-                    class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] active">
-                    Stop normal
-                </button>
-                <button data-type-ws-btn="gpio_stop" data-module="gpio_module"
-                    class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff]">
-                    Stop module
-                </button>
-            </div>
-        </div>
         @endif
     </div>
-    <div class="w-full h-full flex flex-col">
+    <div class="w-full h-full flex flex-col justify-center">
         <div class="">
             <button
                 class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
@@ -119,9 +99,18 @@
             </button>
 
             @if ($type == 'gpio_wake_up' || $type == 'gpio_stop')
-                <input
+                <select data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}'
+                    class="w-[120px] text-xl px-4 py-1 outline-none h-[24.5px] bg-[#fff] border border-[#000] rounded-md name_gpio_module_wakeup-stop hidden"
+                    name="name_gpio" id="">
+                    @foreach ($allRobots as $robot)
+                        <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
+                    @endforeach
+                </select>
+
+
+                {{-- <input
                     class="ml-2 text-xl transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
-                    type="text" data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" />
+                    type="text" data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" /> --}}
             @endif
 
         </div>

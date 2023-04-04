@@ -3,7 +3,7 @@ import { toggerMessage } from "../../main.js";
 import renderBlockStep from "./renderBlockStep.js";
 
 export default function updateBlockStep(id, data, isRender = true) {
-    loading();
+    isRender  && loading()
     fetch(`/api/mi/${id}`, {
         headers: {
             Accept: "application/json",
@@ -16,7 +16,7 @@ export default function updateBlockStep(id, data, isRender = true) {
         .then((data) => {
             isRender && renderBlockStep();
             toggerMessage("success", data.message);
-            loaded();
+            isRender && loaded()
         })
         .catch((data) => console.log(data));
 }

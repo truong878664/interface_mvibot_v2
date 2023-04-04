@@ -16,6 +16,7 @@ export default function activeModule({ type }) {
                 "hidden",
                 !isModule
             );
+
             showLight({ type, isModule });
         };
     });

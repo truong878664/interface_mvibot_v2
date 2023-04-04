@@ -1,9 +1,7 @@
 import { toggerMessage } from "../main.js";
-import { updateAvatarUser } from "../mainLayout.js";
 import { $, $$ } from "../main.js";
 
 tabUser();
-handleUpdateUser();
 handleCreateNewUser();
 handleUpdatePassword();
 handleNormalUser();
@@ -74,43 +72,43 @@ function handleUpdatePassword() {
     }
 }
 
-function handleUpdateUser() {
-    const username = $(".change-username");
-    let usernameValue = username.value;
-    $(".change-username-btn").onclick = () => {
-        username.removeAttribute("readonly");
-        username.focus();
-        username.setSelectionRange(usernameValue.length, usernameValue.length);
-        username.style.borderColor = "#FF7B54";
-    };
+// function handleUpdateUser() {
+//     const username = $(".change-username");
+//     let usernameValue = username.value;
+//     $(".change-username-btn").onclick = () => {
+//         username.removeAttribute("readonly");
+//         username.focus();
+//         username.setSelectionRange(usernameValue.length, usernameValue.length);
+//         username.style.borderColor = "#FF7B54";
+//     };
 
-    username.onblur = (e) => {
-        e.target.style.borderColor = "transparent";
-        username.setAttribute("readonly", "readonly");
+//     username.onblur = (e) => {
+//         e.target.style.borderColor = "transparent";
+//         username.setAttribute("readonly", "readonly");
 
-        if (usernameValue != username.value) {
-            updateUsername({ username: username.value.replaceAll(" ", "") });
-            updateAvatarUser();
-            usernameValue = username.value;
-        }
-    };
-    function updateUsername(data) {
-        fetch("/api/user/update", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status == 200) {
-                    localStorage.setItem("username", username.value);
-                }
-            });
-    }
-}
+//         if (usernameValue != username.value) {
+//             updateUsername({ username: username.value.replaceAll(" ", "") });
+//             updateAvatarUser();
+//             usernameValue = username.value;
+//         }
+//     };
+//     function updateUsername(data) {
+//         fetch("/api/user/update", {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Accept: "application/json",
+//             },
+//             body: JSON.stringify(data),
+//         })
+//             .then((res) => res.json())
+//             .then((data) => {
+//                 if (data.status == 200) {
+//                     localStorage.setItem("username", username.value);
+//                 }
+//             });
+//     }
+// }
 
 function handleCreateNewUser() {
     $(".create-btn").onclick = () => {

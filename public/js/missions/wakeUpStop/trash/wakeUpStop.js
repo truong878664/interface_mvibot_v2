@@ -1,5 +1,5 @@
-import { $, $$ } from "../../main.js";
-import { currentMission } from "../handleStepMission.js";
+import { $, $$ } from "../../../main.js";
+import { currentMission } from "../../handleStepMission.js";
 
 const gpios = [
     "out_set",

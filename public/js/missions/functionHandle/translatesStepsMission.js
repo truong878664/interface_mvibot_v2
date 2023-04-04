@@ -4,7 +4,7 @@ import handleRenderTypeMission from "../typeMission/handleRenderTypeMission.js";
 import renderBlockStep from "../blockStep/renderBlockStep.js";
 
 export default function translatesStepsMission({id, renderBlockType = true}) {
-    loading();
+    renderBlockType && loading()
     fetch(`/api/mi/${id}`, {
         method: "PUT",
         headers: {
@@ -15,9 +15,9 @@ export default function translatesStepsMission({id, renderBlockType = true}) {
     })
         .then((res) => res.json())
         .then((data) => {
-            loaded();
             renderBlockType && renderBlockStep();
             renderBlockType && handleRenderTypeMission();
+            renderBlockType && loaded();
             toggerMessage("success", data.message);
         });
 }

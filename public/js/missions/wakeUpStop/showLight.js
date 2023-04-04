@@ -1,12 +1,15 @@
+import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import { currentMission } from "../handleStepMission.js";
 
 export default function showLight({ type, isModule, isReset = true }) {
+    loading()
     const typeModule = isModule ? "gpio_module" : "gpio";
     fetch(`/api/${type}?id_mission=${currentMission}&type=${typeModule}`)
         .then((res) => res.json())
         .then((data) => {
-            isReset && resetLight({type});
+            isReset && resetLight({ type });
             setLight({ typeGpio: type, data });
+            loaded()
         });
 }
 
@@ -19,7 +22,7 @@ function setLight({ typeGpio, data }) {
         "in_pullup",
         "in_pulldown",
     ];
-    
+
     gpios.map((item) => {
         data[item] = data[item]?.split(",") || [];
     });
@@ -37,22 +40,25 @@ function setLight({ typeGpio, data }) {
             }
         });
     });
-    
-    data.name_seri && ($(`[data-ws-module-name=gpio_${typeGpio}]`).value = data.name_seri) 
+
+    data.name_seri &&
+        ($(`[data-ws-module-name=gpio_${typeGpio}]`).value = data.name_seri);
 }
 
-function resetLight({type}) {
+function resetLight({ type }) {
     console.log(type);
-    $(`#${type}-wrapper`).querySelectorAll(".gpio-io").forEach((item) => {
-        item.classList.remove(
-            "in_on",
-            "in_off",
-            "in_pullup",
-            "in_pulldown",
-            "out_reset",
-            "out_set",
-            "gpio_normal",
-            "gpio_module"
-        );
-    });
+    $(`#${type}-wrapper`)
+        .querySelectorAll(".gpio-io")
+        .forEach((item) => {
+            item.classList.remove(
+                "in_on",
+                "in_off",
+                "in_pullup",
+                "in_pulldown",
+                "out_reset",
+                "out_set",
+                "gpio_normal",
+                "gpio_module"
+            );
+        });
 }

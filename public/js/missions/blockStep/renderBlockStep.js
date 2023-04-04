@@ -8,7 +8,7 @@ import { showAllStep, showStep } from "./showStep.js";
 
 export default function renderBlockStep() {
     console.log("render block step...");
-    loading();
+    loading()
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())
         .then((data) => {

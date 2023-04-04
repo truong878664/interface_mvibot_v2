@@ -8,8 +8,7 @@ import handleMultiTypeMission from "./handleMultiTypeMission.js";
 import handleUpdateTypeMission from "./handleUpdateTypeMisison.js";
 
 export default function handleRenderTypeMission() {
-    console.log(21);
-    loading(".type-mission-item-wrapper-normal");
+    loading()
     fetch("/api/type-mission")
         .then((res) => res.json())
         .then((data) => {
@@ -70,7 +69,7 @@ export default function handleRenderTypeMission() {
             handleDeleteTypeMission();
             handleUpdateTypeMission();
             handleMultiTypeMission()
-            loaded(".type-mission-item-wrapper-normal");
+            loaded()
         });
 }
 

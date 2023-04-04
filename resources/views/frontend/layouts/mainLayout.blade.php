@@ -9,8 +9,8 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    {{-- <link rel="stylesheet" href="/build/assets/app-f811b736.css"> --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/build/assets/app-eff917a7.css">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -65,17 +65,25 @@
                     </div>
                 </div>
             </div>
-
+            @php
+                $userName = session('UserName');
+                $key = substr($userName, 0, 1);
+                
+                $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
+                $color = $colors[strlen($userName)];
+            @endphp
 
         </div>
         <div class="user-wrapper">
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
             <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
                 value="{{ session('UserName') }}" />
-            <div class="avatar-user transparent flex justify-center items-center bg-avatar relative">
+            <div data-user-name="{{ session('UserName') }}" key="{{ $key }}" style="background-color: {{$color}};"
+                class="avatar-user transparent flex justify-center items-center bg-avatar relative after:content-[attr(key)] after:absolute after:text-[24px] after:font-bold after:uppercase">
                 <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
                 @if (session('TypeUser') == 'admin')
-                    <div class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px]">
+                    <div
+                        class="absolute text-cyan-400 text-2xl -top-1 -right-2 bg-[#fff] rounded-full leading-[0px] z-10">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
                 @endif

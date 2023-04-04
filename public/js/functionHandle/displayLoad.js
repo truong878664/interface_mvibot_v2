@@ -1,18 +1,15 @@
-import { $ } from "../main.js";
-
-export function loading(element = '.step-render') {
-    $(element).querySelector(".loader-wrapper")?.remove();
-
-    const loadedWrapper =  document.createElement('div')
-    loadedWrapper.classList.add('loader-wrapper')
-    loadedWrapper.innerHTML = '<span class="loader"></span>'
-
-    $(element).appendChild(loadedWrapper);
+export function loading() {
+    const isHasLoader = document.querySelector(".loader-wrapper");
+    if (isHasLoader) {
+        return;
+    }
+    const loadedWrapper = document.createElement("div");
+    loadedWrapper.classList.add("loader-wrapper");
+    loadedWrapper.innerHTML = '<span class="loader"></span>';
+    document.body.appendChild(loadedWrapper);
 }
-export function loaded(element = '.step-render') {
+export function loaded() {
     setTimeout(() => {
-        $(element).querySelector(".loader-wrapper")?.remove();
-    }, 600) 
+        document.body.querySelector(".loader-wrapper")?.remove();
+    }, 600);
 }
-``
-

@@ -13,6 +13,7 @@ import handleAddStep, {
 } from "./function/addFunction.js";
 import updateBlockStep from "./blockStep/updateBlockStep.js";
 import sortFunction from "../functionHandle/sort.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -46,6 +47,7 @@ handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
 export function loadDataFunction() {
+    loading()
     const dataSort = localStorage.getItem("sortFunction");
     let typeSort2, sort2;
     if (dataSort) {
@@ -58,7 +60,6 @@ export function loadDataFunction() {
         typeSort2 = "name";
         sort2 = "asc";
     }
-
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
@@ -82,6 +83,8 @@ export function loadDataFunction() {
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
+            console.log('stop loader');
+            loaded()
         })
         .then(() => {
             deleteMultiFunction();
@@ -139,6 +142,7 @@ function handleAddMissionIfelse() {
             const typeSave = e.target.getAttribute("type");
 
             if (isValid && isDataIf && isData) {
+                loading();
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputIfelse();
                 $$(".normal-border").forEach((item) => {
@@ -201,6 +205,7 @@ function handleAddMissionTrycatch() {
 }
 
 function addTypeMission(data, typeSave) {
+    loading();
     fetch("/api/type-mission", {
         headers: {
             Accept: "application/json",
@@ -218,6 +223,7 @@ function addTypeMission(data, typeSave) {
                 });
             }
             handleRenderTypeMission();
+            loaded();
         })
         .catch((error) => {});
 }
@@ -250,7 +256,6 @@ export function render(dataSteps, element) {
 }
 
 export function handleMoveStep(data, wrapperItem) {
-    console.log($(wrapperItem), data);
     $(wrapperItem)
         .querySelectorAll(".move-left")
         .forEach((element) => {

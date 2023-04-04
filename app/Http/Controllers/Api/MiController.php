@@ -274,8 +274,8 @@ class MiController extends Controller
                         $dataCatch = $changeTryCatch[1] === "|" ? "" : $this->translateStepItem($changeTryCatch[1]);
 
 
-                        $dataStringTry = "%try_step#$dataTry%";
-                        $dataStringCatch = "%catch_step#$dataCatch%";
+                        $dataStringTry = $dataTry ? "%try_step#$dataTry%" : "";
+                        $dataStringCatch = $dataCatch ? "%catch_step#$dataCatch%" : "";
 
                         $body =  "$dataStringTry$dataStringCatch@";
                         array_push($data, $head . $body);

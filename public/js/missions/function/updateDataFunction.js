@@ -25,7 +25,7 @@ export default function updateDataFunction(type) {
     }
 
     function updateStep(url = "", stepSave, isChangeName) {
-        loading();
+        loading()
         fetch(url, {
             headers: {
                 Accept: "application/json",

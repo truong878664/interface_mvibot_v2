@@ -2160,13 +2160,25 @@ li {
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    z-index: 30;
+    z-index: 101;
+}
+
+.loader-wrapper::after{
+    content: "";
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 20px;
+    background-color: rgb(161, 161, 161);
 }
 .loader {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--main-color);
+    background: #fff;
     position: relative;
     z-index: 31;
 }
@@ -2176,7 +2188,7 @@ li {
     position: absolute;
     border-radius: 50%;
     inset: 0;
-    background: var(--main-color);
+    background: #fff;
     transform: rotate(0deg) translate(20px);
     animation: rotate 1s ease infinite;
 }

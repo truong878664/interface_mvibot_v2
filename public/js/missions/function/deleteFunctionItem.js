@@ -1,6 +1,5 @@
 import { $, $$ } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
-import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
 import { currentMission } from "../handleStepMission.js";
 
@@ -20,7 +19,6 @@ function deleteItem(e) {
 
     functionItem.remove()
 
-    loading();
     fetch(`/api/${typeFunction}/${idFunction}`, {
         method: "DELETE",
         headers: {
@@ -38,6 +36,5 @@ function deleteItem(e) {
                     translatesStepsMission({id: currentMission});
                 }, 1000)
             );
-            loaded();
         });
 }

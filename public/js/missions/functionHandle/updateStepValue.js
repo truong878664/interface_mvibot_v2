@@ -1,8 +1,6 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 
 export default function updateStepValue(id) {
-    console.log(id);
-    loading();
     fetch(`/api/mi/${id}`, {
         headers: {
             Accept: "application/json",
@@ -12,7 +10,6 @@ export default function updateStepValue(id) {
         body: JSON.stringify({ method: "update-step-value" }),
     })
         .then(function (res) {
-            loaded();
             res.status == 200 || console.log("update step error");
             return res.json();
         })
