@@ -428,7 +428,7 @@ class MiController extends Controller
 
                     $newVarMission = "--+/front/$name_variable/back/--+";
 
-                    if ((int)$focus_value == 0) {
+                    if ($focus_value  !== "0" && (int)$focus_value === 0) {
                         $newFocusMission = "--+/front/$focus_value/back/--+";
                     } else {
                         $newFocusMission = "";

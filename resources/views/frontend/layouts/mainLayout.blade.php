@@ -13,13 +13,12 @@
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
-
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
-
+        
         .text-clamp-2 {
             display: block;
             display: -webkit-box;
@@ -29,8 +28,16 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-    </style>
+        </style>
     <header class="main-header">
+        {{-- @php
+            $a = "0";
+            if(($a !== "0") && (int)$a === 0) {
+                echo("create varialbe");
+            } else {
+                echo("dont create");
+            }
+        @endphp --}}
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed">
                 <i class="fa-solid fa-satellite-dish"></i>
