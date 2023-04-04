@@ -3,7 +3,7 @@
     <div class="w-[calc(100%_-_10px)] m-2  h-[calc(100%_-_10px)] flex flex-col">
         <div class="flex mx-4 items-center">
 
-            @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'robot-gpio'])
+            @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-gpio'])
 
             <button
                 class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"

@@ -104,7 +104,7 @@
                 <span class="mr-8 text-2xl">{{ $itemRender->name }} |
                     <span class="font-bold">{{ $itemRender->type }}</span>
                 </span>
-                <div class="flex mt-4 items-center">
+                <div class="flex mt-4 items-center justify-end">
                     <label class="relative inline-flex items-center cursor-pointer mr-4">
                         <input type="checkbox" value="" class="sr-only peer/wake_up check-show-step">
                         <div
