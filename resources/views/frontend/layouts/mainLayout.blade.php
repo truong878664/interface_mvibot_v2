@@ -30,14 +30,6 @@
         }
         </style>
     <header class="main-header">
-        {{-- @php
-            $a = "0";
-            if(($a !== "0") && (int)$a === 0) {
-                echo("create varialbe");
-            } else {
-                echo("dont create");
-            }
-        @endphp --}}
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed">
                 <i class="fa-solid fa-satellite-dish"></i>

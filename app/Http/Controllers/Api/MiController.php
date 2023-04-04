@@ -285,7 +285,18 @@ class MiController extends Controller
 
             $dataStepMission = trim(implode('', $data), " ");
 
-            $dataStepMissionRemoveVar = implode('--+', array_unique(explode('--+', $dataStepMission)));
+
+            $arrayNew = [];
+            $oldArray = explode('--+', $dataStepMission);
+
+            foreach ($oldArray as $item) {
+                if (substr($item, 0, 6) !== "/front" || !in_array($item, $arrayNew)) {
+                    $arrayNew[] = $item;
+                }
+            }
+
+            $dataStepMissionRemoveVar = implode("--+", $arrayNew);
+
 
             $addFrontVar = str_replace("--+/front/", "(name:new_variable|time_out:-1|mode:variable|data:~command_action=new~~name_variable=", $dataStepMissionRemoveVar);
             $addBackVar = str_replace("/back/--+", "~~focus_value=0~)",  $addFrontVar);
