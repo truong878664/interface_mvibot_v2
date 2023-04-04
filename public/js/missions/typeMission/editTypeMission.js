@@ -52,6 +52,7 @@ export default function editTypeMission(data) {
             render(valueItemIfelse.then, `.then-steps-wrapper`);
             render(valueItemIfelse.else, `.else-steps-wrapper`);
 
+
             handleMoveStep(valueItemIfelse.if, ".if-steps-wrapper");
             handleMoveStep(valueItemIfelse.then, ".then-steps-wrapper");
             handleMoveStep(valueItemIfelse.else, ".else-steps-wrapper");

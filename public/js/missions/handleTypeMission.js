@@ -46,23 +46,29 @@ handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
 export function loadDataFunction() {
-    const dataSort = localStorage.getItem('sortFunction')
-    let typeSort2, sort2
-    if(dataSort) {
-        const {typeSort, sort} = JSON.parse(localStorage.getItem('sortFunction'))
-        typeSort2 = typeSort
-        sort2 = sort
+    const dataSort = localStorage.getItem("sortFunction");
+    let typeSort2, sort2;
+    if (dataSort) {
+        const { typeSort, sort } = JSON.parse(
+            localStorage.getItem("sortFunction")
+        );
+        typeSort2 = typeSort;
+        sort2 = sort;
     } else {
-        typeSort2 = "name"
-        sort2 = "asc"
+        typeSort2 = "name";
+        sort2 = "asc";
     }
-    
+
     fetch(`/api/function`)
         .then((res) => res.json())
         .then((data) => {
             typeFunction.forEach((item) => {
                 const dataFunction = [...data[item]];
-                sortFunction({ data: dataFunction, type: typeSort2, sort: sort2 });
+                sortFunction({
+                    data: dataFunction,
+                    type: typeSort2,
+                    sort: sort2,
+                });
                 renderDataFunction(dataFunction, item);
             });
         })
@@ -244,6 +250,7 @@ export function render(dataSteps, element) {
 }
 
 export function handleMoveStep(data, wrapperItem) {
+    console.log($(wrapperItem), data);
     $(wrapperItem)
         .querySelectorAll(".move-left")
         .forEach((element) => {
@@ -276,34 +283,39 @@ export function handleMoveStep(data, wrapperItem) {
             };
         });
 
-    $$(".move-right").forEach((element) => {
-        element.onclick = (e) => {
-            let moveIndex =
-                e.target.closest(".step-item").getAttribute("index") * 1;
+    $(wrapperItem)
+        .querySelectorAll(".move-right")
+        .forEach((element) => {
+            element.onclick = (e) => {
+                console.log(data, element.closest(".step-item"));
+                let moveIndex =
+                    e.target.closest(".step-item").getAttribute("index") * 1;
 
-            if (moveIndex < data.length - 1) {
-                arrayMove(data, moveIndex, moveIndex + 1);
+                if (moveIndex < data.length - 1) {
+                    arrayMove(data, moveIndex, moveIndex + 1);
 
-                const currentStep = e.target.closest(".step-item");
-                const moveStep = currentStep.nextSibling.nextSibling;
+                    const currentStep = e.target.closest(".step-item");
+                    const moveStep = currentStep.nextSibling.nextSibling;
 
-                e.target
-                    .closest(".step-item")
-                    .parentElement.insertBefore(currentStep, moveStep);
+                    e.target
+                        .closest(".step-item")
+                        .parentElement.insertBefore(currentStep, moveStep);
 
-                moveIndex++;
-                e.target.closest(".step-item").setAttribute("index", moveIndex);
+                    moveIndex++;
+                    e.target
+                        .closest(".step-item")
+                        .setAttribute("index", moveIndex);
 
-                const itemPrevious =
-                    e.target.closest(".step-item").previousSibling;
+                    const itemPrevious =
+                        e.target.closest(".step-item").previousSibling;
 
-                itemPrevious.setAttribute(
-                    "index",
-                    Number(itemPrevious.getAttribute("index")) - 1
-                );
-            }
-        };
-    });
+                    itemPrevious.setAttribute(
+                        "index",
+                        Number(itemPrevious.getAttribute("index")) - 1
+                    );
+                }
+            };
+        });
 }
 
 export function handleDeleteStep(data, wrapperItem) {
