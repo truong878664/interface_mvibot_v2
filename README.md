@@ -18,7 +18,7 @@ rosrun map_server map_server map22.yaml
 
 ---
 
-# <strong>Mvibot interface v2 - config ubuntu 22.04</strong>
+# <strong>Mvibot interface v2 - config ubuntu 20.04</strong>
 
 # <strong>Install git</strong>
 

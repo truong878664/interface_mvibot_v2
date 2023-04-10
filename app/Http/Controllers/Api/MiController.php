@@ -221,7 +221,7 @@ class MiController extends Controller
 
             $data = array_map(function ($item) {
                 $itemStep = TypeMission::where('id', $item)->first();
-                return $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
+                return $itemStep->id. "^" . $itemStep->name. "^" . $itemStep->type . "^|" . $itemStep->data;
             }, $split_mission_shorthand);
             Missions::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
         } else {
@@ -233,7 +233,6 @@ class MiController extends Controller
         $dataMission = Missions::where('id', $id)->first();
         $step_name = $dataMission->steps_mission_name;
         if ($step_name != "") {
-
             $splitSteps = explode("+", $step_name);
             $dataChange = [];
             foreach ($splitSteps as $splitStep) {
@@ -242,16 +241,16 @@ class MiController extends Controller
 
             $data = [];
             foreach ($dataChange as $index => $dataItem) {
-                switch ($dataItem[1]) {
+                switch ($dataItem[2]) {
                     case "normal":
-                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>normal/data>%normal_step#";
-                        $body = $this->translateStepItem($dataItem[2]);
+                        $head = "&name>$dataItem[1]_$index/time_out>-1/mode>normal/data>%normal_step#";
+                        $body = $this->translateStepItem($dataItem[3]);
                         array_push($data, $head . $body . '%@');
                         break;
                     case "ifelse":
-                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>if_else/data>%condition#";
+                        $head = "&name>$dataItem[1]_$index/time_out>-1/mode>if_else/data>%condition#";
 
-                        $changeDataIfelse = explode('?', $dataItem[2]);
+                        $changeDataIfelse = explode('?', $dataItem[3]);
 
                         $dataIf = $this->translateStepItem($changeDataIfelse[0]);
                         $dataThen = $changeDataIfelse[1] == "|" ? "" : $this->translateStepItem($changeDataIfelse[1]);
@@ -266,13 +265,12 @@ class MiController extends Controller
                         array_push($data, $head . $body);
                         break;
                     case "trycatch":
-                        $head = "&name>$dataItem[0]_$index/time_out>-1/mode>try_catch/data>";
+                        $head = "&name>$dataItem[1]_$index/time_out>-1/mode>try_catch/data>";
 
-                        $changeTryCatch = explode('?', $dataItem[2]);
+                        $changeTryCatch = explode('?', $dataItem[3]);
 
                         $dataTry = $changeTryCatch[0] === "|" ? "" : $this->translateStepItem($changeTryCatch[0]);
                         $dataCatch = $changeTryCatch[1] === "|" ? "" : $this->translateStepItem($changeTryCatch[1]);
-
 
                         $dataStringTry = $dataTry ? "%try_step#$dataTry%" : "";
                         $dataStringCatch = $dataCatch ? "%catch_step#$dataCatch%" : "";

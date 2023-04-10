@@ -7,7 +7,6 @@ export default function topicsListening() {
     if (allRobot) {
         for (let i = 0; i < allRobot.length; i++) {
             const name_seri = allRobot[i].name_seri;
-            console.log(name_seri);
             //sub mission
             const missionTopic = ['mission_normal','mission_error','mission_battery']
             for (let i = 0; i < missionTopic.length ; i++) {

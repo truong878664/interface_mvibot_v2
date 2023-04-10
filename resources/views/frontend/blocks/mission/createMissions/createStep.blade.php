@@ -57,16 +57,16 @@
                         class="type-mission">{{ $itemRender->type }}</span>
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full type-mission-btn-wrapper">
-                    <div data-index="0" data-type-mission="gpio_module"
+                    <div data-index="0" data-type-mission="normal"
                         class="active normal-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>Normal mission</span>
                     </div>
-                    <div data-index="1" data-type-mission="gpio_module"
+                    <div data-index="1" data-type-mission="ifelse"
                         class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>If-Else mission</span>
                     </div>
 
-                    <div data-index="2" data-type-mission="gpio_module"
+                    <div data-index="2" data-type-mission="trycatch"
                         class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>Try-catch mission</span>
                     </div>

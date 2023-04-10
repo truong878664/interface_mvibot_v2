@@ -1,4 +1,4 @@
-import { $, $$ } from "../../main.js";
+import { $ } from "../../main.js";
 export default function fullScreenBlockStep() {
     const stepBlockWrapper = $(".step-block-wrapper");
 

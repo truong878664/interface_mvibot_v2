@@ -13,9 +13,8 @@ export default function renderBlockStep() {
         .then((res) => res.json())
         .then((data) => {
             const steps_mission_name = data.steps_mission_name;
-
             const shortHandMissionList = data.mission_shorthand?.split("+");
-
+            
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
 
@@ -29,21 +28,24 @@ export default function renderBlockStep() {
 
             arraySteps?.forEach((arrayStep, index) => {
                 const typeMissionItem = arrayStep.split("^");
-                switch (typeMissionItem[1]) {
+                const nameTypeMission = arrayStep.slice(arrayStep.indexOf("^") + 1, arrayStep.indexOf("^", arrayStep.indexOf("^") + 1))
+                const idTypeMission = arrayStep.slice(0, arrayStep.indexOf("^"))
+                
+                switch (typeMissionItem[2]) {
                     case "normal":
                         const htmlNormal = [];
 
-                        renderStepItem(typeMissionItem[2], htmlNormal);
+                        renderStepItem(typeMissionItem[3], htmlNormal);
 
                         const htmlNormalText = htmlNormal.join("");
                         html.push(
-                            `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
+                            `<div class=" flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
                                 shortHandMissionList &&
                                 shortHandMissionList[index]
                             }>
                                 ${ICON_FRONT}
-                                <div class="step-item text-[#333] border border-[#333] bg-white font-bold">normal|
-                                ${arrayStep.slice(0, arrayStep.indexOf("^"))}
+                                <div data-id-type-mission=${idTypeMission} data-type="normal" class="type-mission-btn btn step-item text-[#333] border border-[#333] bg-white font-bold">normal|
+                                ${nameTypeMission}
                                 </div>
                                 ${htmlNormalText}
                                 ${BUTTON_HANDLE}
@@ -51,7 +53,7 @@ export default function renderBlockStep() {
                         );
                         break;
                     case "ifelse":
-                        const dataIfelse = typeMissionItem[2].split("?");
+                        const dataIfelse = typeMissionItem[3].split("?");
                         const htmlIfelse = [];
                         const htmlIf = [];
                         const htmlThen = [];
@@ -62,8 +64,8 @@ export default function renderBlockStep() {
                         renderStepItem(dataIfelse[2], htmlElse);
 
                         htmlIfelse.push(
-                            ` <div class="step-item bg-black font-bold text-[#fff]">if|
-                            ${arrayStep.slice(0, arrayStep.indexOf("^"))}
+                            ` <div data-id-type-mission=${idTypeMission} data-type="ifelse" class="type-mission-btn btn step-item bg-black font-bold text-[#fff]">if|
+                            ${nameTypeMission}
                             </div>${htmlIf.join("")}`
                         );
                         htmlIfelse.push(
@@ -88,7 +90,7 @@ export default function renderBlockStep() {
 
                         break;
                     case "trycatch":
-                        const dataTryCatch = typeMissionItem[2].split("?");
+                        const dataTryCatch = typeMissionItem[3].split("?");
                         const htmlTryCatch = [];
                         const htmlTry = [];
                         const htmlCatch = [];
@@ -97,8 +99,8 @@ export default function renderBlockStep() {
                         renderStepItem(dataTryCatch[1], htmlCatch);
 
                         htmlTryCatch.push(`
-                                <div class="step-item bg-black font-bold text-[#fff]">Try|
-                                ${arrayStep.slice(0, arrayStep.indexOf("^"))}
+                                <div data-id-type-mission=${idTypeMission} data-type="trycatch" class="type-mission-btn btn step-item bg-black font-bold text-[#fff]">Try|
+                                ${nameTypeMission}
                                 </div>${htmlTry.join("")}`);
 
                         htmlTryCatch.push(`

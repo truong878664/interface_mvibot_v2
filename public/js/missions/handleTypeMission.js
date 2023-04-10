@@ -83,7 +83,6 @@ export function loadDataFunction() {
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
-            console.log('stop loader');
             loaded()
         })
         .then(() => {

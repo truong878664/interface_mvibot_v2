@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('steps_mission')->nullable();
+            $table->mediumText('steps_mission')->nullable();
             $table->text('steps_mission_name')->nullable();
             $table->text('mission_shorthand')->nullable();
             $table->text('wake_up')->nullable();

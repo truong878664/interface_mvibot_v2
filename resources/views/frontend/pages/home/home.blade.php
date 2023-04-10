@@ -1,7 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-lg overflow-auto ">
-        <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/background.jpg)">
+    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-lg overflow-y-auto overflow-x-hidden">
+        <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/bg.jpg)">
             <span class="absolute top-0 left-4 text-orange-300 text-2xl">marueivietnam.vn</span>
             <div class="absolute top-[20%] left-1/2 -translate-x-1/2 flex flex-col items-center text-[#fff]">
                 {{-- {{-- <h1 class="text-[100px] font-bold mvibot">MViBot</h1> --}}
@@ -13,7 +13,7 @@
                 </h1>
 
                 </h1>
-                <span class="text-[30px]">ready for the future</span>
+                <span class="text-[30px] text-[#0f6cbd]">ready for the future</span>
 
 
 
@@ -36,7 +36,7 @@
                 <div class="w-1/3 h-full bg-contain bg-center bg-no-repeat hover:scale-110 transition-all"
                     style="background-image: url(/img/home2/robot3.png)"></div>
             </div>
-            <div class="absolute left-1/2 bottom-10 text-[#fff] text-[30px] animate-bounce">
+            <div class="absolute left-1/2 bottom-10 text-[#0f6cbd] text-[30px] animate-bounce">
                 <i class="fa-solid fa-angles-down"></i>
             </div>
         </div>
@@ -122,6 +122,7 @@
             .animation-text {
                 position: relative;
                 width: 100%;
+                color: var(--main-color);
             }
 
             .animation-text div {
@@ -136,7 +137,7 @@
                 position: absolute;
                 width: 0%;
                 height: 4px;
-                background: #fff;
+                background: var(--main-color);
             }
 
             .animation-text span {

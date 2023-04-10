@@ -57,9 +57,9 @@ function setRotateHook(deg) {
 //     deg === -90 && (right = true);
 // }, 1000);
 
-// let data = 0.0;
+// let data = 1.0;
 
 // setInterval(() => {
 //     publishTopic("Mb23_946/hook_switch", data, "std_msgs/Float32");
-//     data = data === 1.0 ? 0.0 : 1.0;
+//     // data = data === 1.0 ? 0.0 : 1.0;
 // }, 3000);
