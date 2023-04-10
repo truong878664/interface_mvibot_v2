@@ -19,16 +19,16 @@ export default function showMissionCode() {
             "show-mission-form-wrapper",
             "flex",
             "justify-center",
-            "items-center",
+            "items-center"
         );
         fetch(`/api/mi/${currentMission}`)
             .then((res) => res.json())
             .then((data) => {
                 const stepMission = data.steps_mission;
                 if (!stepMission) {
-                    toggerMessage('error', "Empty mission!")
-                    return
-                };
+                    toggerMessage("error", "Empty mission!");
+                    return;
+                }
                 const htmlStep =
                     "<p>" +
                     stepMission?.split("%@&").join("%@</p><br><p>&") +
@@ -72,9 +72,13 @@ export default function showMissionCode() {
         const copyMissionBtn = $(".copy-mission-btn");
         copyMissionBtn &&
             (copyMissionBtn.onclick = (e) => {
-                const dataFullMission = translateDataMission(data);
-                navigator.clipboard.writeText(dataFullMission);
-                toggerMessage("success", "Copied!");
+                const dataMission = new Promise((resolve, reject) => {
+                    resolve(translateDataMission(data));
+                });
+                dataMission.then((data) => {
+                    navigator.clipboard.writeText(data);
+                    toggerMessage("success", "Copied!");
+                });
             });
     }
 }
