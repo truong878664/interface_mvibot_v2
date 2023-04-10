@@ -76,7 +76,7 @@ export default function showMissionCode() {
                     resolve(translateDataMission(data));
                 });
                 dataMission.then((data) => {
-                    navigator.clipboard.writeText(data);
+                    window.navigator.clipboard.writeText(data);
                     toggerMessage("success", "Copied!");
                 });
             });
