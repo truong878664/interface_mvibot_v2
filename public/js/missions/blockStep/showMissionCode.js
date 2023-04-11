@@ -7,6 +7,11 @@ export default function showMissionCode() {
     showMissionBtn.addEventListener("click", handleShowMission);
 
     function handleShowMission() {
+        const isHasShowMissionForm = $(".show-mission-form-wrapper");
+        if (isHasShowMissionForm) {
+            isHasShowMissionForm.remove();
+            return;
+        }
         const showMissionForm = document.createElement("div");
         showMissionForm.classList.add(
             "fixed",

@@ -17,7 +17,7 @@ export default function topicsListening() {
                         if (data.data) {
                             toggerMessage(
                                 "success",
-                                "The robot has received 1 mission!"
+                                `The robot ${name_seri} has received 1 mission!`
                             );
                         }
                         console.log(data);
@@ -31,9 +31,10 @@ export default function topicsListening() {
                 "std_msgs/String",
                 (data) => {
                     if (data.data == 0) {
-                        toggerMessage("success", "Stopped");
+                        toggerMessage("success", `Robot ${name_seri}: stopped`);
                     } else if (data.data == 1) {
-                        toggerMessage("success", "Continued");
+                        
+                        toggerMessage("success", `Robot ${name_seri}: continued`);
                     }
                     console.log(data);
                 }
@@ -44,26 +45,14 @@ export default function topicsListening() {
                 "std_msgs/String",
                 (data) => {
                     if (data.data == 1) {
-                        toggerMessage("success", `Shutdown success`);
+                        toggerMessage("success", `Robot ${name_seri}: Shutdown success`);
                     } else if (data.data == 2) {
-                        toggerMessage("success", `Reboot success`);
+                        toggerMessage("success", `Robot ${name_seri}: Reboot success`);
                     }
                     console.log(data);
                 }
             );
 
-            subscribeTopic(
-                `/${name_seri}/robot_shutdown`,
-                "std_msgs/String",
-                (data) => {
-                    if (data.data == 1) {
-                        toggerMessage("success", `Shutdown success`);
-                    } else if (data.data == 2) {
-                        toggerMessage("success", `Reboot success`);
-                    }
-                    console.log(data);
-                }
-            );
             subscribeTopic(
                 `/${name_seri}/set_config`,
                 "std_msgs/String",

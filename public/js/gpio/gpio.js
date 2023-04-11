@@ -43,6 +43,8 @@ $("#robot-gpio").onchange = (e) => {
     $(".type-gpio-btn.active")?.classList.remove("active");
     currentTypeGpio = "";
 };
+const LIGHT_ON = 1
+const LIGHT_OFF = 0
 
 function setLightGpio(nameRobot) {
     fetch(`/api/input-gpio?name_seri=${nameRobot}`)
@@ -62,18 +64,18 @@ function setLightGpio(nameRobot) {
             };
 
             data.dataInput?.forEach((io, index) => {
-                if (io == 1) {
+                if (io === LIGHT_ON) {
                     dataInput.in_on.push(index);
-                } else if (io == 0) {
+                } else if (io === LIGHT_OFF) {
                     dataInput.in_off.push(index);
                 }
             });
 
             if (!currentTypeGpio) {
                 data.dataOutput?.forEach((io, index) => {
-                    if (io == 1) {
+                    if (io === LIGHT_ON) {
                         dataOutput.out_set.push(index);
-                    } else if (io == 0) {
+                    } else if (io === LIGHT_OFF) {
                         dataOutput.out_reset.push(index);
                     }
                 });
@@ -83,6 +85,8 @@ function setLightGpio(nameRobot) {
 
             resetLightGpioInput();
             setLightGpioInput(dataInput);
+        }).catch(error => {
+            toggerMessage('error', "Too many requests, please reload the page!")
         });
 
     function setLightGpioInput(dataInput) {
