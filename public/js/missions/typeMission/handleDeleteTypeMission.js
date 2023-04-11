@@ -1,6 +1,8 @@
 import { $, $$ } from "../../main.js";
 import resetIndex from "../blockStep/resetIndex.js";
 import dbDelete from "../functionHandle/dbDelete.js";
+import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
+import { currentMission } from "../handleStepMission.js";
 
 export default function handleDeleteTypeMission() {
     $$(".delete-type-mission-btn").forEach((element) => {
@@ -9,7 +11,6 @@ export default function handleDeleteTypeMission() {
     function handleDelete(e) {
         const missionItem = e.target.closest(".type-mission-item");
         const typeMissionId = missionItem.getAttribute("type-mission-id");
-
         fetch(`/api/type-mission/${typeMissionId}`, {
             method: "DELETE",
             headers: {
@@ -22,7 +23,11 @@ export default function handleDeleteTypeMission() {
                 if (statusDelete.deleted) {
                     missionItem.remove();
                     deleteBlockStepMission(typeMissionId);
-                    resetIndex('.mission-item')
+                    resetIndex(".mission-item");
+                    translatesStepsMission({
+                        id: currentMission,
+                        renderBlockType: false,
+                    });
                 }
             })
             .catch((err) => console.error(err));

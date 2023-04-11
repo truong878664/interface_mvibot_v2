@@ -49,9 +49,12 @@
         $batteryVolt = $item['batteryVolt'] ? $item['batteryVolt'] : 0;
         $batteryCharge = $item['batteryCharge'];
         $activate = $item['activate'];
-    @endphp
-
-    <x-status-item nameRobot="{{ $nameRobot }}"
+        $robotType = $item['robotType'];
+        $moduleIn = $item['moduleIn'];
+        $moduleOut = $item['moduleOut']; 
+@endphp
+    
+    <x-status-item nameRobot="{{ $nameRobot }}" robotType="{{$robotType}}" moduleIn="{{$moduleIn}}" moduleOut="{{$moduleOut}}"
         statusStatusRobot="{{ $statusRobot }}" batteryPercent="{{ $batteryPercent }}%"
         batteryCharge="{{ $batteryCharge }}" batteryTemperValue="{{ $batteryTemperValue }}°C"
         batteryA="{{ $batteryA }}A" batteryVoltValue="{{ $batteryVolt }}" :dataAccessory="$dataAccessory"

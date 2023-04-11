@@ -20,7 +20,10 @@ class statusController extends Controller
         'batteryVolt' => "",
         'dataAccessory' => "",
         'batteryCharge' => "",
-        'activate' => 0
+        'activate' => 0,
+        'robotType' => "",
+        'moduleIn' => "",
+        'moduleOut' => "",
     ];
 
     public function index()
@@ -42,6 +45,7 @@ class statusController extends Controller
         $robots = Robot::all();
         foreach ($robots as $robot) {
             $this->statusRobotItem['nameRobot'] = $robot->name_seri;
+            $this->statusRobotItem['robotType'] = $robot->type;
             array_push($this->dataStatus, $this->statusRobotItem);
         }
 
@@ -118,6 +122,43 @@ class statusController extends Controller
                     ];
                     $this->dataStatus[$index]['dataAccessory'] = $sensor;
                 } else {
+                }
+            }
+        }
+
+        $inputModule = DB::table('input_user_status')->get();
+        $outputModule = DB::table('output_user_status')->get();
+        foreach ($inputModule as $inputIO) {
+            foreach ($this->dataStatus as $index => $dataItem) {
+                if ($inputIO->name_seri === $dataItem['nameRobot']) {
+                    $dataIO = [
+                        $inputIO->in1,
+                        $inputIO->in2,
+                        $inputIO->in3,
+                        $inputIO->in4,
+                        $inputIO->in5,
+                        $inputIO->in6,
+                        $inputIO->in7,
+                        $inputIO->in8,
+                    ];
+                    $this->dataStatus[$index]['moduleIn'] = implode(",", $dataIO);
+                }
+            }
+        }
+        foreach ($outputModule as $outputIO) {
+            foreach ($this->dataStatus as $index => $dataItem) {
+                if ($outputIO->name_seri === $dataItem['nameRobot']) {
+                    $dataIO = [
+                        $outputIO->out1,
+                        $outputIO->out2,
+                        $outputIO->out3,
+                        $outputIO->out4,
+                        $outputIO->out5,
+                        $outputIO->out6,
+                        $outputIO->out7,
+                        $outputIO->out8,
+                    ];
+                    $this->dataStatus[$index]['moduleOut'] = implode(",",$dataIO);
                 }
             }
         }

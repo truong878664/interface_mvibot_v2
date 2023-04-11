@@ -155,9 +155,10 @@
     fill: #fff;
     width: 24px;
 }
-.inactivate {
-    color: #ccc;
+.disconnect .io_module {
+  color: #ccc !important;
 }
+
 .inactivate .accessoty-item-wrapper .accessoty-item {
     background: #ccc;
     box-shadow: none;

@@ -4,7 +4,6 @@ import { $$ } from "../main.js";
 // setColorTemper();
 const xhttp = new XMLHttpRequest();
 let oldResponse = "";
-
 function dataLoad() {
     xhttp.onload = function () {
         if (oldResponse !== this.responseText) {
