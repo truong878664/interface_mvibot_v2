@@ -1,14 +1,12 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import updateBlockStep from "../blockStep/updateBlockStep.js";
-import {
-    currentMission,
-} from "../handleStepMission.js";
+import { currentMission } from "../handleStepMission.js";
 import handleDeleteTypeMission from "./handleDeleteTypeMission.js";
 import handleMultiTypeMission from "./handleMultiTypeMission.js";
 import handleUpdateTypeMission from "./handleUpdateTypeMisison.js";
 
 export default function handleRenderTypeMission() {
-    loading()
+    loading();
     fetch("/api/type-mission")
         .then((res) => res.json())
         .then((data) => {
@@ -17,6 +15,12 @@ export default function handleRenderTypeMission() {
                 ifelse: [],
                 trycatch: [],
             };
+
+            const typeMissionEmpty = `
+            <div class="flex justify-center items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item shadow-sm shadow-[#ccc] text-slate-300">
+                <i class="fa-solid fa-box-open text-[30px]"></i>
+                <span>Type mission empty</span>      
+            </div>`;
 
             data.reverse().map((item) => {
                 const itemHtml = `
@@ -27,12 +31,20 @@ export default function handleRenderTypeMission() {
                         )}" class="" />
 
                         <div class="flex">
-                            <input type="checkbox" data-select-type-mission-id="${item.id}" data-type="${item.type}" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] type-mission-item-select">
+                            <input type="checkbox" data-select-type-mission-id="${
+                                item.id
+                            }" data-type="${
+                    item.type
+                }" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] type-mission-item-select">
                             <div class="flex flex-col">
-                                <span class="font-bold font-3xl capitalize">${item.type}</span>
+                                <span class="font-bold font-3xl capitalize">${
+                                    item.type
+                                }</span>
                                 <div class="flex">
                                     <span class="mr-2">Name:</span>
-                                    <span class="font-bold text-sky-600">${item.name}</span>
+                                    <span class="font-bold text-sky-600">${
+                                        item.name
+                                    }</span>
                                 </div>
                             </div>
                         </div>
@@ -63,13 +75,15 @@ export default function handleRenderTypeMission() {
 
             for (const type in htmlTypeMission) {
                 const itemTypeMission = $(`.type-mission-item-wrapper-${type}`);
-                itemTypeMission.innerHTML = htmlTypeMission[type].join("");
+                itemTypeMission.innerHTML = htmlTypeMission[type].join("")
+                    ? htmlTypeMission[type].join("")
+                    : typeMissionEmpty;
             }
             handleAddTypeMission();
             handleDeleteTypeMission();
             handleUpdateTypeMission();
-            handleMultiTypeMission()
-            loaded()
+            handleMultiTypeMission();
+            loaded();
         });
 }
 
