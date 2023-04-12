@@ -1,3 +1,24 @@
+<style>
+    .sound-btn.active {
+        opacity: 1;
+        font-weight: 700;
+    }
+
+    .sound-start-btn::after {
+        content: attr(data-mode);
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 10px;
+        background-color: #fff;
+        color: var(--color);
+        border-radius: 4px;
+        transform: translateX(50%) translateY(50%);
+        padding: 0 4px;
+        border: solid 1px var(--color);
+        font-weight: 400;
+    }
+</style>
 <div class="hidden function-item function-mission-tab" data-type="sound">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function sound</label>
@@ -42,24 +63,4 @@
     @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'sound'])
 
 </div>
-<style>
-    .sound-btn.active {
-        opacity: 1;
-        font-weight: 700;
-    }
 
-    .sound-start-btn::after {
-        content: attr(data-mode);
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        font-size: 10px;
-        background-color: #fff;
-        color: var(--color);
-        border-radius: 4px;
-        transform: translateX(50%) translateY(50%);
-        padding: 0 4px;
-        border: solid 1px var(--color);
-        font-weight: 400;
-    }
-</style>

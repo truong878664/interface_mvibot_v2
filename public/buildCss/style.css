@@ -1,17 +1,15 @@
 @import url(../fonts/fontawesome-free-6.2.0-web/css/all.min.css);
 
 :root {
-    --column-status: 4;
+    --column-status: 2;
 }
 .wrapper-status-content {
     display: flex;
-    flex-wrap: wrap;
 }
 .status-item-wrapper {
     background-color: #f1f1f1;
     border-radius: 6px;
     box-shadow: 0 0 20px hsla(0, 0%, 80%, 0.514);
-    flex-direction: column;
     height: 320px;
     margin: 10px;
     min-width: 400px;
@@ -19,6 +17,7 @@
     padding: 16px 23px;
     position: relative;
     width: calc(100% / var(--column-status) - 20px);
+    
 }
 .status-item {
     display: flex;
@@ -26,7 +25,7 @@
 .status-header {
     display: flex;
     font-size: 2.2rem;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-bottom: 10px;
 }
 .status-status-robot {
@@ -1901,14 +1900,14 @@ input[type="number"] {
     :root {
         --colum-dashboard: 3;
         --column-create-missions: 4;
-        --column-status: 4;
+        --column-status: 1;
     }
 }
 @media (min-width: 739px) and (max-width: 1023px) {
     :root {
         --colum-dashboard: 2;
         --column-create-missions: 3;
-        --column-status: 2;
+        --column-status: 1;
     }
 }
 @media (max-width: 738px) {
@@ -2121,6 +2120,7 @@ li {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    display: inline-block;
 }
 .btn:not(:disabled):hover {
     transform: scale(1.02);

@@ -11,13 +11,14 @@
                 ])
 
                 <div class="inline-block">
-                    <button
-                        class="float-right text-xl md:text-3xl btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>
 
                     <button
-                        class="float-right text-xl md:text-3xl btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 basic-sound-btn">Basic</button>
+                        class="float-right text-2xl font-bold btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>
+
                     <button
-                        class="float-right text-xl md:text-3xl btn bg-yellow-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 custom-sound-btn">Custom</button>
+                        class="float-right text-2xl font-bold btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 basic-sound-btn">Basic</button>
+                    <button
+                        class="float-right text-2xl font-bold btn bg-yellow-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 custom-sound-btn">Custom</button>
                 </div>
 
             </div>

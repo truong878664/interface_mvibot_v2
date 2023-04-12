@@ -5,7 +5,7 @@
             @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'list-robot'])
         </div>
 
-        <div class="w-full flex-1 flex  justify-evenly items-center">
+        <div class="w-full flex-1 flex justify-evenly items-center mt-[70px]">
             <div class="relative">
                 <div class="mb-8 absolute w-full -top-[30px] -translate-y-full">
                     <div class="range-slider relative mb-12">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-[160px] w-[160px] md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px] rounded-full bg-[#eee] flex flex-col justify-center items-stretch button-console-wrapper p-2">
+                    class="h-[160px] w-[160px] md:w-[300px] md:h-[300px] lg:h-[350px] lg:w-[350px] rounded-full bg-[#eee] flex flex-col justify-center items-stretch button-console-wrapper p-2">
                     <div class=" w-full flex justify-center items-center h-1/3">
                         <button type="up"
                             class="button-move w-[50px] p-[6px] flex justify-center items-center text-[26px] tex h-[50px]  md:w-[120px] md:h-[120px] md:text-[40px] text-[#ccc]"><i
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '400px'])
+            @include('frontend/blocks/joystick', ['mb' => '160px', 'md' => '300px', 'lg' => '350px'])
         </div>
     </div>
     <script type="module" src="/js/joystick/joystick.js"></script>

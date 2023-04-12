@@ -49,6 +49,7 @@
         border-radius: 10px;
         overflow: hidden;
         display: none;
+        z-index: 1;
     }
 
     .dropdown.active .options {
