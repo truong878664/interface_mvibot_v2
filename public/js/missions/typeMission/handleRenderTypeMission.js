@@ -17,7 +17,7 @@ export default function handleRenderTypeMission() {
             };
 
             const typeMissionEmpty = `
-            <div class="flex justify-center items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item shadow-sm shadow-[#ccc] text-slate-300">
+            <div class="flex justify-center items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-item shadow-sm shadow-[#ccc] text-slate-300 border">
                 <i class="fa-solid fa-box-open text-[30px]"></i>
                 <span>Type mission empty</span>      
             </div>`;

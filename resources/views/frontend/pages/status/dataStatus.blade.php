@@ -39,7 +39,8 @@
     $data = [];
 @endphp
 
-<div class="w-full md:w-1/2 flex flex-wrap h-fit">
+<div
+    class="w-full md:w-1/2 flex flex-wrap h-fit relative after:contents-[''] after:h-full after:w-[1px] after:bg-[#b0b0b0] after:absolute after:-right-[0.5px]">
     @if (count($dataStatus) === 0)
         <div class="status-item-wrapper w-full flex justify-center items-center text-slate-300">
             <i class="fa-solid fa-box-open text-[50px]"></i>
@@ -71,7 +72,8 @@
         @endforeach
     @endif
 </div>
-<div class="w-full md:w-1/2 flex flex-wrap h-fit">
+<div
+    class="w-full md:w-1/2 flex flex-wrap h-fit relative after:contents-[''] after:h-full after:w-[1px] after:bg-[#b0b0b0] after:absolute after:-left-[0.5px]">
     @if (count($dataStatus) === 0)
         <div class="status-item-wrapper w-full flex justify-center items-center text-slate-300">
             <i class="fa-solid fa-box-open text-[50px]"></i>
