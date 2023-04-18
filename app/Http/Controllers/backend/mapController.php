@@ -14,8 +14,8 @@ class mapController extends Controller
     {
         $allRobot = Robot::all()->toArray();
         $mapActive = $this->mapActive();
-
-        return view('frontend.pages.map.map', compact('mapActive', 'allRobot'));
+        $title = 'map';
+        return view('frontend.pages.map.map', compact('mapActive', 'allRobot', 'title'));
     }
     public function addMapActive(Request $request)
     {
@@ -39,13 +39,15 @@ class mapController extends Controller
         return $mapActive;
     }
     public function createLayer()
-    {
+    {   
+        $title = "Create layer";
         $mapActive = $this->mapActive();
         $allLayer = Layer::where('name_map_active', $mapActive)->get();
-        return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer'));
+        return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer', 'title'));
     }
     public function chooseMapActive()
     {
-        return view('frontend.pages.map.mapActive');
+        $title = 'Choose map active';
+        return view('frontend.pages.map.mapActive', compact('title'));
     }
 }

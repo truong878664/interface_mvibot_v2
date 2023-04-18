@@ -38,7 +38,7 @@ export default function sendMission() {
                 } else {
                     toggerMessage(
                         "error",
-                        "Currently no data please reload the page and try again"
+                        "Current mission is empty"
                     );
                 }
             });

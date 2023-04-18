@@ -52,6 +52,8 @@ function handleParameterRobot(robot) {
         .then((data) => {
             renderParameterRobot(data);
         }).catch(error => {
+            localStorage.removeItem("robotActive");
+            showSettingRobot()
             toggerMessage('error', error)
         })
 
