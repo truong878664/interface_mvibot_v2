@@ -41,9 +41,12 @@
             <div class="w-1/2 flex justify-center">
                 <div class="w-1/2">
                     <h1 class="uppercase font-bold text-[30px] mb-4">About us</h1>
-                    <p class="text-3xl">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum dolor nisi est.
-                        Cumque blanditiis dignissimos magni odio facilis, fuga quam explicabo molestiae voluptatem!
-                        Cum mollitia fuga incidunt corrupti quaerat distinctio!</p>
+                    <p class="text-3xl">Established in 2001, Maruei Vietnam Precision Co., Ltd., a 100% Japanese-owned
+                        company, specializes in precision mechanical components with over 99% of its products serving the
+                        automotive industry. With over 16 years of presence in Vietnam, Maruei Vietnam has continuously
+                        developed and become the largest manufacturing base within the Maruei Industrial Group (Japan). With
+                        over 1,500 dedicated and responsible employees, MVP takes pride in delivering high-quality products,
+                        competitive prices, and timely delivery (Q-C-D) to customers, always meeting their expectations.</p>
                 </div>
             </div>
 
@@ -227,19 +230,19 @@
         </style>
         <style>
             /* body {
-                    margin: 0;
-                    height: 100vh;
-                    font-weight: 100;
-                    background: radial-gradient(#a23982, #1f1013);
-                    -webkit-overflow-Y: hidden;
-                    -moz-overflow-Y: hidden;
-                    -o-overflow-Y: hidden;
-                    overflow-y: hidden;
-                    -webkit-animation: fadeIn 1 1s ease-out;
-                    -moz-animation: fadeIn 1 1s ease-out;
-                    -o-animation: fadeIn 1 1s ease-out;
-                    animation: fadeIn 1 1s ease-out;
-                } */
+                        margin: 0;
+                        height: 100vh;
+                        font-weight: 100;
+                        background: radial-gradient(#a23982, #1f1013);
+                        -webkit-overflow-Y: hidden;
+                        -moz-overflow-Y: hidden;
+                        -o-overflow-Y: hidden;
+                        overflow-y: hidden;
+                        -webkit-animation: fadeIn 1 1s ease-out;
+                        -moz-animation: fadeIn 1 1s ease-out;
+                        -o-animation: fadeIn 1 1s ease-out;
+                        animation: fadeIn 1 1s ease-out;
+                    } */
 
 
             .light {
