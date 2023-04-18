@@ -56,7 +56,7 @@
 
                 <div class="flex justify-end">
                     <div class="flex flex-col">
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Health</span>
+                        {{-- <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Health</span> --}}
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Chagre</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Level</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Temperature</span>
@@ -68,7 +68,7 @@
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Capacity max</span>
                     </div>
                     <div class="flex flex-col mx-6">
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2">Gooth</span>
+                        {{-- <span class="py-2 h-[30px] text-2xl pr-8 pl-2">Gooth</span> --}}
                         <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="charge">-</span>
                         <span class="py-2 h-[30px] text-2xl pr-8 pl-2">
                             <div
