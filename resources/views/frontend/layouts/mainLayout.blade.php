@@ -9,8 +9,8 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    {{-- <link rel="stylesheet" href="/build/assets/app-21d5aef8.css"> --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/build/assets/app-41eb8537.css">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-satellite-dish"></i>
             </div>
             <div class="flex items-center">
-                <h3 class="font-bold">Mvibot</h3>
+                <h3 class="font-bold">Mvibot - new wave</h3>
             </div>
             <div class="message-map-wrapper">
             </div>

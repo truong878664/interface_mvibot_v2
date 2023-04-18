@@ -8,7 +8,7 @@
     <div class="w-full h-full bg-[#fff] text-xl flex flex-col-reverse">
         <div data-type="{{$type}}" class="bg-[rgba(204,204,204,0.2)] px-5 py-3 mb- text-[20px] h-[40px] rounded-md shadow-sm shadow-[#ccc] flex items-center text-xl">
             <div class="mr-8">
-                <i class="fa-solid fa-turn-up rotate-180 translate-y-"></i>
+                <i class="fa-solid fa-turn-down rotate-180 -translate-y-3"></i>
                 <input type="checkbox" id="checkall-{{$type}}" data-type="{{$type}}" class=" ml-4 w-[12px] h-[12px] accent-[#f5b933] check-all-input-type-mission">
                 <label for="checkall-{{$type}}" class="font-bold">Check all</label>
             </div>
