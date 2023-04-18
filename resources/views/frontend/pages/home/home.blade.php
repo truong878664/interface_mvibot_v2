@@ -5,19 +5,14 @@
             <span class="absolute top-0 left-4 text-orange-400 text-2xl">website: maruei-robots.com</span>
             <span class="absolute top-0 right-4 text-xl">version: nw 1.0</span>
             <div class="absolute top-[20%] left-1/2 -translate-x-1/2 flex flex-col items-center text-[#fff]">
-                {{-- {{-- <h1 class="text-[100px] font-bold mvibot">MViBot</h1> --}}
                 <h1>
                     <div class="animation-text text-[100px] font-bold">
                         <div class="animation-text-left"><span>MViBot</span></div>
                         <div class="animation-text-right"><span>MViBot</span></div>
                     </div>
                 </h1>
-
                 </h1>
                 <span class="text-[30px] text-[#0f6cbd]">ready for the future</span>
-
-
-
             </div>
             <div class='light x1'></div>
             <div class='light x2'></div>
@@ -232,19 +227,19 @@
         </style>
         <style>
             /* body {
-                margin: 0;
-                height: 100vh;
-                font-weight: 100;
-                background: radial-gradient(#a23982, #1f1013);
-                -webkit-overflow-Y: hidden;
-                -moz-overflow-Y: hidden;
-                -o-overflow-Y: hidden;
-                overflow-y: hidden;
-                -webkit-animation: fadeIn 1 1s ease-out;
-                -moz-animation: fadeIn 1 1s ease-out;
-                -o-animation: fadeIn 1 1s ease-out;
-                animation: fadeIn 1 1s ease-out;
-            } */
+                    margin: 0;
+                    height: 100vh;
+                    font-weight: 100;
+                    background: radial-gradient(#a23982, #1f1013);
+                    -webkit-overflow-Y: hidden;
+                    -moz-overflow-Y: hidden;
+                    -o-overflow-Y: hidden;
+                    overflow-y: hidden;
+                    -webkit-animation: fadeIn 1 1s ease-out;
+                    -moz-animation: fadeIn 1 1s ease-out;
+                    -o-animation: fadeIn 1 1s ease-out;
+                    animation: fadeIn 1 1s ease-out;
+                } */
 
 
             .light {
