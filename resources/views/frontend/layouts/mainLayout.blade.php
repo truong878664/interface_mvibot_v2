@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-satellite-dish"></i>
             </div>
             <div class="flex items-center">
-                <h3 class="font-bold">Mvibot</h3>
+                <h3 class="font-bold">Mvibot app</h3>
             </div>
             <div class="message-map-wrapper">
             </div>
