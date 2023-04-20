@@ -37,5 +37,7 @@
 
         <x-dashboard-item route='dashboard.setting.' icon='fa-solid fa-gear' title='Setting' describe='Setting all robot'
             color="#10A19D" />
+            <x-dashboard-item route='dashboard.history' icon='fa-solid fa-clock-rotate-left' title='History' describe='Operation history of all robots'
+            color="#0A4D68" />
     </ul>
 @endsection

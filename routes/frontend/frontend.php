@@ -93,5 +93,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             // $allRobot = Robot::all();
             return view('frontend.pages.hook.hook', compact('title'));
         })->name('hook');
+
+        Route::get('history', function () {
+            $title = 'History';
+            return view('frontend.pages.history.history', compact('title'));
+        })->name('history');
     });
 });
