@@ -3,7 +3,7 @@
     <div class="heading">Mission</div>
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div class="w-full flex flex-wrap">
-            
+
             @php
                 // $type = 'gpio-mission';
                 $color = [
@@ -19,7 +19,8 @@
                 ];
             @endphp
             @foreach ($typeMisison[$type] as $index => $mission)
-                <div class="w-full md:w-1/3 lg:w-1/5 xl:1/6">
+                <div
+                    class="w-full md:w-1/3 lg:w-1/5 xl:1/6 {{ $version === 'new_wave' && ($mission === 'error' || $mission === 'battery') ? 'hidden' : '' }}">
                     <div
                         class=" bg-gradient-to-r {{ $color[$mission] }} w-[calc(100%_-_10px)] h-[120px] rounded-md p-4 mb-4 mx-[5px] btn">
                         <a href="{{ route('dashboard.missions.create-missions.', ['type' => $mission]) }}"

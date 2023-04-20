@@ -31,13 +31,6 @@
             <div
                 class="absolute bg-[#fff] p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center">
                 <div class="flex">
-                    {{-- <select id="" class="bg-transparent outline-none robot-active border rounded-md">
-                        <option value="">Choose Robot</option>
-                        @foreach ($allRobot as $robot)
-                        <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
-                        @endforeach
-                    </select> --}}
-
                     @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-active'])
 
                     <button
@@ -54,13 +47,6 @@
 
                     @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-reset'])
 
-
-                    {{-- <select id="" class="bg-transparent outline-none border rounded-md robot-reset">
-                        <option value="">Choose Robot</option>
-                        @foreach ($allRobot as $robot)
-                            <option value="{{ $robot['name_seri'] }}">{{ $robot['name_seri'] }}</option>
-                        @endforeach
-                    </select> --}}
                     <button class="block btn text-2xl font-bold bg-red-400 py-2 text-[#fff] self-end px-4 rounded-md reset-mission-btn"
                         data-type="{{ $type }}">Reset</button>
                 </div>

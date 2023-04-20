@@ -67,7 +67,7 @@
                     </div>
 
                     <div data-index="2" data-type-mission="trycatch"
-                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
+                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc] {{ $version === 'new_wave' ? 'hidden' : '' }}">
                         <span>Try-catch mission</span>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     </button>
 
                     <button data-index="1" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn {{ $version === 'new_wave' ? 'hidden' : '' }}">
                         <span class="mr-2 text-blue-500">
                             <i class="fa-regular fa-lightbulb"></i>
                         </span>

@@ -34,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
             $moduleGpios = Robot::where('type', 'module_gpio')->get();
             $robotsSlam = DB::table('robot_status')->where('mode', 'slam')->get();
             $robotsNavigation = DB::table('robot_status')->where('mode', 'navigation')->get();
+
+            //app version
+            $version = env('APP_VERSION', 'common');
         } catch (\Illuminate\Database\QueryException $e) {
             $robots = [];
             $moduleGpios = [];
@@ -41,6 +44,13 @@ class AppServiceProvider extends ServiceProvider
             $robotsNavigation = [];
             $allRobots = [];
         }
-        View::share(['robots' => $robots, 'moduleGpios' => $moduleGpios, 'robotsSlam' => $robotsSlam, 'robotsNavigation' => $robotsNavigation, 'allRobots' => $allRobots]);
+        View::share([
+            'robots' => $robots,
+            'moduleGpios' => $moduleGpios,
+            'robotsSlam' => $robotsSlam,
+            'robotsNavigation' => $robotsNavigation,
+            'allRobots' => $allRobots,
+            'version' => $version
+        ]);
     }
 }
