@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $robotsNavigation = DB::table('robot_status')->where('mode', 'navigation')->get();
 
             //app version
-            // $version = env('APP_VERSION', 'common');
+            $version = env('APP_VERSION', 'common');
         } catch (\Illuminate\Database\QueryException $e) {
             $robots = [];
             $moduleGpios = [];
@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
             'robotsSlam' => $robotsSlam,
             'robotsNavigation' => $robotsNavigation,
             'allRobots' => $allRobots,
-            // 'version' => $version
+            'version' => $version
         ]);
     }
 }
