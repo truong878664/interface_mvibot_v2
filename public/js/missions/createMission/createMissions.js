@@ -63,14 +63,20 @@ function getMission(ids, robotActive) {
         .then((data) => {
             const allMission = [];
             data.map((item) => {
-                return allMission.push(
+                if (!item.steps_mission) {
+                    return;
+                }
+
+                allMission.push(
                     `[${item.wake_up ? item.wake_up : ""}${
                         item.stop ? item.stop : ""
                     }*${item.steps_mission ? item.steps_mission : ""}]`
                 );
+                return allMission;
             });
+
             const missionNew = allMission.filter((item) => {
-                return (item !== '[*]');
+                return item !== "[*]";
             });
 
             const mission = missionNew.join("");
@@ -78,6 +84,7 @@ function getMission(ids, robotActive) {
                 toggerMessage("error", "Mission don't have data!");
                 return;
             }
+            
             let topic;
             data[0].type === "normal" &&
                 (topic = `/${robotActive}/mission_normal`);
