@@ -153,14 +153,15 @@ function handleCloneMission() {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
             const missionItem = e.target.closest(".create-misisons-item");
-            const missionItemClone = missionItem.cloneNode(true);
+            
             fetchApi(
                 "/api/mi",
                 "POST",
                 { method: "clone", id: missionId },
                 (data) => {
+                    // console.log(data);
                     location.reload();
-                    console.log(missionItemClone);
+                    // console.log(missionItemClone);
                 }
             );
         };

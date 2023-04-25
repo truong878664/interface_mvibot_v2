@@ -8,9 +8,9 @@
     <ul
         class="absolute top-full text-2xl w-full transition-[max-height] duration-300 item-var-ul {{ $type }}_ul overflow-auto hidden max-h-[200px]">
         @if ($type == 'command_action')
-            <li class="mt-1 text-center rounded-md hover:bg-stone-200 border {{ $type }}_value var-item-value"
+            <li class="mt-1 text-center rounded-md hover:bg-stone-200 border {{ $type }}_value var-item-value bg-[#fff]"
                 type="{{ $type }}" value="=">=</li>
-            <li class="mt-1 text-center rounded-md hover:bg-stone-200 border {{ $type }}_value var-item-value"
+            <li class="mt-1 text-center rounded-md hover:bg-stone-200 border {{ $type }}_value var-item-value bg-[#fff]"
                 type="{{ $type }}" value="==">==</li>
         @endif
     </ul>

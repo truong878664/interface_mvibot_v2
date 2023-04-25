@@ -1,4 +1,4 @@
-<div class="h-full w-full flex flex-col function-item form-footprint function-mission-tab hidden" data-type="footprint">
+<div class="h-full w-full flex flex-col function-item form-footprint function-mission-tab hidden bg-[#fff] p-4" data-type="footprint">
     <div class="flex flex-col mr-[30px]">
         <label for="" class="text-xl">Name function footpint</label>
         <input class="w-[200px] text-xl px-4 py-1 input-reset valid-input" type="text" name="name_footprint" required>
@@ -8,28 +8,28 @@
             <div class="mr-4">
                 <label for="" class="text-xl">X1</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
+                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
                     name="x1_footprint" value="">
             </div>
 
             <div class="mr-4 ">
                 <label for="" class="text-xl">X2</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
+                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
                     name="x2_footprint" value="">
             </div>
 
             <div class="mr-4 ">
                 <label for="" class="text-xl">Y1</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
+                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
                     name="y1_footprint" value="">
             </div>
 
             <div class="mr-4">
                 <label for="" class="text-xl">Y2</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
+                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
                     name="y2_footprint" value="">
             </div>
             <div class="mr-4">

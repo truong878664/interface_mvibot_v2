@@ -2,7 +2,7 @@
 <div class="select-robot-wrapper form-checkbox">
     <input type="hidden" name="" id="current-wake-up" value="{{ $currentWakeUp }}">
     <label class="overlay"></label>
-    <div class="form-wrapper w-[80%] h-[80%] bg-red-500" id="wake_up-wrapper">
+    <div class="form-wrapper w-[70%] h-[70%]" id="wake_up-wrapper">
         @includeIf('frontend.blocks.mission.createMissions.functionTab.gpio', [
             'type' => 'gpio_wake_up',
         ])

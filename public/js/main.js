@@ -30,10 +30,20 @@ $(".delete-message-btn").onclick = () => {
 };
 
 $(".back-history-btn").onclick = (e) => {
-    history.back();
+    const isPageCreateStep = $("#create-step-container");
+    const isPageCreateMission = $("#create-mission");
+    if (isPageCreateStep) {
+        window.location = document.referrer;
+    } else if (isPageCreateMission) {
+        console.log();
+        window.history.go(-3);
+    } else {
+        window.history.back();
+    }
 };
+
 $(".next-history-btn").onclick = (e) => {
-    history.forward();
+    window.history.forward();
 };
 
 window.oncontextmenu = (e) => {

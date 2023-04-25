@@ -61,7 +61,7 @@
                 value="-1">
         </div>
 
-        <div class="relative w-full h-[40px]">
+        <div class="relative w-full h-[50px]">
             <input type="text" value="" name="map" hidden />
             @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', [
                 'type' => 'position',

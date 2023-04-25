@@ -27,7 +27,7 @@ export default function renderDataFunction(data, type) {
             `<div data-id=${item.id} function-id=${item.id} function-type="${
                 item.mode
             }"
-                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc]">
+                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
                 <input type="hidden" value='${JSON.stringify(
                     item
                 )}' class="value-function-item"/>

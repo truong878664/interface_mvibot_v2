@@ -39,7 +39,7 @@
 
         <div class="w-full h-full bg-white flex mt-8 items-center">
             <div class="w-1/2 flex justify-center">
-                <div class="w-1/2">
+                <div class="w-2/3">
                     <h1 class="uppercase font-bold text-[30px] mb-4">About us</h1>
                     <p class="text-3xl">Established in 2001, Maruei Vietnam Precision Co., Ltd., a 100% Japanese-owned
                         company, specializes in precision mechanical components with over 99% of its products serving the

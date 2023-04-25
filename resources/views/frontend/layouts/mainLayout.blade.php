@@ -9,16 +9,17 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-26395517.css">
+    <link rel="stylesheet" href="/build/assets/app-7d0798e3.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
 </head>
+
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
     <style>
         .connection-failed {
             animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
-        
+
         .text-clamp-2 {
             display: block;
             display: -webkit-box;
@@ -28,7 +29,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        </style>
+    </style>
     <header class="main-header">
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed">
@@ -77,7 +78,8 @@
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
             <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
                 value="{{ session('UserName') }}" />
-            <div data-user-name="{{ session('UserName') }}" key="{{ $key }}" style="background-color: {{$color}};"
+            <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
+                style="background-color: {{ $color }};"
                 class="avatar-user transparent flex justify-center items-center bg-avatar relative after:content-[attr(key)] after:absolute after:text-[24px] after:font-bold after:uppercase">
                 <span class="text-[20px] font-[300] uppercase avatar-img-key"></span>
                 @if (session('TypeUser') == 'admin')
@@ -131,8 +133,9 @@
         <button
             class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i
                 class="fa-solid fa-angle-left"></i></button>
+
         <button
-            class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 btn next-history-btn"><i
+            class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn next-history-btn"><i
                 class="fa-solid fa-angle-right"></i></button>
 
     </div>

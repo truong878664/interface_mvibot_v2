@@ -1,5 +1,6 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 import { loadDataFunction } from "../handleTypeMission.js";
+import resetSleep from "./sleep/resetSleep.js";
 
 export default function saveFunctionItem(type, data) {
     loading();
@@ -15,6 +16,7 @@ export default function saveFunctionItem(type, data) {
         .then((data) => {
             $(".function-item-form-wrapper").click();
             loadDataFunction();
+            resetSleep()
             loaded();
         })
         .catch(function (res) {

@@ -1,4 +1,4 @@
-<div class="hidden function-item function-mission-tab" data-type="variable">
+<div class="hidden function-item function-mission-tab relative rounded-md bg-[#fff] p-4 pb-[60px]" data-type="variable">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function variable</label>
         <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_variable valid-input" type="text" name="" required>
@@ -15,7 +15,7 @@
 
     <div class="flex flex-col m-4">
         <label for="" class="text-xl">Command action</label>
-        <div class="flex mt-4">
+        <div class="flex mt-4 z-[11]">
             @include('frontend.blocks.mission.createMissions.functionTab.tabVar.nameVar', [
                 'type' => 'name_variable',
             ])

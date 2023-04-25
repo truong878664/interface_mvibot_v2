@@ -26,18 +26,18 @@ export default function createNameVariable() {
 }
 
 export function updateVar() {
-    const itemKeyboard = `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border focus_value_value var-item-value" type="focus_value" value="keyboard"><i class="fa-regular fa-keyboard"></i></li>`;
+    const itemKeyboard = `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border focus_value_value var-item-value bg-[#fff]" type="focus_value" value="keyboard"><i class="fa-regular fa-keyboard"></i></li>`;
     fetchCustom("/api/var", "GET", (data) => {
         const htmlNameVariable = [];
         const htmlFocusValue = [];
         data.reverse();
         data.map((item) => {
             htmlNameVariable.push(
-                `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border name_variable_value var-item-value"
+                `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border name_variable_value var-item-value bg-[#fff] z-10"
                     type="name_variable" value="${item.name_var}">${item.name_var}</li>`
             );
             htmlFocusValue.push(
-                `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border focus_value_value var-item-value"
+                `<li class="mt-1 text-center rounded-md hover:bg-stone-200 border focus_value_value var-item-value bg-[#fff] z-10"
                     type="focus_value" value="${item.name_var}">${item.name_var}</li>`
             );
             return { htmlNameVariable, htmlFocusValue };

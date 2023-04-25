@@ -39,8 +39,8 @@ export default function confirmationForm({
     cancelFormAgainBtn.addEventListener("click", hiddenFormAgain);
     submitFormAgainBtn.addEventListener("click", () => {
         callback();
+        hiddenFormAgain()
     });
-    formSubmitAgain.addEventListener("click", hiddenFormAgain);
 
     function hiddenFormAgain() {
         formSubmitAgain.remove();

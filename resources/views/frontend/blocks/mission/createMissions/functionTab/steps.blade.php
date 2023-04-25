@@ -124,10 +124,10 @@
             </div>
             <div class="flex flex-col lg:flex-row mt-8 text-2xl font-bold">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
-                <label for="wake-up" data-type-mission="{{ $itemRender->type }}"
+                <label for="wake-up" data-ws="wake_up" data-type-mission="{{ $itemRender->type }}" id="wake_up-btn"
                     class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden">Wake
                     up</label>
-                <label for="stop" data-type-mission="{{ $itemRender->type }}"
+                <label for="stop" data-ws="stop" data-type-mission="{{ $itemRender->type }}" id="stop-btn"
                     class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden">Stop</label>
                 <label for="select-robot"
                     class="send-mission-btn-front mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn data-[status-send=disabled]:opacity-50 data-[status-send=disabled]:pointer-events-none">Send</label>

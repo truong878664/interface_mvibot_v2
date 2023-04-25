@@ -16,7 +16,6 @@ export default function activeModule({ type }) {
                 "hidden",
                 !isModule
             );
-
             showLight({ type, isModule });
         };
     });
@@ -32,4 +31,17 @@ export function saveData({ type }) {
             })
             .catch((error) => console.log(error));
     };
+}
+
+export function handleShowWakeUpStop() {
+    const wakeUpBtn = document.querySelector("#wake_up-btn");
+    const stopBtn = document.querySelector("#stop-btn");
+    wakeUpBtn.addEventListener("click", showWs);
+    stopBtn.addEventListener("click", showWs);
+    function showWs(e) {
+        const type = e.target.dataset.ws;
+        showLight({ type, isModule: false, isReset: true });
+        $(".wakeup-module-btn[data-module=gpio]")?.click();
+        $(".stop-module-btn[data-module=gpio]")?.click();
+    }
 }

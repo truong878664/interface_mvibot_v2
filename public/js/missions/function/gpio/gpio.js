@@ -1,6 +1,7 @@
 import handleChangeTypeGpio from "./changeTypeGpio.js";
 import createGpio from "./createGpio.js";
 import createGpioModule from "./createGpioModule.js";
+import reset from "./reset.js";
 import { handleClickSetLightGpio } from "./setLightGpio.js";
 
 export const dataGpio = {
@@ -17,4 +18,5 @@ export default function gpio() {
     createGpioModule();
     handleChangeTypeGpio();
     handleClickSetLightGpio();
+    reset()
 }

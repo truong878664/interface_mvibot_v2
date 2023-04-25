@@ -12,6 +12,7 @@ import sound from "./function/sound/sound.js";
 import variable from "./function/variable/variable.js";
 import wakeUp from "./wakeUpStop/wakeUp.js";
 import stop from "./wakeUpStop/stop.js";
+import { handleShowWakeUpStop } from "./wakeUpStop/activeModule.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -29,6 +30,8 @@ function start() {
     sleep();
     sound();
     variable();
+    
+    handleShowWakeUpStop();
     wakeUp();
     stop();
 }

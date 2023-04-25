@@ -5,5 +5,5 @@ export default function stop() {
     const option = { type: "stop" };
     activeModule(option);
     saveData(option);
-    showLight({ ...option, isModule: false, isReset: false });
+    // showLight({ ...option, isModule: false, isReset: false });
 }

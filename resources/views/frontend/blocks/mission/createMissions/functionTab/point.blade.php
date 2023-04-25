@@ -1,3 +1,24 @@
+<style>
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .fullscreen .full {
+        display: none;
+    }
+
+    .fullscreen .hide {
+        display: block;
+    }
+</style>
 <div class="hidden function-item w-full h-full point-function-item function-mission-tab" data-type="position">
     <div class="w-full h-full overflow-auto relative">
         <div class="w-full h-full bg-[#ccc] overflow-hidden rounded-md map-position-wrapper">
@@ -39,25 +60,5 @@
         {{-- form --}}
         @include('frontend.blocks.mission.createMissions.functionTab.tabPoint.form')
     </div>
-    <style>
-        .fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .hide {
-            display: none;
-        }
-
-        .fullscreen .full {
-            display: none;
-        }
-
-        .fullscreen .hide {
-            display: block;
-        }
-    </style>
+    
 </div>

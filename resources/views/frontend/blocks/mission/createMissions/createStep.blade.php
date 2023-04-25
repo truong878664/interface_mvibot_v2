@@ -45,7 +45,7 @@
     }
 </style>
 
-<div class="w-full h-full flex-col flex justify-start relative ">
+<div class="w-full h-full flex-col flex justify-start relative" id="create-step-container">
     <div class="w-full h-full flex flex-col">
 
         <div class="w-full md:flex h-[calc(60%_-_2.5px)] mb-1 min-h-[300px]">
@@ -207,7 +207,7 @@
 
         <div
             class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center function-item-form-wrapper hidden">
-            <div class="w-[80%] h-[80%]  bg-[#fff] rounded-md p-4 function-item-form relative">
+            <div class="w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden flex justify-center items-center">
                 @include('frontend.blocks.mission.createMissions.functionTab.gpio', [
                     'type' => 'gpio',
                 ])

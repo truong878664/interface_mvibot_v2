@@ -14,7 +14,7 @@
                 class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
         </div>
     @else
-        <div class="absolute right-2 bottom-2 flex data-[valid=disable]:pointer-events-none data-[valid=disable]:opacity-70"
+        <div class="absolute right-6 bottom-6 flex data-[valid=disable]:pointer-events-none data-[valid=disable]:opacity-70  z-10"
             data-valid="">
             <div class="update-btn-wrapper mr-2 {{ $type . '-update-btn-wrapper' }} hidden">
                 <button

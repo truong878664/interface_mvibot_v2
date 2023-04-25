@@ -1,4 +1,4 @@
-<div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col"
+<div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
     data-type="{{ $type }}">
     <div class="flex mb-4">
         @if ($type != 'gpio_wake_up' && $type != 'gpio_stop')
@@ -13,8 +13,6 @@
                 {{-- <input
                     class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     type="text" name="name_gpio" required> --}}
-
-
                 <select
                     class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     name="name_gpio" id="">
@@ -54,11 +52,11 @@
                 </div>
                 <div class="flex">
                     <button data-type-ws-btn="gpio_stop" data-module="gpio"
-                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] active">
+                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn active">
                         Stop normal
                     </button>
                     <button data-type-ws-btn="gpio_stop" data-module="gpio_module"
-                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff]">
+                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn">
                         Stop module
                     </button>
                 </div>
@@ -106,12 +104,14 @@
                         <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                     @endforeach
                 </select>
-
-
                 {{-- <input
-                    class="ml-2 text-xl transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
-                    type="text" data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" /> --}}
+            class="ml-2 text-xl transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
+            type="text" data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" /> --}}
             @endif
+            <button data-type="{{ $type }}"
+                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] reset-gpio-btn">
+                <i class="fa-solid fa-rotate"></i>
+            </button>
 
         </div>
         <div class="flex-1 max-h-[calc(100%_-_80px)] overflow-hidden">
