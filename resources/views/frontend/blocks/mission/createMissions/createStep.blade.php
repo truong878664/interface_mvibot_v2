@@ -116,7 +116,7 @@
                     <button data-index="2" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-yellow-500">
-                            <i class="fa-solid fa-arrows-to-dot"></i>
+                            <i class="fa-solid fa-arrows-left-right-to-line"></i>
                         </span>
                         <span>
                             Footprint
@@ -126,7 +126,7 @@
                     <button data-index="3" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-sky-500">
-                            <i class="fa-solid fa-map-pin"></i>
+                            <i class="fa-solid fa-arrows-up-to-line"></i>
                         </span>
                         <span>
                             Marker
@@ -136,7 +136,7 @@
                     <button data-index="4" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sleep-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-red-600">
-                            <i class="fa-solid fa-mattress-pillow"></i>
+                            <i class="fa-solid fa-bed"></i>
                         </span>
                         <span>
                             Sleep
@@ -166,7 +166,7 @@
                     <button data-index="7" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex variable-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-orange-600">
-                            <i class="fa-solid fa-square-root-variable"></i>
+                            <i class="fa-solid fa-dollar-sign"></i>
                         </span>
                         <span>
                             Variable

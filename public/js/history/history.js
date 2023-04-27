@@ -39,6 +39,7 @@ function handleHistory(e) {
         }
     );
 }
+
 function renderLog(data) {
     const lineLog = data.split(BR_LINE);
     const htmlLog = [];

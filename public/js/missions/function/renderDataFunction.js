@@ -19,7 +19,7 @@ export default function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
 
     const listFunction = JSON.parse(JSON.stringify(data));
-    
+
     data.map((item, index) => {
         const dataFunctionDetail = dataRenderFunction(listFunction, index);
 

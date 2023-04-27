@@ -7,7 +7,7 @@ export default function showAllPosition() {
     $(".show-all-map-btn").onclick = (e) => {
         handleShowFormFunction(true, "position");
         showListPosition(true);
-    
+
         const mapShowAll = new Promise((resolve, reject) => {
             const { viewer, tfClient } = createMapPosition();
             resolve({ viewer, tfClient });
@@ -29,11 +29,12 @@ export default function showAllPosition() {
                         `);
                         return htmlListPoint;
                     });
-                    $("[data-list-position]").innerHTML = htmlListPoint.join("");
+                    $("[data-list-position]").innerHTML =
+                        htmlListPoint.join("");
                     return data;
                 })
                 .then((data) => {
-                    const NUMBER_PUB = 5
+                    const NUMBER_PUB = 5;
                     data.forEach((position) => {
                         for (let i = 0; i < NUMBER_PUB; i++) {
                             showPoint(
@@ -43,7 +44,7 @@ export default function showAllPosition() {
                                 tfClient,
                                 `point_pub_${position.id}`
                             );
-    
+
                             showPose(
                                 position.x,
                                 position.y,
@@ -59,7 +60,7 @@ export default function showAllPosition() {
                 });
         });
     };
-    
+
     function showPoint(x, y, viewer, tfClient, nameTopic = "/point_pub") {
         new ROS3D.Point({
             ros: ros,
@@ -71,7 +72,7 @@ export default function showAllPosition() {
             throttle_rate: 1000,
             radius: 0.1,
         });
-    
+
         const point_pub = new ROSLIB.Topic({
             ros: ros,
             name: nameTopic,
@@ -90,7 +91,7 @@ export default function showAllPosition() {
         });
         point_pub.publish(point_msg);
     }
-    
+
     function showPose(
         x,
         y,
@@ -111,7 +112,7 @@ export default function showAllPosition() {
             shaftDiameter: 0.1,
             length: 2,
         });
-    
+
         const pose_pub = new ROSLIB.Topic({
             ros: ros,
             name: nameTopic,
@@ -128,7 +129,7 @@ export default function showAllPosition() {
                     y: y,
                     z: 0,
                 },
-    
+
                 orientation: {
                     x: 0,
                     y: 0,

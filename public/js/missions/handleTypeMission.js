@@ -47,7 +47,7 @@ handleAddMissionIfelse();
 handleAddMissionTrycatch();
 
 export function loadDataFunction() {
-    loading()
+    loading();
     const dataSort = localStorage.getItem("sortFunction");
     let typeSort2, sort2;
     if (dataSort) {
@@ -83,7 +83,7 @@ export function loadDataFunction() {
             handleAddStep();
             handleEditFunctionType();
             handleDeleteFunctionType();
-            loaded()
+            loaded();
         })
         .then(() => {
             deleteMultiFunction();

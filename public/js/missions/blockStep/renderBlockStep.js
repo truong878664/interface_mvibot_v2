@@ -4,6 +4,7 @@ import handleDeleteBlockMission from "./handleDeleteBlockStep.js";
 import handleEditMission from "./handleEditMission.js";
 import handleMoveBlockStep from "./handleMoveBlockStep.js";
 import renderStepItem from "./renderStepItem.js";
+import showAction from "./showAction.js";
 import { showAllStep, showStep } from "./showStep.js";
 
 export default function renderBlockStep() {
@@ -18,11 +19,11 @@ export default function renderBlockStep() {
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
 
-            const BUTTON_HANDLE = `<button class="step-item text-[#333] border border-[#333] bg-white btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
-                            <button class="step-item text-[#333] border border-[#333] bg-white btn move-block-step-btn move-up-step-btn" type="up"><i class="fa-solid fa-angle-up"></i></button>
-                            <button class="step-item text-[#333] border border-[#333] bg-white btn move-block-step-btn move-down-step-btn" type="down"><i class="fa-solid fa-angle-down"></i></button>
-                            <button class="step-item text-[#333] border border-[#333] bg-white btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
-                            <button class="step-item text-[#333] border border-[#333] bg-white btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
+            const BUTTON_HANDLE = `<button class="step-item text-[#333] border border-[#333] bg-white group-data-[action-step=hidden]/steps-wrapper:hidden  btn show-step-btn"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="step-item text-[#333] border border-[#333] bg-white group-data-[action-step=hidden]/steps-wrapper:hidden  btn move-block-step-btn move-up-step-btn" type="up"><i class="fa-solid fa-angle-up"></i></button>
+                                    <button class="step-item text-[#333] border border-[#333] bg-white group-data-[action-step=hidden]/steps-wrapper:hidden  btn move-block-step-btn move-down-step-btn" type="down"><i class="fa-solid fa-angle-down"></i></button>
+                                    <button class="step-item text-[#333] border border-[#333] bg-white group-data-[action-step=hidden]/steps-wrapper:hidden  btn edit-step-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="step-item text-[#333] border border-[#333] bg-white group-data-[action-step=hidden]/steps-wrapper:hidden  btn delete-mission-btn"><i class="fa-solid fa-xmark"></i></button>`;
 
             const ICON_FRONT = `<span class="cursor-pointer"><i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical ml-1"></i></span>`;
 
@@ -128,6 +129,7 @@ export default function renderBlockStep() {
             scrollTop(".steps-wrapper");
             handleDeleteBlockMission(shortHandMissionList);
             showStep();
+            showAction();
             showAllStep();
             handleEditMission();
             handleMoveBlockStep(shortHandMissionList);

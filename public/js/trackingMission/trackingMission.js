@@ -101,6 +101,12 @@ function changeTopic() {
 
             clearInterval(displayPathFs);
         }
+
+        // // console.log(laser[0].topicName);
+        // const selectLaser =  laser.find((item) => {
+        //     return item.topicName === `/${robotActive}/laser/scan`
+        // })
+        // console.log(selectLaser);
     };
 }
 

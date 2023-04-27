@@ -21,8 +21,8 @@
     --orange-color: #f5b933;
     --black-color: #fff;
     --green-color: #45a5ba;
-    --main-font: "ubuntu-mono", "Arial";
-    --number-font: "ubuntu-mono", "Arial";
+    --main-font:  "ubuntu-mono","Courier New", "Arial";
+    --number-font:  "ubuntu-mono","Courier New", "Arial";
     --background-color: #f5f5f5;
 }
 html {

@@ -26,22 +26,22 @@ class FunctionController extends Controller
     public function index()
     {
         $mapActive = Map::first();
-        if($mapActive) {
-
-            $data = [
-                'footprint' => MissionFootprint::all(),
-                'gpio' => MissionGpio::all(),
-                'marker' => MissionMarker::all(),
-                'sleep' => MissionSleep::all(),
-                'position' => MissionPosition::where('map', $mapActive->name_map_active)->get(),
-                'gpio_module' => MissionGpioModule::all(),
-                'variable' => MissionVariable::all(),
-                'sound' => MissionSound::all(),
-            ];
-            return $data;
-        } else {
-            return ['message' => 'dont have map'];
-        }
+        $nameMapActive = $mapActive ?$mapActive->name_map_active : "no_map";
+        // if ($mapActive) {
+        $data = [
+            'footprint' => MissionFootprint::all(),
+            'gpio' => MissionGpio::all(),
+            'marker' => MissionMarker::all(),
+            'sleep' => MissionSleep::all(),
+            'position' => MissionPosition::where('map', $nameMapActive)->get(),
+            'gpio_module' => MissionGpioModule::all(),
+            'variable' => MissionVariable::all(),
+            'sound' => MissionSound::all(),
+        ];
+        return $data;
+        // } else {
+        // return ['message' => 'dont have map', 'success' => false];
+        // }
     }
 
     /**
@@ -69,7 +69,7 @@ class FunctionController extends Controller
         foreach ($functions as $function) {
             $newFunction = $function;
             unset($newFunction->id);
-            $newFunction->name= $function->name . "_copy";
+            $newFunction->name = $function->name . "_copy";
             DB::table($table)->insert((array) $newFunction);
         };
         return ['message' => 'copy successfully!'];
@@ -121,13 +121,13 @@ class FunctionController extends Controller
 
 
         $functions = DB::table($function)->whereIn('id', $deletes)->get();
-        
+
         foreach ($functions as $function2) {
             $itemName =  "$function2->mode#$function2->name#$function2->id";
             $this->updateStepDelete($itemName);
         }
 
         DB::table($function)->whereIn('id', $deletes)->delete();
-        return ['message'=> 'delete function item successfully!', 'deleted' => true];
+        return ['message' => 'delete function item successfully!', 'deleted' => true];
     }
 }

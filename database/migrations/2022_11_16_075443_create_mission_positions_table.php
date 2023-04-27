@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->string('color_position');
                 $table->string('mode_position');
                 $table->string('mode_child');
-                $table->string('map');
+                $table->string('map')->default('no_map');
                 $table->timestamps();
             });
         }

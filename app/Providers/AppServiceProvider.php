@@ -43,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $robotsSlam = [];
             $robotsNavigation = [];
             $allRobots = [];
+            $version = "";
         }
         View::share([
             'robots' => $robots,

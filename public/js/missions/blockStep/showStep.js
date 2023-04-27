@@ -17,10 +17,10 @@ export function showStep() {
 }
 
 export function showAllStep() {
-    $(".check-show-step").checked =
+    $("#check-show-step").checked =
         localStorage.getItem("isShowAllStep") === "true";
 
-    if ($(".check-show-step").checked) {
+    if ($("#check-show-step").checked) {
         $$(".step-hidden").forEach((element) => {
             element.classList.remove("hidden");
         });
@@ -38,7 +38,7 @@ export function showAllStep() {
         });
     }
 
-    $(".check-show-step").onchange = (e) => {
+    $("#check-show-step").onchange = (e) => {
         if (e.target.checked) {
             $$(".step-hidden").forEach((element) => {
                 element.classList.remove("hidden");

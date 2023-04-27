@@ -20,15 +20,15 @@
         </div>
     </div>
     <div class="joystick">
-        <div class="h-[160px] w-[160px] md:w-[220px] md:h-[220px] lg:h-[300px] lg:w-[300px]" hidden></div>
+        {{-- <div class="h-[160px] w-[160px] md:w-[220px] md:h-[220px] lg:h-[300px] lg:w-[300px]" ></div> --}}
         @include('frontend.blocks.joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
     </div>
     <div class="absolute right-3 top-3">
         <button
-            class=" btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold stop-mission-btn">Stop</button>
+            class=" btn bg-red-500 text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold stop-mission-btn">Stop</button>
         <button
-            class=" btn bg-green-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold continue-mission-btn">Continue</button>
+            class=" btn bg-green-500 text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold continue-mission-btn">Continue</button>
         <button
-            class=" btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">Refresh</button>
+            class=" btn bg-main text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">Refresh</button>
     </div>
 </div>

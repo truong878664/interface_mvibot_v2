@@ -17,8 +17,9 @@ class RobotSeeder extends Seeder
     {
         DB::table('my_robot')->insert(
             [
-                'name_seri' => 'Mb23_946'
-            ]
+                'name_seri' => 'Mb23_946',
+                'type' => 'robot'
+            ],
         );
 
         DB::table('input_user_status')->insert(

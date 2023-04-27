@@ -50,6 +50,8 @@
         overflow: hidden;
         display: none;
         z-index: 1;
+        max-height: 300px;
+        overflow: auto;
     }
 
     .dropdown.active .options {
@@ -57,9 +59,15 @@
     }
 
     .dropdown .options div {
-        padding: 12px 20px;
+        padding: 20px 20px;
         cursor: pointer;
         color: #000;
+        font-size: 17px;
+    }
+
+    .dropdown .options div:last-child {
+        padding: 12px 12px;
+        text-align: center;
     }
 
     .dropdown .options div:hover {
@@ -70,7 +78,6 @@
     .dropdown .options div ion-icon {
         position: relative;
         top: 4px;
-
         margin-right: 10px;
     }
 </style>
@@ -109,12 +116,14 @@
         </div>
         <div class="options">
             @foreach ($robotArray as $robot)
-                <div onclick="show('{{ $robot['name_seri'] }}', this)">
+                <div class="border-b" onclick="show('{{ $robot['name_seri'] }}', this)">
                     <i class="fa-solid fa-caret-right mr-4 text-[#0f6cbd]"></i>
                     {{ $robot['name_seri'] }}
                 </div>
             @endforeach
-            <div onclick="show('', this)"> - {{ $title }} - </div>
+            <div class="px-2 py-2" onclick="show('', this)">
+                {{ $title }}
+            </div>
         </div>
     </div>
 </div>
@@ -130,8 +139,6 @@
         dropdown.onclick = (e) => {
             e.preventDefault()
             dropdown.classList.toggle("active")
-
         }
-
     });
 </script>

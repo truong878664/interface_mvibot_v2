@@ -19,7 +19,6 @@ const $$ = document.querySelectorAll.bind(document);
 
 function start() {
     nextTabFunction();
-
     sendMission();
 
     handleCreateFunction();

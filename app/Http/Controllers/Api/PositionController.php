@@ -20,7 +20,11 @@ class PositionController extends Controller
     public function index()
     {
         $mapActive = Map::first();
-        return MissionPosition::where('map', $mapActive->name_map_active)->get();
+        if($mapActive) {
+            return MissionPosition::where('map', $mapActive->name_map_active)->get();
+        } else {
+            return [];
+        }
     }
 
     /**

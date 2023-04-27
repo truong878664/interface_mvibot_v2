@@ -14,14 +14,14 @@ export default function highlineStepItem() {
             const modeStep = stepItem.dataset.mode;
             const functionList = $(`.function-list-item-${modeStep}`);
 
-            $(`.${modeStep}-function-btn`).click();
+            $(`.${modeStep}-function-btn`)?.click();
 
-            const itemActive = functionList.querySelector(
+            const itemActive = functionList?.querySelector(
                 `[function-id="${idStep}"]`
             );
 
-            itemActive.classList.add("highline");
-            itemActive.scrollIntoView({ behavior: "smooth" });
+            itemActive?.classList.add("highline");
+            itemActive?.scrollIntoView({ behavior: "smooth" });
 
             clearTimeout(timeOutDeleteHighline);
             itemHighline?.classList.remove("highline");

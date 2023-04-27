@@ -191,7 +191,7 @@ export default function getDataFunction(typeFunction) {
                 color_position: color_position.value,
                 mode_position: mode_position_value,
                 mode_child: mode_child.value,
-                map: map.innerText,
+                map: map.innerText ? map.innerText : "no_map",
                 mode: "position",
             };
             break;
