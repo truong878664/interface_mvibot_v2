@@ -17,7 +17,6 @@
         </div>
         <div class="absolute top-4 right-4 justify-between z-30 flex flex-row-reverse ">
             <div class="flex">
-
                 <button data-id="{{ $itemMission->id }}"
                     class="rounded-full ml-2 bg-[#fff] {{ $colorButton[$type] }} text-[15px] w-[30px] h-[30px] flex items-center justify-center btn delete-mission-btn"><i
                         class="fa-regular fa-trash-can"></i></button>

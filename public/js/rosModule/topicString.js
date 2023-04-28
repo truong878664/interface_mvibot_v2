@@ -10,5 +10,6 @@ export default function publishTopicString(nameTopic, data) {
         data: `${data}`,
     });
 
+    console.log(nameTopic);
     topic.publish(topicData);
 }
