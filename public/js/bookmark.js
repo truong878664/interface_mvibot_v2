@@ -38,7 +38,8 @@ function handleAddBookmark() {
         const nameBookmarkChange = nameBookmark
             .trim()
             .toLowerCase()
-            .replaceAll("-", "_").replaceAll(" ", "_")
+            .replaceAll("-", "_")
+            .replaceAll(" ", "_");
         console.log();
         const dataBookmark = {
             color: "#" + Math.floor(Math.random() * 16777215).toString(16),
@@ -83,22 +84,22 @@ function renderBookmark(data) {
 
     data?.map((item) => {
         htmlBookmark.push(
-            `
-                <li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md">
-                <a href="${
-                    origin + item.link
-                }" class="flex flex-col items-center h-full">
-                    <div class="leading-[0px] icon-bookmark" style="color:${item.color}">
-                        <i class="${item.icon} drop-shadow-[0_5px_5px_#d6d6d6]"></i>
-                    </div>
-                    <div class="w-full flex-1 flex justify-center items-center">
-                        <p class="text-base text-center text-clamp-2">${
-                            item.name
-                        }</p>
-                    </div>
-                </a>
-                </li>
-                `
+            `<li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md">
+            <a href="${
+                origin + item.link
+            }" class="flex flex-col items-center h-full">
+                <div class="leading-[0px] icon-bookmark" style="color:${
+                    item.color
+                }">
+                    <i class="${item.icon} drop-shadow-[0_5px_5px_#d6d6d6]"></i>
+                </div>
+                <div class="w-full flex-1 flex justify-center items-center">
+                    <p class="text-base text-center text-clamp-2">${
+                        item.name
+                    }</p>
+                </div>
+            </a>
+            </li>`
         );
 
         return htmlBookmark;

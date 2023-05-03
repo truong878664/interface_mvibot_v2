@@ -18,8 +18,6 @@ function connectionFailed() {
 
 activeNabBar();
 
-
-
 function activeNabBar() {
     const currentPathname = window.location.pathname.replace("/", "");
     let currentPage;
@@ -48,9 +46,9 @@ xhttp.onload = function () {
 xhttp.open("GET", "/dashboard/map/map-active", true);
 xhttp.send();
 
-
 function robotActive() {
     return localStorage.getItem("robotActive");
 }
 
 export { connected, connectionFailed, robotActive };
+
