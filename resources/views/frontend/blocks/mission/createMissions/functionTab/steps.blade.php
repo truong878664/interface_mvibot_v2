@@ -85,8 +85,6 @@
             display: block;
         }
 
-        .sleep-edit {}
-
         .disabled {
             pointer-events: none;
             opacity: 0.8;
@@ -130,10 +128,10 @@
             <div class="flex flex-col lg:flex-row mt-8 text-2xl font-bold">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
                 <label for="wake-up" data-ws="wake_up" data-type-mission="{{ $itemRender->type }}" id="wake_up-btn"
-                    class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden">Wake
+                    class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Wake
                     up</label>
                 <label for="stop" data-ws="stop" data-type-mission="{{ $itemRender->type }}" id="stop-btn"
-                    class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error]:hidden">Stop</label>
+                    class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Stop</label>
                 <label for="select-robot"
                     class="send-mission-btn-front mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn data-[status-send=disabled]:opacity-50 data-[status-send=disabled]:pointer-events-none">Send</label>
             </div>
@@ -141,17 +139,15 @@
             <div class="select-robot-wrapper form-checkbox">
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
-                    <div class="">
 
-                    </div>
-                    @if ($itemRender->type === 'gpio')
+                    @if ($itemRender->type === 'normal' || $itemRender->type === 'error-robot' || $itemRender->type === 'battery')
                         @include('frontend.blocks.selectRobot', [
-                            'type' => 'module_gpio',
+                            'type' => 'robot',
                             'id' => 'select-robot-option',
                         ])
-                    @else
+                    @elseif($itemRender->type === 'gpio' || $itemRender->type === 'error-gpio')
                         @include('frontend.blocks.selectRobot', [
-                            'type' => 'all_robot',
+                            'type' => 'module_gpio',
                             'id' => 'select-robot-option',
                         ])
                     @endif

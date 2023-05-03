@@ -5,8 +5,15 @@ export default function handleResetMission() {
     const resetMissionBtn = $(".reset-mission-btn");
     resetMissionBtn.onclick = (e) => {
         const type = e.target.dataset.type;
-        const typeTranslate = type === "gpio" ? "normal" : type;
+        const typeTranslate =
+            type === "gpio"
+                ? "normal"
+                : type === "error-robot" || type === "error-gpio"
+                ? "error"
+                : type;
+
         const robotReset = $("#robot-reset")?.value;
+
         if (!robotReset) {
             toggerMessage("error", "Please choose robot to reset!");
             return;

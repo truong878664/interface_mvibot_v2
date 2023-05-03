@@ -55,10 +55,10 @@ function getMission(ids, robotActive) {
             }
 
             let topic;
-            data[0].type === "normal" || data[0].type === "gpio"  &&
+            (data[0].type === "normal" || data[0].type === "gpio") &&
                 (topic = `/${robotActive}/mission_normal`);
 
-            data[0].type === "error" &&
+            (data[0].type === "error-robot" || data[0].type === "error-gpio") &&
                 (topic = `/${robotActive}/mission_error`);
 
             data[0].type === "battery" &&

@@ -121,7 +121,7 @@
                     {{ $robot['name_seri'] }}
                 </div>
             @endforeach
-            <div class="px-2 py-2" onclick="show('', this)">
+            <div class="px-2 py-2 font-bold !text-2xl" onclick="show('', this)">
                 {{ $title }}
             </div>
         </div>

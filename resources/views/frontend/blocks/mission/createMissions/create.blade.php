@@ -1,7 +1,19 @@
 @php
-    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500', 'error' => 'from-red-500 to-red-600', 'battery' => 'from-[#0f6cbd] to-[#227dcd]', 'gpio' => 'from-[#FFB84C] to-[#F0A04B]'];
-    $colorButton = ['normal' => 'text-green-500', 'error' => 'text-red-800', 'battery' => 'text-[#0f6cbd]', 'gpio' => 'text-[#F99417]'];
-    $colorBg = ['normal' => 'bg-green-400', 'error' => 'bg-red-400', 'battery' => 'bg-blue-400', 'gpio' => 'bg-yellow-400'];
+    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500',
+     'error-robot' => 'from-red-500 to-red-600',
+     'error-gpio' => 'from-red-500 to-red-600',
+     'battery' => 'from-[#0f6cbd] to-[#227dcd]',
+     'gpio' => 'from-[#FFB84C] to-[#F0A04B]'];
+    $colorButton = ['normal' => 'text-green-500', 
+    'error-robot' => 'text-red-800', 
+    'error-gpio' => 'text-red-800', 
+    'battery' => 'text-[#0f6cbd]', 
+    'gpio' => 'text-[#F99417]'];
+    $colorBg = ['normal' => 'bg-green-400', 
+    'error-robot' => 'bg-red-400', 
+    'error-gpio' => 'bg-red-400', 
+    'battery' => 'bg-blue-400', 
+    'gpio' => 'bg-yellow-400'];
 @endphp
 
 @foreach ($missions as $index => $itemMission)

@@ -2,25 +2,33 @@ import { $, toggerMessage } from "../main.js";
 import subscribeTopic from "./subscribeTopic.js";
 
 export default function topicsListening() {
-    const allRobot = JSON.parse($('#all-my-robots')?.value);
-   
+    const allRobot = JSON.parse($("#all-my-robots")?.value);
+
     if (allRobot) {
         for (let i = 0; i < allRobot.length; i++) {
             const name_seri = allRobot[i].name_seri;
             //sub mission
-            const missionTopic = ['mission_normal','mission_error','mission_battery']
-            for (let i = 0; i < missionTopic.length ; i++) {
+            const missionTopic = [
+                "mission_normal",
+                "mission_error",
+                "mission_battery",
+            ];
+            for (let i = 0; i < missionTopic.length; i++) {
                 subscribeTopic(
                     `/${name_seri}/${missionTopic[i]}`,
                     "std_msgs/String",
                     (data, name) => {
                         if (data.data) {
+                            const amountMission =
+                                data.data.split("][").length || 1;
+
+                            console.log(data);
+
                             toggerMessage(
                                 "success",
-                                `The robot ${name_seri} has received 1 mission!`
+                                `The robot ${name_seri} has received ${amountMission} mission! - Topic: ${missionTopic[i]}`
                             );
                         }
-                        console.log(data);
                     }
                 );
             }
@@ -33,8 +41,10 @@ export default function topicsListening() {
                     if (data.data == 0) {
                         toggerMessage("success", `Robot ${name_seri}: stopped`);
                     } else if (data.data == 1) {
-                        
-                        toggerMessage("success", `Robot ${name_seri}: continued`);
+                        toggerMessage(
+                            "success",
+                            `Robot ${name_seri}: continued`
+                        );
                     }
                     console.log(data);
                 }
@@ -45,9 +55,15 @@ export default function topicsListening() {
                 "std_msgs/String",
                 (data) => {
                     if (data.data == 1) {
-                        toggerMessage("success", `Robot ${name_seri}: Shutdown success`);
+                        toggerMessage(
+                            "success",
+                            `Robot ${name_seri}: Shutdown success`
+                        );
                     } else if (data.data == 2) {
-                        toggerMessage("success", `Robot ${name_seri}: Reboot success`);
+                        toggerMessage(
+                            "success",
+                            `Robot ${name_seri}: Reboot success`
+                        );
                     }
                     console.log(data);
                 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\Mi;
 use App\Models\backend\Missions;
 use App\Models\backend\Stop;
 use App\Models\backend\TypeMission;
@@ -46,10 +45,7 @@ class MiController extends Controller
             case 'clone':
                 $idMission = $request->id;
                 $data = (Missions::where('id', $idMission)->first());
-                // unset($data['id'], $data['updated_at'], $data['created_at']);
-                // return ($data);
-
-                $data2 = [
+                $dataClone = [
                     "mission_shorthand" => $data->mission_shorthand,
                     "name" => $data->name . "(copy)",
                     "steps_mission" => $data->steps_mission,
@@ -57,26 +53,14 @@ class MiController extends Controller
                     "stop" => $data->stop,
                     "wake_up" => $data->wake_up,
                     "type" => $data->type,
-                    "created_ad" => $data->created_at,
-                    'updated_at' => $data->updated_ats
                 ];
 
-                $this->missionClone = Missions::create($data2);
+                $this->missionClone = Missions::create($dataClone);
 
                 $this->cloneWakeUp($idMission);
                 $this->cloneStop($idMission);
-                // $wakeUp =  WakeUp::where('id_mission' , $idMission)->get()->toArray();
-                // $wakeUpNew = array_map(function($item) {
-                //     unset($item['id']);
-                //     $item['id_mission'] = $this->missionClone->id;
-                //     return $item;
-                // }, $wakeUp);
 
-                // foreach($wakeUpNew as $wakeUpItem) {
-                //     WakeUp::insert($wakeUpItem);
-                // }
-
-                return  $data2;
+                return  $dataClone;
 
                 break;
             default:
@@ -239,7 +223,7 @@ class MiController extends Controller
 
             $data = array_map(function ($item) {
                 $itemStep = TypeMission::where('id', $item)->first();
-                return $itemStep->id. "^" . $itemStep->name. "^" . $itemStep->type . "^|" . $itemStep->data;
+                return $itemStep->id . "^" . $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
             }, $split_mission_shorthand);
             Missions::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
         } else {
@@ -486,29 +470,30 @@ class MiController extends Controller
         $out = array_splice($array, $from, 1);
         array_splice($array, $to, 0, $out);
     }
-    public function cloneWakeUp($idMission) {
-        $wakeUp =  WakeUp::where('id_mission' , $idMission)->get()->toArray();
-        $wakeUpNew = array_map(function($item) {
+    public function cloneWakeUp($idMission)
+    {
+        $wakeUp =  WakeUp::where('id_mission', $idMission)->get()->toArray();
+        $wakeUpNew = array_map(function ($item) {
             unset($item['id']);
             $item['id_mission'] = $this->missionClone->id;
             return $item;
         }, $wakeUp);
 
-        foreach($wakeUpNew as $wakeUpItem) {
+        foreach ($wakeUpNew as $wakeUpItem) {
             WakeUp::insert($wakeUpItem);
         }
-
     }
 
-    public function cloneStop($idMission) {
-        $stop =  Stop::where('id_mission' , $idMission)->get()->toArray();
-        $stopNew = array_map(function($item) {
+    public function cloneStop($idMission)
+    {
+        $stop =  Stop::where('id_mission', $idMission)->get()->toArray();
+        $stopNew = array_map(function ($item) {
             unset($item['id']);
             $item['id_mission'] = $this->missionClone->id;
             return $item;
         }, $stop);
 
-        foreach($stopNew as $stopItem) {
+        foreach ($stopNew as $stopItem) {
             Stop::insert($stopItem);
         }
     }

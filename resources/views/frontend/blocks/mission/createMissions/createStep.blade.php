@@ -114,7 +114,7 @@
                     </button>
 
                     <button data-index="2" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-yellow-500">
                             <i class="fa-solid fa-arrows-left-right-to-line"></i>
                         </span>
@@ -124,7 +124,7 @@
                     </button>
 
                     <button data-index="3" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-sky-500">
                             <i class="fa-solid fa-arrows-up-to-line"></i>
                         </span>
@@ -144,7 +144,7 @@
                     </button>
 
                     <button data-index="5" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sound-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sound-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-purple-600">
                             <i class="fa-solid fa-volume-high"></i>
                         </span>
@@ -154,7 +154,7 @@
                     </button>
 
                     <button data-index="6" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex position-function-btn point-function-btn data-[type-mission=error]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex position-function-btn point-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-stone-600">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>

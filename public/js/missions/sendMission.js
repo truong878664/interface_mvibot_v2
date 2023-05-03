@@ -23,7 +23,7 @@ export default function sendMission() {
                         type === "normal" &&
                             (topic = `/${nameRobot}/mission_normal`);
 
-                        type === "error" &&
+                        (type === "error-robot" || type === "error-gpio") &&
                             (topic = `/${nameRobot}/mission_error`);
 
                         type === "battery" &&
@@ -36,10 +36,7 @@ export default function sendMission() {
                         publishMission(topic, dataFullMission);
                     }
                 } else {
-                    toggerMessage(
-                        "error",
-                        "Current mission is empty"
-                    );
+                    toggerMessage("error", "Current mission is empty");
                 }
             });
     };
