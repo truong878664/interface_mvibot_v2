@@ -19,7 +19,7 @@ export default function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
 
     const listFunction = JSON.parse(JSON.stringify(data));
-    
+
     data.map((item, index) => {
         const dataFunctionDetail = dataRenderFunction(listFunction, index);
 
@@ -79,12 +79,26 @@ export default function renderDataFunction(data, type) {
                     case "time_sleep":
                         return `Sleep <span class="font-bold">${item[1]}</span> seconds`;
                     default:
-                        return `<span class="font-bold">${item[0]}</span> <span>: ${item[1]}</span>`;
+                        return `<span class="font-bold">${
+                            item[0]
+                        }</span> <span>: ${
+                            isNaN(item[1] * 1)
+                                ? item[1]
+                                : checkNumber(item[1] * 1)
+                        }</span>`;
                 }
             } else {
                 return "";
             }
         });
         return data.filter((item) => item).join(" <strong>|</strong> ");
+    }
+}
+
+function checkNumber(number) {
+    if (Number(number) === number && number % 1 === 0) {
+        return number;
+    } else if (Number(number) === number && number % 1 !== 0) {
+        return number.toFixed(3);
     }
 }
