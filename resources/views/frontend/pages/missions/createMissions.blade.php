@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Mission - {{ $type }}</div>
+    <div class="heading">Mission - {{ $type === 'error-robot' || $type === 'error-gpio' ? "error" : $type }}</div>
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             <div class="">
@@ -34,7 +34,7 @@
             <div
                 class="absolute bg-[#fff] p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center">
                 <div class="flex">
-                    @if ($type === 'normal' || $type === 'error-robot' || $type === 'battery')
+                    {{-- @if ($type === 'normal' || $type === 'error-robot' || $type === 'battery')
                         @include('frontend.blocks.selectRobot', [
                             'type' => 'robot',
                             'id' => 'robot-active',
@@ -44,8 +44,11 @@
                             'type' => 'module_gpio',
                             'id' => 'robot-active',
                         ])
-                    @endif
-
+                    @endif --}}
+                    @include('frontend.blocks.selectRobot', [
+                        'type' => 'all_robot',
+                        'id' => 'robot-active',
+                    ])
                     <button
                         class="ml-2 text-2xl font-bold rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-btn">Send</button>
                 </div>

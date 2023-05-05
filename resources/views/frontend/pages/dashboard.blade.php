@@ -26,7 +26,7 @@
         <x-dashboard-item route='dashboard.mapping.' icon='fa-solid fa-map' title='Maping' describe='Learning map'
             color="#e62648" />
 
-        <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-location-dot' title='localization'
+        <x-dashboard-item route='dashboard.location.' icon='fa-solid fa-location-dot' title='Localization'
             describe='Set localization for robot' color="#B01E68" />
 
         <x-dashboard-item route='dashboard.gpio.' icon='fa-solid fa-lightbulb' title='Gpio' describe='Set & reset Gpio'

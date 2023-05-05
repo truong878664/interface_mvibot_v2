@@ -1,6 +1,5 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Battery</div>
     <div class="flex justify-between mt-3 ml-4">
         @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'robot-status'])
     </div>
@@ -12,8 +11,6 @@
         [data-status-robot="yes"] .yes {
             color: #54B435;
         }
-
-
     </style>
     <div class="group/status wrapper-battery-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto flex flex-wrap data-[status-robot=no]:!text-[#d2d2d2]" data-status-robot="no">
         <div class="w-1/2 md:w-1/3 lg:w-1/4">
@@ -28,11 +25,11 @@
                 <div class="flex justify-end">
                     <div class="flex flex-col">
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Status</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">mode</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">mode status</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">ip node</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">ip master</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">type connect</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Mode</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Mode status</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">IP node</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">IP master</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Type connect</span>
                     </div>
                     <div class="flex flex-col mx-6">
                         <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="status">-</span>
@@ -57,7 +54,7 @@
                 <div class="flex justify-end">
                     <div class="flex flex-col">
                         {{-- <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Health</span> --}}
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Chagre</span>
+                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Charging</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Level</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Temperature</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Voltage</span>
@@ -101,10 +98,10 @@
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Radar 1</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Radar 2</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Camera 1</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">serial</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Serial 1</span>
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Camera 2</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">serial</span>
-                        <span class="py-2 h-[30px] text-2xl font-bold px-2 text-right">uart</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Serial 2</span>
+                        <span class="py-2 h-[30px] text-2xl font-bold px-2 text-right">Uart</span>
 
                     </div>
                     <div class="flex flex-col mx-6">
@@ -133,26 +130,26 @@
                 <div class="flex justify-end">
                     <div class="flex flex-col">
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Motor left</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">live</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">error</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">enable</span>
-                        <span class="py-2 h-[30px] text-2xl font-bold px-2 text-right">brake</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Live</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Error</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Enable</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Brake</span>
 
                         <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Motor right</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">live</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">error</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">enable</span>
-                        <span class="py-2 h-[30px] text-2xl font-bold px-2 text-right">brake</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Live</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Error</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Enable</span>
+                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Brake</span>
                     </div>
                     <div class="flex flex-col mx-6">
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2">-</span>
+                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 text-transparent">-</span>
                         <div class="flex flex-col motor_left">
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 live">-</span>
+                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 live ">-</span>
                             <span class="py-2 h-[30px] text-2xl pr-8 pl-2 error">-</span>
                             <span class="py-2 h-[30px] text-2xl pr-8 pl-2 enable">-</span>
                             <span class="py-2 h-[30px] text-2xl pr-8 pl-2 brake">-</span>
                         </div>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 ">-</span>
+                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 text-transparent">-</span>
                         <div class="flex flex-col motor_right">
                             <span class="py-2 h-[30px] text-2xl pr-8 pl-2 live">-</span>
                             <span class="py-2 h-[30px] text-2xl pr-8 pl-2 error">-</span>

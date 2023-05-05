@@ -26,8 +26,7 @@ class FunctionController extends Controller
     public function index()
     {
         $mapActive = Map::first();
-        $nameMapActive = $mapActive ?$mapActive->name_map_active : "no_map";
-        // if ($mapActive) {
+        $nameMapActive = $mapActive ? $mapActive->name_map_active : "no_map";
         $data = [
             'footprint' => MissionFootprint::all(),
             'gpio' => MissionGpio::all(),
@@ -39,9 +38,6 @@ class FunctionController extends Controller
             'sound' => MissionSound::all(),
         ];
         return $data;
-        // } else {
-        // return ['message' => 'dont have map', 'success' => false];
-        // }
     }
 
     /**

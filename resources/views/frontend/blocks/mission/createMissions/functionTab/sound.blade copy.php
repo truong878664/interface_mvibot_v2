@@ -25,39 +25,8 @@
         <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_sound valid-input" type="text" required>
     </div>
 
-    @php
-        $nameSound = ['buzzer1', 'buzzer2', 'basic', 'custom'];
-    @endphp
-
-    <div class="flex mt-8">
-        <ul class="text-xl w-full sound-list">
-            @for ($i = 0; $i < count($nameSound); $i++)
-                <li data-number-sound="{{$i + 1}}"
-                    class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
-                    <span class="w-1/6 text-center">{{ $i + 1 }}</span>
-                    <span class="text-left w-4/6">
-                        {{$nameSound[$i]}}
-                    </span>
-                    <span class="w-1/6 btn text-center">
-                        <i class="fa-solid fa-play"></i>
-                    </span>
-                </li>
-            @endfor
-
-            <li  data-number-sound="0"
-                class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
-                <span class="w-1/6 text-center">{{ $i + 1 }}</span>
-                <span class="text-left w-4/6">
-                    Sound OFF
-                </span>
-                <span class="w-1/6 btn text-center">
-                </span>
-            </li>
-        </ul>
-
-
-
-        {{-- <div class="relative">
+    <div class="flex ml-4 mt-8">
+        <div class="relative">
             <button
                 class="btn rounded-md relative flex items-center text-2xl px-4 py-1 ml-1 mr-8 bg-green-500 opacity-30  text-[#fff] hover:opacity-90 sound-btn sound-start-btn active"
                 type='start' value="1" data-mode="basic" style="--color: rgb(56 189 248);">Start</button>
@@ -89,9 +58,9 @@
 
         <button
             class="btn rounded-md flex items-center text-2xl px-4 py-1 mx-1  bg-red-500 text-[#fff] opacity-30 hover:opacity-90 sound-btn sound-stop-btn"
-            type='stop' value="0">Stop</button> --}}
-
+            type='stop' value="0">Stop</button>
     </div>
     @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'sound'])
 
 </div>
+

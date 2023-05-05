@@ -78,6 +78,35 @@ function displayLaserUrd(dataRobotNavigation) {
     });
 }
 
+function activeLaserRobot(robotActive) {
+    for (let i = 0; i < robotNavigationChange.length; i++) {
+        if (robotActive == robotNavigationChange[i].name_seri) {
+            viewer.scene.remove(laser[i].points.sn);
+            laser[i] = new ROS3D.LaserScan({
+                ros: ros,
+                topic: "/" + robotActive + "/laser/scan",
+                rootObject: viewer.scene,
+                tfClient: tfClient,
+                material: { size: 0.5, color: 0x00ff00 },
+                rate: 1,
+            });
+        } else {
+            viewer.scene.remove(laser[i].points.sn);
+            laser[i] = new ROS3D.LaserScan({
+                ros: ros,
+                topic:
+                    "/" +
+                    robotNavigationChange[i].name_seri +
+                    "/laser/scan",
+                rootObject: viewer.scene,
+                tfClient: tfClient,
+                material: { size: 0.5, color: 0xff0000 },
+                rate: 1,
+            });
+        }
+    }
+}
+
 let robotActive = "";
 let displayPathFs;
 function changeTopic() {
@@ -96,6 +125,9 @@ function changeTopic() {
             }, 2000);
 
             robotPathTopic(robotActive);
+
+            activeLaserRobot(robotActive)
+
         } else {
             cmd_vel_listener.name = `/cmd_vel`;
 

@@ -5,13 +5,13 @@ export default function createNameVariable() {
     $(".create-variable-btn").onclick = () => {
         const nameVariableElement = $(".name-variable");
         if (nameVariableElement.value != "") {
-            fetchCustom("/api/var", "POST", (data) => console.log(data), {
+            fetchCustom("/api/var", "POST", updateVar, {
                 name_var: nameVariableElement.value,
-            });
+            })
 
             nameVariableElement.value = "";
 
-            updateVar();
+            // updateVar();
         } else {
             errorBorder(nameVariableElement);
         }

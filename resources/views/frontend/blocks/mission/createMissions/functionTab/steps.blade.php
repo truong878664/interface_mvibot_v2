@@ -140,7 +140,7 @@
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
 
-                    @if ($itemRender->type === 'normal' || $itemRender->type === 'error-robot' || $itemRender->type === 'battery')
+                    {{-- @if ($itemRender->type === 'normal' || $itemRender->type === 'error-robot' || $itemRender->type === 'battery')
                         @include('frontend.blocks.selectRobot', [
                             'type' => 'robot',
                             'id' => 'select-robot-option',
@@ -150,7 +150,12 @@
                             'type' => 'module_gpio',
                             'id' => 'select-robot-option',
                         ])
-                    @endif
+                    @endif --}}
+
+                    @include('frontend.blocks.selectRobot', [
+                            'type' => 'all_robot',
+                            'id' => 'select-robot-option',
+                        ])
 
                     <label for="select-robot" type="{{ $itemRender->type }}"
                         class="rounded-md text-2xl font-bold px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-mission-btn">Send</label>

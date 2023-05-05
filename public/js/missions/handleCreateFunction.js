@@ -4,6 +4,7 @@ import {
     showListPosition,
 } from "./function/position/point.js";
 import createMapPosition from "./function/position/createPosition.js";
+import resetSound from "./function/sound/resetSound.js";
 
 let tabFunctionActive;
 
@@ -23,7 +24,6 @@ function createFunction(e) {
 }
 
 export function handleShowFormFunction(isShow, typeFunction) {
-    console.log();
     $(".function-item-form-wrapper")?.classList.toggle("hidden", !isShow);
     $(`.function-mission-tab[data-type=${typeFunction}`)?.classList.toggle(
         "hidden",
@@ -41,6 +41,7 @@ export function handleShowFormFunction(isShow, typeFunction) {
 
     !isShow && resetMapPosition();
     !isShow && ($(".create-point-btn").textContent = "Create");
+    !isShow && resetSound();
 }
 
 function handleHideFormFunction() {

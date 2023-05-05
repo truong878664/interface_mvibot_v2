@@ -39,7 +39,6 @@ import {
 import { dataGpio } from "./gpio/gpio.js";
 import { setLightGpio } from "./gpio/setLightGpio.js";
 import createMapPosition from "./position/createPosition.js";
-import setColorSticker from "./sound/setColorSticker.js";
 
 export let currentIdUpdate;
 export let oldName;
@@ -131,22 +130,14 @@ export default function showDataFunction(typeFunction, valueFunction) {
 
         case "sound":
             $(".sound-function-btn").click();
-            $(".sound-btn.active").classList.remove("active");
+            $(".sound-item.active")?.classList.remove("active");
 
             name_sound.value = valueFunction.name;
-            if (valueFunction.music_start == 1) {
-                $(".sound-start-btn").classList.add("active");
-                let mode;
 
-                valueFunction.music_mode == 1 && (mode = "buzzer1");
-                valueFunction.music_mode == 2 && (mode = "buzzer2");
-                valueFunction.music_mode == 3 && (mode = "basic");
-                valueFunction.music_mode == 4 && (mode = "custom");
-                $(".sound-start-btn").setAttribute("data-mode", mode);
-                setColorSticker(mode);
-            } else {
-                $(".sound-stop-btn").classList.add("active");
-            }
+            $(
+                `[data-number-sound='${valueFunction.music_mode}']`
+            ).classList.add("active");
+
             break;
 
         case "position":

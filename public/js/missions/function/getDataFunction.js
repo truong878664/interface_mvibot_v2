@@ -50,7 +50,7 @@ export const name_sound = $(".name_function_sound");
 
 export const name_variable = $(".name_function_variable");
 export const name_var = $(".name_variable_input");
-export const command_action = $(".command_action_input")
+export const command_action = $(".command_action_input");
 
 export const focus_value = $(".focus_value_input");
 
@@ -119,7 +119,7 @@ export default function getDataFunction(typeFunction) {
             };
             break;
         case "marker":
-            setTabMarkerActive()
+            setTabMarkerActive();
 
             isValid =
                 name_marker.value &&
@@ -196,26 +196,12 @@ export default function getDataFunction(typeFunction) {
             };
             break;
         case "sound":
-            const music_type = $(".sound-btn.active")?.getAttribute("type");
-            let music_mode;
-            const music_start = music_type == "start" ? 1 : 0;
-            if (music_type != "stop") {
-                const mode = $(".sound-btn.active")?.dataset.mode;
-                music_mode =
-                    mode === "buzzer1"
-                        ? 1
-                        : mode === "buzzer2"
-                        ? 2
-                        : mode === "basic"
-                        ? 3
-                        : mode === "custom"
-                        ? 4
-                        : undefined;
-            } else {
-                music_mode = 0;
-            }
+            const music_type = $(".sound-item.active")?.dataset.numberSound;
+            
+            const music_mode = music_type ? music_type : 0;
+            const music_start = music_type * 1 === 0 ? 0 : 1;
 
-            isValid = !!name_sound.value;
+            isValid = name_sound.value && music_type;
 
             data = {
                 music_start,
@@ -224,7 +210,8 @@ export default function getDataFunction(typeFunction) {
             };
             break;
         case "variable":
-            const command_action_value = command_action.value === "=" ? "equal" : "equal_as";
+            const command_action_value =
+                command_action.value === "=" ? "equal" : "equal_as";
 
             isValid =
                 name_var.value && focus_value.value && name_variable.value;
@@ -245,8 +232,6 @@ export default function getDataFunction(typeFunction) {
     return { isValid: !!isValid, data };
 }
 
-
-
 export function setTabMarkerActive() {
     const formElement = document.querySelector(".marker-item:not(.hidden)");
     name_marker = formElement.querySelector('[name="name_marker"]');
@@ -262,5 +247,4 @@ export function setTabMarkerActive() {
     sx2 = formElement.querySelector('[name="sx2"]');
     sy1 = formElement.querySelector('[name="sy1"]');
     sy2 = formElement.querySelector('[name="sy2"]');
-
 }

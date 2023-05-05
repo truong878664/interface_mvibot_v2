@@ -84,7 +84,7 @@ function renderBookmark(data) {
 
     data?.map((item) => {
         htmlBookmark.push(
-            `<li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md">
+            `<li class=" mt-6 mx-2 py-2 w-[80%] min-h-[60px]  rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md lowercase">
             <a href="${
                 origin + item.link
             }" class="flex flex-col items-center h-full">
