@@ -100,9 +100,7 @@
         <div class="submit-btn-wrapper flex flex-col justify-end min-w-[240px] items-end">
 
             <div class="absolute top-2 right-2">
-                <span class="mr-8 text-2xl">{{ $itemRender->name }} |
-                    <span class="font-bold">{{ $itemRender->type }}</span>
-                </span>
+                <span class="mr-4 text-2xl block font-bold text-right">Name: {{ $itemRender->name }}</span>
                 <div class="flex mt-4 items-center justify-end">
                     <button class="text-center mr-4 px-2 btn full-screen-step-btn">
                         <i class="fa-solid fa-expand not-full"></i>

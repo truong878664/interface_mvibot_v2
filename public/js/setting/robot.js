@@ -1,6 +1,7 @@
 import { showSettingRobot } from "./setting.js";
 import { $, $$ } from "../main.js";
 import dbDelete from "../missions/functionHandle/dbDelete.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 export default function robot() {
     checkRobotActiveStart();
@@ -38,15 +39,17 @@ function handleDeleteRobot() {
     $$(".delete-robot-btn").forEach((item) => {
         item.onclick = (e) => {
             e.stopPropagation();
-            dbDelete(e.target, () => deleteRobot(e));
+            
+            confirmationForm({
+                message: "Do you want to permanently delete this robot?",
+                callback: () => deleteRobot(e),
+            });
         };
     });
 }
 
 function deleteRobot(e) {
-    const nameRobotDelete = e.target
-        .closest(".robot-item")
-        .querySelector(".name-robot").value;
+    const nameRobotDelete = e.target.closest(".robot-item").dataset.robot;
 
     fetch(`/api/robot/${nameRobotDelete}`, {
         headers: {

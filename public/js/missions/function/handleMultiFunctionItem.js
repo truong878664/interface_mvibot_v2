@@ -11,7 +11,7 @@ export default function handleMultiFunction() {
     handleCheckAll();
     handleDeleteMultiFunction();
     handleCopyFunction();
-    sortFunction()
+    sortFunction();
 }
 
 function checkAll() {
@@ -22,10 +22,18 @@ function checkAll() {
     function handleCheck(e) {
         const isCheckAll = e.target.checked;
         const type = e.target.dataset.type;
-        check($$(`[data-select-function-id][data-type=${type}`), isCheckAll);
+        check(
+            $$(`[data-select-function-id][data-type=${type}]`),
+            isCheckAll
+        );
 
         function check(data, isCheckAll) {
-            data.forEach((item) => (item.checked = isCheckAll));
+            data.forEach((item) => {
+                const isItemHidden = item.closest('.type-mission-function-item').classList.contains('hidden')
+                if(!isItemHidden) {
+                    item.checked = isCheckAll;
+                }
+            });
         }
     }
 }

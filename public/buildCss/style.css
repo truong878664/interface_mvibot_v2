@@ -21,8 +21,8 @@
     --orange-color: #f5b933;
     --black-color: #fff;
     --green-color: #45a5ba;
-    --main-font:  "ubuntu-mono","Courier New", "Arial";
-    --number-font:  "ubuntu-mono","Courier New", "Arial";
+    --main-font: "ubuntu-mono", "Courier New", "Arial";
+    --number-font: "ubuntu-mono", "Courier New", "Arial";
     --background-color: #f5f5f5;
 }
 html {
@@ -106,7 +106,6 @@ li {
     background: rgb(236, 236, 236);
 }
 
-
 :root {
     --column-status: 2;
 }
@@ -124,7 +123,6 @@ li {
     padding: 16px 23px;
     position: relative;
     width: calc(100% / var(--column-status) - 20px);
-    
 }
 .status-item {
     display: flex;
@@ -262,7 +260,7 @@ li {
     width: 24px;
 }
 .disconnect .io_module {
-  color: #ccc !important;
+    color: #ccc !important;
 }
 
 .inactivate .accessoty-item-wrapper .accessoty-item {
@@ -1024,11 +1022,14 @@ li {
     color: var(--white-color);
     margin: 8px 4px;
     padding: 4px 8px;
-
 }
 
 .step-item:not(.step-item-function):not(.btn) {
+    display: inline-block;
+    width: auto;
     min-width: 100px;
+    flex-shrink: 0;
+
 }
 .form-submit-steps {
     display: flex;
@@ -2121,8 +2122,6 @@ input[type="number"] {
     }
 }
 
-
-
 .btn {
     transform: translateZ(0) scale(1);
     transition: transform 0.2s;
@@ -2154,8 +2153,7 @@ input[type="number"] {
 
 .setting-item.active,
 .setting-item.active:hover {
-    background-color: #DCD4D1;
-    
+    background-color: #dcd4d1;
 }
 
 /* load */
@@ -2173,7 +2171,7 @@ input[type="number"] {
     z-index: 101;
 }
 
-.loader-wrapper::after{
+.loader-wrapper::after {
     content: "";
     width: 80px;
     height: 80px;
@@ -2219,7 +2217,6 @@ input[type="number"] {
     display: none;
 }
 
-
 @keyframes zoom {
     from {
         opacity: 0;
@@ -2231,7 +2228,6 @@ input[type="number"] {
         transform: scale(100%);
     }
 }
-
 
 .not-allowed {
     pointer-events: none;

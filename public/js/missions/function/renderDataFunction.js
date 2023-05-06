@@ -19,22 +19,18 @@ export default function renderDataFunction(data, type) {
     htmlDataFunction[type].length = 0;
 
     const listFunction = JSON.parse(JSON.stringify(data));
-
     data.map((item, index) => {
         const dataFunctionDetail = dataRenderFunction(listFunction, index);
-
         htmlDataFunction[type].push(
             `<div data-id=${item.id} function-id=${item.id} function-type="${
                 item.mode
-            }"
+            }" ${item.mode === 'marker' && 'data-type-maker="' + item.marker_type + '"' } ${item.mode === 'gpio_module' && 'data-type-gpio_module="' + item.name_gpio_module + '"' }
                 class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
                 <input type="hidden" value='${JSON.stringify(
                     item
                 )}' class="value-function-item"/>
                 <div class="flex">
-                    <input data-select-function-id=${item.id} data-type="${
-                item.mode
-            }" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
+                    <input data-select-function-id=${item.id} data-type="${item.mode}" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">
                         <div class="flex">
                             <span class=" font-bold font-3xl capitalize">${
