@@ -1,4 +1,6 @@
 import ros from "../../../main.js";
+import mathYaw from "../../../rosModule/mathYaw.js";
+import qToYaw from "../../../rosModule/qToYawn.js";
 import { handleShowFormFunction } from "../../handleCreateFunction.js";
 import createMapPosition from "./createPosition.js";
 import { showListPosition } from "./point.js";
@@ -37,6 +39,9 @@ export default function showAllPosition() {
                     const NUMBER_PUB = 5;
                     data.forEach((position) => {
                         for (let i = 0; i < NUMBER_PUB; i++) {
+                            const yaw = qToYaw(position.z, position.w);
+                            const {z, w} = mathYaw((Number(yaw) / 180) * Math.PI);
+
                             showPoint(
                                 position.x,
                                 position.y,
@@ -48,8 +53,8 @@ export default function showAllPosition() {
                             showPose(
                                 position.x,
                                 position.y,
-                                position.z,
-                                position.w,
+                                z,
+                                w,
                                 viewer,
                                 tfClient,
                                 position.color_position,

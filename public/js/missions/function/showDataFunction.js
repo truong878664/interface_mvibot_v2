@@ -1,6 +1,7 @@
 import createPose from "../../rosModule/createPose.js";
 import displayPoint from "../../rosModule/displayPoint.js";
 import displayPose from "../../rosModule/displayPose.js";
+import mathYaw from "../../rosModule/mathYaw.js";
 import qToYaw from "../../rosModule/qToYawn.js";
 import {
     command_action,
@@ -158,8 +159,12 @@ export default function showDataFunction(typeFunction, valueFunction) {
             const { viewer, tfClient } = createMapPosition(x, y, z, w);
 
             createPose(viewer, tfClient, color_position);
+
+            const yaw = qToYaw(z, w);
+            const q = mathYaw((Number(yaw) / 180) * Math.PI);
+
             displayPoint(x, y);
-            displayPose(x, y, z, w);
+            displayPose(x, y, q.z, q.w);
 
             showControlPosition(x, y, z, w);
             showInfoPosition(
@@ -169,6 +174,7 @@ export default function showDataFunction(typeFunction, valueFunction) {
                 color_position,
                 mode_child
             );
+
             function showControlPosition(x, y, z, w) {
                 const yaw = qToYaw(z, w);
                 $("#inx").value = x;

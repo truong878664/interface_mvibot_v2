@@ -4,7 +4,6 @@
         <div class="w-full flex flex-col text-xl px-8 py-4">
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot Wmax</span>
-                <span class="">Lorem ipsum dolor sit amet consectetur adipisicing elit</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_wmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_wmax" type="number">
@@ -16,7 +15,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot Vmax</span>
-                <span class="">Lorem ipsum dolor consectetur adipisicing elit</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_vmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_vmax" type="number">
@@ -26,7 +24,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot AW</span>
-                <span class="">Lorem ipsum dolor consectetur adipisicing elit Lorem ipsum dolor consectetur</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_aw" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_aw" type="number">
@@ -37,7 +34,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot AX</span>
-                <span class="">Lorem ipsum dolor consectetur Lorem ipsum adipisicing elit</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_ax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_ax" type="number">
@@ -48,8 +44,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot Gear</span>
-                <span class="">Lorem ipsum dolor Lorem ipsum dolor consectetur Lorem ipsum dolor consectetur
-                    adipisicing elit</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_gear" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_gear" type="number">
@@ -60,7 +54,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot L</span>
-                <span class="">Lorem ipsum dolor consectetur adipisicing elit ipsum</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_L" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_L" type="number">
@@ -71,7 +64,6 @@
 
             <div class="flex flex-col my-6">
                 <span class="font-bold">Robot R</span>
-                <span class="">Lorem ipsum dolor consectetur adipisicing elit</span>
                 <div class="">
                     <button data-math="minus" data-parameter="robot_R" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
                     <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_R" type="number">

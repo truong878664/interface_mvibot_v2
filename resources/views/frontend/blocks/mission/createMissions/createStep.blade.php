@@ -96,7 +96,7 @@
                     <button data-index="0" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
                         <span class="mr-2 text-green-500">
-                            <i class="fa-solid fa-lightbulb"></i>
+                            <i class="fa-solid fa-microchip"></i>
                         </span>
                         <span>
                             GPIO
@@ -106,7 +106,7 @@
                     <button data-index="1" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn {{ $version === 'new_wave' ? 'hidden' : '' }}">
                         <span class="mr-2 text-blue-500">
-                            <i class="fa-regular fa-lightbulb"></i>
+                            <i class="fa-solid fa-microchip"></i>
                         </span>
                         <span>
                             GPIO_module
@@ -136,7 +136,7 @@
                     <button data-index="4" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sleep-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-red-600">
-                            <i class="fa-solid fa-bed"></i>
+                            <i class="fa-solid fa-mattress-pillow"></i>
                         </span>
                         <span>
                             Sleep
@@ -166,7 +166,7 @@
                     <button data-index="7" data-type-mission="{{ $itemRender->type }}"
                         class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex variable-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-orange-600">
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-file-code"></i>
                         </span>
                         <span>
                             Variable

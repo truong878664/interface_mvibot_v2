@@ -15,6 +15,7 @@ function checkRobotActiveStart() {
 }
 
 function selectRobot() {
+    const inputRobotSelect = $("#robot-select");
     const robotItems = $$(".robot-item");
     robotItems.forEach((element) => {
         element.addEventListener("click", (e) => {
@@ -31,6 +32,11 @@ function selectRobot() {
 
             showSettingRobot();
             $(".name-robot-active").innerText = nameRobot;
+
+            inputRobotSelect.value = nameRobot;
+
+            const changeEvent = new Event('change');
+            inputRobotSelect.dispatchEvent(changeEvent);
         });
     });
 }

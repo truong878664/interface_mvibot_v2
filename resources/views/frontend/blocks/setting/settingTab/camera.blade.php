@@ -13,7 +13,7 @@
                         <div class="w-full h-[30px] bg-contain" style="background-image: url(/img/barcode.png)">
                         </div>
                         <input class="block text-center text-2xl bg-transparent border-none" readonly
-                            name="serial_camera1" value="12-83-21301243030" />
+                            name="serial_camera1" value="" />
                     </div>
 
                     <div class="">
@@ -21,7 +21,7 @@
                         <div class="w-full h-[30px] bg-contain" style="background-image: url(/img/barcode.png)">
                         </div>
                         <input class="block text-center text-2xl bg-transparent border-none" readonly
-                            name="serial_camera2" value="12-83-2130124311" />
+                            name="serial_camera2" value="" />
                     </div>
                 </div>
             </div>

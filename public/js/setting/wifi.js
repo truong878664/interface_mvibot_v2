@@ -4,8 +4,6 @@ import { robotActive } from "../mainLayout.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import publishTopicString from "../rosModule/topicString.js";
 
-let timeoutWifi;
-
 let nameWifi;
 const passwordWifi = $("#password-wifi");
 const formPassword = $(".form-enter-password");
@@ -19,32 +17,46 @@ export default function wifi() {
     otherWifi();
 }
 
+setInterval(() => {
+    publishTopicString(
+        "/Mb23_946/robot_list_wifi",
+        "(~ssid=Tenda_MB22_916b~~signal=100~~active=no~~security=WPA1 WPA2~)(~ssid=Tenda_MB22_916b_5G~~signal=100~~active=no~~security=WPA1\
+         WPA2~)(~ssid=MVP_GUEST~~signal=50~~active=no~~security=~)(~ssid=MVP_PRO~~signal=49~~active=yes~~security=WPA2~)(~ssid=IOT\
+         System~~signal=45~~active=no~~security=WPA2~)(~ssid=CS_NM1~~signal=45~~active=no~~security=WPA2~)(~ssid=MARUEI\
+         VIP~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP_OFFICE~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP~~signal=25~~active=no~~security=WPA2\
+         802.1X~)"
+    );
+}, 1000);
+
 function subscribeTopicWifi() {
     let dataWifiScan;
+
     $$(".name-robot").forEach((element) => {
         const robot = element.value;
         subscribeTopic(
-            `/${robot}/robot_list_wifi`,
+            `${robot}/robot_list_wifi`,
             "std_msgs/String",
             (data, nameTopic) => {
-                clearTimeout(timeoutWifi);
+                // clearTimeout(timeoutWifi);
                 const nameRobotActive = robotActive();
-                if (nameTopic.indexOf(nameRobotActive) !== -1) {
-                    JSON.stringify(dataWifiScan) !== JSON.stringify(data) &&
-                        parseWifi(data.data);
-
-                    timeoutWifi = setTimeout(() => {
+                const robotPub = nameTopic.slice(0, nameTopic.indexOf("/", 2));
+                if (nameRobotActive !== robotPub) {
                         removeWifi();
                         dataWifiScan = "";
-                    }, 3000);
+                    return;
                 }
-                dataWifiScan = data;
+
+                dataWifiScan !== data.data &&
+                    parseWifi(data.data);
+                
+                dataWifiScan = data.data;
             }
         );
     });
 }
 
 function parseWifi(data) {
+    console.log('parser');
     const arrayWifi = data
         .slice(1, data.length - 1)
         .replaceAll("\\", " ")
@@ -134,7 +146,7 @@ function showPasswordWifi() {
         overlay.classList.remove("hidden");
         passwordWifi.focus();
         if (wifiItem.getAttribute("security") !== "lock") {
-            $(".connect-wifi-btn").removeAttribute("disabled")
+            $(".connect-wifi-btn").removeAttribute("disabled");
         }
     };
 
@@ -149,13 +161,9 @@ function showPasswordWifi() {
 }
 
 handleHideFormWifi();
-validConnect()
+validConnect();
 
 function handleConnectWifi() {
-    
-
-
-
     $(".connect-wifi-btn").onclick = () => {
         const password = passwordWifi.value;
         const nameWifiConnect = $("#name-wifi").value;
