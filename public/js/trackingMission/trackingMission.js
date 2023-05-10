@@ -16,7 +16,7 @@ import createJoystick from "../createJoystick/createJoystick.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import showUrd from "../rosModule/showUrd.js";
 import showLaser from "../rosModule/showLaser.js";
-import { cmd_vel_listener } from "../rosModule/moveRobot.js";
+import { setRobotMove } from "../rosModule/moveRobot.js";
 import topicString from "../rosModule/topicString.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
@@ -94,10 +94,7 @@ function activeLaserRobot(robotActive) {
             viewer.scene.remove(laser[i].points.sn);
             laser[i] = new ROS3D.LaserScan({
                 ros: ros,
-                topic:
-                    "/" +
-                    robotNavigationChange[i].name_seri +
-                    "/laser/scan",
+                topic: "/" + robotNavigationChange[i].name_seri + "/laser/scan",
                 rootObject: viewer.scene,
                 tfClient: tfClient,
                 material: { size: 0.5, color: 0x008000 },
@@ -115,9 +112,9 @@ function changeTopic() {
         deletePath(robotActive);
 
         robotActive = e.target.value;
-        if (robotActive) {
-            cmd_vel_listener.name = `${robotActive}/cmd_vel`;
 
+        setRobotMove(robotActive);
+        if (robotActive) {
             robotPathTopic(robotActive);
 
             displayPathFs = setInterval(() => {
@@ -126,10 +123,9 @@ function changeTopic() {
 
             robotPathTopic(robotActive);
 
-            activeLaserRobot(robotActive)
-
+            activeLaserRobot(robotActive);
         } else {
-            cmd_vel_listener.name = `/cmd_vel`;
+            // cmd_vel_listener.name = `/cmd_vel`;
 
             clearInterval(displayPathFs);
         }
