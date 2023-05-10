@@ -1,6 +1,5 @@
 import { $ } from "../main.js";
 import moveRobot from "../rosModule/moveRobot.js";
-import { cmd_vel_listener } from "../rosModule/moveRobot.js";
 
 const createJoystick = function () {
     const heightJoystick = $(".joystick-wrapper").offsetHeight;

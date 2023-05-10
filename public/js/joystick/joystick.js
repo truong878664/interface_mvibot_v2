@@ -1,6 +1,8 @@
 import createJoystick from "../createJoystick/createJoystick.js";
 import { $, $$ } from "../main.js";
-import moveRobot, { cmd_vel_listener } from "../rosModule/moveRobot.js";
+import moveRobot, {
+    setRobotMove,
+} from "../rosModule/moveRobot.js";
 
 createJoystick();
 createMoveAction();
@@ -10,8 +12,9 @@ export function createMoveAction() {
 
     listRobot &&
         listRobot.addEventListener("change", (e) => {
-            console.log(e.target.value);
-            cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
+            // cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
+            const robotActive = e.target.value;
+            setRobotMove(robotActive);
         });
 
     const SPEED_MAX = 0.5;

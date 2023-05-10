@@ -2,7 +2,6 @@ import createJoystick from "./createJoystick/createJoystick.js";
 import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
 import { $, $$, toggerMessage } from "./main.js";
-import { cmd_vel_listener } from "./rosModule/moveRobot.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
 import reloadWhenOrientation from "./reloadOnOrientation.js";
@@ -10,6 +9,7 @@ import { createMoveAction } from "./joystick/joystick.js";
 import publishTopicString from "./rosModule/topicString.js";
 import confirmationForm from "./functionHandle/confirmationForm.js";
 import subscribeTopic from "./rosModule/subscribeTopic.js";
+import { setRobotMove } from "./rosModule/moveRobot.js";
 
 const heightMap = $("#map").offsetHeight;
 const widthMap = $("#map").offsetWidth;
@@ -35,7 +35,8 @@ function changeTopic() {
     };
 }
 function changeTopicMoveRobot(robotActive) {
-    cmd_vel_listener.name = `${robotActive}/cmd_vel`;
+    // cmd_vel_listener.name = `${robotActive}/cmd_vel`;
+    setRobotMove(robotActive);
 }
 
 function changTopicOccupancy(robotActive) {
