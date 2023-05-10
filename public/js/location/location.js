@@ -110,7 +110,7 @@ $("#robot-navigation-name").onchange = (e) => {
                         "/laser/scan",
                     rootObject: viewer.scene,
                     tfClient: tfClient,
-                    material: { size: 0.5, color: 0xff0000 },
+                    material: { size: 0.5, color: 0x008000 },
                     rate: 1,
                 });
             }
