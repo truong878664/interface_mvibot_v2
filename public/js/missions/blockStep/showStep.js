@@ -17,7 +17,7 @@ export function showStep() {
 }
 
 export function showAllStep() {
-    $("#check-show-step")?.checked =
+    $("#check-show-step").checked =
         localStorage.getItem("isShowAllStep") === "true";
 
     if ($("#check-show-step").checked) {
