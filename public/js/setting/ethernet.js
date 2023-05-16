@@ -7,11 +7,12 @@ import renderIp from "./renderIP.js";
 export default function ethernet(data) {
     setEthernet();
     const { lan_type, lan_ipv4, lan_ipv4_gateway, lan_ipv4_dns } = data;
-    console.log(lan_ipv4);
     const lanTypeElement = document.querySelector(
         `[name=lan_type]#lan-${lan_type}`
     );
-    lanTypeElement.checked = true;
+    if (lanTypeElement) {
+        lanTypeElement.checked = true;
+    }
     dispatchEvent({ event: "change", element: lanTypeElement });
     if (lan_type === "auto") return;
     renderIp({ ipString: lan_ipv4, ipElement: "[data-ip=lan_ipv4]" });

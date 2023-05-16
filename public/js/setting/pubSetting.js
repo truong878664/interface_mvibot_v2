@@ -11,7 +11,7 @@ export default function pubSetting(datas) {
         }
     }
     if(dataTopicArray.length) {
-        const dataTopic =`(${dataTopicArray.join("),(")})`;
+        const dataTopic =`(${dataTopicArray.join(")(")})`;
         publishTopicString(`/${robot}/set_config`, dataTopic);
     } else {
         toggerMessage('error', 'No setting data!')

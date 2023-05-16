@@ -59,11 +59,12 @@ function handleParameterRobot(robot) {
             camera(data);
             renderTypeWifi(data)
         })
-        .catch((error) => {
-            localStorage.removeItem("robotActive");
-            showSettingRobot();
-            toggerMessage("error", error);
-        });
+        // .catch((error) => {
+        //     localStorage.removeItem("robotActive");
+        //     showSettingRobot();
+        //     toggerMessage("error", error);
+        //     console.log(error);
+        // });
 }
 
 function renderParameterRobot(data) {

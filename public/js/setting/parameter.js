@@ -57,7 +57,9 @@ function robotTypeConnect(data) {
     const checkboxTypeConnect = document.querySelector(
         `[name=robot_type_connect]#${data.robot_type_connect}`
     );
-    checkboxTypeConnect.checked = true;
+    if (checkboxTypeConnect) {
+        checkboxTypeConnect.checked = true;
+    }
 }
 
 function otherParameter(data) {
@@ -111,7 +113,10 @@ function showParameter(data) {
         robot_wmax,
     };
     for (const key in parameters) {
-        document.querySelector(`[name=${key}]`).value = parameters[key];
+        const inputParameter = document.querySelector(`[name=${key}]`)
+        if (inputParameter) {   
+            inputParameter.value = parameters[key];
+        }
     }
 }
 
@@ -129,10 +134,10 @@ function setParameter() {
     function getParameter() {
         const robot_volume = document.querySelector(
             "[name=robot_volume]"
-        ).value;
+        )?.value;
         const robot_type_connect = document.querySelector(
             "[name=robot_type_connect]:checked"
-        ).value;
+        )?.value;
         const robot_low_battery = document.querySelector(
             "[name=robot_low_battery]"
         ).value;

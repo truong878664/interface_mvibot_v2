@@ -13,7 +13,10 @@ export default function operation(data) {
 }
 
 function mode(data) {
-    document.querySelector(`.input-mode#${data.mode}`).checked = true;
+    const inputMode = document.querySelector(`.input-mode#${data.mode}`)
+    if (inputMode) {
+        inputMode.checked = true;
+    }
 }
 function master(data) {
     const isMaster = data.is_master === "yes" ? true : false;
