@@ -4,15 +4,26 @@ import { robotActive } from "../mainLayout.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
 
 export default function power() {
-    
-    $("#shutdown-btn").onclick = () =>  confirmationForm({message: 'Do you want to shutdown Robot?', callback: shutdown});
-    $("#reboot-btn").onclick = () => confirmationForm({message: 'Do you want to reboot Robot?', callback: reboot});
-    
+    $("#shutdown-btn").onclick = () => {
+        const robotSelect = robotActive();
+        confirmationForm({
+            message: `Do you want to shutdown Robot ${robotSelect}?`,
+            callback: shutdown,
+        });
+    };
+    $("#reboot-btn").onclick = () => {
+        const robotSelect = robotActive();
+        confirmationForm({
+            message: `Do you want to reboot Robot ${robotSelect}?`,
+            callback: reboot,
+        });
+    };
+
     function shutdown() {
-        robotAction("1")
+        robotAction("1");
     }
     function reboot() {
-        robotAction("2")
+        robotAction("2");
     }
     const robotAction = (action) => {
         const robotSelect = robotActive();
@@ -20,5 +31,4 @@ export default function power() {
             ? toggerMessage("error", "Please choose robot!")
             : publishTopic(`${robotSelect}/robot_shutdown`, action);
     };
-
 }

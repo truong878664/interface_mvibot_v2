@@ -3,7 +3,7 @@ import { robotActive } from "../mainLayout.js";
 import publishTopicString from "../rosModule/topicString.js";
 
 export default function ip() {
-    setIp();
+    // setIp();
     uiIp();
 }
 const isIpChange = {

@@ -15,7 +15,7 @@ class ConfigRobotController extends Controller
      */
     public function index(Request $request)
     {
-        return DB::table('robot_config_status')->where('name_seri', $request->name_seri)->first();
+        return DB::table('robot_config_status2')->where('name_seri', $request->name_seri)->first();
     }
 
     /**

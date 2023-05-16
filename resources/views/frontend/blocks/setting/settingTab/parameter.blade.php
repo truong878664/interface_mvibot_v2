@@ -1,175 +1,82 @@
-<div class="setting-detail flex flex-col hidden h-full">
-
-    <div class="max-w-[700px] w-full mx-auto overflow-auto bg-[#F2EAE8] rounded-md">
-        <div class="w-full flex flex-col text-xl px-8 py-4">
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot Wmax</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_wmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_wmax" type="number">
-                    <button data-math="plus"  data-parameter="robot_wmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot Vmax</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_vmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_vmax" type="number">
-                    <button data-math="plus"  data-parameter="robot_vmax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot AW</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_aw" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_aw" type="number">
-                    <button data-math="plus" data-parameter="robot_aw"  class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot AX</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_ax" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_ax" type="number">
-                    <button data-math="plus" data-parameter="robot_ax"  class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot Gear</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_gear" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_gear" type="number">
-                    <button data-math="plus"  data-parameter="robot_gear" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot L</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_L" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_L" type="number">
-                    <button data-math="plus" data-parameter="robot_L"  class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-            </div>
-
-            <div class="flex flex-col my-6">
-                <span class="font-bold">Robot R</span>
-                <div class="">
-                    <button data-math="minus" data-parameter="robot_R" class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-minus"></i></button>
-                    <input class="max-w-[70px] text-center mt-4 bg-[rgba(255,255,255,0.5)] px-4 py-1 parameter-item" name="robot_R" type="number">
-                    <button data-math="plus" data-parameter="robot_R"  class="w-[24px] h-[24px] btn bg-stone-300 math-parameter-btn"><i class="fa-solid fa-plus"></i></button>
-                </div>
-
-            </div>
-
-        </div>
-        <button
-            class="float-right m-4 px-6 py-2 bg-main text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 add-parameter-btn">Save</button>
-    </div>
-</div>
+@php
+    $titleParameters = ['Robot Wmax', 'Robot Vmax', 'Robot AW', 'Robot AX', 'Robot Gear', 'Robot L', 'Robot R', 'Robot R'];
+    $parameters = ['robot_wmax', 'robot_vmax', 'robot_aw', 'robot_ax', 'robot_gear', 'robot_L', 'robot_R'];
+@endphp
 <style>
-    .mode-item.active {
-        opacity: 1;
+    input[type="range"]::-webkit-slider-thumb {
+        width: 30px;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 15px;
+        border-radius: 5px;
+        cursor: ew-resize;
+        background: #FFF;
+        position: relative;
     }
 </style>
 
-<div class="flex mx-auto items-end relative hidden">
+<div class="setting-detail flex flex-col hidden h-full">
+    <div class="max-w-[700px] w-full mx-auto overflow-auto bg-[#F2EAE8] rounded-md">
+        <div class="w-full flex flex-col text-xl px-8 py-4">
 
-    <div class="inline-flex justify-center p-8 border-stone-300 border bg-stone-200 flex-col items-end">
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Wmax</label>
-            <input type="number" name="robot_wmax"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_wmax_input input-param"
-                id="robot_wmax">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_wmax-btn"
-                type="robot_wmax">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
+        @include('frontend.blocks.setting.settingTab.saveButton', ['setting'=> 'parameter'])
 
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Vmax</label>
-            <input type="number" name="robot_vmax"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_vmax_input input-param"
-                id="robot_vmax">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_vmax-btn"
-                type="robot_vmax">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
+            {{-- SOUND --}}
+            <div class="flex flex-co items-center my-6 justify-between">
+                <span class="font-bold min-w-[70px]">Robot volume</span>
+                <div class="flex justify-end items-center">
+                    <div class="flex justify-between items-center">
+                        <div data-volume="low-vl" class="group/volumn text-start w-[18px]">
+                            <i class="fa-solid fa-volume-xmark hidden group-data-[volume=off-vl]/volumn:block"></i>
+                            <i class="fa-solid fa-volume-off hidden group-data-[volume=low-vl]/volumn:block"></i>
+                            <i class="fa-solid fa-volume-low hidden group-data-[volume=medium-vl]/volumn:block"></i>
+                            <i class="fa-solid fa-volume-high hidden group-data-[volume=high-vl]/volumn:block"></i>
+                        </div>
+                        <div class="text-2xl ml-4 text-center mr-4 min-w-[24px] value-volume">20</div>
+                    </div>
+                    <input type="range" class="w-[250px] rounded-lg appearance-none bg-gray-400 h-4 input-volume"
+                        name="robot_volume" id="" min="0" max="150">
+                </div>
+            </div>
+            {{-- PARAMETER --}}
+            @foreach ($parameters as $index => $parameter)
+                <div class="flex flex-co items-center my-6 justify-between">
+                    <span class="font-bold min-w-[70px]">{{ $titleParameters[$index] }}</span>
+                    <div class="">
+                        @include('frontend.blocks.setting.settingTab.buttonParameter', [
+                            'parameter' => $parameter,
+                        ])
+                    </div>
+                </div>
+            @endforeach
 
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot AW</label>
-            <input type="number" name="robot_aw"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_aw_input input-param"
-                id="robot_aw">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_aw-btn"
-                type="robot_aw">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
+            {{-- LOW BATTERY --}}
+            <div class="flex flex-co items-center my-6 justify-between">
+                <span class="font-bold min-w-[70px]">Robot low battery</span>
+                <div class="flex items-center">
+                    <span class="mr-4 value-low-battery">1</span>
+                    <input type="range" class="w-[250px] rounded-lg appearance-none bg-gray-400 h-4 input-low-battery"
+                        name="robot_low_battery" id="">
+                </div>
+            </div>
 
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot AX</label>
-            <input type="number"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_ax_input input-param"
-                name="robot_ax" id="robot_ax">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_ax-btn"
-                type="robot_ax">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
+            {{-- TYPE CONNECT --}}
+            <div class="flex flex-co items-center my-6 justify-between">
+                <span class="font-bold min-w-[70px]">Robot type connect</span>
+                <div class="flex w-[170px] items-center justify-center">
+                    <input type="radio" class="peer/lan" name="robot_type_connect" id="lan" value="lan" hidden>
+                    <label
+                        class="peer-checked/lan:bg-gray-400 cursor-pointer hover:bg-gray-200 peer-checked/lan:text-[#fff] px-4 border py-1 w-[70px] text-center border-r-0 border-gray-400"
+                        for="lan">LAN</label>
 
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot Gear</label>
-            <input type="number"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_gear_input input-param"
-                name="robot_gear" id="robot_gear">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_gear-btn"
-                type="robot_gear">
-                <i class="fa-solid fa-gear"></i>
-            </button>
+                    <input type="radio" class="peer/wifi" name="robot_type_connect" id="wifi" value="wifi" hidden>
+                    <label
+                        class="peer-checked/wifi:bg-gray-400 cursor-pointer hover:bg-gray-200 peer-checked/wifi:text-[#fff] px-4 border py-1 w-[70px] text-center border-l-0 border-gray-400"
+                        for="wifi">Wifi</label>
+                </div>
+            </div>
+            {{-- robot_type_connect --}}
         </div>
-
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot L</label>
-            <input type="number"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_l_input input-param"
-                name="robot_L" id="robot_l">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_l-btn"
-                type="robot_l">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
-
-        <div class="flex items-center mb-4 para-item">
-            <label class="text-2xl mr-4 min-w-[100px] text-right">Robot R</label>
-            <input type="number" name="robot_R"
-                class="w-[70px] rounded-md text-2xl h-[30px] px-4 text-center para-input robot_r_input input-param"
-                id="robot_r">
-            <button
-                class="w-[30px] h-[30px] border btn border-stone-400 ml-4 text-2xl rounded-lg bg-stone-300 para-robot-btn hidden robot_r-btn"
-                type="robot_r">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </div>
+    
     </div>
-    <button
-        class="px-4 py-1 bg-main text-[#fff] text-2xl btn rounded-md opacity-80 hover:opacity-100 ml-4 hidden save-para-btn absolute left-full">save</button>
 </div>

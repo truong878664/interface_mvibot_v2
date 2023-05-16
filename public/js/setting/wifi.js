@@ -1,8 +1,10 @@
+import dispatchEvent from "../functionHandle/dispatchEvent.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
 import { $, $$ } from "../main.js";
 import { robotActive } from "../mainLayout.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import publishTopicString from "../rosModule/topicString.js";
+import getIp from "./getIp.js";
 
 let nameWifi;
 const passwordWifi = $("#password-wifi");
@@ -15,40 +17,77 @@ export default function wifi() {
     resetWifi();
     subscribeTopicWifi();
     otherWifi();
+    handleChangeWifi();
+    handleConnectWifi();
 }
 
-setInterval(() => {
-    publishTopicString(
-        "/Mb23_946/robot_list_wifi",
-        "(~ssid=Tenda_MB22_916b~~signal=100~~active=no~~security=WPA1 WPA2~)(~ssid=Tenda_MB22_916b_5G~~signal=100~~active=no~~security=WPA1\
-         WPA2~)(~ssid=MVP_GUEST~~signal=50~~active=no~~security=~)(~ssid=MVP_PRO~~signal=49~~active=yes~~security=WPA2~)(~ssid=IOT\
-         System~~signal=45~~active=no~~security=WPA2~)(~ssid=CS_NM1~~signal=45~~active=no~~security=WPA2~)(~ssid=MARUEI\
-         VIP~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP_OFFICE~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP~~signal=25~~active=no~~security=WPA2\
-         802.1X~)"
-    );
-}, 1000);
+export function renderTypeWifi(data) {
+    const { wifi_type } = data;
+    const idWifiType = wifi_type === "hots_pot" ? "hots-pot" : "wifi-connect";
+    const wifiTypeElement = document.querySelector("#" + idWifiType);
+    wifiTypeElement.checked = true;
+    $("[data-wifi-connect]").dataset.wifiConnect = wifi_type;
+    dispatchEvent({ event: "change", element: wifiTypeElement });
+}
 
+function handleChangeWifi() {
+    const switchType = $$("[name=wifi-type]");
+    switchType.forEach((element) => {
+        element.addEventListener("change", (e) => {
+            const currentTypeWifi = e.target.id;
+            $(".wifi-container").dataset.wifiConnect = currentTypeWifi;
+            console.log(currentTypeWifi);
+            console.log(currentTypeWifi === "hots-pot" && e.target.checked);
+        });
+    });
+    $("[name=wifi-type]#hots-pot").addEventListener("input", (e) => {
+        if (!e.target.checked) return;
+        const robot = robotActive();
+        publishTopicString(`/${robot}/set_config`, "(wifi_type|hots_pot)");
+    });
+}
+
+// setInterval(() => {
+//     publishTopicString(
+//         "/Mb23_946/robot_list_wifi",
+//         "(~ssid=Tenda_MB22_916b~~signal=100~~active=no~~security=WPA1 WPA2~)(~ssid=Tenda_MB22_916b_5G~~signal=100~~active=no~~security=WPA1\
+//          WPA2~)(~ssid=MVP_GUEST~~signal=50~~active=no~~security=~)(~ssid=Mb23_946~~signal=49~~active=yes~~security=WPA2~)(~ssid=IOT\
+//          System~~signal=45~~active=no~~security=WPA2~)(~ssid=CS_NM1~~signal=45~~active=no~~security=WPA2~)(~ssid=MARUEI\
+//          VIP~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP_OFFICE~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP~~signal=25~~active=no~~security=WPA2\
+//          802.1X~)"
+//     );
+
+//     publishTopicString(
+//         "/Mb23_94/robot_list_wifi",
+//         "(~ssid=Tenda_MB22_916b~~signal=100~~active=no~~security=WPA1 WPA2~)(~ssid=Tenda_MB22_916b_5G~~signal=100~~active=no~~security=WPA1\
+//          WPA2~)(~ssid=MVP_GUEST~~signal=50~~active=no~~security=~)(~ssid=Mb23_94~~signal=90~~active=yes~~security=WPA2~)(~ssid=IOT\
+//          System~~signal=45~~active=no~~security=WPA2~)(~ssid=CS_NM1~~signal=45~~active=no~~security=WPA2~)(~ssid=MARUEI\
+//          VIP~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP_OFFICE~~signal=37~~active=no~~security=WPA2~)(~ssid=MVP~~signal=25~~active=no~~security=WPA2\
+//          802.1X~)"
+//     );
+// }, 1000);
+
+let dataWifiScan;
+let timeoutWifi;
 function subscribeTopicWifi() {
-    let dataWifiScan;
-
     $$(".name-robot").forEach((element) => {
         const robot = element.value;
         subscribeTopic(
             `${robot}/robot_list_wifi`,
             "std_msgs/String",
             (data, nameTopic) => {
-                // clearTimeout(timeoutWifi);
                 const nameRobotActive = robotActive();
                 const robotPub = nameTopic.slice(0, nameTopic.indexOf("/", 2));
                 if (nameRobotActive !== robotPub) {
-                        removeWifi();
-                        dataWifiScan = "";
                     return;
                 }
+                clearTimeout(timeoutWifi);
+                timeoutWifi = setTimeout(() => {
+                    removeWifi();
+                }, 2000);
+                // dataWifiScan = "";
 
-                dataWifiScan !== data.data &&
-                    parseWifi(data.data);
-                
+                dataWifiScan !== data.data && parseWifi(data.data);
                 dataWifiScan = data.data;
             }
         );
@@ -56,12 +95,13 @@ function subscribeTopicWifi() {
 }
 
 function parseWifi(data) {
-    console.log('parser');
     const arrayWifi = data
         .slice(1, data.length - 1)
         .replaceAll("\\", " ")
+        .replaceAll("  ", "")
         .replaceAll("=", '":"')
         .split(")(");
+
     const listWifi = arrayWifi.map((wifi) => {
         const wifiItem = wifi.split("~").filter((item) => item);
         const data = `{"${wifiItem.join('","')}"}`;
@@ -89,7 +129,6 @@ function renderWifiConnected(wifi) {
 }
 
 function renderWifi(wifi) {
-    loading(".wifi-wrapper");
     const htmlWifi = [];
     wifi.map((item) => {
         let wifiItem;
@@ -103,21 +142,18 @@ function renderWifi(wifi) {
             renderWifiConnected(item);
         } else {
             wifiItem = `
-            <div security="${
-                item.security ? "lock" : "open"
-            }" class="w-full h-[60px] border-b border-[rgba(67,67,67,0.1)] flex justify-between items-center hover:bg-[#cccccc39] cursor-pointer wifi-item"
-            name-wifi="${item.ssid}">
-            <span class="font-bold ml-4">${item.ssid}</span>
-    
-            <div class="text-2xl flex items-center pr-4">
-                <div class="mr-2">
-                ${item.security ? lockWifi.lock : lockWifi.open}
-                </div>
-                <div class="">
-                ${wifiIcon(item.signal)}
+            <div security="${item.security ? "lock" : "open"}"
+                class="w-full h-[60px] border-b border-[rgba(67,67,67,0.1)] flex justify-between items-center hover:bg-[#cccccc39] cursor-pointer wifi-item" name-wifi="${
+                    item.ssid
+                }">
+                <span class="font-bold ml-4">${item.ssid}</span>
+                <div class="text-2xl flex items-center pr-4">
+                    <div class="mr-2"> ${
+                        item.security ? lockWifi.lock : lockWifi.open
+                    } </div>
+                    <div class="">${wifiIcon(item.signal)}</div>
                 </div>
             </div>
-        </div>
             `;
         }
 
@@ -127,12 +163,10 @@ function renderWifi(wifi) {
 
     $(".wifi-wrapper").innerHTML = htmlWifi.join("");
     showPasswordWifi();
-    handleConnectWifi();
     handleHideFormWifi();
-    loaded(".wifi-wrapper");
 }
 
-const overlay = $(".overlay");
+const overlay = $(".overlay-wifi");
 function showPasswordWifi() {
     $(".wifi-wrapper").onclick = (e) => {
         const wifiItem = e.target.closest(".wifi-item");
@@ -144,9 +178,10 @@ function showPasswordWifi() {
         $("#name-wifi").value = nameWifi;
         formPassword.classList.remove("hidden");
         overlay.classList.remove("hidden");
-        passwordWifi.focus();
         if (wifiItem.getAttribute("security") !== "lock") {
             $(".connect-wifi-btn").removeAttribute("disabled");
+        } else {
+            passwordWifi.focus();
         }
     };
 
@@ -164,21 +199,36 @@ handleHideFormWifi();
 validConnect();
 
 function handleConnectWifi() {
+    console.log($(".connect-wifi-btn"));
     $(".connect-wifi-btn").onclick = () => {
-        const password = passwordWifi.value;
-        const nameWifiConnect = $("#name-wifi").value;
-        console.log(nameWifiConnect, password);
+        const wifi_ssid = $("#name-wifi").value;
+        const wifi_password = passwordWifi.value;
+        const wifi_type = $("[name=wifi_type]:checked").value;
+        const wifi_ipv4 = getIp({ element: ".wifi_ipv4" });
+        const wifi_ipv4_gateway = getIp({ element: ".wifi_ipv4_gateway" });
+        const wifi_ipv4_dns = $(".wifi_ipv4_dns").value;
 
-        nameWifiConnect && sendWifi(nameWifiConnect, password);
+        const dataWifi =
+            wifi_type === "auto"
+                ? {
+                      wifi_ssid,
+                      wifi_password,
+                      wifi_type,
+                  }
+                : {
+                      wifi_ssid,
+                      wifi_password,
+                      wifi_type,
+                      wifi_ipv4,
+                      wifi_ipv4_gateway,
+                      wifi_ipv4_dns,
+                  };
 
+        sendWifi(dataWifi);
         hideFormWifi();
-
-        loading(".wifi-wrapper");
-        setTimeout(() => {
-            loaded(".wifi-wrapper");
-        }, 1000);
     };
 }
+
 
 function validConnect() {
     $("#name-wifi").oninput = (e) => {
@@ -189,7 +239,7 @@ function validConnect() {
             : $(".connect-wifi-btn").setAttribute("disabled", true);
     };
     passwordWifi.oninput = (e) => {
-        isValidPass = e.target.value.length >= 8;
+        isValidPass = e.target.value.length >= 8 ||  e.target.value.length == 0;
 
         const isValid = isValidPass && (isValidName || $("#name-wifi").value);
         isValid
@@ -198,11 +248,15 @@ function validConnect() {
     };
 }
 
-function sendWifi(nameWifi, password) {
+function sendWifi(dataWifi) {
     loading(".wifi-wrapper");
     const robot = robotActive();
-    publishTopicString(`/${robot}/new_connect_wifi`, `${nameWifi}|${password}`);
-
+    const wifiTopic = [];
+    for (const key in dataWifi) {
+        wifiTopic.push(`(${key}|${dataWifi[key]})`);
+    }
+    publishTopicString(`/${robot}/set_config`, wifiTopic.join(""));
+    resetFormWifi();
     setTimeout(() => {
         loaded(".wifi-wrapper");
     }, 2000);
@@ -240,6 +294,7 @@ function removeWifi() {
         element.remove();
     });
     $(".wifi-connect-item").classList.add("hidden");
+    dataWifiScan = "";
 }
 
 function resetWifi() {
@@ -285,3 +340,15 @@ function hideFormWifi() {
 }
 
 const PUB_WIFI = `rostopic pub /Mb23_946/robot_list_wifi std_msgs/String "data: '(~ssid=hitech_router~~signal=82~~active=yes~~security=WPA1 WPA2~)(~ssid=MViBot_server~~signal=37~~active=no~~security=WPA2~)(~ssid=MARUEI\ \ VIP~~signal=35~~active=no~~security=WPA2~)(~ssid=MVP_OFFICE~~signal=35~~active=no~~security=WPA2~)(~ssid=MVP_GUEST~~signal=34~~active=no~~security=~)'" -r 1`;
+
+function resetFormWifi() {
+    $$(".wifi_ipv4").forEach((element, index) => {
+        console.log(element);
+        element.value = "";
+        $$(".wifi_ipv4_gateway")[index].value = "";
+    });
+    $(".wifi_ipv4_dns").value = "";
+    const inputWifiAuto = $("#wifi-auto");
+    inputWifiAuto.checked = true;
+    dispatchEvent({ event: "change", element: inputWifiAuto });
+}

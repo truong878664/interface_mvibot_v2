@@ -1,3 +1,4 @@
+import confirmationForm from "../../functionHandle/confirmationForm.js";
 import { $, $$ } from "../../main.js";
 import resetIndex from "../blockStep/resetIndex.js";
 import dbDelete from "../functionHandle/dbDelete.js";
@@ -6,7 +7,13 @@ import { currentMission } from "../handleStepMission.js";
 
 export default function handleDeleteTypeMission() {
     $$(".delete-type-mission-btn").forEach((element) => {
-        element.onclick = (e) => dbDelete(e.target, () => handleDelete(e));
+        element.onclick = (e) => {
+            confirmationForm({
+                message: "Do you want to delete this item?",
+                callback: () => handleDelete(e),
+            });
+        };
+        // element.onclick = (e) => dbDelete(e.target, () => handleDelete(e));
     });
     function handleDelete(e) {
         const missionItem = e.target.closest(".type-mission-item");

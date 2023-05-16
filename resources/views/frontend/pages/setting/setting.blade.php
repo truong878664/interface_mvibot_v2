@@ -4,6 +4,7 @@
         <div class="heading ">setting</div>
         <div class="w-full h-[calc(100%_-_32px)] bg-[#EAE2DF] flex rounded-lg overflow-hidden border border-[#e5e5e5]">
             <div class="w-1/5 h-full  min-w-[220px] shadow-2xl overflow-auto setting-item-wrapper">
+
                 @php
                     $settingItems = [
                         [
@@ -13,17 +14,18 @@
                             'color' => '#010104',
                         ],
                         [
+                            'title' => 'Operation',
+                            'icon' => 'fa-solid fa-person-running',
+                            'class' => 'hidden',
+                            'color' => '#F94A29',
+                        ],
+                        [
                             'title' => 'Parameter',
-                            'icon' => 'fa-solid fa-dolly',
+                            'icon' => 'fa-solid fa-sliders',
                             'class' => 'hidden',
                             'color' => '#8E8A8B',
                         ],
-                        [
-                            'title' => 'Mode',
-                            'icon' => 'fa-solid fa-person-walking',
-                            'class' => 'hidden',
-                            'color' => '#D61355',
-                        ],
+                    
                         [
                             'title' => 'Wifi',
                             'icon' => 'fa-solid fa-wifi',
@@ -31,14 +33,14 @@
                             'color' => '#0080F6',
                         ],
                         [
-                            'title' => 'IP',
-                            'icon' => 'fa-solid fa-location-dot',
+                            'title' => 'Ethernet',
+                            'icon' => 'fa-solid fa-ethernet',
                             'class' => 'hidden',
-                            'color' => '#F94A29',
+                            'color' => '#C07F00',
                         ],
                         [
-                            'title' => 'Device',
-                            'icon' => 'fa-solid fa-tablet-screen-button',
+                            'title' => 'Camera',
+                            'icon' => 'fa-solid fa-camera',
                             'class' => 'hidden',
                             'color' => '#858B89',
                         ],
@@ -48,12 +50,7 @@
                             'class' => 'hidden',
                             'color' => '#6064DC',
                         ],
-                        [
-                            'title' => 'Volume',
-                            'icon' => 'fa-solid fa-volume-high',
-                            'class' => 'hidden',
-                            'color' => '#0080F6',
-                        ],
+                    
                         [
                             'title' => 'Power',
                             'icon' => 'fa-solid fa-power-off',
@@ -80,17 +77,17 @@
 
             <div class="w-4/5 h-full bg-[#F6EEEB] px-4 py-6 border-l border-solid">
                 @include('frontend.blocks.setting.settingTab.robot')
+                @include('frontend.blocks.setting.settingTab.operation')
                 @include('frontend.blocks.setting.settingTab.parameter')
-                @include('frontend.blocks.setting.settingTab.mode')
                 @include('frontend.blocks.setting.settingTab.wifi')
-                @include('frontend.blocks.setting.settingTab.ip')
+                @include('frontend.blocks.setting.settingTab.ethernet')
                 @include('frontend.blocks.setting.settingTab.camera')
                 @include('frontend.blocks.setting.settingTab.publicTopic')
-                @include('frontend.blocks.setting.settingTab.volume')
                 @include('frontend.blocks.setting.settingTab.rebotShutdown')
             </div>
         </div>
-        @include('frontend.blocks.setting.settingTab.rbst')
+        {{-- @include('frontend.blocks.setting.settingTab.rbst') --}}
     </div>
+
     <script type="module" src="/js/setting/setting.js"></script>
 @endsection

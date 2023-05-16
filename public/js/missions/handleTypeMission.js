@@ -14,6 +14,7 @@ import handleAddStep, {
 import updateBlockStep from "./blockStep/updateBlockStep.js";
 import sortFunction from "../functionHandle/sort.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -144,9 +145,6 @@ function handleAddMissionIfelse() {
                 loading();
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputIfelse();
-                $$(".normal-border").forEach((item) => {
-                    item.style.borderColor = "#ccc";
-                });
             }
         };
     });
@@ -224,7 +222,9 @@ function addTypeMission(data, typeSave) {
             handleRenderTypeMission();
             loaded();
         })
-        .catch((error) => {});
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
 export function render(dataSteps, element) {
@@ -325,19 +325,22 @@ export function handleDeleteStep(data, wrapperItem) {
     $(wrapperItem)
         .querySelectorAll(".delete-step-btn")
         .forEach((element) => {
-            element.onclick = (e) => {
-                const stepItem = e.target;
-                data.splice(
-                    stepItem.closest(".step-item").getAttribute("index"),
-                    1
-                );
-                stepItem.closest(".step-item").remove();
-                $(wrapperItem)
-                    .querySelectorAll(".step-item")
-                    .forEach((element, index) => {
-                        element.setAttribute("index", index);
-                    });
-            };
+            element.onclick = (e) =>
+                confirmationForm({
+                    message: "Do you want to delete this step?",
+                    callback: () => handleDelete(e, data, wrapperItem),
+                });
+        });
+}
+
+function handleDelete(e, data, wrapperItem) {
+    const stepItem = e.target;
+    data.splice(stepItem.closest(".step-item").getAttribute("index"), 1);
+    stepItem.closest(".step-item").remove();
+    $(wrapperItem)
+        .querySelectorAll(".step-item")
+        .forEach((element, index) => {
+            element.setAttribute("index", index);
         });
 }
 

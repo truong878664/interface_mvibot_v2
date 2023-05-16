@@ -1,3 +1,4 @@
+import confirmationForm from "../../functionHandle/confirmationForm.js";
 import { $, $$ } from "../../main.js";
 import dbDelete from "../functionHandle/dbDelete.js";
 import translatesStepsMission from "../functionHandle/translatesStepsMission.js";
@@ -6,7 +7,8 @@ import { currentMission } from "../handleStepMission.js";
 export default function handleDeleteFunctionType() {
     $$(".delete-function-item-btn").forEach((element) => {
         element.onclick = (e) => {
-            dbDelete(e.target, () => deleteItem(e));
+            // dbDelete(e.target, () => deleteItem(e));
+            confirmationForm({message:"Do you want to delete this item?", callback: () => deleteItem(e)})
         };
     });
 }

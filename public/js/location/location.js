@@ -97,7 +97,7 @@ $("#robot-navigation-name").onchange = (e) => {
                     topic: "/" + robotActive + "/laser/scan",
                     rootObject: viewer.scene,
                     tfClient: tfClient,
-                    material: { size: 0.5, color: 0x00ff00 },
+                    material: { size: 0.3, color: 0x00ff00 },
                     rate: 1,
                 });
             } else {
@@ -110,10 +110,22 @@ $("#robot-navigation-name").onchange = (e) => {
                         "/laser/scan",
                     rootObject: viewer.scene,
                     tfClient: tfClient,
-                    material: { size: 0.5, color: 0x008000 },
+                    material: { size: 0.3, color: 0x008000 },
                     rate: 1,
                 });
             }
+        }
+    } else {
+        for (let i = 0; i < robotNavigationChange.length; i++) {
+            viewer.scene.remove(laser[i].points.sn);
+            laser[i] = new ROS3D.LaserScan({
+                ros: ros,
+                topic: "/" + robotActive + "/laser/scan",
+                rootObject: viewer.scene,
+                tfClient: tfClient,
+                material: { size: 0.3, color: 0x008000 },
+                rate: 1,
+            });
         }
     }
 };

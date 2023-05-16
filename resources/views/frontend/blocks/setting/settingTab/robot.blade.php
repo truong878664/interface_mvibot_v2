@@ -34,6 +34,5 @@
             opacity: 1;
         }
     </style>
-    <script></script>
 </div>
 

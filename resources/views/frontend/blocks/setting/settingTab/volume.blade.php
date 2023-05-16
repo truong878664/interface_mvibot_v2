@@ -1,5 +1,5 @@
 <div class="setting-detail flex flex-col hidden h-full">
-    <div class="max-w-[700px] w-full mx-auto overflow-auto">
+    {{-- <div class="max-w-[700px] w-full mx-auto overflow-auto">
         <div
             class="w-3/4 mx-auto min-w-[300px] text-2xl overflow-hidden py-4 text-[#242424] bg-[#F2EAE8] rounded-md px-10">
             <div class="range-slider relative mb-12 mt-[20px] flex flex-col items-center">
@@ -28,7 +28,7 @@
             <button
                 class="float-right px-6 py-2 bg-main text-[#fff] text-[16px] btn rounded-md opacity-80 hover:opacity-100 mt-8 set-volume-btn">Ok</button>
         </div>
-    </div>
+    </div> --}}
 </div>
 <style>
     [data-volume="high-vl"] .high-vl,

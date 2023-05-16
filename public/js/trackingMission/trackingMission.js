@@ -87,7 +87,17 @@ function activeLaserRobot(robotActive) {
                 topic: "/" + robotActive + "/laser/scan",
                 rootObject: viewer.scene,
                 tfClient: tfClient,
-                material: { size: 0.5, color: 0x00ff00 },
+                material: { size: 0.3, color: 0x00ff00 },
+                rate: 1,
+            });
+        } else if (robotActive === "") {
+            viewer.scene.remove(laser[i].points.sn);
+            laser[i] = new ROS3D.LaserScan({
+                ros: ros,
+                topic: "/" + robotNavigationChange[i].name_seri + "/laser/scan",
+                rootObject: viewer.scene,
+                tfClient: tfClient,
+                material: { size: 0.3, color: 0x008000 },
                 rate: 1,
             });
         } else {
@@ -97,7 +107,7 @@ function activeLaserRobot(robotActive) {
                 topic: "/" + robotNavigationChange[i].name_seri + "/laser/scan",
                 rootObject: viewer.scene,
                 tfClient: tfClient,
-                material: { size: 0.5, color: 0x008000 },
+                material: { size: 0.3, color: 0x008000 },
                 rate: 1,
             });
         }
@@ -114,27 +124,22 @@ function changeTopic() {
         robotActive = e.target.value;
 
         setRobotMove(robotActive);
+        activeLaserRobot(robotActive);
         if (robotActive) {
             robotPathTopic(robotActive);
-
             displayPathFs = setInterval(() => {
                 displayPath(robotActive);
             }, 2000);
-
             robotPathTopic(robotActive);
-
-            activeLaserRobot(robotActive);
         } else {
             // cmd_vel_listener.name = `/cmd_vel`;
 
             clearInterval(displayPathFs);
         }
 
-        // // console.log(laser[0].topicName);
         // const selectLaser =  laser.find((item) => {
         //     return item.topicName === `/${robotActive}/laser/scan`
         // })
-        // console.log(selectLaser);
     };
 }
 
