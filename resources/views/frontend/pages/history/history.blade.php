@@ -10,7 +10,7 @@
                     <tr class="">
                         <th class="sticky top-0 bg-[#f5f5f5] p-4 w-1/12">STT</th>
                         <th class="sticky top-0 bg-[#f5f5f5] p-4 w-1/12">Type</th>
-                        <th class="sticky top-0 bg-[#f5f5f5] p-4 w-2/12">Time</th>
+                        <th class="sticky top-0 bg-[#f5f5f5] p-4 w-2/12">Time error</th>
                         <th class="sticky top-0 bg-[#f5f5f5] p-4 w-8/12">Log</th>
                     </tr>
                 </thead>
