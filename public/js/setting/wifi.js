@@ -36,8 +36,6 @@ function handleChangeWifi() {
         element.addEventListener("change", (e) => {
             const currentTypeWifi = e.target.id;
             $(".wifi-container").dataset.wifiConnect = currentTypeWifi;
-            console.log(currentTypeWifi);
-            console.log(currentTypeWifi === "hots-pot" && e.target.checked);
         });
     });
     $("[name=wifi-type]#hots-pot").addEventListener("input", (e) => {
@@ -199,7 +197,6 @@ handleHideFormWifi();
 validConnect();
 
 function handleConnectWifi() {
-    console.log($(".connect-wifi-btn"));
     $(".connect-wifi-btn").onclick = () => {
         const wifi_ssid = $("#name-wifi").value;
         const wifi_password = passwordWifi.value;
@@ -343,7 +340,6 @@ const PUB_WIFI = `rostopic pub /Mb23_946/robot_list_wifi std_msgs/String "data: 
 
 function resetFormWifi() {
     $$(".wifi_ipv4").forEach((element, index) => {
-        console.log(element);
         element.value = "";
         $$(".wifi_ipv4_gateway")[index].value = "";
     });
