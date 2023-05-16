@@ -20,7 +20,7 @@ function master(data) {
     isMasterElement.checked = isMaster;
     dispatchEvent({ event: "change", element: isMasterElement });
     renderIp({
-        ipString: isMaster ? data.ip_master : "0.0.0.0",
+        ipString: isMaster ? data.ip_master : "",
         ipElement: "[data-ip=master]",
     });
 }

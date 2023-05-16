@@ -29,10 +29,63 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .connection-failed.shake {
+            animation: shake 1s linear infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                -webkit-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+            }
+
+            4% {
+                -webkit-transform: rotate(15deg);
+                transform: rotate(15deg);
+            }
+
+            8%,
+            24% {
+                -webkit-transform: rotate(-18deg);
+                transform: rotate(-18deg);
+            }
+
+            12%,
+            28% {
+                -webkit-transform: rotate(18deg);
+                transform: rotate(18deg);
+            }
+
+            16% {
+                -webkit-transform: rotate(-22deg);
+                transform: rotate(-22deg);
+            }
+
+            20% {
+                -webkit-transform: rotate(22deg);
+                transform: rotate(22deg);
+            }
+
+            32% {
+                -webkit-transform: rotate(-12deg);
+                transform: rotate(-12deg);
+            }
+
+            36% {
+                -webkit-transform: rotate(12deg);
+                transform: rotate(12deg);
+            }
+
+            40%,
+            100% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+        }
     </style>
     <header class="main-header">
         <div class="header-left-wrapper">
-            <div class="connect-ros-btn connection-failed">
+            <div class="connect-ros-btn connection-failed shake">
                 <i class="fa-solid fa-satellite-dish"></i>
             </div>
             <div class="flex items-center">
