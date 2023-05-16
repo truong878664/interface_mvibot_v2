@@ -34,16 +34,16 @@
             <span class="font-bold">Ip master</span>
             <div class="border inline-block py-2 px-1 rounded-md bg-stone-200">
                 <input class="w-[50px] text-center border-none bg-transparent ip-master-partial ip-partial"
-                    data-ip="master" type="number" value="0">
+                    data-ip="master" type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-master-partial ip-partial"
-                    data-ip="master" type="number" value="0">
+                    data-ip="master" type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-master-partial ip-partial"
-                    data-ip="master" type="number" value="0">
+                    data-ip="master" type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-master-partial ip-partial"
-                    data-ip="master" type="number" value="0">
+                    data-ip="master" type="number">
             </div>
         </div>
 
@@ -52,16 +52,16 @@
             <span class="font-bold">Ip node</span>
             <div class="bg-[#ffffffab] inline-block py-2 px-1 rounded-md">
                 <input class="w-[50px] text-center border-none bg-transparent ip-node-partial ip-partial" data-ip="node"
-                    type="number" value="0">
+                    type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-node-partial ip-partial" data-ip="node"
-                    type="number" value="0">
+                    type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-node-partial ip-partial" data-ip="node"
-                    type="number" value="0">
+                    type="number">
                 <span>.</span>
                 <input class="w-[50px] text-center border-none bg-transparent ip-node-partial ip-partial" data-ip="node"
-                    type="number" value="0">
+                    type="number">
             </div>
         </div>
     </div>

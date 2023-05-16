@@ -23,34 +23,26 @@
                 <div class="mx-8 my-6 flex justify-between text-2xl">
                     <span class="font-bold">Ip v4</span>
                     <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
                     </div>
                 </div>
                 {{-- LAN IPV4 GATEWAY --}}
                 <div class="mx-8 my-6 flex justify-between text-2xl">
                     <span class="font-bold">Ip v4 gateway</span>
                     <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number"
-                            value="0">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
                     </div>
                 </div>
                 {{-- LAN IPV4 DNS --}}
