@@ -306,7 +306,7 @@ function resetWifi() {
 
         // /name_seri/scan_wifi
         const robot = robotActive();
-        publishTopicString(`/${robot}/scan_wifi`, "2");
+        publishTopicString(`/${robot}/scan_wifi`, "1");
     };
 }
 
