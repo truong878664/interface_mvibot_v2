@@ -40,7 +40,7 @@ function setOperation() {
     function getDataOpera() {
         const mode = document.querySelector("[name=mode-value]:checked").value;
         const is_master = document.querySelector("#is-master").checked;
-        const ip_master = is_master
+        const ip_master = !is_master
             ? getIp({ element: "[data-ip=master]" })
             : null;
         const dataOperation = {

@@ -70,7 +70,7 @@
         const checkboxIsMaster = document.querySelector('#is-master');
         checkboxIsMaster.onchange = (e) => {
             const isMaster = e.target.checked;
-            document.querySelector('[data-ismaster]').dataset.ismaster = isMaster ? 'show' : 'hidden';
+            document.querySelector('[data-ismaster]').dataset.ismaster = !isMaster ? 'show' : 'hidden';
         }
     </script>
 

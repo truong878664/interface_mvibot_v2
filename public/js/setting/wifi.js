@@ -296,8 +296,9 @@ function removeWifi() {
 
 function resetWifi() {
     let timeOut;
-    $(".reset-wifi-btn").onclick = () => {
+    $(".reset-wifi-btn").onclick = (e) => {
         loadingWifi(true);
+        // /MB/scan_wifi string '2'
         clearTimeout(timeOut);
         timeOut = setTimeout(() => {
             loadingWifi(false);
@@ -305,7 +306,7 @@ function resetWifi() {
 
         // /name_seri/scan_wifi
         const robot = robotActive();
-        publishTopicString(`/${robot}/scan_wifi`, "1");
+        publishTopicString(`/${robot}/scan_wifi`, "2");
     };
 }
 

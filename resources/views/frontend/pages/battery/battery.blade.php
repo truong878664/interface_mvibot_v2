@@ -12,157 +12,219 @@
             color: #54B435;
         }
     </style>
-    <div class="group/status wrapper-battery-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto flex flex-wrap data-[status-robot=no]:!text-[#d2d2d2]" data-status-robot="no">
-        <div class="w-1/2 md:w-1/3 lg:w-1/4">
-            <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
-                <div class="">
-                    <label class="inline-flex justify-center items-center p-3 rounded-md bg-red-400 text-[#fff]">
-                        <i class="fa-solid fa-robot"></i>
-                    </label>
-                    <span class="font-bold" id="name_seri"></span>
-                </div>
 
-                <div class="flex justify-end">
-                    <div class="flex flex-col">
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Status</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Mode</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Mode status</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">IP node</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">IP master</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Type connect</span>
-                    </div>
-                    <div class="flex flex-col mx-6">
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="status">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="mode">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="mode_status">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="ip_node">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="ip_master">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="type_connect">-</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-1/2 md:w-1/3 lg:w-1/4">
-            <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
-                <div class="">
-                    <label class="inline-flex justify-center items-center p-3 rounded-md bg-yellow-400 text-[#fff]">
-                        <i class="fa-solid fa-bolt"></i>
-                    </label>
-                    <span class="font-bold">Battery</span>
-                </div>
-
-                <div class="flex justify-end">
-                    <div class="flex flex-col">
-                        {{-- <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Health</span> --}}
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Charging</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Level</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Temperature</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Voltage</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Cycle count</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Current</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Num cell</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Capacity now</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Capacity max</span>
-                    </div>
-                    <div class="flex flex-col mx-6">
-                        {{-- <span class="py-2 h-[30px] text-2xl pr-8 pl-2">Gooth</span> --}}
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="charge">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2">
-                            <div
-                                class="w-[120px] h-[20px] border-[2px] rounded-full  text-center font-bold text-xl soc-wrapper">
-                                <spa parameter-statusn id="soc">-</spa>%
+    @php
+        $statusDetails = [
+            [
+                'title' => 'robot',
+                'icon' => 'fa-solid fa-robot',
+                'color' => 'bg-red-400',
+            ],
+            [
+                'title' => 'battery',
+                'icon' => 'fa-solid fa-bolt',
+                'color' => 'bg-yellow-400',
+            ],
+            [
+                'title' => 'device',
+                'icon' => 'fa-solid fa-tablet-screen-button',
+                'color' => 'bg-blue-400',
+            ],
+            [
+                'title' => 'motor',
+                'icon' => 'fa-solid fa-fax',
+                'color' => 'bg-[#8d6e63]',
+            ],
+        ];
+    @endphp
+    <div class="group/status wrapper-battery-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto flex flex-wrap data-[status-robot=no]:!text-[#d2d2d2]"
+        data-status-robot="no">
+        @foreach ($statusDetails as $item)
+            <div class="w-1/2 md:w-1/3 lg:w-1/4">
+                <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md">
+                    <div class="flex justify-between items-center p-4 cursor-pointer border-b group/status-title peer/status-title status-title"
+                        data-status="hidden">
+                        <div class="">
+                            <label
+                                class="inline-flex justify-center items-center p-3 rounded-md {{ $item['color'] }} text-[#fff]">
+                                <i class="{{ $item['icon'] }}"></i>
+                            </label>
+                            <span class="font-bold capitalize"
+                                id="{{ $item['title'] === 'robot' ? 'name_seri' : '' }}">{{ $item['title'] }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="group/status-item text-2xl text-yellow-400 data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500" data-title-status="{{$item['title']}}"
+                                data-status-item="">
+                                <span class="text-2xl">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+                                <span class="group-data-[status-item=ng]/status-item:inline-block hidden">
+                                    NG
+                                </span>
+                                <span class="group-data-[status-item=ok]/status-item:inline-block hidden">
+                                    OK
+                                </span>
                             </div>
+                            <div
+                                class="text-[#0f6cbd] group-data-[status=show]/status-title:rotate-180 ml-3 transition-all duration-500 block">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex justify-end status-item-detail overflow-hidden peer-data-[status=hidden]/status-title:hidden">
+                        @switch($item['title'])
+                            @case('robot')
+                                @include('frontend.blocks.statusDetail.robot')
+                            @break
+
+                            @case('battery')
+                                @include('frontend.blocks.statusDetail.battery')
+                            @break
+
+                            @case('device')
+                                @include('frontend.blocks.statusDetail.device')
+                            @break
+
+                            @case('motor')
+                                @include('frontend.blocks.statusDetail.motor')
+                            @break
+
+                            @default
+                        @endswitch
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        {{-- <div class="w-1/2 md:w-1/3 lg:w-1/4">
+            <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
+                <div class="flex justify-between">
+                    <div class="">
+                        <label class="inline-flex justify-center items-center p-3 rounded-md bg-red-400 text-[#fff]">
+                            <i class="fa-solid fa-robot"></i>
+                        </label>
+                        <span class="font-bold" id="name_seri"></span>
+                    </div>
+                    <div class="group/status-item data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500"
+                        data-status-item="ok">
+                        <span class="text-2xl">
+                            <i class="fa-solid fa-circle"></i>
                         </span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2"><spa parameter-statusn id="temperature">-</spa> <span>°C</span></span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2"><spa parameter-statusn id="vol">-</spa> <span>v</span></span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="cycle">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="current">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="num_cell">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="capacity_now">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="capacity_max">-</span>
+                        <span class="group-data-[status-item=ng]/status-item:inline-block hidden">
+                            NG
+                        </span>
+                        <span class="group-data-[status-item=ok]/status-item:inline-block hidden">
+                            OK
+                        </span>
                     </div>
+                    <div class="">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+
+                <div class="flex justify-end status-item-detail">
+                    @include('frontend.blocks.statusDetail.robot')
                 </div>
             </div>
         </div>
         <div class="w-1/2 md:w-1/3 lg:w-1/4">
             <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
-                <div class="">
-                    <label class="inline-flex justify-center items-center p-3 rounded-md bg-blue-400 text-[#fff]">
-                        <i class="fa-solid fa-tablet-screen-button"></i>
-                    </label>
-                    <span class="font-bold">Device</span>
+                <div class="flex justify-between">
+                    <div class="">
+                        <label class="inline-flex justify-center items-center p-3 rounded-md bg-yellow-400 text-[#fff]">
+                            <i class="fa-solid fa-bolt"></i>
+                        </label>
+                        <span class="font-bold">Battery</span>
+                    </div>
+                    <div class="group/status-item data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500"
+                        data-status-item="ok">
+                        <span class="text-2xl">
+                            <i class="fa-solid fa-circle"></i>
+                        </span>
+                        <span class="group-data-[status-item=ng]/status-item:inline-block hidden">
+                            NG
+                        </span>
+                        <span class="group-data-[status-item=ok]/status-item:inline-block hidden">
+                            OK
+                        </span>
+                    </div>
                 </div>
 
-                <div class="flex justify-end">
-                    <div class="flex flex-col">
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Radar 1</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Radar 2</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Camera 1</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Serial 1</span>
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Camera 2</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Serial 2</span>
-                        <span class="py-2 h-[30px] text-2xl font-bold px-2 text-right">Uart</span>
+                <div class="flex justify-end status-item-detail">
+                    @include('frontend.blocks.statusDetail.battery')
 
+                </div>
+            </div>
+        </div>
+        <div class="w-1/2 md:w-1/3 lg:w-1/4">
+            <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
+                <div class="flex justify-between">
+                    <div class="">
+                        <label class="inline-flex justify-center items-center p-3 rounded-md bg-blue-400 text-[#fff]">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                        </label>
+                        <span class="font-bold">Device</span>
                     </div>
-                    <div class="flex flex-col mx-6">
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="radar1">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="radar2">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl- parameter-status2"id="camera1">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="serial_camera1">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="camera2">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="serial_camera2">-</span>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" id="uart">-</span>
+                    <div class="group/status-item data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500"
+                        data-status-item="ok">
+                        <span class="text-2xl">
+                            <i class="fa-solid fa-circle"></i>
+                        </span>
+                        <span class="group-data-[status-item=ng]/status-item:inline-block hidden">
+                            NG
+                        </span>
+                        <span class="group-data-[status-item=ok]/status-item:inline-block hidden">
+                            OK
+                        </span>
+                    </div>
+                </div>
 
-                    </div>
+                <div class="flex justify-end hidden status-item-detail">
+                    @include('frontend.blocks.statusDetail.device')
                 </div>
             </div>
         </div>
         <div class="w-1/2 md:w-1/3 lg:w-1/4">
 
             <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md p-4">
-                <div class="">
-                    <label class="inline-flex justify-center items-center p-3 rounded-md bg-[#8d6e63] text-[#fff]">
-                        <i class="fa-solid fa-fax"></i>
-                    </label>
-                    <span class="font-bold">Motor</span>
+                <div class="flex justify-between">
+                    <div class="">
+                        <label class="inline-flex justify-center items-center p-3 rounded-md bg-[#8d6e63] text-[#fff]">
+                            <i class="fa-solid fa-fax"></i>
+                        </label>
+                        <span class="font-bold">Motor</span>
+                    </div>
+                    <div class="group/status-item data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500"
+                        data-status-item="">
+                        <span class="text-2xl">
+                            <i class="fa-solid fa-circle"></i>
+                        </span>
+                        <span class="group-data-[status-item=ng]/status-item:inline-block hidden">
+                            NG
+                        </span>
+                        <span class="group-data-[status-item=ok]/status-item:inline-block hidden">
+                            OK
+                        </span>
+                    </div>
                 </div>
 
-                <div class="flex justify-end">
-                    <div class="flex flex-col">
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Motor left</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Live</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Error</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Enable</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Brake</span>
-
-                        <span class="py-2 h-[30px] font-bold text-2xl px-2 text-right">Motor right</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Live</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Error</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Enable</span>
-                        <span class="py-2 h-[30px] text-2xl px-2 text-right">Brake</span>
-                    </div>
-                    <div class="flex flex-col mx-6">
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 text-transparent">-</span>
-                        <div class="flex flex-col motor_left">
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 live ">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 error">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 enable">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 brake">-</span>
-                        </div>
-                        <span class="py-2 h-[30px] text-2xl pr-8 pl-2 text-transparent">-</span>
-                        <div class="flex flex-col motor_right">
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 live">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 error">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 enable">-</span>
-                            <span class="py-2 h-[30px] text-2xl pr-8 pl-2 brake">-</span>
-                        </div>
-                    </div>
+                <div class="flex justify-end hidden status-item-detail">
+                    @include('frontend.blocks.statusDetail.device')
                 </div>
             </div>
-
-        </div>
+        </div> --}}
     </div>
 
-   
+    <script>
+        const statusTitles = document.querySelectorAll('.status-title')
+        statusTitles.forEach(element => {
+            element.onclick = (e) => {
+                const status = element.dataset.status
+                element.dataset.status = status === 'hidden' ? 'show' : 'hidden'
+            }
+        });
+    </script>
     <script type="module" src="/js/status/status2.js"></script>
 @endsection

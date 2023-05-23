@@ -250,8 +250,12 @@ export function render(dataSteps, element) {
         );
     });
     stepsWrapper.innerHTML = htmlStep.join("");
+
     stepsWrapper.scrollTop =
         stepsWrapper.scrollHeight - stepsWrapper.clientHeight;
+
+    stepsWrapper.scrollLeft =
+        stepsWrapper.scrollWidth - stepsWrapper.clientWidth;
 }
 
 export function handleMoveStep(data, wrapperItem) {

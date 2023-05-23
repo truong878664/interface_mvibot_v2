@@ -9,13 +9,13 @@ import { showAllStep, showStep } from "./showStep.js";
 
 export default function renderBlockStep() {
     console.log("render block step...");
-    loading()
+    loading();
     fetch(`/api/mi/${currentMission}`)
         .then((res) => res.json())
         .then((data) => {
             const steps_mission_name = data.steps_mission_name;
             const shortHandMissionList = data.mission_shorthand?.split("+");
-            
+
             const arraySteps = steps_mission_name?.split("+");
             const html = [];
 
@@ -29,9 +29,15 @@ export default function renderBlockStep() {
 
             arraySteps?.forEach((arrayStep, index) => {
                 const typeMissionItem = arrayStep.split("^");
-                const nameTypeMission = arrayStep.slice(arrayStep.indexOf("^") + 1, arrayStep.indexOf("^", arrayStep.indexOf("^") + 1))
-                const idTypeMission = arrayStep.slice(0, arrayStep.indexOf("^"))
-                
+                const nameTypeMission = arrayStep.slice(
+                    arrayStep.indexOf("^") + 1,
+                    arrayStep.indexOf("^", arrayStep.indexOf("^") + 1)
+                );
+                const idTypeMission = arrayStep.slice(
+                    0,
+                    arrayStep.indexOf("^")
+                );
+
                 switch (typeMissionItem[2]) {
                     case "normal":
                         const htmlNormal = [];
@@ -126,17 +132,19 @@ export default function renderBlockStep() {
                 ? ($(".steps-wrapper").innerHTML = html.join(""))
                 : messageEmpty($(".steps-wrapper"), "Mission empty!");
 
-            scrollTop(".steps-wrapper");
             handleDeleteBlockMission(shortHandMissionList);
             showStep();
             showAction();
             showAllStep();
             handleEditMission();
             handleMoveBlockStep(shortHandMissionList);
+            scrollTop({ query: ".steps-wrapper" });
             loaded();
         });
 }
 
-function scrollTop(element) {
-    $(element).scrollTop = $(".steps-wrapper").scrollHeight;
+function scrollTop({ query }) {
+    const scrollElement = $(query);
+    scrollElement.scrollTop =
+        scrollElement.scrollHeight - scrollElement.clientHeight;
 }

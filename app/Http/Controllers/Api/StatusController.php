@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\StatusRobot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class StatusController extends Controller
 {
@@ -48,74 +49,36 @@ class StatusController extends Controller
      */
     public function show($robot)
     {
-        $status_robot = StatusRobot::where('name_seri', $robot)->first();
-        $battery_status = DB::table('battery_status')->where('name_seri', $robot)->first();
-        $sensor_status = DB::table('sensor_status')->where('name_seri', $robot)->first();
-        $robot_config_status = DB::table('robot_config_status')->where('name_seri', $robot)->select('serial_camera1', 'serial_camera2')->first();
-        $motor_left_status = DB::table('motor_left_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
-        $motor_right_status = DB::table('motor_right_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
+        try {
 
-        $status_robot =  $status_robot ? $status_robot : [        
-            "name_seri" => "-",
-            "status" => "-",
-            "mode" => "-",
-            "mode_status" => "-",
-            "ip_node" => "-",
-            "ip_master" => "-",
-            "type_connect" => "-",
+            $battery_status = DB::table('battery_status')->where('name_seri', $robot)->first();
+            $sensor_status = DB::table('sensor_status')->where('name_seri', $robot)->first();
+            $robot_config_status = DB::table('robot_config_status')->where('name_seri', $robot)->select('serial_camera1', 'serial_camera2', 'robot_low_battery', 'is_master', 'robot_volume', 'robot_type_connect', 'name_seri', 'mode', 'ip_node', 'ip_master', 'robot_type_connect')->first();
+            $motor_left_status = DB::table('motor_left_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
+            $motor_right_status = DB::table('motor_right_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
 
-        ];
-        $battery_status =  $battery_status ? $battery_status : [
-            "name_seri" => "-",
-            "soc" => "-",
-            "vol" => "-",
-            "cycle" => "-",
-            "capacity_now" => "-",
-            "capacity_max" => "-",
-            "charge" => "-",
-            "current" => "-",
-            "num_cell" => "-",
-            "temperature" => "-",
-        ];
-        $sensor_status =  $sensor_status ? $sensor_status : [
-            "name_seri" => "-",
-            "radar1" => "-",
-            "radar2" => "-",
-            "camera1" => "-",
-            "camera2" => "-",
-            "uart" => "-",
-        ];
-        $robot_config_status =  $robot_config_status ? $robot_config_status : [
-            "serial_camera1" => "-",
-            "serial_camera2" => "-"
-        ];
-        $motor_left_status =  $motor_left_status ? $motor_left_status : [
-            "live" => "-",
-            "error" => "-",
-            "enable" => "-",
-            "brake" => "-"
-        ];
-        $motor_right_status =  $motor_right_status ? $motor_right_status : [
-            "live" => "-",
-            "error" => "-",
-            "enable" => "-",
-            "brake" => "-"
-        ];
+            $data = array_merge(
+                json_decode(json_encode($battery_status), true),
+                json_decode(json_encode($sensor_status), true),
+                json_decode(json_encode($robot_config_status), true),
+                [
+                    'motor_left' => $motor_left_status,
+                    'motor_right' => $motor_right_status,
+                ]
+            );
 
-        $data = array_merge(
-            json_decode(json_encode($status_robot), true),
-            json_decode(json_encode($battery_status), true),
-            json_decode(json_encode($sensor_status), true),
-            json_decode(json_encode($robot_config_status), true),
-            [
-                'motor_left' => $motor_left_status,
-                'motor_right' => $motor_right_status,
+            return $data;
+        } catch (\Throwable $th) {
+            return [
+                'name_seri' => 'error',
+                'radar1' => 0,
+                'motor_left' => ['error' => 0, 'live' => 0],
+                'motor_right' => ['error' => 0, 'live' => 0],
+                'soc' => 0,
+                'status'=>'error'
 
-            ]
-        );
-
-
-        return $data;
+            ];
+        }
     }
 
     /**
