@@ -82,4 +82,8 @@ export default function topicsListening() {
             );
         }
     }
+
+    subscribeTopic("/reset_server", "std_msgs/String", (data, name) => {
+        toggerMessage("success", "Reset server success!");
+    });
 }

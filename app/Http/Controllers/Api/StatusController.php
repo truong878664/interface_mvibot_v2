@@ -53,7 +53,7 @@ class StatusController extends Controller
 
             $battery_status = DB::table('battery_status')->where('name_seri', $robot)->first();
             $sensor_status = DB::table('sensor_status')->where('name_seri', $robot)->first();
-            $robot_config_status = DB::table('robot_config_status')->where('name_seri', $robot)->select('serial_camera1', 'serial_camera2', 'robot_low_battery', 'is_master', 'robot_volume', 'robot_type_connect', 'name_seri', 'mode', 'ip_node', 'ip_master', 'robot_type_connect')->first();
+            $robot_config_status = DB::table('robot_config_status')->where('name_seri', $robot)->select('serial_camera1', 'serial_camera2', 'is_master', 'robot_volume', 'robot_type_connect', 'name_seri', 'mode', 'ip_node', 'ip_master', 'robot_type_connect', 'lan_type', 'wifi_type')->first();
             $motor_left_status = DB::table('motor_left_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
             $motor_right_status = DB::table('motor_right_status')->where('name_seri', $robot)->select('live', 'error', 'enable', 'brake')->first();
 

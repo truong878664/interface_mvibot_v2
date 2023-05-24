@@ -22,8 +22,9 @@ function master(data) {
     const isMaster = data.is_master === "yes" ? true : false;
     isMasterElement.checked = isMaster;
     dispatchEvent({ event: "change", element: isMasterElement });
+    
     renderIp({
-        ipString: isMaster ? data.ip_master : "",
+        ipString: isMaster ? "" : data.ip_master,
         ipElement: "[data-ip=master]",
     });
 }

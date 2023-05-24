@@ -223,7 +223,7 @@
             </div>
         </div>
 
-        <div class="w-full bg-[#fff] z-18 h-[calc(40%)] border rounded-md overflow-hidden">
+        <div class="w-full bg-[#fff] z-18 h-[calc(40%)] border rounded-md overflow-hidden"id="block-step-container">
             @include('frontend.blocks.mission.createMissions.functionTab.steps')
         </div>
     </div>

@@ -152,7 +152,12 @@ $(".stop-mission-btn").onclick = (e) => {
 };
 
 $(".refresh-mission-btn").onclick = () => {
-    toggerMessage("error", "The function is under development!");
+    confirmationForm({
+        message: `Do you want to reset server?`,
+        callback: () => {
+            topicString("/reset_server", "1");
+        },
+    });
 };
 
 $(".continue-mission-btn").onclick = (e) => {

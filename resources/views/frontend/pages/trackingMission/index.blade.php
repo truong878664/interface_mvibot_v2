@@ -29,6 +29,6 @@
         <button
             class=" btn bg-green-500 text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold continue-mission-btn">Continue</button>
         <button
-            class=" btn bg-main text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">Refresh</button>
+            class=" btn bg-main text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">Reset server</button>
     </div>
 </div>

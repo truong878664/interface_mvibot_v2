@@ -86,6 +86,8 @@ function updateStatus() {
                             itemElement.innerText = mapping.text;
                             itemElement.classList.add(mapping.class);
                         } else {
+                            key === "is_master" &&
+                                (itemElement.dataset.status = value);
                             itemElement.innerText = value;
                         }
                     }

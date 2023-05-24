@@ -121,6 +121,13 @@
                     <label for="check-show-action" class="text-2xl mr-2">Show action</label>
                     @include('components.switch', ['id' => 'check-show-action'])
                 </div>
+                <div id="save-move-block-wrapper" class="flex flex-col items-end mt-4 hidden">
+                    <span class="text-2xl mr-2 block font-bold">Save move block mission</span>
+                    <div class="">
+                        <button class="mb-2 rounded-md px-4 py-2 bg-yellow-400 text-[#fff] mt-4 btn text-2xl font-bold hidden" id="cancel-move-block-btn">Cancel</button>
+                        <button class="mb-2 rounded-md px-4 py-2 bg-main text-[#fff] mx-2 mt-4 btn text-2xl font-bold" id="save-move-block-btn">save</button>
+                    </div>
+                </div>
 
             </div>
             <div class="flex flex-col lg:flex-row mt-8 text-2xl font-bold">
