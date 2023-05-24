@@ -98,7 +98,7 @@ class MiController extends Controller
      */
     public function edit($id)
     {
-        return $this->translateData($id);
+        // return $this->translateData($id);
     }
 
     /**
@@ -123,16 +123,12 @@ class MiController extends Controller
                 Missions::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
 
                 $this->translateStepMissionName($id);
-                $this->translateData($id);
                 return ['message' => 'Add mission success!', "status" => 200];
-                break;
             case "update":
                 $update_mission_shorthand = $request->mission_shorthand;
                 Missions::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
                 $this->translateStepMissionName($id);
-                $this->translateData($id);
                 return ['message' => 'Update mission success!', "status" => 200];
-                break;
             case "move":
                 $mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
                 $arrayIdBlockStep = explode("+", $mission_shorthand);
@@ -156,28 +152,30 @@ class MiController extends Controller
                 }
 
                 $this->translateStepMissionName($id);
-                $this->translateData($id);
                 return ['message' => 'Move mission success!', "status" => 200];
-                break;
             case "update-name":
                 Missions::where('id', $id)->update(['name' => $request->name]);
-
-                $this->translateStepMissionName($id);
-                $this->translateData($id);
-                return ['message' => 'Update1 mission success!', "status" => 200];
                 break;
             case "update-type-mission":
                 $this->translateStepMissionName($id);
-                $this->translateData($id);
-                return ['message' => 'Mission data is ready!', "status" => 200];
-
                 break;
+            case "translate-data-mission-end":
+                $this->translateStepMissionName($id);
+                $this->translateData($id);
+                return Missions::where('id', $id)->first();
+            case "translate-multi-mission-end":
+                try {
+                    $idsMission = $request->idsMission;
+                    for ($i = 0; $i < count($idsMission); $i++) {
+                        $this->translateStepMissionName($idsMission[$i]);
+                        $this->translateData($idsMission[$i]);
+                    }
+                    return ['translated' => true];
+                } catch (\Throwable $th) {
+                    return ['translated' => false];
+                }
         }
-
-        $this->translateStepMissionName($id);
-        $this->translateData($id);
-
-        return ['message' => 'Mission data is ready', "status" => 200];
+        return ['message' => 'Mission data is ready2', "status" => 200];
     }
 
     /**
@@ -223,9 +221,13 @@ class MiController extends Controller
 
             $data = array_map(function ($item) {
                 $itemStep = TypeMission::where('id', $item)->first();
-                return $itemStep->id . "^" . $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
+                if($itemStep) {
+                    return $itemStep->id . "^" . $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
+                }
             }, $split_mission_shorthand);
-            Missions::where("id", $id)->update(['steps_mission_name' => implode("+", $data)]);
+
+            $dataNew = $this->filterItemNull($data);
+            Missions::where("id", $id)->update(['steps_mission_name' => implode("+", $dataNew)]);
         } else {
             Missions::where("id", $id)->update(['steps_mission_name' => NULL]);
         }
@@ -285,7 +287,6 @@ class MiController extends Controller
 
             $dataStepMission = trim(implode('', $data), " ");
 
-
             $arrayNew = [];
             $oldArray = explode('--+', $dataStepMission);
 
@@ -320,7 +321,9 @@ class MiController extends Controller
 
         foreach ($arrayStepMissionName as $datas) {
             $item = DB::table("mission_$datas[0]s")->where("id", $datas[2])->get()->all();
-            array_push($stepMissionData, $item);
+            if($item) {
+                array_push($stepMissionData, $item);
+            }
         };
 
 
@@ -496,5 +499,13 @@ class MiController extends Controller
         foreach ($stopNew as $stopItem) {
             Stop::insert($stopItem);
         }
+    }
+    public function filterItemNull($array) {
+        $arrayNoNull = array_filter($array, function ($item) {
+            if ($item) {
+                return $item;
+            };
+        });
+        return $arrayNoNull;
     }
 }

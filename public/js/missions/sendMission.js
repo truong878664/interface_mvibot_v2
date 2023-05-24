@@ -1,44 +1,34 @@
 import { $$, toggerMessage } from "../main.js";
 import { publishMission } from "../rosModule/handleMission.js";
-import { currentMission } from "./handleStepMission.js";
+import requestTranslateMissionEnd from "./blockStep/requestTranslateMissionEnd.js";
 
 export default function sendMission() {
-    $(".send-mission-btn").onclick = (e) => {
-        fetch(`/api/mi/${currentMission}`)
-            .then((res) => res.json())
-            .then((data) => {
-                const type = e.target.getAttribute("type");
+    $(".send-mission-btn").onclick = async (e) => {
+        const data = await requestTranslateMissionEnd()
+        const type = e.target.getAttribute("type");
+        const nameRobot = $("#select-robot-option").value.replaceAll(" ", "");
+        if (data.steps_mission !== null) {
+            if (!nameRobot) {
+                toggerMessage("error", "please choose robot");
+            } else {
+                const dataFullMission = translateDataMission(data);
+                let topic;
 
-                const nameRobot = $("#select-robot-option").value.replaceAll(
-                    " ",
-                    ""
-                );
-                if (data.steps_mission !== null) {
-                    if (!nameRobot) {
-                        toggerMessage("error", "please choose robot");
-                    } else {
-                        const dataFullMission = translateDataMission(data);
-                        let topic;
+                type === "normal" && (topic = `/${nameRobot}/mission_normal`);
 
-                        type === "normal" &&
-                            (topic = `/${nameRobot}/mission_normal`);
+                (type === "error-robot" || type === "error-gpio") &&
+                    (topic = `/${nameRobot}/mission_error`);
 
-                        (type === "error-robot" || type === "error-gpio") &&
-                            (topic = `/${nameRobot}/mission_error`);
+                type === "battery" && (topic = `/${nameRobot}/mission_battery`);
 
-                        type === "battery" &&
-                            (topic = `/${nameRobot}/mission_battery`);
+                type === "gpio" && (topic = `/${nameRobot}/mission_normal`);
 
-                        type === "gpio" &&
-                            (topic = `/${nameRobot}/mission_normal`);
-
-                        console.log("Topic: ", topic);
-                        publishMission(topic, dataFullMission);
-                    }
-                } else {
-                    toggerMessage("error", "Current mission is empty");
-                }
-            });
+                console.log("Topic: ", topic);
+                publishMission(topic, dataFullMission);
+            }
+        } else {
+            toggerMessage("error", "Current mission is empty");
+        }
     };
 }
 export function translateDataMission(data) {

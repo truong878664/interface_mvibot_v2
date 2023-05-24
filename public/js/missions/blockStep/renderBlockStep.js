@@ -46,10 +46,7 @@ export default function renderBlockStep() {
 
                         const htmlNormalText = htmlNormal.join("");
                         html.push(
-                            `<div class=" flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
-                                shortHandMissionList &&
-                                shortHandMissionList[index]
-                            }>
+                            `<div class=" flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission="${idTypeMission}">
                                 ${ICON_FRONT}
                                 <div data-id-type-mission=${idTypeMission} data-type="normal" class="type-mission-btn btn step-item text-[#333] border border-[#333] bg-white font-bold">normal|
                                 ${nameTypeMission}
@@ -87,7 +84,7 @@ export default function renderBlockStep() {
                         );
                         html.push(
                             `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
-                                shortHandMissionList[index]
+                                idTypeMission
                             }>
                                 ${ICON_FRONT}
                                 ${htmlIfelse.join("")}
@@ -117,7 +114,7 @@ export default function renderBlockStep() {
 
                         html.push(
                             `<div class="flex flex-wrap w-full items-center ml-4 mb-4 mission-item" index="${index}" id-mission=${
-                                shortHandMissionList[index]
+                                idTypeMission
                             }>
                                 ${ICON_FRONT}
                                 ${htmlTryCatch.join("")}

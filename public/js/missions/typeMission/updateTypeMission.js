@@ -109,17 +109,16 @@ export function handleUpdateMission(idTypeMissionEdit) {
     };
 }
 
-function updateTypeMission(id, data) {
-    fetch(`/api/type-mission/${id}`, {
+async function updateTypeMission(id, data) {
+    const res = await fetch(`/api/type-mission/${id}`, {
         method: "PUT",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            translatesStepsMission({id:currentMission});
-        });
+    });
+    const dataApi = await res.json();
+    console.log(dataApi);
+    translatesStepsMission({ id: currentMission });
 }

@@ -1,6 +1,6 @@
 import { loaded, loading } from "../../functionHandle/displayLoad.js";
 
-export default function getMission(id, callback) {
+export default function getTypeMission(id, callback) {
     loading();
     fetch(`/api/type-mission/${id}`)
         .then((res) => res.json())

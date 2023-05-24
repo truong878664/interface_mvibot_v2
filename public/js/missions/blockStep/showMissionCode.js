@@ -1,12 +1,12 @@
 import { $, toggerMessage } from "../../main.js";
-import { currentMission } from "../handleStepMission.js";
 import { translateDataMission } from "../sendMission.js";
+import requestTranslateMissionEnd from "./requestTranslateMissionEnd.js";
 
 export default function showMissionCode() {
     const showMissionBtn = $(".show-mission-code-btn");
     showMissionBtn.addEventListener("click", handleShowMission);
 
-    function handleShowMission() {
+    async function handleShowMission() {
         const isHasShowMissionForm = $(".show-mission-form-wrapper");
         if (isHasShowMissionForm) {
             isHasShowMissionForm.remove();
@@ -26,20 +26,18 @@ export default function showMissionCode() {
             "justify-center",
             "items-center"
         );
-        fetch(`/api/mi/${currentMission}`)
-            .then((res) => res.json())
-            .then((data) => {
-                const stepMission = data.steps_mission;
-                if (!stepMission) {
-                    toggerMessage("error", "Empty mission!");
-                    return;
-                }
-                const htmlStep =
-                    "<p>" +
-                    stepMission?.split("%@&").join("%@</p><br><p>&") +
-                    "</p>";
 
-                const htmlMission = `
+        const data = await requestTranslateMissionEnd();
+
+        const stepMission = data.steps_mission;
+        if (!stepMission) {
+            toggerMessage("error", "Empty mission!");
+            return;
+        }
+        const htmlStep =
+            "<p>" + stepMission?.split("%@&").join("%@</p><br><p>&") + "</p>";
+
+        const htmlMission = `
                 <div class="bg-[#fff] rounded-md flex flex-col text-2xl show-mission-form w-2/3 max-h-[500px] h- relative">
                     <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
                         <i class="fa-regular fa-copy"></i>
@@ -60,18 +58,15 @@ export default function showMissionCode() {
                     </div>
                 </div>`;
 
-                showMissionForm.innerHTML = htmlMission;
-                document.body.appendChild(showMissionForm);
-                const formShowMission = $(".show-mission-form-wrapper");
-                formShowMission.onclick = (e) => {
-                    const isOverlay = e.target.closest(".show-mission-form");
-                    !isOverlay && formShowMission.remove();
-                };
-                return data;
-            })
-            .then((data) => {
-                handleCopyMission(data);
-            });
+        showMissionForm.innerHTML = htmlMission;
+        document.body.appendChild(showMissionForm);
+        const formShowMission = $(".show-mission-form-wrapper");
+        formShowMission.onclick = (e) => {
+            const isOverlay = e.target.closest(".show-mission-form");
+            !isOverlay && formShowMission.remove();
+        };
+
+        handleCopyMission(data);
     }
     function handleCopyMission(data) {
         const copyMissionBtn = $(".copy-mission-btn");

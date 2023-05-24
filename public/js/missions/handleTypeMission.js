@@ -96,8 +96,7 @@ function handleAddMissionNormal() {
         element.onclick = (e) => {
             const isValid = validateInput(".name-normal-mission");
             const isData = validateArray(
-                valueNormalMissionArray,
-                ".normal-steps-wrapper"
+                valueNormalMissionArray
             );
 
             const dataSaveTypeMission = {
@@ -110,6 +109,8 @@ function handleAddMissionNormal() {
             if (isValid && isData) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputNormal();
+            } else {
+                toggerMessage("error", `Data cannot be empty`);
             }
         };
     });
@@ -124,10 +125,11 @@ function handleAddMissionIfelse() {
     $$(".add-mission-ifelse").forEach((element) => {
         element.onclick = (e) => {
             const isValid = validateInput(".name-ifelse-mission");
-            const isDataIf = validateArray(valueItemIfelse.if, ".if-label");
             const isData =
-                validateArray(valueItemIfelse.then, ".then-label") ||
-                validateArray(valueItemIfelse.else, ".else-label");
+                validateArray(valueItemIfelse.else) ||
+                validateArray(valueItemIfelse.then);
+
+            const isDataIf = validateArray(valueItemIfelse.if);
 
             const dataSaveTypeMission = {
                 name: nameIfelseMission.value,
@@ -145,6 +147,8 @@ function handleAddMissionIfelse() {
                 loading();
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputIfelse();
+            } else {
+                toggerMessage("error", `Data cannot be empty`);
             }
         };
     });
@@ -166,14 +170,7 @@ function handleAddMissionTrycatch() {
     $$(".add-mission-trycatch").forEach((element) => {
         element.onclick = (e) => {
             const isValid = validateInput(".name-trycatch-mission");
-            const isDataTry = validateArray(
-                valueItemTrycatch.try,
-                ".try-label"
-            );
-            const isDataCatch = validateArray(
-                valueItemTrycatch.catch,
-                ".catch-label"
-            );
+            const isDataTry = validateArray(valueItemTrycatch.try);
             const dataSaveTypeMission = {
                 name: nameTryCatchMission.value,
                 type: "trycatch",
@@ -184,9 +181,11 @@ function handleAddMissionTrycatch() {
             };
             const typeSave = e.target.getAttribute("type");
 
-            if (isValid) {
+            if (isValid && isDataTry) {
                 addTypeMission(dataSaveTypeMission, typeSave);
                 resetValueInputTrycatch();
+            } else {
+                toggerMessage("error", `Data cannot be empty`);
             }
         };
     });
@@ -203,6 +202,7 @@ function handleAddMissionTrycatch() {
 
 function addTypeMission(data, typeSave) {
     loading();
+
     fetch("/api/type-mission", {
         headers: {
             Accept: "application/json",
@@ -366,11 +366,6 @@ export function validateInput(...rest) {
     return result.indexOf(false) == -1;
 }
 
-export function validateArray(arr, element) {
-    if (arr.length == 0) {
-        toggerMessage("error", "Data cannot be empty");
-        return false;
-    } else {
-        return true;
-    }
+export function validateArray(arr) {
+    return arr.length === 0 ? false : true;
 }

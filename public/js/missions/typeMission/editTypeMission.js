@@ -31,18 +31,18 @@ export default function editTypeMission(data) {
             valueItemIfelse.else.length = 0;
 
             const dataIfElse = data.data.split("?");
-            const dataIf = dataIfElse[0].split("|");
+            const dataIf = dataIfElse[0]?.split("|");
             const dataThen = dataIfElse[1]
-                .split("|")
+                ?.split("|")
                 .filter((item) => item.length != 0);
 
             const dataElse = dataIfElse[2]
-                .split("|")
+                ?.split("|")
                 .filter((item) => item.length != 0);
 
             valueItemIfelse.if.push(...dataIf);
-            valueItemIfelse.then.push(...dataThen);
-            valueItemIfelse.else.push(...dataElse);
+            dataThen && valueItemIfelse.then.push(...dataThen);
+            dataElse && valueItemIfelse.else.push(...dataElse);
 
             $(".ifelse-mission-btn").click();
             $(".name-ifelse-mission").value = data.name;
@@ -69,11 +69,11 @@ export default function editTypeMission(data) {
 
             const dataTryCatch = data.data.split("?");
             const dataTry = dataTryCatch[0]
-                .split("|")
+                ?.split("|")
                 .filter((item) => item.length != 0);
 
             const dataCatch = dataTryCatch[1]
-                .split("|")
+                ?.split("|")
                 .filter((item) => item.length != 0);
 
             valueItemTrycatch.try.push(...dataTry);

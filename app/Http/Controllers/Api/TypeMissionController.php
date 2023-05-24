@@ -68,7 +68,12 @@ class TypeMissionController extends Controller
      */
     public function show($id)
     {
-        return TypeMission::where('id', $id)->first();
+        $typeMission = TypeMission::where('id', $id)->first();
+        if ($typeMission) {
+            return ['data' => $typeMission, 'error' => false];
+        } else {
+            return ['message' => "Maybe this block has been deleted, please reload the page", 'error' => true];
+        }
     }
 
     /**
