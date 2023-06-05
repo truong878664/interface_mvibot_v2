@@ -31,8 +31,13 @@ $("#choose-map-active").onchange = (e) => {
 $("#active-map-btn").onclick = () => {
     const mapActive = $("#choose-map-active").value;
     if (mapActive) {
-        topicString("/request_action", `active_map|~name_map=${mapActive}~`);
-        toggerMessage("success", "Map activated");
+        confirmationForm({
+            message: "Do you want to active this map?",
+            callback: () => {
+                topicString("/request_action", `active_map|~name_map=${mapActive}~`);
+                toggerMessage("success", "Map activated");
+            },
+        });
     } else {
         toggerMessage("error", "Choose map!");
     }
