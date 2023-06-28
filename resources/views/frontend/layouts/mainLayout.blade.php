@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/buildCss/style.css">
     <link rel="stylesheet" href="/build/assets/app-37033027.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">

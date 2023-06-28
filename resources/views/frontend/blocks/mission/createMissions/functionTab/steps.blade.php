@@ -144,19 +144,6 @@
             <div class="select-robot-wrapper form-checkbox">
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
-
-                    {{-- @if ($itemRender->type === 'normal' || $itemRender->type === 'error-robot' || $itemRender->type === 'battery')
-                        @include('frontend.blocks.selectRobot', [
-                            'type' => 'robot',
-                            'id' => 'select-robot-option',
-                        ])
-                    @elseif($itemRender->type === 'gpio' || $itemRender->type === 'error-gpio')
-                        @include('frontend.blocks.selectRobot', [
-                            'type' => 'module_gpio',
-                            'id' => 'select-robot-option',
-                        ])
-                    @endif --}}
-
                     @include('frontend.blocks.selectRobot', [
                             'type' => 'all_robot',
                             'id' => 'select-robot-option',

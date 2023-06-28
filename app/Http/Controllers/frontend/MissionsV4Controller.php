@@ -5,46 +5,37 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\backend\mapController;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Map;
-use Illuminate\Http\Request;
-use App\Models\backend\Missions;
 use App\Models\backend\MissionPosition;
+use App\Models\backend\MissionsVer;
 use App\Models\backend\Robot;
-use App\Models\backend\StatusRobot;
 use App\Models\backend\Stop;
 use App\Models\backend\WakeUp;
+use Illuminate\Http\Request;
 
-class MissionsController extends Controller
-{   
-    public $v = 'v3';
-    public function index()
-    {
-        return redirect('/dashboard/missions/select-mission');
-    }
-
-    public function createPoint()
-    {
-        $map = new mapController();
-        $mapActive = $map->mapActive();
-        $title = "Create point";
-        return view('frontend.pages.missions.createPoint', compact('mapActive', 'title'));
+class MissionsV4Controller extends Controller
+{
+    public $v = 'v4';
+    public function index() {
+        return 123;
     }
 
     public function createMissions(Request $request)
     {
         $allRobot = Robot::all();
-        $missions = Missions::where('type', $request->type)->get();
+        $missions = MissionsVer::where('type', $request->type)->get();
         $type = $request->type;
         $title = "Create mission";
         $v = $this->v;
         return view('frontend.pages.missions.createMissions', compact('missions', 'allRobot', 'type', 'title', 'v'));
     }
 
-    public function trackingMission()
+    public function typeMission(Request $request)
     {
-        $robotNavigate = StatusRobot::where('mode', 'navigation')->get();
-        $title = "Tracking mission";
+        $type = $request->type;
+        $title = "Type mission";
+        $v = $this->v;
 
-        return view('frontend.pages.trackingMission.trackingMission', compact('robotNavigate', 'title'));
+        return view('frontend.pages.missions.typeMission', compact('type', 'title', 'v'));
     }
 
     public function createStepsMissions(Request $request)
@@ -56,7 +47,7 @@ class MissionsController extends Controller
             $mapActive = "";
         }
         $idRender = $request->id;
-        $itemRender = Missions::find($idRender);
+        $itemRender = MissionsVer::find($idRender);
 
         $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
 
@@ -70,15 +61,6 @@ class MissionsController extends Controller
 
         $title = "Mission - $itemRender->name";
         $v = $this->v;
-        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
-    }
-
-    public function typeMission(Request $request)
-    {
-        $type = $request->type;
-        $title = "Type mission";
-        $v = $this->v;
-
-        return view('frontend.pages.missions.typeMission', compact('type', 'title', 'v'));
+        return view('frontend.pages.missions.createMissionsV4.index', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
     }
 }

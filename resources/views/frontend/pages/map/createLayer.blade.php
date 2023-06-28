@@ -78,7 +78,7 @@
                         </div>
 
                         <div for="" class="text-[1.4rem] w-full flex items-center mb-9">
-                            <span class="pr-2 min-w-[77px]">Height</span>
+                            <span class="pr-2 min-w-[77px]">Length</span>
                             <div class="flex-1 flex flex-col">
                                 <input type="number" class=" w-[200px] px-4 flex-1" value="1" id="height-layer">
                                 <input id="height-layer-range" type="range" step="0.1" max="50" value="0.1"

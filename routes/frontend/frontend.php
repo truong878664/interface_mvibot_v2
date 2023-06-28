@@ -13,6 +13,7 @@ use App\Http\Controllers\frontend\joystickController;
 use App\Http\Controllers\frontend\locationController;
 use App\Http\Controllers\frontend\mappingController;
 use App\Http\Controllers\frontend\MissionsController;
+use App\Http\Controllers\frontend\MissionsV4Controller;
 use App\Http\Controllers\frontend\SoundController;
 use App\Http\Controllers\frontend\statusController;
 use App\Models\backend\Robot;
@@ -33,23 +34,42 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/', [DashboardController::class, 'index']);
 
         Route::prefix('missions')->name('missions.')->group(function () {
-            Route::get('/', [MissionsController::class, 'index']);
-
-            Route::get('/select-mission', function () {
-                $title = "select mission";
-                return view('frontend.pages.missions.selectMission', compact('title'));
-            })->name('select');
-
-            Route::get('/type-mission',  [MissionsController::class, 'typeMission'])->name('type-mission');
-
-            Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
-            Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
-
-            Route::prefix('/create-missions')->name('create-missions.')->group(function () {
-                Route::get('/', [MissionsController::class, 'createMissions']);
-                Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('create-steps-missions');
+            Route::prefix('v3')->name('v3.')->group(function() {
+                Route::get('/', [MissionsController::class, 'index']);
+                Route::get('/select-mission', function () {
+                    $title = "select mission";
+                    $v = 'v3';
+                    return view('frontend.pages.missions.selectMission', compact('title', 'v'));
+                })->name('select');
+                
+                Route::get('/type-mission',  [MissionsController::class, 'typeMission'])->name('type-mission');
+                
+                
+                Route::prefix('/create-missions')->name('create-missions.')->group(function () {
+                    Route::get('/', [MissionsController::class, 'createMissions']);
+                    Route::get('/{id}', [MissionsController::class, 'createStepsMissions'])->name('create-steps-missions');
+                });
             });
+            
+            Route::prefix('v4')->name('v4.')->group(function() {
+                Route::get('/', [MissionsController::class, 'index']);
+                Route::get('/select-mission', function () {
+                    $title = "select mission";
+                    $v = 'v4';
+                    return view('frontend.pages.missions.selectMission', compact('title', 'v'));
+                })->name('select');
+                
+                Route::get('/type-mission',  [MissionsV4Controller::class, 'typeMission'])->name('type-mission');
+            
+                Route::prefix('/create-missions')->name('create-missions.')->group(function () {
+                    Route::get('/', [MissionsV4Controller::class, 'createMissions']);
+                    Route::get('/{id}', [MissionsV4Controller::class, 'createStepsMissions'])->name('create-steps-missions');
+                });
+            });
+            
+            Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
         });
+        Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
 
         Route::prefix('map')->name('map.')->group(function () {
             Route::get('/', [mapController::class, 'index'])->name('map');

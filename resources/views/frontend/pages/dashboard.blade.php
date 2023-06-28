@@ -2,10 +2,13 @@
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <ul class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
-        <x-dashboard-item route='dashboard.missions.select' icon='fa-solid fa-bullseye' title='Create missions'
+        <x-dashboard-item route='dashboard.missions.v3.select' icon='fa-solid fa-bullseye' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 
-        <x-dashboard-item route='dashboard.missions.tracking-mission' icon='fa-solid fa-arrows-split-up-and-left'
+        <x-dashboard-item route='dashboard.missions.v4.select' icon='fa-solid fa-bullseye' title='Create missions V4'
+            describe='Assign tasks to robots (new version)' color="#898121" />
+
+        <x-dashboard-item route='dashboard.tracking-mission' icon='fa-solid fa-arrows-split-up-and-left'
             title='Tracking Missions' describe='Follow the robot on the mission' color="#FF0032" />
 
         <x-dashboard-item route='dashboard.map.map' icon='fa-solid fa-map-location-dot' title='Map'
