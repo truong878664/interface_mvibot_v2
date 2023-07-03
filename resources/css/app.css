@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.function:checked ~ .label-function .down{
+    transform: rotate(180deg);
+}
