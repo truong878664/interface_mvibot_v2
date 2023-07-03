@@ -15,23 +15,24 @@ const IfElse = {
         ],
     },
 };
-const Normal = {
-    type: "normal",
-    data: {
-        normal: [
-            "footprint#HS_123#1",
-            "marker#HS_111#1",
-            "gpio_module#JS_123#2",
-            "gpio#HB_999#23",
-        ],
-    },
-};
 
 const Trycatch = {
     type: "trycatch",
     data: {
         try_: ["gpio_module#HS_1II#2", "gpio_module#KK_1II#2"],
         catch_: ["gpio_module#HK_1II#2"],
+    },
+};
+
+const Normal = {
+    type: "normal",
+    data: {
+        normal: [
+            "footprint#HS_123#1",Trycatch,
+            "marker#HS_111#1",
+            "gpio_module#JS_123#2",
+            "gpio#HB_999#23", IfElse
+        ],
     },
 };
 

@@ -67,33 +67,45 @@
 @endphp
 <div class="flex flex-col h-full overflow-y-auto overflow-x-clip" id="function-container">
     @foreach ($typeMissions as $index => $item)
-        <div class="">
-            <input type="checkbox" hidden name="function" class="peer/function function" id="{{ $item['title'] }}">
-            <label for="{{ $item['title'] }}"
-                class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+        @if ($item['type'] === 'break')
+            <button data-button-function-kind="add" data-function-type="break" data-value="break##" class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                 <div class="flex">
                     <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                         <i class="{{ $item['icon'] }}"></i>
                     </span>
                     <span class="capitalize">{{ $item['title'] }}</span>
                 </div>
-                <span class="{{ $item['color'] }} transition-all down {{ $item['type'] === 'break' ? '!hidden' : '' }}">
-                    <i class="fa-solid fa-angle-down"></i>
-                </span>
-            </label>
-            <div class="hidden peer-checked/function:block relative">
-                <div data-list-function="{{ $item['type'] }}"
-                    class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md text-[16px] pt-14 {{ $item['type'] === 'break' ? '!hidden' : '' }}">
-                    
-                </div>
+            </button>
+        @else
+            <div class="">
+                <input type="checkbox" hidden name="function" class="peer/function function" id="{{ $item['title'] }}">
+                <label for="{{ $item['title'] }}"
+                    class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                    <div class="flex">
+                        <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
+                            <i class="{{ $item['icon'] }}"></i>
+                        </span>
+                        <span class="capitalize">{{ $item['title'] }}</span>
+                    </div>
+                    <span
+                        class="{{ $item['color'] }} transition-all down {{ $item['type'] === 'break' ? '!hidden' : '' }}">
+                        <i class="fa-solid fa-angle-down"></i>
+                    </span>
+                </label>
+                <div class="hidden peer-checked/function:block relative">
+                    <div data-list-function="{{ $item['type'] }}"
+                        class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md text-[16px] pt-14 {{ $item['type'] === 'break' ? '!hidden' : '' }}">
 
-                @if ($item['type'] !== 'break')
-                    <button data-index="{{ $index }}" data-type="new-function"
-                        data-type-mission="{{ $item['type'] }}"
-                        class="absolute top-0 right-0 bg-main py-1 px-2 text-white rounded-md text-2xl mr-2 mt-1 btn">New</button>
-                @endif
+                    </div>
+
+                    @if ($item['type'] !== 'break')
+                        <button data-index="{{ $index }}" data-button-function-kind="new"
+                            data-type-mission="{{ $item['type'] }}"
+                            class="absolute top-0 right-0 bg-main py-1 px-2 text-white rounded-md text-2xl mr-2 mt-1 btn">New</button>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
     @endforeach
 
     <div id="function-item-form-wrapper"

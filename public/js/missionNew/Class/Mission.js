@@ -1,4 +1,10 @@
+import BlockStep from "../component/BlockStep/index.js";
+
 export default class Mission {
+    constructor() {
+        this.data = [];
+        this.currentAddAddress = "";
+    }
     Normal({ data = "" }) {
         return {
             type: "normal",
@@ -44,5 +50,68 @@ export default class Mission {
                 do_,
             },
         };
+    }
+    render() {
+        const html = [];
+        this.data.map((item, index) => {
+            html.push(BlockStep[item.type]({ ...item, address: index }));
+            return html;
+        });
+
+        const blockWrapper = document.getElementById("block-step-wrapper");
+        blockWrapper.innerHTML = html.join("");
+    }
+    getAddress(element) {
+        let locationAdd;
+        locationAdd = element;
+        let timeLoop = 1;
+        const TIME_MAX_LOOP = 20;
+        const addressCurrentAt = [];
+        while (
+            locationAdd?.parentElement.id !== "block-step-wrapper" &&
+            timeLoop < TIME_MAX_LOOP
+        ) {
+            const typeDetail = locationAdd.closest("[data-data-block]");
+            locationAdd = locationAdd.parentElement.closest(
+                "[data-block-wrapper]"
+            );
+            timeLoop++;
+            const typeBlockStep = locationAdd.dataset.blockWrapper;
+            if (typeBlockStep === "normal") {
+                const address = locationAdd.dataset.address;
+                addressCurrentAt.unshift(`[${address}].data.normal`);
+            } else {
+                const typeDetailValue = typeDetail.dataset.dataBlock;
+                const address = locationAdd.dataset.address;
+                addressCurrentAt.unshift(
+                    `[${address}].data.${typeDetailValue}`
+                );
+            }
+        }
+        this.currentAddAddress = addressCurrentAt.join("");
+        return addressCurrentAt.join("");
+    }
+    addItem(newItem) {
+        const addressParts = this.currentAddAddress.split(".");
+        const objectPath = addressParts.slice(0, -1).join(".");
+        const propertyName = addressParts[addressParts.length - 1];
+        try {
+            const targetObject = eval("this.data" + objectPath);
+            if (propertyName) {
+                if (Array.isArray(targetObject[propertyName])) {
+                    targetObject[propertyName].push(newItem);
+                    this.render();
+                } else {
+                    console.log(
+                        "Địa chỉ không hợp lệ hoặc không phải là một mảng."
+                    );
+                }
+            } else {
+                targetObject.push(newItem);
+                this.render();
+            }
+        } catch (error) {
+            console.log("Không thể thêm phần tử:", error);
+        }
     }
 }

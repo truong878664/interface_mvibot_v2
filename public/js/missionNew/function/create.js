@@ -1,4 +1,3 @@
-import createFunction from "./handle/createFunction.js";
 import handleShowFormFunction from "./handle/showFromFunction.js";
 import footprint from "./footprint/index.js";
 import gpio from "./gpio/index.js";
@@ -21,7 +20,6 @@ import variable from "./variable/index.js";
 
 export default function create() {
     handleShowFormFunction();
-    createFunction();
     footprint();
     gpio();
     gpioModule();

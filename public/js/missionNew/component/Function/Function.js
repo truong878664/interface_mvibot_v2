@@ -32,11 +32,11 @@ const createHtmlFunctionItem = {
                     </div>
                 </div>
                 <div class="absolute top-0 right-0">
-                    <button
+                    <button data-button-function-kind="add" 
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
                         <i class="fa-solid fa-plus"></i>
                     </button>
-                    <button
+                    <button data-button-function-kind="option"
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md more-option-function-btn">
                         <i class="fa-solid fa-ellipsis"></i>
                     </button>

@@ -15,4 +15,19 @@ export const htmlDataFunction = {
 export default function Function() {
     render();
     create();
+    eventFunctionContainer();
+}
+
+function eventFunctionContainer() {
+    const functionContainer = document.getElementById("function-container");
+    functionContainer.addEventListener("click", (e) => {
+        const button = e.target.closest("[data-button-function-kind]");
+        if (!button) return;
+        const functionKind = button.dataset.buttonFunctionKind;
+        switch (functionKind) {
+            case "add":
+                console.log();
+                break;
+        }
+    });
 }

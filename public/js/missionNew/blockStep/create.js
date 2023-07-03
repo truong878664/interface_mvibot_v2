@@ -1,6 +1,6 @@
 import renderMission from "../handle/renderMission.js";
-import { MissionData } from "../index.js";
 import Mission from "../Class/Mission.js";
+import { MissionClass } from "../index.js";
 
 export default function createTypeMission() {
     const createTypeMissionWrapper = document.getElementById(
@@ -12,10 +12,7 @@ export default function createTypeMission() {
             return;
         }
         const typeMission = createTypeMissionBtn.dataset.typeMission;
-
-        const mission = new Mission();
-        const typeMissionObject = mission[typeMission]({});
-        MissionData.push(typeMissionObject);
-        renderMission({ mission: MissionData });
+        const typeMissionObject = MissionClass[typeMission]({});
+        MissionClass.addItem(typeMissionObject)
     });
 }

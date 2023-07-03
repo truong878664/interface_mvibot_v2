@@ -4,7 +4,7 @@ import render3DMap from "../position/handle/render.js";
 export default function handleShowFormFunction() {
     const functionContainer = document.getElementById("function-container");
     functionContainer.addEventListener("click", (e) => {
-        const newFunctionBtn = e.target.closest("[data-type='new-function']");
+        const newFunctionBtn = e.target.closest("[data-button-function-kind='new']");
         if (!newFunctionBtn) return;
         const typeFunction = newFunctionBtn.dataset.typeMission;
         showFormFunction({

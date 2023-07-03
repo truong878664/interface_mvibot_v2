@@ -3,45 +3,49 @@ import createHtml from "./createHtml.js";
 
 const blockStep = {
     html: [],
-    normal({ data }) {
+    normal({ data, address }) {
         const htmlNormal = [];
-        data.normal.map((data) => {
+        data.normal.map((data, index) => {
             if (data instanceof Object) {
-                htmlNormal.push(this[data.type]({ data: data.data }));
+                htmlNormal.push(
+                    this[data.type]({ data: data.data, address: index })
+                );
             } else {
                 htmlNormal.push(Step(data));
             }
         });
-        return createHtml.normal({ normal: htmlNormal });
+        return createHtml.normal({ normal: htmlNormal, address });
     },
-    ifelse({ data }) {
+    ifelse({ data, address }) {
         const htmlIfElse = {
             condition: [],
             if_: [],
             else_: [],
         };
         for (const key in data) {
-            data[key].map((item) => {
+            data[key].map((item, index) => {
                 if (item instanceof Object) {
-                    htmlIfElse[key].push(this[item.type]({ data: item.data }));
+                    htmlIfElse[key].push(
+                        this[item.type]({ data: item.data, address: index })
+                    );
                 } else {
                     htmlIfElse[key].push(Step(item));
                 }
             });
         }
-        return createHtml.ifelse(htmlIfElse);
+        return createHtml.ifelse({ ...htmlIfElse, address });
     },
-    trycatch({ data }) {
+    trycatch({ data, address }) {
         const htmlTryCatch = {
             try_: [],
             catch_: [],
         };
 
         for (const key in data) {
-            data[key].map((item) => {
+            data[key].map((item, index) => {
                 if (item instanceof Object) {
                     htmlTryCatch[key].push(
-                        this[item.type]({ data: item.data })
+                        this[item.type]({ data: item.data, address: index })
                     );
                 } else {
                     htmlTryCatch[key].push(Step(item));
@@ -49,34 +53,36 @@ const blockStep = {
             });
         }
 
-        return createHtml.trycatch(htmlTryCatch);
+        return createHtml.trycatch({ ...htmlTryCatch, address });
     },
-    while({ data }) {
+    while({ data, address }) {
         const htmlWhile = {
             condition: [],
             do_: [],
         };
         for (const key in data) {
-            data[key].map((item) => {
+            data[key].map((item, index) => {
                 if (item instanceof Object) {
-                    htmlWhile[key].push(this[item.type]({ data: item.data }));
+                    htmlWhile[key].push(
+                        this[item.type]({ data: item.data, address: index })
+                    );
                 } else {
                     htmlWhile[key].push(Step(item));
                 }
             });
         }
-        return createHtml.while(htmlWhile);
+        return createHtml.while({ ...htmlWhile, address });
     },
-    logicAnd({ data }) {
+    logicAnd({ data, address }) {
         const htmlLogicAnd = {
             logicA: [],
             logicB: [],
         };
         for (const key in data) {
-            data[key].map((item) => {
+            data[key].map((item, index) => {
                 if (item instanceof Object) {
                     htmlLogicAnd[key].push(
-                        this[item.type]({ data: item.data })
+                        this[item.type]({ data: item.data, address: index })
                     );
                 } else {
                     htmlLogicAnd[key].push(Step(item));
@@ -85,21 +91,23 @@ const blockStep = {
         }
         return createHtml.logicAnd(htmlLogicAnd);
     },
-    logicOr({ data }) {
+    logicOr({ data, address }) {
         const htmlLogicOr = {
             logicA: [],
             logicB: [],
         };
         for (const key in data) {
-            data[key].map((item) => {
+            data[key].map((item, index) => {
                 if (item instanceof Object) {
-                    htmlLogicOr[key].push(this[item.type]({ data: item.data }));
+                    htmlLogicOr[key].push(
+                        this[item.type]({ data: item.data, address: index })
+                    );
                 } else {
                     htmlLogicOr[key].push(Step(item));
                 }
             });
         }
-        return createHtml.logicOr(htmlLogicOr);
+        return createHtml.logicOr({ ...htmlLogicOr, address });
     },
 };
 export default blockStep;
