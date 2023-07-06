@@ -101,7 +101,7 @@ export default class Mission {
                     this.render();
                 } else {
                     console.log(
-                        "Địa chỉ không hợp lệ hoặc không phải là một mảng."
+                        "Address is not array."
                     );
                 }
             } else {
@@ -110,7 +110,7 @@ export default class Mission {
             }
             useDebounce({ cb: this.save.bind(this), delay: 1000 });
         } catch (error) {
-            console.log("Không thể thêm phần tử:", error);
+            console.log("Can't add item:", error);
         }
     }
 

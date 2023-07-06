@@ -16,7 +16,7 @@ module.exports = {
         theme: {            
             colors: {
                 main: '#0f6cbd',
-                // ...colors
+                ...colors
             },
         },
     },
