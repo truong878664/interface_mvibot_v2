@@ -19,7 +19,7 @@
         display: block;
     }
 </style>
-<div class="hidden function-item w-full h-full point-function-item function-mission-tab" data-type="position">
+<div class="hidden function-form-item w-full h-full point-function-item function-mission-tab" data-type="position">
     <div class="w-full h-full overflow-auto relative">
         <div class="w-full h-full bg-[#ccc] overflow-hidden rounded-md map-position-wrapper">
             <div id="map" class="w-full h-full"></div>

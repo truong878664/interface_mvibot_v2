@@ -10,8 +10,8 @@ const createHtmlFunctionItem = {
         data,
     }) {
         const html = `
-            <div data-function-type="${mode}" data-marker-type="${marker_type}" data-value="${value}" data-id=${id} data-data='${data}'
-                class="flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
+            <div data-function-type="${mode}" ${marker_type ? `data-marker-type="${marker_type}"` : ``} data-value="${value}" data-id=${id} data-data='${data}'
+                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
                 <div class="flex">
                     <input data-select-function-id="1" data-type="marker" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">
@@ -84,6 +84,7 @@ const createHtmlFunctionItem = {
             marker_type: field.marker_type,
             data: JSON.stringify(data),
         };
+
         const htmlItem = this.html(dataFunction);
         return htmlItem;
     },

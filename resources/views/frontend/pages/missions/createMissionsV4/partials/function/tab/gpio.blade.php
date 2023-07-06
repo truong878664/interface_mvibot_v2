@@ -1,4 +1,4 @@
-<div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
+<div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-form-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
     data-type="{{ $type }}">
     <div class="flex mb-4">
         @if ($type != 'gpio_wake_up' && $type != 'gpio_stop')

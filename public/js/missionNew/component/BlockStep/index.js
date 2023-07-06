@@ -11,7 +11,7 @@ const blockStep = {
                     this[data.type]({ data: data.data, address: index })
                 );
             } else {
-                htmlNormal.push(Step(data));
+                htmlNormal.push(Step(data, index));
             }
         });
         return createHtml.normal({ normal: htmlNormal, address });
@@ -29,7 +29,7 @@ const blockStep = {
                         this[item.type]({ data: item.data, address: index })
                     );
                 } else {
-                    htmlIfElse[key].push(Step(item));
+                    htmlIfElse[key].push(Step(item, index));
                 }
             });
         }
@@ -48,7 +48,7 @@ const blockStep = {
                         this[item.type]({ data: item.data, address: index })
                     );
                 } else {
-                    htmlTryCatch[key].push(Step(item));
+                    htmlTryCatch[key].push(Step(item, index));
                 }
             });
         }
@@ -67,7 +67,7 @@ const blockStep = {
                         this[item.type]({ data: item.data, address: index })
                     );
                 } else {
-                    htmlWhile[key].push(Step(item));
+                    htmlWhile[key].push(Step(item, index));
                 }
             });
         }
@@ -85,11 +85,11 @@ const blockStep = {
                         this[item.type]({ data: item.data, address: index })
                     );
                 } else {
-                    htmlLogicAnd[key].push(Step(item));
+                    htmlLogicAnd[key].push(Step(item, index));
                 }
             });
         }
-        return createHtml.logicAnd(htmlLogicAnd);
+        return createHtml.logicAnd({ ...htmlLogicAnd, address });
     },
     logicOr({ data, address }) {
         const htmlLogicOr = {
@@ -103,7 +103,7 @@ const blockStep = {
                         this[item.type]({ data: item.data, address: index })
                     );
                 } else {
-                    htmlLogicOr[key].push(Step(item));
+                    htmlLogicOr[key].push(Step(item, index));
                 }
             });
         }

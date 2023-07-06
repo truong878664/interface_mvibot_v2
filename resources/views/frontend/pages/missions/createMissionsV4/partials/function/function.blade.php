@@ -68,7 +68,7 @@
 <div class="flex flex-col h-full overflow-y-auto overflow-x-clip" id="function-container">
     @foreach ($typeMissions as $index => $item)
         @if ($item['type'] === 'break')
-            <button data-button-function-kind="add" data-function-type="break" data-value="break##" class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+            <button data-button-function-kind="add" data-function-type="break" data-value="break##" class="function-item label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                 <div class="flex">
                     <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                         <i class="{{ $item['icon'] }}"></i>
@@ -78,7 +78,7 @@
             </button>
         @else
             <div class="">
-                <input type="checkbox" hidden name="function" class="peer/function function" id="{{ $item['title'] }}">
+                <input type="radio" hidden name="function" class="peer/function function" id="{{ $item['title'] }}">
                 <label for="{{ $item['title'] }}"
                     class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                     <div class="flex">
@@ -112,12 +112,8 @@
         class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center hidden">
         <div
             class="w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden flex justify-center items-center">
-            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
-                'type' => 'gpio',
-            ])
-            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
-                'type' => 'gpio_module',
-            ])
+            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', ['type' => 'gpio',])
+            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', ['type' => 'gpio_module',])
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.footprint')
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.marker')
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.sleep')

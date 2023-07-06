@@ -22,7 +22,7 @@ export default function handleShowFormFunction() {
             "function-item-form-wrapper"
         );
         functionFormWrapper.onclick = function (e) {
-            const isFunctionItem = e.target.closest(".function-item");
+            const isFunctionItem = e.target.closest(".function-form-item");
             if (isFunctionItem) return;
             showFormFunction({
                 show: false,

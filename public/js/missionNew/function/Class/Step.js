@@ -41,6 +41,7 @@ export default class Step {
             this.message.status = "success";
             return { stepSaved, message: this.message };
         } catch (error) {
+            console.log(error);
             return this.message;
         }
     }
@@ -52,7 +53,9 @@ export default class Step {
     }
     reset() {
         for (const key in this.data) {
-            this.data[key].value = "";
+            if(this.data[key]) {
+                this.data[key].value = "";
+            }
         }
     }
 }

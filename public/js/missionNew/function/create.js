@@ -54,7 +54,6 @@ function handleCreateFunction() {
         const functionClass = new FunctionClass();
         const res = await functionClass.save();
         const stepSaved = await res.stepSaved;
-        console.log(functionClass);
         if (res.message.saved) {
             toggerMessage(res.message.status, res.message.message);
             showFormFunction({ type: typeFunction, show: false });

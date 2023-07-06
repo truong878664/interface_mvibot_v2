@@ -1,3 +1,4 @@
+import { MissionClass } from "../index.js";
 import create from "./create.js";
 import render from "./render.js";
 
@@ -23,10 +24,12 @@ function eventFunctionContainer() {
     functionContainer.addEventListener("click", (e) => {
         const button = e.target.closest("[data-button-function-kind]");
         if (!button) return;
+        const functionItem = e.target.closest(".function-item");
         const functionKind = button.dataset.buttonFunctionKind;
         switch (functionKind) {
             case "add":
-                console.log();
+                const valueFunction = functionItem.dataset.value;
+                MissionClass.addItem(valueFunction);
                 break;
         }
     });

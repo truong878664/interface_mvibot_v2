@@ -2,11 +2,11 @@ export default function showFormFunction({ type = "", show }) {
     const functionFormWrapper = document.getElementById(
         "function-item-form-wrapper"
     );
-    const functionItems = document.querySelectorAll(".function-item");
+    const functionFormItems = document.querySelectorAll(".function-form-item");
     functionFormWrapper?.classList.toggle("hidden", !show);
 
     if (show) {
-        functionItems.forEach((item) => {
+        functionFormItems.forEach((item) => {
             if (item.dataset.type === type) {
                 item.classList.remove("hidden");
             } else {
@@ -14,7 +14,7 @@ export default function showFormFunction({ type = "", show }) {
             }
         });
     } else {
-        functionItems.forEach((item) => {
+        functionFormItems.forEach((item) => {
             item.classList.add("hidden");
         });
     }

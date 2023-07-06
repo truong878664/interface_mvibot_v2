@@ -25,6 +25,18 @@
                 'title' => 'While',
                 'icon' => 'fa-solid fa-arrows-spin',
             ],
+            [
+                'color' => 'text-blue-400',
+                'type' => 'LogicOr',
+                'title' => 'Logic OR',
+                'icon' => 'fa-solid fa-grip-lines-vertical',
+            ],
+            [
+                'color' => 'text-pink-400',
+                'type' => 'LogicAnd',
+                'title' => 'Logic AND',
+                'icon' => 'fa-solid fa-link',
+            ],
         ];
     @endphp
     @foreach ($blockMissions as $item)

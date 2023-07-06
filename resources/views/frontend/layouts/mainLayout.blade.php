@@ -50,6 +50,8 @@
                     </div>
                 </div>
             </div>
+            <div class="ml-7 !hidden" id="loader-header"></div>
+            </div>
             @php
                 $userName = session('UserName');
                 $key = substr($userName, 0, 1);
