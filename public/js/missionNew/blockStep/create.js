@@ -8,11 +8,10 @@ export default function createTypeMission() {
     );
     createTypeMissionWrapper.addEventListener("click", (e) => {
         const createTypeMissionBtn = e.target.closest("[data-type-mission]");
-        if (!createTypeMissionBtn) {
-            return;
-        }
+        if (!createTypeMissionBtn) return;
         const typeMission = createTypeMissionBtn.dataset.typeMission;
         const typeMissionObject = MissionClass[typeMission]({});
-        MissionClass.addItem(typeMissionObject)
+        MissionClass.addStep({ step: typeMissionObject });
+        MissionClass.render();
     });
 }

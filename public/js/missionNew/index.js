@@ -1,17 +1,20 @@
+import confirmationForm from "../functionHandle/confirmationForm.js";
 import { loadingHeader } from "../functionHandle/displayLoad.js";
 import useDebounce from "../hooks/useDebouche.js";
 import Mission from "./Class/Mission.js";
 import createTypeMission from "./blockStep/create.js";
+import Label from "./component/Label.js";
 import Function from "./function/index.js";
 
 export const MissionClass = new Mission();
+const blockStepWrapper = document.getElementById("block-step-wrapper");
 
 createTypeMission();
 Function();
 handleAddStepToBlockStep();
+handleDragDrop();
 
 function handleAddStepToBlockStep() {
-    const blockStepWrapper = document.getElementById("block-step-wrapper");
     blockStepWrapper.addEventListener("click", (e) => {
         const buttonAction = e.target.closest("[data-action-block-step]");
         if (!buttonAction) return;
@@ -26,20 +29,18 @@ function handleAddStepToBlockStep() {
                 buttonAction.classList.add("active");
                 break;
             case "delete":
-                loadingHeader(true);
-                const [address, indexItemDelete] =
-                    MissionClass.getAddressDelete(buttonAction);
-                const { targetObject, propertyName } =
-                    MissionClass.targetObject(address);
-                propertyName
-                    ? targetObject[propertyName].splice(indexItemDelete, 1)
-                    : targetObject.splice(indexItemDelete, 1);
-
-                MissionClass.render();
-                useDebounce({
-                    cb: MissionClass.save.bind(MissionClass),
-                    delay: 1000,
-                });
+                const handleDelete = () => {
+                    loadingHeader(true);
+                    const [address, indexStep] =
+                        MissionClass.getAddressByStep(buttonAction);
+                    MissionClass.deleteStep({ address, indexStep });
+                    MissionClass.render();
+                    useDebounce({
+                        cb: MissionClass.save.bind(MissionClass),
+                        delay: 1000,
+                    });
+                };
+                confirmationForm({ callback: handleDelete });
                 break;
             case "step":
                 const isSticky = buttonAction.querySelector(
@@ -56,28 +57,7 @@ function handleAddStepToBlockStep() {
                         currentStickyShow.dataset.sticky = "hidden";
                     }
 
-                    const sticky = `
-                    <div class="absolute top-[120%] left-1/2 -translate-x-1/2 bg-white rounded-md shadow-md text-xl" data-name="sticky">
-                        <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden text-stone-900">
-                            <li class="px-6 py-1 hover:bg-stone-100 ">
-                                <button data-action-block-step="delete" class="btn flex py-2">
-                                    <span class="mr-2 text-red-500">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </span>
-                                    <span>Delete</span>
-                                </button>
-                            </li>
-                            <li class="px-6 py-1 hover:bg-stone-100 ">
-                                <button data-action-block-step="" class="btn flex">
-                                    <span class="mr-2 text-sky-500">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </span>
-                                    <span>Detail</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    `;
+                    const sticky = Label.sticky;
                     const div = document.createElement("div");
                     div.innerHTML = sticky;
                     buttonAction.dataset.sticky = "show";
@@ -85,7 +65,14 @@ function handleAddStepToBlockStep() {
                 }
                 break;
             case "hidden":
-                buttonAction.closest("[data-block-wrapper]").dataset.showData= "hidden"
+                const blockWrapper = buttonAction.closest(
+                    "[data-block-wrapper]"
+                );
+                const currentStatusShow = blockWrapper.dataset.showData;
+                const statusChange =
+                    currentStatusShow === "show" ? "hidden" : "show";
+                blockWrapper.dataset.showData = statusChange;
+                buttonAction.dataset.status = statusChange;
                 break;
             default:
                 console.log(134);
@@ -96,642 +83,121 @@ function handleAddStepToBlockStep() {
     function removeSticky() {
         blockStepWrapper.querySelector("[data-name='sticky']")?.remove();
     }
-
-    blockStepWrapper.addEventListener("drop", (e) => {
-        const [address, indexItemDelete] = MissionClass.getAddressDelete(
-            e.target
-        );
-        // console.log(e.srcElement.);
-        console.log(address, indexItemDelete);
-        blockStepWrapper.querySelectorAll('.highline-move')?.forEach(e => {
-            e.remove()
-        })
-
-    });
-    const line = document.createElement('div')
-    line.classList.add("absolute","top-0","h-full","w-[2px]","rounded-full","bg-main", "highline-move")
-
-
-    blockStepWrapper.addEventListener("dragover", (e) => {
-        const itemDrop = e.target.closest("[data-name='step']");
-        if (!itemDrop) return;
-        const offsetX = e.offsetX;
-
-        const targetWidth = itemDrop.offsetWidth;
-        const distanceFromCenter = offsetX - targetWidth / 2;
-
-        if (distanceFromCenter < 0) {
-            line.style.left = "-3px"
-            line.style.right = "auto"
-        } else {
-            line.style.right = "-3px"
-            line.style.left = "auto"
-        }
-        itemDrop.appendChild(line)
-
-        e.preventDefault();
-    });
 }
 
-// const json = [
-//     {
-//         type: "ifelse",
-//         name: "ifelse_name",
-//         id: null,
-//         data: {
-//             condition: [
-//                 "footprint#truong#4",
-//                 {
-//                     type: "normal",
-//                     name: "normal_name",
-//                     id: null,
-//                     data: {
-//                         normal: [
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "gpio#123#22",
-//                             "variable#123#2",
-//                             "variable#123#3",
-//                             "variable#g#4",
-//                             "variable#g#4",
-//                             {
-//                                 type: "logicAnd",
-//                                 name: "logic_and_name",
-//                                 id: null,
-//                                 data: {
-//                                     logicA: [
-//                                         "sleep#1#2",
-//                                         {
-//                                             type: "trycatch",
-//                                             name: "trycatch_name",
-//                                             id: null,
-//                                             data: { try_: [], catch_: [] },
-//                                         },
-//                                     ],
-//                                     logicB: [
-//                                         "sleep#12#1",
-//                                         {
-//                                             type: "trycatch",
-//                                             name: "trycatch_name",
-//                                             id: null,
-//                                             data: { try_: [], catch_: [] },
-//                                         },
-//                                     ],
-//                                 },
-//                             },
-//                             {
-//                                 type: "logicAnd",
-//                                 name: "logic_and_name",
-//                                 id: null,
-//                                 data: { logicA: [], logicB: [] },
-//                             },
-//                         ],
-//                     },
-//                 },
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 "gpio#jjjjjjjjjjjjjjjjjjjjjj#53",
-//                 {
-//                     type: "trycatch",
-//                     name: "trycatch_name",
-//                     id: null,
-//                     data: {
-//                         try_: [
-//                             {
-//                                 type: "normal",
-//                                 name: "normal_name",
-//                                 id: null,
-//                                 data: {
-//                                     normal: [
-//                                         "footprint#1#9",
-//                                         "footprint#1#9",
-//                                         "footprint#1#9",
-//                                         "footprint#1#9",
-//                                         "footprint#1#9",
-//                                         "footprint#123#7",
-//                                         "footprint#123#8",
-//                                         "footprint#truong#4",
-//                                     ],
-//                                 },
-//                             },
-//                             {
-//                                 type: "logicAnd",
-//                                 name: "logic_and_name",
-//                                 id: null,
-//                                 data: {
-//                                     logicA: [
-//                                         "footprint#123#7",
-//                                         "footprint#123#7",
-//                                         "footprint#123#7",
-//                                         "footprint#123#7",
-//                                         "footprint#123#7",
-//                                     ],
-//                                     logicB: [
-//                                         "footprint#1#9",
-//                                         "footprint#123#8",
-//                                         "footprint#123#7",
-//                                         "footprint#truong#4",
-//                                     ],
-//                                 },
-//                             },
-//                             {
-//                                 type: "ifelse",
-//                                 name: "ifelse_name",
-//                                 id: null,
-//                                 data: {
-//                                     condition: [
-//                                         {
-//                                             type: "logicAnd",
-//                                             name: "logic_and_name",
-//                                             id: null,
-//                                             data: {
-//                                                 logicA: ["position#hhhg#1"],
-//                                                 logicB: ["marker#123#1"],
-//                                             },
-//                                         },
-//                                     ],
-//                                     if_: ["gpio#123#22", "gpio#123#22"],
-//                                     else_: [
-//                                         "footprint#truong#4",
-//                                         "footprint#truong#4",
-//                                         "footprint#truong#4",
-//                                         "footprint#truong#4",
-//                                         "footprint#truong#4",
-//                                     ],
-//                                 },
-//                             },
-//                         ],
-//                         catch_: [
-//                             "gpio_module#123#14",
-//                             "gpio_module#123#13",
-//                             "gpio_module#ggggg#12",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                             "gpio_module#123#11",
-//                         ],
-//                     },
-//                 },
-//                 "variable#123#7",
-//             ],
-//             if_: [
-//                 "footprint#truong#4",
-//                 {
-//                     type: "normal",
-//                     name: "normal_name",
-//                     id: null,
-//                     data: {
-//                         normal: [
-//                             {
-//                                 type: "trycatch",
-//                                 name: "trycatch_name",
-//                                 id: null,
-//                                 data: { try_: [], catch_: [] },
-//                             },
-//                             {
-//                                 type: "logicAnd",
-//                                 name: "logic_and_name",
-//                                 id: null,
-//                                 data: { logicA: [], logicB: [] },
-//                             },
-//                         ],
-//                     },
-//                 },
-//                 {
-//                     type: "ifelse",
-//                     name: "ifelse_name",
-//                     id: null,
-//                     data: { condition: [], if_: [], else_: [] },
-//                 },
-//                 {
-//                     type: "trycatch",
-//                     name: "trycatch_name",
-//                     id: null,
-//                     data: {
-//                         try_: [
-//                             "gpio_module#123#13",
-//                             "gpio_module#ggggg#12",
-//                             "footprint#truong#4",
-//                             "footprint#123#7",
-//                             "footprint#123#8",
-//                             "footprint#123#10",
-//                             "footprint#123#26",
-//                         ],
-//                         catch_: [],
-//                     },
-//                 },
-//                 {
-//                     type: "while",
-//                     name: "while_name",
-//                     id: null,
-//                     data: { condition: [], do_: [] },
-//                 },
-//                 {
-//                     type: "logicOr",
-//                     name: "logic_or_name",
-//                     id: null,
-//                     data: { logicA: [], logicB: [] },
-//                 },
-//                 {
-//                     type: "logicAnd",
-//                     name: "logic_and_name",
-//                     id: null,
-//                     data: { logicA: [], logicB: [] },
-//                 },
-//                 "gpio_module#123#14",
-//                 "gpio_module#123#14",
-//                 "gpio_module#123#14",
-//                 "gpio_module#123#14",
-//                 {
-//                     type: "normal",
-//                     name: "normal_name",
-//                     id: null,
-//                     data: { normal: [] },
-//                 },
-//             ],
-//             else_: [
-//                 "gpio#123_copy_copy#28",
-//                 {
-//                     type: "normal",
-//                     name: "normal_name",
-//                     id: null,
-//                     data: {
-//                         normal: [
-//                             "sound#1#4",
-//                             {
-//                                 type: "normal",
-//                                 name: "normal_name",
-//                                 id: null,
-//                                 data: {
-//                                     normal: [
-//                                         "sound#1#4",
-//                                         {
-//                                             type: "trycatch",
-//                                             name: "trycatch_name",
-//                                             id: null,
-//                                             data: {
-//                                                 try_: [
-//                                                     "sound#1#4",
-//                                                     "sound#1#4",
-//                                                     "gpio_module#a#9",
-//                                                     "gpio_module#a#9",
-//                                                     "gpio_module#a#9",
-//                                                     "gpio_module#a#9",
-//                                                     "gpio_module#a#9",
-//                                                 ],
-//                                                 catch_: [],
-//                                             },
-//                                         },
-//                                     ],
-//                                 },
-//                             },
-//                         ],
-//                     },
-//                 },
-//                 "sound#123#10",
-//             ],
-//         },
-//     },
-//     {
-//         type: "trycatch",
-//         name: "trycatch_name",
-//         id: null,
-//         data: {
-//             try_: [
-//                 "gpio_module#a#9",
-//                 {
-//                     type: "ifelse",
-//                     name: "ifelse_name",
-//                     id: null,
-//                     data: {
-//                         condition: ["marker#123#1"],
-//                         if_: ["marker#123#2"],
-//                         else_: ["marker#123#1"],
-//                     },
-//                 },
-//             ],
-//             catch_: ["marker#1#3"],
-//         },
-//     },
-//     {
-//         type: "while",
-//         name: "while_name",
-//         id: null,
-//         data: {
-//             condition: ["marker#123#1"],
-//             do_: [
-//                 "marker#123#4",
-//                 {
-//                     type: "logicAnd",
-//                     name: "logic_and_name",
-//                     id: null,
-//                     data: { logicA: [], logicB: [] },
-//                 },
-//             ],
-//         },
-//     },
-//     {
-//         type: "logicAnd",
-//         name: "logic_and_name",
-//         id: null,
-//         data: {
-//             logicA: ["footprint#truong#4"],
-//             logicB: [
-//                 "gpio#adf_copy#27",
-//                 {
-//                     type: "logicOr",
-//                     name: "logic_or_name",
-//                     id: null,
-//                     data: { logicA: [], logicB: [] },
-//                 },
-//             ],
-//         },
-//     },
-//     {
-//         type: "logicOr",
-//         name: "logic_or_name",
-//         id: null,
-//         data: { logicA: ["gpio#123_copy#26"], logicB: ["gpio#adf_copy#27"] },
-//     },
-//     {
-//         type: "while",
-//         name: "while_name",
-//         id: null,
-//         data: {
-//             condition: [
-//                 "sound#OFF#12",
-//                 {
-//                     type: "ifelse",
-//                     name: "ifelse_name",
-//                     id: null,
-//                     data: {
-//                         condition: [
-//                             "sound#OFF#12",
-//                             "footprint#iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii#63",
-//                         ],
-//                         if_: ["sound#OFF#12"],
-//                         else_: ["sound#OFF#12"],
-//                     },
-//                 },
-//             ],
-//             do_: ["sound#OFF#12"],
-//         },
-//     },
-//     {
-//         type: "logicAnd",
-//         name: "logic_and_name",
-//         id: null,
-//         data: { logicA: [], logicB: [] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["break##"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: {
-//             normal: [
-//                 "variable#123#2",
-//                 {
-//                     type: "ifelse",
-//                     name: "ifelse_name",
-//                     id: null,
-//                     data: {
-//                         condition: [
-//                             {
-//                                 type: "normal",
-//                                 name: "normal_name",
-//                                 id: null,
-//                                 data: {
-//                                     normal: [
-//                                         {
-//                                             type: "ifelse",
-//                                             name: "ifelse_name",
-//                                             id: null,
-//                                             data: {
-//                                                 condition: [
-//                                                     "gpio#123#22",
-//                                                     "gpio#123#22",
-//                                                     "gpio#123#22",
-//                                                     "gpio#adf#23",
-//                                                     "gpio#123_copy#24",
-//                                                 ],
-//                                                 if_: [
-//                                                     "footprint#truong#4",
-//                                                     "footprint#123#7",
-//                                                     "footprint#123#8",
-//                                                     "footprint#1#9",
-//                                                     "sound#hhhh#9",
-//                                                     "sound#123#10",
-//                                                     "sound#1#11",
-//                                                     "sound#OFF#12",
-//                                                 ],
-//                                                 else_: [
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                     "marker#123#1",
-//                                                 ],
-//                                             },
-//                                         },
-//                                         {
-//                                             type: "trycatch",
-//                                             name: "trycatch_name",
-//                                             id: null,
-//                                             data: {
-//                                                 try_: [
-//                                                     "position#hhhg#1",
-//                                                     "position#h#2",
-//                                                     "position#hhhg#1",
-//                                                     "sound#1#4",
-//                                                     "sound#123#5",
-//                                                     "sound#123#6",
-//                                                 ],
-//                                                 catch_: [
-//                                                     "break##",
-//                                                     "break##",
-//                                                     "break##",
-//                                                     "break##",
-//                                                 ],
-//                                             },
-//                                         },
-//                                         {
-//                                             type: "while",
-//                                             name: "while_name",
-//                                             id: null,
-//                                             data: {
-//                                                 condition: [
-//                                                     "sleep#12#1",
-//                                                     "sleep#1#2",
-//                                                     "sleep#10#3",
-//                                                     "sleep#ggg#4",
-//                                                 ],
-//                                                 do_: [],
-//                                             },
-//                                         },
-//                                         {
-//                                             type: "logicOr",
-//                                             name: "logic_or_name",
-//                                             id: null,
-//                                             data: { logicA: [], logicB: [] },
-//                                         },
-//                                         {
-//                                             type: "logicAnd",
-//                                             name: "logic_and_name",
-//                                             id: null,
-//                                             data: { logicA: [], logicB: [] },
-//                                         },
-//                                         {
-//                                             type: "logicOr",
-//                                             name: "logic_or_name",
-//                                             id: null,
-//                                             data: { logicA: [], logicB: [] },
-//                                         },
-//                                         {
-//                                             type: "while",
-//                                             name: "while_name",
-//                                             id: null,
-//                                             data: { condition: [], do_: [] },
-//                                         },
-//                                     ],
-//                                 },
-//                             },
-//                         ],
-//                         if_: [],
-//                         else_: [],
-//                     },
-//                 },
-//             ],
-//         },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["variable#123#2"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["variable#123#2"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["variable#123#2"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["variable#123#2"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: { normal: ["variable#123#2"] },
-//     },
-//     {
-//         type: "normal",
-//         name: "normal_name",
-//         id: null,
-//         data: {
-//             normal: [
-//                 "variable#123#2",
-//                 "variable#g#11",
-//                 {
-//                     type: "trycatch",
-//                     name: "trycatch_name",
-//                     id: null,
-//                     data: {
-//                         try_: [
-//                             {
-//                                 type: "normal",
-//                                 name: "normal_name",
-//                                 id: null,
-//                                 data: {
-//                                     normal: [
-//                                         "gpio_module#123#14",
-//                                         "gpio_module#123#14",
-//                                         "gpio_module#123#14",
-//                                         "gpio_module#123#14",
-//                                     ],
-//                                 },
-//                             },
-//                         ],
-//                         catch_: [],
-//                     },
-//                 },
-//             ],
-//         },
-//     },
-// ];
+function handleDragDrop() {
+    let isLeftOrRightDrop;
+    let valueStepDrag;
+    let addressStepDrag;
+    // DROP
+    blockStepWrapper.addEventListener("drop", (e) => {
+        const itemDrop = e.target.closest("[data-name='step']");
+        const blockDrop = e.target.closest("[data-data-block]");
+        // MissionClass.render();
 
-// const address = json[0].data.condition[1].data.normal[36].data.logicA[1];
-// console.log(address);
-// // [0].data.condition[1].data.normal[36].data.logicA[1].data.try_
-// // [0].data.condition[1].data.normal[36].data.logicA[1].data.logicA
+        if (itemDrop) {
+            const [address, indexStep] =
+                MissionClass.getAddressByStep(itemDrop);
+            // delete went target drop is step
+            const addressDelete = addressStepDrag.address;
+
+            const isDragDropSameBlock = addressDelete === address;
+            console.log(isDragDropSameBlock);
+            if (isDragDropSameBlock) {
+                MissionClass.deleteStep(addressStepDrag);
+                MissionClass.addStep({
+                    step: valueStepDrag,
+                    isDefaultLocation: false,
+                    addressIndex: [address, indexStep],
+                    side: isLeftOrRightDrop,
+                });
+            } else {
+                MissionClass.addStep({
+                    step: valueStepDrag,
+                    isDefaultLocation: false,
+                    addressIndex: [address, indexStep],
+                    side: isLeftOrRightDrop,
+                });
+                MissionClass.deleteStep(addressStepDrag);
+            }
+        } else if (blockDrop) {
+            const buttonAdd = MissionClass.lastQuerySelector({
+                wrapper: blockDrop,
+                query: "[data-action-block-step='add']",
+            });
+
+            MissionClass.setAddressAdd(buttonAdd);
+            MissionClass.addStep({ step: valueStepDrag });
+
+            // delete went target drop is block
+            MissionClass.deleteStep(addressStepDrag);
+        }
+
+        MissionClass.render();
+        removeSticky.hightLineLine();
+        removeSticky.hightLineBorder();
+    });
+    // END DROP
+    // DRAG START
+    blockStepWrapper.addEventListener("dragstart", (e) => {
+        const [address, indexStep] = MissionClass.getAddressByStep(e.target);
+        addressStepDrag = { address, indexStep };
+        const itemDrop = e.target.closest("[data-name='step']");
+        valueStepDrag = itemDrop.dataset.value;
+    });
+    // END DRAG START
+    // OVER
+    const line = Label.line();
+    blockStepWrapper.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        const itemDrop = e.target.closest("[data-name='step']");
+        const itemBlockDrop = e.target.closest("[data-block-wrapper]");
+        const blockDrop = e.target.closest("[data-data-block]");
+
+        if (itemDrop) {
+            removeSticky.hightLineBorder();
+            const offsetX = e.offsetX;
+            const targetWidth = itemDrop.offsetWidth;
+            const distanceFromCenter = offsetX - targetWidth / 2;
+
+            if (distanceFromCenter < 0) {
+                line.style.left = "-3px";
+                line.style.right = "auto";
+                isLeftOrRightDrop = "left";
+            } else {
+                isLeftOrRightDrop = "right";
+                line.style.right = "-3px";
+                line.style.left = "auto";
+            }
+            itemDrop.appendChild(line);
+            e.preventDefault();
+            return;
+        } else if (blockDrop) {
+            removeSticky.hightLineLine();
+            removeSticky.hightLineBorder();
+            blockDrop.parentElement.classList.add("highline-border");
+            return;
+        } else if (itemBlockDrop && blockDrop) {
+            console.log(123);
+        }
+    });
+    // END OVER
+    // DRAG END
+    blockStepWrapper.addEventListener("dragend", (e) => {
+        removeSticky.hightLineLine();
+        removeSticky.hightLineBorder();
+    });
+    // END DRAG END
+}
+const removeSticky = {
+    hightLineBorder() {
+        blockStepWrapper
+            .querySelector(".highline-border")
+            ?.classList.remove("highline-border");
+    },
+    hightLineLine() {
+        blockStepWrapper
+            .querySelectorAll(".highline-line")
+            ?.forEach((e) => e.remove());
+    },
+};

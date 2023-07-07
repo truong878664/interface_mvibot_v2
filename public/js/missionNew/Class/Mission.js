@@ -75,51 +75,75 @@ export default class Mission {
         }
         return addressCurrentAt.join("");
     }
-    getAddressDelete(element) {
+    getAddressByStep(element) {
         const blockMission = element.closest("[data-address-index]");
         const address = this.getAddress(blockMission);
-        const indexItemDelete = blockMission.dataset.addressIndex;
-        return [address, indexItemDelete ];
+        const indexStep = blockMission.dataset.addressIndex;
+        return [address, indexStep];
+    }
+
+    deleteStep({ address, indexStep }) {
+        try {
+            const { targetObject, propertyName } = this.targetObject(address);
+            propertyName
+                ? targetObject[propertyName].splice(indexStep, 1)
+                : targetObject.splice(indexStep, 1);
+        } catch (error) {
+            console.log(error);
+        }
     }
     setAddressAdd(element) {
         this.currentAddAddress = this.getAddress(element);
     }
-    addItem(newItem) {
+    addStep({
+        step,
+        isDefaultLocation = true,
+        addressIndex = this.currentAddAddress,
+        side = "right",
+    }) {
         try {
             loadingHeader(true);
-            if (!this.currentAddAddress && !(newItem instanceof Object)) {
-                const normal = this.Normal({ data: newItem });
-                this.data.push(normal);
-                this.render();
-                useDebounce({ cb: this.save.bind(this), delay: 1000 });
-                return;
-            }
-            const {targetObject, propertyName} = this.targetObject(this.currentAddAddress);
-            if (propertyName) {
-                if (Array.isArray(targetObject[propertyName])) {
-                    targetObject[propertyName].push(newItem);
-                    this.render();
+            if (isDefaultLocation) {
+                if (!this.currentAddAddress && !(step instanceof Object)) {
+                    const normal = this.Normal({ data: step });
+                    this.data.push(normal);
+                    useDebounce({ cb: this.save.bind(this), delay: 1000 });
+                    return;
+                }
+                const { targetObject, propertyName } = this.targetObject(
+                    this.currentAddAddress
+                );
+                if (propertyName) {
+                    if (Array.isArray(targetObject[propertyName])) {
+                        targetObject[propertyName].push(step);
+                    } else {
+                        console.log("Address is not array.");
+                    }
                 } else {
-                    console.log(
-                        "Address is not array."
-                    );
+                    targetObject.push(step);
                 }
             } else {
-                targetObject.push(newItem);
-                this.render();
+                const [address, indexStep] = addressIndex;
+                const indexAdd =
+                    side === "right"
+                        ? parseInt(indexStep) + 1
+                        : parseInt(indexStep);
+                const { targetObject, propertyName } =
+                    this.targetObject(address);
+                targetObject[propertyName].splice(indexAdd, 0, step);
             }
             useDebounce({ cb: this.save.bind(this), delay: 1000 });
         } catch (error) {
-            console.log("Can't add item:", error);
+            console.log("[Can't add item]:", error);
         }
     }
 
     targetObject(address) {
         const addressParts = address.split(".");
-            const objectPath = addressParts.slice(0, -1).join(".");
-            const propertyName = addressParts[addressParts.length - 1];
-            const targetObject = eval("this.data" + objectPath);
-            return {targetObject, propertyName}
+        const objectPath = addressParts.slice(0, -1).join(".");
+        const propertyName = addressParts[addressParts.length - 1];
+        const targetObject = eval("this.data" + objectPath);
+        return { targetObject, propertyName };
     }
     activeAddButton() {
         const arrayPath = this.currentAddAddress

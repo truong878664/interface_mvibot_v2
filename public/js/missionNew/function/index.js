@@ -29,7 +29,8 @@ function eventFunctionContainer() {
         switch (functionKind) {
             case "add":
                 const valueFunction = functionItem.dataset.value;
-                MissionClass.addItem(valueFunction);
+                MissionClass.addStep({step: valueFunction});
+                MissionClass.render();
                 break;
         }
     });
