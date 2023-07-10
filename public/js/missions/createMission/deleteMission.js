@@ -17,12 +17,15 @@ function deleteMission(e) {
     });
     function handleDelete(e) {
         const idDelete = e.target.dataset.id;
+        const versionMission =
+            document.querySelector("[data-version]").dataset.version;
         fetchApi(
             "/api/mi/delete",
             "DELETE",
             {
                 method: "delete",
                 idDelete: idDelete,
+                version: versionMission,
             },
             (data) => {
                 if (data.deleted) {

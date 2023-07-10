@@ -51,7 +51,7 @@ const buttonMore = `
 const createHtml = {
     htmlBlock: {
         normal: `
-        <div data-block-wrapper="normal" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div draggable="true" data-block-wrapper="normal" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
             <span class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center">
                 <i class="fa-solid fa-bullseye"></i>
             </span>
@@ -63,7 +63,7 @@ const createHtml = {
         </div>
         `,
         ifelse: `
-        <div data-block-wrapper="ifelse" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div draggable="true" data-block-wrapper="ifelse" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
         <span class="text-green-400 mr-3 rotate-90 w-[20px] h-[20px] flex justify-center items-center">
             <i class="fa-solid fa-code-fork"></i>
         </span>
@@ -95,7 +95,7 @@ const createHtml = {
         
         `,
         trycatch: `
-        <div data-block-wrapper="trycatch" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div data-block-wrapper="trycatch" draggable="true" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
             <span class="text-yellow-500 mr-3 w-[20px] h-[20px] flex justify-center items-center">
                 <i class="fa-solid fa-triangle-exclamation"></i>
             </span>
@@ -119,7 +119,7 @@ const createHtml = {
         </div>
         `,
         while: `
-        <div data-block-wrapper="while" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div data-block-wrapper="while" draggable="true" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
             <span class="text-sky-400 mr-3 rotate-90 w-[20px] h-[20px] flex justify-center items-center">
                 <i class="fa-solid fa-arrows-spin"></i>
             </span>
@@ -143,7 +143,7 @@ const createHtml = {
         </div>
         `,
         logicAnd: `
-        <div data-block-wrapper="logic_and" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div data-block-wrapper="logic_and" draggable="true" data-show-data="show" class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
             <span class="text-pink-500 mr-3 w-[20px] h-[20px] flex justify-center items-center group-data-[show-data='show']/wrapper:hidden">
                 <i class="fa-solid fa-link"></i>    
             </span>
@@ -166,7 +166,7 @@ const createHtml = {
         </div>
         `,
         logicOr: `
-        <div data-block-wrapper="logic_or" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <div data-block-wrapper="logic_or" draggable="true" data-show-data="show" class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
             <span class="text-blue-500 mr-3 w-[20px] h-[20px] flex justify-center items-center group-data-[show-data='show']/wrapper:hidden">
                 <i class="fa-solid fa-grip-lines-vertical"></i>
             </span>

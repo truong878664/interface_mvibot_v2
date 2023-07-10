@@ -6,11 +6,13 @@ export default function handleCloneMission() {
         element.onclick = (e) => {
             const missionId = e.target.getAttribute("mission-id");
             const missionItem = e.target.closest(".create-misisons-item");
+            const versionMission =
+                document.querySelector("[data-version]").dataset.version;
 
             fetchApi(
                 "/api/mi",
                 "POST",
-                { method: "clone", id: missionId },
+                { method: "clone", id: missionId, version: versionMission },
                 (data) => {
                     location.reload();
                 }

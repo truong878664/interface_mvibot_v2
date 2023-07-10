@@ -176,6 +176,8 @@ function handleDragDrop() {
             removeSticky.hightLineLine();
             removeSticky.hightLineBorder();
             blockDrop.parentElement.classList.add("highline-border");
+
+            console.log(itemBlockDrop);
             return;
         } else if (itemBlockDrop && blockDrop) {
             console.log(123);

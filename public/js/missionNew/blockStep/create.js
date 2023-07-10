@@ -10,6 +10,7 @@ export default function createTypeMission() {
         const createTypeMissionBtn = e.target.closest("[data-type-mission]");
         if (!createTypeMissionBtn) return;
         const typeMission = createTypeMissionBtn.dataset.typeMission;
+        console.log(createTypeMissionBtn);
         const typeMissionObject = MissionClass[typeMission]({});
         MissionClass.addStep({ step: typeMissionObject });
         MissionClass.render();

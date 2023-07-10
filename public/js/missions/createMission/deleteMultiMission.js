@@ -11,6 +11,8 @@ export default function handleDeleteMultiMission() {
     };
     function deleteMulti() {
         const idDelete = [];
+        const versionMission =
+            document.querySelector("[data-version]").dataset.version;
         $$(".select-mission").forEach((element) => {
             if (element.checked) {
                 idDelete.push(element.value);
@@ -23,6 +25,7 @@ export default function handleDeleteMultiMission() {
             {
                 method: "delete",
                 idDelete: idDelete,
+                version: versionMission,
             },
             checkDelete
         );

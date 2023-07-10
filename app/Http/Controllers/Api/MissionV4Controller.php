@@ -87,7 +87,7 @@ class MissionV4Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 
     public function translateDataRobot($id)
