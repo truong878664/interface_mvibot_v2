@@ -1,6 +1,8 @@
 import { loadingHeader } from "../../functionHandle/displayLoad.js";
 import useDebounce from "../../hooks/useDebouche.js";
+import { toggerMessage } from "../../main.js";
 import BlockStep from "../component/BlockStep/index.js";
+import isJSON from "../handle/isJson.js";
 
 export default class Mission {
     constructor() {
@@ -11,14 +13,17 @@ export default class Mission {
         this.id = document.getElementById("id-mission").value;
         this.UrlApi = "/api/mission-v4/" + this.id;
         this.get();
+        this.saved = true;
     }
     async get() {
-        const res = await fetch(this.UrlApi);
+        const urlGet = this.UrlApi + "?kind=get";
+        const res = await fetch(urlGet);
         const data = await res.json();
         this.data = JSON.parse(data.mission_shorthand || "[]");
         this.render();
     }
     async save() {
+        this.saved = false;
         const res = await fetch(this.UrlApi, {
             method: "PUT",
             headers: {
@@ -29,8 +34,19 @@ export default class Mission {
             }),
         });
         const message = await res.json();
-        console.log(message);
+        console.log("Saved...");
+        this.saved = true;
         loadingHeader(false);
+    }
+    async getDataRobot() {
+        if (this.saved) {
+            const urlGet = this.UrlApi + "?kind=convert_data_robot";
+            const res = await fetch(urlGet);
+            const data = await res.json();
+            return data;
+        } else {
+            toggerMessage("error", "Saving data!");
+        }
     }
     render() {
         const html = [];
@@ -90,7 +106,9 @@ export default class Mission {
                 : targetObject.splice(indexStep, 1);
         } catch (error) {
             console.log(error);
+            toggerMessage("error", "ERR!. Reload please!");
         }
+        this.resetCurrentAddAddress();
     }
     setAddressAdd(element) {
         this.currentAddAddress = this.getAddress(element);
@@ -105,22 +123,32 @@ export default class Mission {
             loadingHeader(true);
             if (isDefaultLocation) {
                 if (!this.currentAddAddress && !(step instanceof Object)) {
-                    const normal = this.Normal({ data: step });
+                    const normal = this.Normal({ data: { normal: [step] } });
                     this.data.push(normal);
                     useDebounce({ cb: this.save.bind(this), delay: 1000 });
                     return;
                 }
+
                 const { targetObject, propertyName } = this.targetObject(
                     this.currentAddAddress
                 );
+
                 if (propertyName) {
                     if (Array.isArray(targetObject[propertyName])) {
-                        targetObject[propertyName].push(step);
+                        if (!isJSON(step)) {
+                            targetObject[propertyName].push(step);
+                        } else {
+                            targetObject[propertyName].push(JSON.parse(step));
+                        }
                     } else {
                         console.log("Address is not array.");
                     }
                 } else {
-                    targetObject.push(step);
+                    if (!isJSON(step)) {
+                        targetObject.push(step);
+                    } else {
+                        targetObject.push(JSON.parse(step));
+                    }
                 }
             } else {
                 const [address, indexStep] = addressIndex;
@@ -130,7 +158,15 @@ export default class Mission {
                         : parseInt(indexStep);
                 const { targetObject, propertyName } =
                     this.targetObject(address);
-                targetObject[propertyName].splice(indexAdd, 0, step);
+                if (!isJSON(step)) {
+                    targetObject[propertyName].splice(indexAdd, 0, step);
+                } else {
+                    targetObject[propertyName].splice(
+                        indexAdd,
+                        0,
+                        JSON.parse(step)
+                    );
+                }
             }
             useDebounce({ cb: this.save.bind(this), delay: 1000 });
         } catch (error) {
@@ -150,37 +186,31 @@ export default class Mission {
             .split(/[.\[\]]/)
             .filter((e) => e && e !== "data");
         let wrapperBlockCurrent = this.missionWrapperElement;
-        let element;
         if (arrayPath.length === 0) {
             document
                 .querySelector(".active-block-step-root")
                 .classList.add("active");
         } else {
+            const querys = [];
             arrayPath.map((path) => {
                 const query = isNaN(parseInt(path))
                     ? `[data-data-block='${path}']`
                     : `[data-address='${path}']`;
-                element = wrapperBlockCurrent?.querySelector(query);
-
-                wrapperBlockCurrent = element;
-                return element;
+                return querys.push(query);
             });
-
-            const lastButton = this.lastQuerySelector({
-                wrapper: element,
-                query: "[data-action-block-step='add']",
-            });
-            lastButton?.classList.add("active");
+            const parentButtonAdd = wrapperBlockCurrent.querySelector(
+                querys.join(" ")
+            );
+            const buttonAdd = parentButtonAdd?.querySelector(
+                "[data-action-block-step='add']"
+            );
+            buttonAdd?.classList.add("active");
         }
     }
     traverseObjectPath(path) {
         return path.split(/[\[\].]/).filter((e) => e);
     }
-    demoPath() {
-        const demoPath =
-            "[1].data.condition[0].data.if_[0].data.if_[0].data.normal[0].data.else_";
-        return demoPath;
-    }
+
     lastQuerySelector({ wrapper = document, query }) {
         const elements = wrapper?.querySelectorAll(query);
         if (elements) {
@@ -189,86 +219,81 @@ export default class Mission {
         }
     }
 
-    Normal({ data = "", name = "normal_name", id = null }) {
+    resetCurrentAddAddress() {
+        this.currentAddAddress = "";
+        console.log("Reset default path add address!");
+        return;
+    }
+    Normal({ data = { normal: [] }, name = "normal_name", id = null }) {
         return {
             type: "normal",
             name,
             id,
-            data: {
-                normal: data.split("|").filter((i) => i) || [],
-            },
+            data: data,
         };
     }
-    IfElse({ data = "", name = "ifelse_name", id = null }) {
-        const dataIfElse = data?.split("?");
-        const condition = dataIfElse[0]?.split("|").filter((i) => i) || [];
-        const if_ = dataIfElse[1]?.split("|").filter((i) => i) || [];
-        const else_ = dataIfElse[2]?.split("|").filter((i) => i) || [];
+    IfElse({
+        data = {
+            condition: [],
+            if_: [],
+            else_: [],
+        },
+        name = "ifelse_name",
+        id = null,
+    }) {
         return {
             type: "ifelse",
             name,
             id,
-            data: {
-                condition,
-                if_,
-                else_,
-            },
+            data: data,
         };
     }
-    Trycatch({ data = "", name = "trycatch_name", id = null }) {
-        const dataTryCatch = data?.split("?");
-        const try_ = dataTryCatch[0]?.split("|").filter((i) => i) || [];
-        const catch_ = dataTryCatch[1]?.split("|").filter((i) => i) || [];
+    Trycatch({
+        data = { try_: [], catch_: [] },
+        name = "trycatch_name",
+        id = null,
+    }) {
         return {
             type: "trycatch",
             name,
             id,
-            data: {
-                try_,
-                catch_,
-            },
+            data: data,
         };
     }
-    While({ data = "", name = "while_name", id = null }) {
-        const dataWhile = data?.split("?");
-        const condition = dataWhile[0].split("|").filter((i) => i) || [];
-        const do_ = dataWhile[1]?.split("|").filter((i) => i) || [];
+    While({
+        data = { condition: [], do_: [] },
+        name = "while_name",
+        id = null,
+    }) {
         return {
             type: "while",
             name,
             id,
-            data: {
-                condition,
-                do_,
-            },
+            data: data,
         };
     }
-    LogicOr({ data = "", name = "logic_or_name", id = null }) {
-        const dataOr = data?.split("?");
-        const logicA = dataOr[0].split("|").filter((i) => i) || [];
-        const logicB = dataOr[1]?.split("|").filter((i) => i) || [];
+    LogicOr({
+        data = { logicA: [], logicB: [] },
+        name = "logic_or_name",
+        id = null,
+    }) {
         return {
             type: "logicOr",
             name,
             id,
-            data: {
-                logicA,
-                logicB,
-            },
+            data: data,
         };
     }
-    LogicAnd({ data = "", name = "logic_and_name", id = null }) {
-        const dataAnd = data?.split("?");
-        const logicA = dataAnd[0].split("|").filter((i) => i) || [];
-        const logicB = dataAnd[1]?.split("|").filter((i) => i) || [];
+    LogicAnd({
+        data = { logicA: [], logicB: [] },
+        name = "logic_and_name",
+        id = null,
+    }) {
         return {
             type: "logicAnd",
             name,
             id,
-            data: {
-                logicA,
-                logicB,
-            },
+            data: data,
         };
     }
 }

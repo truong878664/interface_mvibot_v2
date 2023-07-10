@@ -20,7 +20,7 @@ class MissionV4Controller extends Controller
      */
     public function index()
     {
-        $mission = $this->translateDataRobot(2);
+        $mission = $this->translateDataRobot(25);
         return $mission;
     }
 
@@ -50,9 +50,15 @@ class MissionV4Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return MissionsVer::where('id', $id)->first();
+    public function show(Request $request, $id)
+    {   
+        $kind = $request->kind;
+        if($kind === "get") {
+            return MissionsVer::where('id', $id)->first();
+        } else if($kind === "convert_data_robot") {
+            $mission = $this->translateDataRobot($id);
+            return ["data"=>$mission];
+        }
     }
 
     /**
@@ -92,13 +98,17 @@ class MissionV4Controller extends Controller
 
     public function translateDataRobot($id)
     {
-        $dataJson = MissionsVer::where("id", $id)->first()->mission_shorthand;
-        $BlockStep = new BlockStep();
-        $mission = json_decode($dataJson);
-        $dataTranslateEndMission = array_map(function($mission) use($BlockStep) {
-            return $BlockStep->translate($mission);
-        }, $mission);
-
-        return implode("",$dataTranslateEndMission);
+        try {
+            $dataJson = MissionsVer::where("id", $id)->first()->mission_shorthand;
+            $BlockStep = new BlockStep();
+            $mission = json_decode($dataJson);
+            $dataTranslateEndMission = array_map(function($mission) use($BlockStep) {
+                return $BlockStep->translate($mission);
+            }, $mission);
+            $data = implode("",$dataTranslateEndMission);
+        } catch (\Throwable $th) {
+            $data = "";
+        }
+        return $data;
     }
 }

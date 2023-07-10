@@ -9,61 +9,52 @@ use Illuminate\Database\Eloquent\Model;
 class BlockStep extends Model
 {
     use HasFactory;
-    public function translate($block)
+    public function translate($block, $isHtml= true)
     {
+
         try {
             $type = $block->type;
-            // $arrayDataTranslate = [];
-            $Step = new Step();
-
-            switch ($type) {
-                case $type === 'normal':
-                    $data = $block->data->normal;
-                    $DataTranslate =  $this->translateGroupStep($data);
-                    $formatDataNormal = "{normal#normal_step{" . $DataTranslate . "}}";
-                    return $formatDataNormal;
-                case $type === "ifelse":
-                    $condition = $block->data->condition;
-                    $if = $block->data->if_;
-                    $else = $block->data->else_;
-                    $DataConditionTranslate = $this->translateGroupStep($condition);
-                    $DataIfTranslate = $this->translateGroupStep($if);
-                    $DataElseTranslate = $this->translateGroupStep($else);
-
-                    $formatIfElse = "{if_else#condition_step{" . $DataConditionTranslate . "}if_step{" . $DataIfTranslate . "}else_step{" . $DataElseTranslate . "}}";
-                    return $formatIfElse;
-                case $type === "trycatch":
-                    $try = $block->data->try_;
-                    $catch = $block->data->catch_;
-                    $DataTryTranslate = $this->translateGroupStep($try);
-                    $DataCatchTranslate = $this->translateGroupStep($catch);
-                    $formatTryCatch = "{try_catch#try_step{" . $DataTryTranslate . "}catch_step{" . $DataCatchTranslate . "}}";
-                    return $formatTryCatch;
-                case $type === "while":
-                    $condition = $block->data->condition;
-                    $do = $block->data->do_;
-                    $DataConditionTranslate = $this->translateGroupStep($condition);
-                    $DataDoTranslate = $this->translateGroupStep($do);
-                    $formatWhile = "{while#condition_step{" . $DataConditionTranslate . "}do_step{" . $DataDoTranslate . "}}";
-                    return $formatWhile;
-
-                case $type === "logicAnd":
-                    $logicA = $block->data->logicA;
-                    $logicB = $block->data->logicB;
-                    $DataLogicATranslate = $this->translateGroupStep($logicA);
-                    $DataLogicBTranslate = $this->translateGroupStep($logicB);
-                    $formatLogicAnd = "{logic_and#logic_A{" . $DataLogicATranslate . "}logic_B{" . $DataLogicBTranslate . "}}";
-                    return $formatLogicAnd;
-                case $type === "logicOr":
-                    $logicA = $block->data->logicA;
-                    $logicB = $block->data->logicB;
-                    $DataLogicATranslate = $this->translateGroupStep($logicA);
-                    $DataLogicBTranslate = $this->translateGroupStep($logicB);
-                    $formatLogicOr = "{logic_or#logic_A{" . $DataLogicATranslate . "}logic_B{" . $DataLogicBTranslate . "}}";
-                    return $formatLogicOr;
+            if($isHtml) {
+                $mapping = [
+                    'normal' => "<div class='pl-10'>{normal#<div class='pl-10'>normal_step{<div class='pl-10'>%s</div>}</div>}</div><br>",
+                    'ifelse' => `<div class='pl-10'>{if_else#
+                                    <div class='pl-10'>condition_step{
+                                        <div class='pl-10'>%s</div>
+                                    }
+                                        if_step{%s}else_step{%s}}</div>
+                                    </div>
+                                </div>  
+                                <br>
+                                    `,
+                    'trycatch' => "<div class='pl-10'>{try_catch#try_step{%s}catch_step{%s}}</div><br>",
+                    'while' => "<div class='pl-10'>{while#condition_step{%s}do_step{%s}}</div><br>",
+                    'logicAnd' => "<div class='pl-10'>{logic_and#logic_A{%s}logic_B{%s}}</div><br>",
+                    'logicOr' => "<div class='pl-10'>{logic_or#logic_A{%s}logic_B{%s}}</div><br>",
+                ];
+            } else {
+                $mapping = [
+                    'normal' => "{normal#normal_step{%s}}",
+                    'ifelse' => "{if_else#condition_step{%s}if_step{%s}else_step{%s}}",
+                    'trycatch' => "{try_catch#try_step{%s}catch_step{%s}}",
+                    'while' => "{while#condition_step{%s}do_step{%s}}",
+                    'logicAnd' => "{logic_and#logic_A{%s}logic_B{%s}}",
+                    'logicOr' => "{logic_or#logic_A{%s}logic_B{%s}}",
+                ];
             }
+    
+            if (isset($mapping[$type])) {
+                $data = $block->data;
+                $format = $mapping[$type];
+                $translatedData = [];
+                foreach ($data as $key => $value) {
+                    $translatedData[$key] = $this->translateGroupStep($value);
+                }
+    
+                return vsprintf($format, $translatedData);
+            }
+            return "";
         } catch (\Throwable $th) {
-            return "(ERR!)" . $th;
+            return "";
         }
 
 
@@ -71,16 +62,21 @@ class BlockStep extends Model
     }
     public function translateGroupStep($arrayStep)
     {
-        $Step = new Step();
-        $arrayDataTranslate = array_map(function ($item) use ($Step) {
-            if (gettype($item) === "object") {
-                return "}" . $this->translate($item) . "{";
-            } else {
-                return $Step->translate($item);
-            }
-        }, $arrayStep);
+        try {
+            $Step = new Step();
+            $arrayDataTranslate = array_map(function ($item) use ($Step) {
+                if (gettype($item) === "object") {
+                    return "}" . $this->translate($item) . "{";
+                } else {
+                    return $Step->translate($item);
+                }
+            }, $arrayStep);
 
-        $stringData = "{" . implode("", $arrayDataTranslate) . "}";
-        return str_replace("{}", "", $stringData);
+            $stringData = "{" . implode("", $arrayDataTranslate) . "}";
+            return str_replace("{}", "", $stringData);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return "";
+        }
     }
 }

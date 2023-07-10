@@ -13,11 +13,10 @@ module.exports = {
                 block: "0px 0px 7px 0px rgba(0, 0, 0, 0.14)",
             },
         },
-        theme: {            
-            colors: {
-                main: '#0f6cbd',
-                ...colors
-            },
+        colors: {
+            main: "#0f6cbd",
+            "black-o-30": "rgba(0,0,0,30%)",
+            ...colors,
         },
     },
     plugins: [],

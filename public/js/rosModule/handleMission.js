@@ -1,7 +1,6 @@
 import ros from "../main.js";
 
 function publishMission(nameTopic, dataMission) {
-
     const mission_pub = new ROSLIB.Topic({
         ros: ros,
         name: nameTopic,

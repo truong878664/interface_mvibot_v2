@@ -43,6 +43,15 @@ const buttonMore = `
                         <span>Save</span>
                         </button>
                     </li>
+
+                    <li>
+                        <button data-action-block-step="duplicate" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                        <span class="mr-2 w-[20px] text-orange-500">
+                            <i class="fa-regular fa-clone"></i>
+                        </span>
+                        <span>Duplicate</span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -51,8 +60,8 @@ const buttonMore = `
 const createHtml = {
     htmlBlock: {
         normal: `
-        <div draggable="true" data-block-wrapper="normal" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center">
+        <div data-name="block" data-block-wrapper="normal" data-value={{value}} data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+            <span draggable="true" class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center cursor-pointer hover:scale-105">
                 <i class="fa-solid fa-bullseye"></i>
             </span>
             <div class="flex-1 flex flex-wrap items-start group-data-[show-data='hidden']/wrapper:hidden" data-data-block="normal">
@@ -63,8 +72,8 @@ const createHtml = {
         </div>
         `,
         ifelse: `
-        <div draggable="true" data-block-wrapper="ifelse" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-        <span class="text-green-400 mr-3 rotate-90 w-[20px] h-[20px] flex justify-center items-center">
+        <div draggable="false" data-name="block" data-block-wrapper="ifelse" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+        <span draggable="true" class="text-green-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
             <i class="fa-solid fa-code-fork"></i>
         </span>
         <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
@@ -95,8 +104,8 @@ const createHtml = {
         
         `,
         trycatch: `
-        <div data-block-wrapper="trycatch" draggable="true" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span class="text-yellow-500 mr-3 w-[20px] h-[20px] flex justify-center items-center">
+        <div data-name="block" data-block-wrapper="trycatch" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+            <span draggable="true" class="text-yellow-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
                 <i class="fa-solid fa-triangle-exclamation"></i>
             </span>
             <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
@@ -119,8 +128,8 @@ const createHtml = {
         </div>
         `,
         while: `
-        <div data-block-wrapper="while" draggable="true" data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span class="text-sky-400 mr-3 rotate-90 w-[20px] h-[20px] flex justify-center items-center">
+        <div data-name="block" data-block-wrapper="while" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+            <span draggable="true" class="text-sky-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
                 <i class="fa-solid fa-arrows-spin"></i>
             </span>
             <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
@@ -143,8 +152,8 @@ const createHtml = {
         </div>
         `,
         logicAnd: `
-        <div data-block-wrapper="logic_and" draggable="true" data-show-data="show" class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span class="text-pink-500 mr-3 w-[20px] h-[20px] flex justify-center items-center group-data-[show-data='show']/wrapper:hidden">
+        <div data-name="block" data-block-wrapper="logic_and" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+            <span draggable="true" class="text-pink-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
                 <i class="fa-solid fa-link"></i>    
             </span>
             <div class="flex-1 text-[16px] flex group-data-[show-data='hidden']/wrapper:hidden">
@@ -166,8 +175,8 @@ const createHtml = {
         </div>
         `,
         logicOr: `
-        <div data-block-wrapper="logic_or" draggable="true" data-show-data="show" class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span class="text-blue-500 mr-3 w-[20px] h-[20px] flex justify-center items-center group-data-[show-data='show']/wrapper:hidden">
+        <div data-name="block" data-block-wrapper="logic_or" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white p-4 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
+            <span draggable="true" class="text-blue-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
                 <i class="fa-solid fa-grip-lines-vertical"></i>
             </span>
             
@@ -190,46 +199,52 @@ const createHtml = {
         </div>
         `,
     },
-    normal({ normal, address }) {
+    normal({ normal, address, value }) {
         return this.htmlBlock.normal
             .replace("{{data}}", normal.join(""))
             .replace("{{address}}", address)
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address-index}}", address);
     },
-    ifelse({ condition, if_, else_, address }) {
+    ifelse({ condition, if_, else_, address, value }) {
         return this.htmlBlock.ifelse
             .replace("{{condition}}", condition.join(""))
             .replace("{{if_}}", if_.join(""))
             .replace("{{else_}}", else_.join(""))
             .replace("{{address}}", address)
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address-index}}", address);
     },
-    trycatch({ try_, catch_, address }) {
+    trycatch({ try_, catch_, address, value }) {
         return this.htmlBlock.trycatch
             .replace("{{try_}}", try_.join(""))
             .replace("{{catch_}}", catch_.join(""))
             .replace("{{address}}", address)
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address-index}}", address);
     },
-    while({ condition, do_, address }) {
+    while({ condition, do_, address, value }) {
         return this.htmlBlock.while
             .replace("{{condition}}", condition.join(""))
             .replace("{{do_}}", do_.join(""))
             .replace("{{address}}", address)
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address-index}}", address);
     },
 
-    logicAnd({ logicA, logicB, address }) {
+    logicAnd({ logicA, logicB, address, value }) {
         return this.htmlBlock.logicAnd
             .replace("{{logicA}}", logicA.join(""))
             .replace("{{logicB}}", logicB.join(""))
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address}}", address)
             .replace("{{address-index}}", address);
     },
-    logicOr({ logicA, logicB, address }) {
+    logicOr({ logicA, logicB, address, value }) {
         return this.htmlBlock.logicOr
             .replace("{{logicA}}", logicA.join(""))
             .replace("{{logicB}}", logicB.join(""))
+            .replace("{{value}}", JSON.stringify(value))
             .replace("{{address}}", address)
             .replace("{{address-index}}", address);
     },

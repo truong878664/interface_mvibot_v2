@@ -161,7 +161,6 @@ class Step extends Model
             $dataTranslated = "*/step_no_found/*";
         }
 
-
         return $dataTranslated;
     }
 }

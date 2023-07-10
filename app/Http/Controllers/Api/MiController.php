@@ -125,6 +125,8 @@ class MiController extends Controller
             $missionClass= new Missions();
         } else if($v ===  "v4") {
             $missionClass= new MissionsVer();
+        } else {
+            $missionClass= new Missions();
         }
 
         switch ($request->method) {

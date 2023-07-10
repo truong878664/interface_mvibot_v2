@@ -1,3 +1,4 @@
+import { MissionClass } from "../../index.js";
 import Step from "../Step.js";
 import createHtml from "./createHtml.js";
 
@@ -5,16 +6,27 @@ const blockStep = {
     html: [],
     normal({ data, address }) {
         const htmlNormal = [];
-        data.normal.map((data, index) => {
-            if (data instanceof Object) {
-                htmlNormal.push(
-                    this[data.type]({ data: data.data, address: index })
-                );
-            } else {
-                htmlNormal.push(Step(data, index));
-            }
-        });
-        return createHtml.normal({ normal: htmlNormal, address });
+        try {
+            data.normal.map((data, index) => {
+                if (data instanceof Object) {
+                    htmlNormal.push(
+                        this[data.type]({
+                            data: data.data,
+                            address: index,
+                            value: data,
+                        })
+                    );
+                } else {
+                    htmlNormal.push(Step(data, index));
+                }
+            });
+            const value = MissionClass.Normal({ data: data });
+            return createHtml.normal({ normal: htmlNormal, address, value });
+        } catch (error) {
+            console.log(error);
+            htmlNormal.push(Step("step error", "error"))
+            return createHtml.normal({ normal: htmlNormal, address, value:"" });
+        }
     },
     ifelse({ data, address }) {
         const htmlIfElse = {
@@ -33,7 +45,8 @@ const blockStep = {
                 }
             });
         }
-        return createHtml.ifelse({ ...htmlIfElse, address });
+        const value = MissionClass.IfElse({ data: data });
+        return createHtml.ifelse({ ...htmlIfElse, address, value });
     },
     trycatch({ data, address }) {
         const htmlTryCatch = {
@@ -52,8 +65,8 @@ const blockStep = {
                 }
             });
         }
-
-        return createHtml.trycatch({ ...htmlTryCatch, address });
+        const value = MissionClass.Trycatch({ data: data });
+        return createHtml.trycatch({ ...htmlTryCatch, address, value });
     },
     while({ data, address }) {
         const htmlWhile = {
@@ -71,7 +84,8 @@ const blockStep = {
                 }
             });
         }
-        return createHtml.while({ ...htmlWhile, address });
+        const value = MissionClass.While({ data: data });
+        return createHtml.while({ ...htmlWhile, address, value });
     },
     logicAnd({ data, address }) {
         const htmlLogicAnd = {
@@ -89,7 +103,8 @@ const blockStep = {
                 }
             });
         }
-        return createHtml.logicAnd({ ...htmlLogicAnd, address });
+        const value = MissionClass.LogicAnd({ data: data });
+        return createHtml.logicAnd({ ...htmlLogicAnd, address, value });
     },
     logicOr({ data, address }) {
         const htmlLogicOr = {
@@ -107,7 +122,9 @@ const blockStep = {
                 }
             });
         }
-        return createHtml.logicOr({ ...htmlLogicOr, address });
+        const value = MissionClass.LogicOr({ data: data });
+
+        return createHtml.logicOr({ ...htmlLogicOr, address, value });
     },
 };
 export default blockStep;
