@@ -48,7 +48,7 @@ function eventFunctionContainer() {
         const functionKind = buttonAction?.dataset.buttonFunctionKind;
         const functionType = functionItem?.dataset.functionType;
         const functionId = functionItem?.dataset.id;
-        switch (functionKind) {
+        switch (functionKind) { 
             case "add":
                 const valueFunction = functionItem.dataset.value;
                 MissionClass.addStep({ step: valueFunction });
