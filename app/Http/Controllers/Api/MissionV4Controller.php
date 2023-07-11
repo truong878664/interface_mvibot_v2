@@ -56,7 +56,8 @@ class MissionV4Controller extends Controller
         if($kind === "get") {
             return MissionsVer::where('id', $id)->first();
         } else if($kind === "convert_data_robot") {
-            $mission = $this->translateDataRobot($id);
+            $html = json_decode($request->html);
+            $mission = $this->translateDataRobot($id, $html);
             return ["data"=>$mission];
         }
     }
@@ -96,14 +97,14 @@ class MissionV4Controller extends Controller
         
     }
 
-    public function translateDataRobot($id)
+    public function translateDataRobot($id, $html)
     {
         try {
             $dataJson = MissionsVer::where("id", $id)->first()->mission_shorthand;
             $BlockStep = new BlockStep();
             $mission = json_decode($dataJson);
-            $dataTranslateEndMission = array_map(function($mission) use($BlockStep) {
-                return $BlockStep->translate($mission);
+            $dataTranslateEndMission = array_map(function($mission) use($BlockStep, $html) {
+                return $BlockStep->translate($mission, $html);
             }, $mission);
             $data = implode("",$dataTranslateEndMission);
         } catch (\Throwable $th) {

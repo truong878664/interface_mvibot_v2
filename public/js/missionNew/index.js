@@ -1,5 +1,9 @@
 import confirmationForm from "../functionHandle/confirmationForm.js";
-import { loadingHeader } from "../functionHandle/displayLoad.js";
+import {
+    loaded,
+    loading,
+    loadingHeader,
+} from "../functionHandle/displayLoad.js";
 import sendMission from "../functionHandle/sendMission.js";
 import useDebounce from "../hooks/useDebouche.js";
 import { toggerMessage } from "../main.js";
@@ -11,6 +15,7 @@ import handleDragDrop from "./handle/handleDragDrop.js";
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
+const functionWrapper = document.getElementById("function-container");
 
 createTypeMission();
 Function();
@@ -25,6 +30,9 @@ function handleAddStepToBlockStep() {
         const stepWrapper = document.getElementById("step-wrapper");
         if (!buttonAction) return;
         const typeAction = buttonAction.dataset.actionBlockStep;
+        let functionHighline;
+        let timeOutDeleteHighline;
+
         switch (typeAction) {
             case "add":
                 MissionClass.setAddressAdd(buttonAction);
@@ -107,8 +115,27 @@ function handleAddStepToBlockStep() {
                 blockWrapper.dataset.showData = statusChange;
                 buttonAction.dataset.status = statusChange;
                 break;
-            case "send":
-                console.log(123);
+            case "detail":
+                const currentStep = buttonAction.closest("[data-name='step']");
+                const valueStep = currentStep.dataset.value;
+                const typeStep = currentStep.dataset.type;
+                if (typeStep === "break") return;
+                functionWrapper.querySelector("#" + typeStep).checked = true;
+                stepWrapper.checked = true;
+                const functionActive = functionWrapper.querySelector(
+                    `[data-value='${valueStep}'`
+                );
+                functionActive?.classList.add("highline");
+                functionActive?.scrollIntoView({ behavior: "smooth" });
+                clearTimeout(timeOutDeleteHighline);
+                functionHighline?.classList.remove("highline");
+                functionHighline = document.querySelector(
+                    "[data-function-type].highline"
+                );
+                timeOutDeleteHighline = setTimeout(() => {
+                    functionHighline?.classList.remove("highline");
+                }, 4000);
+
                 break;
             default:
                 console.log(134);
@@ -126,15 +153,24 @@ function handleSendMission() {
     const closeFormSendMission = document.getElementById("input-send-mission");
     sendBtn.onclick = async (e) => {
         try {
-            const data = await MissionClass.getDataRobot();
+            loading();
+            const data = await MissionClass.getDataRobot({});
+            if (!data.success) {
+                toggerMessage("error", data.message);
+                loaded();
+                return;
+            }
             const nameRobot = document.querySelector(
                 "#select-robot-option"
             ).value;
             const typeMission = sendBtn.dataset.typeMission;
+            console.log(data);
             sendMission({ nameRobot, data: data.data, typeMission });
             closeFormSendMission.checked = false;
+            loaded();
         } catch (error) {
             toggerMessage("error", "ERR!, Please try again!");
+            console.log(error);
         }
     };
 }
@@ -157,7 +193,8 @@ function handleMoreAction() {
 }
 
 async function handleCode() {
-    const data = await MissionClass.getDataRobot();
+    loading();
+    const data = await MissionClass.getDataRobot({ html: true });
 
     const showMissionForm = document.createElement("div");
     showMissionForm.classList.add(
@@ -202,22 +239,46 @@ async function handleCode() {
         const isOverlay = e.target.closest(".show-mission-form");
         !isOverlay && formShowMission.remove();
     };
-    handleCopyMission(data.data);
+    handleCopyMission();
+    loaded();
 }
 
-function handleCopyMission(data) {
+function handleCopyMission() {
     const copyMissionBtn = $(".copy-mission-btn");
     copyMissionBtn &&
-        (copyMissionBtn.onclick = (e) => {
-            copyToClipboard(data);
+        (copyMissionBtn.onclick = async (e) => {
+            // loading();
+            const data = await MissionClass.getDataRobot({});
+            console.log(data);
+            copyToClipboard(data.data);
+            // loaded();
         });
-}
 
-const copyToClipboard = (content) => {
-    if (window.isSecureContext && navigator.clipboard) {
-        navigator.clipboard.writeText(content);
-    } else {
-        unsecuredCopyToClipboard(content);
-    }
-    toggerMessage("success", "Copied!");
-};
+    const copyToClipboard = (content) => {
+        try {
+            if (window.isSecureContext && navigator.clipboard) {
+                toggerMessage("success", content);
+                navigator.clipboard.writeText(content);
+            } else {
+                toggerMessage("success", content);
+                unsecuredCopyToClipboard(content);
+            }
+            toggerMessage("success", "Copied!");
+        } catch (error) {
+            toggerMessage("success", error);
+        }
+    };
+    const unsecuredCopyToClipboard = (text) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand("copy");
+        } catch (err) {
+            console.error("Unable to copy to clipboard", err);
+        }
+        document.body.removeChild(textArea);
+    };
+}

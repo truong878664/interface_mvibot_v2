@@ -45,6 +45,16 @@ export default class Step {
             return this.message;
         }
     }
+    async delete(id) {
+        try {
+            const urlDelete = "/api/" + this.type + "/" + id;
+            const res = await fetch(urlDelete, { method: "DELETE" });
+            const data = await res.json();
+            return { message: data.message, deleted: true };
+        } catch (error) {
+            return { message: "ERR!, Try again!", deleted: false };
+        }
+    }
 
     addItem(item) {
         document
@@ -53,7 +63,7 @@ export default class Step {
     }
     reset() {
         for (const key in this.data) {
-            if(this.data[key]) {
+            if (this.data[key]) {
                 this.data[key].value = "";
             }
         }

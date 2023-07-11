@@ -11,7 +11,7 @@ const Label = {
                 </button>
             </li>
             <li class="px-6 py-1 hover:bg-stone-100 ">
-                <button data-action-block-step="" class="btn flex py-2">
+                <button data-action-block-step="detail" class="btn flex py-2">
                     <span class="mr-2 text-sky-500">
                         <i class="fa-solid fa-circle-info"></i>
                     </span>

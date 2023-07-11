@@ -14,6 +14,7 @@ export default class Mission {
         this.UrlApi = "/api/mission-v4/" + this.id;
         this.get();
         this.saved = true;
+        this.history = [];
     }
     async get() {
         const urlGet = this.UrlApi + "?kind=get";
@@ -23,7 +24,6 @@ export default class Mission {
         this.render();
     }
     async save() {
-        this.saved = false;
         const res = await fetch(this.UrlApi, {
             method: "PUT",
             headers: {
@@ -35,17 +35,23 @@ export default class Mission {
         });
         const message = await res.json();
         console.log("Saved...");
-        this.saved = true;
         loadingHeader(false);
     }
-    async getDataRobot() {
-        if (this.saved) {
-            const urlGet = this.UrlApi + "?kind=convert_data_robot";
+    async getDataRobot({ html = false }) {
+        try {
+            await this.save();
+            const urlGet =
+                this.UrlApi + "?kind=convert_data_robot" + `&html=${html}`;
             const res = await fetch(urlGet);
             const data = await res.json();
-            return data;
-        } else {
-            toggerMessage("error", "Saving data!");
+            return { success: true, message: "Saving data!", data: data.data };
+        } catch (error) {
+            console.error(error);
+            return {
+                success: false,
+                message: "ERR!, Please check your internet and try again!!",
+                data: "",
+            };
         }
     }
     render() {

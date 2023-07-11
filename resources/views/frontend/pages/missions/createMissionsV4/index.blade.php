@@ -1,11 +1,14 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
+    <div class="fixed top-0 left-0 right-0 bottom-0 bg-white z-10 flex justify-center items-center" id="loading-mission">
+        <span class="loader-mission"></span>
+    </div>
     <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-aut p-4 relative">
         @php
             $json = '[{"type":"normal","data":{"normal":["footprint#HS_123#1","marker#HS_111#1","gpio_module#JS_123#2","gpio#HB_999#23"]}},{"type":"while","data":{"condition":[{"type":"logicAnd","data":{"logicA":["gpio_module#name#2","gpio_module#name#2"],"logicB":["gpio_module#name#2","gpio_module#name#2"]}},{"type":"logicOr","data":{"logicA":["gpio_module#name#2","gpio_module#name#2"],"logicB":["gpio_module#name#2","gpio_module#name#2"]}}],"do_":["gpio_module#name#2","gpio_module#name#2"]}}]';
         @endphp
         <div class="h-full w-full">
-            <input class="" id="id-mission" value="{{$itemRender->id}}" hidden>
+            <input class="" id="id-mission" value="{{ $itemRender->id }}" hidden>
             <div class="flex w-full h-full ">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden>
                 <div class="w-full h-full relative mr-4 peer-checked/step-wrapper:w-3/4 transition-all ">
@@ -25,4 +28,11 @@
         </div>
     </div>
     <script type="module" src="/js/missionNew/index.js"></script>
+    <script>
+        window.addEventListener('load', e => {
+            setTimeout(() => {
+                document.getElementById("loading-mission")?.remove()
+            }, 1500);
+        })
+    </script>
 @endsection

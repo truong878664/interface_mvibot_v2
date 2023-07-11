@@ -10,7 +10,7 @@ export default function confirmationForm({
     divElement.classList.add(
         "fixed",
         "top-0",
-        "z-[30]",
+        "z-[1000]",
         "left-0",
         "right-0",
         "bottom-0",

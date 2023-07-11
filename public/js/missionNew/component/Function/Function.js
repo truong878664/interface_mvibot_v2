@@ -10,8 +10,10 @@ const createHtmlFunctionItem = {
         data,
     }) {
         const html = `
-            <div data-function-type="${mode}" ${marker_type ? `data-marker-type="${marker_type}"` : ``} data-value="${value}" data-id=${id} data-data='${data}'
-                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
+            <div data-function-type="${mode}" ${
+            marker_type ? `data-marker-type="${marker_type}"` : ``
+        } data-value="${value}" data-id=${id} data-data='${data}'
+                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg hover:z-50">
                 <div class="flex">
                     <input data-select-function-id="1" data-type="marker" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">
@@ -36,10 +38,13 @@ const createHtmlFunctionItem = {
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
                         <i class="fa-solid fa-plus"></i>
                     </button>
-                    <button data-button-function-kind="option"
-                        class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md more-option-function-btn">
+                    <div
+                        class="text-2xl mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
                         <i class="fa-solid fa-ellipsis"></i>
-                    </button>
+                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block">
+                            ${this.optionButtonFunction}
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -96,6 +101,35 @@ const createHtmlFunctionItem = {
         DOMElement.querySelector(".is-new").classList.remove("hidden");
         return DOMElement;
     },
+
+    optionButtonFunction: `
+        <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden text-stone-900">
+            <li class="px-6 py-1 hover:bg-stone-100 mt-4">
+                <button data-button-function-kind="delete" class="btn flex w-full h-full">
+                    <span class="mr-2 text-red-500">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                    <span>Delete</span>
+                </button>
+            </li>
+            <li class="px-6 py-1 hover:bg-stone-100 ">
+                <button data-button-function-kind="edit" class="btn flex py-2 w-full h-full">
+                    <span class="mr-2 text-sky-500">
+                        <i class="fa-solid fa-pen"></i>
+                    </span>
+                    <span>Edit</span>
+                </button>
+            </li>
+            <li class="px-6 py-1 hover:bg-stone-100 ">
+                <button data-button-function-kind="duplicate" class="btn flex py-2 w-full h-full">
+                    <span class="mr-2 text-orange-500">
+                        <i class="fa-regular fa-clone"></i>
+                    </span>
+                    <span>Duplicate</span>
+                </button>
+            </li>
+        </ul>
+    `,
 };
 
 export default createHtmlFunctionItem;

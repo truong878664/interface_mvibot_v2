@@ -9,7 +9,7 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-d746886a.css">
+    <link rel="stylesheet" href="/build/assets/app-6e7cbc2b.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite('resources/css/app.css')
 </head>
@@ -50,16 +50,24 @@
                     </div>
                 </div>
             </div>
-            <div class="ml-7 !hidden" id="loader-header"></div>
+            <div class="ml-4">
+                <div class="hidden">
+                    <button data-action-block-step="undo"
+                        class="text-xl border rounded-md border-stone-400 px-2 btn">Undo</button>
+                    <button data-action-block-step="redo"
+                        class="text-xl border rounded-md border-stone-400 px-2 btn">Redo</button>
+                </div>
+                <div class="ml-7 !hidden" id="loader-header"></div>
             </div>
-            @php
-                $userName = session('UserName');
-                $key = substr($userName, 0, 1);
-                
-                $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
-                $color = $colors[strlen($userName)];
-            @endphp
+        </div>
 
+        @php
+            $userName = session('UserName');
+            $key = substr($userName, 0, 1);
+            
+            $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
+            $color = $colors[strlen($userName)];
+        @endphp
         </div>
         <div class="user-wrapper">
             <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
@@ -153,6 +161,7 @@
     <script type="text/javascript" src="/js/library/roslib.min.js"></script>
     <script type="text/javascript" src="/js/library/ros3d.min.js"></script>
     <script type="text/javascript" src="/js/library/nipplejs.js"></script>
+    <script type="text/javascript" src="/js/library/dragDropMobile.js"></script>
 
     <script type="module" src="/js/mainLayout.js"></script>
     <script type="module" src="/js/main.js"></script>

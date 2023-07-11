@@ -78,8 +78,8 @@
             </button>
         @else
             <div class="">
-                <input type="radio" hidden name="function" class="peer/function function" id="{{ $item['title'] }}">
-                <label for="{{ $item['title'] }}"
+                <input type="radio" hidden name="function" class="peer/function function" id="{{ $item['type'] }}">
+                <label for="{{ $item['type'] }}"
                     class="label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                     <div class="flex">
                         <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
