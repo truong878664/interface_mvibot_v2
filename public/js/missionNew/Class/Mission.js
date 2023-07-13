@@ -11,10 +11,12 @@ export default class Mission {
         this.missionWrapperElement =
             document.getElementById("block-step-wrapper");
         this.id = document.getElementById("id-mission").value;
+        this.typeMission = document.getElementById("type-mission").value;
         this.UrlApi = "/api/mission-v4/" + this.id;
         this.get();
         this.saved = true;
         this.history = [];
+
     }
     async get() {
         const urlGet = this.UrlApi + "?kind=get";
@@ -24,18 +26,23 @@ export default class Mission {
         this.render();
     }
     async save() {
-        const res = await fetch(this.UrlApi, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                mission_shorthand: JSON.stringify(this.data),
-            }),
-        });
-        const message = await res.json();
-        console.log("Saved...");
-        loadingHeader(false);
+        try {
+            const res = await fetch(this.UrlApi, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    mission_shorthand: JSON.stringify(this.data),
+                }),
+            });
+            const message = await res.json();
+            loadingHeader(false);
+        } catch (error) {
+            toggerMessage("error", "ERR!, Please try again!" + error);
+            loadingHeader(false);
+            console.log(error);
+        }
     }
     async getDataRobot({ html = false }) {
         try {
@@ -227,7 +234,6 @@ export default class Mission {
 
     resetCurrentAddAddress() {
         this.currentAddAddress = "";
-        console.log("Reset default path add address!");
         return;
     }
     Normal({ data = { normal: [] }, name = "normal_name", id = null }) {

@@ -1,3 +1,5 @@
+import { toggerMessage } from "../../../main.js";
+
 export default class Step {
     constructor() {
         this.data = {};
@@ -6,8 +8,18 @@ export default class Step {
             status: "no status",
             message: `no handle ${this.type}!`,
         };
+        this.currentIdUpdate = "";
     }
-    display() {}
+    display(data) {
+        try {
+            for (const key in this.data) {
+                this.data[key].value = data[key];
+            }
+        } catch (error) {
+            toggerMessage("error", "ERR!," + error);
+        }
+    }
+
     get() {
         const data = {};
         for (const key in this.data) {
@@ -45,6 +57,20 @@ export default class Step {
             return this.message;
         }
     }
+
+    async update(data) {
+        const res = await fetch(`/api/step/${this.currentIdUpdate}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "PUT",
+            body: JSON.stringify(data),
+        });
+        const message = await res.json();
+        return message;
+    }
+
     async delete(id) {
         try {
             const urlDelete = "/api/" + this.type + "/" + id;

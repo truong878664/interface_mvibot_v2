@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
+use App\Http\Controllers\Api\TypeMissionVerController;
 use App\Http\Controllers\Api\userController;
 use App\Http\Controllers\Api\VarController;
 use App\Http\Controllers\Api\VariableController;
@@ -79,3 +80,4 @@ Route::resource('bookmark', BookmarkController::class);
 
 // mission v4
 Route::resource('mission-v4', MissionV4Controller::class);
+Route::resource('type-mission-v4', TypeMissionVerController::class);

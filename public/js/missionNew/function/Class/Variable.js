@@ -10,9 +10,7 @@ export default class Variable extends Step {
         this.data.name_variable = document.querySelector(
             "[name='name_variable']"
         );
-        this.data.command_action = document.querySelector(
-            "[name='command_action']"
-        );
+        this.data.command_action = document.querySelector("[name='command_action']");
         this.data.focus_value = document.querySelector("[name='focus_value']");
     }
     reset() {
@@ -20,6 +18,6 @@ export default class Variable extends Step {
         this.data.name_variable.value = "";
         this.data.command_action.value = "new";
         this.data.command_action.dataset.value = "new";
-        this.data.focus_value = "";
+        this.data.focus_value.value = "";
     }
 }

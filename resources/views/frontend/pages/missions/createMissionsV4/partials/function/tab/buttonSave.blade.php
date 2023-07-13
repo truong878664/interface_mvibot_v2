@@ -14,16 +14,18 @@
                 class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
         </div>
     @else
-        <div class="absolute right-6 bottom-6 flex data-[valid=disable]:pointer-events-none data-[valid=disable]:opacity-70  z-10"
+        <div class="absolute right-6 bottom-6 flex data-[valid=disable]:pointer-events-none data-[valid=disable]:opacity-70 z-10 group" data-name="action-form-function" data-type="{{$type}}" data-status="create"
             data-valid="">
-            <div class="update-btn-wrapper mr-2 {{ $type . '-update-btn-wrapper' }} hidden">
+            <div class="mr-2 hidden group-data-[status='update']:block">
                 <button
-                    class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md update-cancel-btn {{ $type . '-update-cancel' }}">Cancel</button>
+                    class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md" data-type="{{$type}}" data-button-function-kind="cancel">Cancel</button>
                 <button
-                    class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md {{ $type . '-update-btn' }}">Update</button>
+                    class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md " data-type="{{$type}}" data-button-function-kind="update">Update</button>
             </div>
-            <button data-type-mission="{{$type}}"
+            <div class="hidden group-data-[status='create']:block">
+                <button data-type="{{$type}}" data-button-function-kind="create"
                 class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md create-step-btn">Create</button>
+            </div>
         </div>
     @endif
 </div>

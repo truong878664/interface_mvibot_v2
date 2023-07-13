@@ -12,35 +12,7 @@ export default class Gpio extends Step {
         this.data.in_pulldown = [];
         this.data.out_set = [];
         this.data.out_reset = [];
-    }
-
-    reset() {
-        this.data.name.value = "";
-        this.data.time_out.value = -1;
-
-        document.querySelectorAll(".gpio-io").forEach((item) => {
-            item.classList.remove(
-                "in_on",
-                "in_off",
-                "in_pullup",
-                "in_pulldown",
-                "out_reset",
-                "out_set",
-                "gpio_normal",
-                "gpio_module"
-            );
-        });
-        document
-            .querySelector(".type-gpio-btn.active")
-            ?.classList.remove("active");
-    }
-
-    get() {
-        const gpioContainer = document.querySelector(
-            `.function-mission-tab[data-type=${this.type}]`
-        );
-
-        const gpioTypes = [
+        this.gpioTypes = [
             "in_on",
             "in_off",
             "in_pullup",
@@ -48,8 +20,33 @@ export default class Gpio extends Step {
             "out_set",
             "out_reset",
         ];
+    }
 
-        gpioTypes.forEach((type) => {
+    reset() {
+        this.data.name.value = "";
+        this.data.time_out.value = -1;
+        this.gpioTypes.forEach((e) => {
+            this.data[e] = [];
+        });
+        document.querySelectorAll(".gpio-io").forEach((item) => {
+            item.classList.remove(...this.gpioTypes);
+        });
+        document
+            .querySelector(".type-gpio-btn.active")
+            ?.classList.remove("active");
+    }
+    display(data) {
+        const { name, time_out, mode, id, ...field } = data;
+        this.data.name.value = name;
+        this.data.time_out.value = time_out;
+        this.setLightGpio(field);
+    }
+    get() {
+        const gpioContainer = document.querySelector(
+            `.function-mission-tab[data-type=${this.type}]`
+        );
+
+        this.gpioTypes.forEach((type) => {
             const elements = gpioContainer.querySelectorAll(`.gpio-io.${type}`);
             this.data[type].push(
                 ...Array.from(elements, (gpio) => gpio.dataset.gpio)
@@ -73,5 +70,23 @@ export default class Gpio extends Step {
 
         this.reset();
         return data;
+    }
+    setLightGpio(dataGpio) {
+        const form = document.querySelector(
+            `#function-item-form-wrapper [data-type='${this.type}']`
+        );
+        for (const item in dataGpio) {
+            dataGpio[item]?.split(",").forEach((light) => {
+                if (item.indexOf("out") != -1) {
+                    form.querySelector(
+                        `.output-gpio[data-gpio="${light}"]`
+                    ).classList.add(`${item}`);
+                } else if (item.indexOf("in") != -1) {
+                    form.querySelector(
+                        `.input-gpio[data-gpio="${light}"]`
+                    ).classList.add(`${item}`);
+                }
+            });
+        }
     }
 }

@@ -9,8 +9,10 @@ const renderFunction = async () => {
         createHtmlDataFunction(data[key], key);
     }
 
-    for (const key in htmlDataFunction) {  
-        $(`[data-list-function='${key}'`).innerHTML = htmlDataFunction[key].join("")
+    for (const key in htmlDataFunction) {
+        if($(`[data-list-function='${key}'`)) {
+            $(`[data-list-function='${key}'`).innerHTML = htmlDataFunction[key].join("")
+        }  
     }
 };
 

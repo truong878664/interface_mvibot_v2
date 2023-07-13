@@ -8,6 +8,7 @@ const createHtmlFunctionItem = {
         id,
         color_position = "",
         data,
+        status = ""
     }) {
         const html = `
             <div data-function-type="${mode}" ${
@@ -18,7 +19,7 @@ const createHtmlFunctionItem = {
                     <input data-select-function-id="1" data-type="marker" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">
                         <div class="flex">
-                            <span class="mr-2 text-green-400 is-new hidden">New</span>
+                            <span class="mr-2 text-green-400 status hidden">${status}</span>
                             <span class=" font-bold font-3xl capitalize">${mode}</span>
                             ${
                                 color_position
@@ -73,6 +74,7 @@ const createHtmlFunctionItem = {
             created_at,
             updated_at,
             color_position,
+            status,
             ...field
         } = data;
 
@@ -88,6 +90,7 @@ const createHtmlFunctionItem = {
             color_position,
             marker_type: field.marker_type,
             data: JSON.stringify(data),
+            status
         };
 
         const htmlItem = this.html(dataFunction);
@@ -98,7 +101,8 @@ const createHtmlFunctionItem = {
         const wrapper = document.createElement("div");
         wrapper.innerHTML = htmlItem;
         const DOMElement = wrapper.firstElementChild;
-        DOMElement.querySelector(".is-new").classList.remove("hidden");
+        const sticker = DOMElement.querySelector(".status")
+        sticker.classList.remove("hidden");
         return DOMElement;
     },
 

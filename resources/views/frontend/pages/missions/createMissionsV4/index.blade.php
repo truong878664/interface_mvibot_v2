@@ -9,6 +9,7 @@
         @endphp
         <div class="h-full w-full">
             <input class="" id="id-mission" value="{{ $itemRender->id }}" hidden>
+            <input class="" id="type-mission" value="{{ $itemRender->type }}" hidden>
             <div class="flex w-full h-full ">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden>
                 <div class="w-full h-full relative mr-4 peer-checked/step-wrapper:w-3/4 transition-all ">

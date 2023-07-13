@@ -58,11 +58,11 @@ export default function handleDragDrop() {
         const [address, indexStep] = MissionClass.getAddressByStep(e.target);
         addressStepDrag = { address, indexStep };
         const itemDrop = e.target.closest("[data-name='step']");
-        const blockDrop = e.target.closest("[data-block-wrapper]")
-        if(itemDrop) {
+        const blockDrop = e.target.closest("[data-block-wrapper]");
+        if (itemDrop) {
             valueStepDrag = itemDrop.dataset.value;
-        } else if(blockDrop) {
-            valueStepDrag = blockDrop.dataset.value
+        } else if (blockDrop) {
+            valueStepDrag = blockDrop.dataset.value;
         }
     });
     // END DRAG START

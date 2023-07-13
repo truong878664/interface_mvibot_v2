@@ -1,10 +1,13 @@
 import showFormFunction from "../action/showFormFunction.js";
+import { classFunctions } from "../index.js";
 import render3DMap from "../position/handle/render.js";
 
 export default function handleShowFormFunction() {
     const functionContainer = document.getElementById("function-container");
     functionContainer.addEventListener("click", (e) => {
-        const newFunctionBtn = e.target.closest("[data-button-function-kind='new']");
+        const newFunctionBtn = e.target.closest(
+            "[data-button-function-kind='new']"
+        );
         if (!newFunctionBtn) return;
         const typeFunction = newFunctionBtn.dataset.typeMission;
         showFormFunction({

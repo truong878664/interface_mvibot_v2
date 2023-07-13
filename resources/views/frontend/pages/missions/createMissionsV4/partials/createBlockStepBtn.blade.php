@@ -5,7 +5,8 @@
         </label>
     </div>
     <input type="checkbox" name="" id="action-create-block" class="peer" hidden>
-    <div class="flex-col-reverse justify-between gap-[10px] bg-white rounded-md shadow-md px-4 py-8 hidden peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:p-0 xl:bg-transparent xl:shadow-none">
+    <div
+        class="flex-col-reverse justify-between gap-[10px] bg-white rounded-md shadow-md px-4 py-8 hidden peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:p-0 xl:bg-transparent xl:shadow-none">
         <div class="">
             {{-- ACTION SEND MISSION --}}
             <input class="peer/send-mission" type="checkbox" name="" hidden id="input-send-mission">
@@ -35,6 +36,8 @@
                     <i class="fa-solid fa-caret-up"></i>
                 </label>
                 <input hidden type="checkbox" id="more-action" class="peer/more-action">
+                <label for="more-action"
+                    class="fixed top-0 left-0 right-0 bottom-0 z-20 hidden peer-checked/more-action:block"></label>
                 <ul id="more-action-wrapper"
                     class="absolute text-2xl right-0 bottom-[calc(100%_+_10px)] w-[200px] bg-white shadow-sm rounded-md transition-all hidden py-8 opacity-0 peer-checked/more-action:block peer-checked/more-action:opacity-100 peer-checked/more-action:z-50 overflow-hidden ">
                     <li>

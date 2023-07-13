@@ -7,6 +7,7 @@ import {
 import sendMission from "../functionHandle/sendMission.js";
 import useDebounce from "../hooks/useDebouche.js";
 import { toggerMessage } from "../main.js";
+import BlockStep from "./Class/BlockStep.js";
 import Mission from "./Class/Mission.js";
 import createTypeMission from "./blockStep/create.js";
 import Label from "./component/Label.js";
@@ -33,8 +34,9 @@ function handleAddStepToBlockStep() {
         let functionHighline;
         let timeOutDeleteHighline;
 
-        switch (typeAction) {
-            case "add":
+        const blockWrapper = buttonAction.closest("[data-block-wrapper]");
+        const actions = {
+            add() {
                 MissionClass.setAddressAdd(buttonAction);
                 if (buttonAction.classList.contains("active")) {
                     stepWrapper.checked = false;
@@ -48,9 +50,8 @@ function handleAddStepToBlockStep() {
                 activeButton?.classList.remove("active");
                 buttonAction.classList.add("active");
                 stepWrapper.checked = true;
-
-                break;
-            case "delete":
+            },
+            delete() {
                 const handleDelete = () => {
                     loadingHeader(true);
                     const [address, indexStep] =
@@ -63,8 +64,8 @@ function handleAddStepToBlockStep() {
                     });
                 };
                 confirmationForm({ callback: handleDelete });
-                break;
-            case "duplicate":
+            },
+            duplicate() {
                 // MissionClass.setAddressAdd(buttonAction);
                 const [address, indexStep] =
                     MissionClass.getAddressByStep(buttonAction);
@@ -82,8 +83,8 @@ function handleAddStepToBlockStep() {
                     addressIndex: [address, indexStep],
                 });
                 MissionClass.render();
-                break;
-            case "step":
+            },
+            step() {
                 const isSticky = buttonAction.querySelector(
                     "[data-name='sticky']"
                 );
@@ -104,27 +105,35 @@ function handleAddStepToBlockStep() {
                     buttonAction.dataset.sticky = "show";
                     buttonAction.appendChild(div.firstElementChild);
                 }
-                break;
-            case "hidden":
-                const blockWrapper = buttonAction.closest(
-                    "[data-block-wrapper]"
-                );
+            },
+            hidden() {
                 const currentStatusShow = blockWrapper.dataset.showData;
                 const statusChange =
                     currentStatusShow === "show" ? "hidden" : "show";
                 blockWrapper.dataset.showData = statusChange;
                 buttonAction.dataset.status = statusChange;
-                break;
-            case "detail":
+            },
+            detail() {
+                const functionTab = document.getElementById("tab-function");
                 const currentStep = buttonAction.closest("[data-name='step']");
                 const valueStep = currentStep.dataset.value;
                 const typeStep = currentStep.dataset.type;
+                const [type, name, id] = valueStep.split("#");
                 if (typeStep === "break") return;
+                functionTab.checked = true;
                 functionWrapper.querySelector("#" + typeStep).checked = true;
                 stepWrapper.checked = true;
                 const functionActive = functionWrapper.querySelector(
-                    `[data-value='${valueStep}'`
+                    `[data-function-type='${type}'][data-id='${id}']`
                 );
+                if (!functionActive) {
+                    toggerMessage(
+                        "error",
+                        "This element was not found or deleted!"
+                    );
+                    return;
+                }
+
                 functionActive?.classList.add("highline");
                 functionActive?.scrollIntoView({ behavior: "smooth" });
                 clearTimeout(timeOutDeleteHighline);
@@ -135,12 +144,33 @@ function handleAddStepToBlockStep() {
                 timeOutDeleteHighline = setTimeout(() => {
                     functionHighline?.classList.remove("highline");
                 }, 4000);
+            },
+            save() {
+                const data = blockWrapper.dataset.value;
+                const typeBlock = blockWrapper.dataset.blockWrapper;
+                const { x, y } = buttonAction.getBoundingClientRect();
+                const div = document.createElement("div");
+                div.innerHTML = Label.formName({ x, y });
+                const formName = div.firstElementChild;
+                const enterBtn = formName.querySelector(".enter-btn");
+                enterBtn.onclick = async (e) => {
+                    const name = formName.querySelector("[name='name']").value;
+                    const dataSaveBlockMission = {
+                        name,
+                        type: typeBlock,
+                        data,
+                        type_mission: MissionClass.typeMission,
+                    };
+                    const blockStep = new BlockStep();
+                    const message = await blockStep.save(dataSaveBlockMission);
+                    console.log(message);
+                    formName.remove();
+                };
+                blockStepWrapper.appendChild(formName);
+            },
+        };
 
-                break;
-            default:
-                console.log(134);
-                break;
-        }
+        actions[typeAction]?.();
     });
 
     function removeSticky() {
@@ -181,14 +211,12 @@ function handleMoreAction() {
         const buttonMoreAction = e.target.closest("[data-button-action-more");
         if (!buttonMoreAction) return;
         const typeButton = buttonMoreAction.dataset.buttonActionMore;
-        switch (typeButton) {
-            case "code":
+        const actions = {
+            code() {
                 handleCode();
-                break;
-
-            default:
-                break;
-        }
+            },
+        };
+        actions[typeButton]?.();
     };
 }
 
