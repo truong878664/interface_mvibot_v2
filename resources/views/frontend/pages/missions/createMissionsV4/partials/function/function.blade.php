@@ -205,7 +205,7 @@
         </div>
     </div>
 
-    <div class="h-full overflow-y-auto overflow-x-hidden hidden peer-checked/type-mission:block">
+    <div class="h-full overflow-y-auto overflow-x-hidden hidden peer-checked/type-mission:block" id="list-type-mission-wrapper">
         @foreach ($typeMissions as $index => $item)
             <div class="">
                 <input type="radio" name="function" class="peer/function function" id="{{ $item['type'] }}" hidden>
@@ -225,34 +225,6 @@
                 </button>
                 <div class="hidden peer-checked/function:block relative">
                     <div class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md text-2xl" data-list-type-mission="{{ $item['type'] }}">
-
-                        {{-- <div type-mission-id="91" mission-type="normal" class="flex justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg">
-                            <div class="flex">
-                                <input type="checkbox" data-select-type-mission-id="" data-type="normal" class="mr-4 w-[12px] h-[12px] accent-[#f5b933]">
-                                <div class="flex flex-col">
-                                    <div class="flex">
-                                        <span class="mr-2">Name:</span>
-                                        <span class="font-bold text-sky-600">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="absolute top-0 right-0">
-                                <button data-button-function-kind="add" 
-                                    class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                                <div
-                                    class="text-2xl mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                    <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block">
-                                       1
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
-
-
                     </div>
                 </div>
             </div>

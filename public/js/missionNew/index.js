@@ -7,19 +7,24 @@ import {
 import sendMission from "../functionHandle/sendMission.js";
 import useDebounce from "../hooks/useDebouche.js";
 import { toggerMessage } from "../main.js";
-import BlockStep from "./Class/BlockStep.js";
+import BlockStep from "./Class/TypeMission.js";
 import Mission from "./Class/Mission.js";
 import createTypeMission from "./blockStep/create.js";
 import Label from "./component/Label.js";
 import Function from "./function/index.js";
 import handleDragDrop from "./handle/handleDragDrop.js";
+import TypeMission from "./Class/TypeMission.js";
+import typeMission from "./typeMission/index.js";
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
 const functionWrapper = document.getElementById("function-container");
 
 createTypeMission();
+
 Function();
+typeMission();
+
 handleAddStepToBlockStep();
 handleDragDrop();
 handleSendMission();
@@ -153,6 +158,9 @@ function handleAddStepToBlockStep() {
                 div.innerHTML = Label.formName({ x, y });
                 const formName = div.firstElementChild;
                 const enterBtn = formName.querySelector(".enter-btn");
+                const input = formName.querySelector("[name]");
+                requestAnimationFrame(() => input.focus());
+
                 enterBtn.onclick = async (e) => {
                     const name = formName.querySelector("[name='name']").value;
                     const dataSaveBlockMission = {
@@ -161,10 +169,17 @@ function handleAddStepToBlockStep() {
                         data,
                         type_mission: MissionClass.typeMission,
                     };
-                    const blockStep = new BlockStep();
-                    const message = await blockStep.save(dataSaveBlockMission);
-                    console.log(message);
+                    const typeMission = new TypeMission();
+                    const message = await typeMission.save(
+                        dataSaveBlockMission
+                    );
                     formName.remove();
+
+                    message.saved && typeMission.render();
+                    toggerMessage(
+                        message.saved ? "success" : "error",
+                        message.message
+                    );
                 };
                 blockStepWrapper.appendChild(formName);
             },

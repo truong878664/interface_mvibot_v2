@@ -9,7 +9,6 @@ import Position from "./Class/Position.js";
 import Variable from "./Class/Variable.js";
 import Footprint from "./Class/Footprint.js";
 import handleWrapFunction from "./handleWrapFunction.js";
-import TypeMission from "../component/typeMission/index.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -36,6 +35,4 @@ export default function Function() {
     render();
     create();
     handleWrapFunction();
-    const typeMission = new TypeMission();
-    typeMission.render();
 }
