@@ -6,7 +6,6 @@ const blockStep = {
     html: [],
     normal({ data, address }) {
         const htmlNormal = [];
-        try {
             data.normal.map((data, index) => {
                 if (data instanceof Object) {
                     htmlNormal.push(
@@ -22,11 +21,6 @@ const blockStep = {
             });
             const value = MissionClass.Normal({ data: data });
             return createHtml.normal({ normal: htmlNormal, address, value });
-        } catch (error) {
-            console.log(error);
-            htmlNormal.push(Step("step error", "error"))
-            return createHtml.normal({ normal: htmlNormal, address, value:"" });
-        }
     },
     ifelse({ data, address }) {
         const htmlIfElse = {

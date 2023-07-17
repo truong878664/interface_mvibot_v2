@@ -42,7 +42,19 @@ const Label = {
         );
         return line;
     },
-    formName({ x, y}) {
+    lineLarge() {
+        const line = document.createElement("div");
+        line.classList.add(
+            "absolute",
+            "w-full",
+            "h-[2px]",
+            "bg-main",
+            "left-0",
+            "highline-line"
+        );
+        return line;
+    },
+    formName({ x, y }) {
         return `
         <div class="fullscreen">
             <div class="absolute top-0 left-0 right-0 bottom-0" onclick="this.parentElement.remove()"></div>

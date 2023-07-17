@@ -7,50 +7,42 @@ export default function handleDragDrop() {
     let addressStepDrag;
     // DROP
     blockStepWrapper.addEventListener("drop", (e) => {
-        const itemDrop = e.target.closest("[data-name='step']");
-        const blockDrop = e.target.closest("[data-data-block]");
-        // MissionClass.render();
+        const itemDrop = e.target.closest(
+            "[data-name='step'],[data-data-block], [data-block-wrapper]"
+        );
 
-        if (itemDrop) {
-            const [address, indexStep] =
-                MissionClass.getAddressByStep(itemDrop);
-            // delete went target drop is step
-            const addressDelete = addressStepDrag.address;
+        const isStep = itemDrop?.dataset.name === "step";
+        const isBlock = itemDrop?.dataset.dataBlock !== undefined;
 
-            const isDragDropSameBlock = addressDelete === address;
-            if (isDragDropSameBlock) {
-                MissionClass.deleteStep(addressStepDrag);
-                MissionClass.addStep({
-                    step: valueStepDrag,
-                    isDefaultLocation: false,
-                    addressIndex: [address, indexStep],
-                    side: isLeftOrRightDrop,
-                });
-            } else {
-                MissionClass.addStep({
-                    step: valueStepDrag,
-                    isDefaultLocation: false,
-                    addressIndex: [address, indexStep],
-                    side: isLeftOrRightDrop,
-                });
-                MissionClass.deleteStep(addressStepDrag);
-            }
-        } else if (blockDrop) {
+        const { address: addressFrom, indexStep: indexStepFrom } =
+            addressStepDrag;
+
+        if (isBlock) {
             const buttonAdd = MissionClass.lastQuerySelector({
-                wrapper: blockDrop,
+                wrapper: itemDrop,
                 query: "[data-action-block-step='add']",
             });
-
             MissionClass.setAddressAdd(buttonAdd);
-            MissionClass.addStep({ step: valueStepDrag });
+            MissionClass.move({
+                fromIndex: indexStepFrom,
+                addressFrom,
+                isBlock: true,
+            });
+            return;
+        } else {
+            const [addressTo, indexStepTo] =
+                MissionClass.getAddressByStep(itemDrop);
 
-            // delete went target drop is block
-            MissionClass.deleteStep(addressStepDrag);
+            const optionMove = {
+                fromIndex: indexStepFrom,
+                toIndex: indexStepTo,
+                addressFrom,
+                addressTo,
+                sideToAdd: isLeftOrRightDrop,
+            };
+            MissionClass.move(optionMove);
+            return;
         }
-
-        MissionClass.render();
-        removeSticky.hightLineLine();
-        removeSticky.hightLineBorder();
     });
     // END DROP
     // DRAG START
@@ -68,13 +60,17 @@ export default function handleDragDrop() {
     // END DRAG START
     // OVER
     const line = Label.line();
+    const lineLarge = Label.lineLarge();
     blockStepWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();
-        const itemDrop = e.target.closest("[data-name='step']");
-        const itemBlockDrop = e.target.closest("[data-block-wrapper]");
-        const blockDrop = e.target.closest("[data-data-block]");
+        const itemDrop = e.target.closest(
+            "[data-name='step'],[data-data-block], [data-block-wrapper]"
+        );
 
-        if (itemDrop) {
+        const isStep = itemDrop?.dataset.name === "step";
+        const isBlock = itemDrop?.dataset.dataBlock !== undefined;
+      
+        if (isStep) {
             removeSticky.hightLineBorder();
             const offsetX = e.offsetX;
             const targetWidth = itemDrop.offsetWidth;
@@ -92,13 +88,31 @@ export default function handleDragDrop() {
             itemDrop.appendChild(line);
             e.preventDefault();
             return;
-        } else if (blockDrop) {
+        } else if (isBlock) {
             removeSticky.hightLineLine();
             removeSticky.hightLineBorder();
-            blockDrop.parentElement.classList.add("highline-border");
+            itemDrop.parentElement.classList.add("highline-border");
             return;
-        } else if (itemBlockDrop && blockDrop) {
-            console.log(123);
+        } else if (itemDrop) {
+            removeSticky.hightLineBorder();
+
+            const offsetY = e.offsetY;
+            const targetHeight = itemDrop.offsetHeight;
+            const distanceFromCenter = offsetY - targetHeight / 2;
+
+            if (distanceFromCenter < 0) {
+                lineLarge.style.top = "-3px";
+                lineLarge.style.bottom = "auto";
+                isLeftOrRightDrop = "left";
+            } else {
+                isLeftOrRightDrop = "right";
+                lineLarge.style.bottom = "-3px";
+                lineLarge.style.top = "auto";
+            }
+            itemDrop.appendChild(lineLarge);
+        } else {
+            removeSticky.hightLineLine();
+            removeSticky.hightLineBorder();
         }
     });
     // END OVER

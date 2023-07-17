@@ -16,13 +16,13 @@ export default class Mission {
         this.get();
         this.saved = true;
         this.history = [];
-
     }
     async get() {
         const urlGet = this.UrlApi + "?kind=get";
         const res = await fetch(urlGet);
         const data = await res.json();
         this.data = JSON.parse(data.mission_shorthand || "[]");
+        console.log(this.data);
         this.render();
     }
     async save() {
@@ -62,16 +62,21 @@ export default class Mission {
         }
     }
     render() {
-        const html = [];
-        this.data?.map((item, index) => {
-            html.push(BlockStep[item.type]({ ...item, address: index }));
-            return html;
-        });
+        try {
+            const html = [];
+            this.data?.map((item, index) => {
+                html.push(BlockStep[item?.type]?.({ ...item, address: index }));
+                return html;
+            });
 
-        const buttonAddRoot = `<button data-action-block-step="add" class="active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&amp;.active]:bg-sky-800 [&amp;.active]:text-white"> <i class="fa-solid fa-plus"></i></button>`;
+            const buttonAddRoot = `<button data-action-block-step="add" class="active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&amp;.active]:bg-sky-800 [&amp;.active]:text-white"> <i class="fa-solid fa-plus"></i></button>`;
 
-        this.missionWrapperElement.innerHTML = html.join("") + buttonAddRoot;
-        this.activeAddButton();
+            this.missionWrapperElement.innerHTML =
+                html.join("") + buttonAddRoot;
+            this.activeAddButton();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     getAddress(element) {
@@ -105,10 +110,16 @@ export default class Mission {
         return addressCurrentAt.join("");
     }
     getAddressByStep(element) {
-        const blockMission = element.closest("[data-address-index]");
-        const address = this.getAddress(blockMission);
-        const indexStep = blockMission.dataset.addressIndex;
-        return [address, indexStep];
+        try {
+            const blockMission = element.closest("[data-address-index]");
+            const address = this.getAddress(blockMission);
+            const indexStep = blockMission.dataset.addressIndex;
+            return [address, indexStep];
+        } catch (error) {
+            const address = "";
+            const indexStep = "";
+            return [address, indexStep];
+        }
     }
 
     deleteStep({ address, indexStep }) {
@@ -126,6 +137,120 @@ export default class Mission {
     setAddressAdd(element) {
         this.currentAddAddress = this.getAddress(element);
     }
+
+    move({
+        fromIndex,
+        toIndex,
+        addressFrom,
+        addressTo,
+        sideToAdd,
+        isBlock = false,
+    }) {
+        const {
+            targetObject: targetObjectFrom,
+            propertyName: propertyNameFrom,
+            isRootAddress: isRootAddressFrom,
+        } = this.targetObject(addressFrom);
+
+        const elementFrom = this.findItemInMission({
+            targetObject: targetObjectFrom,
+            property: propertyNameFrom,
+            index: fromIndex,
+        });
+
+        let toIndexNew = toIndex;
+        let addressToNew = addressTo;
+        let fromIndexNew = fromIndex;
+        let addressFromNew = addressFrom;
+
+        const optionAddStep = { step: elementFrom };
+        if (isBlock) {
+            this.addStep(optionAddStep);
+            toIndexNew = 100;
+            addressToNew = this.currentAddAddress;
+        } else {
+            optionAddStep.isDefaultLocation = false;
+            optionAddStep.addressIndex = [addressTo, toIndex];
+            optionAddStep.side = sideToAdd;
+            if (!toIndexNew) return;
+            this.addStep(optionAddStep);
+        }
+
+        // console.log("");
+        // console.log("");
+        // console.log("");
+        // console.log("");
+        // console.log("");
+        // console.log("ADDRESS FORM");
+        // console.log("address:", addressFromNew + "[" + fromIndexNew + "]");
+        // console.log("======");
+        // console.log("ADDRESS TO");
+        // console.log("address:", addressToNew + "[" + toIndexNew + "]");
+        console.log();
+        console.log();
+        console.log();
+        console.log();
+        console.log("toindex :", toIndexNew);
+        const case1 =
+            addressFromNew === addressToNew &&
+            parseInt(toIndexNew) < parseInt(fromIndex) &&
+            toIndexNew;
+
+        const addressBranch = addressFromNew.slice(0, addressToNew.length);
+
+        const indexBranch = addressFromNew.slice(
+            addressBranch.length + 1,
+            addressFromNew.indexOf("]", addressBranch.length)
+        );
+        const addressNextPartBranch = addressFromNew.slice(
+            addressBranch.length + indexBranch.length + 2,
+            addressFromNew.length
+        );
+        const case2 = () => {
+            console.log("sideToAdd: ", sideToAdd);
+            const isSameAddress = addressBranch === addressToNew;
+            const conditionToIndex =
+                parseInt(toIndexNew) + (sideToAdd === "right" ? 1 : 0);
+            return (
+                isSameAddress &&
+                parseInt(indexBranch) >= conditionToIndex &&
+                toIndexNew
+            );
+        };
+
+        if (case1) {
+            this.deleteStep({
+                address: addressFromNew,
+                indexStep: parseInt(fromIndex) + 1,
+            });
+        } else if (case2()) {
+            const addressFromNewDelete = `${addressToNew}[${
+                parseInt(indexBranch) + 1
+            }]${addressNextPartBranch}`;
+            this.deleteStep({
+                address: addressFromNewDelete,
+                indexStep: fromIndex,
+            });
+        } else if (toIndexNew) {
+            console.log(addressFromNew, fromIndex);
+
+            
+
+
+
+            this.deleteStep({ address: addressFromNew, indexStep: fromIndex });
+        } else {
+            toggerMessage("error", "no found");
+        }
+
+        this.render();
+    }
+
+    findItemInMission({ targetObject, property, index }) {
+        const target = property ? targetObject[property] : targetObject;
+        return JSON.parse(JSON.stringify(target[index]));
+    }
+
     addStep({
         step,
         isDefaultLocation = true,
@@ -146,40 +271,36 @@ export default class Mission {
                     this.currentAddAddress
                 );
 
-                if (propertyName) {
-                    if (Array.isArray(targetObject[propertyName])) {
-                        if (!isJSON(step)) {
-                            targetObject[propertyName].push(step);
-                        } else {
-                            targetObject[propertyName].push(JSON.parse(step));
-                        }
-                    } else {
-                        console.log("Address is not array.");
-                    }
-                } else {
-                    if (!isJSON(step)) {
-                        targetObject.push(step);
-                    } else {
-                        targetObject.push(JSON.parse(step));
-                    }
-                }
+                let objectToAdd = step;
+                isJSON(step) && (objectToAdd = JSON.parse(step));
+                propertyName
+                    ? targetObject[propertyName].push(objectToAdd)
+                    : targetObject.push(objectToAdd);
             } else {
                 const [address, indexStep] = addressIndex;
                 const indexAdd =
                     side === "right"
                         ? parseInt(indexStep) + 1
                         : parseInt(indexStep);
-                const { targetObject, propertyName } =
+                const { targetObject, propertyName, isRootAddress } =
                     this.targetObject(address);
-                if (!isJSON(step)) {
-                    targetObject[propertyName].splice(indexAdd, 0, step);
-                } else {
-                    targetObject[propertyName].splice(
-                        indexAdd,
-                        0,
-                        JSON.parse(step)
-                    );
-                }
+
+                let objectToAdd = step;
+
+                isRootAddress &&
+                    !(step instanceof Object) &&
+                    (objectToAdd = this.Normal({ data: { normal: [step] } }));
+
+                isJSON(step) && (objectToAdd = JSON.parse(step));
+
+                console.log(objectToAdd);
+                propertyName
+                    ? targetObject[propertyName].splice(
+                          indexAdd,
+                          0,
+                          objectToAdd
+                      )
+                    : targetObject.splice(indexAdd, 0, objectToAdd);
             }
             useDebounce({ cb: this.save.bind(this), delay: 1000 });
         } catch (error) {
@@ -188,11 +309,27 @@ export default class Mission {
     }
 
     targetObject(address) {
-        const addressParts = address.split(".");
-        const objectPath = addressParts.slice(0, -1).join(".");
-        const propertyName = addressParts[addressParts.length - 1];
-        const targetObject = eval("this.data" + objectPath);
-        return { targetObject, propertyName };
+        try {
+            const addressParts = address.split(/\.|\[|\]/).filter((e) => e);
+            const objectPath = addressParts.slice(0, -1);
+            const propertyName = addressParts[addressParts.length - 1];
+            const targetObject = objectPath.reduce(
+                (targetObject, currentValue) => targetObject[currentValue],
+                this.data
+            );
+            return {
+                targetObject,
+                propertyName,
+                isRootAddress: !address,
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                targetObject: null,
+                propertyName: null,
+                isRootAddress: true,
+            };
+        }
     }
     activeAddButton() {
         const arrayPath = this.currentAddAddress

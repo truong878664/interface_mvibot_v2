@@ -22,7 +22,7 @@
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')
                 </div>
                 <div
-                    class="w-0 opacity-0 h-full bg-white rounded-lg p-4 peer-checked/step-wrapper:w-1/4 peer-checked/step-wrapper:opacity-100 transition-all">
+                    class="w-0 opacity-0 h-full bg-white rounded-lg p-4 peer-checked/step-wrapper:w-1/4 peer-checked/step-wrapper:opacity-100 transition-all overflow-hidden">
                     @include('frontend.pages.missions.createMissionsV4.partials.function.function')
                 </div>
             </div>
