@@ -1,4 +1,4 @@
-import ros, { toggerMessage } from "../main.js";
+import ros from "../main.js";
 
 let nameRobotMove;
 export function setRobotMove(nameRobot) {
@@ -6,7 +6,7 @@ export function setRobotMove(nameRobot) {
 }
 
 function moveRobot(linear, angular) {
-    console.log(linear, angular);
+    // console.log(linear, angular);
     const cmd_vel_listener = new ROSLIB.Topic({
         ros: ros,
         name: `${nameRobotMove}/cmd_vel`,

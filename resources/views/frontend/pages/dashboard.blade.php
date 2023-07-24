@@ -43,5 +43,10 @@
 
         <x-dashboard-item route='dashboard.history' icon='fa-solid fa-clock-rotate-left' title='History'
             describe='Operation history of all robots' color="#0A4D68" />
+
+        <x-dashboard-item route='dashboard.history' icon='fa-solid fa-rotate' title='Update' describe='Update system'
+            color="#F0DE36" />
     </ul>
+
+    <script type="module" src="/js/functionHandle/createIdBrowser.js"></script>
 @endsection

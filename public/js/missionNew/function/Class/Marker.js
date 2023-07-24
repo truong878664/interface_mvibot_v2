@@ -19,8 +19,25 @@ export default class Marker extends Step {
                         : Number(value)
                     : value;
         }
-        this.reset();
-        return data;
+        const dataValidated = this.validate(data);
+        dataValidated.success && this.reset();
+        return dataValidated;
+    }
+
+    validate(data) {
+        const dataValidated = {
+            success: true,
+            data,
+            message: "Get data success",
+            error: null,
+        };
+        const {name, marker_dir} = data
+        if(!name || !marker_dir) {
+            dataValidated.success = false
+            dataValidated.message = `Name or marker dir cannot be empty!`
+            return dataValidated;
+        }
+        return dataValidated;
     }
 
     display(data) {

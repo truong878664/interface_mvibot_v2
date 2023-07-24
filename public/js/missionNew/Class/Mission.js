@@ -1,6 +1,7 @@
 import { loadingHeader } from "../../functionHandle/displayLoad.js";
 import useDebounce from "../../hooks/useDebouche.js";
 import { toggerMessage } from "../../main.js";
+import publishTopicString from "../../rosModule/topicString.js";
 import BlockStep from "../component/BlockStep/index.js";
 import isJSON from "../handle/isJson.js";
 
@@ -22,7 +23,6 @@ export default class Mission {
         const res = await fetch(urlGet);
         const data = await res.json();
         this.data = JSON.parse(data.mission_shorthand || "[]");
-        console.log(this.data);
         this.render();
     }
     async save() {
@@ -37,6 +37,17 @@ export default class Mission {
                 }),
             });
             const message = await res.json();
+            console.log("save");
+
+            const dataDevice = {
+                name: navigator.userAgent,
+                id: window.name,
+            }
+            publishTopicString(
+                `/change_data_mission/${this.id}`,
+                JSON.stringify(dataDevice)
+            );
+            
             loadingHeader(false);
         } catch (error) {
             toggerMessage("error", "ERR!, Please try again!" + error);
@@ -63,22 +74,32 @@ export default class Mission {
     }
     render() {
         try {
-            const html = [];
-            this.data?.map((item, index) => {
-                html.push(BlockStep[item?.type]?.({ ...item, address: index }));
-                return html;
-            });
+            const html = this.renderHtml({ data: this.data });
 
             const buttonAddRoot = `<button data-action-block-step="add" class="active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&amp;.active]:bg-sky-800 [&amp;.active]:text-white"> <i class="fa-solid fa-plus"></i></button>`;
 
-            this.missionWrapperElement.innerHTML =
-                html.join("") + buttonAddRoot;
+            this.missionWrapperElement.innerHTML = html + buttonAddRoot;
             this.activeAddButton();
         } catch (error) {
             console.log(error);
         }
     }
 
+    renderHtml({ data, handleAble = true }) {
+        const html = [];
+        data?.map((item, index) => {
+            html.push(
+                BlockStep[item?.type]?.({
+                    ...item,
+                    address: index,
+                    name: item.name,
+                    handleAble,
+                })
+            );
+            return html;
+        });
+        return html.join("");
+    }
     getAddress(element) {
         let locationAdd;
         locationAdd = element;
@@ -176,21 +197,6 @@ export default class Mission {
             this.addStep(optionAddStep);
         }
 
-        // console.log("");
-        // console.log("");
-        // console.log("");
-        // console.log("");
-        // console.log("");
-        // console.log("ADDRESS FORM");
-        // console.log("address:", addressFromNew + "[" + fromIndexNew + "]");
-        // console.log("======");
-        // console.log("ADDRESS TO");
-        // console.log("address:", addressToNew + "[" + toIndexNew + "]");
-        console.log();
-        console.log();
-        console.log();
-        console.log();
-        console.log("toindex :", toIndexNew);
         const case1 =
             addressFromNew === addressToNew &&
             parseInt(toIndexNew) < parseInt(fromIndex) &&
@@ -207,7 +213,6 @@ export default class Mission {
             addressFromNew.length
         );
         const case2 = () => {
-            console.log("sideToAdd: ", sideToAdd);
             const isSameAddress = addressBranch === addressToNew;
             const conditionToIndex =
                 parseInt(toIndexNew) + (sideToAdd === "right" ? 1 : 0);
@@ -232,15 +237,20 @@ export default class Mission {
                 indexStep: fromIndex,
             });
         } else if (toIndexNew) {
-            console.log(addressFromNew, fromIndex);
+            const addressFromDelete =
+                addressFromNew + "[" + fromIndexNew + "]" + ".data";
 
-            
-
-
-
-            this.deleteStep({ address: addressFromNew, indexStep: fromIndex });
+            const moveIntoItself =
+                addressToNew.slice(0, addressFromDelete.length) !==
+                addressFromDelete;
+            if (moveIntoItself) {
+                this.deleteStep({
+                    address: addressFromNew,
+                    indexStep: fromIndex,
+                });
+            }
         } else {
-            toggerMessage("error", "no found");
+            toggerMessage("error", "Reload and try again!");
         }
 
         this.render();
@@ -293,7 +303,6 @@ export default class Mission {
 
                 isJSON(step) && (objectToAdd = JSON.parse(step));
 
-                console.log(objectToAdd);
                 propertyName
                     ? targetObject[propertyName].splice(
                           indexAdd,
@@ -336,6 +345,7 @@ export default class Mission {
             .split(/[.\[\]]/)
             .filter((e) => e && e !== "data");
         let wrapperBlockCurrent = this.missionWrapperElement;
+
         if (arrayPath.length === 0) {
             document
                 .querySelector(".active-block-step-root")
@@ -373,7 +383,7 @@ export default class Mission {
         this.currentAddAddress = "";
         return;
     }
-    Normal({ data = { normal: [] }, name = "normal_name", id = null }) {
+    Normal({ data = { normal: [] }, name = null, id = null }) {
         return {
             type: "normal",
             name,
@@ -387,7 +397,7 @@ export default class Mission {
             if_: [],
             else_: [],
         },
-        name = "ifelse_name",
+        name = null,
         id = null,
     }) {
         return {
@@ -397,11 +407,7 @@ export default class Mission {
             data: data,
         };
     }
-    Trycatch({
-        data = { try_: [], catch_: [] },
-        name = "trycatch_name",
-        id = null,
-    }) {
+    Trycatch({ data = { try_: [], catch_: [] }, name = null, id = null }) {
         return {
             type: "trycatch",
             name,
@@ -409,11 +415,7 @@ export default class Mission {
             data: data,
         };
     }
-    While({
-        data = { condition: [], do_: [] },
-        name = "while_name",
-        id = null,
-    }) {
+    While({ data = { condition: [], do_: [] }, name = null, id = null }) {
         return {
             type: "while",
             name,
@@ -421,11 +423,7 @@ export default class Mission {
             data: data,
         };
     }
-    LogicOr({
-        data = { logicA: [], logicB: [] },
-        name = "logic_or_name",
-        id = null,
-    }) {
+    LogicOr({ data = { logicA: [], logicB: [] }, name = null, id = null }) {
         return {
             type: "logicOr",
             name,
@@ -433,11 +431,7 @@ export default class Mission {
             data: data,
         };
     }
-    LogicAnd({
-        data = { logicA: [], logicB: [] },
-        name = "logic_and_name",
-        id = null,
-    }) {
+    LogicAnd({ data = { logicA: [], logicB: [] }, name = null, id = null }) {
         return {
             type: "logicAnd",
             name,

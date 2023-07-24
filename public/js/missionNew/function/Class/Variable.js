@@ -20,4 +20,19 @@ export default class Variable extends Step {
         this.data.command_action.dataset.value = "new";
         this.data.focus_value.value = "";
     }
+    validate(data) {
+        const dataValidated = {
+            success: true,
+            data,
+            message: "Get data success",
+            error: null,
+        };
+        const {name, name_variable, focus_value, command_action} = data
+        if(!name || !name_variable || (command_action !== "new" && !focus_value) ) {
+            dataValidated.success = false
+            dataValidated.message = `Name, name variable, focus value cannot be empty!`
+            return dataValidated;
+        }
+        return dataValidated;
+    }
 }

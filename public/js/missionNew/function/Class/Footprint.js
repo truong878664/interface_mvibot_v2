@@ -12,9 +12,9 @@ export default class Footprint extends Step {
     }
 
     default() {
-        this.data.x1.value = 0.41;
+        this.data.x1.value = -0.41;
         this.data.x2.value = 0.41;
-        this.data.y1.value = 0.345;
+        this.data.y1.value = -0.345;
         this.data.y2.value = 0.345;
     }
 }

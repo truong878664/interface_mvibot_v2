@@ -15,8 +15,9 @@ export default class Sound extends Step {
             music_mode,
             music_start,
         };
-        this.reset();
-        return data;
+        const dataValidated = this.validate(data);
+        dataValidated.success && this.reset();
+        return dataValidated;
     }
 
     reset() {

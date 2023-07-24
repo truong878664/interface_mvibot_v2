@@ -51,13 +51,12 @@ function handleActionFunction() {
 
                     functionClass.addItem(DOMElement);
                 } else {
-                    toggerMessage("error", "had error");
+                    toggerMessage("error", res.message);
                 }
             },
             update() {
                 const id = functionClass.currentIdUpdate;
-                const dataGet = functionClass.get();
-                console.log(dataGet);
+                const {data:dataGet} = functionClass.get();
                 const dataUpdate = { id, ...dataGet, type: functionClass.type };
                 (async () => {
                     const stepUpdated = await functionClass.update(dataUpdate);

@@ -1,7 +1,9 @@
-<div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-form-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
+<div class=" {{ $type !== 'wakeup' && $type !== 'stop' ? 'hidden function-form-item function-mission-tab' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
     data-type="{{ $type }}">
+
+    <input type="checkbox" class="peer/wakeup" name="" id="is-module-wakeup">
     <div class="flex mb-4">
-        @if ($type != 'gpio_wake_up' && $type != 'gpio_stop')
+        @if ($type != 'wakeup' && $type != 'stop')
             <div class="flex flex-col">
                 <label for="" class="text-xl">Name function GPIO</label>
                 <input
@@ -29,23 +31,23 @@
                     class="w-[40px] text-xl px-2 py-1 {{ $type == 'gpio_module' ? 'time_out_gpio_module' : 'time_out_gpio' }} text-center input-type-number"
                     type="text" name="time_out" value="-1" required>
             </div>
-        @elseif($type == 'gpio_wake_up')
-            <div class="w-full">
+        @elseif($type == 'wakeup')
+            <div class="w-full group">
                 <div class="flex justify-between w-full">
                     <div class="font-bold">Wake UP</div>
                 </div>
                 <div class="flex">
                     <button data-type-ws-btn="gpio_wake_up" data-module="gpio"
-                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn active">
+                        class=" ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn active">
                         Wake up normal
                     </button>
                     <button data-type-ws-btn="gpio_wake_up" data-module="gpio_module"
-                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn">
+                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn">
                         Wake up module
                     </button>
                 </div>
             </div>
-        @elseif($type == 'gpio_stop')
+        @elseif($type == 'stop')
             <div class="w-full">
                 <div class="flex justify-between w-full">
                     <div class="font-bold">Stop</div>

@@ -224,7 +224,7 @@
                     </span>
                 </button>
                 <div class="hidden peer-checked/function:block relative">
-                    <div class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md text-2xl" data-list-type-mission="{{ $item['type'] }}">
+                    <div class="w-full max-h-[500px] min-h-[100px] bg-stone-50 overflow-y-auto p-4 rounded-md text-2xl" data-list-type-mission="{{ $item['type'] }}">
                     </div>
                 </div>
             </div>

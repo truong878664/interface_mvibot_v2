@@ -18,13 +18,14 @@ import {
 import lockZ from "../../../../rosModule/lockZ.js";
 import mathYaw from "../../../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../../../rosModule/path/markerClientPath.js";
+import qToYaw from "../../../../rosModule/qToYawn.js";
 
-export default function render3DMap(x = 0, y = 0, z = 0, w = 1) {
-    let positionX = x;
-    let positionY = y;
-    let rotateZ = z;
-    let rotateW = w;
-    let rotateZdeg = 0;
+export default function render3DMap(x = 0, y = 0, z = 0, w = 1, colorPose = "#EA047E") {
+    let positionX = parseFloat(x);
+    let positionY = parseFloat(y);
+    let rotateZ = parseFloat(z);
+    let rotateW = parseFloat(w);
+    let rotateZdeg = qToYaw(z, w);
 
     removeAllEvent("#position-x");
     removeAllEvent("#position-y");
@@ -63,13 +64,19 @@ export default function render3DMap(x = 0, y = 0, z = 0, w = 1) {
     createAxes(viewer);
 
     createPoint(viewer, tfClient);
-    createPose(viewer, tfClient);
+    createPose(viewer, tfClient, colorPose);
 
     markerClient(tfClient, viewer);
     markerClientPath(tfClient, viewer);
 
-    displayPoint(0, 0);
-    displayPose(0, 0, 0, 1);
+    // displayPoint(0, 0);
+    // displayPose(0, 0, 0, 1);
+    setTimeout(() => {
+        displayPoint(positionX, positionY);
+        displayPose(positionX, positionY, rotateZ, rotateW);
+        displayValue(positionX, positionY, rotateZdeg);
+    }, 100);
+
     addLayerDbToLayerActive();
 
     setSizeMap();

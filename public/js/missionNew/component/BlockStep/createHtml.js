@@ -7,9 +7,14 @@ const buttonAddStep = `
 const buttonMore = `
     <div class="absolute top-0 right-0 hover:z-50">
         <div class="group/more">
-            <span class="h-[20px] w-[20px] mr-3 text-3xl btn text-stone-500 hover:text-stone-900 "><i class="fa-solid fa-ellipsis"></i></span>
+            <span class="h-[20px] w-[20px] mr-3 text-3xl btn text-stone-500 hover:text-stone-900 ">
+                <i class="fa-solid fa-ellipsis"></i>
+            </span>
             <div class="absolute top-[20px] right-2 h-[50px] text-2xl hidden group-hover/more:block">
                 <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden min-w-[100px]">
+                    <li>
+                        <span class="text-center block text-2xl">name: {{name}}</span>
+                    </li>
                     <li>
                         <button data-action-block-step="delete" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
                         <span class="mr-2 w-[20px] text-red-500">
@@ -59,197 +64,332 @@ const buttonMore = `
 `;
 const createHtml = {
     htmlBlock: {
-        normal: `
-        <div data-name="block" data-block-wrapper="normal" data-value={{value}} data-show-data="show" class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span draggable="true" class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center cursor-pointer hover:scale-105">
-                <i class="fa-solid fa-bullseye"></i>
-            </span>
-            <div class="w-full group-data-[show-data='hidden']/wrapper:hidden" data-data-block="normal">
-                <div data-data-block="normal" class="flex-1 w-full inline-flex flex-wrap items-start">
-                    {{data}}
-                    ${buttonAddStep}
+        normal({ value, data, address, addable = true, draggable = true }) {
+            return `
+                <div
+                    data-name="block"
+                    data-block-wrapper="normal"
+                    data-value='${JSON.stringify(value)}'
+                    data-show-data="show"
+                    class="${
+                        draggable ? "" : "pointer-events-none"
+                    } group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
+                    data-address="${address}"
+                    data-address-index="${address}">
+                    
+                    <span draggable="${draggable}" class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center cursor-pointer hover:scale-105">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </span>
+                    <div class="w-full group-data-[show-data='hidden']/wrapper:hidden" data-data-block="normal">
+                        <div data-data-block="normal" class="flex-1 w-full inline-flex flex-wrap items-start ">
+                            ${data}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    ${addable ? buttonMore.replace("{{name}}", value.name) : ""}
                 </div>
-            </div>
-            
-            ${buttonMore}
-        </div>
-        `,
-        ifelse: `
-        <div draggable="false" data-name="block" data-block-wrapper="ifelse" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-        <span draggable="true" class="text-green-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
-            <i class="fa-solid fa-code-fork"></i>
-        </span>
-        <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
-            <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                <span class="font-bold mr-3 text-red-600">If</span>
-                <div class="flex-1 flex flex-wrap items-start" data-data-block="condition">
-                    {{condition}}
-                    ${buttonAddStep}
-                </div>
-            </div>
-            <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                <span class="font-bold mr-3 text-red-700">Then</span>
-                <div class="flex-1 flex flex-wrap items-start" data-data-block="if_">
-                   {{if_}}
-                    ${buttonAddStep}
-                </div>
-            </div>
-            <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                <span class="font-bold mr-3 text-red-700">Else</span>
-                <div class="flex-1 flex flex-wrap items-start" data-data-block="else_">
-                    {{else_}}
-                    ${buttonAddStep}
-                </div>
-            </div>
-        </div>
-        ${buttonMore}        
-    </div>
-        
-        `,
-        trycatch: `
-        <div data-name="block" data-block-wrapper="trycatch" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span draggable="true" class="text-yellow-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </span>
-            <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                    <span class="font-bold mr-3 text-red-700">Try</span>
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="try_">
-                        {{try_}}
-                        ${buttonAddStep}
+        `;
+        },
+        ifelse({
+            value,
+            condition,
+            if_,
+            else_,
+            address,
+            addable = true,
+            draggable = true,
+        }) {
+            return `
+            <div
+                data-name="block"
+                data-block-wrapper="ifelse"
+                data-show-data="show"
+                data-value='${JSON.stringify(value)}'
+                data-address="${address}"
+                data-address-index="${address}"
+                class="${
+                    draggable ? "" : "pointer-events-none"
+                } group/wrapper  data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]">
+                
+                <span draggable="${draggable}" class="text-green-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
+                    <i class="fa-solid fa-code-fork"></i>
+                </span>
+                <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-600">If</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="condition">
+                            ${condition}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">Then</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="if_">
+                            ${if_}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">Else</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="else_">
+                            ${else_}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
                     </div>
                 </div>
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                    <span class="font-bold mr-3 text-red-700">Catch</span>
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="catch_">
-                        {{catch_}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
+                ${
+                    addable ? buttonMore.replace("{{name}}", value.name) : ""
+                }        
             </div>
-            ${buttonMore}
-        </div>
-        `,
-        while: `
-        <div data-name="block" data-block-wrapper="while" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span draggable="true" class="text-sky-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
-                <i class="fa-solid fa-arrows-spin"></i>
-            </span>
-            <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                    <span class="font-bold mr-3 text-red-700">While</span>
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="condition">
-                        {{condition}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
-                    <span class="font-bold mr-3 text-red-700">Do</span>
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="do_">
-                        {{do_}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-            </div>
-            ${buttonMore}
-        </div>
-        `,
-        logicAnd: `
-        <div data-name="block" data-block-wrapper="logic_and" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span draggable="true" class="text-pink-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
-                <i class="fa-solid fa-link"></i>    
-            </span>
-            <div class="flex-1 text-[16px] flex group-data-[show-data='hidden']/wrapper:hidden">
-                <div class="bg-stone-100 p-4  rounded-lg flex mb-3 items-start border-[2px] border-transparent">
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="logicA">
-                        {{logicA}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-                <span class="px-4 font-bold text-red-700">AND</span>
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 items-start border-[2px] border-transparent">
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="logicB">
-                        {{logicB}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-            </div>
-            ${buttonMore}
-        </div>
-        `,
-        logicOr: `
-        <div data-name="block" data-block-wrapper="logic_or" draggable="false" data-show-data="show" data-value={{value}} class="group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]" data-address="{{address}}" data-address-index="{{address-index}}">
-            <span draggable="true" class="text-blue-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
-                <i class="fa-solid fa-grip-lines-vertical"></i>
-            </span>
-            
-            <div class="flex-1 text-[16px] flex group-data-[show-data='hidden']/wrapper:hidden">
-                <div class="bg-stone-100 p-4  rounded-lg flex mb-3 items-start border-[2px] border-transparent">
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="logicA">
-                        {{logicA}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-                <span class="px-4 font-bold text-red-700">OR</span>
-                <div class="bg-stone-100 p-4 rounded-lg flex mb-3 items-start border-[2px] border-transparent">
-                    <div class="flex-1 flex flex-wrap items-start" data-data-block="logicB">
-                        {{logicB}}
-                        ${buttonAddStep}
-                    </div>
-                </div>
-            </div>
-            ${buttonMore}
-        </div>
-        `,
-    },
-    normal({ normal, address, value }) {
-        return this.htmlBlock.normal
-            .replace("{{data}}", normal.join(""))
-            .replace("{{address}}", address)
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address-index}}", address);
-    },
-    ifelse({ condition, if_, else_, address, value }) {
-        return this.htmlBlock.ifelse
-            .replace("{{condition}}", condition.join(""))
-            .replace("{{if_}}", if_.join(""))
-            .replace("{{else_}}", else_.join(""))
-            .replace("{{address}}", address)
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address-index}}", address);
-    },
-    trycatch({ try_, catch_, address, value }) {
-        return this.htmlBlock.trycatch
-            .replace("{{try_}}", try_.join(""))
-            .replace("{{catch_}}", catch_.join(""))
-            .replace("{{address}}", address)
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address-index}}", address);
-    },
-    while({ condition, do_, address, value }) {
-        return this.htmlBlock.while
-            .replace("{{condition}}", condition.join(""))
-            .replace("{{do_}}", do_.join(""))
-            .replace("{{address}}", address)
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address-index}}", address);
-    },
+            `;
+        },
+        trycatch({
+            value,
+            try_,
+            catch_,
+            address,
+            addable = true,
+            draggable = true,
+        }) {
+            return `
+            <div
+            data-name="block"
+            data-block-wrapper="trycatch"
+            data-show-data="show"
+            data-value='${JSON.stringify(value)}'
+            data-address="${address}"
+            data-address-index="${address}"
+            class="${
+                draggable ? "" : "pointer-events-none"
+            } group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]">
 
-    logicAnd({ logicA, logicB, address, value }) {
-        return this.htmlBlock.logicAnd
-            .replace("{{logicA}}", logicA.join(""))
-            .replace("{{logicB}}", logicB.join(""))
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address}}", address)
-            .replace("{{address-index}}", address);
+                <span draggable="${addable}" class="text-yellow-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+                <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">Try</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="try_">
+                            ${try_}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">Catch</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="catch_">
+                            ${catch_}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                </div>
+                ${addable ? buttonMore.replace("{{name}}", value.name) : ""}
+            </div>
+            `;
+        },
+        while({
+            value,
+            address,
+            condition,
+            do_,
+            addable = true,
+            draggable = true,
+        }) {
+            return `
+            <div
+                data-name="block"
+                data-block-wrapper="while"
+                draggable="false"
+                data-show-data="show"
+                data-value='${JSON.stringify(value)}'
+                class="${
+                    draggable ? "" : "pointer-events-none"
+                } group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
+                data-address="${address}"
+                data-address-index="${address}">
+                
+                <span draggable="${addable}" class="text-sky-400 mr-3 rotate-90 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
+                    <i class="fa-solid fa-arrows-spin"></i>
+                </span>
+                <div class="flex-1 text-[16px] group-data-[show-data='hidden']/wrapper:hidden">
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">While</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="condition">
+                            ${condition}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent">
+                        <span class="font-bold mr-3 text-red-700">Do</span>
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="do_">
+                            ${do_}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                </div>
+                ${addable ? buttonMore.replace("{{name}}", value.name) : ""}
+            </div>
+            `;
+        },
+        logicAnd({
+            value,
+            address,
+            logicA,
+            logicB,
+            addable = true,
+            draggable = true,
+        }) {
+            return `
+            <div
+                data-name="block"
+                data-block-wrapper="logic_and"
+                data-show-data="show"
+                data-value='${JSON.stringify(value)}'
+                class="${
+                    draggable ? "" : "pointer-events-none"
+                } group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
+                data-address="${address}"
+                data-address-index="${address}">
+                
+                <span draggable="${draggable}" class="text-pink-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
+                    <i class="fa-solid fa-link"></i>    
+                </span>
+                <div class="flex-1 text-[16px] flex group-data-[show-data='hidden']/wrapper:hidden">
+                    <div class="bg-stone-100 p-4  rounded-lg flex mb-3 items-start border-[2px] border-transparent">
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="logicA">
+                            ${logicA}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <span class="px-4 font-bold text-red-700">AND</span>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 items-start border-[2px] border-transparent">
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="logicB">
+                            ${logicB}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                </div>
+                ${addable ? buttonMore.replace("{{name}}", value.name) : ""}
+            </div>
+            `;
+        },
+        logicOr({
+            value,
+            address,
+            logicA,
+            logicB,
+            addable = true,
+            draggable = true,
+        }) {
+            return `
+            <div
+                data-name="block"
+                data-block-wrapper="logic_or"
+                draggable="false"
+                data-show-data="show"
+                data-value='${JSON.stringify(value)}'
+                class="${
+                    draggable ? "" : "pointer-events-none"
+                } group/wrapper mx-2 data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[50px] inline-flex shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
+                data-address="${address}"
+                data-address-index="${address}">
+               
+                <span draggable="${draggable}" class="text-blue-500 mr-3 w-[20px] h-[20px] cursor-pointer hover:scale-105 flex justify-center items-center">
+                    <i class="fa-solid fa-grip-lines-vertical"></i>
+                </span>
+                
+                <div class="flex-1 text-[16px] flex group-data-[show-data='hidden']/wrapper:hidden">
+                    <div class="bg-stone-100 p-4  rounded-lg flex mb-3 items-start border-[2px] border-transparent">
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="logicA">
+                            ${logicA}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                    <span class="px-4 font-bold text-red-700">OR</span>
+                    <div class="bg-stone-100 p-4 rounded-lg flex mb-3 items-start border-[2px] border-transparent">
+                        <div class="flex-1 flex flex-wrap items-start" data-data-block="logicB">
+                            ${logicB}
+                            ${addable ? buttonAddStep : ""}
+                        </div>
+                    </div>
+                </div>
+                ${
+                    addable
+                        ? addable
+                            ? buttonMore.replace("{{name}}", value.name)
+                            : ""
+                        : ""
+                }
+            </div>
+            `;
+        },
     },
-    logicOr({ logicA, logicB, address, value }) {
-        return this.htmlBlock.logicOr
-            .replace("{{logicA}}", logicA.join(""))
-            .replace("{{logicB}}", logicB.join(""))
-            .replace("{{value}}", JSON.stringify(value))
-            .replace("{{address}}", address)
-            .replace("{{address-index}}", address);
+    normal({ normal, address, value, handleAble }) {
+        const option = {
+            value,
+            data: normal.join(""),
+            buttonAdd: buttonAddStep,
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+
+        return this.htmlBlock.normal(option);
+    },
+    ifelse({ condition, if_, else_, address, value, handleAble }) {
+        const option = {
+            value,
+            condition: condition.join(""),
+            if_: if_.join(""),
+            else_: else_.join(""),
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+        return this.htmlBlock.ifelse(option);
+    },
+    trycatch({ try_, catch_, address, value, handleAble }) {
+        const option = {
+            value,
+            try_: try_.join(""),
+            catch_: catch_.join(""),
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+        return this.htmlBlock.trycatch(option);
+    },
+    while({ condition, do_, address, value, handleAble }) {
+        const option = {
+            value,
+            condition: condition.join(""),
+            do_: do_.join(""),
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+        return this.htmlBlock.while(option);
+    },
+    logicAnd({ logicA, logicB, address, value, handleAble }) {
+        const option = {
+            value,
+            logicA: logicA.join(""),
+            logicB: logicB.join(""),
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+        return this.htmlBlock.logicAnd(option);
+    },
+    logicOr({ logicA, logicB, address, value, handleAble }) {
+        const option = {
+            value,
+            logicA: logicA.join(""),
+            logicB: logicB.join(""),
+            address,
+            draggable: handleAble,
+            addable: handleAble,
+        };
+        return this.htmlBlock.logicOr(option);
     },
 };
 

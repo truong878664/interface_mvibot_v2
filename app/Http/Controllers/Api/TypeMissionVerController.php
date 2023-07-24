@@ -41,8 +41,8 @@ class TypeMissionVerController extends Controller
             TypeMissionVer::create($request->all());
             return ["saved" => true, "message" => "Save block step successfully!", "error" => null];
         } catch (\Throwable $th) {
-            //throw $th;
-            return ["saved" => true, "message" => "Save block step successfully!", "error" => $th];
+            throw $th;
+            // return ["saved" => false, "message" => "Save block step error!", "error" => $th];
         }
     }
 
@@ -88,6 +88,12 @@ class TypeMissionVerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            TypeMissionVer::where("id", $id)->delete();
+            return ["deleted"=>true, "message"=>"Delete type mission id:$id, successfully!", "error"=> null];
+        } catch (\Throwable $th) {
+            return ["deleted"=>false, "message"=>"Delete type mission id:$id, ERROR!", "error"=> $th];
+            
+        }
     }
 }

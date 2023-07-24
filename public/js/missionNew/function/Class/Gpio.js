@@ -68,9 +68,38 @@ export default class Gpio extends Step {
             data.name_gpio_module = this.data.name_gpio_module.value;
         }
 
-        this.reset();
-        return data;
+        const dataValidated = this.validate(data);
+        dataValidated.success && this.reset();
+        return dataValidated;
     }
+
+    validate(data) {
+        const {name, time_out, name_gpio_module, ...filed} = data
+        const dataValidated = {
+            success: true,
+            data,
+            message: "Get data success!S",
+            error: null,
+        };
+
+        if(!name || !time_out) {
+            dataValidated.success = false
+            dataValidated.message = `Name or timeout cannot be empty!`
+            return dataValidated;
+        }
+        for (const key in filed) {
+            if (data[key]) {
+                dataValidated.success = true
+                dataValidated.message = `Get data success!`
+                return dataValidated;
+            } else {
+                dataValidated.success = false
+                dataValidated.message = `Must have at least one gpio imported!`
+            }
+        }
+        return dataValidated;
+    }
+
     setLightGpio(dataGpio) {
         const form = document.querySelector(
             `#function-item-form-wrapper [data-type='${this.type}']`

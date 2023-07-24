@@ -32,20 +32,41 @@ export default class Step {
                         : Number(value)
                     : value;
         }
-        this.reset();
-        return data;
+        const dataValidated = this.validate(data);
+        dataValidated.success && this.reset();
+        return dataValidated;
+    }
+    validate(data) {
+        const dataValidated = {
+            success: true,
+            data,
+            message: "Get data success",
+            error: null,
+        };
+        for (const key in data) {
+            if (!data[key]) {
+                dataValidated.success = false;
+                dataValidated.message = `${key} cannot be empty!`;
+                return dataValidated;
+            }
+        }
+        return dataValidated;
     }
 
     async save() {
         try {
             const data = this.get();
+            if (!data.success) {
+                this.message.message = data.message;
+                return this.message;
+            }
             const res = await fetch(`/api/${this.type}`, {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 method: "POST",
-                body: JSON.stringify(data),
+                body: JSON.stringify(data.data),
             });
             const stepSaved = res.json();
             this.message.message = `save ${this.type} successfully!`;
@@ -59,16 +80,22 @@ export default class Step {
     }
 
     async update(data) {
-        const res = await fetch(`/api/step/${this.currentIdUpdate}`, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            method: "PUT",
-            body: JSON.stringify(data),
-        });
-        const message = await res.json();
-        return message;
+        try {
+            const res = await fetch(`/api/step/${this.currentIdUpdate}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                method: "PUT",
+                body: JSON.stringify(data),
+            });
+            const message = await res.json();
+            console.log(message);
+            this.reset();
+            return message;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async delete(id) {

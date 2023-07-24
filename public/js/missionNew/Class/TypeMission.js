@@ -43,10 +43,13 @@ export default class TypeMission {
 
     html(data) {
         const { name, id } = data;
-
         return `
             <div
-                data-value='${JSON.stringify(data)}' data-id='${id}' data-name="item-type-mission" class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg">
+                data-value='${JSON.stringify(data)}'
+                data-id='${id}'
+                data-name="item-type-mission"
+                class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg">
+
                 <div class="flex">
                     <input type="checkbox" data-select-type-mission-id="" data-type="normal" class="mr-4 w-[12px] h-[12px] accent-[#f5b933]">
                     <div class="flex flex-col">
@@ -63,11 +66,33 @@ export default class TypeMission {
                     <div
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block">
-                        1
-                        </div>
+                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block">
+                            <li>
+                                <button data-button-type-mission-kind="delete" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                    <span class="mr-2 w-[20px] text-red-500">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </span>
+                                    <span>Delete</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button data-button-type-mission-kind="detail" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                    <span class="mr-2 w-[20px] text-sky-500">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </span>
+                                    <span>Detail</span>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>`;
+    }
+    async delete(id) {
+        const res = await fetch(this.urlApi + "/" + id, {
+            method: "DELETE",
+        });
+        const data = await res.json();
+        return data;
     }
 }

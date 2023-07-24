@@ -1,71 +1,69 @@
+import render3DMap from "../position/handle/render.js";
 import Step from "./Step.js";
 
 export default class Position extends Step {
     constructor(data) {
         super(data);
         this.type = "position";
-        this.data.mode_position = document.querySelector(
-            "[name=mode_position_other]"
-        );
-        this.data.name = document.querySelector('[name="name_position"]');
-        this.data.x = document.querySelector('[name="x"]');
-        this.data.y = document.querySelector('[name="y"]');
-        this.data.z = document.querySelector('[name="z"]');
-        this.data.w = document.querySelector('[name="w"]');
-        this.data.time_out = document.querySelector('[name="time_out"]');
-        this.data.color_position = document.querySelector(
-            '[name="color_position"]'
-        );
-        this.data.mode_position = document.querySelector(
-            '[name="mode_position"]'
-        );
-        this.data.mode_child = document.querySelector('[name="mode_child"]');
-        this.data.map = document.querySelector("#map-active-input");
+        const form = document.querySelector("#function-item-form-wrapper [data-type='position']");
+        this.data.mode_position = form.querySelector("[name=mode_position_other]");
+        this.data.name = form.querySelector('[name="name_position"]');
+        this.data.x = form.querySelector('[name="x"]');
+        this.data.y = form.querySelector('[name="y"]');
+        this.data.z = form.querySelector('[name="z"]');
+        this.data.w = form.querySelector('[name="w"]');
+        this.data.time_out = form.querySelector('[name="time_out"]');
+        this.data.color_position = form.querySelector('[name="color_position"]');
+        this.data.mode_position = form.querySelector('[name="mode_position"]');
+        this.data.mode_child = form.querySelector('[name="mode_child"]');
+        this.data.map = form.querySelector("#map-active-input");
     }
 
     get() {
-        const name = this.data.name.value;
-        const x = this.data.x.value;
-        const y = this.data.y.value;
-        const z = this.data.z.value;
-        const w = this.data.w.value;
-        const time_out = this.data.time_out.value;
-        const color_position = this.data.color_position.value;
-        const mode_position = this.data.mode_position.value;
-        const mode_child = this.data.mode_child.value;
-        const map = this.data.map.value;
-        const data = {
-            name,
-            x,
-            y,
-            z,
-            w,
-            time_out,
-            map,
-            color_position,
-            mode_position,
-            mode_child,
-        };
-        this.reset();
-        return data;
+        try {
+            const data = {}
+            for (const key in this.data) {
+                data[key] = this.data[key].value
+            }
+            const dataValidated = this.validate(data);
+            dataValidated.success && this.reset();
+            return dataValidated;    
+        } catch (error) {
+            console.log(error);
+            return data = {}
+        }
     }
     reset() {
         this.data.name.value = "";
-        this.data.time_out.value = -1;
+        this.data.time_out.value = "-1";
         this.data.color_position.value = "#EA047E";
         this.data.mode_position.value = "normal";
         this.data.mode_child.value = -1;
 
-        document.querySelector(".number-position-x").value = 0;
-        document.querySelector(".number-position-y").value = 0;
-        document.querySelector(".number-rotate-z").value = 0;
-        document.querySelector("#position-x").value = 0;
-        document.querySelector("#position-y").value = 0;
-        document.querySelector("#rotate-z").value = 0;
         document.querySelector("#create-point-checkbox").checked = false;
-        document.querySelector("#inx").value = 0;
-        document.querySelector("#iny").value = 0;
-        document.querySelector("#position-x").value = 0;
-        document.querySelector("#position-y").value = 0;
+        const queryReset = [
+            ".number-position-x",
+            ".number-position-y",
+            ".number-rotate-z",
+            "#position-x",
+            "#position-y",
+            "#rotate-z",
+            "#inx",
+            "#iny",
+            "#position-x",
+            "#position-y",
+        ];
+        queryReset.forEach(element => {
+            document.querySelector(element).value = 0
+        });
+    }
+    display(data) {
+        const {x ,y ,z ,w ,name ,mode_child ,mode_position ,time_out ,color_position,} = data;
+        render3DMap(x, y, z, w, color_position);
+        this.data.name.value = name;
+        this.data.color_position.value = color_position;
+        this.data.mode_child.value = mode_child;
+        this.data.mode_position.value = mode_position;
+        this.data.time_out.value = time_out;
     }
 }

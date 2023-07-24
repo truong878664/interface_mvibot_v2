@@ -15,12 +15,15 @@ import Function from "./function/index.js";
 import handleDragDrop from "./handle/handleDragDrop.js";
 import TypeMission from "./Class/TypeMission.js";
 import typeMission from "./typeMission/index.js";
+import subscribeTopic from "../rosModule/subscribeTopic.js";
+import getUA from "../functionHandle/getUA.js";
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
 const functionWrapper = document.getElementById("function-container");
 
 createTypeMission();
+subscribeMissionChange();
 
 Function();
 typeMission();
@@ -163,16 +166,19 @@ function handleAddStepToBlockStep() {
 
                 enterBtn.onclick = async (e) => {
                     const name = formName.querySelector("[name='name']").value;
+                    const dataTranslate = JSON.parse(data);
+                    dataTranslate.name = name;
                     const dataSaveBlockMission = {
                         name,
                         type: typeBlock,
-                        data,
+                        data: JSON.stringify(dataTranslate),
                         type_mission: MissionClass.typeMission,
                     };
                     const typeMission = new TypeMission();
                     const message = await typeMission.save(
                         dataSaveBlockMission
                     );
+                    console.log(message);
                     formName.remove();
 
                     message.saved && typeMission.render();
@@ -324,4 +330,21 @@ function handleCopyMission() {
         }
         document.body.removeChild(textArea);
     };
+}
+
+function subscribeMissionChange() {
+    subscribeTopic(
+        `change_data_mission/${MissionClass.id}`,
+        "std_msgs/String",
+        (data, name) => {
+            const dataDevice = JSON.parse(data.data);
+            if (dataDevice.id !== window.name) {
+                MissionClass.get();
+                toggerMessage(
+                    "success",
+                    getUA(dataDevice.name) + " device changed mission!"
+                );
+            }
+        }
+    );
 }
