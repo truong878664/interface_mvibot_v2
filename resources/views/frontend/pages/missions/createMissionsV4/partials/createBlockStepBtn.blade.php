@@ -54,7 +54,6 @@
         <div class="pl-10"></div>
         {{-- WAKE UP STOP --}}
         <div class="text-white flex justify-end gap-[10px] xl:absolute xl:bottom-full xl:right-0 xl:mb-10">
-            {{-- <div class="absolute bottom-full right-0 mb-10 text-white"> --}}
             <label for="input-wakeup" class="btn py-2 px-4 text-2xl font-bold bg-green-500 rounded-md">
                 Wake up
             </label>
@@ -62,23 +61,30 @@
                 Stop
             </label>
         </div>
-        {{-- END WAKE UP STOP --}}
         <input hidden type="checkbox" class="peer/wakeup" name="" id="input-wakeup">
         <input hidden type="checkbox" class="peer/stop" name="" id="input-stop">
-        <div class="w-screen h-screen fullscreen z-20 justify-center items-center group hidden peer-checked/wakeup:flex peer-checked/stop:flex">
-            <label for="input-wakeup" class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block"></label>
-            <label for="input-stop" class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/stop:group-[]:block"></label>
-            <div class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
+        <div data-name="wakeup-stop-wrapper"
+            class="w-screen h-screen fullscreen z-20 justify-center items-center group hidden peer-checked/wakeup:flex peer-checked/stop:flex">
+            <label for="input-wakeup"
+                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block"></label>
+            <label for="input-stop"
+                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/stop:group-[]:block"></label>
+            <div
+                class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.wakeupstop', [
                     'type' => 'wakeup',
                 ])
             </div>
-            <div class="hidden peer-checked/stop:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
+
+            <div
+                class="hidden peer-checked/stop:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.wakeupstop', [
                     'type' => 'stop',
                 ])
             </div>
+
         </div>
+        {{-- END WAKE UP STOP --}}
 
         <div class="ml-[20px] flex flex-col justify-start gap-[10px] xl:flex-row" id="create-type-mission-wrapper">
             @php

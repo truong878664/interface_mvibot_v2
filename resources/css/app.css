@@ -118,3 +118,46 @@
 .fullscreen {
   @apply fixed top-0 left-0 right-0 bottom-0 z-50;
 }
+
+/* gpio */
+.gpio-io.out_reset,
+.gpio-io.in_off {
+    fill: #DC0000;
+}
+
+.gpio-io.in_pullup {
+    fill: #FED049;
+}
+
+.gpio-io.in_pulldown {
+    fill: #4FA095;
+}
+
+.type-gpio-btn.active {
+    color: #fff;
+    border: #fff;
+}
+
+.gpio-io.out_set,
+.gpio-io.in_on {
+    fill: #00E7FF;
+}
+
+.out-set-btn.active,
+.in-on-btn.active {
+    background: #00E7FF;
+}
+
+.out-reset-btn.active,
+.in-off-btn.active {
+    background: #DC0000;
+}
+
+.in-pullup-btn.active {
+    background: #FED049;
+}
+
+.in-pulldown-btn.active {
+    background: #4FA095;
+}
+/* end gpio */

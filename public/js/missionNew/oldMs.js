@@ -15,23 +15,22 @@ export default function oldMs(dataTranslate) {
             dataMission.push(dataMissionNormal);
         } else if (type === "ifelse") {
             const [condition, if_, else_] = data.split("?");
-            const datacondition = condition.split("|").filter((e) => e);
+            const dataCondition = condition.split("|").filter((e) => e);
             const dataIf = if_.split("|").filter((e) => e);
             const dataElse = else_.split("|").filter((e) => e);
-            
-            const dataIfelseMission =  MissionClass.IfElse({
-                data: {
-                    condition: datacondition,
-                    if_: dataIf,
-                    else_: dataElse
-                },
-                name, id
-            })
-            dataMission.push(dataIfelseMission);
 
+            const dataIfelseMission = MissionClass.IfElse({
+                data: {
+                    condition: dataCondition,
+                    if_: dataIf,
+                    else_: dataElse,
+                },
+                name,
+                id,
+            });
+            dataMission.push(dataIfelseMission);
         }
         return dataMission;
     });
     return dataMission;
 }
-// console.log(oldMs(dataOld));

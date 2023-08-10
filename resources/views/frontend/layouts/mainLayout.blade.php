@@ -9,7 +9,7 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-dc2fe9cb.css">
+    <link rel="stylesheet" href="/build/assets/app-a1db7216.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite('resources/css/app.css')
 </head>
@@ -51,12 +51,6 @@
                 </div>
             </div>
             <div class="ml-4">
-                <div class="hidden">
-                    <button data-action-block-step="undo"
-                        class="text-xl border rounded-md border-stone-400 px-2 btn">Undo</button>
-                    <button data-action-block-step="redo"
-                        class="text-xl border rounded-md border-stone-400 px-2 btn">Redo</button>
-                </div>
                 <div class="ml-7 !hidden" id="loader-header"></div>
             </div>
         </div>

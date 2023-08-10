@@ -1,4 +1,5 @@
 import Label from "../component/Label.js";
+import deleteZone from "../component/deleteZone.js";
 import { MissionClass, blockStepWrapper } from "../index.js";
 
 export default function handleDragDrop() {
@@ -10,6 +11,7 @@ export default function handleDragDrop() {
         const itemDrop = e.target.closest(
             "[data-name='step'],[data-data-block], [data-block-wrapper]"
         );
+        const deleteZone = e.target.closest("#delete-zone");
 
         const isStep = itemDrop?.dataset.name === "step";
         const isBlock = itemDrop?.dataset.dataBlock !== undefined;
@@ -17,7 +19,13 @@ export default function handleDragDrop() {
         const { address: addressFrom, indexStep: indexStepFrom } =
             addressStepDrag;
 
-        if (isBlock) {
+        if (deleteZone) {
+            MissionClass.deleteStep({
+                address: addressFrom,
+                indexStep: indexStepFrom,
+            });
+            MissionClass.render();
+        } else if (isBlock) {
             const buttonAdd = MissionClass.lastQuerySelector({
                 wrapper: itemDrop,
                 query: "[data-action-block-step='add']",
@@ -43,6 +51,7 @@ export default function handleDragDrop() {
             MissionClass.move(optionMove);
             return;
         }
+
     });
     // END DROP
     // DRAG START
@@ -56,6 +65,7 @@ export default function handleDragDrop() {
         } else if (blockDrop) {
             valueStepDrag = blockDrop.dataset.value;
         }
+        blockStepWrapper.appendChild(deleteZone());
     });
     // END DRAG START
     // OVER
@@ -69,7 +79,8 @@ export default function handleDragDrop() {
 
         const isStep = itemDrop?.dataset.name === "step";
         const isBlock = itemDrop?.dataset.dataBlock !== undefined;
-      
+        const deleteZone = e.target.closest("#delete-zone");
+
         if (isStep) {
             removeSticky.hightLineBorder();
             const offsetX = e.offsetX;
@@ -114,12 +125,19 @@ export default function handleDragDrop() {
             removeSticky.hightLineLine();
             removeSticky.hightLineBorder();
         }
+
+        if (deleteZone) {
+            deleteZone.dataset.status = "active";
+        } else {
+            blockStepWrapper.querySelector("#delete-zone").dataset.status = "";
+        }
     });
     // END OVER
     // DRAG END
     blockStepWrapper.addEventListener("dragend", (e) => {
         removeSticky.hightLineLine();
         removeSticky.hightLineBorder();
+        blockStepWrapper.querySelector("#delete-zone").remove();
     });
     // END DRAG END
 }

@@ -20,7 +20,7 @@ class MissionV4Controller extends Controller
      */
     public function index()
     {
-        $mission = $this->translateDataRobot(25);
+        $mission = $this->translateDataRobot(25, false);
         return $mission;
     }
 
@@ -51,17 +51,28 @@ class MissionV4Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
-    {   
+    {
         $kind = $request->kind;
-        if($kind === "get") {
-            return MissionsVer::where('id', $id)->first();
-        } else if($kind === "convert_data_robot") {
-            $html = json_decode($request->html);
-            $mission = $this->translateDataRobot($id, $html);
-            return ["data"=>$mission];
+
+        switch ($kind) {
+            case 'get':
+                return MissionsVer::where('id', $id)->first();
+                break;
+            case "convert_data_robot":
+                $html = json_decode($request->html);
+                $mission = $this->translateDataRobot($id, $html);
+                return $mission;
+            case "convert_data_robot_multiple":
+                $ids = explode(",", $request->ids);
+                $dataMissions = array_map(function ($id) {
+                    return $this->translateDataRobot($id, false);
+                }, $ids);
+                return $dataMissions;
+            default:
+                # code...
+                break;
         }
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -94,22 +105,66 @@ class MissionV4Controller extends Controller
      */
     public function destroy($id)
     {
-        
     }
 
     public function translateDataRobot($id, $html)
     {
         try {
-            $dataJson = MissionsVer::where("id", $id)->first()->mission_shorthand;
+            $dataMission = MissionsVer::where("id", $id)->first();
+            $dataJson = $dataMission->mission_shorthand;
             $BlockStep = new BlockStep();
             $mission = json_decode($dataJson);
-            $dataTranslateEndMission = array_map(function($mission) use($BlockStep, $html) {
+            $dataTranslateEndMission = array_map(function ($mission) use ($BlockStep, $html) {
                 return $BlockStep->translate($mission, $html);
             }, $mission);
-            $data = implode("",$dataTranslateEndMission);
+            $dataWakeup = $this->translateWakeup($dataMission->wake_up);
+            $dataStop = $this->translateWakeup($dataMission->stop);
+
+            $data = [
+                "data" => implode("", $dataTranslateEndMission),
+                "wakeup" => $dataWakeup,
+                "stop" => $dataStop,
+                "name" => $dataMission->name,
+                "id" => $dataMission->id
+            ];
         } catch (\Throwable $th) {
-            $data = "";
+            $data = [
+                "data" => null,
+                "wakeup" => null,
+                "stop" => null,
+                "name" => null,
+                "id" => null,
+            ];
         }
         return $data;
+    }
+
+    public function translateWakeup($data)
+    {
+        try {
+            $dataWakeup = json_decode($data);
+            $normalWakeup = $dataWakeup->normal;
+            $moduleWakeup = $dataWakeup->module;
+
+            $stringDataNormalWakeup = $this->toStringWakeupStop($normalWakeup);
+            $stringDataModuleWakeup = $this->toStringWakeupStop($moduleWakeup);
+
+            $dataNormal = $stringDataNormalWakeup ? "(name:wakeup|time_out:-1|mode:gpio|data:$stringDataNormalWakeup)" : null;
+            $dataModule =  $stringDataModuleWakeup ? "(name:wakeup|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeup)" : null;
+            return $dataNormal . $dataModule;
+        } catch (\Throwable $th) {
+            return "(name:wakeup|time_out:-1|mode:gpio|data:'')";
+        }
+    }
+    public function toStringWakeupStop($data)
+    {
+        $dataTranslate = [];
+        foreach ($data as $key => $value) {
+            if ($value && $key !== "name_seri") {
+                array_push($dataTranslate, "~$key=$value~");
+            }
+        }
+        $stringDataWakeup = implode("", $dataTranslate);
+        return $stringDataWakeup;
     }
 }

@@ -18,7 +18,6 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": { },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/truong878664/interface_mvibot_v2.git"

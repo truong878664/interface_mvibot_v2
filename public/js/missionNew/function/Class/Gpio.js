@@ -21,13 +21,15 @@ export default class Gpio extends Step {
             "out_reset",
         ];
     }
-
     reset() {
         this.data.name.value = "";
         this.data.time_out.value = -1;
         this.gpioTypes.forEach((e) => {
             this.data[e] = [];
         });
+        this.resetIo();
+    }
+    resetIo() {
         document.querySelectorAll(".gpio-io").forEach((item) => {
             item.classList.remove(...this.gpioTypes);
         });
@@ -39,31 +41,21 @@ export default class Gpio extends Step {
         const { name, time_out, mode, id, ...field } = data;
         this.data.name.value = name;
         this.data.time_out.value = time_out;
-        this.setLightGpio(field);
+
+        const gpioWrapElement = document.querySelector(
+            `#function-item-form-wrapper [data-type='${this.type}']`
+        );
+        this.setLightGpio(field, gpioWrapElement);
     }
     get() {
         const gpioContainer = document.querySelector(
             `.function-mission-tab[data-type=${this.type}]`
         );
 
-        this.gpioTypes.forEach((type) => {
-            const elements = gpioContainer.querySelectorAll(`.gpio-io.${type}`);
-            this.data[type].push(
-                ...Array.from(elements, (gpio) => gpio.dataset.gpio)
-            );
-        });
+        const data = this.getGpio(gpioContainer);
 
-        const data = {
-            name: this.data.name.value,
-            time_out: this.data.time_out.value * 1,
-            out_set: this.data.out_set.join(","),
-            out_reset: this.data.out_reset.join(","),
-            in_on: this.data.in_on.join(","),
-            in_off: this.data.in_off.join(","),
-            in_pullup: this.data.in_pullup.join(","),
-            in_pulldown: this.data.in_pulldown.join(","),
-        };
-
+        data.name = this.data.name.value;
+        data.time_out = this.data.time_out.value * 1;
         if (this.type === "gpio_module") {
             data.name_gpio_module = this.data.name_gpio_module.value;
         }
@@ -74,7 +66,7 @@ export default class Gpio extends Step {
     }
 
     validate(data) {
-        const {name, time_out, name_gpio_module, ...filed} = data
+        const { name, time_out, name_gpio_module, ...filed } = data;
         const dataValidated = {
             success: true,
             data,
@@ -82,40 +74,57 @@ export default class Gpio extends Step {
             error: null,
         };
 
-        if(!name || !time_out) {
-            dataValidated.success = false
-            dataValidated.message = `Name or timeout cannot be empty!`
+        if (!name || !time_out) {
+            dataValidated.success = false;
+            dataValidated.message = `Name or timeout cannot be empty!`;
             return dataValidated;
         }
         for (const key in filed) {
             if (data[key]) {
-                dataValidated.success = true
-                dataValidated.message = `Get data success!`
+                dataValidated.success = true;
+                dataValidated.message = `Get data success!`;
                 return dataValidated;
             } else {
-                dataValidated.success = false
-                dataValidated.message = `Must have at least one gpio imported!`
+                dataValidated.success = false;
+                dataValidated.message = `Must have at least one gpio imported!`;
             }
         }
         return dataValidated;
     }
 
-    setLightGpio(dataGpio) {
-        const form = document.querySelector(
-            `#function-item-form-wrapper [data-type='${this.type}']`
-        );
+    setLightGpio(dataGpio, gpioWrapElement) {
+        console.log(dataGpio);
         for (const item in dataGpio) {
             dataGpio[item]?.split(",").forEach((light) => {
                 if (item.indexOf("out") != -1) {
-                    form.querySelector(
-                        `.output-gpio[data-gpio="${light}"]`
-                    ).classList.add(`${item}`);
+                    gpioWrapElement
+                        .querySelector(`.output-gpio[data-gpio="${light}"]`)
+                        ?.classList.add(`${item}`);
                 } else if (item.indexOf("in") != -1) {
-                    form.querySelector(
-                        `.input-gpio[data-gpio="${light}"]`
-                    ).classList.add(`${item}`);
+                    gpioWrapElement
+                        .querySelector(`.input-gpio[data-gpio="${light}"]`)
+                        ?.classList.add(`${item}`);
                 }
             });
         }
+    }
+    getGpio(wrapperGpio) {
+        this.gpioTypes.forEach((type) => {
+            const elements = wrapperGpio.querySelectorAll(`.gpio-io.${type}`);
+            this.data[type] = [];
+            this.data[type].push(
+                ...Array.from(elements, (gpio) => gpio.dataset.gpio)
+            );
+        });
+
+        const data = {
+            out_set: this.data.out_set.join(","),
+            out_reset: this.data.out_reset.join(","),
+            in_on: this.data.in_on.join(","),
+            in_off: this.data.in_off.join(","),
+            in_pullup: this.data.in_pullup.join(","),
+            in_pulldown: this.data.in_pulldown.join(","),
+        };
+        return data;
     }
 }

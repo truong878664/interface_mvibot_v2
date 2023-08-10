@@ -1,16 +1,16 @@
 <div class="text-2xl font-bold">
-    @if ($type == 'gpio_wake_up')
+    @if ($type == 'wakeup')
         <div class="mt-4 absolute left-0 bottom-2 px-2 w-full flex justify-between">
             <label for="wake-up"
                 class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 text-2xl rounded-md cancel-wake_up">Cancel</label>
-            <button
+            <button data-kind-button='save' data-type="{{$type}}"
                 class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 text-2xl rounded-md save-wake-up-btn">Save</button>
         </div>
-    @elseif ($type == 'gpio_stop')
+    @elseif ($type == 'stop')
         <div class="mt-4 absolute left-0 bottom-2 px-2 w-full flex justify-between">
             <label for="stop"
                 class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-stop">cancel</label>
-            <button
+            <button data-kind-button='save' data-type="{{$type}}"
                 class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
         </div>
     @else

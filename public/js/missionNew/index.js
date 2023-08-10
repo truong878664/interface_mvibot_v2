@@ -17,6 +17,8 @@ import TypeMission from "./Class/TypeMission.js";
 import typeMission from "./typeMission/index.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import getUA from "../functionHandle/getUA.js";
+import handleHistory from "./blockStep/history.js";
+import { wakeUpStop } from "./wakeUpStop/index.js";
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
@@ -27,11 +29,12 @@ subscribeMissionChange();
 
 Function();
 typeMission();
-
 handleAddStepToBlockStep();
 handleDragDrop();
 handleSendMission();
 handleMoreAction();
+handleHistory();
+wakeUpStop();
 
 function handleAddStepToBlockStep() {
     blockStepWrapper.addEventListener("click", (e) => {
@@ -66,10 +69,6 @@ function handleAddStepToBlockStep() {
                         MissionClass.getAddressByStep(buttonAction);
                     MissionClass.deleteStep({ address, indexStep });
                     MissionClass.render();
-                    useDebounce({
-                        cb: MissionClass.save.bind(MissionClass),
-                        delay: 1000,
-                    });
                 };
                 confirmationForm({ callback: handleDelete });
             },
@@ -215,8 +214,8 @@ function handleSendMission() {
                 "#select-robot-option"
             ).value;
             const typeMission = sendBtn.dataset.typeMission;
-            console.log(data);
-            sendMission({ nameRobot, data: data.data, typeMission });
+            const dataEnd = MissionClass.dataEndToRobot(data);
+            sendMission({ nameRobot, data: dataEnd, typeMission });
             closeFormSendMission.checked = false;
             loaded();
         } catch (error) {
@@ -268,11 +267,11 @@ async function handleCode() {
                     <div class="p-4 h-full w-full overflow-y-auto">
                         <div>
                             <span class="font-bold mr-2">Wake up:</span>
-                            <span>null</span>
+                            <span>${data.wakeup}</span>
                         </div>
                         <div>
                             <span class="font-bold mr-2">Stop:</span>
-                            <span>null</span>
+                            <span>${data.stop}</span>
                         </div>
                         <div>
                             <span class="font-bold mr-2">Data:</span>

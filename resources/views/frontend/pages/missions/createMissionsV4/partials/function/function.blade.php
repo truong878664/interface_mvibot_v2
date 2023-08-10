@@ -135,7 +135,7 @@
             type mission
         </label>
     </div>
-    
+
     <div class="h-full overflow-y-auto overflow-x-hidden hidden peer-checked/function:block">
         @foreach ($functions as $index => $item)
             @if (!in_array($currentTypeMission, $item['mission_not_allowed']))
@@ -189,12 +189,8 @@
             class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center hidden">
             <div
                 class="w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden flex justify-center items-center">
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
-                    'type' => 'gpio',
-                ])
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio', [
-                    'type' => 'gpio_module',
-                ])
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio')
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpioModule')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.footprint')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.marker')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.sleep')
@@ -205,7 +201,8 @@
         </div>
     </div>
 
-    <div class="h-full overflow-y-auto overflow-x-hidden hidden peer-checked/type-mission:block" id="list-type-mission-wrapper">
+    <div class="h-full overflow-y-auto overflow-x-hidden hidden peer-checked/type-mission:block"
+        id="list-type-mission-wrapper">
         @foreach ($typeMissions as $index => $item)
             <div class="">
                 <input type="radio" name="function" class="peer/function function" id="{{ $item['type'] }}" hidden>
@@ -218,13 +215,13 @@
                         </span>
                         <span class="capitalize">{{ $item['title'] }}</span>
                     </div>
-                    <span
-                        class="{{ $item['color'] }} transition-all down">
+                    <span class="{{ $item['color'] }} transition-all down">
                         <i class="fa-solid fa-angle-down"></i>
                     </span>
                 </button>
                 <div class="hidden peer-checked/function:block relative">
-                    <div class="w-full max-h-[500px] min-h-[100px] bg-stone-50 overflow-y-auto p-4 rounded-md text-2xl" data-list-type-mission="{{ $item['type'] }}">
+                    <div class="w-full max-h-[500px] min-h-[100px] bg-stone-50 overflow-y-auto p-4 rounded-md text-2xl"
+                        data-list-type-mission="{{ $item['type'] }}">
                     </div>
                 </div>
             </div>
