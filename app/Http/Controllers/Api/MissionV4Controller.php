@@ -160,7 +160,7 @@ class MissionV4Controller extends Controller
     {
         $dataTranslate = [];
         foreach ($data as $key => $value) {
-            if ($value && $key !== "name_seri") {
+            if ($value || $value == 0) {
                 array_push($dataTranslate, "~$key=$value~");
             }
         }

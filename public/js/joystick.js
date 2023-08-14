@@ -20,14 +20,3 @@ createPose(viewer, tfClient);
 displayPoint(0, 0);
 
 createJoystick();
-// changeNameTopic();
-
-// function changeNameTopic() {
-//     console.log('xxx');
-//     const listRobot = $(".list-robot");
-//     listRobot.onchange = (e) => {
-//         // cmd_vel_listener.name = `${e.target.value}/cmd_vel`;
-//         const robotActive = e.target.value
-//         setRobotMove(robotActive)
-//     };
-// }

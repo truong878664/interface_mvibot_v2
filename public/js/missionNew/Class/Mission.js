@@ -65,10 +65,12 @@ export default class Mission {
             );
 
             loadingHeader(false);
+            return { saved: true, message: "Successfully saved" };
         } catch (error) {
             toggerMessage("error", "ERR!, Please try again!" + error);
             loadingHeader(false);
             console.log(error);
+            return { saved: false, message: "ERR!, " + error };
         }
     }
     async getDataRobot({ html = false }) {

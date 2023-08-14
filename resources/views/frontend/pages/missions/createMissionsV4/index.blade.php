@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="fixed top-0 left-0 right-0 bottom-0 bg-white z-10 grid place-content-center hidden" id="loading-mission">
+    <div class="fixed top-0 left-0 right-0 bottom-0 bg-white z-10 grid place-content-center" id="loading-mission">
         <span class="loader-mission"></span>
     </div>
     <div class="w-full lg:w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] lg:m-2 overflow-aut lg:p-4 relative">

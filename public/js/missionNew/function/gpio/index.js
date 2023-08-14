@@ -21,8 +21,10 @@ export default function gpio() {
 }
 
 function handleReset() {
-    const resetBtn = document.querySelector(".reset-gpio-btn");
-    resetBtn.onclick = () => {
-        new Gpio().reset();
-    };
+    const resetBtns = document.querySelectorAll(".reset-gpio-btn");
+    resetBtns.forEach((resetBtn) => {
+        resetBtn.onclick = () => {
+            new Gpio().resetIo();
+        };
+    });
 }

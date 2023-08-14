@@ -297,8 +297,9 @@ function handleCopyMission() {
         (copyMissionBtn.onclick = async (e) => {
             // loading();
             const data = await MissionClass.getDataRobot({});
-            console.log(data);
-            copyToClipboard(data.data);
+            const dataEnd = MissionClass.dataEndToRobot(data);
+            console.log(dataEnd);
+            copyToClipboard(dataEnd);
             // loaded();
         });
 

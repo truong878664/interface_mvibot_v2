@@ -1,3 +1,4 @@
+import { toggerMessage } from "../../main.js";
 import WakeUpAndStop from "../function/Class/WakeUpAndStop.js";
 import { MissionClass } from "../index.js";
 
@@ -24,11 +25,9 @@ export function wakeUpStop() {
 
                 const dataWakeupStop =
                     MissionClass[typeWakeupStop][currentKindModule];
-                classWakeupAndStop[typeWakeupStop].display(dataWakeupStop)
-               
-
+                classWakeupAndStop[typeWakeupStop].display(dataWakeupStop);
             },
-            save() {
+            async save() {
                 const data = classWakeupAndStop[typeWakeupStop].get();
                 if (currentKindModule === "module") {
                     const name_seri = wakeUpStopWrapper.querySelector(
@@ -37,7 +36,11 @@ export function wakeUpStop() {
                     data.name_seri = name_seri;
                 }
                 MissionClass[typeWakeupStop][currentKindModule] = data;
-                MissionClass.save();
+                const statusSave = await MissionClass.save();
+                toggerMessage(
+                    statusSave ? "success" : "error",
+                    statusSave.message
+                );
             },
         };
         actions[kindAction]?.();
