@@ -2,6 +2,9 @@
 @section('content')
     <div class="heading dashboard-heading">Dashboard</div>
     <ul class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
+        <x-dashboard-item route='dashboard.start-robot' icon='fa-solid fa-truck-fast' title='Start ROBOT' describe='Start robot'
+            color="#C23373" />
+
         <x-dashboard-item route='dashboard.missions.select' icon='fa-solid fa-bullseye' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 

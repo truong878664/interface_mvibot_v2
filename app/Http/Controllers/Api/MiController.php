@@ -20,7 +20,8 @@ class MiController extends Controller
      */
     public function index()
     {
-        //
+
+        return Missions::select(["id", "name", "type"])->get();
     }
 
     /**
@@ -75,18 +76,23 @@ class MiController extends Controller
      */
     public function show(Request $request, $type)
     {
-
-        switch ($type) {
-            case "get-mission":
-                $list_id = explode(",", $request->list_id);
-                $dataMission = array_map(function ($item) {
-                    return Missions::where('id', $item)->first();
-                }, $list_id);
-
-                return $dataMission;
-
-            default:
-                return Missions::where('id', $type)->first();
+        try {
+            //code...
+            switch ($type) {
+                case "get-mission":
+                    $list_id = explode(",", $request->list_id);
+                    $dataMission = array_map(function ($item) {
+                        return Missions::where('id', $item)->first();
+                    }, $list_id);
+                    return $dataMission;
+                case "get-column-mission":
+                    $column = json_decode($request->column);
+                    return Missions::select($column)->where("type", "normal")->get();
+                default:
+                    return Missions::where('id', $type)->first();
+            }
+        } catch (\Throwable $th) {
+            return ["message" => "ERROR", "error" => $th];
         }
     }
 
@@ -221,7 +227,7 @@ class MiController extends Controller
 
             $data = array_map(function ($item) {
                 $itemStep = TypeMission::where('id', $item)->first();
-                if($itemStep) {
+                if ($itemStep) {
                     return $itemStep->id . "^" . $itemStep->name . "^" . $itemStep->type . "^|" . $itemStep->data;
                 }
             }, $split_mission_shorthand);
@@ -321,7 +327,7 @@ class MiController extends Controller
 
         foreach ($arrayStepMissionName as $datas) {
             $item = DB::table("mission_$datas[0]s")->where("id", $datas[2])->get()->all();
-            if($item) {
+            if ($item) {
                 array_push($stepMissionData, $item);
             }
         };
@@ -500,7 +506,8 @@ class MiController extends Controller
             Stop::insert($stopItem);
         }
     }
-    public function filterItemNull($array) {
+    public function filterItemNull($array)
+    {
         $arrayNoNull = array_filter($array, function ($item) {
             if ($item) {
                 return $item;
