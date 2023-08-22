@@ -74,7 +74,7 @@
             </div>
             <a href="{{ route('logout') }}"
                 class="text-[16px] px-4 rounded border-[1px] border-solid border-stone-500 float-right mt-4 btn hover:bg-stone-300">
-                Logout... helo
+                Logout...
             </a>
         </div>
     </div>
