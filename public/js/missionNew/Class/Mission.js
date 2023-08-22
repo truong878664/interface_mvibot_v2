@@ -105,9 +105,7 @@ export default class Mission {
     render() {
         try {
             const html = this.renderHtml({ data: this.data });
-
             const buttonAddRoot = `<button data-action-block-step="add" class="active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&amp;.active]:bg-sky-800 [&amp;.active]:text-white"> <i class="fa-solid fa-plus"></i></button>`;
-
             this.missionWrapperElement.innerHTML = html + buttonAddRoot;
             this.activeAddButton();
         } catch (error) {

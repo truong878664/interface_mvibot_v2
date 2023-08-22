@@ -9,7 +9,7 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-a1db7216.css">
+    <link rel="stylesheet" href="/build/assets/app-84ab90fd.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite('resources/css/app.css')
 </head>
@@ -64,7 +64,7 @@
         @endphp
         </div>
         <div class="user-wrapper">
-            <input type="hidden" class="type-user" value={{ session('TypeUser') }}>
+            <input type="text" class="type-user text-black" value={{ session('TypeUser') }}>
             <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
                 value="{{ session('UserName') }}" />
             <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
