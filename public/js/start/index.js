@@ -5,8 +5,10 @@ import { toggerMessage } from "../main.js";
 import amclSet from "../rosModule/amclSet.js";
 import { publishMission } from "../rosModule/handleMission.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
+import feature from "./feature.js";
 
 configStart();
+feature();
 
 const startBtn = document.querySelector("[data-name='start']");
 const robotActive = document.querySelector("#robot-navigation");

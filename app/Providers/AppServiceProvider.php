@@ -31,10 +31,9 @@ class AppServiceProvider extends ServiceProvider
         try {
             $allRobots = Robot::all();
             $robots = Robot::where('type', 'robot')->get();
-            $moduleGpios = Robot::where('type', 'module_gpio')->get();
+            $moduleGpios = Robot::where('type', 'gpio_module')->get();
             $robotsSlam = DB::table('robot_status')->where('mode', 'slam')->get();
             $robotsNavigation = DB::table('robot_status')->where('mode', 'navigation')->get();
-
             //app version
             $version = env('APP_VERSION', 'common');
         } catch (\Illuminate\Database\QueryException $e) {

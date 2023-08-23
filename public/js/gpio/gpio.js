@@ -43,8 +43,8 @@ $("#robot-gpio").onchange = (e) => {
     $(".type-gpio-btn.active")?.classList.remove("active");
     currentTypeGpio = "";
 };
-const LIGHT_ON = 1
-const LIGHT_OFF = 0
+const LIGHT_ON = 1;
+const LIGHT_OFF = 0;
 
 function setLightGpio(nameRobot) {
     fetch(`/api/input-gpio?name_seri=${nameRobot}`)
@@ -85,8 +85,12 @@ function setLightGpio(nameRobot) {
 
             resetLightGpioInput();
             setLightGpioInput(dataInput);
-        }).catch(error => {
-            toggerMessage('error', "Too many requests, please reload the page!")
+        })
+        .catch((error) => {
+            toggerMessage(
+                "error",
+                "Too many requests, please reload the page!"
+            );
         });
 
     function setLightGpioInput(dataInput) {
@@ -151,10 +155,10 @@ $(".send-gpio-btn").onclick = () => {
             $(".type-gpio-btn.active")?.classList.remove("active");
             currentTypeGpio = "";
 
-            $$('.output-gpio.output-send').forEach(item => {
-                item.classList.remove('output-send')
-            })
-            console.log(dataTopic)
+            $$(".output-gpio.output-send").forEach((item) => {
+                item.classList.remove("output-send");
+            });
+            console.log(dataTopic);
         } else {
             toggerMessage("error", "Please set output IO!");
         }

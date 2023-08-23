@@ -11,7 +11,7 @@ class Robot extends Model
     use HasFactory;
     protected $table = 'my_robot';
     protected $fillable = [
-        'name_seri',
+        'name_seri', 'type'
     ];
     public $timestamps = false;
 }
