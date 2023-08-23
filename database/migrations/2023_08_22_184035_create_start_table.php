@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('start', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("position_with_tool");
+            $table->string("position_with_toollift");
+            $table->string("position_no_toollift");
+            $table->string("mission_go_to_toollift");
+            $table->string("missions_send_robot");
         });
     }
 

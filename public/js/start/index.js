@@ -1,176 +1,69 @@
-import renderLiActive from "./renderLiActive.js";
-import ulSelectComponent from "./ulSelectComponent.js";
+import configStart from "./config.js";
+import getMultiMission from "../missions/createMission/getMultiMission.js";
+import toMissionRobot from "./toMissionRobot.js";
+import { toggerMessage } from "../main.js";
+import amclSet from "../rosModule/amclSet.js";
+import { publishMission } from "../rosModule/handleMission.js";
+import confirmationForm from "../functionHandle/confirmationForm.js";
 
-let dataMissionSendToRobot = [];
-const dataMissionGotoToolLift = [];
-const dataPositionWithToolLift = [];
-const dataPositionNoToolLift = [];
+configStart();
 
-const buttonShow = document.querySelector("[data-name='show-label']");
-const buttonPositionToolLift = document.querySelector(
-    "[data-name='option-toolift']"
-);
-const buttonPositionNoToolLift = document.querySelector(
-    "[data-name='option-no-toolift']"
-);
-const buttonMissionGoToLift = document.querySelector(
-    "[data-name='option-go-to-lift']"
-);
-const saveStartBtn = document.querySelector("#save-start-btn");
+const startBtn = document.querySelector("[data-name='start']");
+const robotActive = document.querySelector("#robot-navigation");
 
-renderLiActive({
-    data: dataMissionSendToRobot,
-    selector: "#mission-active",
-});
-renderLiActive({
-    data: dataPositionWithToolLift,
-    selector: "#position-with-tool-active",
-});
-renderLiActive({
-    data: dataPositionNoToolLift,
-    selector: "#position-no-tool-active",
-});
-renderLiActive({
-    data: dataMissionGotoToolLift,
-    selector: "#go-to-lift-active",
-});
-
-saveStartBtn.onclick = () => {
-    console.log(dataPositionWithToolLift);
+startBtn.onclick = () => {
+    confirmationForm({
+        message: "Do you want to start robot?",
+        callback: handleStart,
+    });
 };
 
-buttonShow.addEventListener("click", handleClickMissionRobot);
-buttonPositionToolLift.addEventListener("click", handleClickPositionToolLift);
-buttonPositionNoToolLift.addEventListener(
-    "click",
-    handleClickPositionNoToolLift
-);
-buttonMissionGoToLift.addEventListener("click", handleClickMissionGoToLift);
-
-async function handleClickMissionRobot() {
-    const rect = this.getBoundingClientRect();
-    const x = rect.x;
-    const y = rect.y + rect.height;
-    const datalist = await getAllMission();
-    const listWrapper = await ulSelectComponent({
-        x,
-        y,
-        dataList: datalist,
-        dataListCheck: dataMissionSendToRobot,
-    });
-    const listLi = listWrapper.querySelectorAll(".item-li");
-    listLi.forEach((li) => {
-        li.onchange = (e) => {
-            const id = Number(e.target.value);
-            const name = e.target.dataset.name;
-            const isCheck = e.target.checked;
-            const data = { id, name };
-            dataMissionSendToRobot = dataMissionSendToRobot.filter(
-                (itemF) => itemF.id !== id
+async function handleStart() {
+    try {
+        const isWithToollift = JSON.parse(
+            document.querySelector("[name='toollift']:checked").dataset.toollift
+        );
+        const nameRobot = robotActive.value;
+        if (!nameRobot) {
+            toggerMessage("error", "Choose robot please!");
+            return;
+        }
+        const res = await fetch("/api/start/get-detail-start");
+        const dataStart = await res.json();
+        if (!dataStart.error) {
+            const data = dataStart.data;
+            const positionInit = isWithToollift
+                ? data.positionWithToollift
+                : data.positionNoToollift;
+            console.log(isWithToollift);
+            amclSet(
+                nameRobot,
+                positionInit.x,
+                positionInit.y,
+                positionInit.z,
+                positionInit.w
             );
-            isCheck && dataMissionSendToRobot.push(data);
-            renderLiActive({
-                data: dataMissionSendToRobot,
-                selector: "#mission-active",
-            });
-        };
-    });
-}
 
-async function handleClickPositionToolLift() {
-    const rect = this.getBoundingClientRect();
-    const x = rect.x;
-    const y = rect.y + rect.height;
-    const datalist = await getPosition();
-    const listWrapper = await ulSelectComponent({
-        x,
-        y,
-        dataList: datalist,
-        dataListCheck: dataPositionWithToolLift,
-        multiple: false,
-    });
-    const listLi = listWrapper.querySelectorAll(".item-li");
-    listLi.forEach((li) => {
-        li.onchange = (e) => {
-            const id = Number(e.target.value);
-            const name = e.target.dataset.name;
-            const data = { id, name };
-            dataPositionWithToolLift.length = 0;
-            dataPositionWithToolLift.push(data);
-            renderLiActive({
-                data: dataPositionWithToolLift,
-                selector: "#position-with-tool-active",
-            });
-        };
-    });
-}
-async function handleClickPositionNoToolLift() {
-    const rect = this.getBoundingClientRect();
-    const x = rect.x;
-    const y = rect.y + rect.height;
-    const datalist = await getPosition();
-    const listWrapper = await ulSelectComponent({
-        x,
-        y,
-        dataList: datalist,
-        dataListCheck: dataPositionNoToolLift,
-        multiple: false,
-    });
-    const listLi = listWrapper.querySelectorAll(".item-li");
-    listLi.forEach((li) => {
-        li.onchange = (e) => {
-            const id = Number(e.target.value);
-            const name = e.target.dataset.name;
-            const data = { id, name };
-            dataPositionNoToolLift.length = 0;
-            dataPositionNoToolLift.push(data);
-            renderLiActive({
-                data: dataPositionNoToolLift,
-                selector: "#position-no-tool-active",
-            });
-        };
-    });
-}
+            const missions = [];
 
-async function handleClickMissionGoToLift() {
-    const rect = this.getBoundingClientRect();
-    const x = rect.x;
-    const y = rect.y + rect.height;
-    const datalist = await getAllMission();
-    const listWrapper = await ulSelectComponent({
-        x,
-        y,
-        dataList: datalist,
-        dataListCheck: dataMissionGotoToolLift,
-        multiple: false,
-    });
-    const listLi = listWrapper.querySelectorAll(".item-li");
-    listLi.forEach((li) => {
-        li.onchange = (e) => {
-            const id = Number(e.target.value);
-            const name = e.target.dataset.name;
-            const data = { id, name };
-            dataMissionGotoToolLift.length = 0;
-            dataMissionGotoToolLift.push(data);
-            renderLiActive({
-                data: dataMissionGotoToolLift,
-                selector: "#go-to-lift-active",
+            if (!isWithToollift) {
+                const missionGoToToolliftRobot = toMissionRobot(
+                    data.missionGotoToollift
+                );
+                missions.push(missionGoToToolliftRobot);
+            }
+
+            data.dataMissionSendToRobot.map((missionItem) => {
+                missions.push(toMissionRobot(missionItem));
+                return missions;
             });
-        };
-    });
-}
-async function getAllMission() {
-    const column = ["id", "name"];
 
-    const res = await fetch(
-        `/api/mi/get-column-mission?column=${JSON.stringify(column)}`
-    );
-    const missions = await res.json();
-    return missions;
-}
-
-async function getPosition() {
-    const res = await fetch(`/api/position`);
-    const position = await res.json();
-    return position;
+            const topic = `/${nameRobot}/mission_normal`;
+            publishMission(topic, missions.join(""));
+        } else {
+            toggerMessage("error", dataStart.message);
+        }
+    } catch (error) {
+        toggerMessage("error", "ERROR!" + error);
+    }
 }

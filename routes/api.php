@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\SoundFileController;
+use App\Http\Controllers\Api\StartController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
@@ -42,7 +43,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::resource('start', StartController::class);
 Route::resource('mission', MissionController::class);
 Route::resource('position', PositionController::class);
 Route::resource('layer', LayerController::class);

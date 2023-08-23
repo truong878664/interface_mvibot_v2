@@ -5,7 +5,7 @@
         <x-dashboard-item route='dashboard.start-robot' icon='fa-solid fa-truck-fast' title='Start ROBOT' describe='Start robot'
             color="#C23373" />
 
-        <x-dashboard-item route='dashboard.missions.select' icon='fa-solid fa-bullseye' title='Create missions'
+        <x-dashboard-item route='dashboard.missions.select' icon='fa-solid fa-bullseye' title='Missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 
         <x-dashboard-item route='dashboard.missions.tracking-mission' icon='fa-solid fa-arrows-split-up-and-left'

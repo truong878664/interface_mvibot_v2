@@ -97,7 +97,7 @@ curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 Verify the hash of the downloaded PHP composer script with the signatures present at the official page:
 
 ```tsx
-HASH=`curl -sS https://composer.github.io/installer.sig`;
+HASH = `curl -sS https://composer.github.io/installer.sig`;
 ```
 
 Then, validate if the PHP Composer installer can be safely executed or not:
@@ -189,10 +189,10 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
 ```tsx
 mysql> FLUSH PRIVILEGES;
 ```
-```tsx
-mysql> exit;
-```
 
+```tsx
+mysql > exit;
+```
 
 # <strong> Add C++ -> MySql </strong>
 
@@ -232,11 +232,11 @@ press Ctrl + H
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong> -->
 
 ```tsx
-cd/mvibotApp/interface_mvibot_v2;
+cd / mvibotApp / interface_mvibot_v2;
 ```
 
 ```tsx
-mv .env.example .env;
+mv.env.example.env;
 ```
 
 # <strong>Composer</strong>
@@ -244,7 +244,7 @@ mv .env.example .env;
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
 
 ```tsx
-cd/mvibotApp/interface_mvibot_v2;
+cd / mvibotApp / interface_mvibot_v2;
 ```
 
 ```tsx
@@ -294,3 +294,7 @@ open link: http://127.0.0.1:8000/ open the link in your browser
 
 User: admin <br>
 Password: admin
+
+#
+
+run one file migrate: php artisan migrate --path=/database/migrations/2023_08_22_184035_create_start_table.php

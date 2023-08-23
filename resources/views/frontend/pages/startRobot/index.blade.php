@@ -11,22 +11,30 @@
             <div class="">
                 <div class="mb-[20px] text-2xl">
                     <label class="cursor-pointer">
-                        <input type="radio" name="lift" class="sr-only peer" checked>
+                        <input type="radio" name="toollift" data-toollift="false" class="sr-only peer" checked>
                         <div
                             class="bg-gray-200 text-gray-400 inline-block px-4 py-2 rounded-md peer-checked:bg-green-500 peer-checked:font-bold peer-checked:text-white">
-                            No Toolift
+                            No toollift
                         </div>
                     </label>
                     <label class="cursor-pointer">
-                        <input type="radio" name="lift" class="sr-only peer">
+                        <input type="radio" name="toollift" data-toollift="true" class="sr-only peer">
                         <div
                             class="bg-gray-200 text-gray-400 inline-block px-4 py-2 rounded-md peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white">
-                            With Toolift
+                            With toollift
                         </div>
                     </label>
                 </div>
+
+                <div class="flex justify-center mb-10">
+                    @include('frontend.blocks.selectRobot', [
+                        'type' => 'robot_navigation',
+                        'id' => 'robot-navigation',
+                    ])
+                </div>
+
                 <div class="flex justify-center items-center">
-                    <button class="bg-red-400 text-white rounded-full px-8 py-5 btn button-start">
+                    <button class="bg-red-400 text-white rounded-full px-8 py-5 btn button-start" data-name="start">
                         <span class="label">
                             <span>
                                 Start
@@ -41,17 +49,17 @@
 
                 {{--  --}}
                 <input type="checkbox" name="" id="input-setting-start" class="peer/setting-start hidden">
-                <div class="absolute top-0 left-0 right-0 bottom-0 p-5 bg-white hidde peer-checked/setting-start:block">
+                <div class="absolute top-0 left-0 right-0 bottom-0 p-5 bg-white hidden peer-checked/setting-start:block">
                     <label for="input-setting-start"
-                        class="absolute top-0 right-0 text-4xl px-4 py-2 inline-block rounded-full bg-white">
+                        class="absolute top-0 right-0 text-4xl px-4 py-2 inline-block rounded-full bg-white cursor-pointer">
                         <i class="fa-solid fa-xmark"></i>
                     </label>
                     <ul class="text-[16px]">
                         <li class="mb-4 flex">
                             <span>
-                                Initial position <span class="font-bold">with</span> toolift
+                                Initial position <span class="font-bold">with</span> toollift
                             </span>
-                            <div data-name="option-toolift"
+                            <div data-name="option-toollift"
                                 class="px-4 py-1 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap" id="position-with-tool-active"></div>
@@ -60,7 +68,7 @@
                             </div>
                         </li>
                         <li class="mb-4 flex">
-                            <span>Mission go to toolift</span>
+                            <span>Mission go to toollift</span>
                             <div data-name="option-go-to-lift"
                                 class="px-4 py-1 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
@@ -71,9 +79,9 @@
                         </li>
                         <li class="mb-4 flex">
                             <span>
-                                Initial position <span class="font-bold">without</span> toolift
+                                Initial position <span class="font-bold">without</span> toollift
                             </span>
-                            <div data-name="option-no-toolift"
+                            <div data-name="option-no-toollift"
                                 class="px-4 py-1 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap" id="position-no-tool-active"></div>
