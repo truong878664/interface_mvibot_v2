@@ -88,7 +88,9 @@ function updateStatus() {
                         } else {
                             key === "is_master" &&
                                 (itemElement.dataset.status = value);
-                            itemElement.innerText = value;
+                            if (itemElement) {
+                                itemElement.innerText = value;
+                            }
                         }
                     }
                 }

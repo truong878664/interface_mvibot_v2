@@ -13,7 +13,7 @@ function feature() {
         const message = {
             upToolLift: "Bạn có muốn nâng tool lift?",
             downToolLift: "Bạn có muốn hạ tool lift?",
-            setYellowSx: "Bạn có muốn set các module ở SX đèn vảng?",
+            setYellowSx: "Bạn có muốn set các module ở SX đèn vàng?",
             setRedSx: "Bạn có muốn set các module ở SX đèn đỏ?",
         };
         const robotActive = robots.value;

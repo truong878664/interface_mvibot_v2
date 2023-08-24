@@ -15,7 +15,7 @@ const robotActive = document.querySelector("#robot-navigation");
 
 startBtn.onclick = () => {
     confirmationForm({
-        message: "Do you want to start robot?",
+        message: "Bạn có chắc muốn khởi chạy robot?",
         callback: handleStart,
     });
 };
@@ -27,7 +27,7 @@ async function handleStart() {
         );
         const nameRobot = robotActive.value;
         if (!nameRobot) {
-            toggerMessage("error", "Choose robot please!");
+            toggerMessage("error", "Vui lòng chọn robot!");
             return;
         }
         const res = await fetch("/api/start/get-detail-start");

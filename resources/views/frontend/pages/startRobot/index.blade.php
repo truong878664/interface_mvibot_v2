@@ -10,7 +10,7 @@
         <div class="flex flex-col h-full p-10 overflow-auto">
             <div id="feature-wrapper-button" class="pb-10">
                 <div class="">
-                    <span>Tính năng module GPIO</span>
+                    <span class="font-bold">Tính năng module GPIO</span>
                     <input class="sr-only" id="module_gpio_list" type="text" value="{{ json_encode($moduleGpios) }}">
                     <div class="text-white text-3xl ml-3 my-10">
                         <button data-type-button="setYellowSx" class="bg-yellow-500 p-4 rounded-md btn">Kích đèn vàng ở
@@ -19,9 +19,9 @@
                     </div>
                 </div>
                 <hr>
-                <div class=" ml-3 mt-10">
-                    <span>Tính năng tool lift robot</span>
-                    <div class="flex gap-32 flex-wrap text-white text-3xl mt-10">
+                <div class="mt-10">
+                    <span class="font-bold">Tính năng tool lift robot</span>
+                    <div class="flex gap-32 flex-wrap text-white text-3xl my-10">
                         @include('frontend.blocks.selectRobot', [
                             'type' => 'robot_navigation',
                             'id' => 'robot-tool-lift',
@@ -34,7 +34,7 @@
             </div>
             <hr />
             <div class="w-full h-full  relative flex-1 mt-10">
-                <span>Setup bắt đầu chạy robot</span>
+                <span class="font-bold">Setup bắt đầu chạy robot</span>
                 <div class="">
                     <div class=" mb-10">
                         @include('frontend.blocks.selectRobot', [

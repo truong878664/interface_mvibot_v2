@@ -1029,7 +1029,6 @@ li {
     width: auto;
     min-width: 100px;
     flex-shrink: 0;
-
 }
 .form-submit-steps {
     display: flex;

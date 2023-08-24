@@ -8,14 +8,13 @@
     align-content: flex-start;
 }
 
-
 /* dashboard item */
 .dashboard-content-item {
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: calc(100% / var(--colum-dashboard) - 30px);
+    /* width: calc(100% / var(--colum-dashboard) - 30px); */
     margin: 15px;
     border-radius: 8px;
     padding: 16px;
