@@ -8,14 +8,14 @@
         <div class="w-full flex-1 flex justify-evenly items-center mt-[70px]">
             <div class="relative">
                 <div class="mb-8 absolute w-full -top-[30px] -translate-y-full">
-                    <div class="range-slider relative mb-12">
+                    <div class="range-slider relative mb-12 flex">
                         <span id="rs-bullet-speed"
-                            class="rs-label-speed rs-label absolute -left-2 top-0 -translate-x-full -translate-y-1/2 "
+                            class="rs-label-speed rs-label absolute -left-2 top-1/2 -translate-x-full -translate-y-1/2 "
                             speed="0.00">0.00</span>
                         <input id="rs-range-line-speed" class="rs-range-speed rs-range w-full" type="range" value="0"
                             min="0" max="100">
                     </div>
-                    <div class="range-slider relative">
+                    <div class="range-slider relative flex">
                         <span id="rs-bullet-rad"
                             class="rs-label rs-label-rad absolute -left-2 top-0 -translate-x-full -translate-y-1/2 "
                             rad="0.00">0.00</span>

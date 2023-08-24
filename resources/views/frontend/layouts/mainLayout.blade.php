@@ -6,84 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
-    {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
-    {{-- <link rel="stylesheet" href="/css/main.css"> --}}
-    <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-5db38d1e.css">
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-    {{-- @vite('resources/css/app.css') --}}
+    {{-- <link rel="stylesheet" href="/build/assets/app-52ec5278.css"> --}}
+    @vite('resources/css/app.css')
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
-    <style>
-        .connection-failed {
-            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        .text-clamp-2 {
-            display: block;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /* số dòng hiển thị */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .connection-failed.shake {
-            animation: shake 1s linear infinite;
-        }
-
-        @keyframes shake {
-            0% {
-                -webkit-transform: rotate(-15deg);
-                transform: rotate(-15deg);
-            }
-
-            4% {
-                -webkit-transform: rotate(15deg);
-                transform: rotate(15deg);
-            }
-
-            8%,
-            24% {
-                -webkit-transform: rotate(-18deg);
-                transform: rotate(-18deg);
-            }
-
-            12%,
-            28% {
-                -webkit-transform: rotate(18deg);
-                transform: rotate(18deg);
-            }
-
-            16% {
-                -webkit-transform: rotate(-22deg);
-                transform: rotate(-22deg);
-            }
-
-            20% {
-                -webkit-transform: rotate(22deg);
-                transform: rotate(22deg);
-            }
-
-            32% {
-                -webkit-transform: rotate(-12deg);
-                transform: rotate(-12deg);
-            }
-
-            36% {
-                -webkit-transform: rotate(12deg);
-                transform: rotate(12deg);
-            }
-
-            40%,
-            100% {
-                -webkit-transform: rotate(0deg);
-                transform: rotate(0deg);
-            }
-        }
-    </style>
     <header class="main-header">
         <div class="header-left-wrapper">
             <div class="connect-ros-btn connection-failed shake">

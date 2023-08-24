@@ -1,11 +1,5 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <style>
-        .button-start {
-            box-shadow: rgba(245, 56, 56, .2) 0 -25px 18px -14px inset, rgba(245, 56, 56, .15) 0 1px 2px, rgba(245, 56, 56, .15) 0 2px 4px, rgba(245, 56, 56, .15) 0 4px 8px, rgba(245, 56, 56, .15) 0 8px 16px, rgba(245, 56, 56, .15) 0 16px 32px;
-            transform: scale(1.01) rotate(-1deg);
-        }
-    </style>
     <div class="w-[calc(100%_-_10px)] h-full md:h-[calc(100%_-_10px)] m-2 overflow-hidden">
         <div class="flex flex-col h-full p-10 overflow-auto">
             <div id="feature-wrapper-button" class="pb-10">
@@ -27,7 +21,8 @@
                             'id' => 'robot-tool-lift',
                         ])
                         <button data-type-button="upToolLift" class="bg-main p-4 rounded-md btn">Nâng tool lift</button>
-                        <button data-type-button="downToolLift" class="bg-green-500 p-4 rounded-md btn">Hạ tool
+                        <button data-type-button="downToolLift"
+                            class="bg-green-500 p-4 rounded-md btn shadow-button-light shadow-green-400/20">Hạ tool
                             lift</button>
                     </div>
                 </div>
@@ -61,7 +56,8 @@
 
 
                     <div class="">
-                        <button class="bg-red-400 text-white rounded-full px-8 py-5 btn button-start" data-name="start">
+                        <button class="bg-red-400 text-white rounded-full px-8 py-5 btn shadow-light shadow-red-700/20"
+                            data-name="start">
                             <span class="label">
                                 <span>
                                     Start

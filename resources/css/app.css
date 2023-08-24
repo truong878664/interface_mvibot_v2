@@ -1,75 +1,9 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-.dropdown {
-    position: relative;
-    width: 200px;
-    height: 30px;
-    color: #fff;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-.dropdown.active::before {
-    top: 22px;
-    transform: rotate(-225deg);
-}
-
-.dropdown input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    padding: 12px 20px;
-    border-radius: 4px;
-}
-
-.dropdown input::placeholder {
-    font-weight: bold;
-    color: #000;
-}
-
-.dropdown .options {
-    position: absolute;
-    top: 40px;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    overflow: hidden;
-    display: none;
-    z-index: 1;
-    max-height: 300px;
-    overflow: auto;
-}
-
-.dropdown.active .options {
-    display: block;
-}
-
-.dropdown .options div {
-    padding: 20px 20px;
-    cursor: pointer;
-    color: #000;
-    font-size: 17px;
-}
-
-.dropdown .options div:last-child {
-    padding: 12px 12px;
-    text-align: center;
-}
-
-.dropdown .options div:hover {
-    background: #62baea;
-    color: #fff;
-}
-
-.dropdown .options div ion-icon {
-    position: relative;
-    top: 4px;
-    margin-right: 10px;
-}
+@import "./style.css";

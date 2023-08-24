@@ -2,18 +2,8 @@
 @section('content')
     <div class=""></div>
     <div class="relative overflow-hidden w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2">
-        {{-- <canvas id="map-test" class="bg-red-100 w-full h-full "></canvas>
-        <div class="absolute top-0 left-0 ">
-            <input type="range" min="0" max="100" class="change-canvas">
-            <input type="range" min="0" max="100" class="change-left">
-            <input type="range" min="0" max="100" class="change-right">
-        </div> --}}
-
         <button id="submit-btn" class="bg-blue-400 p-4 btn">tesst</button>
     </div>
-
-
-
     <script>
         const $ = document.querySelector.bind(document)
         const $$ = document.querySelectorAll.bind(document)
@@ -28,7 +18,10 @@
             console.log(123);
         }
 
-        function showActive({ message = 'Do you want to delete?',callback}) {
+        function showActive({
+            message = 'Do you want to delete?',
+            callback
+        }) {
             const divElement = document.createElement('div')
             divElement.classList.add('fixed', 'top-0', 'z-10', 'left-0', 'right-0', 'bottom-0', 'bg-[rgba(0,0,0,0.2)]',
                 'form-submit-again', 'flex', 'justify-center', 'items-center')
