@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
-    <link rel="stylesheet" href="/build/assets/app-87bf25f2.css">
-    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="/build/assets/app-e4fdcfb3.css">
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
