@@ -7,9 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mvibot – Login</title>
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
-    <link rel="stylesheet" href="/buildCss/style.css">
+    <link rel="stylesheet" href="/build/assets/app-fedffd3d.css">
 
 </head>
+<style>
+
+</style>
 
 <body>
     <div class="login-wrapper">
