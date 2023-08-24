@@ -1,6 +1,8 @@
 import ros from "../main.js";
 
 export default function publishTopicString(nameTopic, data) {
+    console.log(nameTopic);
+    console.log(data);
     const topic = new ROSLIB.Topic({
         ros: ros,
         name: nameTopic,

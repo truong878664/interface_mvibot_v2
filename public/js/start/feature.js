@@ -38,27 +38,30 @@ function feature() {
             },
             setYellowSx() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
-                dataGpioModule.forEach((moduleGpio) => {
-                    if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
-                        publishTopicString(
-                            `/${moduleGpio.name_seri}/output_user_set`,
-                            "(0|1)(7|0)"
-                        );
-                    }
-                });
+                publishTopicString(`/IB03_916b/output_user_set`, "(0|1)(7|0)");
+                publishTopicString(`/IB04_916b/output_user_set`, "(0|1)(7|0)");
+                publishTopicString(`/IB05_916b/output_user_set`, "(0|1)(7|0)");
+                // dataGpioModule.forEach((moduleGpio) => {
+                //     if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
+                //     }
+                // });
                 publishTopicString(`/MB22_916b/output_user_set`, "(5|0)");
                 toggerMessage("success", "Đã kích đèn vàng module ở SX!");
             },
             setRedSx() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
-                dataGpioModule.forEach((moduleGpio) => {
-                    if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
-                        publishTopicString(
-                            `/${moduleGpio.name_seri}/output_user_set`,
-                            "(2|1)(7|1)"
-                        );
-                    }
-                });
+                publishTopicString(`/IB03_916b/output_user_set`, "(2|1)(7|1)");
+                publishTopicString(`/IB04_916b/output_user_set`, "(2|1)(7|1)");
+                publishTopicString(`/IB05_916b/output_user_set`, "(2|1)(7|1)");
+                // dataGpioModule.forEach((moduleGpio) => {
+
+                //     if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
+                //         publishTopicString(
+                //             `/${moduleGpio.name_seri}/output_user_set`,
+                //             "(2|1)(7|1)"
+                //         );
+                //     }
+                // });
                 publishTopicString(`/MB22_916b/output_user_set`, "(5|1)");
                 toggerMessage("success", "Đã kích đèn đỏ module ở SX!");
             },
