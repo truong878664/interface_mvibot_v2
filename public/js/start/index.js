@@ -1,11 +1,11 @@
 import configStart from "./config.js";
-import getMultiMission from "../missions/createMission/getMultiMission.js";
 import toMissionRobot from "./toMissionRobot.js";
 import { toggerMessage } from "../main.js";
 import amclSet from "../rosModule/amclSet.js";
 import { publishMission } from "../rosModule/handleMission.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
 import feature from "./feature.js";
+import publishTopicString from "../rosModule/topicString.js";
 
 configStart();
 feature();
@@ -63,6 +63,7 @@ async function handleStart() {
 
             const topic = `/${nameRobot}/mission_normal`;
             publishMission(topic, missions.join(""));
+            publishTopicString(`/${nameRobot}/output_user_set`, "(6|1)");
         } else {
             toggerMessage("error", dataStart.message);
         }
