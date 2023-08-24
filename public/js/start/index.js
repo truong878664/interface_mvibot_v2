@@ -38,6 +38,7 @@ async function handleStart() {
                 ? data.positionWithToollift
                 : data.positionNoToollift;
             console.log(isWithToollift);
+
             amclSet(
                 nameRobot,
                 positionInit.x,

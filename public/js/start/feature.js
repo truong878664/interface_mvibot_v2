@@ -17,13 +17,15 @@ function feature() {
             setRedSx: "Bạn có muốn set các module ở SX đèn đỏ?",
         };
         const robotActive = robots.value;
+        const moduleSet = ["IB03_916b", "IB04_916b", "IB05_916b"];
+
         const actions = {
             upToolLift() {
                 if (!robotActive) {
                     toggerMessage("error", "Vui lòng chọn robot!");
                     return;
                 }
-                publishTopicString(`/${robotActive}/output_user_set`, "(0|1)");
+                publishTopicString(`/${robotActive}/output_user_set`, "(0|0)");
                 toggerMessage("success", "Nâng tool lift thành công!");
             },
             downToolLift() {
@@ -31,27 +33,33 @@ function feature() {
                     toggerMessage("error", "Vui lòng chọn robot!");
                     return;
                 }
-                publishTopicString(`/${robotActive}/output_user_set`, "(0|0)");
+                publishTopicString(`/${robotActive}/output_user_set`, "(0|1)");
                 toggerMessage("success", "Hạ tool lift thành công!");
             },
             setYellowSx() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
                 dataGpioModule.forEach((moduleGpio) => {
-                    publishTopicString(
-                        `/${moduleGpio.name_seri}/output_user_set`,
-                        "(0|1)"
-                    );
+                    if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
+                        publishTopicString(
+                            `/${moduleGpio.name_seri}/output_user_set`,
+                            "(0|1)(7|0)"
+                        );
+                    }
                 });
+                publishTopicString(`/MB22_916b/output_user_set`, "(5|0)");
                 toggerMessage("success", "Đã kích đèn vàng module ở SX!");
             },
             setRedSx() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
                 dataGpioModule.forEach((moduleGpio) => {
-                    publishTopicString(
-                        `/${moduleGpio.name_seri}/output_user_set`,
-                        "(2|1)"
-                    );
+                    if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
+                        publishTopicString(
+                            `/${moduleGpio.name_seri}/output_user_set`,
+                            "(2|1)(7|1)"
+                        );
+                    }
                 });
+                publishTopicString(`/MB22_916b/output_user_set`, "(5|1)");
                 toggerMessage("success", "Đã kích đèn đỏ module ở SX!");
             },
         };
