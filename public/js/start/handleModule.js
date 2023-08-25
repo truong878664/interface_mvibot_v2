@@ -4,26 +4,31 @@ import andonLight from "./andon.js";
 async function handleModule() {
     try {
         const andonWrapper = document.querySelector("#light-andon-wrapper");
+        const currentIO = {};
         setInterval(async () => {
             const dataOutputGpio = await getOutPutGpioModule();
-
             dataOutputGpio.data.forEach((output, index) => {
                 const { out1, out2, out3 } = output;
 
-                const currentAndon = andonWrapper.querySelector(
-                    `.andon[data-module='${output.name_seri}']`
-                );
-
-                currentAndon.innerHTML = andonLight(
-                    {
-                        out1,
-                        out2,
-                        out3,
-                    },
-                    index
-                );
+                if (
+                    JSON.stringify({ out1, out2, out3 }) !==
+                    JSON.stringify(currentIO[output.name_seri])
+                ) {
+                    const currentAndon = andonWrapper.querySelector(
+                        `.andon[data-module='${output.name_seri}']`
+                    );
+                    currentAndon.innerHTML = andonLight(
+                        {
+                            out1,
+                            out2,
+                            out3,
+                        },
+                        index
+                    );
+                }
+                currentIO[output.name_seri] = { out1, out2, out3 };
             });
-        }, 3000);
+        }, 1000);
     } catch (error) {
         toggerMessage("error", "ERROR! " + error);
         console.log(error);
