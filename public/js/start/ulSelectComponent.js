@@ -11,6 +11,7 @@ function ulSelectComponent({ x, y, dataList, dataListCheck, multiple = true }) {
         "right-0",
         "bottom-0",
         "overlay-start",
+        "z-[100]",
     ];
 
     div.classList.add(...className);

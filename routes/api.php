@@ -64,7 +64,7 @@ Route::resource('type-mission', TypeMissionController::class);
 Route::resource('wake_up', WakeUpController::class);
 Route::resource('stop', StopController::class);
 
-Route::resource('input-gpio', InputGpioController::class)->only('index');
+Route::resource('input-gpio', InputGpioController::class);
 
 Route::resource('robot', RobotController::class);
 Route::resource('function', FunctionController::class);

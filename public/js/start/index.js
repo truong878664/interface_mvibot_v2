@@ -6,9 +6,11 @@ import { publishMission } from "../rosModule/handleMission.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
 import feature from "./feature.js";
 import publishTopicString from "../rosModule/topicString.js";
+import handleModule from "./handleModule.js";
 
 configStart();
 feature();
+handleModule();
 
 const startBtn = document.querySelector("[data-name='start']");
 const robotActive = document.querySelector("#robot-navigation");

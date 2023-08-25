@@ -103,9 +103,24 @@ class InputGpioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        switch ($id) {
+            case 'get-output-module':
+                try {
+                    $moduleGet = json_decode($request->moduleGet);
+
+                    $dataModuleGet = OutputGpio::whereIn("name_seri", $moduleGet)->get();
+                    return ['data' => $dataModuleGet, "message" => "get data successfully!", "error" => true];
+                    break;
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    return ["data" => null, "message" => "ERROR! " . $th, "error" => true];
+                }
+
+            default:
+                return ["data" => null, "message" => "check parameter", "error" => true];
+        }
     }
 
     /**
