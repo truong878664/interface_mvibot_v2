@@ -12,6 +12,12 @@
         </div>
     </div>
     <div class="w-full h-full flex flex-col justify-center">
+        <div class="text-2xl mb-4">
+            <label for="not_set_out" class="flex items-center gap-4">
+                <span>Not set out </span>
+                <input id="not_set_out" type="checkbox" name="not_set_out">
+            </label>
+        </div>
         <div class="">
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.kindGpio', [
                 'type' => 'gpio',

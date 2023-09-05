@@ -6,6 +6,7 @@ export default class Gpio extends Step {
         const form = document.getElementById("function-item-form-wrapper");
         this.data.name = form.querySelector(".name_gpio");
         this.data.time_out = form.querySelector(".time_out_gpio");
+        this.data.notSetout = form.querySelector("#not_set_out");
         this.data.in_off = [];
         this.data.in_on = [];
         this.data.in_pullup = [];
@@ -27,6 +28,7 @@ export default class Gpio extends Step {
         this.gpioTypes.forEach((e) => {
             this.data[e] = [];
         });
+        this.data.notSetout.checked = false;
         this.resetIo();
     }
     resetIo() {
@@ -38,9 +40,10 @@ export default class Gpio extends Step {
             ?.classList.remove("active");
     }
     display(data) {
-        const { name, time_out, mode, id, ...field } = data;
+        const { name, time_out, mode, id, not_set_out, ...field } = data;
         this.data.name.value = name;
         this.data.time_out.value = time_out;
+        this.data.notSetout.checked = Number(not_set_out);
 
         const gpioWrapElement = document.querySelector(
             `#function-item-form-wrapper [data-type='${this.type}']`
@@ -51,10 +54,10 @@ export default class Gpio extends Step {
         const gpioContainer = document.querySelector(
             `.function-mission-tab[data-type=${this.type}]`
         );
-
         const data = this.getGpio(gpioContainer);
 
         data.name = this.data.name.value;
+        data.not_set_out = this.data.notSetout.checked ? 1 : 0;
         data.time_out = this.data.time_out.value * 1;
         if (this.type === "gpio_module") {
             data.name_gpio_module = this.data.name_gpio_module.value;

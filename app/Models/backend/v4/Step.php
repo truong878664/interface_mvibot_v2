@@ -16,11 +16,11 @@ class Step extends Model
             $type = $infoStep[0];
             $name = $infoStep[1];
             $id = $infoStep[2];
-            
-            if($type === 'break') {
+
+            if ($type === 'break') {
                 return "(name:break|time_out:-1|mode:break|data:~~)";
             }
-            
+
             $table = "mission_" . $type . "s";
             if ($table) {
                 $dataFunction = DB::table($table)->where("id", $id)->first();
@@ -66,6 +66,7 @@ class Step extends Model
                     $in_off = $dataFunction->in_off;
                     $in_pullup = $dataFunction->in_pullup;
                     $in_pulldown = $dataFunction->in_pulldown;
+                    $not_set_out = $dataFunction->not_set_out ? $dataFunction->not_set_out : 0;
 
                     strlen($out_set) ? $data_out_set = "~out_set=$out_set~" : $data_out_set = "";
                     strlen($out_reset) ? $data_out_reset = "~out_reset=$out_reset~" : $data_out_reset = "";
@@ -73,8 +74,8 @@ class Step extends Model
                     strlen($in_off) ? $data_in_off = "~in_off=$in_off~" : $data_in_off = "";
                     strlen($in_pullup) ? $data_in_pullup = "~in_pullup=$in_pullup~" : $data_in_pullup = "";
                     strlen($in_pulldown) ? $data_in_pulldown = "~in_pulldown=$in_pulldown~" : $data_in_pulldown = "";
-                    $dataTranslated =  "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
-
+                    $data_not_set_out = "~not_set_out=$not_set_out~";
+                    $dataTranslated =  "(name:$name_gpio|time_out:$time_out|mode:$mode|data:$data_not_set_out$data_out_set$data_out_reset$data_in_on$data_in_off$data_in_pullup$data_in_pulldown)";
                     break;
                 case 'gpio_module':
                     $name_function_gpio_module = $dataFunction->name;
@@ -138,10 +139,10 @@ class Step extends Model
                     $name_variable = $dataFunction->name_variable;
                     $focus_value = $dataFunction->focus_value;
 
-                    if($command_action === "new") {
+                    if ($command_action === "new") {
                         $focus_value = 0;
                     }
-                
+
                     $dataTranslated = "(name:$name_function_variable|time_out:$time_out|mode:$mode|data:~command_action=$command_action~~name_variable=$name_variable~~focus_value=$focus_value~)";
                     return $dataTranslated;
                     break;
@@ -155,7 +156,6 @@ class Step extends Model
 
                     $dataTranslated =  "(name:$name_sound|time_out:$time_out|mode:$mode|data:~music_start=$music_start~~music_mode=$music_mode~)";
                     break;
-                
             }
         } catch (\Throwable $th) {
             $dataTranslated = "*/step_no_found/*";

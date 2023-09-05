@@ -149,11 +149,11 @@ class MissionV4Controller extends Controller
             $stringDataNormalWakeup = $this->toStringWakeupStop($normalWakeup);
             $stringDataModuleWakeup = $this->toStringWakeupStop($moduleWakeup);
 
-            $dataNormal = $stringDataNormalWakeup ? "(name:wakeup|time_out:-1|mode:gpio|data:$stringDataNormalWakeup)" : null;
-            $dataModule =  $stringDataModuleWakeup ? "(name:wakeup|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeup)" : null;
+            $dataNormal = $stringDataNormalWakeup ? "(name:wake_up|time_out:-1|mode:gpio|data:$stringDataNormalWakeup)" : null;
+            $dataModule =  $stringDataModuleWakeup ? "(name:wake_up|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeup)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
-            return "(name:wakeup|time_out:-1|mode:gpio|data:'')";
+            return "(name:wake_up|time_out:-1|mode:gpio|data:'')";
         }
     }
     public function toStringWakeupStop($data)

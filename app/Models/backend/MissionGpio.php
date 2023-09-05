@@ -18,6 +18,7 @@ class MissionGpio extends Model
         'in_off',
         'in_pullup',
         'in_pulldown',
+        'not_set_out'
     ];
     public $timestamps = false;
 }
