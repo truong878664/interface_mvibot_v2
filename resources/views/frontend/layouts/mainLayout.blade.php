@@ -9,9 +9,9 @@
     {{-- <link rel="shortcut icon" href="/img/home/logo.png" type="image/x-icon"> --}}
     {{-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/buildCss/style.css">
-    <link rel="stylesheet" href="/build/assets/app-84ab90fd.css">
+    <link rel="stylesheet" href="/build/assets/app-d724b612.css">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
