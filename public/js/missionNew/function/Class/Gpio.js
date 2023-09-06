@@ -51,6 +51,7 @@ export default class Gpio extends Step {
         this.setLightGpio(field, gpioWrapElement);
     }
     get() {
+        console.log(this.data.notSetout);
         const gpioContainer = document.querySelector(
             `.function-mission-tab[data-type=${this.type}]`
         );
@@ -65,6 +66,7 @@ export default class Gpio extends Step {
 
         const dataValidated = this.validate(data);
         dataValidated.success && this.reset();
+
         return dataValidated;
     }
 
@@ -96,7 +98,6 @@ export default class Gpio extends Step {
     }
 
     setLightGpio(dataGpio, gpioWrapElement) {
-        console.log(dataGpio);
         for (const item in dataGpio) {
             dataGpio[item]?.split(",").forEach((light) => {
                 if (item.indexOf("out") != -1) {

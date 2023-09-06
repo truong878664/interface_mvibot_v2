@@ -34,30 +34,30 @@ class GpioModuleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $time_out = $request->time_out;
-        $name = $request->name;
-        $name_gpio_module = $request->name_gpio_module;
-        $out_set = $request->out_set;
-        $out_reset = $request->out_reset;
-        $in_on = $request->in_on;
-        $in_off = $request->in_off;
-        $in_pullup = $request->in_pullup;
-        $in_pulldown = $request->in_pulldown;
+    {
+        // $time_out = $request->time_out;
+        // $name = $request->name;
+        // $name_gpio_module = $request->name_gpio_module;
+        // $out_set = $request->out_set;
+        // $out_reset = $request->out_reset;
+        // $in_on = $request->in_on;
+        // $in_off = $request->in_off;
+        // $in_pullup = $request->in_pullup;
+        // $in_pulldown = $request->in_pulldown;
 
-        $dataGpio = [
-            "name" => $name,
-            "name_gpio_module" => $name_gpio_module,
-            "time_out" => $time_out,
-            "out_set" => $out_set,
-            "out_reset" => $out_reset,
-            "in_on" => $in_on,
-            "in_off" => $in_off,
-            "in_pullup" => $in_pullup,
-            "in_pulldown" => $in_pulldown,
-        ];
+        // $dataGpio = [
+        //     "name" => $name,
+        //     "name_gpio_module" => $name_gpio_module,
+        //     "time_out" => $time_out,
+        //     "out_set" => $out_set,
+        //     "out_reset" => $out_reset,
+        //     "in_on" => $in_on,
+        //     "in_off" => $in_off,
+        //     "in_pullup" => $in_pullup,
+        //     "in_pulldown" => $in_pulldown,
+        // ];
 
-       return MissionGpioModule::create($dataGpio);
+        return MissionGpioModule::create($request->all());
     }
 
     /**

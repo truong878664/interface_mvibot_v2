@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::table('mission_gpios', function (Blueprint $table) {
             $table->string('not_set_out')->nullable()->after('mode');
         });
+        Schema::table('mission_gpio_modules', function (Blueprint $table) {
+            $table->string('not_set_out')->nullable()->after('mode');
+        });
     }
 
     /**
@@ -26,6 +29,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('mission_gpios', function (Blueprint $table) {
+            $table->dropColumn('not_set_out');
+        });
+        Schema::table('mission_gpio_modules', function (Blueprint $table) {
             $table->dropColumn('not_set_out');
         });
     }

@@ -28,7 +28,6 @@
                 @endforeach
             </select>
         </div>
-
         <div class="">
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.kindGpio', [
                 'type' => 'wakeup',

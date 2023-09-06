@@ -1,4 +1,5 @@
-<div class="h-full w-full flex flex-col bg-[#fff] p-4 relative" data-type="{{ $type }}" data-type-wake-stop-wrapper="{{ $type }}">
+<div class="h-full w-full flex flex-col bg-[#fff] p-4 relative" data-type="{{ $type }}"
+    data-type-wake-stop-wrapper="{{ $type }}">
     <div class="flex mb-4 font-bold capitalize z-[2]">{{ $type }}</div>
     <div data-module="" class="flex group/module peer/module z-[2]">
         <button data-kind="normal" data-kind-button='changeModule' data-type="{{ $type }}"
@@ -19,12 +20,19 @@
     <div class="w-full h-full flex flex-col justify-center group/module">
         <div class="ml-2 items-center hidden my-3 peer-data-[module='module']/module:group-[]/module:flex">
             <label for="" class="text-xl mr-3">Name GPIO module</label>
-            <select data-name-seri-module="{{$type}}" class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] input-reset valid-input"
+            <select data-name-seri-module="{{ $type }}"
+                class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] input-reset valid-input"
                 name="name_gpio" id="">
                 @foreach ($allRobots as $robot)
                     <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                 @endforeach
             </select>
+        </div>
+        <div class="text-2xl mb-4 ml-2">
+            <label for="not_set_out_{{ $type }}" class="flex items-center gap-4">
+                <span>Not set out </span>
+                <input id="not_set_out_{{ $type }}" type="checkbox" name="not_set_out">
+            </label>
         </div>
         <div class="">
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.kindGpio', [
