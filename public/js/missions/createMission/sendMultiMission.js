@@ -1,3 +1,4 @@
+import sendMission from "../../functionHandle/sendMission.js";
 import { $, $$, toggerMessage } from "../../main.js";
 import { publishMission } from "../../rosModule/handleMission.js";
 
@@ -94,10 +95,11 @@ async function sendMissionV3(ids, robotActive) {
 }
 
 async function sendMissionV4(ids, robotActive) {
+    const typeMission = document.querySelector("[data-type-mission]").dataset
+        .typeMission;
     const url = `/api/mission-v4/send?kind=convert_data_robot_multiple&ids=${ids.toString()}`;
     const res = await fetch(url);
     const data = await res.json();
-
     const dataMission = [];
     data.map((mission) => {
         if (mission.data) {
@@ -105,13 +107,15 @@ async function sendMissionV4(ids, robotActive) {
         }
         return dataMission;
     });
-    console.log(dataMission);
-    // const MissionClass = new Mission();
-    // const data = await MissionClass.getMultipleDataRobot({ ids });
-    // console.log(data);
+
+    sendMission({
+        nameRobot: robotActive,
+        data: dataMission.join(""),
+        typeMission,
+    });
 }
 
 function dataEndToRobot(data) {
-    const dataEnd = `&/name_mission/${data.name}//id_mission>${data.id}//data_configuration>${data.wakeup}${data.stop}/*${data.data}@`;
+    const dataEnd = `&/name_mission>${data.name}//id_mission>${data.id}//data_configuration>${data.wakeup}${data.stop}/*${data.data}@`;
     return dataEnd;
 }

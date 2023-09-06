@@ -68,6 +68,7 @@ class MissionV4Controller extends Controller
                     return $this->translateDataRobot($id, false);
                 }, $ids);
                 return $dataMissions;
+                // return ["data" => $dataMissions, "error" => false, "message" => "get missions successfully!"];
             default:
                 # code...
                 break;

@@ -1,7 +1,8 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Mission - {{ $type === 'error-robot' || $type === 'error-gpio' ? "error" : $type }}</div>
-    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto" data-version="{{$v}}">
+    <div class="heading">Mission - {{ $type === 'error-robot' || $type === 'error-gpio' ? 'error' : $type }}</div>
+    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto"
+        data-version="{{ $v }}" data-type-mission="{{ $type }}">
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             <div class="">
                 @include('frontend.blocks.mission.createMissions.index')
