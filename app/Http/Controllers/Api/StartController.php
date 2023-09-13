@@ -7,6 +7,7 @@ use App\Models\backend\MissionPosition;
 use App\Models\backend\Missions;
 use App\Models\backend\Start;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\MiController;
 
 class StartController extends Controller
 {
@@ -70,6 +71,15 @@ class StartController extends Controller
                     $missionGotoToollift =  Missions::where("id", $idMissionToollift)->first();
                     $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
                     $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
+
+                    $miController = new MiController();
+
+                    $list_id = array_map(function ($mission) use ($miController) {
+                        $miController->translateStepMissionName($mission->id);
+                        $miController->translateData($mission->id);
+
+                        return $mission->id;
+                    }, json_decode($dataStart->missions_send_robot));
 
                     $list_id = array_map(function ($mission) {
                         return $mission->id;
