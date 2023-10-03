@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Layer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LayerController extends Controller
 {
@@ -15,7 +16,8 @@ class LayerController extends Controller
      */
     public function index()
     {
-        return Layer::all();
+        $mapActive = DB::table("map_active")->first();
+        return Layer::where("name_map_active", $mapActive->name_map_active)->get();
     }
 
     /**
