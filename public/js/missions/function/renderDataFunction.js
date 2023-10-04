@@ -1,4 +1,3 @@
-import { loading } from "../../functionHandle/displayLoad.js";
 import { htmlDataFunction } from "../handleTypeMission.js";
 
 export default function renderDataFunction(data, type) {

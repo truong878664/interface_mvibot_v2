@@ -14,10 +14,11 @@ use App\Models\backend\Stop;
 use App\Models\backend\WakeUp;
 
 class MissionsController extends Controller
-{
+{   
+    public $v = 'v3';
     public function index()
     {
-        return redirect('/dashboard/missions/create-point');
+        return redirect('/dashboard/missions/select-mission');
     }
 
     public function createPoint()
@@ -34,7 +35,8 @@ class MissionsController extends Controller
         $missions = Missions::where('type', $request->type)->get();
         $type = $request->type;
         $title = "Create mission";
-        return view('frontend.pages.missions.createMissions', compact('missions', 'allRobot', 'type', 'title'));
+        $v = $this->v;
+        return view('frontend.pages.missions.createMissions', compact('missions', 'allRobot', 'type', 'title', 'v'));
     }
 
     public function trackingMission()
@@ -67,16 +69,16 @@ class MissionsController extends Controller
         $mapActive = $map->mapActive();
 
         $title = "Mission - $itemRender->name";
-
-        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allPoints', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title'));
+        $v = $this->v;
+        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
     }
 
     public function typeMission(Request $request)
     {
         $type = $request->type;
-
         $title = "Type mission";
+        $v = $this->v;
 
-        return view('frontend.pages.missions.typeMission', compact('type', 'title'));
+        return view('frontend.pages.missions.typeMission', compact('type', 'title', 'v'));
     }
 }

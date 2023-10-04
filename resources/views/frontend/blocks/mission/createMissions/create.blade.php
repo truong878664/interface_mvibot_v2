@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="h-full w-full">
-            <a href="/dashboard/missions/create-missions/{{ $itemMission->id }}"
+            <a href="/dashboard/missions/{{$v}}/create-missions/{{ $itemMission->id }}"
                 class=" flex relative items-end w-full h-full text-[#fff] href-mission">
                 <input
                     class="text-3xl bg-transparent border-[2px] rounded-lg border-transparent p-2 w-full pointer-events-none name-mission"

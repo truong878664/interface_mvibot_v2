@@ -1,7 +1,6 @@
-import ros from "../main.js";
+import ros, { toggerMessage } from "../main.js";
 
 function publishMission(nameTopic, dataMission) {
-
     const mission_pub = new ROSLIB.Topic({
         ros: ros,
         name: nameTopic,
@@ -14,6 +13,12 @@ function publishMission(nameTopic, dataMission) {
 
     console.log(dataMission);
     mission_pub.publish(mission_set);
+    if (!ros.isConnected) {
+        toggerMessage(
+            "error",
+            `WebSocket connection to '${ros.socket.url}' failed:`
+        );
+    }
 }
 
 export { publishMission };

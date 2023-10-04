@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('dashboard.missions.create-missions.') }}"
+<form method="POST" action="{{ route("dashboard.missions.$v.create-missions.") }}"
     class="fixed top-0 left-0 right-0 bottom-0 z-20 inline-block">
     <div
         class="z-[40] absolute bg-[#fff] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg flex items-center flex-col p-4">

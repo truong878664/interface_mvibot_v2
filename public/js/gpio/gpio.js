@@ -15,14 +15,20 @@ $$(".type-gpio-btn").forEach((element) => {
 
 $$(".output-gpio").forEach((element) => {
     element.onclick = (e) => {
-        e.target.classList.remove(
-            currentTypeGpio == "out_reset" ? "null" : "out_reset",
-            currentTypeGpio == "out_set" ? "null" : "out_set"
-        );
-        currentTypeGpio && e.target.classList.toggle(currentTypeGpio);
-        e.target.classList.add("output-send");
+        const currentIoOutput = e.target;
+        const isOutReset = currentIoOutput.classList.contains("out_reset");
+        currentIoOutput.classList.remove("out_reset", "out_set");
+        currentIoOutput.classList.add(isOutReset ? "out_set" : "out_reset");
+        currentIoOutput.classList.add("output-send");
     };
 });
+// console.log(e.target.classList.contains("out_reset"));
+
+// e.target.classList.remove(
+//     currentTypeGpio === "out_reset" ? null : "out_reset",
+//     currentTypeGpio === "out_set" ? null : "out_set"
+// );
+// currentTypeGpio && e.target.classList.toggle(currentTypeGpio);
 
 let nameRobot;
 let updateGpio;
@@ -46,6 +52,7 @@ $("#robot-gpio").onchange = (e) => {
 const LIGHT_ON = 1;
 const LIGHT_OFF = 0;
 
+<<<<<<< HEAD
 function setLightGpio(nameRobot) {
     fetch(`/api/input-gpio?name_seri=${nameRobot}`)
         .then((res) => res.json())
@@ -70,19 +77,33 @@ function setLightGpio(nameRobot) {
                     dataInput.in_off.push(index);
                 }
             });
+=======
+async function setLightGpio(nameRobot) {
+    const res = await fetch(`/api/input-gpio?name_seri=${nameRobot}`);
+    const data = await res.json();
+    if (data.status == 400) {
+        toggerMessage("error", data.message);
+    }
+    const dataInput = {
+        in_on: [],
+        in_off: [],
+    };
+>>>>>>> missionv4
 
-            if (!currentTypeGpio) {
-                data.dataOutput?.forEach((io, index) => {
-                    if (io === LIGHT_ON) {
-                        dataOutput.out_set.push(index);
-                    } else if (io === LIGHT_OFF) {
-                        dataOutput.out_reset.push(index);
-                    }
-                });
-                resetLightGpioOutput();
-                setLightGpioOutput(dataOutput);
-            }
+    const dataOutput = {
+        out_set: [],
+        out_reset: [],
+    };
 
+    data.dataInput?.forEach((io, index) => {
+        if (io === LIGHT_ON) {
+            dataInput.in_on.push(index);
+        } else if (io === LIGHT_OFF) {
+            dataInput.in_off.push(index);
+        }
+    });
+
+<<<<<<< HEAD
             resetLightGpioInput();
             setLightGpioInput(dataInput);
         })
@@ -91,7 +112,68 @@ function setLightGpio(nameRobot) {
                 "error",
                 "Too many requests, please reload the page!"
             );
+=======
+    if (!currentTypeGpio) {
+        data.dataOutput?.forEach((io, index) => {
+            if (io === LIGHT_ON) {
+                dataOutput.out_set.push(index);
+            } else if (io === LIGHT_OFF) {
+                dataOutput.out_reset.push(index);
+            }
+>>>>>>> missionv4
         });
+        resetLightGpioOutput();
+        setLightGpioOutput(dataOutput);
+    }
+
+    resetLightGpioInput();
+    setLightGpioInput(dataInput);
+
+    // fetch(`/api/input-gpio?name_seri=${nameRobot}`)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //         if (data.status == 400) {
+    //             toggerMessage("error", data.message);
+    //         }
+    //         const dataInput = {
+    //             in_on: [],
+    //             in_off: [],
+    //         };
+
+    //         const dataOutput = {
+    //             out_set: [],
+    //             out_reset: [],
+    //         };
+
+    //         data.dataInput?.forEach((io, index) => {
+    //             if (io === LIGHT_ON) {
+    //                 dataInput.in_on.push(index);
+    //             } else if (io === LIGHT_OFF) {
+    //                 dataInput.in_off.push(index);
+    //             }
+    //         });
+
+    //         if (!currentTypeGpio) {
+    //             data.dataOutput?.forEach((io, index) => {
+    //                 if (io === LIGHT_ON) {
+    //                     dataOutput.out_set.push(index);
+    //                 } else if (io === LIGHT_OFF) {
+    //                     dataOutput.out_reset.push(index);
+    //                 }
+    //             });
+    //             resetLightGpioOutput();
+    //             setLightGpioOutput(dataOutput);
+    //         }
+
+    //         resetLightGpioInput();
+    //         setLightGpioInput(dataInput);
+    //     })
+    //     .catch((error) => {
+    //         toggerMessage(
+    //             "error",
+    //             "Too many requests, please reload the page!"
+    //         );
+    //     });
 
     function setLightGpioInput(dataInput) {
         for (const item in dataInput) {

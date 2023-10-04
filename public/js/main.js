@@ -1,10 +1,11 @@
+import createNameWindow from "./functionHandle/createIdBrowser.js";
 import connectRos from "./rosModule/connectRos.js";
 import topicsListening from "./rosModule/topicsListening.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const notification = $(".notification");
-
+createNameWindow();
 const ros = connectRos(window.location.hostname);
 
 let timeOut;
@@ -51,4 +52,3 @@ export { $, $$, toggerMessage };
 
 export default ros;
 topicsListening();
-

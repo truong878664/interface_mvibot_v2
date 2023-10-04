@@ -44,22 +44,3 @@ function setRotateHook(deg) {
     hook.style.rotate = -deg + "deg";
 }
 
-
-
-// let deg = 0;
-// let right = true;
-// setInterval(() => {
-//     const rad = deg * (Math.PI / 180);
-
-//     publishTopic("Mb23_946/hook_encoder", rad, "std_msgs/Float32");
-//     right ? deg++ : deg--;
-//     deg === 90 && (right = false);
-//     deg === -90 && (right = true);
-// }, 1000);
-
-// let data = 1.0;
-
-// setInterval(() => {
-//     publishTopic("Mb23_946/hook_switch", data, "std_msgs/Float32");
-//     // data = data === 1.0 ? 0.0 : 1.0;
-// }, 3000);

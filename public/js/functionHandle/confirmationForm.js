@@ -10,23 +10,23 @@ export default function confirmationForm({
     divElement.classList.add(
         "fixed",
         "top-0",
-        "z-[30]",
+        "z-[1000]",
         "left-0",
         "right-0",
         "bottom-0",
-        "bg-[rgba(0,0,0,0.2)]",
+        "bg-black/20",
         "confirmation-form",
-        "flex",
-        "justify-center",
-        "items-center"
+        "grid",
+        "place-content-center"
     );
-    divElement.innerHTML = `<div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
-        <p>${message}</p>
-        <div class="flex justify-between mt-8">
-        <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='submit-confirmation-form-btn'>Yes</button>
-        <button class="border-yellow-500 border text-yellow-500 text-[# px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='cancel-confirmation-form-btn'>No</button>
-        </div>
-    </div>`;
+    divElement.innerHTML = `
+        <div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
+            <p>${message}</p>
+            <div class="flex justify-between mt-8">
+                <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='submit-confirmation-form-btn'>Yes</button>
+                <button class="border-yellow-500 border text-yellow-500 text-[# px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='cancel-confirmation-form-btn'>No</button>
+            </div>
+        </div>`;
 
     document.body.appendChild(divElement);
     const formSubmitAgain = document.querySelector(".confirmation-form");

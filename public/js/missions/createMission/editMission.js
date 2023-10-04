@@ -25,10 +25,13 @@ function editNameMission(e) {
             hrefElement.onclick = () => true;
         }, 500);
         nameElement.disabled = true;
+        const versionMission =
+        document.querySelector("[data-version]").dataset.version;
         if (oldName != nameElement.value && nameElement.value != "") {
             const dataUpdate = {
                 method: "update-name",
                 name: nameElement.value,
+                version: versionMission,
             };
 
             fetchApi(

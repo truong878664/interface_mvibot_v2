@@ -17,7 +17,6 @@ class userController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -39,14 +38,21 @@ class userController extends Controller
     public function store(Request $request)
     {
 
-        $user =
-            [
-                'name' => $request->username,
-                'password' => Hash::make($request->password)
-            ];
-
-        User::insert($user);
-        return  ['message' => 'create user success', 'status' => 200];
+        try {
+            $isHadUser =  User::where("name", $request->username)->exists();
+            if ($isHadUser) {
+                return  ['message' => 'Username already exists', 'error' => true];
+            } else {
+                $user = [
+                    'name' => $request->username,
+                    'password' => Hash::make($request->password)
+                ];
+                User::insert($user);
+                return  ['message' => 'create user successfully', 'error' => false];
+            }
+        } catch (\Throwable $th) {
+            return  ['message' => $th, 'error' => true];
+        }
     }
 
     /**

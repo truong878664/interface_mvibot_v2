@@ -13,3 +13,7 @@ export function loaded() {
         document.body.querySelector(".loader-wrapper")?.remove();
     }, 600);
 }
+const loadingHeaderElement = document.getElementById("loader-header");
+export function loadingHeader(isLoad) {
+    loadingHeaderElement.classList.toggle("!hidden", !isLoad);
+}

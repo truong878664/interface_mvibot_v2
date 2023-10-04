@@ -1,10 +1,11 @@
 import { $$, toggerMessage } from "../main.js";
 import { publishMission } from "../rosModule/handleMission.js";
 import requestTranslateMissionEnd from "./blockStep/requestTranslateMissionEnd.js";
+import send from "../functionHandle/sendMission.js";
 
 export default function sendMission() {
     $(".send-mission-btn").onclick = async (e) => {
-        const data = await requestTranslateMissionEnd()
+        const data = await requestTranslateMissionEnd();
         const type = e.target.getAttribute("type");
         const nameRobot = $("#select-robot-option").value.replaceAll(" ", "");
         if (data.steps_mission !== null) {
@@ -12,19 +13,11 @@ export default function sendMission() {
                 toggerMessage("error", "please choose robot");
             } else {
                 const dataFullMission = translateDataMission(data);
-                let topic;
-
-                type === "normal" && (topic = `/${nameRobot}/mission_normal`);
-
-                (type === "error-robot" || type === "error-gpio") &&
-                    (topic = `/${nameRobot}/mission_error`);
-
-                type === "battery" && (topic = `/${nameRobot}/mission_battery`);
-
-                type === "gpio" && (topic = `/${nameRobot}/mission_normal`);
-
-                console.log("Topic: ", topic);
-                publishMission(topic, dataFullMission);
+                send({
+                    nameRobot: nameRobot,
+                    data: dataFullMission,
+                    typeMission: type,
+                });
             }
         } else {
             toggerMessage("error", "Current mission is empty");

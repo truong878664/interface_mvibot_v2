@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
 use App\Http\Controllers\Api\MissionController;
+use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TypeMissionController;
+use App\Http\Controllers\Api\TypeMissionVerController;
 use App\Http\Controllers\Api\userController;
 use App\Http\Controllers\Api\VarController;
 use App\Http\Controllers\Api\VariableController;
@@ -75,3 +77,8 @@ Route::resource('config-status', ConfigRobotController::class)->only('index');
 Route::resource('status', StatusController::class)->only('show');
 
 Route::resource('bookmark', BookmarkController::class);
+
+
+// mission v4
+Route::resource('mission-v4', MissionV4Controller::class);
+Route::resource('type-mission-v4', TypeMissionVerController::class);

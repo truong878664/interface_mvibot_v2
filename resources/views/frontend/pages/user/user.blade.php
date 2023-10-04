@@ -10,7 +10,7 @@
     <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
         <div class="w-full h-full mx-auto mt-10 max-w-[500px] overflow-auto">
             <div class="flex items-center">
-                <div key="{{ $key }}" style="background-color: {{$color}};"
+                <div key="{{ $key }}" style="background-color: {{ $color }};"
                     class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full m-3 transparent bg-avatar flex justify-center items-center shadow-lg after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400 text-white avatar-img-key before:content-[attr(key)] relative before:absolute before:top-1/2 before:left-1/2 before:font-bold before:-translate-x-1/2 before:-translate-y-1/2 before:text-[80px] before:uppercase">
                     @if (session('TypeUser') == 'admin')
                         <div
@@ -22,7 +22,6 @@
                 <input
                     class="ml-10 text-[22px] font-bold name-user w-1/2 border-2 bg-transparent change-username px-3 rounded-xl border-transparent"
                     readonly value="{{ session('UserName') }}" />
-
             </div>
 
             <div class="mt-16">
@@ -73,10 +72,10 @@
                 @include('frontend.blocks.user.usersTab.managerAcc')
                 @include('frontend.blocks.user.usersTab.createAcc')
             </div>
-            <button
-                class="text-[16px] px-4 rounded border-[1px] border-solid border-stone-500 float-right mt-4 btn hover:bg-stone-300 logout-btn">Logout...
-            </button>
-            <a href="{{ route('logout') }}" class="hidden logout-href"></a>
+            <a href="{{ route('logout') }}"
+                class="text-[16px] px-4 rounded border-[1px] border-solid border-stone-500 float-right mt-4 btn hover:bg-stone-300">
+                Logout...
+            </a>
         </div>
     </div>
     <script type="module" src="/js/user/user.js"></script>

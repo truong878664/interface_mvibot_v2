@@ -1,12 +1,12 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Mission - {{ $type === 'error-robot' || $type === 'error-gpio' ? "error" : $type }}</div>
-    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
+    <div class="heading">Mission - {{ $type === 'error-robot' || $type === 'error-gpio' ? 'error' : $type }}</div>
+    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto"
+        data-version="{{ $v }}" data-type-mission="{{ $type }}">
         <div id="create-mission" class="missions-wrapper-create-missions nav-content content-missions">
             <div class="">
                 @include('frontend.blocks.mission.createMissions.index')
             </div>
-
             {{-- <label for="select-robot" class="mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn">Send</label> --}}
 
             <div class="fixed bottom-10 right-10 flex">

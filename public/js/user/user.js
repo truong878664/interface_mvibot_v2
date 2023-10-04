@@ -1,21 +1,25 @@
 import { toggerMessage } from "../main.js";
 import { $, $$ } from "../main.js";
+import renderUser from "./renderUser.js";
+
+const userSettingBtns = $$(".user-setting-btn");
+const closeTabUsers = $$(".close-tab-user");
+const confirmPassWord = $(".confirm-password");
+const changPwBtn = $(".change-pw-btn");
 
 tabUser();
 handleCreateNewUser();
 handleUpdatePassword();
 handleNormalUser();
 
-logout();
-
 function tabUser() {
-    $$(".user-setting-btn").forEach((element, index) => {
+    userSettingBtns.forEach((element, index) => {
         element.onclick = (e) => {
             $$(".user-setting-detail")[index].classList.remove("hidden");
         };
     });
 
-    $$(".close-tab-user").forEach((element) => {
+    closeTabUsers.forEach((element) => {
         element.onclick = () => {
             $(".user-setting-detail:not(.hidden)").classList.add("hidden");
         };
@@ -24,7 +28,7 @@ function tabUser() {
 
 function handleUpdatePassword() {
     let isUpdate = false;
-    $(".confirm-password").oninput = (e) => {
+    confirmPassWord.oninput = (e) => {
         if (e.target.value !== $(".new-password").value) {
             $(".span-confirm").innerText = "password does not match";
             isUpdate = false;
@@ -34,7 +38,7 @@ function handleUpdatePassword() {
         }
     };
 
-    $(".change-pw-btn").onclick = () => {
+    changPwBtn.onclick = () => {
         $(".password").value === ""
             ? ($(".span-password").innerText = "Enter your password")
             : ($(".span-password").innerText = "");
@@ -46,69 +50,27 @@ function handleUpdatePassword() {
         isUpdate && updatePassword(dataPassword);
     };
 
-    function updatePassword(data) {
-        fetch("/api/user/check", {
+    async function updatePassword(data) {
+        const res = await fetch("/api/user/check", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
             body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status == 200) {
-                    toggerMessage("success", data.message);
-                    $(".password").value = "";
-                    $(".new-password").value = "";
-                    $(".confirm-password").value = "";
-                    $(".user-setting-detail:not(.hidden)").classList.add(
-                        "hidden"
-                    );
-                } else {
-                    $(".span-password").innerText = data.message;
-                }
-            });
+        });
+        const dataRes = res.json();
+        if (dataRes.status == 200) {
+            toggerMessage("success", dataRes.message);
+            $(".password").value = "";
+            $(".new-password").value = "";
+            $(".confirm-password").value = "";
+            $(".user-setting-detail:not(.hidden)").classList.add("hidden");
+        } else {
+            $(".span-password").innerText = dataRes.message;
+        }
     }
 }
-
-// function handleUpdateUser() {
-//     const username = $(".change-username");
-//     let usernameValue = username.value;
-//     $(".change-username-btn").onclick = () => {
-//         username.removeAttribute("readonly");
-//         username.focus();
-//         username.setSelectionRange(usernameValue.length, usernameValue.length);
-//         username.style.borderColor = "#FF7B54";
-//     };
-
-//     username.onblur = (e) => {
-//         e.target.style.borderColor = "transparent";
-//         username.setAttribute("readonly", "readonly");
-
-//         if (usernameValue != username.value) {
-//             updateUsername({ username: username.value.replaceAll(" ", "") });
-//             updateAvatarUser();
-//             usernameValue = username.value;
-//         }
-//     };
-//     function updateUsername(data) {
-//         fetch("/api/user/update", {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 Accept: "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         })
-//             .then((res) => res.json())
-//             .then((data) => {
-//                 if (data.status == 200) {
-//                     localStorage.setItem("username", username.value);
-//                 }
-//             });
-//     }
-// }
 
 function handleCreateNewUser() {
     $(".create-btn").onclick = () => {
@@ -129,51 +91,31 @@ function handleCreateNewUser() {
             createNewUser(dataUser);
         }
     };
-    function createNewUser(data) {
-        fetch("/api/user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status == 200) {
-                    $(".create-username").value = "";
-                    $(".create-password").value = "";
-                    $(".user-setting-detail:not(.hidden)").classList.add(
-                        "hidden"
-                    );
-                    toggerMessage("success", `create user success`);
-                    handleNormalUser();
-                }
-            });
+}
+async function createNewUser(data) {
+    const res = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const dataRes = await res.json();
+
+    if (!dataRes.error) {
+        $(".create-username").value = "";
+        $(".create-password").value = "";
+        $(".user-setting-detail:not(.hidden)").classList.add("hidden");
+        handleNormalUser();
     }
+
+    toggerMessage(dataRes.error ? "error" : "success", dataRes.message);
 }
 
-function handleNormalUser() {
-    fetch("/api/user/normal-user")
-        .then((res) => res.json())
-        .then((data) => renderNormalUser(data));
-    function renderNormalUser(data) {
-        const html = [];
-        data.map((item) => {
-            html.push(
-                ` <div class="text-[16px] px-4 py-4 text-[#333] border-b border-[#e0e0e0] cursor-pointer">
-                    <span class="ml-4 pointer-events-none select-none">
-                        ${item.name}
-                    </span>
-                </div>`
-            );
-        });
-        $(".list-normal-user").innerHTML = html.join("");
-    }
-}
-
-function logout() {
-    $(".logout-btn").onclick = (e) => {
-        $(".logout-href").click();
-    };
+async function handleNormalUser() {
+    const res = await fetch("/api/user/normal-user");
+    const data = await res.json();
+    renderUser(data);
+    // console.log(document.querySelector("[data-button='action-user']"));
 }

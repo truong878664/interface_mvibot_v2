@@ -4,7 +4,7 @@
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <ul class="w-full flex flex-wrap">
             <li class="w-full md:w-1/3 lg:w-1/5 xl:1/6 btn bg-opacity-70">
-                <a href="{{ route('dashboard.missions.type-mission', ['type' => 'robot-mission']) }}"
+                <a href="{{ route("dashboard.missions.$v.type-mission", ['type' => 'robot-mission']) }}"
                     class="w-[calc(100%_-_10px)] h-[140px] rounded-md p-4 mb-4 mx-[5px]  bg-cover shadow-md"
                     style="background-image: url(/img/mission/amr.png)">
                     <div
@@ -18,7 +18,7 @@
             </li>
 
             <li class="w-full md:w-1/3 lg:w-1/5 xl:1/6 {{ $version === 'new_wave' ? 'hidden' : '' }}">
-                <a href="{{ route('dashboard.missions.type-mission', ['type' => 'gpio-mission']) }}"
+                <a href="{{ route("dashboard.missions.$v.type-mission", ['type' => 'gpio-mission']) }}"
                     style="background-image: url(/img/mission/gpio.png)"
                     class="  w-[calc(100%_-_10px)] h-[140px] rounded-md p-4 mb-4 mx-[5px] bg-cover bg-no-repeat btn shadow-md">
                     <div

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Missions;
+use App\Models\backend\MissionsVer;
 use App\Models\backend\Stop;
 use App\Models\backend\TypeMission;
 use App\Models\backend\WakeUp;
@@ -45,7 +46,16 @@ class MiController extends Controller
         switch ($request->method) {
             case 'clone':
                 $idMission = $request->id;
-                $data = (Missions::where('id', $idMission)->first());
+                $v = $request->version;
+
+                if($v ===  "v3") {
+                    $missionClass= new Missions();
+                } else if($v ===  "v4") {
+                    $missionClass= new MissionsVer();
+
+                }
+
+                $data = ($missionClass->where('id', $idMission)->first());
                 $dataClone = [
                     "mission_shorthand" => $data->mission_shorthand,
                     "name" => $data->name . "(copy)",
@@ -55,8 +65,7 @@ class MiController extends Controller
                     "wake_up" => $data->wake_up,
                     "type" => $data->type,
                 ];
-
-                $this->missionClone = Missions::create($dataClone);
+                $this->missionClone = $missionClass->create($dataClone);
 
                 $this->cloneWakeUp($idMission);
                 $this->cloneStop($idMission);
@@ -115,28 +124,37 @@ class MiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {  
+        
+        $v = $request->version;
+        if($v ===  "v3") {
+            $missionClass= new Missions();
+        } else if($v ===  "v4") {
+            $missionClass= new MissionsVer();
+        } else {
+            $missionClass= new Missions();
+        }
 
         switch ($request->method) {
             case "add":
-                $old_mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
+                $old_mission_shorthand = $missionClass->where('id', $id)->first()->mission_shorthand;
                 $mission_shorthand = $request->mission_shorthand;
                 if (trim($old_mission_shorthand, " ") !== "") {
                     $new_mission_shorthand = $old_mission_shorthand . "+" . $mission_shorthand;
                 } else {
                     $new_mission_shorthand = $mission_shorthand;
                 }
-                Missions::where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
+                $missionClass->where('id', $id)->update(['mission_shorthand' => $new_mission_shorthand]);
 
                 $this->translateStepMissionName($id);
                 return ['message' => 'Add mission success!', "status" => 200];
             case "update":
                 $update_mission_shorthand = $request->mission_shorthand;
-                Missions::where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
+                $missionClass->where('id', $id)->update(['mission_shorthand' => $update_mission_shorthand]);
                 $this->translateStepMissionName($id);
                 return ['message' => 'Update mission success!', "status" => 200];
             case "move":
-                $mission_shorthand = Missions::where('id', $id)->first()->mission_shorthand;
+                $mission_shorthand = $missionClass->where('id', $id)->first()->mission_shorthand;
                 $arrayIdBlockStep = explode("+", $mission_shorthand);
                 switch ($request->type) {
                     case 'left':
@@ -145,7 +163,7 @@ class MiController extends Controller
                         $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
                         array_splice($arrayIdBlockStep, $indexItemMove - 1, 0, $out);
 
-                        Missions::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        $missionClass->where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
                         break;
                     case 'right':
                         $indexItemMove = array_search($request->id_move, $arrayIdBlockStep);
@@ -153,14 +171,14 @@ class MiController extends Controller
                         $out = array_splice($arrayIdBlockStep, $indexItemMove, 1);
                         array_splice($arrayIdBlockStep, $indexItemMove + 1, 0, $out);
 
-                        Missions::where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
+                        $missionClass->where('id', $id)->update(['mission_shorthand' => implode("+", $arrayIdBlockStep)]);
                         break;
                 }
 
                 $this->translateStepMissionName($id);
                 return ['message' => 'Move mission success!', "status" => 200];
             case "update-name":
-                Missions::where('id', $id)->update(['name' => $request->name]);
+                $missionClass->where('id', $id)->update(['name' => $request->name]);
                 break;
             case "update-type-mission":
                 $this->translateStepMissionName($id);
@@ -168,7 +186,7 @@ class MiController extends Controller
             case "translate-data-mission-end":
                 $this->translateStepMissionName($id);
                 $this->translateData($id);
-                return Missions::where('id', $id)->first();
+                return $missionClass->where('id', $id)->first();
             case "translate-multi-mission-end":
                 try {
                     $idsMission = $request->idsMission;
@@ -192,29 +210,40 @@ class MiController extends Controller
      */
     public function destroy(Request $request, $type)
     {
-        switch ($type) {
-            case 'delete-multi':
-                if (count($request->idDelete)) {
+        try {
+            $v = $request->version;
+            if($v ===  "v3") {
+                $missionClass= new Missions();
+            } else if($v ===  "v4") {
+                $missionClass= new MissionsVer();
+            }
 
-                    foreach ($request->idDelete as $id) {
-                        Missions::where('id', $id)->delete();
-                        Stop::where('id_mission', $id)->delete();
-                        WakeUp::where('id_mission', $id)->delete();
-                        DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $id)->delete();
+            switch ($type) {
+                case 'delete-multi':
+                    if (count($request->idDelete)) {
+                        foreach ($request->idDelete as $id) {
+                            $missionClass->where('id', $id)->delete();
+                            Stop::where('id_mission', $id)->delete();
+                            WakeUp::where('id_mission', $id)->delete();
+                            DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $id)->delete();
+                        }
+                        return ['message' => 'Delete missions success', 'status' => 200];
+                    } else {
+                        return ['message' => 'No mission selected', 'status' => 100];
                     }
-                    return ['message' => 'Delete missions success', 'status' => 200];
-                } else {
-                    return ['message' => 'No mission selected', 'status' => 100];
-                }
-            case 'delete':
-                $idDelete = $request->idDelete;
-                Missions::where('id', $idDelete)->delete();
-                Stop::where('id_mission', $idDelete)->delete();
-                WakeUp::where('id_mission', $idDelete)->delete();
-                DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $idDelete)->delete();
-                return ['message' => 'Delete mission success', 'deleted' => true];
-            default:
-                return 123;
+                case 'delete':
+                    $idDelete = $request->idDelete;
+                   
+                    $missionClass->where('id', $idDelete)->delete();
+                    Stop::where('id_mission', $idDelete)->delete();
+                    WakeUp::where('id_mission', $idDelete)->delete();
+                    DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $idDelete)->delete();
+                    return ['message' => 'Delete mission success', 'deleted' => true];
+                default:
+                    return 123;
+            }
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 
