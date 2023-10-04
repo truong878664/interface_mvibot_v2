@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
-    {{-- <link rel="stylesheet" href="/build/assets/app-26b12692.css"> --}}
     @vite('resources/css/app.css')
 </head>
 
@@ -60,7 +59,7 @@
         @endphp
         </div>
         <div class="user-wrapper">
-            <input type="text" class="type-user text-black" value={{ session('TypeUser') }}>
+            {{-- <input type="text" class="type-user text-black" value={{ session('TypeUser') }}> --}}
             <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
                 value="{{ session('UserName') }}" />
             <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
