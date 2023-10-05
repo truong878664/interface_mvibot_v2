@@ -11,6 +11,7 @@ module.exports = {
         extend: {
             boxShadow: {
                 block: "0px 0px 7px 0px rgba(0, 0, 0, 0.14)",
+                light: "0px 0px 7px 0px rgba(0, 0, 0, 0.14)",
             },
         },
         colors: {
@@ -35,5 +36,5 @@ module.exports = {
             // => @media (min-width: 1536px) { ... }
         },
     },
-    plugins: [],
+    plugins: ["postcss-import"],
 };
