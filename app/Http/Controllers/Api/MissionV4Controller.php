@@ -118,8 +118,8 @@ class MissionV4Controller extends Controller
             $dataTranslateEndMission = array_map(function ($mission) use ($BlockStep, $html) {
                 return $BlockStep->translate($mission, $html);
             }, $mission);
-            $dataWakeup = $this->translateWakeup($dataMission->wake_up);
-            $dataStop = $this->translateWakeup($dataMission->stop);
+            $dataWakeup = $this->translateWakeupStop($dataMission->wake_up, "wake_up");
+            $dataStop = $this->translateWakeupStop($dataMission->stop, "stop");
 
             $data = [
                 "data" => implode("", $dataTranslateEndMission),
@@ -140,18 +140,18 @@ class MissionV4Controller extends Controller
         return $data;
     }
 
-    public function translateWakeup($data)
+    public function translateWakeupStop($data, $type)
     {
         try {
-            $dataWakeup = json_decode($data);
-            $normalWakeup = $dataWakeup->normal;
-            $moduleWakeup = $dataWakeup->module;
+            $dataWakeupStop = json_decode($data);
+            $normalWakeupStop = $dataWakeupStop->normal;
+            $moduleWakeupStop = $dataWakeupStop->module;
 
-            $stringDataNormalWakeup = $this->toStringWakeupStop($normalWakeup);
-            $stringDataModuleWakeup = $this->toStringWakeupStop($moduleWakeup);
+            $stringDataNormalWakeupStop = $this->toStringWakeupStop($normalWakeupStop);
+            $stringDataModuleWakeupStop = $this->toStringWakeupStop($moduleWakeupStop);
 
-            $dataNormal = $stringDataNormalWakeup ? "(name:wake_up|time_out:-1|mode:gpio|data:$stringDataNormalWakeup)" : null;
-            $dataModule =  $stringDataModuleWakeup ? "(name:wake_up|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeup)" : null;
+            $dataNormal = $stringDataNormalWakeupStop ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalWakeupStop)" : null;
+            $dataModule =  $stringDataModuleWakeupStop ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeupStop)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
             return "(name:wake_up|time_out:-1|mode:gpio|data:'')";
