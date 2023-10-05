@@ -8,10 +8,10 @@
             <button
                 class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
                 id='out_set'>
-                Out Set
+                Set
             </button>
             <button
-                class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
+                class="ml-2 hidden text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
                 id='out_reset'>
                 Out Reset
             </button>
