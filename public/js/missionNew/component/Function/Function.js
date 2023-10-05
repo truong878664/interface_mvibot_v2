@@ -8,13 +8,13 @@ const createHtmlFunctionItem = {
         id,
         color_position = "",
         data,
-        status = ""
+        status = "",
     }) {
         const html = `
-            <div data-function-type="${mode}" ${
+            <div data-function-type="${mode}" data-status="" data-name=${name} ${
             marker_type ? `data-marker-type="${marker_type}"` : ``
         } data-value="${value}" data-id=${id} data-data='${data}'
-                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg hover:z-50">
+                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg hover:z-50 data-[status='hidden']:hidden">
                 <div class="flex">
                     <input data-select-function-id="1" data-type="marker" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
                     <div class="flex flex-col">
@@ -90,7 +90,7 @@ const createHtmlFunctionItem = {
             color_position,
             marker_type: field.marker_type,
             data: JSON.stringify(data),
-            status
+            status,
         };
 
         const htmlItem = this.html(dataFunction);
@@ -101,7 +101,7 @@ const createHtmlFunctionItem = {
         const wrapper = document.createElement("div");
         wrapper.innerHTML = htmlItem;
         const DOMElement = wrapper.firstElementChild;
-        const sticker = DOMElement.querySelector(".status")
+        const sticker = DOMElement.querySelector(".status");
         sticker.classList.remove("hidden");
         return DOMElement;
     },

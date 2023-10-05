@@ -174,9 +174,22 @@
                             </div>
 
                             @if ($item['type'] !== 'break')
-                                <button data-index="{{ $index }}" data-button-function-kind="new"
-                                    data-type-mission="{{ $item['type'] }}"
-                                    class="absolute top-0 right-0 bg-main py-1 px-2 text-white rounded-md text-2xl mr-2 mt-1 btn">New</button>
+                                <div class="absolute top-0 right-0 pr-2 pt-1 flex gap-2 w-full justify-end">
+                                    <div class="flex text-2xl">
+                                        <input type="checkbox" name="" class="sr-only peer/search"
+                                            id="s-{{ $item['type'] }}">
+                                        <input data-type="{{ $item['type'] }}" type="text" data-action="search"
+                                            class="px-2 peer-checked/search:block hidden search-function-input border-gray-200 border-r-0 rounded-l-md">
+                                        <label for="s-{{ $item['type'] }}"
+                                            class="py-1 px-4 border rounded-md peer-checked/search:border-l-0 peer-checked/search:rounded-l-none text-base h-full bg-white grid place-content-center">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </label>
+
+                                    </div>
+                                    <button data-index="{{ $index }}" data-button-function-kind="new"
+                                        data-type-mission="{{ $item['type'] }}"
+                                        class=" bg-main py-1 px-2 text-white rounded-md text-2xl btn">New</button>
+                                </div>
                             @endif
                         </div>
                     </div>
