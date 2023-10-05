@@ -66,16 +66,12 @@ class BlockStep extends Model
             $KEY1 = "[";
             $KEY2 = "]";
             $stringData = $KEY1 . implode("", $arrayDataTranslate) . $KEY2;
-
             $data1 = str_replace($KEY1 . "}", "", $stringData);
             $data2 = str_replace("{" . $KEY2, "", $data1);
             $data3 = str_replace("$KEY1" . $KEY2, "", $data2);
             $data4 = str_replace("$KEY1", "{", $data3);
             $data5 = str_replace($KEY2, "}", $data4);
-
-
             $data = str_replace("", "", $data5);
-
             return $data;
         } catch (\Throwable $th) {
             //throw $th;
