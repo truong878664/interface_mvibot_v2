@@ -78,6 +78,9 @@ export default class Gpio extends Step {
             message: "Get data success!S",
             error: null,
         };
+        dataValidated.data.name = data.name
+            .replaceAll("?", "")
+            .replaceAll("!", "");
 
         if (!name || !time_out) {
             dataValidated.success = false;
