@@ -2474,7 +2474,7 @@ input[type="number"] {
 }
 
 .highline-border {
-    border: 2px dashed #ccc;
+    border: 2px dashed #ccc !important;
 }
 
 [data-function-type].highline {

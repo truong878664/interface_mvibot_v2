@@ -1,5 +1,6 @@
+import { functionWrapper } from "../../index.js";
+
 function search() {
-    const functionWrapper = document.getElementById("function-container");
     functionWrapper.addEventListener("input", (e) => {
         const isInputSearch = e.target.dataset.action === "search";
         if (!isInputSearch) return;

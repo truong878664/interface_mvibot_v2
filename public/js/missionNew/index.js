@@ -24,6 +24,7 @@ import handleAddStepToBlockStep from "./function/action/handleAddStepToBlockStep
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
+export const functionWrapper = document.getElementById("function-container");
 
 createTypeMission();
 subscribeMissionChange();
