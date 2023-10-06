@@ -20,5 +20,5 @@ module.exports = {
             },
         },
     },
-    plugins: ["postcss-import"],
+    plugins: ["postcss-import", require("@tailwindcss/forms")],
 };

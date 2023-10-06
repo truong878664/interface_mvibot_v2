@@ -55,7 +55,7 @@ i {
 input {
     border: 1px solid #ccc;
     font-family: var(--main-font);
-    font-size: 1.6rem;
+    font-size: 1.6rem !important;
     outline: none;
     padding: 6px 4px;
 }
@@ -380,7 +380,6 @@ li {
 .primary-btn:not(:disabled):active {
     transform: translateY(0.125rem);
 }
-
 .login-wrapper {
     background-color: var(--background-color);
     display: flex;
@@ -2644,4 +2643,8 @@ input[type="number"] {
     animation: zoom 200ms linear;
     -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
+}
+
+[hidden] {
+    display: none !important;
 }
