@@ -43,6 +43,9 @@ export default class Step {
             message: "Get data success",
             error: null,
         };
+        dataValidated.data.name = data.name
+            .replaceAll("?", "")
+            .replaceAll("!", "");
         for (const key in data) {
             if (!data[key]) {
                 dataValidated.success = false;

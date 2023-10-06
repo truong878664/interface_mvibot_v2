@@ -41,6 +41,7 @@ class MarkerController extends Controller
     {
         $name = $request->name;
         $marker_type = $request->marker_type;
+        $time_out = $request->time_out;
         $marker_dir = $this->checkDataMarker($request->marker_dir);
         $off_set_x1 = $this->checkDataMarker($request->off_set_x1);
         $off_set_x2 = $this->checkDataMarker($request->off_set_x2);
@@ -56,6 +57,7 @@ class MarkerController extends Controller
 
         $dataMarker = [
             'name' => $name,
+            'time_out' => $time_out,
             'marker_type' => $marker_type,
             'marker_dir' => $marker_dir,
             'off_set_x1' => $off_set_x1,
@@ -70,7 +72,7 @@ class MarkerController extends Controller
             'sy2' => $sy2,
         ];
 
-       return MissionMarker::create($dataMarker);
+        return MissionMarker::create($dataMarker);
     }
 
     /**
@@ -134,5 +136,4 @@ class MarkerController extends Controller
         }
         return $data;
     }
-
 }

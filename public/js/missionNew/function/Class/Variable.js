@@ -31,6 +31,7 @@ export default class Variable extends Step {
             error: null,
         };
         const { name, name_variable, focus_value, command_action } = data;
+        dataValidated.data.name = name.replaceAll("?", "").replaceAll("!", "");
 
         const conditionValidateDeleteReset =
             name && (command_action === "delete" || command_action === "reset");

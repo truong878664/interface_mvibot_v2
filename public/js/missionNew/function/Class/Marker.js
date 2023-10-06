@@ -9,6 +9,7 @@ export default class Marker extends Step {
     get() {
         this.updateElementMarker();
         const data = {};
+
         for (const key in this.data) {
             const typeData = this.data[key]?.dataset.type || "string";
             const value = this.data[key]?.value || null;
@@ -31,10 +32,11 @@ export default class Marker extends Step {
             message: "Get data success",
             error: null,
         };
-        const {name, marker_dir} = data
-        if(!name || !marker_dir) {
-            dataValidated.success = false
-            dataValidated.message = `Name or marker dir cannot be empty!`
+        const { name, time_out } = data;
+        dataValidated.data.name = name.replaceAll("?", "").replaceAll("!", "");
+        if (!name && !time_out) {
+            dataValidated.success = false;
+            dataValidated.message = `Name or time out cannot be empty!`;
             return dataValidated;
         }
         return dataValidated;
@@ -45,8 +47,8 @@ export default class Marker extends Step {
         document.querySelector(`.marker-btn.${marker_type}-btn`).click();
         this.updateElementMarker(marker_type);
         for (const key in filed) {
-            if(filed[key]) {
-                this.data[key].value = filed[key]
+            if (filed[key]) {
+                this.data[key].value = filed[key];
             }
         }
     }
@@ -75,6 +77,7 @@ export default class Marker extends Step {
         this.data.off_set_angle = formElement.querySelector(
             '[name="off_set_angle"]'
         );
+        this.data.time_out = formElement.querySelector('[name="time_out"]');
         this.data.sx1 = formElement.querySelector('[name="sx1"]');
         this.data.sx2 = formElement.querySelector('[name="sx2"]');
         this.data.sy1 = formElement.querySelector('[name="sy1"]');
@@ -82,15 +85,17 @@ export default class Marker extends Step {
     }
     reset() {
         this.updateElementMarker();
-        const { marker_type, sx1, sx2, sy1, sy2, ...filed } = this.data;
+        const { marker_type, time_out, sx1, sx2, sy1, sy2, ...filed } =
+            this.data;
         sx1.value = 0.01;
         sx2.value = 0.01;
         sy1.value = 0.01;
         sy2.value = 0.01;
+        time_out.value = -1;
 
         for (const key in filed) {
             if (this.data[key]) {
-                this.data[key].value = "";
+                this.data[key].value = key === "marker_dir" ? "front_ward" : "";
             }
         }
     }
