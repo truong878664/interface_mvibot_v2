@@ -116,6 +116,6 @@ async function sendMissionV4(ids, robotActive) {
 }
 
 function dataEndToRobot(data) {
-    const dataEnd = `&/name_mission>${data.name}//id_mission>${data.id}//data_configuration>${data.wakeup}${data.stop}/*${data.data}@`;
+    const dataEnd = `&/name_mission>${data.name}//id_mission>${data.id}//data_configuration>${data.continue}${data.wakeup}${data.stop}/*${data.data}@`;
     return dataEnd;
 }

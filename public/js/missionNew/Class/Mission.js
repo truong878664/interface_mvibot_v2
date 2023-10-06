@@ -487,6 +487,9 @@ export default class Mission {
         }
         this.historyStatus.currentLastIndexHistory = 0;
     }
+    get dataMission() {
+        return this.data;
+    }
     Normal({ data = { normal: [] }, name = null, id = null }) {
         return {
             type: "normal",
