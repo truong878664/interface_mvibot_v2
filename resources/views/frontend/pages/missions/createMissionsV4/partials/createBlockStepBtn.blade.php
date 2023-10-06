@@ -47,6 +47,12 @@
                             </span>
                             Show code mission
                         </button>
+
+                        <button id="button-test-1" class="w-full py-2 px-4 hover:bg-stone-100">
+                            <span class="text-red-600">
+                                <i class="fa-solid fa-umbrella"></i>
+                            </span>
+                            Button test</button>
                     </li>
                 </ul>
             </div>

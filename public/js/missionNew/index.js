@@ -1,4 +1,3 @@
-import confirmationForm from "../functionHandle/confirmationForm.js";
 import { loaded, loading } from "../functionHandle/displayLoad.js";
 import sendMission from "../functionHandle/sendMission.js";
 import { toggerMessage } from "../main.js";
@@ -13,6 +12,7 @@ import handleHistory from "./blockStep/history.js";
 import { wakeUpStop } from "./configuration/index.js";
 import search from "./function/action/search.js";
 import handleAddStepToBlockStep from "./function/action/handleAddStepToBlockStep.js";
+import test from "./test.js";
 
 export const MissionClass = new Mission();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
@@ -30,6 +30,7 @@ handleMoreAction();
 handleHistory();
 wakeUpStop();
 search();
+test();
 
 function handleSendMission() {
     const sendBtn = document.querySelector("[data-type-button='send-mission']");
