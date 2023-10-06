@@ -64,17 +64,16 @@
                 Stop
             </label>
         </div>
-        <input type="checkbox" class="sr-only peer/continue" name="" id="input-continue">
-        <input type="checkbox" class="sr-only peer/wakeup" name="" id="input-wakeup">
-        <input type="checkbox" class="sr-only peer/stop" name="" id="input-stop">
+        <input type="radio" class="sr-only peer/continue" name="configuration" id="input-continue"
+            data-type="continue">
+        <input type="radio" class="sr-only peer/wakeup" name="configuration" id="input-wakeup" data-type="wakeup">
+        <input type="radio" class="sr-only peer/stop" name="configuration" id="input-stop" data-type="stop">
+        <input type="radio" class="sr-only" name="configuration" id="input-show-configuration">
         <div data-name="wakeup-stop-wrapper"
             class="w-screen h-screen fullscreen z-20 justify-center items-center group hidden peer-checked/wakeup:flex peer-checked/stop:flex peer-checked/continue:flex">
-            <label for="input-wakeup"
-                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block"></label>
-            <label for="input-stop"
-                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/stop:group-[]:block"></label>
-            <label for="input-continue"
-                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/continue:group-[]:block"></label>
+            <label for="input-show-configuration"
+                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block peer-checked/stop:group-[]:block peer-checked/continue:group-[]:block"></label>
+
             <div
                 class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [

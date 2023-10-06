@@ -54,9 +54,13 @@ const createHtmlFunctionItem = {
     detail(data) {
         const detail = [];
         for (const key in data) {
+            let value = data[key];
+            if (!isNaN(Number(data[key]))) {
+                value = Number(Number(data[key]).toFixed(4));
+            }
             if (data[key]) {
                 detail.push(
-                    `<span class="font-bold">${key} : </span><span>${data[key]}</span>`
+                    `<span class="font-bold">${key} : </span><span>${value}</span>`
                 );
             }
         }

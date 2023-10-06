@@ -152,8 +152,8 @@ class MissionV4Controller extends Controller
             $stringDataNormalConfiguration = $this->toStringConfiguration($normalConfiguration);
             $stringDataModuleConfiguration = $this->toStringConfiguration($moduleConfiguration);
 
-            $dataNormal = $stringDataNormalConfiguration ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalConfiguration)" : null;
-            $dataModule =  $stringDataModuleConfiguration ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleConfiguration)" : null;
+            $dataNormal = $this->checkDataConfiguration($normalConfiguration) ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalConfiguration)" : null;
+            $dataModule =  $this->checkDataConfiguration($moduleConfiguration) ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleConfiguration)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
             return "(name:wake_up|time_out:-1|mode:gpio|data:'')";
@@ -169,5 +169,16 @@ class MissionV4Controller extends Controller
         }
         $stringDataWakeup = implode("", $dataTranslate);
         return $stringDataWakeup;
+    }
+    public function checkDataConfiguration($data)
+    {
+        foreach ($data as $key => $value) {
+            if ($key !== "not_set_out" && $key !== "name_seri") {
+                if ($value === "0" || !empty($value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
