@@ -40,7 +40,7 @@
     "src": "public/fonts/fontawesome-free-6.2.0-web/webfonts/fa-v4compatibility.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-552a1fcf.css",
+    "file": "assets/app-f460bf73.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   }

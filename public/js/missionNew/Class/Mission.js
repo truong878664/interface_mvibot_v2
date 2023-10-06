@@ -28,6 +28,10 @@ export default class Mission {
             normal: {},
             module: {},
         };
+        this.continue = {
+            normal: {},
+            module: {},
+        };
     }
     async get() {
         const urlGet = this.UrlApi + "?kind=get";
@@ -36,6 +40,9 @@ export default class Mission {
         this.data = JSON.parse(data.mission_shorthand || "[]");
         this.wakeup = JSON.parse(data.wake_up || `{"normal":{},"module":{}}`);
         this.stop = JSON.parse(data.stop || `{"normal":{},"module":{}}`);
+        this.continue = JSON.parse(
+            data.continue || `{"normal":{},"module":{}}`
+        );
         this.historyStatus.data.push(JSON.parse(JSON.stringify(this.data)));
         this.render();
     }
@@ -50,6 +57,7 @@ export default class Mission {
                     mission_shorthand: JSON.stringify(this.data),
                     wake_up: JSON.stringify(this.wakeup),
                     stop: JSON.stringify(this.stop),
+                    continue: JSON.stringify(this.continue),
                 }),
             });
             const message = await res.json();
@@ -87,6 +95,7 @@ export default class Mission {
                 data: data.data,
                 wakeup: data.wakeup,
                 stop: data.stop,
+                continue: data.continue,
                 name: data.name,
             };
         } catch (error) {
@@ -99,7 +108,7 @@ export default class Mission {
         }
     }
     dataEndToRobot(data) {
-        const dataEnd = `&/name_mission>${data.name}//id_mission>${data.id}//data_configuration>${data.wakeup}${data.stop}/*${data.data}@`;
+        const dataEnd = `&/name_mission>${data.name}//id_mission>${data.id}//data_configuration>${data.continue}${data.wakeup}${data.stop}/*${data.data}@`;
         return dataEnd;
     }
     render() {

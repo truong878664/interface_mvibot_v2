@@ -1,7 +1,7 @@
 <div class="h-full w-full flex flex-col bg-[#fff] p-4 relative" data-type="{{ $type }}"
     data-type-wake-stop-wrapper="{{ $type }}">
     <div class="flex mb-4 font-bold capitalize z-[2]">{{ $type }}</div>
-    <div data-module="" class="flex group/module peer/module z-[2]">
+    <div data-module="" data-type="{{ $type }}" class="flex group/module peer/module z-[2]">
         <button data-kind="normal" data-kind-button='changeModule' data-type="{{ $type }}"
             class=" ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] group-data-[module='normal']/module:bg-[#0f6cbd] group-data-[module='normal']/module:text-[#fff]">
             Gpio normal

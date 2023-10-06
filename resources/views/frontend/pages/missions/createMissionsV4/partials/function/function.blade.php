@@ -179,12 +179,11 @@
                                         <input type="checkbox" name="" class="sr-only peer/search"
                                             id="s-{{ $item['type'] }}">
                                         <input data-type="{{ $item['type'] }}" type="text" data-action="search"
-                                            class="px-2 peer-checked/search:block hidden search-function-input border-gray-200 border-r-0 rounded-l-md">
+                                            class="px-2 peer-checked/search:block focus:ring-transparent focus:bottom-0 hidden search-function-input !border-gray-200 border-r-0 rounded-l-md">
                                         <label for="s-{{ $item['type'] }}"
                                             class="py-1 px-4 border rounded-md peer-checked/search:border-l-0 peer-checked/search:rounded-l-none text-base h-full bg-white grid place-content-center">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </label>
-
                                     </div>
                                     <button data-index="{{ $index }}" data-button-function-kind="new"
                                         data-type-mission="{{ $item['type'] }}"

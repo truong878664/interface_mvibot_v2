@@ -1,17 +1,20 @@
 import { toggerMessage } from "../../main.js";
-import WakeUpAndStop from "../function/Class/WakeUpAndStop.js";
+import Configuration from "../function/Class/configuration.js";
 import { MissionClass } from "../index.js";
 
 const wakeUpStopWrapper = document.querySelector(
     "[data-name='wakeup-stop-wrapper']"
 );
 
+const inputShowConfig = document.querySelector("#input-show-configuration");
 export function wakeUpStop() {
     const classWakeupAndStop = {
-        wakeup: new WakeUpAndStop("wakeup"),
-        stop: new WakeUpAndStop("stop"),
+        wakeup: new Configuration("wakeup"),
+        stop: new Configuration("stop"),
+        continue: new Configuration("continue"),
     };
     let currentKindModule;
+
     wakeUpStopWrapper.addEventListener("click", (e) => {
         const buttonAction = e.target.closest("[data-kind-button]");
         if (!buttonAction) return;
@@ -22,10 +25,9 @@ export function wakeUpStop() {
                 const kindModule = buttonAction.dataset.kind;
                 buttonAction.parentElement.dataset.module = kindModule;
                 currentKindModule = kindModule;
-
-                const dataWakeupStop =
+                const dataConfiguration =
                     MissionClass[typeWakeupStop][currentKindModule];
-                classWakeupAndStop[typeWakeupStop].display(dataWakeupStop);
+                classWakeupAndStop[typeWakeupStop].display(dataConfiguration);
             },
             async save() {
                 const data = classWakeupAndStop[typeWakeupStop].get();
@@ -44,5 +46,15 @@ export function wakeUpStop() {
             },
         };
         actions[kindAction]?.();
+    });
+    inputShowConfig?.addEventListener("change", (e) => {
+        const checked = e.target.checked;
+        const changeModuleWrapperList =
+            document.querySelectorAll("[data-module]");
+        if (checked && changeModuleWrapperList) {
+            changeModuleWrapperList.forEach((element) => {
+                if (element) element.dataset.module = "";
+            });
+        }
     });
 }
