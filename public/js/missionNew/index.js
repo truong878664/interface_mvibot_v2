@@ -1,24 +1,16 @@
 import confirmationForm from "../functionHandle/confirmationForm.js";
-import {
-    loaded,
-    loading,
-    loadingHeader,
-} from "../functionHandle/displayLoad.js";
+import { loaded, loading } from "../functionHandle/displayLoad.js";
 import sendMission from "../functionHandle/sendMission.js";
-import useDebounce from "../hooks/useDebouche.js";
 import { toggerMessage } from "../main.js";
-import BlockStep from "./Class/TypeMission.js";
 import Mission from "./Class/Mission.js";
 import createTypeMission from "./blockStep/create.js";
-import Label from "./component/Label.js";
 import Function from "./function/index.js";
 import handleDragDrop from "./handle/handleDragDrop.js";
-import TypeMission from "./Class/TypeMission.js";
 import typeMission from "./typeMission/index.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
 import getUA from "../functionHandle/getUA.js";
 import handleHistory from "./blockStep/history.js";
-import { wakeUpStop } from "./wakeUpStop/index.js";
+import { wakeUpStop } from "./configuration/index.js";
 import search from "./function/action/search.js";
 import handleAddStepToBlockStep from "./function/action/handleAddStepToBlockStep.js";
 
@@ -106,6 +98,10 @@ async function handleCode() {
                         <i class="fa-regular fa-copy"></i>
                     </button>
                     <div class="p-4 h-full w-full overflow-y-auto">
+                        <div>
+                            <span class="font-bold mr-2">Continue:</span>
+                            <span>${data.continue}</span>
+                        </div>
                         <div>
                             <span class="font-bold mr-2">Wake up:</span>
                             <span>${data.wakeup}</span>

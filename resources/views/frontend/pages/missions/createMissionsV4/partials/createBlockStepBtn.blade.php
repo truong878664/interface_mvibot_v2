@@ -54,6 +54,9 @@
         <div class="pl-10"></div>
         {{-- WAKE UP STOP --}}
         <div class="text-white flex justify-end gap-[10px] xl:absolute xl:bottom-full xl:right-0 xl:mb-10">
+            <label for="input-continue" class="btn py-2 px-4 text-2xl font-bold bg-sky-500 rounded-md">
+                Continue
+            </label>
             <label for="input-wakeup" class="btn py-2 px-4 text-2xl font-bold bg-green-500 rounded-md">
                 Wake up
             </label>
@@ -61,28 +64,35 @@
                 Stop
             </label>
         </div>
-        <input hidden type="checkbox" class="peer/wakeup" name="" id="input-wakeup">
-        <input hidden type="checkbox" class="peer/stop" name="" id="input-stop">
+        <input type="checkbox" class="sr-only peer/continue" name="" id="input-continue">
+        <input type="checkbox" class="sr-only peer/wakeup" name="" id="input-wakeup">
+        <input type="checkbox" class="sr-only peer/stop" name="" id="input-stop">
         <div data-name="wakeup-stop-wrapper"
-            class="w-screen h-screen fullscreen z-20 justify-center items-center group hidden peer-checked/wakeup:flex peer-checked/stop:flex">
+            class="w-screen h-screen fullscreen z-20 justify-center items-center group hidden peer-checked/wakeup:flex peer-checked/stop:flex peer-checked/continue:flex">
             <label for="input-wakeup"
                 class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block"></label>
             <label for="input-stop"
                 class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/stop:group-[]:block"></label>
+            <label for="input-continue"
+                class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/continue:group-[]:block"></label>
             <div
                 class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.wakeupstop', [
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
                     'type' => 'wakeup',
                 ])
             </div>
-
             <div
                 class="hidden peer-checked/stop:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
-                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.wakeupstop', [
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
                     'type' => 'stop',
                 ])
             </div>
-
+            <div
+                class="hidden peer-checked/continue:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
+                    'type' => 'continue',
+                ])
+            </div>
         </div>
         {{-- END WAKE UP STOP --}}
 

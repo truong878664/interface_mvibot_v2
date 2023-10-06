@@ -1,5 +1,5 @@
 import { toggerMessage } from "../../main.js";
-import WakeUpAndStop from "../function/Class/WakeUpAndStop.js";
+import Configuration from "../function/Class/configuration.js";
 import { MissionClass } from "../index.js";
 
 const wakeUpStopWrapper = document.querySelector(
@@ -8,8 +8,9 @@ const wakeUpStopWrapper = document.querySelector(
 
 export function wakeUpStop() {
     const classWakeupAndStop = {
-        wakeup: new WakeUpAndStop("wakeup"),
-        stop: new WakeUpAndStop("stop"),
+        wakeup: new Configuration("wakeup"),
+        stop: new Configuration("stop"),
+        continue: new Configuration("continue"),
     };
     let currentKindModule;
     wakeUpStopWrapper.addEventListener("click", (e) => {
@@ -23,9 +24,9 @@ export function wakeUpStop() {
                 buttonAction.parentElement.dataset.module = kindModule;
                 currentKindModule = kindModule;
 
-                const dataWakeupStop =
+                const dataConfiguration =
                     MissionClass[typeWakeupStop][currentKindModule];
-                classWakeupAndStop[typeWakeupStop].display(dataWakeupStop);
+                classWakeupAndStop[typeWakeupStop].display(dataConfiguration);
             },
             async save() {
                 const data = classWakeupAndStop[typeWakeupStop].get();

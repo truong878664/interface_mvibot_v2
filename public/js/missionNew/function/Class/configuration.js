@@ -1,6 +1,6 @@
 import Gpio from "./Gpio.js";
 
-export default class WakeUpAndStop extends Gpio {
+export default class Configuration extends Gpio {
     constructor(type, data) {
         super(data);
         this.type = type;

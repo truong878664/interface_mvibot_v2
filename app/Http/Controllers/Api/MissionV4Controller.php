@@ -118,13 +118,15 @@ class MissionV4Controller extends Controller
             $dataTranslateEndMission = array_map(function ($mission) use ($BlockStep, $html) {
                 return $BlockStep->translate($mission, $html);
             }, $mission);
-            $dataWakeup = $this->translateWakeupStop($dataMission->wake_up, "wake_up");
-            $dataStop = $this->translateWakeupStop($dataMission->stop, "stop");
+            $dataWakeup = $this->translateConfiguration($dataMission->wake_up, "wake_up");
+            $dataStop = $this->translateConfiguration($dataMission->stop, "stop");
+            $dataContinue = $this->translateConfiguration($dataMission->continue, "continue");
 
             $data = [
                 "data" => implode("", $dataTranslateEndMission),
                 "wakeup" => $dataWakeup,
                 "stop" => $dataStop,
+                "continue" => $dataContinue,
                 "name" => $dataMission->name,
                 "id" => $dataMission->id
             ];
@@ -140,24 +142,24 @@ class MissionV4Controller extends Controller
         return $data;
     }
 
-    public function translateWakeupStop($data, $type)
+    public function translateConfiguration($data, $type)
     {
         try {
-            $dataWakeupStop = json_decode($data);
-            $normalWakeupStop = $dataWakeupStop->normal;
-            $moduleWakeupStop = $dataWakeupStop->module;
+            $dataConfiguration = json_decode($data);
+            $normalConfiguration = $dataConfiguration->normal;
+            $moduleConfiguration = $dataConfiguration->module;
 
-            $stringDataNormalWakeupStop = $this->toStringWakeupStop($normalWakeupStop);
-            $stringDataModuleWakeupStop = $this->toStringWakeupStop($moduleWakeupStop);
+            $stringDataNormalConfiguration = $this->toStringConfiguration($normalConfiguration);
+            $stringDataModuleConfiguration = $this->toStringConfiguration($moduleConfiguration);
 
-            $dataNormal = $stringDataNormalWakeupStop ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalWakeupStop)" : null;
-            $dataModule =  $stringDataModuleWakeupStop ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleWakeupStop)" : null;
+            $dataNormal = $stringDataNormalConfiguration ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalConfiguration)" : null;
+            $dataModule =  $stringDataModuleConfiguration ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleConfiguration)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
             return "(name:wake_up|time_out:-1|mode:gpio|data:'')";
         }
     }
-    public function toStringWakeupStop($data)
+    public function toStringConfiguration($data)
     {
         $dataTranslate = [];
         foreach ($data as $key => $value) {
