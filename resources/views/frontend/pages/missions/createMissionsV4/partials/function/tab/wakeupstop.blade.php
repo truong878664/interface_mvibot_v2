@@ -4,11 +4,11 @@
     <div data-module="" class="flex group/module peer/module z-[2]">
         <button data-kind="normal" data-kind-button='changeModule' data-type="{{ $type }}"
             class=" ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] group-data-[module='normal']/module:bg-[#0f6cbd] group-data-[module='normal']/module:text-[#fff]">
-            Wake up normal
+            Gpio normal
         </button>
         <button data-kind="module" data-kind-button='changeModule' data-type="{{ $type }}"
             class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] group-data-[module='module']/module:bg-[#0f6cbd] group-data-[module='module']/module:text-[#fff]">
-            Wake up module
+            Gpio module
         </button>
     </div>
     <div

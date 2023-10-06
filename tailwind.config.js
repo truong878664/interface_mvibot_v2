@@ -10,30 +10,14 @@ module.exports = {
     theme: {
         extend: {
             boxShadow: {
+                light: "rgba(245, 56, 56, 0.2) 0 -25px 18px -14px inset, rgba(245, 56, 56, 0.15) 0 1px 2px, rgba(245, 56, 56, 0.15) 0 2px 4px, rgba(245, 56, 56, 0.15) 0 4px 8px, rgba(245, 56, 56, 0.15) 0 8px 16px, rgba(245, 56, 56, 0.15) 0 16px 32px",
                 block: "0px 0px 7px 0px rgba(0, 0, 0, 0.14)",
-                light: "0px 0px 7px 0px rgba(0, 0, 0, 0.14)",
             },
-        },
-        colors: {
-            main: "#0f6cbd",
-            "black-o-30": "rgba(0,0,0,30%)",
-            ...colors,
-        },
-        screens: {
-            sm: "640px",
-            // => @media (min-width: 640px) { ... }
-
-            md: "768px",
-            // => @media (min-width: 768px) { ... }
-
-            lg: "1024px",
-            // => @media (min-width: 1024px) { ... }
-
-            xl: "1380px",
-            // => @media (min-width: 1280px) { ... }
-
-            "2xl": "1536px",
-            // => @media (min-width: 1536px) { ... }
+            colors: {
+                main: "#0f6cbd",
+                "black-o-30": "rgba(0,0,0,30%)",
+                ...colors,
+            },
         },
     },
     plugins: ["postcss-import"],

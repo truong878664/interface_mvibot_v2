@@ -11,11 +11,11 @@
     <div class="flex group">
         <label for="wakeup-normal"
             class=" ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] peer-checked/normal:group-[]:bg-[#0f6cbd] peer-checked/normal:group-[]:text-[#fff]">
-            Wake up normal
+            Gpio normal
         </label>
         <label for="wakeup-module"
             class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] peer-checked/module:group-[]:bg-[#0f6cbd] peer-checked/module:group-[]:text-[#fff]">
-            Wake up module
+            Gpio module
         </label>
     </div>
     <div class="w-full h-full flex flex-col justify-center group">
