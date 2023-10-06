@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/truong878664/interface_mvibot_v2/issues"
   },
-  "homepage": "https://github.com/truong878664/interface_mvibot_v2#readme"
+  "homepage": "https://github.com/truong878664/interface_mvibot_v2#readme",
+  "dependencies": {
+    "postcss-import": "^15.1.0"
+  }
 }

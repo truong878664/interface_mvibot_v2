@@ -1,4 +1,13 @@
-import { MissionClass, blockStepWrapper } from "../../index.js";
+import confirmationForm from "../../../functionHandle/confirmationForm.js";
+import { loadingHeader } from "../../../functionHandle/displayLoad.js";
+import { toggerMessage } from "../../../main.js";
+import TypeMission from "../../Class/TypeMission.js";
+import Label from "../../component/Label.js";
+import {
+    MissionClass,
+    blockStepWrapper,
+    functionWrapper,
+} from "../../index.js";
 
 export default function handleAddStepToBlockStep() {
     blockStepWrapper.addEventListener("click", (e) => {
@@ -37,7 +46,6 @@ export default function handleAddStepToBlockStep() {
                 confirmationForm({ callback: handleDelete });
             },
             duplicate() {
-                // MissionClass.setAddressAdd(buttonAction);
                 const [address, indexStep] =
                     MissionClass.getAddressByStep(buttonAction);
                 let valueStepDuplicate;

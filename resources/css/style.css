@@ -42,6 +42,7 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    @apply fixed top-0 left-0 right-0 bottom-0 min-h-[300px];
 }
 a {
     color: inherit;
@@ -79,6 +80,10 @@ input:focus {
 li {
     list-style: none;
 }
+.fullscreen {
+    @apply fixed top-0 left-0 right-0 bottom-0 z-10;
+}
+
 .bg-main {
     background-color: #0f6cbd;
 }
@@ -2153,6 +2158,9 @@ input[type="number"] {
     border-color: #ffdfdf;
     color: red;
 }
+.btn:disabled {
+    opacity: 70%;
+}
 
 .setting-item.active,
 .setting-item.active:hover {
@@ -2465,7 +2473,7 @@ input[type="number"] {
 }
 
 .highline-border {
-    border: 2px dashed #ccc;
+    border: 2px dashed #ccc !important;
 }
 
 [data-function-type].highline {
@@ -2598,3 +2606,41 @@ input[type="number"] {
     background: #4fa095;
 }
 /* end gpio */
+.type-mission-btn.active {
+    background-color: rgb(216, 216, 216) !important;
+}
+
+.function-btn.active {
+    font-weight: bold;
+}
+
+.type-mission-function-item.highline {
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+}
+
+.function-item-2.active {
+    border-top: 2px solid var(--main-color);
+}
+
+.bg-gpio {
+    background-color: rgba(242, 146, 28, 0.5);
+}
+
+.bg-battery {
+    background-color: rgba(28, 146, 242, 0.5);
+}
+
+.bg-error {
+    background-color: rgba(255, 39, 39, 0.5);
+}
+
+.bg-normal {
+    background-color: rgba(25, 200, 28, 0.5);
+}
+
+.function-item-form {
+    animation: zoom 200ms linear;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
