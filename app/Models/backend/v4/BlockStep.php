@@ -57,7 +57,7 @@ class BlockStep extends Model
             $Step = new Step();
             $arrayDataTranslate = array_map(function ($item) use ($Step, $html) {
                 if (gettype($item) === "object") {
-                    return "}" . $this->translate($item, $html) . "{";
+                    return "]" . $this->translate($item, $html) . "[";
                 } else {
                     return $Step->translate($item);
                 }

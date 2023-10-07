@@ -1,168 +1,103 @@
+import { FunctionStepClass } from "../index.js";
+
+const details = {
+    footprint: "set footprint",
+    gpio: "enable GPIO pins",
+    gpio_module: "enable GPIO module pins",
+    marker: "run marker",
+    sound: "play sound",
+    position: "Go to location",
+    variable: "",
+    break: "",
+    error: "STEP NOT FOUND",
+    sleep: "sleep",
+};
+
+const stepHTML = ({ step, id, addressIndex, type, name, color, icon }) => {
+    return `
+    <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+        <span class="text-sky-500 mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500">${
+            details[type]
+        }</span>
+        <div draggable="true"
+            class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+            <span class="mr-4">${icon}</span>
+            <span>${type === "break" ? "break;" : name}</span>
+            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black hidden group-hover/stepz:block"><i class="fa-solid fa-up-down-left-right"></i></span>
+        </div>
+        <button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden  group-data-[type='error']/step:block"></button>
+        <button
+            data-action-block-step="step"
+            class="data-[sticky='show']:z-[10] z-[3] hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
+                <i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+    </div>
+    `;
+};
+
+const checkExistStep = ({ id, type }) => {
+    const listFunctionStep = FunctionStepClass.data || {};
+    const found = listFunctionStep[type]?.find((item) => {
+        return item.id === Number(id);
+    });
+    if (type === "break") return true;
+    return Object.keys(listFunctionStep).length ? !!found : true;
+};
+
 const Step = (step, addressIndex = "") => {
     const arrayStep = step.split("#");
-    const type = arrayStep[0];
     const name = arrayStep[1];
     const id = arrayStep[2];
-    const stepItems = {
-        footprint: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="footprint"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#38c3ff33] text-[#38c3ff] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-arrows-left-right-to-line"></i></span>
-            <span>${name}</span>
-        </div>`,
-
-        gpio: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="gpio"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#30C93033] text-[#30C930] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-microchip"></i></span>
-            <span>${name}</span>
-        </div>`,
-
-        gpio_module: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="gpio_module"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#EE5E8B33] text-[#EE5E8B] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-microchip"></i></span>
-            <span>${name}</span>
-        </div>`,
-        
-        marker: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="marker"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#432C7A33] text-[#432C7A] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-arrows-up-to-line"></i></span>
-            <span>${name}</span>
-        </div>`,
-
-        sleep: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="sleep"
-            class=" text-[16px] mr-2 mb-2 flex relative items-center">
-            
-            <span class="text-sky-500 mr-2 ml-6 font-bold">Sleep</span>
-            <div data-action-block-step="step" data-sticky="hidden" class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] bg-[#DC262633] text-[#DC2626] rounded-lg inline-flex items-center px-4">
-                <span>${name}</span>
-            </div>
-        </div>
-        
-        `,
-
-        sound: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="sound"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#9333EA33] text-[#9333EA] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-volume-high"></i></span>
-            <span>${name}</span>
-        </div>`,
-
-        position: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="position"
-            class=" text-[16px] mr-2 mb-2 flex relative items-center">
-            
-            <span class="text-sky-500 mr-2 ml-6 font-bold">Go to location
-            </span>
-            <div data-action-block-step="step" data-sticky="hidden" class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] bg-[#57534E33] text-[#57534E] rounded-lg inline-flex items-center px-4">
-                <span class="mr-4"><i class="fa-solid fa-location-dot"></i></span>
-                <span>${name}</span>
-            </div>
-        </div>`,
-
-        variable: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-id=${id}
-            data-address-index="${addressIndex}"
-            data-type="variable"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#EA580C33] text-[#EA580C] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-file-code"></i></span>
-            <span>${name}</span>
-        </div>`,
-
-        break: `
-        <div
-            draggable="true"
-            data-name="step"
-            data-value="${step}"
-            data-address-index="${addressIndex}"
-            data-type="break"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#C9000C33] text-[#C9000C] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-right-from-bracket"></i></span>
-            <span>break;</span>
-        </div>`,
-
-        stepError: `
-        <div
-            draggable="true"
-            data-type="break"
-            data-action-block-step="step"
-            data-sticky="hidden"
-            class="data-[sticky='show']:z-10 relative cursor-grab active:cursor-grabbing h-[30px] mr-2 mb-2 bg-[#C9000C33] text-[#C9000C] rounded-lg inline-flex items-center px-4 text-[16px]">
-            
-            <span class="mr-4"><i class="fa-solid fa-triangle-exclamation"></i></span>
-        </div>`,
+    const isExistStep = checkExistStep({ type: arrayStep[0], id });
+    const type = isExistStep ? arrayStep[0] : "error";
+    const uiList = {
+        footprint: {
+            color: "bg-[#38c3ff33] text-[#38c3ff]",
+            icon: '<i class="fa-solid fa-arrows-left-right-to-line"></i>',
+        },
+        gpio: {
+            color: "bg-[#30C93033] text-[#30C930]",
+            icon: '<i class="fa-solid fa-microchip"></i>',
+        },
+        gpio_module: {
+            color: "bg-[#EE5E8B33] text-[#EE5E8B]",
+            icon: '<i class="fa-solid fa-microchip"></i>',
+        },
+        marker: {
+            color: "bg-[#432C7A33] text-[#432C7A]",
+            icon: '<i class="fa-solid fa-arrows-up-to-line"></i>',
+        },
+        sound: {
+            color: "bg-[#9333EA33] text-[#9333EA]",
+            icon: '<i class="fa-solid fa-volume-high"></i>',
+        },
+        position: {
+            color: "bg-[#57534E33] text-[#57534E]",
+            icon: '<i class="fa-solid fa-location-dot"></i>',
+        },
+        variable: {
+            color: "bg-[#EA580C33] text-[#EA580C]",
+            icon: '<i class="fa-solid fa-file-code"></i>',
+        },
+        break: {
+            color: "bg-[#C9000C33] text-[#C9000C]",
+            icon: '<i class="fa-solid fa-right-from-bracket"></i>',
+        },
+        error: {
+            color: "bg-red-100 text-red-500",
+            icon: '<i class="fa-solid fa-triangle-exclamation"></i>',
+        },
+        sleep: { color: "bg-[#DC262633] text-[#DC2626]", icon: "" },
     };
-    const stepItem = stepItems[type] || stepItems.stepError;
+    const stepItem = stepHTML({
+        step,
+        id,
+        addressIndex,
+        name,
+        type,
+        icon: uiList[type].icon,
+        color: uiList[type].color,
+    });
     return stepItem;
 };
 

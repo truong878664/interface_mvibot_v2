@@ -82,7 +82,7 @@ export default class Gpio extends Step {
             .replaceAll("?", "")
             .replaceAll("!", "");
 
-        if (!name || !time_out) {
+        if (!name || isNaN(time_out)) {
             dataValidated.success = false;
             dataValidated.message = `Name or timeout cannot be empty!`;
             return dataValidated;
