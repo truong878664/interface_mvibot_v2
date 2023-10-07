@@ -6,11 +6,12 @@
     </div>
     <input type="checkbox" name="" id="action-create-block" class="peer" hidden>
     <div
-        class="flex-col-reverse justify-between gap-[10px] bg-white rounded-md shadow-md px-4 py-8 hidden peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:p-0 xl:bg-transparent xl:shadow-none">
-        <div class="">
+        class="flex-col-reverse justify-between gap-[4px] bg-white rounded-md shadow-md px-4 py-8 hidden peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:p-0 xl:bg-transparent xl:shadow-none">
+        <div class="flex">
             {{-- ACTION SEND MISSION --}}
             <input class="peer/send-mission" type="checkbox" name="" hidden id="input-send-mission">
-            <label for="input-send-mission" class="btn rounded-lg border px-4 py-2 text-3xl mx-2 bg-white">
+            <label for="input-send-mission"
+                class="btn rounded-lg border px-4 py-2 text-3xl mx-2 bg-white  whitespace-nowrap h-fit">
                 <span class="text-blue-400">
                     <i class="fa-solid fa-paper-plane"></i>
                 </span>
@@ -57,9 +58,10 @@
                 </ul>
             </div>
         </div>
-        <div class="pl-10"></div>
+        {{-- <div class="pl-10"></div> --}}
         {{-- WAKE UP STOP --}}
-        <div class="text-white flex justify-end gap-[10px] xl:absolute xl:bottom-full xl:right-0 xl:mb-10">
+        <div
+            class="text-white flex justify-end gap-[10px] py-10 xl:py-0 xl:absolute xl:bottom-full xl:right-0 xl:mb-10">
             <label for="input-continue" class="btn py-2 px-4 text-2xl font-bold bg-sky-500 rounded-md">
                 Continue
             </label>
@@ -81,19 +83,19 @@
                 class="fullscreen bg-black/20 !z-[-1] hidden peer-checked/wakeup:group-[]:block peer-checked/stop:group-[]:block peer-checked/continue:group-[]:block"></label>
 
             <div
-                class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                class="hidden peer-checked/wakeup:group-[]:flex w-[80%] h-[80%] -mt-[5%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
                     'type' => 'wakeup',
                 ])
             </div>
             <div
-                class="hidden peer-checked/stop:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                class="hidden peer-checked/stop:group-[]:flex w-[80%] h-[80%] -mt-[5%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
                     'type' => 'stop',
                 ])
             </div>
             <div
-                class="hidden peer-checked/continue:group-[]:flex w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
+                class="hidden peer-checked/continue:group-[]:flex w-[80%] h-[80%] -mt-[5%] rounded-md function-item-form relative overflow-hidden justify-center items-center z-10 bg-white">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.configuration', [
                     'type' => 'continue',
                 ])
@@ -101,7 +103,8 @@
         </div>
         {{-- END WAKE UP STOP --}}
 
-        <div class="ml-[20px] flex flex-col justify-start gap-[10px] xl:flex-row" id="create-type-mission-wrapper">
+        <div class="ml-[10px] flex flex-col justify-start flex-wrap gap-[4px] xl:flex-row"
+            id="create-type-mission-wrapper">
             @php
                 $blockMissions = [
                     [
@@ -144,7 +147,7 @@
             @endphp
             @foreach ($blockMissions as $item)
                 <button data-type-mission="{{ $item['type'] }}"
-                    class="btn rounded-lg border px-4 py-2 text-3xl mx-2 bg-white">
+                    class="btn rounded-lg border px-4 py-2 text-3xl bg-white flex gap-3">
                     <span class="{{ $item['color'] }}">
                         <i class=" {{ $item['icon'] }}"></i>
                     </span>
