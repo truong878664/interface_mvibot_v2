@@ -38,22 +38,31 @@
                 </label>
                 <input hidden type="checkbox" id="more-action" class="peer/more-action">
                 <label for="more-action"
-                    class="fixed top-0 left-0 right-0 bottom-0 z-20 hidden peer-checked/more-action:block"></label>
+                    class="fixed top-0 left-0 right-0 bottom-0 z-20 hidden peer-checked/more-action:block bg-black/20"></label>
                 <ul id="more-action-wrapper"
                     class="absolute text-2xl right-0 bottom-[calc(100%_+_10px)] w-[200px] bg-white shadow-sm rounded-md transition-all hidden py-8 opacity-0 peer-checked/more-action:block peer-checked/more-action:opacity-100 peer-checked/more-action:z-50 overflow-hidden ">
                     <li>
-                        <button data-button-action-more="code" class="w-full py-2 px-4 hover:bg-stone-100 text-start">
-                            <span class="text-blue-600">
+                        <button data-button-action-more="code"
+                            class="w-full py-2 px-4 hover:bg-stone-100 flex justify-end">
+                            <span class="text-blue-600 w-[40px]">
                                 <i class="fa-solid fa-code"></i>
-                            </span>
-                            Show code mission
-                        </button>
 
-                        <button id="button-test-1" class="w-full py-2 px-4 hover:bg-stone-100">
-                            <span class="text-red-600">
+                            </span>
+                            <span class="flex-1 text-start">
+                                Show code mission
+                            </span>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button id="button-test-1" class="w-full py-2 px-4 hover:bg-stone-100 flex justify-end">
+                            <span class="text-red-600 w-[40px]">
                                 <i class="fa-solid fa-umbrella"></i>
                             </span>
-                            Button test</button>
+                            <span class="flex-1 text-start">
+                                Button test
+                            </span>
+                        </button>
                     </li>
                 </ul>
             </div>

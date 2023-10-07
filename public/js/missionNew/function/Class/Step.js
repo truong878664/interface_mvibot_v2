@@ -47,7 +47,7 @@ export default class Step {
             .replaceAll("?", "")
             .replaceAll("!", "");
         for (const key in data) {
-            if (!data[key]) {
+            if (data[key] != "0" || !data[key]) {
                 dataValidated.success = false;
                 dataValidated.message = `${key} cannot be empty!`;
                 return dataValidated;

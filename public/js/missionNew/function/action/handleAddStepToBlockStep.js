@@ -38,6 +38,7 @@ export default function handleAddStepToBlockStep() {
             delete() {
                 const handleDelete = () => {
                     loadingHeader(true);
+                    console.log(buttonAction);
                     const [address, indexStep] =
                         MissionClass.getAddressByStep(buttonAction);
                     MissionClass.deleteStep({ address, indexStep });

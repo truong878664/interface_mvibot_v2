@@ -1,10 +1,10 @@
 import { htmlDataFunction } from "./index.js";
 import { $ } from "../../main.js";
 import createHtmlDataFunction from "./action/createHtmlDataFunction.js";
+import { FunctionStepClass } from "../index.js";
 
 const renderFunction = async () => {
-    const res = await fetch(`/api/function`);
-    const data = await res.json();
+    const data = await FunctionStepClass.get();
     for (const key in data) {
         createHtmlDataFunction(data[key], key);
     }

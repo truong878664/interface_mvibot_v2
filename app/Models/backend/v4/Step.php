@@ -160,7 +160,7 @@ class Step extends Model
                     break;
             }
         } catch (\Throwable $th) {
-            $dataTranslated = "*/step_no_found/*";
+            $dataTranslated = "";
         }
 
         return $dataTranslated;
