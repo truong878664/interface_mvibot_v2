@@ -4,24 +4,26 @@ import createHtml from "./createHtml.js";
 
 const blockStep = {
     html: [],
-    normal({ data, address, name = null, handleAble = false }) {
+    normal({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlNormal = [];
         data.normal.map((item, index) => {
+            const { data, name, type, ...rest } = item;
             if (item instanceof Object) {
                 htmlNormal.push(
-                    this[item.type]({
-                        data: item.data,
+                    this[type]({
+                        data,
                         address: index,
                         value: item,
-                        name: item.name,
+                        name,
                         handleAble,
+                        ...rest,
                     })
                 );
             } else {
                 htmlNormal.push(Step(item, index));
             }
         });
-        const value = MissionClass.Normal({ data: data, name });
+        const value = MissionClass.Normal({ data: data, name, ...rest });
         return createHtml.normal({
             normal: htmlNormal,
             address,
@@ -29,7 +31,7 @@ const blockStep = {
             handleAble,
         });
     },
-    ifelse({ data, address, name = null, handleAble = false }) {
+    ifelse({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlIfElse = {
             condition: [],
             if_: [],
@@ -37,13 +39,15 @@ const blockStep = {
         };
         for (const key in data) {
             data[key].map((item, index) => {
+                const { data, name, type, ...rest } = item;
                 if (item instanceof Object) {
                     htmlIfElse[key].push(
-                        this[item.type]({
-                            data: item.data,
+                        this[type]({
+                            data,
                             address: index,
-                            name: item.name,
+                            name,
                             handleAble,
+                            ...rest,
                         })
                     );
                 } else {
@@ -51,10 +55,15 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.IfElse({ data: data, name });
-        return createHtml.ifelse({ ...htmlIfElse, address, value, handleAble });
+        const value = MissionClass.IfElse({ data: data, name, ...rest });
+        return createHtml.ifelse({
+            ...htmlIfElse,
+            address,
+            value,
+            handleAble,
+        });
     },
-    trycatch({ data, address, name = null, handleAble = false }) {
+    trycatch({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlTryCatch = {
             try_: [],
             catch_: [],
@@ -62,13 +71,15 @@ const blockStep = {
 
         for (const key in data) {
             data[key].map((item, index) => {
+                const { data, name, type, ...rest } = item;
                 if (item instanceof Object) {
                     htmlTryCatch[key].push(
-                        this[item.type]({
-                            data: item.data,
+                        this[type]({
+                            data,
                             address: index,
-                            name: item.name,
+                            name,
                             handleAble,
+                            ...rest,
                         })
                     );
                 } else {
@@ -76,7 +87,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.Trycatch({ data: data, name });
+        const value = MissionClass.Trycatch({ data: data, name, ...rest });
         return createHtml.trycatch({
             ...htmlTryCatch,
             address,
@@ -84,20 +95,22 @@ const blockStep = {
             handleAble,
         });
     },
-    while({ data, address, name = null, handleAble = false }) {
+    while({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlWhile = {
             condition: [],
             do_: [],
         };
         for (const key in data) {
             data[key].map((item, index) => {
+                const { data, name, type, ...rest } = item;
                 if (item instanceof Object) {
                     htmlWhile[key].push(
-                        this[item.type]({
-                            data: item.data,
+                        this[type]({
+                            data,
                             address: index,
-                            name: item.name,
+                            name,
                             handleAble,
+                            ...rest,
                         })
                     );
                 } else {
@@ -105,23 +118,30 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.While({ data: data, name });
-        return createHtml.while({ ...htmlWhile, address, value, handleAble });
+        const value = MissionClass.While({ data: data, name, ...rest });
+        return createHtml.while({
+            ...htmlWhile,
+            address,
+            value,
+            handleAble,
+        });
     },
-    logicAnd({ data, address, name = null, handleAble = false }) {
+    logicAnd({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlLogicAnd = {
             logicA: [],
             logicB: [],
         };
         for (const key in data) {
             data[key].map((item, index) => {
+                const { data, name, type, ...rest } = item;
                 if (item instanceof Object) {
                     htmlLogicAnd[key].push(
-                        this[item.type]({
-                            data: item.data,
+                        this[type]({
+                            data,
                             address: index,
-                            name: item.name,
+                            name,
                             handleAble,
+                            ...rest,
                         })
                     );
                 } else {
@@ -129,7 +149,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.LogicAnd({ data: data, name });
+        const value = MissionClass.LogicAnd({ data: data, name, ...rest });
         return createHtml.logicAnd({
             ...htmlLogicAnd,
             address,
@@ -137,20 +157,22 @@ const blockStep = {
             handleAble,
         });
     },
-    logicOr({ data, address, name = null, handleAble = false }) {
+    logicOr({ data, address, name = null, handleAble = false, ...rest }) {
         const htmlLogicOr = {
             logicA: [],
             logicB: [],
         };
         for (const key in data) {
             data[key].map((item, index) => {
+                const { data, name, type, ...rest } = item;
                 if (item instanceof Object) {
                     htmlLogicOr[key].push(
-                        this[item.type]({
-                            data: item.data,
+                        this[type]({
+                            data,
                             address: index,
-                            name: item.name,
+                            name,
                             handleAble,
+                            ...rest,
                         })
                     );
                 } else {
@@ -158,7 +180,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.LogicOr({ data: data, name });
+        const value = MissionClass.LogicOr({ data: data, name, ...rest });
         return createHtml.logicOr({
             ...htmlLogicOr,
             address,

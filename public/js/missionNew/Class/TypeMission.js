@@ -49,7 +49,6 @@ export default class TypeMission {
                 data-id='${id}'
                 data-name="item-type-mission"
                 class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg">
-
                 <div class="flex">
                     <input type="checkbox" data-select-type-mission-id="" data-type="normal" class="mr-4 w-[12px] h-[12px] accent-[#f5b933]">
                     <div class="flex flex-col">
@@ -89,10 +88,30 @@ export default class TypeMission {
             </div>`;
     }
     async delete(id) {
-        const res = await fetch(this.urlApi + "/" + id, {
-            method: "DELETE",
-        });
-        const data = await res.json();
-        return data;
+        try {
+            const res = await fetch(this.urlApi + "/" + id, {
+                method: "DELETE",
+            });
+            const message = await res.json();
+            return message;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async update({ id, data }) {
+        try {
+            const res = await fetch(this.urlApi + "/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ data }),
+            });
+            const message = await res.json();
+            this.render();
+            return message;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

@@ -14,7 +14,6 @@ export default class Mission {
         this.id = document.getElementById("id-mission").value;
         this.typeMission = document.getElementById("type-mission").value;
         this.UrlApi = "/api/mission-v4/" + this.id;
-        this.get();
         this.saved = true;
         this.historyStatus = {
             data: [],
@@ -196,6 +195,31 @@ export default class Mission {
     }
     setAddressAdd(element) {
         this.currentAddAddress = this.getAddress(element);
+    }
+    addStyle({ address, indexStep, style }) {
+        try {
+            const { targetObject, propertyName } = this.targetObject(address);
+            const targetItemAddStyle = propertyName
+                ? targetObject[propertyName][indexStep]
+                : targetObject[indexStep];
+            const currentStyle = targetItemAddStyle.style;
+            targetItemAddStyle.style = { ...currentStyle, ...style };
+            this.save();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    update({ address, indexStep, data }) {
+        const { targetObject, propertyName } = this.targetObject(address);
+        const targetItemAddStyle = propertyName
+            ? targetObject[propertyName][indexStep]
+            : targetObject[indexStep];
+        if (targetItemAddStyle) {
+            for (const key in data) {
+                targetItemAddStyle[key] = data[key];
+            }
+        }
+        this.render();
     }
     move({
         fromIndex,
@@ -490,12 +514,18 @@ export default class Mission {
     get dataMission() {
         return this.data;
     }
-    Normal({ data = { normal: [] }, name = null, id = null }) {
+    Normal({
+        data = { normal: [] },
+        name = null,
+        id = null,
+        style = { hidden: false },
+    }) {
         return {
             type: "normal",
             name,
             id,
             data: data,
+            style,
         };
     }
     IfElse({
@@ -506,44 +536,70 @@ export default class Mission {
         },
         name = null,
         id = null,
+        style = { hidden: false },
     }) {
         return {
             type: "ifelse",
             name,
             id,
             data: data,
+            style,
         };
     }
-    Trycatch({ data = { try_: [], catch_: [] }, name = null, id = null }) {
+    Trycatch({
+        data = { try_: [], catch_: [] },
+        name = null,
+        id = null,
+        style = { hidden: false },
+    }) {
         return {
             type: "trycatch",
             name,
             id,
             data: data,
+            style,
         };
     }
-    While({ data = { condition: [], do_: [] }, name = null, id = null }) {
+    While({
+        data = { condition: [], do_: [] },
+        name = null,
+        id = null,
+        style = { hidden: false },
+    }) {
         return {
             type: "while",
             name,
             id,
             data: data,
+            style,
         };
     }
-    LogicOr({ data = { logicA: [], logicB: [] }, name = null, id = null }) {
+    LogicOr({
+        data = { logicA: [], logicB: [] },
+        name = null,
+        id = null,
+        style = { hidden: false },
+    }) {
         return {
             type: "logicOr",
             name,
             id,
             data: data,
+            style,
         };
     }
-    LogicAnd({ data = { logicA: [], logicB: [] }, name = null, id = null }) {
+    LogicAnd({
+        data = { logicA: [], logicB: [] },
+        name = null,
+        id = null,
+        style = { hidden: false },
+    }) {
         return {
             type: "logicAnd",
             name,
             id,
             data: data,
+            style,
         };
     }
 }

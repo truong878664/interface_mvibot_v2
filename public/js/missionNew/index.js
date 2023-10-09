@@ -19,20 +19,23 @@ export const MissionClass = new Mission();
 export const FunctionStepClass = new FunctionStep();
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
 export const functionWrapper = document.getElementById("function-container");
-
 createTypeMission();
 subscribeMissionChange();
 
-Function();
-typeMission();
-handleAddStepToBlockStep();
-handleDragDrop();
-handleSendMission();
-handleMoreAction();
-handleHistory();
-wakeUpStop();
-search();
-test();
+(async function init() {
+    await FunctionStepClass.get();
+    await MissionClass.get();
+    Function();
+    typeMission();
+    handleAddStepToBlockStep();
+    handleDragDrop();
+    handleSendMission();
+    handleMoreAction();
+    handleHistory();
+    wakeUpStop();
+    search();
+    test();
+})();
 
 function handleSendMission() {
     const sendBtn = document.querySelector("[data-type-button='send-mission']");

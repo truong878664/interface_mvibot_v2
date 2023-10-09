@@ -17,10 +17,12 @@ export default function handleActionTypeMission() {
         );
         const actions = {
             add() {
-                const data = JSON.parse(
-                    JSON.parse(itemTypeMission.dataset.value).data
-                );
-                MissionClass.addStep({ step: data });
+                const dataDatabase = JSON.parse(itemTypeMission.dataset.value);
+                const data = JSON.parse(dataDatabase.data);
+
+                MissionClass.addStep({
+                    step: { ...data, id: dataDatabase.id },
+                });
                 MissionClass.render();
             },
             delete() {

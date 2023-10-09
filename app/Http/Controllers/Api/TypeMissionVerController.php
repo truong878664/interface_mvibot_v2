@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\v4\TypeMissionVer;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TypeMissionVerController extends Controller
 {
@@ -38,8 +39,8 @@ class TypeMissionVerController extends Controller
     public function store(Request $request)
     {
         try {
-            TypeMissionVer::create($request->all());
-            return ["saved" => true, "message" => "Save block step successfully!", "error" => null];
+            $typeMission = TypeMissionVer::create($request->all());
+            return ["saved" => true, "message" => "Save block step successfully!", "error" => null, "id" => $typeMission->id, "name" => $typeMission->name];
         } catch (\Throwable $th) {
             throw $th;
             // return ["saved" => false, "message" => "Save block step error!", "error" => $th];
@@ -77,7 +78,12 @@ class TypeMissionVerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            TypeMissionVer::where("id", $id)->update(['data' => $request->data]);
+            return ["message" => "update type mission successfully", "error" => false];
+        } catch (\Throwable $th) {
+            return ["message" => "ERR!" . $th, "error" => true];
+        }
     }
 
     /**
@@ -90,10 +96,9 @@ class TypeMissionVerController extends Controller
     {
         try {
             TypeMissionVer::where("id", $id)->delete();
-            return ["deleted"=>true, "message"=>"Delete type mission id:$id, successfully!", "error"=> null];
+            return ["deleted" => true, "message" => "Delete type mission id:$id, successfully!", "error" => null];
         } catch (\Throwable $th) {
-            return ["deleted"=>false, "message"=>"Delete type mission id:$id, ERROR!", "error"=> $th];
-            
+            return ["deleted" => false, "message" => "Delete type mission id:$id, ERROR!", "error" => $th];
         }
     }
 }
