@@ -3,6 +3,7 @@ import { loadingHeader } from "../../../functionHandle/displayLoad.js";
 import { toggerMessage } from "../../../main.js";
 import TypeMission from "../../Class/TypeMission.js";
 import Label from "../../component/Label.js";
+import syncTypeMission from "../../handle/syncTypeMission.js";
 import {
     MissionClass,
     blockStepWrapper,
@@ -195,31 +196,11 @@ export default function handleAddStepToBlockStep() {
                     id: idTypeMission,
                     data: valueNewTypeMission,
                 });
-                this.asyncTypeMission(valueNewTypeMission);
+                syncTypeMission(valueNewTypeMission);
                 toggerMessage(
                     message.error ? "error" : "success",
                     message.message
                 );
-            },
-            asyncTypeMission(typeMission) {
-                const { id, type } = typeMission;
-                const typeMissionBLockUpdateList = getNodeList(
-                    `[data-block-wrapper='${type}'][data-id='${id}']`
-                );
-                Array.from(typeMissionBLockUpdateList).forEach((item) => {
-                    const [address, indexStep] = MissionClass.getAddressByStep(
-                        item.firstElementChild
-                    );
-                    Promise.resolve([address, indexStep]).then(
-                        ([address, indexStep]) => {
-                            MissionClass.update({
-                                address,
-                                indexStep,
-                                data: JSON.parse(JSON.stringify(typeMission)),
-                            });
-                        }
-                    );
-                });
             },
         };
 

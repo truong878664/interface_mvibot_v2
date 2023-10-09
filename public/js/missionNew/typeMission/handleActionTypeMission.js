@@ -1,5 +1,6 @@
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import { toggerMessage } from "../../main.js";
+import syncTypeMission from "../handle/syncTypeMission.js";
 import { MissionClass } from "../index.js";
 import typeMission, { typeMissionClass } from "./index.js";
 export default function handleActionTypeMission() {
@@ -63,6 +64,12 @@ export default function handleActionTypeMission() {
                 `;
                 div.innerHTML = contentDetail;
                 document.body.appendChild(div);
+            },
+            sync() {
+                const dataTypeMission = JSON.parse(
+                    JSON.parse(itemTypeMission.dataset.value).data
+                );
+                syncTypeMission(dataTypeMission);
             },
         };
         actions[typeButtonAction]?.();
