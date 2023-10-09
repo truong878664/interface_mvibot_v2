@@ -29,8 +29,12 @@ export default class TypeMission {
         };
         const datas = await this.get();
         datas.map((data) => {
-            htmlElement[data.type].push(this.html(data));
-            return htmlElement;
+            try {
+                htmlElement[data.type].push(this.html(data));
+                return htmlElement;
+            } catch (error) {
+                return;
+            }
         });
 
         for (const key in htmlElement) {
@@ -80,6 +84,15 @@ export default class TypeMission {
                                         <i class="fa-solid fa-circle-info"></i>
                                     </span>
                                     <span>Detail</span>
+                                </button>
+                            </li>
+                            
+                            <li>
+                                <button data-button-type-mission-kind="sync" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                    <span class="mr-2 w-[20px] text-yellow-500">
+                                        <i class="fa-solid fa-rotate"></i>
+                                    </span>
+                                    <span>Sync</span>
                                 </button>
                             </li>
                         </ul>

@@ -13,6 +13,8 @@
         "gpios",
         "klip",
         "Laravel",
+        "logicand",
+        "logicor",
         "lowspeed",
         "Modulewakeup",
         "Mvibot",
