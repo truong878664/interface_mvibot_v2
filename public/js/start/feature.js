@@ -40,15 +40,15 @@ function feature() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
                 publishTopicString(
                     `/IB03_916b/output_user_set`,
-                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)(7|0)"
+                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)"
                 );
                 publishTopicString(
                     `/IB04_916b/output_user_set`,
-                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)(7|0)"
+                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)"
                 );
                 publishTopicString(
                     `/IB05_916b/output_user_set`,
-                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)(7|0)"
+                    "(0|1)(1|0)(2|0)(3|0)(4|0)(5|0)(6|0)"
                 );
                 // dataGpioModule.forEach((moduleGpio) => {
                 //     if (moduleSet.indexOf(moduleGpio.name_seri) !== -1) {
@@ -61,15 +61,15 @@ function feature() {
                 const dataGpioModule = JSON.parse(moduleGpios.value);
                 publishTopicString(
                     `/IB03_916b/output_user_set`,
-                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)(7|1)"
+                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)"
                 );
                 publishTopicString(
                     `/IB04_916b/output_user_set`,
-                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)(7|1)"
+                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)"
                 );
                 publishTopicString(
                     `/IB05_916b/output_user_set`,
-                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)(7|1)"
+                    "(0|0)(1|0)(2|1)(3|0)(4|0)(5|0)(6|0)"
                 );
                 // dataGpioModule.forEach((moduleGpio) => {
 
