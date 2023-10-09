@@ -1,4 +1,4 @@
-import { MissionClass } from "../index.js";
+import { FunctionStepClass, MissionClass } from "../index.js";
 import { toggerMessage } from "../../main.js";
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import showFormFunction from "./action/showFormFunction.js";
@@ -25,7 +25,10 @@ export default function handleWrapFunction() {
                 confirmationForm({ callback: handleDeleteFunction });
                 async function handleDeleteFunction() {
                     const data = await functionClass.delete(functionId);
-
+                    FunctionStepClass.delete({
+                        type: functionType,
+                        id: functionId,
+                    });
                     toggerMessage(
                         data.deleted ? "success" : "error",
                         data.message
@@ -41,7 +44,7 @@ export default function handleWrapFunction() {
                 });
                 const data = JSON.parse(functionItem.dataset.data);
                 functionClass.display(data);
-                functionClass.currentIdUpdate = data.id
+                functionClass.currentIdUpdate = data.id;
                 break;
             default:
                 console.log("Default button function clicked!", functionKind);

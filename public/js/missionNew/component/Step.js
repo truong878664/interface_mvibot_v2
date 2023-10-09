@@ -13,7 +13,10 @@ const details = {
     sleep: "sleep",
 };
 
-const stepHTML = ({ step, id, addressIndex, type, name, color, icon }) => {
+const stepHTML = (props) => {
+    const { step, id, addressIndex, type, name, color, icon, detail } = props;
+    if (type === "variable") return htmlVariable(props);
+
     return `
     <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
         <span class="text-sky-500 mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500">${
@@ -25,7 +28,7 @@ const stepHTML = ({ step, id, addressIndex, type, name, color, icon }) => {
             <span>${type === "break" ? "break;" : name}</span>
             <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black hidden group-hover/stepz:block"><i class="fa-solid fa-up-down-left-right"></i></span>
         </div>
-        <button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden  group-data-[type='error']/step:block"></button>
+        <button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden"></button>
         <button
             data-action-block-step="step"
             class="data-[sticky='show']:z-[10] z-[3] hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
@@ -35,21 +38,45 @@ const stepHTML = ({ step, id, addressIndex, type, name, color, icon }) => {
     `;
 };
 
+const htmlVariable = (props) => {
+    const { step, id, addressIndex, type, name, color, icon, detail } = props;
+    return `
+    <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+        <span class="text-sky-500 mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500">${
+            details[type]
+        }</span>
+        <div draggable="true"
+            class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+            <span class="mr-4">${icon}</span>
+            <span>${type === "break" ? "break;" : name}</span>
+            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black hidden group-hover/stepz:block"><i class="fa-solid fa-up-down-left-right"></i></span>
+        </div>
+        <button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden"></button>
+        <button
+            data-action-block-step="step"
+            class="data-[sticky='show']:z-[10] z-[3] hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
+                <i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+    </div>
+    
+    `;
+};
+
 const checkExistStep = ({ id, type }) => {
     const listFunctionStep = FunctionStepClass.data || {};
     const found = listFunctionStep[type]?.find((item) => {
         return item.id === Number(id);
     });
     if (type === "break") return true;
-    return Object.keys(listFunctionStep).length ? !!found : true;
+    return Object.keys(listFunctionStep).length ? found : true;
 };
 
 const Step = (step, addressIndex = "") => {
     const arrayStep = step.split("#");
     const name = arrayStep[1];
     const id = arrayStep[2];
-    const isExistStep = checkExistStep({ type: arrayStep[0], id });
-    const type = isExistStep ? arrayStep[0] : "error";
+    const stepDetail = checkExistStep({ type: arrayStep[0], id });
+    const type = stepDetail ? arrayStep[0] : "error";
     const uiList = {
         footprint: {
             color: "bg-[#38c3ff33] text-[#38c3ff]",
@@ -97,6 +124,7 @@ const Step = (step, addressIndex = "") => {
         type,
         icon: uiList[type].icon,
         color: uiList[type].color,
+        detail: stepDetail,
     });
     return stepItem;
 };

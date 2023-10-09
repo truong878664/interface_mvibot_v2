@@ -1,9 +1,20 @@
 export default class FunctionStep {
     constructor() {}
     async get() {
-        const res = await fetch(`/api/function`);
-        const data = await res.json();
-        this.data = data;
+        const data = this.fetchApi();
+        this.data = await data;
         return data;
+    }
+
+    async fetchApi() {
+        const res = await fetch(`/api/function`);
+        return await res.json();
+    }
+    delete({ type, id }) {
+        this.data[type]?.forEach((fn, index) => {
+            if (fn.id === Number(id)) {
+                this.data[type]?.splice(index, 1);
+            }
+        });
     }
 }

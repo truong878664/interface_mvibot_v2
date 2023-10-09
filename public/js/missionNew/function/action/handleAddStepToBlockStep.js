@@ -8,7 +8,10 @@ import {
     blockStepWrapper,
     functionWrapper,
 } from "../../index.js";
+import { typeMissionClass } from "../../typeMission/index.js";
 
+const getNode = document.querySelector.bind(document);
+const getNodeList = document.querySelectorAll.bind(document);
 export default function handleAddStepToBlockStep() {
     blockStepWrapper.addEventListener("click", (e) => {
         const buttonAction = e.target.closest("[data-action-block-step]");
@@ -28,7 +31,7 @@ export default function handleAddStepToBlockStep() {
                     MissionClass.resetCurrentAddAddress();
                     return;
                 }
-                const activeButton = document.querySelector(
+                const activeButton = getNode(
                     '[data-action-block-step="add"].active'
                 );
                 activeButton?.classList.remove("active");
@@ -87,9 +90,18 @@ export default function handleAddStepToBlockStep() {
                 }
             },
             hidden() {
-                const currentStatusShow = blockWrapper.dataset.showData;
-                const statusChange =
-                    currentStatusShow === "show" ? "hidden" : "show";
+                const [address, indexStep] =
+                    MissionClass.getAddressByStep(buttonAction);
+
+                const currentStatusShow =
+                    blockWrapper.dataset.showData === "show";
+
+                MissionClass.addStyle({
+                    address,
+                    indexStep,
+                    style: { hidden: currentStatusShow ? true : false },
+                });
+                const statusChange = currentStatusShow ? "hidden" : "show";
                 blockWrapper.dataset.showData = statusChange;
                 buttonAction.dataset.status = statusChange;
             },
@@ -118,9 +130,7 @@ export default function handleAddStepToBlockStep() {
                 functionActive?.scrollIntoView({ behavior: "smooth" });
                 clearTimeout(timeOutDeleteHighline);
                 functionHighline?.classList.remove("highline");
-                functionHighline = document.querySelector(
-                    "[data-function-type].highline"
-                );
+                functionHighline = getNode("[data-function-type].highline");
                 timeOutDeleteHighline = setTimeout(() => {
                     functionHighline?.classList.remove("highline");
                 }, 4000);
@@ -150,7 +160,19 @@ export default function handleAddStepToBlockStep() {
                     const message = await typeMission.save(
                         dataSaveBlockMission
                     );
-                    console.log(message);
+
+                    const [address, indexStep] =
+                        MissionClass.getAddressByStep(buttonAction);
+
+                    MissionClass.update({
+                        address,
+                        indexStep,
+                        data: {
+                            id: message.id,
+                            name: message.name,
+                        },
+                    });
+
                     formName.remove();
 
                     message.saved && typeMission.render();
@@ -160,6 +182,44 @@ export default function handleAddStepToBlockStep() {
                     );
                 };
                 blockStepWrapper.appendChild(formName);
+            },
+            async update() {
+                const blockTypeMission = buttonAction.closest(
+                    "[data-block-wrapper]"
+                );
+                const idTypeMission = blockTypeMission.dataset.id;
+                const valueNewTypeMission = JSON.parse(
+                    blockTypeMission.dataset.value
+                );
+                const message = await typeMissionClass.update({
+                    id: idTypeMission,
+                    data: valueNewTypeMission,
+                });
+                this.asyncTypeMission(valueNewTypeMission);
+                toggerMessage(
+                    message.error ? "error" : "success",
+                    message.message
+                );
+            },
+            asyncTypeMission(typeMission) {
+                const { id, type } = typeMission;
+                const typeMissionBLockUpdateList = getNodeList(
+                    `[data-block-wrapper='${type}'][data-id='${id}']`
+                );
+                Array.from(typeMissionBLockUpdateList).forEach((item) => {
+                    const [address, indexStep] = MissionClass.getAddressByStep(
+                        item.firstElementChild
+                    );
+                    Promise.resolve([address, indexStep]).then(
+                        ([address, indexStep]) => {
+                            MissionClass.update({
+                                address,
+                                indexStep,
+                                data: JSON.parse(JSON.stringify(typeMission)),
+                            });
+                        }
+                    );
+                });
             },
         };
 
