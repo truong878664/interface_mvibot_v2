@@ -23,8 +23,8 @@ export default function confirmationForm({
         <div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
             <p>${message}</p>
             <div class="flex justify-between mt-8">
-                <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='submit-confirmation-form-btn'>Yes</button>
-                <button class="border-yellow-500 border text-yellow-500 text-[# px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='cancel-confirmation-form-btn'>No</button>
+                <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='submit-confirmation-form-btn'>Confirm</button>
+                <button class="border-yellow-500 border text-yellow-500 text-[# px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='cancel-confirmation-form-btn'>Cancel</button>
             </div>
         </div>`;
 
@@ -39,7 +39,7 @@ export default function confirmationForm({
     cancelFormAgainBtn.addEventListener("click", hiddenFormAgain);
     submitFormAgainBtn.addEventListener("click", () => {
         callback();
-        hiddenFormAgain()
+        hiddenFormAgain();
     });
 
     function hiddenFormAgain() {

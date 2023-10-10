@@ -59,7 +59,10 @@ export default function handleAddStepToBlockStep() {
                 if (isStep) {
                     valueStepDuplicate = isStep.dataset.value;
                 } else if (isBlock) {
-                    valueStepDuplicate = isBlock.dataset.value;
+                    const valueTypeMission = JSON.parse(isBlock.dataset.value);
+                    valueTypeMission.id = null;
+                    valueTypeMission.name = null;
+                    valueStepDuplicate = JSON.stringify(valueTypeMission);
                 }
                 MissionClass.addStep({
                     step: valueStepDuplicate,
@@ -114,7 +117,10 @@ export default function handleAddStepToBlockStep() {
                 const [type, name, id] = valueStep.split("#");
                 if (typeStep === "break") return;
                 functionTab.checked = true;
-                functionWrapper.querySelector("#" + typeStep).checked = true;
+                const functionWrapperDetail = functionWrapper.querySelector(
+                    "#" + typeStep
+                );
+                if (functionWrapperDetail) functionWrapperDetail.checked = true;
                 stepWrapper.checked = true;
                 const functionActive = functionWrapper.querySelector(
                     `[data-function-type='${type}'][data-id='${id}']`

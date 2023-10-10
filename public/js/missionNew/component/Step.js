@@ -45,7 +45,11 @@ const stepHTML = (props) => {
         <div draggable="true"
             class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
             <span class="mr-4">${icon}</span>
-            <span>${type === "break" ? "break;" : detail.name || name}</span>
+            <span>${
+                type === "break"
+                    ? "break;"
+                    : detail?.name || `<i class="fa-solid fa-bug"></i>`
+            }</span>
             ${iconEnableMove}
         </div>
         ${overLayPreventMoveOnMobile}
