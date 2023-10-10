@@ -38,7 +38,7 @@ export function wakeUpStop() {
                     data.name_seri = name_seri;
                 }
                 MissionClass[typeWakeupStop][currentKindModule] = data;
-                const statusSave = await MissionClass.save();
+                const statusSave = await MissionClass._save();
                 toggerMessage(
                     statusSave ? "success" : "error",
                     statusSave.message
