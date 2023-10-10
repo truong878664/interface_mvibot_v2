@@ -19,7 +19,13 @@ export default class Configuration extends Gpio {
         const wrapperElement = document.querySelector(
             `[data-type-wake-stop-wrapper="${this.type}"]`
         );
-        console.log(data);
+        const { name_seri } = data;
+        if (name_seri) {
+            const moduleName = wrapperElement.querySelector(
+                "[data-name-seri-module]"
+            );
+            moduleName.value = name_seri;
+        }
         this.data.notSetOut.checked = Number(data.not_set_out);
         this.setLightGpio(data, wrapperElement);
     }

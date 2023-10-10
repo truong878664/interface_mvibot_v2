@@ -16,7 +16,8 @@
                         fill="black" fill-opacity="0.81" />
                 </svg>
             </button>
-            <button data-action-history="redo" class="text-xl border rounded-md border-stone-400 bg-white px-2 btn w-10 h-10">
+            <button data-action-history="redo"
+                class="text-xl border rounded-md border-stone-400 bg-white px-2 btn w-10 h-10">
                 <svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M46.4377 341.843C46.4377 255 105.062 195.281 204.594 195.281H342.407L393.157 197.469L354.657 164.875L298.219 109.969C294.063 105.813 291.219 100.563 291.219 93.3438C291.219 80.0001 300.626 70.1562 314.844 70.1562C320.75 70.1562 327.313 73.0001 332.125 77.5937L457.688 201.406C462.719 206 465.344 212.563 465.344 219.125C465.344 225.687 462.719 232.031 457.688 236.844L332.125 360.656C327.313 365.251 320.75 368.093 314.844 368.093C300.626 368.093 291.219 358.25 291.219 344.688C291.219 337.686 294.063 332.438 298.219 328.064L354.657 273.156L393.157 240.781L342.407 242.969H203.063C132.626 242.969 93.9065 283 93.9065 339.875C93.9065 396.97 132.626 438.749 203.063 438.749H254.032C268.469 438.749 278.313 449.469 278.313 462.813C278.313 475.936 268.25 486.656 254.032 486.656H201.532C103.75 486.656 46.4377 429.126 46.4377 341.843Z"
@@ -31,7 +32,7 @@
             <div class="flex w-full h-full relative">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden>
                 <div class="w-full h-full relative lg:mr-4 md:peer-checked/step-wrapper:w-3/4 transition-all ">
-                    <div id="block-step-wrapper" class="overflow-y-auto max-h-full pb-32">
+                    <div id="block-step-wrapper" class="overflow-y-auto max-h-full pb-32 flex flex-wrap">
                         <button data-action-block-step="add"
                             class="active active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&.active]:bg-sky-800 [&.active]:text-white">
                             <i class="fa-solid fa-plus"></i>

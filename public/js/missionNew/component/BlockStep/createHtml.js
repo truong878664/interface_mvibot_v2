@@ -85,17 +85,23 @@ const createHtml = {
                     data-name="block"
                     data-block-wrapper="normal"
                     data-value='${JSON.stringify(value)}'
-                    data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+                    data-show-data="${
+                        !draggable
+                            ? "show"
+                            : value?.style?.hidden
+                            ? "hidden"
+                            : "show"
+                    }"
                     data-id="${value.id}"
                     class="${
                         draggable ? "" : "pointer-events-none"
-                    } group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit border-[2px] border-transparent min-w-[100px] min-h-[103px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
+                    } group/wrapper data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex w-full shadow-block bg-white px-4 py-10 rounded-lg my-4 relative pt-[20px]"
                     data-address="${address}"
                     data-address-index="${address}">
                     <span draggable="${draggable}" class="text-red-400 mr-3 w-[20px] h-[20px] flex justify-center items-center cursor-pointer hover:scale-105">
                         <i class="fa-solid fa-bullseye"></i>
                     </span>
-                    <span class="hidden group-data-[show-data='hidden']/wrapper:inline-block font-bold text-2xl ${
+                    <span class="hidden group-data-[show-data='hidden']/wrapper:block font-bold text-2xl ${
                         value.name || "text-red-500"
                     }">${value.name || "No name"}</span>
                     <div class="w-full group-data-[show-data='hidden']/wrapper:hidden" data-data-block="normal">
@@ -126,7 +132,13 @@ const createHtml = {
             <div
                 data-name="block"
                 data-block-wrapper="ifelse"
-                data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+                data-show-data="${
+                    !draggable
+                        ? "show"
+                        : value?.style?.hidden
+                        ? "hidden"
+                        : "show"
+                }"
                 data-value='${JSON.stringify(value)}'
                 data-address="${address}"
                 data-id="${value.id}"
@@ -185,7 +197,9 @@ const createHtml = {
             <div
             data-name="block"
             data-block-wrapper="trycatch"
-            data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+            data-show-data="${
+                !draggable ? "show" : value?.style?.hidden ? "hidden" : "show"
+            }"
             data-value='${JSON.stringify(value)}'
             data-id="${value.id}"
             data-address="${address}"
@@ -239,7 +253,13 @@ const createHtml = {
                 data-block-wrapper="while"
                 data-id="${value.id}"
                 draggable="false"
-                data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+                data-show-data="${
+                    !draggable
+                        ? "show"
+                        : value?.style?.hidden
+                        ? "hidden"
+                        : "show"
+                }"
                 data-value='${JSON.stringify(value)}'
                 class="${
                     draggable ? "" : "pointer-events-none"
@@ -290,7 +310,13 @@ const createHtml = {
             <div
                 data-name="block"
                 data-block-wrapper="logic_and"
-                data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+                data-show-data="${
+                    !draggable
+                        ? "show"
+                        : value?.style?.hidden
+                        ? "hidden"
+                        : "show"
+                }"
                 data-id="${value.id}"
                 data-value='${JSON.stringify(value)}'
                 class="${
@@ -343,7 +369,13 @@ const createHtml = {
                 data-block-wrapper="logic_or"
                 data-id="${value.id}"
                 draggable="false"
-                data-show-data="${value?.style?.hidden ? "hidden" : "show"}"
+                data-show-data="${
+                    !draggable
+                        ? "show"
+                        : value?.style?.hidden
+                        ? "hidden"
+                        : "show"
+                }"
                 data-value='${JSON.stringify(value)}'
                 class="${
                     draggable ? "" : "pointer-events-none"

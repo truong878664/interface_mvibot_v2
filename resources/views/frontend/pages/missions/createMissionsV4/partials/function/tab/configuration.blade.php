@@ -19,9 +19,9 @@
     </div>
     <div class="w-full h-full flex flex-col justify-center group/module">
         <div class="ml-2 items-center hidden my-3 peer-data-[module='module']/module:group-[]/module:flex">
-            <label for="" class="text-xl mr-3">Name GPIO module</label>
+            <label for="" class="text-2xl mr-3">Name GPIO module</label>
             <select data-name-seri-module="{{ $type }}"
-                class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] input-reset valid-input"
+                class="w-[200px] text-2xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] input-reset valid-input"
                 name="name_gpio" id="">
                 @foreach ($allRobots as $robot)
                     <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
@@ -29,9 +29,10 @@
             </select>
         </div>
         <div class="text-2xl mb-4 ml-2">
-            <label for="not_set_out_{{ $type }}" class="flex items-center gap-4">
+            <label for="not_set_out_{{ $type }}" class="inline-flex items-center gap-4 ">
                 <span>Not set out </span>
-                <input id="not_set_out_{{ $type }}" type="checkbox" name="not_set_out">
+                <input id="not_set_out_{{ $type }}" type="checkbox" name="not_set_out"
+                    class="w-6 h-6 rounded-md text-red-400 focus:outline-red-400">
             </label>
         </div>
         <div class="">

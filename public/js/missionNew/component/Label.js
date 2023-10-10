@@ -2,24 +2,24 @@ const Label = {
     sticky: `
     <div class="absolute top-[120%] left-1/2 -translate-x-1/2 bg-white rounded-md shadow-md text-xl" data-name="sticky">
         <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden text-stone-900">
-            <li class="px-6 py-1 hover:bg-stone-100 ">
-                <button data-action-block-step="delete" class="btn flex py-2">
+            <li>
+                <button data-action-block-step="delete" class="hover:bg-stone-100 px-6 btn flex py-2 w-full">
                     <span class="mr-2 text-red-500">
                         <i class="fa-solid fa-trash-can"></i>
                     </span>
                     <span>Delete</span>
                 </button>
             </li>
-            <li class="px-6 py-1 hover:bg-stone-100 ">
-                <button data-action-block-step="detail" class="btn flex py-2">
+            <li>
+                <button data-action-block-step="detail" class="hover:bg-stone-100 px-6 btn flex py-2 w-full">
                     <span class="mr-2 text-sky-500">
                         <i class="fa-solid fa-circle-info"></i>
                     </span>
                     <span>Detail</span>
                 </button>
             </li>
-            <li class="px-6 py-1 hover:bg-stone-100 ">
-                <button data-action-block-step="duplicate" class="btn flex py-2">
+            <li>
+                <button data-action-block-step="duplicate" class="hover:bg-stone-100 px-6 btn flex py-2 w-full">
                     <span class="mr-2 text-orange-500">
                         <i class="fa-regular fa-clone"></i>
                     </span>
