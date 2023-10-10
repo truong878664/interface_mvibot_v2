@@ -10,7 +10,7 @@ import position from "./position/index.js";
 import sound from "./sound/index.js";
 import variable from "./variable/index.js";
 import { classFunctions } from "./index.js";
-import { FunctionStepClass } from "../index.js";
+import { FunctionStepClass, MissionClass } from "../index.js";
 
 export default function handleFormFunction() {
     handleShowFormFunction();
@@ -64,6 +64,10 @@ function handleActionFunction() {
                 const dataUpdate = { id, ...dataGet, type: functionClass.type };
                 (async () => {
                     const stepUpdated = await functionClass.update(dataUpdate);
+                    FunctionStepClass.updateItem({
+                        type: functionClass.type,
+                        data: JSON.parse(JSON.stringify(stepUpdated)),
+                    });
                     showFormFunction({
                         type: functionType,
                         show: false,
@@ -80,6 +84,7 @@ function handleActionFunction() {
                         `[data-id='${id}']`
                     );
                     wrapperFunction.replaceChild(DOMElement, elementUpdating);
+                    MissionClass.render();
                     functionClass.reset();
                 })();
             },
