@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="username-wrapper">
-                    <input type="text" placeholder="Username" name="username" class="login-input username"
-                        value="{{ old('username') }}">
+                    <input type="text" placeholder="Username" name="username"
+                        class="login-input bg-transparent text-main rounded-md username" value="{{ old('username') }}">
 
                     <span class="input-fail">
                         @error('username')
@@ -39,8 +39,9 @@
 
                 </div>
                 <div class="password-wrapper">
-                    <input type="password" placeholder="Password" name="password" class="login-input password">
                     <span class="show-password"><i class="fa-regular fa-eye"></i></span>
+                    <input type="password" placeholder="Password" name="password"
+                        class="login-input bg-transparent text-main rounded-md password [&[type='text']]:text-red-500">
                     <span class="input-fail">
                         @error('password')
                             {{ $message }}
@@ -50,12 +51,14 @@
                 </div>
 
                 <div class="login-footer">
-                    <div class="remember-wrapper">
-                        <input type="checkbox" class="remember-checkbox" name="remember" id="remember">
+                    <div class="remember-wrapper flex items-center">
+                        <input type="checkbox"
+                            class="remember-checkbox w-6 h-6 rounded-lg text-orange-400 focus:outline-orange-500"
+                            name="remember" id="remember">
                         <label for="remember">Remember me</label>
                     </div>
-                    <div class="link-forgot">
-                        <a href="">Forgot Password?</a>
+                    <div class="link-forgot opacity-50  cursor-not-allowed">
+                        <a href="" class="pointer-events-none">Forgot Password?</a>
                     </div>
                 </div>
                 @if (Session::get('fail'))
@@ -64,7 +67,10 @@
                         {{ Session::get('fail') }}
                     </span>
                 @endif
-                <button class="login-btn btn"><i class="fa-solid fa-arrow-right-long"></i></button>
+                <button
+                    class="login-btn btn hover:shadow-lg hover:ring-4 group/login hover:ring-red-500/30 transition-all">
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </button>
                 @csrf
             </form>
         </div>
