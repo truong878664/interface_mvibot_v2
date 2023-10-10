@@ -192,6 +192,7 @@ export default function handleAddStepToBlockStep() {
                 const valueNewTypeMission = JSON.parse(
                     blockTypeMission.dataset.value
                 );
+
                 const message = await typeMissionClass.update({
                     id: idTypeMission,
                     data: valueNewTypeMission,

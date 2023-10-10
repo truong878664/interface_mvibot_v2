@@ -10,6 +10,7 @@ import position from "./position/index.js";
 import sound from "./sound/index.js";
 import variable from "./variable/index.js";
 import { classFunctions } from "./index.js";
+import { FunctionStepClass } from "../index.js";
 
 export default function handleFormFunction() {
     handleShowFormFunction();
@@ -48,7 +49,10 @@ function handleActionFunction() {
                         ...stepSaved,
                         status: "new",
                     });
-
+                    FunctionStepClass.pushFunctionStepToData({
+                        type: functionType,
+                        data: stepSaved,
+                    });
                     functionClass.addItem(DOMElement);
                 } else {
                     toggerMessage("error", res.message);
@@ -56,7 +60,7 @@ function handleActionFunction() {
             },
             update() {
                 const id = functionClass.currentIdUpdate;
-                const {data:dataGet} = functionClass.get();
+                const { data: dataGet } = functionClass.get();
                 const dataUpdate = { id, ...dataGet, type: functionClass.type };
                 (async () => {
                     const stepUpdated = await functionClass.update(dataUpdate);
