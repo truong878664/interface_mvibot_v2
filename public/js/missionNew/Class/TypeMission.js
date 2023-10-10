@@ -1,5 +1,6 @@
 export default class TypeMission {
     constructor() {
+        this.type = document.querySelector("#type-mission").value;
         this.urlApi = "/api/type-mission-v4";
     }
     async save(data) {
@@ -14,7 +15,7 @@ export default class TypeMission {
         return message;
     }
     async get() {
-        const res = await fetch(this.urlApi + "?type-mission=normal");
+        const res = await fetch(this.urlApi + `?type-mission=${this.type}`);
         const data = await res.json();
         return data;
     }

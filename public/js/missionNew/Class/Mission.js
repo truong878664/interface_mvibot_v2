@@ -4,7 +4,6 @@ import { toggerMessage } from "../../main.js";
 import publishTopicString from "../../rosModule/topicString.js";
 import BlockStep from "../component/BlockStep/index.js";
 import isJSON from "../handle/isJson.js";
-import { MissionClass } from "../index.js";
 
 export default class Mission {
     constructor() {

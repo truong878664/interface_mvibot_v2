@@ -46,8 +46,13 @@ export default class Step {
         dataValidated.data.name = data.name
             .replaceAll("?", "")
             .replaceAll("!", "");
+
         for (const key in data) {
-            if (data[key] != "0" || !data[key]) {
+            if (
+                data[key] === undefined ||
+                data[key] === null ||
+                data[key] === ""
+            ) {
                 dataValidated.success = false;
                 dataValidated.message = `${key} cannot be empty!`;
                 return dataValidated;
@@ -71,7 +76,7 @@ export default class Step {
                 method: "POST",
                 body: JSON.stringify(data.data),
             });
-            const stepSaved = res.json();
+            const stepSaved = await res.json();
             this.message.message = `save ${this.type} successfully!`;
             this.message.saved = true;
             this.message.status = "success";
