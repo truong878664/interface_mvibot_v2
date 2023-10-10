@@ -98,7 +98,6 @@ export default class Step {
                 body: JSON.stringify(data),
             });
             const message = await res.json();
-            console.log(message);
             this.reset();
             return message;
         } catch (error) {

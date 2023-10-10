@@ -74,6 +74,22 @@ function handleMoreAction() {
             code() {
                 handleCode();
             },
+            showAllMission() {
+                const buttonCurrentHiddenStepList = document.querySelectorAll(
+                    "[data-action-block-step='hidden'][data-status='hidden']"
+                );
+                buttonCurrentHiddenStepList.forEach((button) => {
+                    button.click();
+                });
+            },
+            hideAllMission() {
+                const buttonCurrentHiddenStepList = document.querySelectorAll(
+                    "[data-action-block-step='hidden'][data-status='show']"
+                );
+                buttonCurrentHiddenStepList.forEach((button) => {
+                    button.click();
+                });
+            },
         };
         actions[typeButton]?.();
     };

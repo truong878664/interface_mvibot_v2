@@ -45,7 +45,11 @@ export default class Mission {
         this.historyStatus.data.push(JSON.parse(JSON.stringify(this.data)));
         this.render();
     }
-    async save() {
+    save() {
+        useDebounce({ cb: this._save.bind(this), delay: 600 });
+    }
+
+    async _save() {
         try {
             const res = await fetch(this.UrlApi, {
                 method: "PUT",
