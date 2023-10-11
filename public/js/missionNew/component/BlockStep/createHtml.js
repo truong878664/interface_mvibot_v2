@@ -232,6 +232,22 @@ const createHtml = {
                     className: "",
                     hidden: !isTypeMissionAvailable,
                 },
+                {
+                    action: "unLinkTypeMission",
+                    title: "Unlink",
+                    icon: '<i class="fa-solid fa-link-slash"></i>',
+                    color: "text-red-500",
+                    className: "",
+                    hidden: !isTypeMissionAvailable,
+                },
+                {
+                    action: "copy",
+                    title: "Copy",
+                    icon: '<i class="fa-solid fa-copy"></i>',
+                    color: "text-blue-500",
+                    className: "pointer-events-none opacity-40",
+                    hidden: false,
+                },
             ];
 
             const ButtonItemMore = (props) => {
@@ -239,7 +255,7 @@ const createHtml = {
                 if (hidden) return "";
                 return `
                 <li>
-                    <button data-action-block-step="${action}" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                    <button data-action-block-step="${action}" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full ${className}">
                         <span class="mr-2 w-[20px] ${color}">${icon}</span>
                         <span>${title}</span>
                     </button>

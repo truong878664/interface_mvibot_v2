@@ -1,5 +1,6 @@
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import { toggerMessage } from "../../main.js";
+import Label from "../component/Label.js";
 import syncTypeMission from "../handle/syncTypeMission.js";
 import { MissionClass } from "../index.js";
 import typeMission, { typeMissionClass } from "./index.js";
@@ -72,7 +73,45 @@ export default function handleActionTypeMission() {
                 syncTypeMission(dataTypeMission);
             },
             edit() {
-                console.log(itemTypeMission);
+                const dataTypeMission = JSON.parse(
+                    JSON.parse(itemTypeMission.dataset.value).data
+                );
+                const { id, name } = dataTypeMission;
+                const { x, y } = buttonAction.getBoundingClientRect();
+                const { inputForm, buttonSubmit, formElement } = Label.form({
+                    x,
+                    y,
+                });
+                requestAnimationFrame(() => inputForm.focus());
+                inputForm.value = name;
+
+                buttonSubmit.onclick = async () => {
+                    if (inputForm.value === "") {
+                        toggerMessage(
+                            "error",
+                            "The name field cannot be empty!"
+                        );
+                        return;
+                    }
+
+                    if (inputForm.value === name) {
+                        formElement.remove();
+                        return;
+                    }
+                    dataTypeMission.name = inputForm.value;
+                    const status = await typeMissionClass.update({
+                        id,
+                        data: dataTypeMission,
+                    });
+                    if (!status.error) {
+                        formElement.remove();
+                        syncTypeMission(dataTypeMission);
+                    }
+                    toggerMessage(
+                        status.error ? "error" : "success",
+                        status.message
+                    );
+                };
             },
         };
         actions[typeButtonAction]?.();

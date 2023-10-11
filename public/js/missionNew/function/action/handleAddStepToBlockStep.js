@@ -147,15 +147,14 @@ export default function handleAddStepToBlockStep() {
                 const data = blockWrapper.dataset.value;
                 const typeBlock = blockWrapper.dataset.blockWrapper;
                 const { x, y } = buttonAction.getBoundingClientRect();
-                const div = document.createElement("div");
-                div.innerHTML = Label.formName({ x, y });
-                const formName = div.firstElementChild;
-                const enterBtn = formName.querySelector(".enter-btn");
-                const input = formName.querySelector("[name]");
-                requestAnimationFrame(() => input.focus());
+                const { inputForm, buttonSubmit, formElement } = Label.form({
+                    x,
+                    y,
+                });
+                requestAnimationFrame(() => inputForm.focus());
 
-                enterBtn.onclick = async (e) => {
-                    const name = formName.querySelector("[name='name']").value;
+                buttonSubmit.onclick = async (e) => {
+                    const name = inputForm.value;
                     const dataTranslate = JSON.parse(data);
                     dataTranslate.name = name;
                     const dataSaveBlockMission = {
@@ -181,7 +180,7 @@ export default function handleAddStepToBlockStep() {
                         },
                     });
 
-                    formName.remove();
+                    formElement.remove();
                     MissionClass.save();
                     message.saved && typeMission.render();
                     toggerMessage(
@@ -189,26 +188,31 @@ export default function handleAddStepToBlockStep() {
                         message.message
                     );
                 };
-                blockStepWrapper.appendChild(formName);
             },
-            async update() {
-                const blockTypeMission = buttonAction.closest(
-                    "[data-block-wrapper]"
-                );
-                const idTypeMission = blockTypeMission.dataset.id;
-                const valueNewTypeMission = JSON.parse(
-                    blockTypeMission.dataset.value
-                );
+            update() {
+                const handle = async () => {
+                    const blockTypeMission = buttonAction.closest(
+                        "[data-block-wrapper]"
+                    );
+                    const idTypeMission = blockTypeMission.dataset.id;
+                    const valueNewTypeMission = JSON.parse(
+                        blockTypeMission.dataset.value
+                    );
 
-                const message = await typeMissionClass.update({
-                    id: idTypeMission,
-                    data: valueNewTypeMission,
+                    const message = await typeMissionClass.update({
+                        id: idTypeMission,
+                        data: valueNewTypeMission,
+                    });
+                    syncTypeMission(valueNewTypeMission);
+                    toggerMessage(
+                        message.error ? "error" : "success",
+                        message.message
+                    );
+                };
+                confirmationForm({
+                    message: "Do you want to update?",
+                    callback: handle,
                 });
-                syncTypeMission(valueNewTypeMission);
-                toggerMessage(
-                    message.error ? "error" : "success",
-                    message.message
-                );
             },
             detailTypeMission() {
                 const idTypeMission = blockWrapper.dataset.id;
@@ -243,6 +247,22 @@ export default function handleAddStepToBlockStep() {
                         "highline-type-mission"
                     );
                 }, 4000);
+            },
+            unLinkTypeMission() {
+                const handle = () => {
+                    const [address, indexStep] =
+                        MissionClass.getAddressByStep(buttonAction);
+                    MissionClass.update({
+                        address,
+                        indexStep,
+                        data: { id: null, name: null },
+                    });
+                    MissionClass.save();
+                };
+                confirmationForm({
+                    message: "Do you want to unlink type mission?",
+                    callback: handle,
+                });
             },
         };
 
