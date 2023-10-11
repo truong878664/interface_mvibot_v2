@@ -2648,3 +2648,7 @@ input[type="number"] {
 [hidden] {
     display: none !important;
 }
+
+.highline-type-mission {
+    @apply ring-2 ring-main;
+}

@@ -32,7 +32,8 @@
             <div class="flex w-full h-full relative">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden>
                 <div class="w-full h-full relative lg:mr-4 md:peer-checked/step-wrapper:w-3/4 transition-all ">
-                    <div id="block-step-wrapper" class="overflow-y-auto max-h-full pb-32 flex flex-wrap">
+                    <div id="block-step-wrapper"
+                        class="overflow-y-auto h-full w-full pb-72 pt-10 inline-flex flex-wrap gap-4 items-start content-start">
                         <button data-action-block-step="add"
                             class="active active-block-step-root btn w-[25px] h-[20px] relative flex justify-center text-[16px] rounded-md mb-2 ml-2  items-center text-sky-500 bg-sky-100 self-center [&.active]:bg-sky-800 [&.active]:text-white">
                             <i class="fa-solid fa-plus"></i>

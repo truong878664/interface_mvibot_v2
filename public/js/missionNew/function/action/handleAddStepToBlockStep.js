@@ -20,6 +20,7 @@ export default function handleAddStepToBlockStep() {
         if (!buttonAction) return;
         const typeAction = buttonAction.dataset.actionBlockStep;
         let functionHighline;
+        let typeMissionHighline;
         let timeOutDeleteHighline;
 
         const blockWrapper = buttonAction.closest("[data-block-wrapper]");
@@ -146,15 +147,14 @@ export default function handleAddStepToBlockStep() {
                 const data = blockWrapper.dataset.value;
                 const typeBlock = blockWrapper.dataset.blockWrapper;
                 const { x, y } = buttonAction.getBoundingClientRect();
-                const div = document.createElement("div");
-                div.innerHTML = Label.formName({ x, y });
-                const formName = div.firstElementChild;
-                const enterBtn = formName.querySelector(".enter-btn");
-                const input = formName.querySelector("[name]");
-                requestAnimationFrame(() => input.focus());
+                const { inputForm, buttonSubmit, formElement } = Label.form({
+                    x,
+                    y,
+                });
+                requestAnimationFrame(() => inputForm.focus());
 
-                enterBtn.onclick = async (e) => {
-                    const name = formName.querySelector("[name='name']").value;
+                buttonSubmit.onclick = async (e) => {
+                    const name = inputForm.value;
                     const dataTranslate = JSON.parse(data);
                     dataTranslate.name = name;
                     const dataSaveBlockMission = {
@@ -180,34 +180,89 @@ export default function handleAddStepToBlockStep() {
                         },
                     });
 
-                    formName.remove();
-
+                    formElement.remove();
+                    MissionClass.save();
                     message.saved && typeMission.render();
                     toggerMessage(
                         message.saved ? "success" : "error",
                         message.message
                     );
                 };
-                blockStepWrapper.appendChild(formName);
             },
-            async update() {
-                const blockTypeMission = buttonAction.closest(
-                    "[data-block-wrapper]"
-                );
-                const idTypeMission = blockTypeMission.dataset.id;
-                const valueNewTypeMission = JSON.parse(
-                    blockTypeMission.dataset.value
+            update() {
+                const handle = async () => {
+                    const blockTypeMission = buttonAction.closest(
+                        "[data-block-wrapper]"
+                    );
+                    const idTypeMission = blockTypeMission.dataset.id;
+                    const valueNewTypeMission = JSON.parse(
+                        blockTypeMission.dataset.value
+                    );
+
+                    const message = await typeMissionClass.update({
+                        id: idTypeMission,
+                        data: valueNewTypeMission,
+                    });
+                    syncTypeMission(valueNewTypeMission);
+                    toggerMessage(
+                        message.error ? "error" : "success",
+                        message.message
+                    );
+                };
+                confirmationForm({
+                    message: "Do you want to update?",
+                    callback: handle,
+                });
+            },
+            detailTypeMission() {
+                const idTypeMission = blockWrapper.dataset.id;
+                const typeMission = blockWrapper.dataset.blockWrapper;
+                const typeMissionTab =
+                    document.getElementById("tab-type-mission");
+                const listTypeMissionWrapper = document.querySelector(
+                    "#list-type-mission-wrapper"
                 );
 
-                const message = await typeMissionClass.update({
-                    id: idTypeMission,
-                    data: valueNewTypeMission,
-                });
-                syncTypeMission(valueNewTypeMission);
-                toggerMessage(
-                    message.error ? "error" : "success",
-                    message.message
+                const dataListTypeMissionWrapper =
+                    listTypeMissionWrapper.querySelector(
+                        `[data-list-type-mission='${typeMission}']`
+                    );
+                stepWrapper.checked = true;
+                typeMissionTab.checked = true;
+                document.querySelector(`input#${typeMission}`).checked = true;
+                const foundedTypeMission =
+                    dataListTypeMissionWrapper.querySelector(
+                        `[data-id='${idTypeMission}']`
+                    );
+
+                foundedTypeMission?.classList.add("highline-type-mission");
+                foundedTypeMission?.scrollIntoView({ behavior: "smooth" });
+                clearTimeout(timeOutDeleteHighline);
+                typeMissionHighline?.classList.remove("highline");
+                typeMissionHighline = getNode(
+                    "[data-name='item-type-mission'].highline-type-mission"
                 );
+                timeOutDeleteHighline = setTimeout(() => {
+                    typeMissionHighline?.classList.remove(
+                        "highline-type-mission"
+                    );
+                }, 4000);
+            },
+            unLinkTypeMission() {
+                const handle = () => {
+                    const [address, indexStep] =
+                        MissionClass.getAddressByStep(buttonAction);
+                    MissionClass.update({
+                        address,
+                        indexStep,
+                        data: { id: null, name: null },
+                    });
+                    MissionClass.save();
+                };
+                confirmationForm({
+                    message: "Do you want to unlink type mission?",
+                    callback: handle,
+                });
             },
         };
 

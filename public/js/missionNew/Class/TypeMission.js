@@ -47,21 +47,24 @@ export default class TypeMission {
     }
 
     html(data) {
-        const { name, id } = data;
+        const { name, id, type } = data;
         return `
             <div
                 data-value='${JSON.stringify(data)}'
                 data-id='${id}'
                 data-name="item-type-mission"
-                class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg">
-                <div class="flex">
-                    <input type="checkbox" data-select-type-mission-id="" data-type="normal" class="mr-4 w-[12px] h-[12px] accent-[#f5b933]">
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <span class="font-bold text-sky-600">${name}</span>
-                        </div>
-                    </div>
+                class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg last:mb-20">
+                
+                <div class="flex w-full">
+                    <input
+                    data-select-type-mission-id="${id}"
+                    id="${id + type}"
+                    data-type="${type}"
+                    type="checkbox"
+                    class="mr-4 w-6 h-6 rounded-md cursor-pointer text-green-500 bg-stone-200 border-none function-item-select">
+                    <button data-button-type-mission-kind="detail" class="font-bold text-sky-600 w-full py-3 text-start">${name}</button>
                 </div>
+
                 <div class="absolute top-0 right-0">
                     <button data-button-type-mission-kind="add" 
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
@@ -70,7 +73,15 @@ export default class TypeMission {
                     <div
                         class="text-2xl mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block">
+                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block py-4">
+                            <li>
+                                <button data-button-type-mission-kind="edit" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                    <span class="mr-2 w-[20px] text-blue-500">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </span>
+                                    <span>Edit</span>
+                                </button>
+                            </li>
                             <li>
                                 <button data-button-type-mission-kind="delete" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
                                     <span class="mr-2 w-[20px] text-red-500">
@@ -80,7 +91,7 @@ export default class TypeMission {
                                 </button>
                             </li>
                             <li>
-                                <button data-button-type-mission-kind="detail" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                <button data-button-type-mission-kind="detail" class="btn hidden px-6 py-2 hover:bg-stone-100 text-xl w-full">
                                     <span class="mr-2 w-[20px] text-sky-500">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </span>
@@ -96,6 +107,7 @@ export default class TypeMission {
                                     <span>Sync</span>
                                 </button>
                             </li>
+                            
                         </ul>
                     </div>
                 </div>

@@ -86,7 +86,7 @@ export default class Mission {
     }
     async getDataRobot({ html = false }) {
         try {
-            await this.save();
+            await this._save();
             const urlGet =
                 this.UrlApi + "?kind=convert_data_robot" + `&html=${html}`;
             const res = await fetch(urlGet);
@@ -223,7 +223,6 @@ export default class Mission {
                 targetItemAddStyle[key] = data[key];
             }
         }
-        // MissionClass.save();
         this.render();
     }
     move({

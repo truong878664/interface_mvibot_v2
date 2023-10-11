@@ -79,7 +79,9 @@ class TypeMissionVerController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            TypeMissionVer::where("id", $id)->update(['data' => $request->data]);
+            $data = $request->data;
+            $name = $data['name'];
+            TypeMissionVer::where("id", $id)->update(['data' => $request->data, 'name' => $name]);
             return ["message" => "update type mission successfully", "error" => false];
         } catch (\Throwable $th) {
             return ["message" => "ERR!" . $th, "error" => true];

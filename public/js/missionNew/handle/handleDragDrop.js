@@ -51,7 +51,6 @@ export default function handleDragDrop() {
             MissionClass.move(optionMove);
             return;
         }
-
     });
     // END DROP
     // DRAG START
@@ -70,7 +69,8 @@ export default function handleDragDrop() {
     // END DRAG START
     // OVER
     const line = Label.line();
-    const lineLarge = Label.lineLarge();
+    const lineLargeY = Label.lineLargeY();
+    const lineLargeX = Label.lineLargeX();
     blockStepWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();
         const itemDrop = e.target.closest(
@@ -111,21 +111,27 @@ export default function handleDragDrop() {
             const targetHeight = itemDrop.offsetHeight;
             const distanceFromCenter = offsetY - targetHeight / 2;
 
+            const isHidden = itemDrop.dataset.showData === "hidden";
+            const lineLarge = isHidden ? lineLargeX : lineLargeY;
+            const typeSide = isHidden ? "x" : "y";
+            const valueSideLineLarge = {
+                x: ["left", "right"],
+                y: ["top", "bottom"],
+            };
             if (distanceFromCenter < 0) {
-                lineLarge.style.top = "-3px";
-                lineLarge.style.bottom = "auto";
+                lineLarge.style[valueSideLineLarge[typeSide][0]] = "-3px";
+                lineLarge.style[valueSideLineLarge[typeSide][1]] = "auto";
                 isLeftOrRightDrop = "left";
             } else {
+                lineLarge.style[valueSideLineLarge[typeSide][1]] = "-3px";
+                lineLarge.style[valueSideLineLarge[typeSide][0]] = "auto";
                 isLeftOrRightDrop = "right";
-                lineLarge.style.bottom = "-3px";
-                lineLarge.style.top = "auto";
             }
             itemDrop.appendChild(lineLarge);
         } else {
             removeSticky.hightLineLine();
             removeSticky.hightLineBorder();
         }
-
         if (deleteZone) {
             deleteZone.dataset.status = "active";
         } else {
