@@ -54,7 +54,7 @@
         @php
             $userName = session('UserName');
             $key = substr($userName, 0, 1);
-            
+
             $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
             $color = $colors[strlen($userName)];
         @endphp
@@ -114,7 +114,7 @@
         </div>
     </div>
 
-    <div class="fixed bottom-10 left-10 z-[21] flex">
+    <div class="fixed bottom-10 left-10 z-[21] flex sr-only">
         <button
             class="w-[40px] h-[40px] bg-[#fff] rounded-full border border-[#333] flex justify-center items-center hover:opacity-100 opacity-80 mr-4 btn back-history-btn"><i
                 class="fa-solid fa-angle-left"></i></button>
