@@ -10,23 +10,36 @@ const createHtmlFunctionItem = {
         data,
         status = "",
     }) {
-        const html = `
-            <div data-function-type="${mode}" data-status="" data-name=${name} ${
-            marker_type ? `data-marker-type="${marker_type}"` : ``
-        } data-value="${value}" data-id=${id} data-data='${data}'
-                class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg hover:z-50 data-[status='hidden']:hidden">
+        const ColorPosition = color_position
+            ? `<span class="rounded-full border shadow-sm shadow-[#ccc] ml-2" style="background-color:${color_position};width:15px;height:15px;"></span>`
+            : "";
+
+        const MarkerType = marker_type
+            ? `data-marker-type="${marker_type}"`
+            : "";
+        return `
+            <div 
+            data-function-type="${mode}"
+            data-status=""
+            data-name=${name}
+            data-value="${value}"
+            data-id=${id}
+            data-data='${data}'
+            ${MarkerType}
+            class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg hover:z-50 data-[status='hidden']:hidden last:mb-20">
                 <div class="flex">
-                    <input data-select-function-id="1" data-type="marker" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
+                    <input
+                        data-select-function-id="${id}"
+                        id="${id + mode}"
+                        data-type=""
+                        type="checkbox"
+                        class="mr-4 w-6 h-6 rounded-md cursor-pointer text-green-500 bg-stone-200 border-none function-item-select">
                     <div class="flex flex-col">
-                        <div class="flex">
+                        <label class="flex cursor-pointer" for="${id + mode}">
                             <span class="mr-2 text-green-400 status hidden">${status}</span>
                             <span class=" font-bold font-3xl capitalize">${mode}</span>
-                            ${
-                                color_position
-                                    ? `<span class="rounded-full border shadow-sm shadow-[#ccc] ml-2" style="background-color:${color_position};width:15px;height:15px;"></span>`
-                                    : ""
-                            }
-                        </div>
+                            ${ColorPosition}
+                        </label>
                         <div class="flex">
                             <span class="mr-2">Name:</span>
                             <span class="text-sky-600 font-bold name-mission-marker">${name}</span>
@@ -49,7 +62,6 @@ const createHtmlFunctionItem = {
                 </div>
             </div>
         `;
-        return html;
     },
     detail(data) {
         const detail = [];

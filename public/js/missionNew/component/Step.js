@@ -38,8 +38,8 @@ const stepHTML = (props) => {
     if (type === "variable") return htmlVariable(props);
 
     return `
-    <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-        <span class="text-sky-500 mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500">${
+    <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+        <span class="text-sky-500 font-bold text-[16px] group-data-[type='error']/step:text-red-500 mr-4">${
             details[type]
         }</span>
         <div draggable="true"

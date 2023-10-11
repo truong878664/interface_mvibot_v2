@@ -71,6 +71,9 @@ export default function handleActionTypeMission() {
                 );
                 syncTypeMission(dataTypeMission);
             },
+            edit() {
+                console.log(itemTypeMission);
+            },
         };
         actions[typeButtonAction]?.();
     };

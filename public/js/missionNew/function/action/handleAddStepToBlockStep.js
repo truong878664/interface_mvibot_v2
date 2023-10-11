@@ -20,6 +20,7 @@ export default function handleAddStepToBlockStep() {
         if (!buttonAction) return;
         const typeAction = buttonAction.dataset.actionBlockStep;
         let functionHighline;
+        let typeMissionHighline;
         let timeOutDeleteHighline;
 
         const blockWrapper = buttonAction.closest("[data-block-wrapper]");
@@ -181,7 +182,7 @@ export default function handleAddStepToBlockStep() {
                     });
 
                     formName.remove();
-
+                    MissionClass.save();
                     message.saved && typeMission.render();
                     toggerMessage(
                         message.saved ? "success" : "error",
@@ -208,6 +209,40 @@ export default function handleAddStepToBlockStep() {
                     message.error ? "error" : "success",
                     message.message
                 );
+            },
+            detailTypeMission() {
+                const idTypeMission = blockWrapper.dataset.id;
+                const typeMission = blockWrapper.dataset.blockWrapper;
+                const typeMissionTab =
+                    document.getElementById("tab-type-mission");
+                const listTypeMissionWrapper = document.querySelector(
+                    "#list-type-mission-wrapper"
+                );
+
+                const dataListTypeMissionWrapper =
+                    listTypeMissionWrapper.querySelector(
+                        `[data-list-type-mission='${typeMission}']`
+                    );
+                stepWrapper.checked = true;
+                typeMissionTab.checked = true;
+                document.querySelector(`input#${typeMission}`).checked = true;
+                const foundedTypeMission =
+                    dataListTypeMissionWrapper.querySelector(
+                        `[data-id='${idTypeMission}']`
+                    );
+
+                foundedTypeMission?.classList.add("highline-type-mission");
+                foundedTypeMission?.scrollIntoView({ behavior: "smooth" });
+                clearTimeout(timeOutDeleteHighline);
+                typeMissionHighline?.classList.remove("highline");
+                typeMissionHighline = getNode(
+                    "[data-name='item-type-mission'].highline-type-mission"
+                );
+                timeOutDeleteHighline = setTimeout(() => {
+                    typeMissionHighline?.classList.remove(
+                        "highline-type-mission"
+                    );
+                }, 4000);
             },
         };
 

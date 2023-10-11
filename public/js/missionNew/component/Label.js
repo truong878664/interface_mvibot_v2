@@ -42,7 +42,7 @@ const Label = {
         );
         return line;
     },
-    lineLarge() {
+    lineLargeY() {
         const line = document.createElement("div");
         line.classList.add(
             "absolute",
@@ -50,6 +50,18 @@ const Label = {
             "h-[2px]",
             "bg-main",
             "left-0",
+            "highline-line"
+        );
+        return line;
+    },
+    lineLargeX() {
+        const line = document.createElement("div");
+        line.classList.add(
+            "absolute",
+            "w-[2px]",
+            "h-full",
+            "bg-main",
+            "top-0",
             "highline-line"
         );
         return line;
