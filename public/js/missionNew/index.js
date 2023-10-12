@@ -13,10 +13,11 @@ import { wakeUpStop } from "./configuration/index.js";
 import search from "./function/action/search.js";
 import handleAddStepToBlockStep from "./function/action/handleAddStepToBlockStep.js";
 import test from "./test.js";
-import FunctionStep from "./Class/FunctionStep.js";
+import { FunctionStepClass } from "./FunctionStepClass.js";
 
-export const MissionClass = new Mission();
-export const FunctionStepClass = new FunctionStep();
+const idMission = document.getElementById("id-mission");
+
+export const MissionClass = new Mission(idMission.value);
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
 export const functionWrapper = document.getElementById("function-container");
 createTypeMission();

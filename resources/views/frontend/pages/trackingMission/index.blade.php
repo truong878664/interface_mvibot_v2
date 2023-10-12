@@ -1,7 +1,7 @@
 <div class="tracking-mission-wrapper h-full">
     <div class="map-tracking-wrapper bg-[#ccc]">
         <div class="map-tracking" id="map"></div>
-        {{-- @include('frontend.pages.trackingMission.missionInProgress') --}}
+        @include('frontend.pages.trackingMission.missionInProgress')
         <div class="choose-robot-tracking">
             <input type="hidden" id="robot-navigation-json" value="{{ json_encode($robotNavigate) }}">
             @include('frontend.blocks.selectRobot', [

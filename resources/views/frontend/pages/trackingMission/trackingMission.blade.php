@@ -1,6 +1,5 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    {{-- <div class="heading missions-heading">Mission</div> --}}
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-auto">
         @include('frontend.pages.trackingMission.index')
         <script type="module" src="/js/missions.js"></script>

@@ -6,13 +6,14 @@ import BlockStep from "../component/BlockStep/index.js";
 import isJSON from "../handle/isJson.js";
 
 export default class Mission {
-    constructor() {
+    constructor(id) {
         this.data = [];
         this.currentAddAddress = "";
         this.missionWrapperElement =
             document.getElementById("block-step-wrapper");
-        this.id = document.getElementById("id-mission").value;
-        this.typeMission = document.getElementById("type-mission").value;
+        this.id = id;
+
+        this.typeMission = document.getElementById("type-mission")?.value;
         this.UrlApi = "/api/mission-v4/" + this.id;
         this.saved = true;
         this.historyStatus = {
@@ -44,6 +45,12 @@ export default class Mission {
         );
         this.historyStatus.data.push(JSON.parse(JSON.stringify(this.data)));
         this.render();
+    }
+    async getDataByName(name) {
+        const urlGet = "/api/mission-v4/" + name + "?kind=get_by_name";
+        const res = await fetch(urlGet);
+        const status = await res.json();
+        return status;
     }
     save() {
         useDebounce({ cb: this._save.bind(this), delay: 600 });

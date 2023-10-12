@@ -8,21 +8,21 @@ export default class Position extends Step {
         const form = document.querySelector(
             "#function-item-form-wrapper [data-type='position']"
         );
-        this.data.mode_position = form.querySelector(
+        this.data.mode_position = form?.querySelector(
             "[name=mode_position_other]"
         );
-        this.data.name = form.querySelector('[name="name_position"]');
-        this.data.x = form.querySelector('[name="x"]');
-        this.data.y = form.querySelector('[name="y"]');
-        this.data.z = form.querySelector('[name="z"]');
-        this.data.w = form.querySelector('[name="w"]');
-        this.data.time_out = form.querySelector('[name="time_out"]');
-        this.data.color_position = form.querySelector(
+        this.data.name = form?.querySelector('[name="name_position"]');
+        this.data.x = form?.querySelector('[name="x"]');
+        this.data.y = form?.querySelector('[name="y"]');
+        this.data.z = form?.querySelector('[name="z"]');
+        this.data.w = form?.querySelector('[name="w"]');
+        this.data.time_out = form?.querySelector('[name="time_out"]');
+        this.data.color_position = form?.querySelector(
             '[name="color_position"]'
         );
-        this.data.mode_position = form.querySelector('[name="mode_position"]');
-        this.data.mode_child = form.querySelector('[name="mode_child"]');
-        this.data.map = form.querySelector("#map-active-input");
+        this.data.mode_position = form?.querySelector('[name="mode_position"]');
+        this.data.mode_child = form?.querySelector('[name="mode_child"]');
+        this.data.map = form?.querySelector("#map-active-input");
     }
 
     get() {

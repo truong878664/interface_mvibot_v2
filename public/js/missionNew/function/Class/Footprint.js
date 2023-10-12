@@ -4,11 +4,11 @@ export default class Footprint extends Step {
         super(data);
         this.type = "footprint";
         const form = document.getElementById("function-item-form-wrapper");
-        this.data.x1 = form.querySelector('[name="x1_footprint"]');
-        this.data.x2 = form.querySelector('[name="x2_footprint"]');
-        this.data.y1 = form.querySelector('[name="y1_footprint"]');
-        this.data.y2 = form.querySelector('[name="y2_footprint"]');
-        this.data.name = form.querySelector('[name="name_footprint"]');
+        this.data.x1 = form?.querySelector('[name="x1_footprint"]');
+        this.data.x2 = form?.querySelector('[name="x2_footprint"]');
+        this.data.y1 = form?.querySelector('[name="y1_footprint"]');
+        this.data.y2 = form?.querySelector('[name="y2_footprint"]');
+        this.data.name = form?.querySelector('[name="name_footprint"]');
     }
 
     default() {

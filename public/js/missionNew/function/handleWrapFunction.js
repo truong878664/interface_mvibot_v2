@@ -1,8 +1,9 @@
-import { FunctionStepClass, MissionClass } from "../index.js";
+import { MissionClass } from "../index.js";
 import { toggerMessage } from "../../main.js";
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import showFormFunction from "./action/showFormFunction.js";
 import { classFunctions } from "./index.js";
+import { FunctionStepClass } from "../FunctionStepClass.js";
 
 export default function handleWrapFunction() {
     const functionContainer = document.getElementById("function-container");

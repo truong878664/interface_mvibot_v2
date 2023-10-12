@@ -4,9 +4,9 @@ export default class Gpio extends Step {
         super(data);
         this.type = "gpio";
         const form = document.getElementById("function-item-form-wrapper");
-        this.data.name = form.querySelector(".name_gpio");
-        this.data.time_out = form.querySelector(".time_out_gpio");
-        this.data.notSetout = form.querySelector("#not_set_out");
+        this.data.name = form?.querySelector(".name_gpio");
+        this.data.time_out = form?.querySelector(".time_out_gpio");
+        this.data.notSetout = form?.querySelector("#not_set_out");
         this.data.in_off = [];
         this.data.in_on = [];
         this.data.in_pullup = [];

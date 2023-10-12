@@ -10,7 +10,8 @@ import position from "./position/index.js";
 import sound from "./sound/index.js";
 import variable from "./variable/index.js";
 import { classFunctions } from "./index.js";
-import { FunctionStepClass, MissionClass } from "../index.js";
+import { MissionClass } from "../index.js";
+import { FunctionStepClass } from "../FunctionStepClass.js";
 
 export default function handleFormFunction() {
     handleShowFormFunction();
