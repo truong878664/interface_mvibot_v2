@@ -52,7 +52,7 @@ export default class Marker extends Step {
     }
 
     display(data) {
-        const { marker_type, mode, id, status, time_out, ...filed } = data;
+        const { marker_type, mode, id, status, ...filed } = data;
         document.querySelector(`.marker-btn.${marker_type}-btn`).click();
         this.updateElementMarker(marker_type);
         for (const key in filed) {
