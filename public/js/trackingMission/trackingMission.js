@@ -20,6 +20,7 @@ import { setRobotMove } from "../rosModule/moveRobot.js";
 import topicString from "../rosModule/topicString.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
+import progress from "./progress.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -40,7 +41,7 @@ createPose(viewer, tfClient);
 displayLayer(tfClient);
 
 createJoystick();
-
+progress();
 changeTopic();
 
 function addLayerDbToLayerActive() {
