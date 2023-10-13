@@ -9,6 +9,8 @@ const robotSelect = getNode("#robot-navigation");
 const localVariableWrapper = getNode("#local-variable-wrapper");
 const progressMainWrapper = getNode("#progress-main-wrapper");
 const missionMemoryWrapper = getNode("#mission-memory-wrapper");
+const infoProgress = getNode("#info-progress");
+const messageComplete = getNode("#completed-mission");
 const missionClass = new Mission();
 
 const splitIndex = (string, index) => {
@@ -75,9 +77,14 @@ function progress() {
 
     robotSelect.addEventListener("change", (e) => {
         const nameRobot = e.target.value;
+        showProgress.remove();
+        messageComplete.dataset.status = "hidden";
+        currentMission.name_mission = "";
+
         actionTopic?.unsubscribe();
         variableTopic?.unsubscribe();
         memoryTopic?.unsubscribe();
+
         progressMainWrapper.textContent =
             "Select robot to display mission or This robot could not find the data";
         localVariableWrapper.textContent =
@@ -85,7 +92,6 @@ function progress() {
         missionMemoryWrapper.textContent =
             "Select robot to display mission memory or This robot could not find the data";
         if (!nameRobot) {
-            currentMission.name_mission = "";
             return;
         }
 
@@ -98,8 +104,9 @@ function progress() {
                 return;
             }
             const infoMission = convert.mission_action_infor(data);
-            const { name_mission, now_step } = infoMission;
-            activeStepNow(now_step);
+            const { name_mission } = infoMission;
+            activeStepNow(infoMission);
+            showProgress.render(infoMission);
             if (currentMission.name_mission !== name_mission) {
                 currentMission.name_mission = name_mission;
                 renderMission();
@@ -121,7 +128,7 @@ function progress() {
                     <div class="mr-4">
                         <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
                         <span class="font-bold">${key}:</span>
-                        <span class="text-blue-400">${dataVariable[key]}</span>
+                        <span class="text-main font-bold">${dataVariable[key]}</span>
                     </div>
                     `);
                 return html;
@@ -144,7 +151,7 @@ function progress() {
                     <div class="mr-4">
                         <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
                         <span class="font-bold">${key}:</span>
-                        <span class="text-blue-400">${
+                        <span class="text-main font-bold">${
                             dataMemory[key] ||
                             `<span class="text-red-400">no value</span>`
                         }</span>
@@ -173,7 +180,11 @@ async function renderMission() {
     }
 }
 
-function activeStepNow(stepNow) {
+function activeStepNow(infoMission) {
+    const { total_step, now_step: stepNow } = infoMission;
+    if (stepNow >= total_step) {
+        messageComplete.dataset.status = "show";
+    }
     const styleActive = ["ring-4", "ring-red-400"];
     const stepList = getNodeList("[data-name='step']");
     const currentActiveStyle = getNode(
@@ -191,4 +202,33 @@ function activeStepNow(stepNow) {
         });
     }
 }
+
+const showProgress = {
+    render(infoMission) {
+        const { name_mission, now_step, total_step } = infoMission;
+        infoProgress.innerHTML = `
+            <div class="flex gap-3 ml-2">
+                <span>name mission:</span>
+                <span class="font-bold text-main">${name_mission}</span>
+            </div>
+            <div class="flex gap-3">
+                <span>total step: </span>
+                <span class="font-bold text-main">${total_step}</span>
+            </div>
+            <div class="flex gap-3">
+                <span>step now:</span>
+                <span class="font-bold text-main"> ${now_step}</span>
+            </div>
+            <div class="flex gap-3">
+                <span>mission progress:</span>
+                <span class="font-bold text-main">
+                    ${((now_step / total_step) * 100).toFixed(1) + "%"}
+                </span>
+            </div>
+    `;
+    },
+    remove() {
+        infoProgress.innerHTML = "";
+    },
+};
 export default progress;
