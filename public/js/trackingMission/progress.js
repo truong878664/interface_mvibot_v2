@@ -127,8 +127,8 @@ function progress() {
                 html.push(`
                     <div class="mr-4">
                         <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
-                        <span class="font-bold">${key}:</span>
-                        <span class="text-main font-bold">${dataVariable[key]}</span>
+                        <span>${key}:</span>
+                        <span class="font-bold">${dataVariable[key]}</span>
                     </div>
                     `);
                 return html;
@@ -150,8 +150,8 @@ function progress() {
                 html.push(`
                     <div class="mr-4">
                         <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
-                        <span class="font-bold">${key}:</span>
-                        <span class="text-main font-bold">${
+                        <span>${key}:</span>
+                        <span class="font-bold">${
                             dataMemory[key] ||
                             `<span class="text-red-400">no value</span>`
                         }</span>
@@ -185,7 +185,7 @@ function activeStepNow(infoMission) {
     if (stepNow >= total_step) {
         messageComplete.dataset.status = "show";
     }
-    const styleActive = ["ring-4", "ring-red-400"];
+    const styleActive = ["ring-4", "ring-red-500"];
     const stepList = getNodeList("[data-name='step']");
     const currentActiveStyle = getNode(
         "[data-name='step']." + styleActive.join(".")
@@ -206,25 +206,42 @@ function activeStepNow(infoMission) {
 const showProgress = {
     render(infoMission) {
         const { name_mission, now_step, total_step } = infoMission;
+        const progress = isNaN(now_step / total_step)
+            ? "no value"
+            : now_step / total_step >= 1
+            ? "100%"
+            : ((now_step / total_step) * 100).toFixed(1) + "%";
         infoProgress.innerHTML = `
-            <div class="flex gap-3 ml-2">
+            <div class="flex gap-6 bg-main/80 rounded-tr-xl">
+            <div class="flex gap-3 text-white ml-4">
                 <span>name mission:</span>
-                <span class="font-bold text-main">${name_mission}</span>
+                <span class="font-bold text-red-500">${
+                    name_mission || "no value"
+                }</span>
             </div>
-            <div class="flex gap-3">
+            <div class="flex gap-3 text-white">
                 <span>total step: </span>
-                <span class="font-bold text-main">${total_step}</span>
+                <span class="font-bold text-red-500">${
+                    total_step || "no value"
+                }</span>
             </div>
-            <div class="flex gap-3">
+            <div class="flex gap-3 text-white">
                 <span>step now:</span>
-                <span class="font-bold text-main"> ${now_step}</span>
+                <span class="font-bold text-red-500"> ${
+                    now_step || "no value"
+                }</span>
             </div>
-            <div class="flex gap-3">
+            <div class="flex gap-3 text-white">
                 <span>mission progress:</span>
-                <span class="font-bold text-main">
-                    ${((now_step / total_step) * 100).toFixed(1) + "%"}
+                <span class="font-bold text-red-500">
+                    ${progress}
                 </span>
             </div>
+            </div>    
+            <div class="w-full h-4 bg-white">
+                <div class="h-full bg-green-500" style="width:${progress};" ></div>
+            </div>
+
     `;
     },
     remove() {
