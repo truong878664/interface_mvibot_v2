@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
@@ -20,5 +21,24 @@ module.exports = {
             },
         },
     },
-    plugins: ["postcss-import", require("@tailwindcss/forms")],
+    plugins: [
+        "postcss-import",
+        require("@tailwindcss/forms"),
+        plugin(function ({ addUtilities }) {
+            addUtilities({
+                ".scrollbar-hide": {
+                    /* IE and Edge */
+                    "-ms-overflow-style": "none",
+
+                    /* Firefox */
+                    "scrollbar-width": "none",
+
+                    /* Safari and Chrome */
+                    "&::-webkit-scrollbar": {
+                        display: "none",
+                    },
+                },
+            });
+        }),
+    ],
 };

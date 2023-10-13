@@ -7,7 +7,7 @@ const details = {
     marker: "run marker",
     sound: "play sound",
     position: "Go to location",
-    variable: "",
+    variable: "Variable",
     break: "",
     error: "STEP NOT FOUND",
     sleep: "sleep",
@@ -56,6 +56,10 @@ const stepHTML = (props) => {
 const htmlVariable = (props) => {
     const { step, id, addressIndex, type, name, color, icon, detail } = props;
     const { command_action, name_variable, focus_value } = detail;
+
+    const notFoundDetailVariable =
+        name_variable === undefined || focus_value == undefined;
+
     const isDeleteOrReset =
         command_action === "delete" || command_action === "reset";
     switch (true) {
@@ -89,6 +93,16 @@ const htmlVariable = (props) => {
                 ${buttonDetailStep}
             </div>
             `;
+        case notFoundDetailVariable:
+            return `
+            <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+                <span class="text-sky-500 font-bold text-[16px] group-data-[type='error']/step:text-red-500 mr-4">${details[type]}</span>
+                <div draggable="true"
+                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+                    <span class="mr-4">${icon}</span>
+                    <span>${name}</span>
+                </div>
+            </div>`;
         default:
             return `
             <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">

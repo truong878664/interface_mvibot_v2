@@ -168,6 +168,7 @@ const createHtml = {
                         draggable="${draggable}"
                         data-action-block-step="hidden"
                         data-status="${checkIsBlockHidden}"
+                        data-name="icon-block"
                         class="${color} mr-3 w-[40px] h-[40px] relative bg-blue-50 shadow-sm rounded-md text-[20px] flex justify-center items-center cursor-grab group/drag hover:text-transparent active:cursor-grabbing">
                         ${icon}
                         <span class="hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-1 absolute text-black/40 group-hover/drag:text-black">
@@ -303,7 +304,7 @@ const createHtml = {
             },
         },
         classNameDataItem: {
-            wrap: "bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent",
+            wrap: "wrap-block bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent",
             span: "font-bold mr-3 text-red-600",
             data: "flex-1 flex flex-wrap items-start gap-4 content-start",
         },
