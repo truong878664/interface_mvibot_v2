@@ -23,15 +23,15 @@
         class="w-full bg-white/90 overflow-auto max-h-0 group peer-checked/progress:max-h-[1000px] peer-checked/hidden-progress:max-h-0 transition-all duration-500">
         <div class="p-4 min-h-[300px] hidden peer-checked/progress-main:group-[]:flex flex-wrap gap-4"
             id="progress-main-wrapper">
-            progress-main
+            Select robot to display mission active or This robot could not find the data
         </div>
         <div class="p-4 min-h-[300px] hidden peer-checked/local-variable:group-[]:flex flex-wrap gap-4"
             id="local-variable-wrapper">
-            local-variable
+            Select robot to display local variables or This robot could not find the data
         </div>
         <div class="p-4 min-h-[300px] hidden peer-checked/mission-memory:group-[]:flex flex-wrap gap-4"
             id="mission-memory-wrapper">
-            mission-memory
+            Select robot to display mission memory or This robot could not find the data
         </div>
     </div>
 </div>

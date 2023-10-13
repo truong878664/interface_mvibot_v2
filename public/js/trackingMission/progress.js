@@ -5,6 +5,11 @@ import topic from "./subscribeTopic.js";
 
 const getNode = document.querySelector.bind(document);
 const getNodeList = document.querySelectorAll.bind(document);
+const robotSelect = getNode("#robot-navigation");
+const localVariableWrapper = getNode("#local-variable-wrapper");
+const progressMainWrapper = getNode("#progress-main-wrapper");
+const missionMemoryWrapper = getNode("#mission-memory-wrapper");
+const missionClass = new Mission();
 
 const splitIndex = (string, index) => {
     return [string.slice(0, index), string.slice(index)];
@@ -35,22 +40,63 @@ const convert = {
         });
         return dataMissionObject;
     },
+    local_variable(data) {
+        const dataMission = splitTwoChar(data, "(", ")");
+        const dataMissionObject = {};
+        dataMission.map((item) => {
+            const [key, value] = item.split(":");
+            dataMissionObject[key] = value;
+            return dataMissionObject;
+        });
+        return dataMissionObject;
+    },
+    mission_memory(data) {
+        const dataMemory = data.split("/").filter((item) => item);
+        const dataMissionObject = {};
+        dataMemory.map((item) => {
+            const [key, value] = item.split(":");
+            dataMissionObject[key] = value;
+            return dataMissionObject;
+        });
+        return dataMissionObject;
+    },
 };
 let currentMission = {
     name_mission: "",
     id_mission: "",
+    mission_shorthand: "",
 };
+
 function progress() {
     // pub();
-    const robotSelect = getNode("#robot-navigation");
     let actionTopic;
+    let variableTopic;
+    let memoryTopic;
+
     robotSelect.addEventListener("change", (e) => {
         const nameRobot = e.target.value;
         actionTopic?.unsubscribe();
-        if (!nameRobot) return;
+        variableTopic?.unsubscribe();
+        memoryTopic?.unsubscribe();
+        progressMainWrapper.textContent =
+            "Select robot to display mission or This robot could not find the data";
+        localVariableWrapper.textContent =
+            "Select robot to display local variables or This robot could not find the data";
+        missionMemoryWrapper.textContent =
+            "Select robot to display mission memory or This robot could not find the data";
+        if (!nameRobot) {
+            currentMission.name_mission = "";
+            return;
+        }
+
+        //mission_action_infor
         actionTopic = topic({ name: `/${nameRobot}/mission_action_infor` });
-        // actionTopic = topic({ name: `/${nameRobot}/mission_action_infor` });
         actionTopic.subscribe((data, topic) => {
+            if (!data) {
+                progressMainWrapper.textContent =
+                    "This robot could not find the data";
+                return;
+            }
             const infoMission = convert.mission_action_infor(data);
             const { name_mission, now_step } = infoMission;
             activeStepNow(now_step);
@@ -59,20 +105,67 @@ function progress() {
                 renderMission();
             }
         });
+
+        //local_variable
+        variableTopic = topic({ name: `/${nameRobot}/local_variable` });
+        variableTopic.subscribe((data) => {
+            if (!data) {
+                localVariableWrapper.textContent =
+                    "This robot could not find the data";
+                return;
+            }
+            const dataVariable = convert.local_variable(data);
+            const html = [];
+            Object.keys(dataVariable).map((key) => {
+                html.push(`
+                    <div class="mr-4">
+                        <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
+                        <span class="font-bold">${key}:</span>
+                        <span class="text-blue-400">${dataVariable[key]}</span>
+                    </div>
+                    `);
+                return html;
+            });
+            localVariableWrapper.innerHTML = html.join("");
+        });
+
+        //mission_memory
+        memoryTopic = topic({ name: `/${nameRobot}/mission_memory` });
+        memoryTopic.subscribe((data) => {
+            if (!data) {
+                missionMemoryWrapper.textContent =
+                    "This robot could not find the data";
+                return;
+            }
+            const dataMemory = convert.mission_memory(data);
+            const html = [];
+            Object.keys(dataMemory).map((key) => {
+                html.push(`
+                    <div class="mr-4">
+                        <span class="text-xs"><i class="fa-solid fa-circle"></i></span>
+                        <span class="font-bold">${key}:</span>
+                        <span class="text-blue-400">${
+                            dataMemory[key] ||
+                            `<span class="text-red-400">no value</span>`
+                        }</span>
+                    </div>
+                    `);
+                return html;
+            });
+            missionMemoryWrapper.innerHTML = html.join("");
+        });
     });
 }
 
 async function renderMission() {
     console.log("get mission from database");
-    const missionClass = new Mission();
     const statusFetch = await missionClass.getDataByName(
         currentMission.name_mission
     );
     if (!statusFetch.error) {
-        const { mission_shorthand } = statusFetch.data;
-        const progressMainWrapper = getNode("#progress-main-wrapper");
+        currentMission.mission_shorthand = statusFetch.data.mission_shorthand;
         progressMainWrapper.innerHTML = missionClass.renderHtml({
-            data: JSON.parse(mission_shorthand),
+            data: JSON.parse(currentMission.mission_shorthand),
             handleAble: false,
         });
     } else {
