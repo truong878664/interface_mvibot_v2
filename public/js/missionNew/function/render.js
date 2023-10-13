@@ -1,7 +1,7 @@
 import { htmlDataFunction } from "./index.js";
 import { $ } from "../../main.js";
 import createHtmlDataFunction from "./action/createHtmlDataFunction.js";
-import { FunctionStepClass } from "../index.js";
+import { FunctionStepClass } from "../FunctionStepClass.js";
 
 const renderFunction = async () => {
     const data = await FunctionStepClass.get();

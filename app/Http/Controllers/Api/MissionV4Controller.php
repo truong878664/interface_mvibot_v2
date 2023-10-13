@@ -52,12 +52,22 @@ class MissionV4Controller extends Controller
      */
     public function show(Request $request, $id)
     {
+
         $kind = $request->kind;
 
         switch ($kind) {
             case 'get':
-                return MissionsVer::where('id', $id)->first();
-                break;
+                $data = MissionsVer::where('id', $id)->first();
+                if (!$data) {
+                    return [];
+                };
+                return $data;
+            case 'get_by_name':
+                $data = MissionsVer::where('name', $id)->first();
+                if (!$data) {
+                    return ["error" => true, "message" => "not found data!", "data" => []];
+                };
+                return ["error" => false, "message" => "get data successfully!", "data" => $data];
             case "convert_data_robot":
                 $html = json_decode($request->html);
                 $mission = $this->translateDataRobot($id, $html);

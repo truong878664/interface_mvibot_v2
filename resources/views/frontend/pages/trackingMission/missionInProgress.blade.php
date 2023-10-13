@@ -20,11 +20,18 @@
             for="hidden-progress"><i class="fa-solid fa-xmark"></i></label>
     </div>
     <div
-        class="w-full bg-white/90 overflow-auto max-h-0 peer-checked/progress:max-h-[1000px] peer-checked/hidden-progress:max-h-0 transition-all duration-500">
-        <div class="p-4 min-h-[300px]">
-            @for ($i = 0; $i < 1; $i++)
-                <div>123</div>
-            @endfor
+        class="w-full bg-white/90 overflow-auto max-h-0 group peer-checked/progress:max-h-[1000px] peer-checked/hidden-progress:max-h-0 transition-all duration-500">
+        <div class="p-4 min-h-[300px] hidden peer-checked/progress-main:group-[]:flex flex-wrap gap-4"
+            id="progress-main-wrapper">
+            Select robot to display mission active or This robot could not find the data
+        </div>
+        <div class="p-4 min-h-[300px] hidden peer-checked/local-variable:group-[]:flex flex-wrap gap-4"
+            id="local-variable-wrapper">
+            Select robot to display local variables or This robot could not find the data
+        </div>
+        <div class="p-4 min-h-[300px] hidden peer-checked/mission-memory:group-[]:flex flex-wrap gap-4"
+            id="mission-memory-wrapper">
+            Select robot to display mission memory or This robot could not find the data
         </div>
     </div>
 </div>

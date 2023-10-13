@@ -1,4 +1,4 @@
-import { MissionClass } from "../../index.js";
+import Mission from "../../Class/Mission.js";
 import Step from "../Step.js";
 import createHtml from "./createHtml.js";
 
@@ -23,7 +23,7 @@ const blockStep = {
                 htmlNormal.push(Step(item, index));
             }
         });
-        const value = MissionClass.Normal({ data: data, name, ...rest });
+        const value = new Mission().Normal({ data: data, name, ...rest });
         return createHtml.normal({
             normal: htmlNormal,
             address,
@@ -55,7 +55,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.IfElse({ data: data, name, ...rest });
+        const value = new Mission().IfElse({ data: data, name, ...rest });
         return createHtml.ifelse({
             ...htmlIfElse,
             address,
@@ -87,7 +87,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.Trycatch({ data: data, name, ...rest });
+        const value = new Mission().Trycatch({ data: data, name, ...rest });
         return createHtml.trycatch({
             ...htmlTryCatch,
             address,
@@ -118,7 +118,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.While({ data: data, name, ...rest });
+        const value = new Mission().While({ data: data, name, ...rest });
         return createHtml.while({
             ...htmlWhile,
             address,
@@ -149,7 +149,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.LogicAnd({ data: data, name, ...rest });
+        const value = new Mission().LogicAnd({ data: data, name, ...rest });
         return createHtml.logicAnd({
             ...htmlLogicAnd,
             address,
@@ -180,7 +180,7 @@ const blockStep = {
                 }
             });
         }
-        const value = MissionClass.LogicOr({ data: data, name, ...rest });
+        const value = new Mission().LogicOr({ data: data, name, ...rest });
         return createHtml.logicOr({
             ...htmlLogicOr,
             address,
