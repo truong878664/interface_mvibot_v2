@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         if (!Schema::hasTable('mission_positions')) {
-
             Schema::create('mission_positions', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
@@ -22,8 +21,8 @@ return new class extends Migration
                 $table->string('mode')->default('position');
                 $table->float('x');
                 $table->float('y');
-                $table->float('z', 20, 10);
-                $table->float('w', 20, 10);
+                $table->float('z', 20, 17);
+                $table->float('w', 20, 17);
                 $table->string('color_position');
                 $table->string('mode_position');
                 $table->string('mode_child');

@@ -20,7 +20,13 @@ import mathYaw from "../../../../rosModule/mathYaw.js";
 import { markerClientPath } from "../../../../rosModule/path/markerClientPath.js";
 import qToYaw from "../../../../rosModule/qToYawn.js";
 
-export default function render3DMap(x = 0, y = 0, z = 0, w = 1, colorPose = "#EA047E") {
+export default function render3DMap(
+    x = 0,
+    y = 0,
+    z = 0,
+    w = 1,
+    colorPose = "#EA047E"
+) {
     let positionX = parseFloat(x);
     let positionY = parseFloat(y);
     let rotateZ = parseFloat(z);
