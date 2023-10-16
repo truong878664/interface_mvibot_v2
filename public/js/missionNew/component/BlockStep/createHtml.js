@@ -136,7 +136,7 @@ const createHtml = {
                     "flex w-full": !isLogicAndOrLogicOr,
                     "inline-flex": isLogicAndOrLogicOr,
                 },
-                "group/wrapper [&:hover>span>span]:flex data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex shadow-block bg-white px-4 py-10 rounded-lg relative pt-[20px]"
+                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex shadow-block bg-white px-4 py-10 rounded-lg relative pt-[20px]"
             );
             const isShowData = !draggable
                 ? "show"
@@ -169,11 +169,13 @@ const createHtml = {
                         data-action-block-step="hidden"
                         data-status="${checkIsBlockHidden}"
                         data-name="icon-block"
-                        class="${color} mr-3 w-[40px] h-[40px] relative bg-blue-50 shadow-sm rounded-md text-[20px] flex justify-center items-center cursor-grab group/drag hover:text-transparent active:cursor-grabbing">
+                        class="${color} mr-3 w-[40px] h-[40px] relative bg-blue-50 shadow-sm rounded-md text-[20px] flex justify-center items-center cursor-grab group/drag active:cursor-grabbing">
                         ${icon}
-                        <span class="hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-1 absolute text-black/40 group-hover/drag:text-black">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <span class="hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-1 absolute text-black/40 group-hover/drag:text-black/90 backdrop-blur-sm w-full h-full place-content-center">
+                            <span class="flex gap-1">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </span>
                         </span>
                     </span>
                     <div class="flex flex-col gap-4 w-full">
