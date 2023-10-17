@@ -44,27 +44,26 @@ createJoystick();
 progress();
 changeTopic();
 
-function addLayerDbToLayerActive() {
+async function addLayerDbToLayerActive() {
     const mvibot_layer_active = [];
-    fetch("/dashboard/missions/layer-active")
-        .then((res) => res.json())
-        .then((data) => {
-            data.forEach((item) => {
-                const { z, w } = mathYaw(item.yawo);
-                const layer = new mvibot_layer(
-                    item.name_layer,
-                    item.width,
-                    item.height,
-                    item.xo,
-                    item.yo,
-                    item.type_layer,
-                    z,
-                    w
-                );
-                mvibot_layer_active.push(layer);
-            });
-            displayLayer(mvibot_layer_active);
-        });
+    const res = await fetch("/dashboard/missions/layer-active");
+    const data = await res.json();
+    data.map((item) => {
+        const { z, w } = mathYaw(item.yawo);
+        const layer = new mvibot_layer(
+            item.name_layer,
+            item.width,
+            item.height,
+            item.xo,
+            item.yo,
+            item.type_layer,
+            z,
+            w
+        );
+        mvibot_layer_active.push(layer);
+        return mvibot_layer_active;
+    });
+    displayLayer(mvibot_layer_active);
 }
 
 const robotNavigation = JSON.parse($("#robot-navigation-json").value);
@@ -133,14 +132,8 @@ function changeTopic() {
             }, 2000);
             robotPathTopic(robotActive);
         } else {
-            // cmd_vel_listener.name = `/cmd_vel`;
-
             clearInterval(displayPathFs);
         }
-
-        // const selectLaser =  laser.find((item) => {
-        //     return item.topicName === `/${robotActive}/laser/scan`
-        // })
     };
 }
 

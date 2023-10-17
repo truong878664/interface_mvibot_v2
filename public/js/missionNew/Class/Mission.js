@@ -52,6 +52,12 @@ export default class Mission {
         const status = await res.json();
         return status;
     }
+    async getDataById(id) {
+        const urlGet = "/api/mission-v4/" + id + "?kind=get_by_id";
+        const res = await fetch(urlGet);
+        const status = await res.json();
+        return status;
+    }
     save() {
         useDebounce({ cb: this._save.bind(this), delay: 600 });
     }
