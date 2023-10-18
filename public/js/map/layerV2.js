@@ -5,4 +5,5 @@ const getNodeList = document.querySelectorAll.bind(document);
 
 (function init() {
     const map = new Map({ mapID: "map", nameMap: "map_878664" });
+    map.create();
 })();
