@@ -14,7 +14,7 @@
                 Create layer
             </li>
         </a>
-        <a href="{{ route('dashboard.map.create-layer') }}">
+        <a href="{{ route('dashboard.map.create-layer-v2') }}">
             <li class="w-full h-[140px] rounded-md p-4 mb-4 bg-cover bg-no-repeat btn flex justify-end items-end shadow-md hover:shadow-lg"
                 style="background-image: url(/img/map/layer.png)">
                 Create layer v2

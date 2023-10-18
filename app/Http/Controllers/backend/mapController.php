@@ -45,6 +45,12 @@ class mapController extends Controller
         $allLayer = Layer::where('name_map_active', $mapActive)->get();
         return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer', 'title'));
     }
+    public function createLayerV2() {
+        $title = "Create layer v2";
+        $mapActive = $this->mapActive();
+        $allLayer = Layer::where('name_map_active', $mapActive)->get();
+        return view('frontend.pages.map.createLayerV2', compact('mapActive', 'allLayer', 'title'));
+    }
     public function chooseMapActive()
     {
         $title = 'Choose map active';
