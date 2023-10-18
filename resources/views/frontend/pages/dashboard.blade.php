@@ -1,9 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading dashboard-heading">Dashboard</div>
-    <ul class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto">
-        <x-dashboard-item route='dashboard.start-robot' icon="fa-solid fa-power-off" title='Start ROBOT'
-            describe='Feature, send mission to start' color="#BB2525" />
+    <ul
+        class="dashboard-content w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
         <x-dashboard-item route='dashboard.missions.v3.select' icon='fa-solid fa-bullseye' title='Create missions'
             describe='Assign tasks to robots' color="#0f6cbd" />
 

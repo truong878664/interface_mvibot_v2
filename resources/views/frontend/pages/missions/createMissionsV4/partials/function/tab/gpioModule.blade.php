@@ -26,7 +26,7 @@
     <div class="text-2xl mb-4">
         <label for="not_set_out_module" class="flex items-center gap-4">
             <span>Not set out </span>
-            <input id="not_set_out_module" type="checkbox" name="not_set_out">
+            <input id="not_set_out_module" type="checkbox" name="not_set_out" class="w-7 h-7 rounded-md">
         </label>
     </div>
     <div class="w-full h-full flex flex-col">

@@ -21,6 +21,7 @@ import topicString from "../rosModule/topicString.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
 import progress from "./progress.js";
+import createMarkerClientArrow from "../rosModule/arrow/createMarkerClientArrow.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -31,6 +32,7 @@ const tfClient = createTfClient();
 
 markerClient(tfClient, viewer);
 markerClientPath(tfClient, viewer);
+createMarkerClientArrow(tfClient, viewer);
 
 addLayerDbToLayerActive();
 
@@ -44,27 +46,26 @@ createJoystick();
 progress();
 changeTopic();
 
-function addLayerDbToLayerActive() {
+async function addLayerDbToLayerActive() {
     const mvibot_layer_active = [];
-    fetch("/dashboard/missions/layer-active")
-        .then((res) => res.json())
-        .then((data) => {
-            data.forEach((item) => {
-                const { z, w } = mathYaw(item.yawo);
-                const layer = new mvibot_layer(
-                    item.name_layer,
-                    item.width,
-                    item.height,
-                    item.xo,
-                    item.yo,
-                    item.type_layer,
-                    z,
-                    w
-                );
-                mvibot_layer_active.push(layer);
-            });
-            displayLayer(mvibot_layer_active);
-        });
+    const res = await fetch("/dashboard/missions/layer-active");
+    const data = await res.json();
+    data.map((item) => {
+        const { z, w } = mathYaw(item.yawo);
+        const layer = new mvibot_layer(
+            item.name_layer,
+            item.width,
+            item.height,
+            item.xo,
+            item.yo,
+            item.type_layer,
+            z,
+            w
+        );
+        mvibot_layer_active.push(layer);
+        return mvibot_layer_active;
+    });
+    displayLayer(mvibot_layer_active);
 }
 
 const robotNavigation = JSON.parse($("#robot-navigation-json").value);
@@ -115,6 +116,51 @@ function activeLaserRobot(robotActive) {
     }
 }
 
+function activeSelectRobot(robotActive) {
+    const markerClient_topic = new ROSLIB.Topic({
+        ros: ros,
+        name: `/visualization_marker_layer_arrow`,
+        messageType: "visualization_msgs/Marker",
+    });
+    const markerClient_msg = new ROSLIB.Message({
+        header: {
+            frame_id: `/${robotActive}/base_footprint`,
+        },
+        ns: "arrow",
+        id: 0,
+        type: 0,
+        action: 0,
+        frame_locked: false,
+        mesh_resource: "",
+        mesh_use_embedded_materials: false,
+        color: {
+            r: 1,
+            g: 0.5,
+            b: 0,
+            a: 0.9,
+        },
+        scale: {
+            x: 0.5,
+            y: 0.25,
+            z: 1.0,
+        },
+        pose: {
+            position: {
+                x: 0.0,
+                y: 0.0,
+                z: 1.2,
+            },
+            orientation: {
+                x: 0.0,
+                y: 0.7071068,
+                z: 0.0,
+                w: 0.7071068,
+            },
+        },
+    });
+    markerClient_topic.publish(markerClient_msg);
+}
+
 let robotActive = "";
 let displayPathFs;
 function changeTopic() {
@@ -126,6 +172,7 @@ function changeTopic() {
 
         setRobotMove(robotActive);
         activeLaserRobot(robotActive);
+        activeSelectRobot(robotActive);
         if (robotActive) {
             robotPathTopic(robotActive);
             displayPathFs = setInterval(() => {
@@ -133,14 +180,8 @@ function changeTopic() {
             }, 2000);
             robotPathTopic(robotActive);
         } else {
-            // cmd_vel_listener.name = `/cmd_vel`;
-
             clearInterval(displayPathFs);
         }
-
-        // const selectLaser =  laser.find((item) => {
-        //     return item.topicName === `/${robotActive}/laser/scan`
-        // })
     };
 }
 

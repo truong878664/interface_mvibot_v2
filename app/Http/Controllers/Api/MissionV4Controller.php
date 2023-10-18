@@ -68,6 +68,14 @@ class MissionV4Controller extends Controller
                     return ["error" => true, "message" => "not found data!", "data" => []];
                 };
                 return ["error" => false, "message" => "get data successfully!", "data" => $data];
+
+            case 'get_by_id':
+                $data = MissionsVer::where('id', $id)->first();
+                if (!$data) {
+                    return ["error" => true, "message" => "not found data!", "data" => []];
+                };
+                return ["error" => false, "message" => "get data successfully!", "data" => $data];
+                return 123;
             case "convert_data_robot":
                 $html = json_decode($request->html);
                 $mission = $this->translateDataRobot($id, $html);

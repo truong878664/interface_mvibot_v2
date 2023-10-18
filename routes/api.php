@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BookmarkController;
+use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\ConfigRobotController;
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
@@ -59,6 +60,7 @@ Route::resource('marker', MarkerController::class);
 Route::resource('sleep', SleepController::class);
 Route::resource('variable', VariableController::class);
 Route::resource('sound', SoundController::class);
+Route::resource('config', ConfigController::class);
 
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);

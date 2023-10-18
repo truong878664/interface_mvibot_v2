@@ -41,9 +41,14 @@ export default class Marker extends Step {
                 ? 0
                 : off_set_angle;
 
-        dataValidated.data.name = name.replaceAll("?", "").replaceAll("!", "");
+        dataValidated.data.name = name?.replaceAll("?", "").replaceAll("!", "");
 
-        if (!name && !time_out) {
+        if (isNaN(Number(time_out))) {
+            dataValidated.success = false;
+            dataValidated.message = `Time out have to number!`;
+            return dataValidated;
+        }
+        if (!name || !time_out) {
             dataValidated.success = false;
             dataValidated.message = `Name or time out cannot be empty!`;
             return dataValidated;

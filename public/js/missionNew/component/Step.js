@@ -11,6 +11,7 @@ const details = {
     break: "",
     error: "STEP NOT FOUND",
     sleep: "sleep",
+    config: "config",
 };
 const typeVariable = {
     new: "new",
@@ -27,8 +28,8 @@ const typeVariable = {
     delete: "delete",
 };
 
-const overLayPreventMoveOnMobile = `<button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden"></button>`;
-const buttonDetailStep = `<button data-action-block-step="step" class="data-[sticky='show']:z-[10] z-[3] hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
+const overLayPreventMoveOnMobile = `<button class="absolute top-0 left-0 right-0 bottom-0 z-[2] hover:hidden peer-hover/step:hidden cursor-default"></button>`;
+const buttonDetailStep = `<button data-action-block-step="step" class="data-[sticky='show']:z-[10] z-[3] hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 backdrop-blur-sm rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
                                 <i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>`;
 const iconEnableMove = `<span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black hidden group-hover/stepz:block"><i class="fa-solid fa-up-down-left-right"></i></span>`;
@@ -47,8 +48,8 @@ const stepHTML = (props) => {
             <span class="mr-4">${icon}</span>
             <span>${type === "break" ? "break;" : detail?.name || name}</span>
             ${iconEnableMove}
-        </div>
-        ${overLayPreventMoveOnMobile}
+            </div>
+            ${overLayPreventMoveOnMobile}
         ${buttonDetailStep}
     </div>
     `;
@@ -171,6 +172,11 @@ const Step = (step, addressIndex = "") => {
         error: {
             color: "bg-red-100 text-red-500",
             icon: '<i class="fa-solid fa-triangle-exclamation"></i>',
+        },
+
+        config: {
+            color: "bg-yellow-300/20 text-yellow-500",
+            icon: '<i class="fa-solid fa-grip"></i>',
         },
         sleep: { color: "bg-[#DC262633] text-[#DC2626]", icon: "" },
     };

@@ -9,6 +9,7 @@ import Position from "./Class/Position.js";
 import Variable from "./Class/Variable.js";
 import Footprint from "./Class/Footprint.js";
 import handleWrapFunction from "./handleWrapFunction.js";
+import Config from "./Class/Config.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -19,6 +20,7 @@ export const htmlDataFunction = {
     gpio_module: [],
     variable: [],
     sound: [],
+    config: [],
 };
 export const classFunctions = {
     footprint: new Footprint(),
@@ -29,6 +31,7 @@ export const classFunctions = {
     sound: new Sound(),
     position: new Position(),
     variable: new Variable(),
+    config: new Config(),
 };
 
 export default function Function() {

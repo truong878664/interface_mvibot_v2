@@ -1,5 +1,6 @@
 import { toggerMessage } from "../main.js";
 import Mission from "../missionNew/Class/Mission.js";
+import convertTopic from "./convertTopic.js";
 import pub from "./pub.js";
 import topic from "./subscribeTopic.js";
 
@@ -11,117 +12,68 @@ const progressMainWrapper = getNode("#progress-main-wrapper");
 const missionMemoryWrapper = getNode("#mission-memory-wrapper");
 const infoProgress = getNode("#info-progress");
 const messageComplete = getNode("#completed-mission");
+const checkTabProgress = getNode("#progress-main");
 const missionClass = new Mission();
 
-const splitIndex = (string, index) => {
-    return [string.slice(0, index), string.slice(index)];
-};
-const splitTwoChar = (string, first, second) => {
-    const result = [];
-    let indexFirst;
-    let indexSecond;
-    while (true) {
-        indexFirst = string.indexOf(first, indexFirst + 1);
-        indexSecond = string.indexOf(second, indexSecond + 1);
-        if (indexFirst === -1 && indexFirst === -1) break;
-        result.push(string.slice(indexFirst + 1, indexSecond));
-    }
-    return result;
-};
-
-const convert = {
-    mission_action_infor(data) {
-        const dataMission = splitTwoChar(data, "(", ")");
-        const dataMissionObject = {};
-        dataMission.map((item) => {
-            const [key, value] = item.split(":");
-            dataMissionObject[key] = isNaN(Number(value))
-                ? value
-                : Number(value);
-            return dataMissionObject;
-        });
-        return dataMissionObject;
-    },
-    local_variable(data) {
-        const dataMission = splitTwoChar(data, "(", ")");
-        const dataMissionObject = {};
-        dataMission.map((item) => {
-            const [key, value] = item.split(":");
-            dataMissionObject[key] = value;
-            return dataMissionObject;
-        });
-        return dataMissionObject;
-    },
-    mission_memory(data) {
-        const dataMemory = data.split("/").filter((item) => item);
-        const dataMissionObject = {};
-        dataMemory.map((item) => {
-            const [key, value] = item.split(":");
-            dataMissionObject[key] = value;
-            return dataMissionObject;
-        });
-        return dataMissionObject;
-    },
-};
 let currentMission = {
     name_mission: "",
     id_mission: "",
     mission_shorthand: "",
 };
-
 function progress() {
     // pub();
     let actionTopic;
     let variableTopic;
     let memoryTopic;
-
-    robotSelect.addEventListener("change", (e) => {
+    checkProgress();
+    robotSelect.addEventListener("change", onChange);
+    function onChange(e) {
         const nameRobot = e.target.value;
-        showProgress.remove();
-        messageComplete.dataset.status = "hidden";
-        currentMission.name_mission = "";
-
-        actionTopic?.unsubscribe();
-        variableTopic?.unsubscribe();
-        memoryTopic?.unsubscribe();
-
-        progressMainWrapper.textContent =
-            "Select robot to display mission or This robot could not find the data";
-        localVariableWrapper.textContent =
-            "Select robot to display local variables or This robot could not find the data";
-        missionMemoryWrapper.textContent =
-            "Select robot to display mission memory or This robot could not find the data";
-        if (!nameRobot) {
-            return;
-        }
+        (function resetProgress() {
+            actionTopic?.unsubscribe();
+            variableTopic?.unsubscribe();
+            memoryTopic?.unsubscribe();
+            showProgress.remove();
+            messageComplete.dataset.status = "hidden";
+            currentMission.id_mission = "";
+            progressMainWrapper.textContent =
+                "Select robot to display mission or This robot could not find the data";
+            localVariableWrapper.textContent =
+                "Select robot to display local variables or This robot could not find the data";
+            missionMemoryWrapper.textContent =
+                "Select robot to display mission memory or This robot could not find the data";
+        })();
+        if (!nameRobot) return;
+        actionTopic = topic({ name: `/${nameRobot}/mission_action_infor` });
+        variableTopic = topic({ name: `/${nameRobot}/local_variable` });
+        memoryTopic = topic({ name: `/${nameRobot}/mission_memory` });
 
         //mission_action_infor
-        actionTopic = topic({ name: `/${nameRobot}/mission_action_infor` });
-        actionTopic.subscribe((data, topic) => {
+        const actionSubscribe = (data, topic) => {
             if (!data) {
                 progressMainWrapper.textContent =
                     "This robot could not find the data";
                 return;
             }
-            const infoMission = convert.mission_action_infor(data);
-            const { name_mission } = infoMission;
+            const infoMission = convertTopic.mission_action_infor(data);
+            const { id_mission } = infoMission;
             activeStepNow(infoMission);
             showProgress.render(infoMission);
-            if (currentMission.name_mission !== name_mission) {
-                currentMission.name_mission = name_mission;
-                renderMission();
+            if (currentMission.id_mission !== id_mission) {
+                currentMission.id_mission = id_mission;
+                renderMission(infoMission);
             }
-        });
+        };
+        actionTopic.subscribe(actionSubscribe);
 
         //local_variable
-        variableTopic = topic({ name: `/${nameRobot}/local_variable` });
-        variableTopic.subscribe((data) => {
+        const variableSubscribe = (data) => {
             if (!data) {
                 localVariableWrapper.textContent =
                     "This robot could not find the data";
                 return;
             }
-            const dataVariable = convert.local_variable(data);
+            const dataVariable = convertTopic.local_variable(data);
             const html = [];
             Object.keys(dataVariable).map((key) => {
                 html.push(`
@@ -134,17 +86,17 @@ function progress() {
                 return html;
             });
             localVariableWrapper.innerHTML = html.join("");
-        });
+        };
+        variableTopic.subscribe(variableSubscribe);
 
         //mission_memory
-        memoryTopic = topic({ name: `/${nameRobot}/mission_memory` });
-        memoryTopic.subscribe((data) => {
+        const memorySubscribe = (data) => {
             if (!data) {
                 missionMemoryWrapper.textContent =
                     "This robot could not find the data";
                 return;
             }
-            const dataMemory = convert.mission_memory(data);
+            const dataMemory = convertTopic.mission_memory(data);
             const html = [];
             Object.keys(dataMemory).map((key) => {
                 html.push(`
@@ -160,21 +112,22 @@ function progress() {
                 return html;
             });
             missionMemoryWrapper.innerHTML = html.join("");
-        });
-    });
+        };
+        memoryTopic.subscribe(memorySubscribe);
+    }
 }
-
-async function renderMission() {
+async function renderMission(infoMission) {
     console.log("get mission from database");
-    const statusFetch = await missionClass.getDataByName(
-        currentMission.name_mission
-    );
+    const { id_mission } = infoMission;
+    if (!id_mission) return;
+    const statusFetch = await missionClass.getDataById(id_mission);
     if (!statusFetch.error) {
         currentMission.mission_shorthand = statusFetch.data.mission_shorthand;
         progressMainWrapper.innerHTML = missionClass.renderHtml({
             data: JSON.parse(currentMission.mission_shorthand),
             handleAble: false,
         });
+        activeStepNow(infoMission);
     } else {
         toggerMessage("error", statusFetch.message);
     }
@@ -182,10 +135,8 @@ async function renderMission() {
 
 function activeStepNow(infoMission) {
     const { total_step, now_step: stepNow } = infoMission;
-    if (stepNow >= total_step) {
-        messageComplete.dataset.status = "show";
-    }
-    const styleActive = ["ring-4", "ring-red-500"];
+    if (stepNow >= total_step) messageComplete.dataset.status = "show";
+    const styleActive = ["ring-4", "ring-red-500", "step-active"];
     const stepList = getNodeList("[data-name='step']");
     const currentActiveStyle = getNode(
         "[data-name='step']." + styleActive.join(".")
@@ -212,7 +163,7 @@ const showProgress = {
             ? "100%"
             : ((now_step / total_step) * 100).toFixed(1) + "%";
         infoProgress.innerHTML = `
-            <div class="flex gap-6 bg-main/80 rounded-tr-xl">
+            <div class="flex gap-6 bg-main/70 rounded-tr-xl backdrop-blur-sm">
             <div class="flex gap-3 text-white ml-4">
                 <span>name mission:</span>
                 <span class="font-bold text-red-500">${
@@ -238,7 +189,7 @@ const showProgress = {
                 </span>
             </div>
             </div>    
-            <div class="w-full h-4 bg-white">
+            <div class="w-full h-4 bg-white/50 backdrop-blur-sm">
                 <div class="h-full bg-green-500" style="width:${progress};" ></div>
             </div>
 
@@ -248,4 +199,19 @@ const showProgress = {
         infoProgress.innerHTML = "";
     },
 };
+function checkProgress() {
+    const onActive = (e) => {
+        if (!e.target.checked) return;
+        const stepActive = getNode(".step-active");
+        setTimeout(() => {
+            stepActive?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "center",
+            });
+        }, 500);
+    };
+    checkTabProgress.addEventListener("change", onActive);
+}
+
 export default progress;

@@ -61,7 +61,12 @@ function handleActionFunction() {
             },
             update() {
                 const id = functionClass.currentIdUpdate;
-                const { data: dataGet } = functionClass.get();
+                const { data: dataGet, success, message } = functionClass.get();
+
+                if (!success) {
+                    toggerMessage("error", message);
+                    return;
+                }
                 const dataUpdate = { id, ...dataGet, type: functionClass.type };
                 (async () => {
                     const stepUpdated = await functionClass.update(dataUpdate);
