@@ -70,3 +70,5 @@ getInfoPositionBtn.addEventListener("click", (e) => {
 resetMapBtn.addEventListener("click", (e) => {
     console.log(map.layerList);
 });
+
+// 'nothing'
