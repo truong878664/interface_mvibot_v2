@@ -44,11 +44,7 @@ export default class Step {
             error: null,
         };
         const { time_out, name } = data;
-        dataValidated.data.name = name.replaceAll("?", "").replaceAll("!", "");
-        if (isNaN(Number(time_out))) {
-            dataValidated.success = false;
-            dataValidated.message = "Time out is have to number!";
-        }
+        dataValidated.data.name = name?.replaceAll("?", "").replaceAll("!", "");
 
         for (const key in data) {
             if (
@@ -60,6 +56,11 @@ export default class Step {
                 dataValidated.message = `${key} cannot be empty!`;
             }
         }
+        if (time_out && isNaN(Number(time_out))) {
+            dataValidated.success = false;
+            dataValidated.message = "Time out is have to number!";
+        }
+
         return dataValidated;
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Map;
+use App\Models\backend\MissionConfig;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionGpioModule;
@@ -36,6 +37,7 @@ class FunctionController extends Controller
             'gpio_module' => MissionGpioModule::all(),
             'variable' => MissionVariable::all(),
             'sound' => MissionSound::all(),
+            'config' => MissionConfig::all(),
         ];
         return $data;
     }

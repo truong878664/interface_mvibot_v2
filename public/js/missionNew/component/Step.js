@@ -11,6 +11,7 @@ const details = {
     break: "",
     error: "STEP NOT FOUND",
     sleep: "sleep",
+    config: "config",
 };
 const typeVariable = {
     new: "new",
@@ -171,6 +172,11 @@ const Step = (step, addressIndex = "") => {
         error: {
             color: "bg-red-100 text-red-500",
             icon: '<i class="fa-solid fa-triangle-exclamation"></i>',
+        },
+
+        config: {
+            color: "bg-yellow-300/20 text-yellow-500",
+            icon: '<i class="fa-solid fa-grip"></i>',
         },
         sleep: { color: "bg-[#DC262633] text-[#DC2626]", icon: "" },
     };

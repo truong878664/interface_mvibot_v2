@@ -4,7 +4,7 @@
             'type' => 'footprint',
             'title' => 'footprint',
             'color' => 'text-[#38c3ff]',
-            'bg' => 'bg-[#38c3ff33]',
+            'bg' => 'bg-[#38c3ff]/20',
             'icon' => 'fa-solid fa-arrows-left-right-to-line',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
@@ -12,7 +12,7 @@
             'type' => 'gpio',
             'title' => 'gpio',
             'color' => 'text-[#30C930]',
-            'bg' => 'bg-[#30C93033]',
+            'bg' => 'bg-[#30C930]/20',
             'icon' => 'fa-solid fa-microchip',
             'mission_not_allowed' => [],
         ],
@@ -20,7 +20,7 @@
             'type' => 'gpio_module',
             'title' => 'gpio module',
             'color' => 'text-[#EE5E8B]',
-            'bg' => 'bg-[#EE5E8B33]',
+            'bg' => 'bg-[#EE5E8B]/20',
             'icon' => 'fa-solid fa-microchip',
             'mission_not_allowed' => [],
         ],
@@ -28,7 +28,7 @@
             'type' => 'marker',
             'title' => 'marker',
             'color' => 'text-[#432C7A]',
-            'bg' => 'bg-[#432C7A33]',
+            'bg' => 'bg-[#432C7A]/20',
             'icon' => 'fa-solid fa-arrows-up-to-line',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
@@ -36,7 +36,7 @@
             'type' => 'sleep',
             'title' => 'sleep',
             'color' => 'text-[#DC2626]',
-            'bg' => 'bg-[#DC262633]',
+            'bg' => 'bg-[#DC2626]/20',
             'icon' => 'fa-solid fa-mattress-pillow',
             'mission_not_allowed' => [],
         ],
@@ -44,7 +44,7 @@
             'type' => 'sound',
             'title' => 'sound',
             'color' => 'text-[#9333EA]',
-            'bg' => 'bg-[#9333EA33]',
+            'bg' => 'bg-[#9333EA]/20',
             'icon' => 'fa-solid fa-volume-high',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
@@ -52,7 +52,7 @@
             'type' => 'position',
             'title' => 'position',
             'color' => 'text-[#57534E]',
-            'bg' => 'bg-[#57534E33]',
+            'bg' => 'bg-[#57534E]/20',
             'icon' => 'fa-solid fa-location-dot',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
@@ -60,22 +60,30 @@
             'type' => 'variable',
             'title' => 'variable',
             'color' => 'text-[#EA580C]',
-            'bg' => 'bg-[#EA580C33]',
+            'bg' => 'bg-[#EA580C]/20',
             'icon' => 'fa-solid fa-file-code',
+            'mission_not_allowed' => [],
+        ],
+        [
+            'type' => 'config',
+            'title' => 'config',
+            'color' => 'text-yellow-500',
+            'bg' => 'bg-yellow-500/20',
+            'icon' => 'fa-solid fa-grip',
             'mission_not_allowed' => [],
         ],
         [
             'type' => 'break',
             'title' => 'break',
             'color' => 'text-[#C9000C]',
-            'bg' => 'bg-[#C9000C33]',
+            'bg' => 'bg-[#C9000C]/20',
             'icon' => 'fa-solid fa-link-slash',
             'mission_not_allowed' => [],
         ],
     ];
-    
+
     $currentTypeMission = $itemRender->type;
-    
+
     $typeMissions = [
         [
             'type' => 'normal',
@@ -209,6 +217,7 @@
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.sound')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.position')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.variable')
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.config')
             </div>
         </div>
     </div>
