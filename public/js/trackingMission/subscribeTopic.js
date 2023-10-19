@@ -6,7 +6,7 @@ export default function topic({ name, type = "std_msgs/String" }) {
         name,
         messageType: type,
     });
-    let currentData = "";
+    let currentData;
     return {
         subscribe(cb) {
             listener.subscribe(({ data }) => {

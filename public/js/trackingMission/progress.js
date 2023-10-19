@@ -1,7 +1,7 @@
 import { toggerMessage } from "../main.js";
 import Mission from "../missionNew/Class/Mission.js";
 import convertTopic from "./convertTopic.js";
-import pub from "./pub.js";
+import pub from "./demo/pub.js";
 import topic from "./subscribeTopic.js";
 
 const getNode = document.querySelector.bind(document);

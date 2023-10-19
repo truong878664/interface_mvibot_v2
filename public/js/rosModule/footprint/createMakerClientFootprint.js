@@ -1,10 +1,10 @@
 import ros from "../../main.js";
 
-export default function createMarkerClientArrow(tfClient, viewer) {
+export function createMakerClientFootprint(tfClient, viewer) {
     new ROS3D.MarkerClient({
         ros: ros,
         tfClient: tfClient,
-        topic: `/visualization_marker_layer_arrow_${window.name}`,
+        topic: `/visualization_marker_footprint_${window.name}`,
         rootObject: viewer.scene,
     });
 }
