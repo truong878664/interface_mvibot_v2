@@ -48,10 +48,10 @@ export const subscribePath = () => {
             mesh_resource: "",
             mesh_use_embedded_materials: false,
             color: colorPath[index] || { r: 1, g: 1, b: 0, a: 0.9 },
-            scale: { x: 0.3, y: 0.3, z: 0.02 },
+            scale: { x: 0.16, y: 0.16, z: 0.02 },
             pose: {
-                position: { x: 0.0, y: 0.0, z: 0.0 },
-                orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
+                position: { x: 0, y: 0, z: 0 },
+                orientation: { x: 0, y: 0, z: 0, w: 1.0 },
             },
             points: pathList,
         };
