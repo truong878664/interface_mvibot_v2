@@ -3,11 +3,10 @@ import createMap from "../rosModule/createMap.js";
 import createTfClient from "../rosModule/createTfClient.js";
 import createPoint from "../rosModule/createPoint.js";
 import createPose from "../rosModule/createPose.js";
-import ros, { $, $$, toggerMessage } from "../main.js";
+import ros, { toggerMessage } from "../main.js";
 import { mvibot_layer } from "../rosModule/classMvibot.js";
 import { markerClient, displayLayer } from "../rosModule/layer/markerClient.js";
 import {
-    markerClientPath,
     displayPath,
     robotPathTopic,
     deletePath,
@@ -22,18 +21,31 @@ import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
 import progress from "./progress.js";
 import createMarkerClientArrow from "../rosModule/arrow/createMarkerClientArrow.js";
+import { subscribeFootprint } from "./footprint.js";
+import activeSelectRobot from "./activeSelectRobot.js";
+import { createMakerClientFootprint } from "../rosModule/footprint/createMakerClientFootprint.js";
+import { createMarkerClientPath } from "../rosModule/path/createMarkerClientPath.js";
+import { subscribePath } from "./path.js";
 
-const mapElement = $("#map");
+const getNode = document.querySelector.bind(document);
+const getNodeList = document.querySelectorAll.bind(document);
+const mapElement = getNode("#map");
 const heightMap = mapElement.offsetHeight;
 const widthMap = mapElement.offsetWidth;
 
 const viewer = createMap(heightMap, widthMap);
 const tfClient = createTfClient();
+const listRobotElement = getNode("#robot-navigation-json");
+export const robotList = JSON.parse(listRobotElement.value);
 
 markerClient(tfClient, viewer);
-markerClientPath(tfClient, viewer);
+// markerClientPath(tfClient, viewer);
 createMarkerClientArrow(tfClient, viewer);
+createMakerClientFootprint(tfClient, viewer);
+createMarkerClientPath(tfClient, viewer);
 
+subscribeFootprint();
+subscribePath();
 addLayerDbToLayerActive();
 
 createAxes(viewer);
@@ -68,7 +80,7 @@ async function addLayerDbToLayerActive() {
     displayLayer(mvibot_layer_active);
 }
 
-const robotNavigation = JSON.parse($("#robot-navigation-json").value);
+const robotNavigation = JSON.parse(getNode("#robot-navigation-json").value);
 const robotNavigationChange = [...robotNavigation];
 const laser = [];
 
@@ -116,55 +128,10 @@ function activeLaserRobot(robotActive) {
     }
 }
 
-function activeSelectRobot(robotActive) {
-    const markerClient_topic = new ROSLIB.Topic({
-        ros: ros,
-        name: `/visualization_marker_layer_arrow`,
-        messageType: "visualization_msgs/Marker",
-    });
-    const markerClient_msg = new ROSLIB.Message({
-        header: {
-            frame_id: `/${robotActive}/base_footprint`,
-        },
-        ns: "arrow",
-        id: 0,
-        type: 0,
-        action: 0,
-        frame_locked: false,
-        mesh_resource: "",
-        mesh_use_embedded_materials: false,
-        color: {
-            r: 1,
-            g: 0.5,
-            b: 0,
-            a: 0.9,
-        },
-        scale: {
-            x: 0.5,
-            y: 0.25,
-            z: 1.0,
-        },
-        pose: {
-            position: {
-                x: 0.0,
-                y: 0.0,
-                z: 1.2,
-            },
-            orientation: {
-                x: 0.0,
-                y: 0.7071068,
-                z: 0.0,
-                w: 0.7071068,
-            },
-        },
-    });
-    markerClient_topic.publish(markerClient_msg);
-}
-
 let robotActive = "";
 let displayPathFs;
 function changeTopic() {
-    $("#robot-navigation").onchange = (e) => {
+    getNode("#robot-navigation").onchange = (e) => {
         clearInterval(displayPathFs);
         deletePath(robotActive);
 
@@ -185,15 +152,13 @@ function changeTopic() {
     };
 }
 
-$(".stop-mission-btn").onclick = (e) => {
-    if (robotActive) {
-        topicString(`${robotActive}/mission_action`, "0");
-    } else {
-        toggerMessage("error", "please choose robot");
-    }
+getNode(".stop-mission-btn").onclick = () => {
+    robotActive
+        ? topicString(`${robotActive}/mission_action`, "0")
+        : toggerMessage("error", "please choose robot");
 };
 
-$(".refresh-mission-btn").onclick = () => {
+getNode(".refresh-mission-btn").onclick = () => {
     confirmationForm({
         message: `Do you want to reset server?`,
         callback: () => {
@@ -202,17 +167,15 @@ $(".refresh-mission-btn").onclick = () => {
     });
 };
 
-$(".continue-mission-btn").onclick = (e) => {
-    if (robotActive) {
-        confirmationForm({
-            message: `Do you want to continue robot ${robotActive}?`,
-            callback: () => {
-                topicString(`${robotActive}/mission_action`, "1");
-            },
-        });
-    } else {
-        toggerMessage("error", "please choose robot");
-    }
+getNode(".continue-mission-btn").onclick = (e) => {
+    robotActive
+        ? confirmationForm({
+              message: `Do you want to continue robot ${robotActive}?`,
+              callback: () => {
+                  topicString(`${robotActive}/mission_action`, "1");
+              },
+          })
+        : toggerMessage("error", "please choose robot");
 };
 
 reloadWhenOrientation();

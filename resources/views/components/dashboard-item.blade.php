@@ -1,6 +1,6 @@
 <a href="{{ route($route) }}">
     <li
-        class="btn bg-white pt-52 w-full rounded-xl p-10 text-main shadow-light shadow-gray-300/20 hover:shadow-gray-200/30">
+        class="btn bg-white pt-52 w-full h-full rounded-xl p-10 text-main shadow-light shadow-gray-300/20 hover:shadow-gray-200/30">
         <div class="dashboard-content-item-icon" style="--color: {{ $color }}">
             <i class="{{ $icon }}"></i>
         </div>

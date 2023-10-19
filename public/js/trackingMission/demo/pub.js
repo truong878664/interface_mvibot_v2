@@ -1,4 +1,4 @@
-import publishTopic from "../rosModule/pubicTopic.js";
+import publishTopic from "../../rosModule/pubicTopic.js";
 
 function pub() {
     let i = 0;
@@ -28,6 +28,15 @@ function pub() {
             "/MB23_916b/mission_memory",
             `/Normal_mission:HS_0010,HS_001${i},HS_0014//Battery_mission://Error_mission:Error/`
         );
+
+        if (i < 10) {
+            publishTopic("/MB22_916b/footprint", `-0.67|0.67|-0.525|0.525`);
+            publishTopic("/MB23_916b/footprint", `-0.67|0.67|-0.525|0.525`);
+        } else {
+            publishTopic("/MB22_916b/footprint", `-0.9|0.9|-1|1`);
+            publishTopic("/MB23_916b/footprint", `-0.9|0.9|-1|1`);
+            console.log("pub change");
+        }
         i++;
     }, 800);
 }
