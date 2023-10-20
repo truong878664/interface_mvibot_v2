@@ -4,5 +4,8 @@
         @include('frontend.pages.trackingMission.index')
         <script type="module" src="/js/missions.js"></script>
         <script type="module" src="/js/trackingMission/trackingMission.js"></script>
+        <script>
+            console.log("nothing")
+        </script>
     </div>
 @endsection
