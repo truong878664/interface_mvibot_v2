@@ -19,7 +19,7 @@
     <div class="max-w-[700px] w-full mx-auto overflow-auto bg-[#F2EAE8] rounded-md">
         <div class="w-full flex flex-col text-xl px-8 py-4">
 
-        @include('frontend.blocks.setting.settingTab.saveButton', ['setting'=> 'parameter'])
+            @include('frontend.blocks.setting.settingTab.saveButton', ['setting' => 'parameter'])
 
             {{-- SOUND --}}
             <div class="flex flex-co items-center my-6 justify-between">
@@ -64,12 +64,14 @@
             <div class="flex flex-co items-center my-6 justify-between">
                 <span class="font-bold min-w-[70px]">Robot type connect</span>
                 <div class="flex w-[170px] items-center justify-center">
-                    <input type="radio" class="peer/lan" name="robot_type_connect" id="lan" value="lan" hidden>
+                    <input type="radio" class="peer/lan" name="robot_type_connect" id="lan" value="lan"
+                        hidden>
                     <label
                         class="peer-checked/lan:bg-gray-400 cursor-pointer hover:bg-gray-200 peer-checked/lan:text-[#fff] px-4 border py-1 w-[70px] text-center border-r-0 border-gray-400"
                         for="lan">LAN</label>
 
-                    <input type="radio" class="peer/wifi" name="robot_type_connect" id="wifi" value="wifi" hidden>
+                    <input type="radio" class="peer/wifi" name="robot_type_connect" id="wifi" value="wifi"
+                        hidden>
                     <label
                         class="peer-checked/wifi:bg-gray-400 cursor-pointer hover:bg-gray-200 peer-checked/wifi:text-[#fff] px-4 border py-1 w-[70px] text-center border-l-0 border-gray-400"
                         for="wifi">Wifi</label>
@@ -77,6 +79,6 @@
             </div>
             {{-- robot_type_connect --}}
         </div>
-    
+
     </div>
 </div>

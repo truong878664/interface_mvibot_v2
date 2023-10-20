@@ -10,8 +10,7 @@
         <div class="mt-4 absolute left-0 bottom-2 px-2 w-full flex justify-between">
             <label for="stop"
                 class="btn bg-yellow-400 text-[#fff] self-end px-4 py-2 rounded-md cancel-stop">cancel</label>
-            <button
-                class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
+            <button class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md save-stop-btn">Save</button>
         </div>
     @else
         <div class="absolute right-6 bottom-6 flex data-[valid=disable]:pointer-events-none data-[valid=disable]:opacity-70  z-10"
@@ -27,4 +26,3 @@
         </div>
     @endif
 </div>
- 

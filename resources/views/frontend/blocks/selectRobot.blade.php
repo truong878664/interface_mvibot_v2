@@ -20,13 +20,13 @@
     }
 @endphp
 
-<div class="text-2xl mx-2 mt-2 user-select-none">
+<div class="text-xl mx-2 mt-2 user-select-none">
     <div class="group/dropdown dropdown">
         <div class="">
-            <input class="text-box bg-[#fff] text-[#000] shadow-md" type="text" placeholder="{{ $placeHolder }}"
-                id="{{ $id }}" readonly>
+            <input class="text-box bg-[#fff] text-[#000] shadow-md placeholder:text-base" type="text"
+                placeholder="{{ $placeHolder }}" id="{{ $id }}" readonly>
             <div
-                class="absolute top-0 right-[10px] text-3xl text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
+                class="absolute top-0 right-[10px] text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
                 <i class="fa-solid fa-caret-down"></i>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     {{ $robot['name_seri'] }}
                 </div>
             @endforeach
-            <div class="px-2 py-2 font-bold !text-2xl" onclick="show('', this)">
+            <div class="px-2 py-2 font-bold" onclick="show('', this)">
                 {{ $title }}
             </div>
         </div>

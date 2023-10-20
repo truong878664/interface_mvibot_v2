@@ -1,9 +1,9 @@
-<div class="hidden function-item function-mission-tab w-fit rounded-md bg-[#fff] p-4 pb-[60px] relative" data-type="sleep">
+<div class="hidden function-item function-mission-tab w-fit rounded-md bg-[#fff] p-4 pb-[60px] relative"
+    data-type="sleep">
     <div class="flex flex-col mb-4">
         <label for="" class="text-xl">Name function Sleep</label>
         <input class="w-[200px] text-xl px-4 py-1  input-reset valid-input" type="text" name="name_sleep" required>
     </div>
-
 
     <div class="flex flex-col">
         <label for="" class="text-xl">Time sleep</label>
@@ -13,7 +13,6 @@
             <span class="text-xl">second</span>
         </div>
     </div>
-
 
     @include('frontend.blocks.mission.createMissions.functionTab.idMission')
 

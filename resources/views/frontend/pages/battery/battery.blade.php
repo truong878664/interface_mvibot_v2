@@ -53,8 +53,8 @@
                                 id="{{ $item['title'] === 'robot' ? 'name_seri' : '' }}">{{ $item['title'] }}</span>
                         </div>
                         <div class="flex items-center">
-                            <div class="group/status-item text-2xl text-yellow-400 data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500" data-title-status="{{$item['title']}}"
-                                data-status-item="">
+                            <div class="group/status-item text-2xl text-yellow-400 data-[status-item=ok]:text-green-500 data-[status-item=ng]:text-red-500"
+                                data-title-status="{{ $item['title'] }}" data-status-item="">
                                 <span class="text-2xl">
                                     <i class="fa-solid fa-circle"></i>
                                 </span>

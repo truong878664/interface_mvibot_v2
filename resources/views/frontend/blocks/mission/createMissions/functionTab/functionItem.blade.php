@@ -69,11 +69,13 @@
                     class="mr-2 btn rounded-md px-2 min-w-[30px] text-center border border-[#0f6cbd] bg-[#fff] [&.active]:text-[#fff] [&.active]:bg-[#0f6cbd] sort-marker-btn">Angle</button>
             </div>
         @elseif($type === 'gpio_module')
-            <div class="absolute bottom-[calc(100%_+_4px)] left-0 flex sort-gpio_module-wrapper w-full overflow-x-auto overflow-y-hidden">
+            <div
+                class="absolute bottom-[calc(100%_+_4px)] left-0 flex sort-gpio_module-wrapper w-full overflow-x-auto overflow-y-hidden">
                 <button data-type='all'
                     class="mr-2 btn rounded-md px-2 min-w-[30px] text-center border border-[#0f6cbd] bg-[#fff] [&.active]:text-[#fff] [&.active]:bg-[#0f6cbd] sort-gpio_module-btn active">all</button>
                 @foreach ($allRobots as $robot)
-                    <button data-type='{{ $robot->name_seri }}' class="mr-2 btn rounded-md px-2 text-center border border-[#0f6cbd] bg-[#fff] [&.active]:text-[#fff] [&.active]:bg-[#0f6cbd] sort-gpio_module-btn">{{ $robot->name_seri }}</button>
+                    <button data-type='{{ $robot->name_seri }}'
+                        class="mr-2 btn rounded-md px-2 text-center border border-[#0f6cbd] bg-[#fff] [&.active]:text-[#fff] [&.active]:bg-[#0f6cbd] sort-gpio_module-btn">{{ $robot->name_seri }}</button>
                 @endforeach
             </div>
         @endif

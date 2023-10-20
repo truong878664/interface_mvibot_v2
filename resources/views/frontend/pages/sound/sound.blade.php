@@ -67,7 +67,6 @@
                     @endforeach
                 </tbody>
 
-
             </table>
             <form class="mt-4 flex justify-center" action="/upload/sound" method="POST" enctype="multipart/form-data"
                 id="form-upload-sound">
@@ -96,7 +95,7 @@
                     $fileSound = json_encode(glob('sound/custom/*'));
                     echo $fileSound;
                 }
-                
+
             @endphp
 
             <input type="hidden" class="pathSound" value="">

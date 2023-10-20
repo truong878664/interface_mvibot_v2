@@ -3,7 +3,7 @@
     <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-lg overflow-y-auto overflow-x-hidden">
         <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/bg.jpg)">
             <span class="absolute top-0 left-4 text-orange-400 text-2xl">website: maruei-robots.com</span>
-            <span class="absolute top-0 right-4 text-xl">version: {{$version}}</span>
+            <span class="absolute top-0 right-4 text-xl">version: {{ $version }}</span>
             <div class="absolute top-[20%] left-1/2 -translate-x-1/2 flex flex-col items-center text-[#fff]">
                 <h1>
                     <div class="animation-text text-[100px] font-bold">
@@ -56,7 +56,6 @@
             </div>
         </div>
 
-
         @php
             $maruei = [
                 ['title' => 'MARUEI INDUSTRIES CO., LTD.', 'description' => 'Sản xuất và bán phụ tùng ô tô'],
@@ -69,7 +68,7 @@
                 ['title' => 'MARUEI TOYOTA CO., LTD.', 'description' => 'Maruei Toyota là một công ty sản xuất lắp ráp các linh kiện điện tử của xe ô tô.'],
                 ['title' => 'MIYAZAKI TECHNOVILLAGE CO., LTD.', 'description' => 'Cửa hàng đầu tiên tại khu vực thương mại của Technovillage, chúng tôi kinh doanh một cửa hàng tiện lợi với giặt tự động.'],
             ];
-            
+
         @endphp
         <div class="w-full h-full">
             <header class="text-center text-[30px] font-bold mt-8 text-[#0f6cbd]">The Maruei Group</header>
@@ -202,38 +201,35 @@
         </style>
         <style>
             /* body {
-<<<<<<< HEAD
-                    margin: 0;
-                    height: 100vh;
-                    font-weight: 100;
-                    background: radial-gradient(#a23982, #1f1013);
-                    -webkit-overflow-Y: hidden;
-                    -moz-overflow-Y: hidden;
-                    -o-overflow-Y: hidden;
-                    overflow-y: hidden;
-                    -webkit-animation: fadeIn 1 1s ease-out;
-                    -moz-animation: fadeIn 1 1s ease-out;
-                    -o-animation: fadeIn 1 1s ease-out;
-                    animation: fadeIn 1 1s ease-out;
-                } */
-=======
-                        margin: 0;
-                        height: 100vh;
-                        font-weight: 100;
-                        background: radial-gradient(#a23982, #1f1013);
-                        -webkit-overflow-Y: hidden;
-                        -moz-overflow-Y: hidden;
-                        -o-overflow-Y: hidden;
-                        overflow-y: hidden;
-                        -webkit-animation: fadeIn 1 1s ease-out;
-                        -moz-animation: fadeIn 1 1s ease-out;
-                        -o-animation: fadeIn 1 1s ease-out;
-                        animation: fadeIn 1 1s ease-out;
-                    } */
->>>>>>> new_wave
+        <<<<<<< HEAD
+                            margin: 0;
+                            height: 100vh;
+                            font-weight: 100;
+                            background: radial-gradient(#a23982, #1f1013);
+                            -webkit-overflow-Y: hidden;
+                            -moz-overflow-Y: hidden;
+                            -o-overflow-Y: hidden;
+                            overflow-y: hidden;
+                            -webkit-animation: fadeIn 1 1s ease-out;
+                            -moz-animation: fadeIn 1 1s ease-out;
+                            -o-animation: fadeIn 1 1s ease-out;
+                            animation: fadeIn 1 1s ease-out;
+                        } */
+            =======margin: 0;
+            height: 100vh;
+            font-weight: 100;
+            background: radial-gradient(#a23982, #1f1013);
+            -webkit-overflow-Y: hidden;
+            -moz-overflow-Y: hidden;
+            -o-overflow-Y: hidden;
+            overflow-y: hidden;
+            -webkit-animation: fadeIn 1 1s ease-out;
+            -moz-animation: fadeIn 1 1s ease-out;
+            -o-animation: fadeIn 1 1s ease-out;
+            animation: fadeIn 1 1s ease-out;
+            }
 
-
-            .light {
+            */>>>>>>>new_wave .light {
                 position: absolute;
                 width: 0px;
                 opacity: .75;
@@ -453,7 +449,6 @@
                     opacity: 0;
                 }
             }
-
 
             @-webkit-keyframes fadeIn {
                 from {

@@ -124,8 +124,11 @@
                 <div id="save-move-block-wrapper" class="flex flex-col items-end mt-4 hidden">
                     <span class="text-2xl mr-2 block font-bold">Save move block mission</span>
                     <div class="">
-                        <button class="mb-2 rounded-md px-4 py-2 bg-yellow-400 text-[#fff] mt-4 btn text-2xl font-bold hidden" id="cancel-move-block-btn">Cancel</button>
-                        <button class="mb-2 rounded-md px-4 py-2 bg-main text-[#fff] mx-2 mt-4 btn text-2xl font-bold" id="save-move-block-btn">save</button>
+                        <button
+                            class="mb-2 rounded-md px-4 py-2 bg-yellow-400 text-[#fff] mt-4 btn text-2xl font-bold hidden"
+                            id="cancel-move-block-btn">Cancel</button>
+                        <button class="mb-2 rounded-md px-4 py-2 bg-main text-[#fff] mx-2 mt-4 btn text-2xl font-bold"
+                            id="save-move-block-btn">save</button>
                     </div>
                 </div>
 
@@ -145,9 +148,9 @@
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
                     @include('frontend.blocks.selectRobot', [
-                            'type' => 'all_robot',
-                            'id' => 'select-robot-option',
-                        ])
+                        'type' => 'all_robot',
+                        'id' => 'select-robot-option',
+                    ])
 
                     <label for="select-robot" type="{{ $itemRender->type }}"
                         class="rounded-md text-2xl font-bold px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-mission-btn">Send</label>
@@ -157,13 +160,12 @@
         @include('frontend.blocks.mission.createMissions.functionTab.tabWakeUpStop.index')
     </div>
 
-
     @php
         $datas = explode('|', $itemRender->steps_mission_name);
         array_shift($datas);
         $datasJson = json_encode($datas);
         echo "<input hidden class='data-steps' type='text' value='$datasJson'>";
-        
+
         if (session('data')) {
             $dataNew = session('data')[0]['steps_mission'];
             $stringStep_mission = trim(str_replace(')(', '||', $dataNew), '()');

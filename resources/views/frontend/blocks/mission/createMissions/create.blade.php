@@ -1,19 +1,7 @@
 @php
-    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500',
-     'error-robot' => 'from-red-500 to-red-600',
-     'error-gpio' => 'from-red-500 to-red-600',
-     'battery' => 'from-[#0f6cbd] to-[#227dcd]',
-     'gpio' => 'from-[#FFB84C] to-[#F0A04B]'];
-    $colorButton = ['normal' => 'text-green-500', 
-    'error-robot' => 'text-red-800', 
-    'error-gpio' => 'text-red-800', 
-    'battery' => 'text-[#0f6cbd]', 
-    'gpio' => 'text-[#F99417]'];
-    $colorBg = ['normal' => 'bg-green-400', 
-    'error-robot' => 'bg-red-400', 
-    'error-gpio' => 'bg-red-400', 
-    'battery' => 'bg-blue-400', 
-    'gpio' => 'bg-yellow-400'];
+    $colorMisisonItem = ['normal' => 'from-green-600 to-green-500', 'error-robot' => 'from-red-500 to-red-600', 'error-gpio' => 'from-red-500 to-red-600', 'battery' => 'from-[#0f6cbd] to-[#227dcd]', 'gpio' => 'from-[#FFB84C] to-[#F0A04B]'];
+    $colorButton = ['normal' => 'text-green-500', 'error-robot' => 'text-red-800', 'error-gpio' => 'text-red-800', 'battery' => 'text-[#0f6cbd]', 'gpio' => 'text-[#F99417]'];
+    $colorBg = ['normal' => 'bg-green-400', 'error-robot' => 'bg-red-400', 'error-gpio' => 'bg-red-400', 'battery' => 'bg-blue-400', 'gpio' => 'bg-yellow-400'];
 @endphp
 
 @foreach ($missions as $index => $itemMission)
@@ -44,7 +32,7 @@
             </div>
         </div>
         <div class="h-full w-full">
-            <a href="/dashboard/missions/{{$v}}/create-missions/{{ $itemMission->id }}"
+            <a href="/dashboard/missions/{{ $v }}/create-missions/{{ $itemMission->id }}"
                 class=" flex relative items-end w-full h-full text-[#fff] href-mission">
                 <input
                     class="text-3xl bg-transparent border-[2px] rounded-lg border-transparent p-2 w-full pointer-events-none name-mission"

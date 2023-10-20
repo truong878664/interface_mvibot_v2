@@ -4,9 +4,7 @@
     }
 
     .function-btn.active {
-
         font-weight: bold;
-
     }
 
     .type-mission-function-item.highline {
@@ -207,7 +205,8 @@
 
         <div
             class="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.2)] flex justify-center items-center function-item-form-wrapper hidden">
-            <div class="w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden flex justify-center items-center">
+            <div
+                class="w-[80%] h-[80%] rounded-md function-item-form relative overflow-hidden flex justify-center items-center">
                 @include('frontend.blocks.mission.createMissions.functionTab.gpio', [
                     'type' => 'gpio',
                 ])

@@ -7,11 +7,9 @@
     </div>
 
     <div class="add-wrapper-{{ $type }}">
-        <button
-            class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md add-mission-{{ $type }}"
+        <button class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md add-mission-{{ $type }}"
             type="save">Save</button>
-        <button
-            class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md add-mission-{{ $type }}"
+        <button class=" btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md add-mission-{{ $type }}"
             type="add">Add</button>
     </div>
 </div>

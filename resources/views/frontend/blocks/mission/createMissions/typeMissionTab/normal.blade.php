@@ -4,7 +4,9 @@
             <label for="" class="text-xl">Name normal mission</label>
             <input class="w-[200px] text-xl px-4 py-1 name-normal-mission" type="text" name="" required>
         </div>
-        @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', ['type'=>'normal'])
+        @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', [
+            'type' => 'normal',
+        ])
     </div>
     <input type="hidden" class="value-normal-mission">
     <div class="h-[100px] w-full flex flex-wrap overflow-y-auto my-2 border normal-steps-wrapper content-start">

@@ -1,67 +1,119 @@
-<div class="flex h-full w-full justify-between hidden marker-item" data-type-marker="none_marker_dis">
-    <div class="w-1/2 ">
+<div
+    class="marker-item flex hidden h-full w-full justify-between"
+    data-type-marker="none_marker_dis"
+>
+    <div class="w-1/2">
         <div class="flex items-stretch gap-4">
-            <div class="flex flex-col mb-2">
+            <div class="mb-2 flex flex-col">
                 <label for="" class="text-xl">Name function Marker</label>
-                <input class="  input-reset w-[100px] text-xl px-4 py-1 valid-input" type="text" name="name_marker"
-                    required>
+                <input
+                    class="input-reset valid-input w-[100px] px-4 py-1 text-xl"
+                    type="text"
+                    name="name_marker"
+                    required
+                />
             </div>
-            <div class="flex flex-col ml-2">
+            <div class="ml-2 flex flex-col">
                 <label for="" class="text-xl">Time out</label>
-                <input class="w-[40px] text-xl px-2 py-1 time_out_gpio_module text-center input-type-number"
-                    type="text" name="time_out" value="-1" required="">
+                <input
+                    class="time_out_gpio_module input-type-number w-[40px] px-2 py-1 text-center text-xl"
+                    type="text"
+                    name="time_out"
+                    value="-1"
+                    required=""
+                />
             </div>
         </div>
-        <input name="marker_type" class="input-offset" type="text" value="none_marker_dis" hidden>
-
+        <input
+            name="marker_type"
+            class="input-offset"
+            type="text"
+            value="none_marker_dis"
+            hidden
+        />
 
         <div class="flex">
-
-            <div class="flex flex-col mr-2 items-center">
+            <div class="mr-2 flex flex-col items-center">
                 <label for="" class="text-xl">Offset dis</label>
-                <input class=" input-reset w-[54px] text-xl px-4 py-1 input-type-number" type="text" step="0.01"
-                    name="off_set_dis" required>
+                <input
+                    class="input-reset input-type-number w-[54px] px-4 py-1 text-xl"
+                    type="text"
+                    step="0.01"
+                    name="off_set_dis"
+                    required
+                />
             </div>
-
         </div>
 
         <div class="flex">
-            <div class="flex flex-col mr-2 items-center">
+            <div class="mr-2 flex flex-col items-center">
                 <label for="" class="text-xl">sx1</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001 input-type-number" type="text" value="0.01"
-                    step="0.01" required name="sx1">
+                <input
+                    class="offset-s-001 input-type-number w-[54px] px-4 py-1 text-xl"
+                    type="text"
+                    value="0.01"
+                    step="0.01"
+                    required
+                    name="sx1"
+                />
             </div>
 
-            <div class="flex flex-col mr-2 items-center">
+            <div class="mr-2 flex flex-col items-center">
                 <label for="" class="text-xl">sx2</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001 input-type-number" type="text" value="0.01"
-                    step="0.01" required name="sx2">
+                <input
+                    class="offset-s-001 input-type-number w-[54px] px-4 py-1 text-xl"
+                    type="text"
+                    value="0.01"
+                    step="0.01"
+                    required
+                    name="sx2"
+                />
             </div>
 
-            <div class="flex flex-col mr-2 items-center">
+            <div class="mr-2 flex flex-col items-center">
                 <label for="" class="text-xl">sy1</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001 input-type-number" type="text" value="0.01"
-                    step="0.01" required name="sy1">
+                <input
+                    class="offset-s-001 input-type-number w-[54px] px-4 py-1 text-xl"
+                    type="text"
+                    value="0.01"
+                    step="0.01"
+                    required
+                    name="sy1"
+                />
             </div>
 
-            <div class="flex flex-col mr-2 items-center">
+            <div class="mr-2 flex flex-col items-center">
                 <label for="" class="text-xl">sy2</label>
-                <input class="w-[54px] text-xl px-4 py-1 offset-s-001 input-type-number" type="text" value="0.01"
-                    step="0.01" required name="sy2">
+                <input
+                    class="offset-s-001 input-type-number w-[54px] px-4 py-1 text-xl"
+                    type="text"
+                    value="0.01"
+                    step="0.01"
+                    required
+                    name="sy2"
+                />
             </div>
-
         </div>
     </div>
 
-    <div class="w-1/2 h-full ">
-        <div class="h-full w-full max-w-[400px] bg-contain bg-no-repeat self-center bg-center marker-img"
-            markerDir="l_marker_" style="background-image: url('/img/marker/none_marker_dis.png')"></div>
+    <div class="h-full w-1/2">
+        <div
+            class="marker-img h-full w-full max-w-[400px] self-center bg-contain bg-center bg-no-repeat"
+            markerDir="l_marker_"
+            style="
+                background-image: url(&quot;/img/marker/none_marker_dis.png&quot;);
+            "
+        ></div>
     </div>
 
-    {{-- @include('frontend.blocks.mission.createMissions.functionTab.idMission')
+    {{--
+    @include('frontend.blocks.mission.createMissions.functionTab.idMission')
 
     <button
-        class="text-xl md:text-3xl absolute right-0 bottom-0 btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md submit-btn-marker">Add</button> --}}
+        class="btn submit-btn-marker absolute right-0 bottom-0 self-end rounded-md bg-[#0f6cbd] px-4 py-2 text-xl text-[#fff] md:text-3xl"
+    >
+        Add
+    </button>
+    --}}
     {{-- @include('frontend.blocks.mission.createMissions.functionTab.buttonSave', ['type' => 'none_marker_dis']) --}}
-
 </div>

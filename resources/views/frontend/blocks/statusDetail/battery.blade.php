@@ -19,14 +19,21 @@
         </div>
     </span>
     <span class="py-2 h-[30px] text-2xl pr-8 pl-2">
-        <span parameter-statusn data-parameter-status="" data-parameter-title="battery" id="temperature">-</span> <span>°C</span>
+        <span parameter-statusn data-parameter-status="" data-parameter-title="battery" id="temperature">-</span>
+        <span>°C</span>
     </span>
     <span class="py-2 h-[30px] text-2xl pr-8 pl-2">
-        <span parameter-statusn data-parameter-status="" data-parameter-title="battery" id="vol">-</span> <span>v</span>
+        <span parameter-statusn data-parameter-status="" data-parameter-title="battery" id="vol">-</span>
+        <span>v</span>
     </span>
-    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status="" data-parameter-title="battery" id="cycle">-</span>
-    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status="" data-parameter-title="battery" id="current">-</span>
-    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status="" data-parameter-title="battery" id="num_cell">-</span>
-    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status="" data-parameter-title="battery" id="capacity_now">-</span>
-    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status="" data-parameter-title="battery" id="capacity_max">-</span>
+    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status=""
+        data-parameter-title="battery" id="cycle">-</span>
+    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status=""
+        data-parameter-title="battery" id="current">-</span>
+    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status=""
+        data-parameter-title="battery" id="num_cell">-</span>
+    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status=""
+        data-parameter-title="battery" id="capacity_now">-</span>
+    <span class="py-2 h-[30px] text-2xl pr-8 pl-2 parameter-status" data-parameter-status=""
+        data-parameter-title="battery" id="capacity_max">-</span>
 </div>

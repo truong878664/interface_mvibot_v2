@@ -19,42 +19,48 @@
         font-weight: 400;
     }
 </style>
-<div class="hidden function-form-item function-mission-tab rounded-md bg-[#fff] p-4 pb-[60px] relative" data-type="sound">
-    <div class="flex flex-col mb-4">
+<div
+    class="function-form-item function-mission-tab relative hidden rounded-md bg-[#fff] p-4 pb-[60px]"
+    data-type="sound"
+>
+    <div class="mb-4 flex flex-col">
         <label for="" class="text-xl">Name function sound</label>
-        <input class="w-[200px] text-xl px-4 py-1  input-reset name_function_sound valid-input" type="text" required>
+        <input
+            class="input-reset name_function_sound valid-input w-[200px] px-4 py-1 text-xl"
+            type="text"
+            required
+        />
     </div>
 
-    @php
-        $nameSound = ['buzzer1', 'buzzer2', 'basic', 'custom'];
-    @endphp
+    @php $nameSound = ['buzzer1', 'buzzer2', 'basic', 'custom']; @endphp
 
-    <div class="flex mt-8">
-        <ul class="text-xl w-full sound-list">
+    <div class="mt-8 flex">
+        <ul class="sound-list w-full text-xl">
             @for ($i = 0; $i < count($nameSound); $i++)
-                <li data-number-sound="{{$i + 1}}"
-                    class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
-                    <span class="w-1/6 text-center">{{ $i + 1 }}</span>
-                    <span class="text-left w-4/6">
-                        {{$nameSound[$i]}}
-                    </span>
-                    <span class="w-1/6 btn text-center">
-                        <i class="fa-solid fa-play"></i>
-                    </span>
-                </li>
+            <li
+                data-number-sound="{{ $i + 1 }}"
+                class="sound-item mb-[2px] flex w-full cursor-pointer items-center justify-between rounded-md bg-stone-100 py-4 px-2 transition-all hover:scale-105 hover:bg-sky-300 hover:font-bold [&.active]:bg-sky-300 [&.active]:font-bold"
+            >
+                <span class="w-1/6 text-center">{{ $i + 1 }}</span>
+                <span class="w-4/6 text-left">
+                    {{ $nameSound[$i] }}
+                </span>
+                <span class="btn w-1/6 text-center">
+                    <i class="fa-solid fa-play"></i>
+                </span>
+            </li>
             @endfor
 
-            <li  data-number-sound="0"
-                class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
+            <li
+                data-number-sound="0"
+                class="sound-item mb-[2px] flex w-full cursor-pointer items-center justify-between rounded-md bg-stone-100 py-4 px-2 transition-all hover:scale-105 hover:bg-sky-300 hover:font-bold [&.active]:bg-sky-300 [&.active]:font-bold"
+            >
                 <span class="w-1/6 text-center">{{ $i + 1 }}</span>
-                <span class="text-left w-4/6">
-                    Sound OFF
-                </span>
-                <span class="w-1/6 btn text-center">
-                </span>
+                <span class="w-4/6 text-left"> Sound OFF </span>
+                <span class="btn w-1/6 text-center"> </span>
             </li>
         </ul>
     </div>
-    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonSave', ['type' => 'sound'])
-
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonSave',
+    [ 'type' => 'sound', ])
 </div>

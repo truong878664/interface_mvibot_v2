@@ -106,7 +106,6 @@
         box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.4);
     }
 
-
     .key {
         text-transform: lowercase;
     }
@@ -148,7 +147,6 @@
 
     div[class*="line"] span:hover {
         /*   box-shadow: 0px 2px 10px #040404;*/
-
         background: #2f3336;
         /* text-shadow: 1px 2px 60px #00BCD4, 0px 0px 60px rgba(0, 188, 212, .9), 0px 0px 60px rgba(0, 188, 212, .9), 10px 10px 60px rgba(0, 188, 212, .9); */
         cursor: pointer;

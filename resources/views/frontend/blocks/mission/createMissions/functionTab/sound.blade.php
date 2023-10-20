@@ -32,11 +32,11 @@
     <div class="flex mt-8">
         <ul class="text-xl w-full sound-list">
             @for ($i = 0; $i < count($nameSound); $i++)
-                <li data-number-sound="{{$i + 1}}"
+                <li data-number-sound="{{ $i + 1 }}"
                     class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
                     <span class="w-1/6 text-center">{{ $i + 1 }}</span>
                     <span class="text-left w-4/6">
-                        {{$nameSound[$i]}}
+                        {{ $nameSound[$i] }}
                     </span>
                     <span class="w-1/6 btn text-center">
                         <i class="fa-solid fa-play"></i>
@@ -44,7 +44,7 @@
                 </li>
             @endfor
 
-            <li  data-number-sound="0"
+            <li data-number-sound="0"
                 class="flex w-full justify-between items-center py-4 bg-stone-100 rounded-md px-2 hover:bg-sky-300 hover:scale-105 hover:font-bold transition-all [&.active]:bg-sky-300 [&.active]:font-bold mb-[2px] cursor-pointer sound-item">
                 <span class="w-1/6 text-center">{{ $i + 1 }}</span>
                 <span class="text-left w-4/6">
@@ -54,8 +54,6 @@
                 </span>
             </li>
         </ul>
-
-
 
         {{-- <div class="relative">
             <button

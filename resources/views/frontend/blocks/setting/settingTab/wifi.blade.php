@@ -66,8 +66,7 @@
 
                 <div class="group-data-[wifi-connect=hots-pot]/wifi-container:hidden">
                     {{-- WIFI CONNECTED --}}
-                    <div
-                        class="w-full h-[80px] rounded-lg bg-[#F2EAE8]  pl-[40px] pr-10 mb-[40px]">
+                    <div class="w-full h-[80px] rounded-lg bg-[#F2EAE8]  pl-[40px] pr-10 mb-[40px]">
                         <div class="flex justify-between items-center h-full wifi-connect-item hidden">
                             <div class="">
                                 <label for="" class="text-sky-600"><i class="fa-solid fa-check"></i></label>
@@ -218,8 +217,8 @@
                             {{-- LAN IPV4 DNS --}}
                             <div class="mx-8 my-6 flex justify-between text-2xl">
                                 <span class="font-bold">Ip v4 DNS</span>
-                                <input type="text" 
-                                    class="h-[32px] w-[275px] px-4 text-right rounded-md border-none bg-gray-200 wifi_ipv4_dns" >
+                                <input type="text"
+                                    class="h-[32px] w-[275px] px-4 text-right rounded-md border-none bg-gray-200 wifi_ipv4_dns">
                             </div>
                             {{-- END IP V4 DNS --}}
                         </div>

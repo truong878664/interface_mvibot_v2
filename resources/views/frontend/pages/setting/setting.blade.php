@@ -25,7 +25,7 @@
                             'class' => 'hidden',
                             'color' => '#8E8A8B',
                         ],
-                    
+
                         [
                             'title' => 'Wifi',
                             'icon' => 'fa-solid fa-wifi',
@@ -50,7 +50,7 @@
                             'class' => 'hidden',
                             'color' => '#6064DC',
                         ],
-                    
+
                         [
                             'title' => 'Power',
                             'icon' => 'fa-solid fa-power-off',
