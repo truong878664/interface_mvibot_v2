@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
-    <link rel="stylesheet" href="/buildCss/style.css">
     @vite('resources/css/app.css')
 </head>
 
 <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[300px]">
     <header class="main-header">
         <div class="header-left-wrapper">
-            <div class="connect-ros-btn connection-failed shake">
+            <div
+                class="connect-ros-btn text-center text-2xl connection-failed shake [&.connected]:text-green-400 [&.connection-failed]:text-red-600">
                 <i class="fa-solid fa-satellite-dish"></i>
             </div>
             <div class="flex items-center">
-                <h3 class="font-bold">Mvibot</h3>
+                <span class="font-bold">Mvibot</span>
             </div>
             <div class="message-map-wrapper">
             </div>
@@ -33,7 +33,7 @@
                     </div>
                 </button>
                 <div
-                    class="absolute top-full w-[200px] bg-[#fff] shadow-sm shadow-[#ccc] text-[#000] text-2xl p-4 rounded-md hidden">
+                    class="absolute top-full w-[200px] bg-[#fff] shadow-sm shadow-[#ccc] text-[#000] p-4 rounded-md hidden">
                     <span>Bookmark add</span>
                     <div class="flex my-2">
                         <label for="name-bookmark" class="mr-2">name</label>
@@ -61,8 +61,8 @@
         </div>
         <div class="user-wrapper">
             <input type="text" class="type-user text-black" value={{ session('TypeUser') }}>
-            <input class="ml-10 mr-4 text-[16px] name-user w-[150px] border-0 bg-transparent text-right" readonly
-                value="{{ session('UserName') }}" />
+            <input class="ml-10 mr-4 text-[16px] text-base name-user w-[150px] border-0 bg-transparent text-right"
+                readonly value="{{ session('UserName') }}" />
             <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
                 style="background-color: {{ $color }};"
                 class="avatar-user transparent flex justify-center items-center bg-avatar relative after:content-[attr(key)] after:absolute after:text-[24px] after:font-bold after:uppercase">

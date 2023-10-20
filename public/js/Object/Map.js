@@ -17,7 +17,6 @@ export default class Map {
     };
     _layerList = [];
     constructor({ mapID, width, height, nameMap }) {
-        // this.mixinMethodFromClass([new MapOption(), new MapAction()]);
         this.mapID = mapID;
         this.width = width;
         this.height = height;
@@ -276,6 +275,7 @@ export default class Map {
         this.dispatchCustomEvent("changeLayer");
         setTimeout(() => {
             this.layer.save();
+            console.log("saved layer!");
         }, 1000);
     }
     /**
@@ -320,15 +320,16 @@ export default class Map {
         },
         topic: null,
         save: async () => {
-            const res = await fetch("/api/layer", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(this.layer.layerRosToDb()),
-            });
-            const status = await res.json();
-            console.log(status);
+            // const res = await fetch("/api/layer", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(this.layer.layerRosToDb()),
+            // });
+            console.log(this.layer.layerRosToDb());
+            // const status = await res.json();
+            // console.log(status);
         },
         layerRosToDb: () => {
             const layers = this.layerList.map((layer) => {

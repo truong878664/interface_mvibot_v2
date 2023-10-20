@@ -1,6 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-md overflow-hidden bg-stone-200 relative">
+    <div data-map-active="{{ $mapActive }}"
+        class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-md overflow-hidden bg-stone-200 relative">
         <div class="absolute top-0 left-0 min-h-[40px] p-2">
             <div class="backdrop-blur-sm h-full rounded-md flex bg-white shadow-md border">
                 <label>

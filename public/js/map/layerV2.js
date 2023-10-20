@@ -2,12 +2,16 @@ import Map from "../Object/Map.js";
 
 const getNode = document.querySelector.bind(document);
 const getNodeList = document.querySelectorAll.bind(document);
+
 const createLayer = getNode("#create-layer");
-const map = new Map({ mapID: "map", nameMap: "map_878664" });
+const mapActive = getNode("[data-map-active]")?.dataset.mapActive || "no_map";
+
+const map = new Map({ mapID: "map", nameMap: mapActive });
 
 (function init() {
     map.create();
     handleLayer();
+    console.log(map.layer.layerRosToDb());
 })();
 
 function handleLayer() {
