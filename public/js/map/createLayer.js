@@ -290,6 +290,7 @@ function handleSaveLayer() {
             layerActive.click();
         }
 
+        console.log(dataLayerSaveDatabase);
         fetch("/api/layer", {
             headers: {
                 Accept: "application/json",

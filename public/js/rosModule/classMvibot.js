@@ -1,3 +1,5 @@
+import { Z_LAYER } from "../trackingMission/zIndexMarkerClientMap.js";
+
 export class mvibot_color {
     constructor(r, g, b, a) {
         this.r = r;
@@ -51,39 +53,9 @@ export class mvibot_layer {
         //
         this.pose = new mvibot_pose();
         //
-        this.pose.position = new mvibot_position(xo, yo, 0.1);
+        this.pose.position = new mvibot_position(xo, yo, Z_LAYER);
 
         this.pose.orientation = new mvibot_orientation(0, 0, z, w);
         //
     }
 }
-// export class mvibot_layer {
-//     constructor(name, x1, y1, x2, y2, type, z = 0, w = 1) {
-//         this.name = name;
-//         this.x1 = x1;
-//         this.y1 = y1;
-//         this.x2 = x2;
-//         this.y2 = y2;
-//         //
-//         if (type == "dead_zone") this.color = new mvibot_color(1, 0, 0, 0.3);
-//         else if (type == "lowspeed_zone")
-//             this.color = new mvibot_color(0.2, 0, 0.8, 0.3);
-//         //
-//         this.scale = new mvibot_scale(
-//             Math.abs(x1 - x2),
-//             Math.abs(y1 - y2),
-//             0.01
-//         );
-//         //
-//         this.pose = new mvibot_pose();
-//         //
-//         this.pose.position = new mvibot_position(
-//             (x1 + x2) / 2,
-//             (y1 + y2) / 2,
-//             0.01
-//         );
-
-//         this.pose.orientation = new mvibot_orientation(0, 0, z, w);
-//         //
-//     }
-// }

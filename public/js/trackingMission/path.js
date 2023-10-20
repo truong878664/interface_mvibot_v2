@@ -1,6 +1,7 @@
 import ros from "../main.js";
 import topic from "./subscribeTopic.js";
 import { robotList } from "./trackingMission.js";
+import { Z_PATH } from "./zIndexMarkerClientMap.js";
 
 export const subscribePath = () => {
     const colorPath = [
@@ -50,7 +51,7 @@ export const subscribePath = () => {
             color: colorPath[index] || { r: 1, g: 1, b: 0, a: 0.9 },
             scale: { x: 0.16, y: 0.16, z: 0.02 },
             pose: {
-                position: { x: 0, y: 0, z: 0 },
+                position: { x: 0, y: 0, z: Z_PATH },
                 orientation: { x: 0, y: 0, z: 0, w: 1.0 },
             },
             points: pathList,
