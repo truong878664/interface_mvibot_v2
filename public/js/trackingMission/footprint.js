@@ -1,6 +1,7 @@
 import ros, { toggerMessage } from "../main.js";
 import topic from "./subscribeTopic.js";
 import { robotList } from "./trackingMission.js";
+import { Z_FOOTPRINT } from "./zIndexMarkerClientMap.js";
 
 export const subscribeFootprint = () => {
     const topicMainFootprint = new ROSLIB.Topic({
@@ -26,10 +27,7 @@ export const subscribeFootprint = () => {
         });
     });
     function displayFootprint({ robotActive, X1, X2, Y1, Y2 }) {
-        const x1 = Number(X1);
-        const x2 = Number(X2);
-        const y1 = Number(Y1);
-        const y2 = Number(Y2);
+        const [x1, x2, y1, y2] = [+X1, +X2, +Y1, +Y2];
         const initMessage = {
             header: {
                 frame_id: "/" + robotActive + "/base_footprint",
@@ -61,7 +59,7 @@ export const subscribeFootprint = () => {
                 color: COLOR_BORDER,
                 scale: { x: disX, y: 0.05, z: 0.05 },
                 pose: {
-                    position: { x: MOVE_X, y: y2, z: 0.05 },
+                    position: { x: MOVE_X, y: y2, z: Z_FOOTPRINT },
                     orientation: { x: 0, y: 0, z: 0, w: 1 },
                 },
             },
@@ -70,7 +68,7 @@ export const subscribeFootprint = () => {
                 color: COLOR_BORDER,
                 scale: { x: disX, y: 0.05, z: 0.05 },
                 pose: {
-                    position: { x: MOVE_X, y: y1, z: 0.05 },
+                    position: { x: MOVE_X, y: y1, z: Z_FOOTPRINT },
                     orientation: { x: 0, y: 0, z: 0, w: 1 },
                 },
             },
@@ -79,7 +77,7 @@ export const subscribeFootprint = () => {
                 color: COLOR_BORDER,
                 scale: { x: disY, y: 0.05, z: 0.05 },
                 pose: {
-                    position: { x: x2, y: MOVE_Y, z: 0.05 },
+                    position: { x: x2, y: MOVE_Y, z: Z_FOOTPRINT },
                     orientation: { x: 0, y: 0, z: 0.7071068, w: 0.7071068 },
                 },
             },
@@ -88,7 +86,7 @@ export const subscribeFootprint = () => {
                 color: COLOR_BORDER,
                 scale: { x: disY, y: 0.05, z: 0.05 },
                 pose: {
-                    position: { x: x1, y: MOVE_Y, z: 0.05 },
+                    position: { x: x1, y: MOVE_Y, z: Z_FOOTPRINT },
                     orientation: { x: 0, y: 0, z: 0.7071068, w: 0.7071068 },
                 },
             },
@@ -98,7 +96,7 @@ export const subscribeFootprint = () => {
             id: 4,
             scale: { x: disX, y: disY, z: 0.05 },
             pose: {
-                position: { x: MOVE_X, y: MOVE_Y, z: 0.05 },
+                position: { x: MOVE_X, y: MOVE_Y, z: Z_FOOTPRINT },
                 orientation: { x: 0, y: 0, z: 0.0, w: 1.0 },
             },
         };
