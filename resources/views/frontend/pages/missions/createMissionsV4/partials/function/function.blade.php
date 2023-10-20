@@ -46,7 +46,7 @@
             'color' => 'text-[#9333EA]',
             'bg' => 'bg-[#9333EA]/20',
             'icon' => 'fa-solid fa-volume-high',
-            'mission_not_allowed' => ['error-robot', 'error-gpio'],
+            'mission_not_allowed' => ['error-gpio'],
         ],
         [
             'type' => 'position',
@@ -70,7 +70,7 @@
             'color' => 'text-yellow-500',
             'bg' => 'bg-yellow-500/20',
             'icon' => 'fa-solid fa-grip',
-            'mission_not_allowed' => [],
+            'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
         [
             'type' => 'break',
