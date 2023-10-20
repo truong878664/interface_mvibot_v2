@@ -28,9 +28,8 @@
 }
 html {
     color: #1c2536;
-    /* font-size: 62.5%; */
+    font-size: 62.5%;
     touch-action: none;
-    /* @apply !text-sm; */
 }
 body {
     font-family: var(--main-font);
@@ -38,7 +37,7 @@ body {
     -webkit-tap-highlight-color: transparent;
     -user-select: none;
     background-color: var(--background-color);
-    /* font-size: 2rem; */
+    font-size: 2rem;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -56,7 +55,7 @@ i {
 input {
     border: 1px solid #ccc;
     font-family: var(--main-font);
-    /* font-size: 1.6rem !important; */
+    font-size: 1.6rem !important;
     outline: none;
     padding: 6px 4px;
 }
@@ -95,7 +94,7 @@ li {
     background-color: #fff;
 }
 .heading {
-    /* font-size: 1.6rem; */
+    font-size: 1.6rem;
     font-weight: 600;
     margin: 4px 0;
     text-align: center;
@@ -569,7 +568,7 @@ li {
 }
 .dashboard-content-item-icon {
     color: #fff;
-    font-size: 3rem;
+    font-size: 5rem;
     opacity: 80%;
     padding: 24px;
     position: absolute;
@@ -669,12 +668,22 @@ li {
 .message {
     font-size: 3rem;
 }
-
+.connect-ros-btn {
+    color: #fff;
+    font-size: 2.5rem;
+    text-align: center;
+    z-index: 1000;
+}
 .connect-ros-btn i {
     line-height: 50px;
     width: 68px;
 }
-
+.connect-ros-btn.connected {
+    color: #82cd47;
+}
+.connect-ros-btn.connection-failed {
+    color: #cf0a0a;
+}
 .bar-item-top {
     height: 48px;
 }
