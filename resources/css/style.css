@@ -42,7 +42,7 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    @apply fixed top-0 left-0 right-0 bottom-0 min-h-[300px];
+    @apply fixed bottom-0 left-0 right-0 top-0 min-h-[300px];
 }
 a {
     color: inherit;
@@ -52,24 +52,12 @@ a {
 i {
     pointer-events: none;
 }
-input {
-    border: 1px solid #ccc;
-    font-family: var(--main-font);
-    /* font-size: 1.6rem !important; */
-    outline: none;
-    padding: 6px 4px;
-}
+
 input[type="number"] {
     font-family: var(--number-font);
 }
 input[type="color"] {
     padding: 0;
-}
-input::-moz-placeholder {
-    font-size: 1.3rem;
-}
-input::placeholder {
-    font-size: 1.3rem;
 }
 input::-moz-focus-inner {
     border: 0;
@@ -81,7 +69,7 @@ li {
     list-style: none;
 }
 .fullscreen {
-    @apply fixed top-0 left-0 right-0 bottom-0 z-10;
+    @apply fixed bottom-0 left-0 right-0 top-0 z-10;
 }
 
 .bg-main {
@@ -105,11 +93,11 @@ li {
     width: 3px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #9a9a9a;
-    border-radius: 10px;
+    /* background: #9a9a9a; */
+    @apply rounded-full bg-slate-300;
 }
 ::-webkit-scrollbar-track {
-    background: rgb(236, 236, 236);
+    /* background: rgb(236, 236, 236); */
 }
 
 :root {
@@ -431,7 +419,7 @@ li {
     background-color: var(--background-color);
     display: flex;
     flex-direction: column;
-    height: 400px;
+    min-height: 400px;
     left: 50%;
     position: absolute;
     top: 50%;
@@ -442,7 +430,7 @@ li {
 .login-header {
     align-items: flex-end;
     display: flex;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -517,24 +505,10 @@ li {
     color: #f03434;
     font-size: 1.6rem;
 }
-.login-input::-moz-placeholder {
-    font-size: 1.6rem;
-}
-.login-input::placeholder {
-    font-size: 1.6rem;
-}
 .password-wrapper {
     position: relative;
 }
-.show-password {
-    cursor: pointer;
-    display: none;
-    font-size: 1.5rem;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
+
 :root {
     --colum-dashboard: 4;
 }
@@ -1044,20 +1018,6 @@ li {
     overflow: auto;
 }
 
-.create-missions-btn {
-    align-items: center;
-    background-color: #ccc;
-    border: none;
-    color: var(--main-color);
-    display: flex;
-    font-size: 6rem;
-    justify-content: center;
-    opacity: 0.7;
-}
-.create-missions-btn:hover {
-    background-color: #ccc;
-    opacity: 1;
-}
 .form-create-mission {
     display: none;
 }
@@ -1783,7 +1743,6 @@ input[type="number"] {
 .step-item {
     align-items: center;
     display: flex;
-    font-size: 1.6rem;
     height: 30px;
     position: relative;
 }
@@ -2542,7 +2501,7 @@ input[type="number"] {
 }
 
 .fullscreen {
-    @apply fixed top-0 left-0 right-0 bottom-0 z-50;
+    @apply fixed bottom-0 left-0 right-0 top-0 z-50;
 }
 
 /* gpio */

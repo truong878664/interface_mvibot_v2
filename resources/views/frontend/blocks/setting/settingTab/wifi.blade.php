@@ -39,7 +39,7 @@
 
 <div class="setting-detail flex flex-col hidden h-full">
     <div class="max-w-[700px] w-full h-full mx-auto overflow-auto">
-        <div class="w-full h-[calc(100%_-_32px)] flex rounded-lg pr-4 overflow-auto text-2xl relative wifi-container group/wifi-container active"
+        <div class="w-full h-[calc(100%_-_32px)] flex rounded-lg pr-4 overflow-auto  relative wifi-container group/wifi-container active"
             data-wifi-connect="wifi">
             <div class=" w-full max-w-[800px] h-[calc(100%_-_200px)] mx-auto mt-10 relative">
                 <div class="w-full min-h-[80px] rounded-lg bg-[#F2EAE8] pl-[40px] pr-10 mb-[20px] py-[20px]">
@@ -70,7 +70,7 @@
                         <div class="flex justify-between items-center h-full wifi-connect-item hidden">
                             <div class="">
                                 <label for="" class="text-sky-600"><i class="fa-solid fa-check"></i></label>
-                                <span class="font-bold ml-4 wifi-connected text-2xl"></span>
+                                <span class="font-bold ml-4 wifi-connected "></span>
                             </div>
                             <div class="">
                                 <svg width="40" height="40" viewBox="0 0 40 20" fill="none"
@@ -88,7 +88,7 @@
 
                     <div class="flex justify-between">
                         <div class="flex items-center mb-4">
-                            <span class="text-2xl block font-bold">Network available</span>
+                            <span class=" block font-bold">Network available</span>
                             <span class="loader-wifi hidden ml-4"></span>
                         </div>
                         <button class="btn reset-wifi-btn">Reset</button>
@@ -102,7 +102,7 @@
                                 name-wifi="${item.ssid}">
                                 <span class="font-bold ml-4"></span>
 
-                                <div class="text-2xl flex items-center pr-4">
+                                <div class=" flex items-center pr-4">
                                     <div class="">
                                         <i class="fa-solid fa-lock"></i>
                                     </div>
@@ -163,7 +163,7 @@
 
                         {{-- SET IP --}}
 
-                        <div class="w-full flex text-2xl px-8 py-4 mt-8  peer/wifi-type type-wifi-wrapper"
+                        <div class="w-full flex  px-8 py-4 mt-8  peer/wifi-type type-wifi-wrapper"
                             data-is-manual="false">
                             <span class="font-bold min-w-[70px]">WI-FI type</span>
                             <div class="ml-8">
@@ -181,7 +181,7 @@
                         {{-- === IP WRAPPPER === --}}
                         <div class="peer-data-[is-manual=false]/wifi-type:hidden">
                             {{-- LAN IPV4 --}}
-                            <div class="mx-8 my-6 flex justify-between text-2xl">
+                            <div class="mx-8 my-6 flex justify-between ">
                                 <span class="font-bold">Ip v4</span>
                                 <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
                                     <input class="w-[50px] text-center border-none bg-transparent wifi_ipv4"
@@ -198,7 +198,7 @@
                                 </div>
                             </div>
                             {{-- LAN IPV4 GATEWAY --}}
-                            <div class="mx-8 my-6 flex justify-between text-2xl">
+                            <div class="mx-8 my-6 flex justify-between ">
                                 <span class="font-bold">Ip v4 gateway</span>
                                 <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
                                     <input class="w-[50px] text-center border-none bg-transparent wifi_ipv4_gateway"
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
                             {{-- LAN IPV4 DNS --}}
-                            <div class="mx-8 my-6 flex justify-between text-2xl">
+                            <div class="mx-8 my-6 flex justify-between ">
                                 <span class="font-bold">Ip v4 DNS</span>
                                 <input type="text"
                                     class="h-[32px] w-[275px] px-4 text-right rounded-md border-none bg-gray-200 wifi_ipv4_dns">

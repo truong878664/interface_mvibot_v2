@@ -1,6 +1,6 @@
 const Label = {
     sticky: `
-    <div class="absolute top-[120%] left-1/2 -translate-x-1/2 bg-white rounded-md shadow-md text-xl" data-name="sticky">
+    <div class="absolute top-[120%] left-1/2 -translate-x-1/2 bg-white rounded-md shadow-md text-xs" data-name="sticky">
         <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden text-stone-900">
             <li>
                 <button data-action-block-step="delete" class="hover:bg-stone-100 px-6 btn flex py-2 w-full">
@@ -38,7 +38,7 @@ const Label = {
             "w-[2px]",
             "rounded-full",
             "bg-main",
-            "highline-line"
+            "highline-line",
         );
         return line;
     },
@@ -50,7 +50,7 @@ const Label = {
             "h-[2px]",
             "bg-main",
             "left-0",
-            "highline-line"
+            "highline-line",
         );
         return line;
     },
@@ -62,7 +62,7 @@ const Label = {
             "h-full",
             "bg-main",
             "top-0",
-            "highline-line"
+            "highline-line",
         );
         return line;
     },
@@ -70,9 +70,9 @@ const Label = {
         return `
         <div class="fullscreen">
             <div class="absolute top-0 left-0 right-0 bottom-0" onclick="this.parentElement.remove()"></div>
-            <div class="text-2xl justify-center items-center py-2 px-4 bg-stone-100 shadow-md rounded-md inline-flex absolute -translate-x-1/2" style="top: ${y}px; left: ${x}px;">
-            <input type="text" class="py-2 rounded-md px-2 bg-white" placeholder="Name" name="name">
-            <button class="btn py-2 px-4 font-bold bg-main rounded-md ml-2 text-white enter-btn"><i class="fa-solid fa-check"></i></button>
+            <div class="justify-center items-center py-1 px-4 bg-stone-100 shadow-md rounded-md inline-flex absolute -translate-x-1/2" style="top: ${y}px; left: ${x}px;">
+            <input type="text" class="py-1 rounded-md px-2 bg-white placeholder:text-sm" placeholder="Name" name="name">
+            <button class="btn py-1 px-4 font-bold bg-main rounded-md ml-2 text-white enter-btn"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>
         `;
@@ -81,9 +81,9 @@ const Label = {
         const html = `
         <div class="fullscreen">
             <div class="absolute top-0 left-0 right-0 bottom-0" onclick="this.parentElement.remove()"></div>
-            <div class="text-2xl justify-center items-center py-2 px-4 bg-stone-100 shadow-md rounded-md inline-flex absolute -translate-x-1/2" style="top: ${y}px; left: ${x}px;">
-            <input type="text" class="py-2 rounded-md px-2 bg-white" placeholder="Name" name="name">
-            <button class="btn py-2 px-4 font-bold bg-main rounded-md ml-2 text-white enter-btn"><i class="fa-solid fa-check"></i></button>
+            <div class="justify-center items-center py-1 px-4 bg-stone-100 shadow-md rounded-md inline-flex absolute -translate-x-1/2" style="top: ${y}px; left: ${x}px;">
+            <input type="text" class="py-1 rounded-md px-2 bg-white placeholder:text-sm" placeholder="Name" name="name">
+            <button class="btn py-1 px-4 font-bold bg-main rounded-md ml-2 text-white enter-btn"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>
         `;

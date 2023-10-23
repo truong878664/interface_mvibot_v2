@@ -21,12 +21,12 @@
 
     <div class="sr-only fixed bottom-10 left-10 z-[21] flex">
         <button
-            class="btn back-history-btn mr-4 flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#333] bg-[#fff] opacity-80 hover:opacity-100">
+            class="btn back-history-btn mr-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#333] bg-[#fff] opacity-80 hover:opacity-100">
             <i class="fa-solid fa-angle-left"></i>
         </button>
 
         <button
-            class="btn next-history-btn mr-4 flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#333] bg-[#fff] opacity-80 hover:opacity-100">
+            class="btn next-history-btn mr-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#333] bg-[#fff] opacity-80 hover:opacity-100">
             <i class="fa-solid fa-angle-right"></i>
         </button>
     </div>
@@ -40,7 +40,8 @@
         });
     </script>
 
-    @include('frontend.blocks.robots') @include('frontend.blocks.message')
+    @include('frontend.blocks.robots')
+    @include('frontend.blocks.message')
     {{--
         <script src="/js/library/jquery.min.js"></script>
         <script type="text/javascript" src="/js/library/three.min.js"></script>

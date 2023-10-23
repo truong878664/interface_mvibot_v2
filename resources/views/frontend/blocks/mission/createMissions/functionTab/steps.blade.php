@@ -100,7 +100,7 @@
         <div class="submit-btn-wrapper flex flex-col justify-end min-w-[240px] items-end">
 
             <div class="absolute top-2 right-2">
-                <span class="mr-4 text-2xl block font-bold text-right">Name: {{ $itemRender->name }}</span>
+                <span class="mr-4 block font-bold text-right">Name: {{ $itemRender->name }}</span>
                 <div class="flex mt-4 items-center justify-end">
                     <button class="text-center mr-4 px-2 btn full-screen-step-btn">
                         <i class="fa-solid fa-expand not-full"></i>
@@ -113,38 +113,37 @@
                 </div>
 
                 <div class="flex mt-4 items-center justify-end">
-                    <label for="check-show-step" class="text-2xl mr-2">Show step</label>
+                    <label for="check-show-step" class="mr-2">Show step</label>
                     @include('components.switch', ['id' => 'check-show-step'])
                 </div>
 
                 <div class="flex mt-4 items-center justify-end">
-                    <label for="check-show-action" class="text-2xl mr-2">Show action</label>
+                    <label for="check-show-action" class="mr-2">Show action</label>
                     @include('components.switch', ['id' => 'check-show-action'])
                 </div>
                 <div id="save-move-block-wrapper" class="flex flex-col items-end mt-4 hidden">
-                    <span class="text-2xl mr-2 block font-bold">Save move block mission</span>
+                    <span class="mr-2 block font-bold">Save move block mission</span>
                     <div class="">
-                        <button
-                            class="mb-2 rounded-md px-4 py-2 bg-yellow-400 text-[#fff] mt-4 btn text-2xl font-bold hidden"
+                        <button class="mb-2 rounded px-4 py-1 bg-yellow-400 text-[#fff] mt-4 btn font-bold hidden"
                             id="cancel-move-block-btn">Cancel</button>
-                        <button class="mb-2 rounded-md px-4 py-2 bg-main text-[#fff] mx-2 mt-4 btn text-2xl font-bold"
+                        <button class="mb-2 rounded px-4 py-1 bg-main text-[#fff] mx-2 mt-4 btn font-bold"
                             id="save-move-block-btn">save</button>
                     </div>
                 </div>
 
             </div>
-            <div class="flex flex-col lg:flex-row mt-8 text-2xl font-bold">
+            <div class="flex flex-col lg:flex-row mt-8 font-bold">
                 <input id="input-steps-name-submit" type="text" value="" name="" hidden>
                 <label for="wake-up" data-ws="wake_up" data-type-mission="{{ $itemRender->type }}" id="wake_up-btn"
-                    class="mb-2 rounded-md px-4 py-2 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Wake
+                    class="mb-2 rounded px-4 py-1 bg-green-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Wake
                     up</label>
                 <label for="stop" data-ws="stop" data-type-mission="{{ $itemRender->type }}" id="stop-btn"
-                    class="mb-2 rounded-md px-4 py-2 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Stop</label>
+                    class="mb-2 rounded px-4 py-1 bg-red-500 text-[#fff] mx-2 btn data-[type-mission=error-robot]:hidden data-[type-mission=error-gpio]:hidden">Stop</label>
                 <label for="select-robot"
-                    class="send-mission-btn-front mb-2 rounded-md px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn data-[status-send=disabled]:opacity-50 data-[status-send=disabled]:pointer-events-none">Send</label>
+                    class="send-mission-btn-front mb-2 rounded px-4 py-1 bg-[#0f6cbd] text-[#fff] mx-2 btn data-[status-send=disabled]:opacity-50 data-[status-send=disabled]:pointer-events-none">Send</label>
             </div>
-            <input type="checkbox" name="" id="select-robot" class="input-checkbox" hidden>
-            <div class="select-robot-wrapper form-checkbox">
+            <input type="checkbox" name="" id="select-robot" class="sr-only peer/send">
+            <div class="hidden peer-checked/send:block">
                 <label for="select-robot" class="overlay overlay-choose-robot"></label>
                 <div class="select-robot form-wrapper flex items-center">
                     @include('frontend.blocks.selectRobot', [
@@ -153,7 +152,7 @@
                     ])
 
                     <label for="select-robot" type="{{ $itemRender->type }}"
-                        class="rounded-md text-2xl font-bold px-4 py-2 bg-[#0f6cbd] text-[#fff] mx-2 btn send-mission-btn">Send</label>
+                        class="rounded font-bold px-4 py-1 bg-[#0f6cbd] text-[#fff] mx-2 btn send-mission-btn">Send</label>
                 </div>
             </div>
         </div>

@@ -50,22 +50,22 @@
             {{-- TYPE MISSION --}}
             <div class="bg-[#fff] mr-1 w-1/5 relative rounded-md border">
                 <input type="text" value="{{ $itemRender->id }}" class="hidden" id="current-id-mission">
-                <p class="text-2xl text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-stone-200">
+                <p class=" text-center text-[#333] font-bold absolute w-full top-0 uppercase bg-stone-200">
                     type mission - <span data="{{ $itemRender->type }}"
                         class="type-mission">{{ $itemRender->type }}</span>
                 </p>
                 <div class="overflow-y-auto overflow-x-hidden min-h-0 mt-[20px] h-full type-mission-btn-wrapper">
                     <div data-index="0" data-type-mission="normal"
-                        class="active normal-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
+                        class="active normal-mission-btn function-btn type-mission-btn type-mission-btn  font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>Normal mission</span>
                     </div>
                     <div data-index="1" data-type-mission="ifelse"
-                        class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
+                        class="ifelse-mission-btn function-btn type-mission-btn type-mission-btn  font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc]">
                         <span>If-Else mission</span>
                     </div>
 
                     <div data-index="2" data-type-mission="trycatch"
-                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn text-2xl font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc] {{ $version === 'new_wave' ? 'hidden' : '' }}">
+                        class="trycatch-mission-btn function-btn type-mission-btn type-mission-btn  font-bold mb-[2px] px-4 py-3 bg-[rgba(204,204,204,0.2)] cursor-pointer select-none hover:bg-[rgba(204,204,204,0.5)] shadow-sm shadow-[#ccc] {{ $version === 'new_wave' ? 'hidden' : '' }}">
                         <span>Try-catch mission</span>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     class="w-full h-[30px] flex items-center overflow-x-auto overflow-y-hidden function-mission-btn-wrapper">
 
                     <button data-index="0" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex gpio-function-btn function-btn active function-mission-btn">
                         <span class="mr-2 text-green-500">
                             <i class="fa-solid fa-microchip"></i>
                         </span>
@@ -102,7 +102,7 @@
                     </button>
 
                     <button data-index="1" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn {{ $version === 'new_wave' ? 'hidden' : '' }}">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex gpio-module-function-btn gpio_module-function-btn function-btn function-mission-btn {{ $version === 'new_wave' ? 'hidden' : '' }}">
                         <span class="mr-2 text-blue-500">
                             <i class="fa-solid fa-microchip"></i>
                         </span>
@@ -112,7 +112,7 @@
                     </button>
 
                     <button data-index="2" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex footprint-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-yellow-500">
                             <i class="fa-solid fa-arrows-left-right-to-line"></i>
                         </span>
@@ -122,7 +122,7 @@
                     </button>
 
                     <button data-index="3" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex marker-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-sky-500">
                             <i class="fa-solid fa-arrows-up-to-line"></i>
                         </span>
@@ -132,7 +132,7 @@
                     </button>
 
                     <button data-index="4" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sleep-function-btn function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex sleep-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-red-600">
                             <i class="fa-solid fa-mattress-pillow"></i>
                         </span>
@@ -142,17 +142,15 @@
                     </button>
 
                     <button data-index="5" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex sound-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex sound-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-purple-600">
                             <i class="fa-solid fa-volume-high"></i>
                         </span>
-                        <span>
-                            Sound
-                        </span>
+                        <span>Sound</span>
                     </button>
 
                     <button data-index="6" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex position-function-btn point-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex position-function-btn point-function-btn data-[type-mission=error-gpio]:hidden data-[type-mission=error-robot]:hidden data-[type-mission=gpio]:hidden function-btn function-mission-btn">
                         <span class="mr-2 text-stone-600">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>
@@ -162,7 +160,7 @@
                     </button>
 
                     <button data-index="7" data-type-mission="{{ $itemRender->type }}"
-                        class="text-sm md:text-2xl px-2 py-1 mx-2 btn function-item-2 flex variable-function-btn function-btn function-mission-btn">
+                        class="text-sm md: px-2 py-1 mx-2 btn function-item-2 flex variable-function-btn function-btn function-mission-btn">
                         <span class="mr-2 text-orange-600">
                             <i class="fa-solid fa-file-code"></i>
                         </span>

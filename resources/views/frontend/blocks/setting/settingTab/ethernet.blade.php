@@ -4,7 +4,7 @@
             @include('frontend.blocks.setting.settingTab.saveButton', ['setting' => 'ethernet'])
 
             {{-- LAN TYPE --}}
-            <div class="w-full flex text-2xl px-8 py-4 peer/lan-type type-lan-wrapper" data-is-manual="false">
+            <div class="w-full flex  px-8 py-4 peer/lan-type type-lan-wrapper" data-is-manual="false">
                 <span class="font-bold min-w-[70px]">LAN type</span>
                 <div class="ml-8">
                     <div class="flex items-center mb-3">

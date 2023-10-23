@@ -11,60 +11,60 @@
                             'title' => 'Robot',
                             'icon' => 'fa-solid fa-robot',
                             'class' => 'active robot-choose',
-                            'color' => '#010104',
+                            'color' => 'bg-[#010104]',
                         ],
                         [
                             'title' => 'Operation',
                             'icon' => 'fa-solid fa-person-running',
                             'class' => 'hidden',
-                            'color' => '#F94A29',
+                            'color' => 'bg-[#F94A29]',
                         ],
                         [
                             'title' => 'Parameter',
                             'icon' => 'fa-solid fa-sliders',
                             'class' => 'hidden',
-                            'color' => '#8E8A8B',
+                            'color' => 'bg-[#8E8A8B]',
                         ],
 
                         [
                             'title' => 'Wifi',
                             'icon' => 'fa-solid fa-wifi',
                             'class' => 'hidden',
-                            'color' => '#0080F6',
+                            'color' => 'bg-[#0080F6]',
                         ],
                         [
                             'title' => 'Ethernet',
                             'icon' => 'fa-solid fa-ethernet',
                             'class' => 'hidden',
-                            'color' => '#C07F00',
+                            'color' => 'bg-[#C07F00]',
                         ],
                         [
                             'title' => 'Camera',
                             'icon' => 'fa-solid fa-camera',
                             'class' => 'hidden',
-                            'color' => '#858B89',
+                            'color' => 'bg-[#858B89]',
                         ],
                         [
                             'title' => 'Public topic',
                             'icon' => 'fa-regular fa-paper-plane',
                             'class' => 'hidden',
-                            'color' => '#6064DC',
+                            'color' => 'bg-[#6064DC]',
                         ],
 
                         [
                             'title' => 'Power',
                             'icon' => 'fa-solid fa-power-off',
                             'class' => 'hidden',
-                            'color' => '#FC4552',
+                            'color' => 'bg-[#FC4552]',
                         ],
                     ];
                 @endphp
 
                 @foreach ($settingItems as $index => $item)
                     <div data-index="{{ $index }}"
-                        class="text-[16px] mx-4 mt-2 px-4 rounded-xl py-4 text-[#333] cursor-pointer flex items-center bg-[#dcd4d138] hover:bg-[#e4dcda] setting-item {{ $item['class'] }} last:mb-[100px]">
+                        class="mx-4 mt-2 px-4 rounded-xl py-4 text-[#333] cursor-pointer flex items-center bg-[#dcd4d138] hover:bg-[#e4dcda] setting-item {{ $item['class'] }} last:mb-[100px]">
                         <label
-                            class="w-[40px] h-[40px] flex justify-center items-center rounded-xl bg-[{{ $item['color'] }}] text-white shadow-md text-[22px] pointer-events-none">
+                            class="w-10 h-10 flex justify-center items-center rounded-xl {{ $item['color'] }} text-white shadow-md text-xl pointer-events-none">
                             <i class=" pointer-events-none select-none {{ $item['icon'] }}"></i>
                         </label>
                         <span class="ml-4 pointer-events-none select-none">

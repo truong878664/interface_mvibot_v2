@@ -35,16 +35,16 @@ function renderSound(pathSound) {
             <td class="border border-solit border-[#ccc] time-sound">00:00</td>
             <td class="border border-solit border-[#ccc]">
            
-                <button name-sound = ${nameSound} class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] delete-sound-btn">
+                <button name-sound = ${nameSound} class="h-7 w-7 text-center m-2 bg-stone-100 btn rounded-md hover:bg-stone-200 play-sound-btn delete-sound-btn">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
                 <button
-                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] play-sound-btn">
+                    class="h-7 w-7 text-center m-2 bg-stone-100 btn rounded-md hover:bg-stone-200 play-sound-btn play-sound-btn">
                     <i class="fa-solid fa-play"></i>
                 </button>
                 
                 <button
-                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] send-sound-btn">
+                    class="h-7 w-7 text-center m-2 bg-stone-100 btn rounded-md hover:bg-stone-200 play-sound-btn send-sound-btn">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
 
@@ -65,7 +65,7 @@ function setTimeSound() {
             item
                 .closest(".sound-item")
                 .querySelector(
-                    ".time-sound"
+                    ".time-sound",
                 ).innerText = `${minutes}:${seconds}`;
         };
         item.ontimeupdate = () => {
@@ -74,7 +74,7 @@ function setTimeSound() {
             item
                 .closest(".sound-item")
                 .querySelector(
-                    ".time-sound"
+                    ".time-sound",
                 ).innerText = `${minutes}:${seconds}`;
         };
     });
@@ -127,12 +127,12 @@ function handleSendSound() {
             } else {
                 publishTopicString(
                     `/${nameRobotActive}/music_name`,
-                    hrefSource
+                    hrefSource,
                 );
                 console.log(hrefSource);
                 toggerMessage(
                     "success",
-                    `${nameSound} sound sent successfully`
+                    `${nameSound} sound sent successfully`,
                 );
             }
         };
@@ -182,7 +182,7 @@ function actionBtn() {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
                 0.0,
-                "std_msgs/Float32"
+                "std_msgs/Float32",
             );
             toggerMessage("success", `successfully`);
         }
@@ -197,7 +197,7 @@ function actionBtn() {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
                 3.0,
-                "std_msgs/Float32"
+                "std_msgs/Float32",
             );
             toggerMessage("success", `successfully`);
         }
@@ -212,20 +212,19 @@ function actionBtn() {
             publishTopic(
                 `/${nameRobotActive}/music_start`,
                 4.0,
-                "std_msgs/Float32"
+                "std_msgs/Float32",
             );
             toggerMessage("success", `successfully`);
         }
     };
 }
 
-
 $("#sound-file").onchange = (e) => {
     const pathSound = e.target.value;
 
     const name = pathSound.slice(
         pathSound.lastIndexOf(`\\`) + 1,
-        pathSound.length
+        pathSound.length,
     );
 
     $(".name-sound-up").innerText =

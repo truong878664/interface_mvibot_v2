@@ -136,7 +136,7 @@ const createHtml = {
                     "flex w-full": !isLogicAndOrLogicOr,
                     "inline-flex": isLogicAndOrLogicOr,
                 },
-                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex shadow-block bg-white px-4 py-10 rounded-lg relative pt-[20px]"
+                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex shadow-block bg-white px-2 py-3 rounded-lg relative",
             );
             const isShowData = !draggable
                 ? "show"
@@ -144,15 +144,12 @@ const createHtml = {
                 ? "hidden"
                 : "show";
             const checkIsBlockHidden = style?.hidden ? "hidden" : "show";
-            const clxName = clx(
-                { "text-red-500": !name },
-                "font-bold text-[16px]"
-            );
+            const clxName = clx({ "text-red-500": !name }, "font-bold ");
             const classNameWrapperData = clx(
                 {
                     flex: isLogicAndOrLogicOr,
                 },
-                "w-full rounded-lg group-data-[show-data='hidden']/wrapper:hidden text-[16px]"
+                "w-full rounded-lg group-data-[show-data='hidden']/wrapper:hidden ",
             );
             const NameComponent = () =>
                 `<span class="${clxName}">${name || "No name"}</span>`;
@@ -169,7 +166,7 @@ const createHtml = {
                         data-action-block-step="hidden"
                         data-status="${checkIsBlockHidden}"
                         data-name="icon-block"
-                        class="${color} mr-3 w-[40px] h-[40px] relative bg-blue-50 shadow-sm rounded-md text-[20px] flex justify-center items-center cursor-grab group/drag active:cursor-grabbing">
+                        class="${color} mr-1 w-10 h-10 relative bg-blue-50 shadow-sm rounded-md text-xl flex justify-center items-center cursor-grab group/drag active:cursor-grabbing">
                         ${icon}
                         <span class="hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-1 absolute text-black/40 group-hover/drag:text-black/90 backdrop-blur-sm w-full h-full place-content-center">
                             <span class="flex gap-1">
@@ -258,8 +255,8 @@ const createHtml = {
                 if (hidden) return "";
                 return `
                 <li>
-                    <button data-action-block-step="${action}" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full ${className}">
-                        <span class="mr-2 w-[20px] ${color}">${icon}</span>
+                    <button data-action-block-step="${action}" class="btn flex px-6 py-2 hover:bg-stone-100 text-xs w-full ${className}">
+                        <span class="mr-2 w-5 ${color}">${icon}</span>
                         <span>${title}</span>
                     </button>
                 </li>
@@ -269,8 +266,8 @@ const createHtml = {
             return `
             <div class="absolute top-0 right-0 hover:z-50">
                 <div class="group/more">
-                    <span class="h-[20px] w-[20px] mr-3 text-3xl btn text-stone-500 hover:text-stone-900"><i class="fa-solid fa-ellipsis"></i></span>
-                    <div class="absolute top-[20px] right-2 h-[50px] text-2xl hidden group-hover/more:block">
+                    <span class="h-5 w-5 mr-1 btn text-stone-500 text-xl hover:text-stone-900"><i class="fa-solid fa-ellipsis"></i></span>
+                    <div class="absolute top-[20px] right-2 h-12 hidden group-hover/more:block">
                         <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden min-w-[100px]">
                         ${listButtonHtml}
                         </ul>
@@ -306,14 +303,14 @@ const createHtml = {
             },
         },
         classNameDataItem: {
-            wrap: "wrap-block bg-stone-100 p-4 rounded-lg flex mb-3 border-[2px] border-transparent",
-            span: "font-bold mr-3 text-red-600",
+            wrap: "wrap-block bg-stone-100 p-2 rounded-lg flex mb-1 border-[2px] border-transparent",
+            span: "font-bold mr-1 text-red-600",
             data: "flex-1 flex flex-wrap items-start gap-4 content-start",
         },
         ButtonAdd(isButton) {
             const buttonAddStep = `
             <button data-action-block-step="add"
-                class="btn w-[30px] aspect-square relative flex justify-center text-[16px] rounded-md mx-2  items-center text-sky-500 bg-sky-100 self-center [&.active]:bg-sky-800 [&.active]:text-white">
+                class="btn w-[30px] aspect-square relative flex justify-center  rounded-md mx-2  items-center text-sky-500 bg-sky-100 self-center [&.active]:bg-sky-800 [&.active]:text-white">
                     <i class="fa-solid fa-plus"></i>
             </button>
             `;

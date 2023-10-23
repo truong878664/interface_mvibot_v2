@@ -17,7 +17,7 @@
 
 <div class="setting-detail flex flex-col hidden h-full">
     <div class="max-w-[700px] w-full mx-auto overflow-auto bg-[#F2EAE8] rounded-md">
-        <div class="w-full flex flex-col text-xl px-8 py-4">
+        <div class="w-full flex flex-col px-8 py-4">
 
             @include('frontend.blocks.setting.settingTab.saveButton', ['setting' => 'parameter'])
 
@@ -32,7 +32,7 @@
                             <i class="fa-solid fa-volume-low hidden group-data-[volume=medium-vl]/volumn:block"></i>
                             <i class="fa-solid fa-volume-high hidden group-data-[volume=high-vl]/volumn:block"></i>
                         </div>
-                        <div class="text-2xl ml-4 text-center mr-4 min-w-[24px] value-volume">20</div>
+                        <div class=" ml-4 text-center mr-4 min-w-[24px] value-volume">20</div>
                     </div>
                     <input type="range" class="w-[250px] rounded-lg appearance-none bg-gray-400 h-4 input-volume"
                         name="robot_volume" id="" min="0" max="150">

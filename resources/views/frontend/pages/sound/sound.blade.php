@@ -13,16 +13,16 @@
                 <div class="inline-block">
 
                     <button
-                        class="float-right text-2xl font-bold btn bg-red-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 stop-sound-btn">Stop</button>
+                        class="float-right font-bold btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-sound-btn">Stop</button>
 
                     <button
-                        class="float-right text-2xl font-bold btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 basic-sound-btn">Basic</button>
+                        class="float-right font-bold btn bg-main text-[#fff] self-end px-4 py-1 rounded-md mr-4 basic-sound-btn">Basic</button>
                     <button
-                        class="float-right text-2xl font-bold btn bg-yellow-500 text-[#fff] self-end px-4 py-2 rounded-md mr-4 custom-sound-btn">Custom</button>
+                        class="float-right font-bold btn bg-yellow-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 custom-sound-btn">Custom</button>
                 </div>
 
             </div>
-            <table class="w-full border text-2xl bg-white " id="table-sound">
+            <table class="w-full border bg-white " id="table-sound">
                 <tr class="text-center">
                     <th class="border border-solit border-[#ccc] py-2">STT</th>
                     <th class="border border-solit border-[#ccc] py-2">Name</th>
@@ -49,16 +49,16 @@
                             <td class="border border-solit border-[#ccc]">
 
                                 <button
-                                    class="pointer-events-none opacity-50 text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#bfbfbf] hover:bg-main btn rounded-md">
+                                    class="pointer-events-none opacity-50 h-7 w-7 text-center m-2 bg-[#bfbfbf] hover:bg-main btn rounded-md">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                                 <button
-                                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] play-sound-btn">
+                                    class="h-7 w-7 text-center m-2 bg-stone-100 btn rounded-md hover:bg-stone-200 play-sound-btn">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
 
                                 <button
-                                    class="text-2xl h-[30px] w-[30px] text-center leading-[30px] m-2 bg-[#e9e9e9] hover:bg-main btn rounded-md hover:bg-[#e0e0e0] send-sound-btn">
+                                    class="h-7 w-7 text-center m-2 bg-stone-100 btn rounded-md hover:bg-stone-200 send-sound-btn">
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </button>
 
@@ -74,16 +74,16 @@
                     class="flex flex-col items-center justify-center w-[200px] border-2 pb-4 border-gray-400 border-dashed rounded-lg cursor-pointer bg-[#dcdcdc] ">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
 
-                        <p class="mb-2 text-xl text-gray-500 dark:text-gray-400">
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                             <span class="font-semibold">Click toupload (MP3 <2MB) </span>
                         </p>
-                        <span class="text-xl name-sound-up"></span>
+                        <span class="text-sm name-sound-up"></span>
                     </div>
                     @csrf
 
                     <input id="sound-file" type="file" accept=".mp3" max-size="6000" class="hidden" name="sound">
                     <button
-                        class="float-right text-xl btn text-blue-400 bg-blue-200 px-8 py-1 rounded-full self-center upload-sound-submit">
+                        class="float-right text-sm btn text-blue-400 bg-blue-200 px-8 py-1 rounded-full self-center upload-sound-submit">
                         <i class="fa-solid fa-upload"></i>
                     </button>
                 </label>

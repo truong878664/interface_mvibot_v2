@@ -20,10 +20,10 @@ const idMission = document.getElementById("id-mission");
 export const MissionClass = new Mission(idMission.value);
 export const blockStepWrapper = document.getElementById("block-step-wrapper");
 export const functionWrapper = document.getElementById("function-container");
-createTypeMission();
-subscribeMissionChange();
 
 (async function init() {
+    createTypeMission();
+    subscribeMissionChange();
     await FunctionStepClass.get();
     await MissionClass.get();
     Function();
@@ -51,7 +51,7 @@ function handleSendMission() {
                 return;
             }
             const nameRobot = document.querySelector(
-                "#select-robot-option"
+                "#select-robot-option",
             ).value;
             const typeMission = sendBtn.dataset.typeMission;
             const dataEnd = MissionClass.dataEndToRobot(data);
@@ -77,7 +77,7 @@ function handleMoreAction() {
             },
             showAllMission() {
                 const buttonCurrentHiddenStepList = document.querySelectorAll(
-                    "[data-action-block-step='hidden'][data-status='hidden']"
+                    "[data-action-block-step='hidden'][data-status='hidden']",
                 );
                 buttonCurrentHiddenStepList.forEach((button) => {
                     button.click();
@@ -85,7 +85,7 @@ function handleMoreAction() {
             },
             hideAllMission() {
                 const buttonCurrentHiddenStepList = document.querySelectorAll(
-                    "[data-action-block-step='hidden'][data-status='show']"
+                    "[data-action-block-step='hidden'][data-status='show']",
                 );
                 buttonCurrentHiddenStepList.forEach((button) => {
                     button.click();
@@ -112,11 +112,11 @@ async function handleCode() {
         "show-mission-form-wrapper",
         "flex",
         "justify-center",
-        "items-center"
+        "items-center",
     );
 
     const htmlMission = `
-                <div class="bg-[#fff] rounded-md flex flex-col text-2xl show-mission-form w-2/3 max-h-[500px] h- relative">
+                <div class="bg-[#fff] rounded-md flex flex-col show-mission-form w-2/3 max-h-[500px] h- relative">
                     <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
                         <i class="fa-regular fa-copy"></i>
                     </button>
@@ -202,9 +202,9 @@ function subscribeMissionChange() {
                 MissionClass.get();
                 toggerMessage(
                     "success",
-                    getUA(dataDevice.name) + " device changed mission!"
+                    getUA(dataDevice.name) + " device changed mission!",
                 );
             }
-        }
+        },
     );
 }

@@ -80,27 +80,27 @@
             'icon' => 'fa-solid fa-link',
         ],
 ]; @endphp
-<div class="flex h-full flex-col" id="function-container">
+<div class="flex h-full flex-col m-1" id="function-container">
     <input type="radio" name="tab-function" class="peer/function" hidden id="tab-function" checked />
     <input type="radio" name="tab-function" class="peer/type-mission" hidden id="tab-type-mission" />
-    <div class="group flex w-full items-center justify-evenly rounded-md bg-stone-100 px-2 py-1 text-2xl">
+    <div class="group flex w-full items-center justify-evenly rounded-md bg-stone-200/90 p-1 ">
         <label
-            class="flex-1 cursor-pointer rounded-md text-center peer-checked/function:group-[]:bg-white peer-checked/function:group-[]:font-bold"
+            class="flex-1 cursor-pointer rounded text-center peer-checked/function:group-[]:bg-white peer-checked/function:group-[]:font-bold"
             for="tab-function">
             function
         </label>
         <label for="tab-type-mission"
-            class="flex-1 cursor-pointer rounded-md text-center peer-checked/type-mission:group-[]:bg-white peer-checked/type-mission:group-[]:font-bold">
+            class="flex-1 cursor-pointer rounded text-center peer-checked/type-mission:group-[]:bg-white peer-checked/type-mission:group-[]:font-bold">
             type mission
         </label>
     </div>
 
-    <div class="hidden h-full overflow-y-auto overflow-x-hidden peer-checked/function:block">
+    <div class="hidden h-full overflow-y-auto overflow-x-hidden p-2 peer-checked/function:block">
         @foreach ($functions as $index => $item)
             @if (!in_array($currentTypeMission, $item['mission_not_allowed']))
                 @if ($item['type'] === 'break')
                     <button data-button-function-kind="add" data-function-type="break" data-value="break##"
-                        class="function-item label-function shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                        class="function-item label-function shadow-sm h-[30px]  flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                         <div class="flex">
                             <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                                 <i class="{{ $item['icon'] }}"></i>
@@ -114,7 +114,7 @@
                             hidden />
                         <button data-type="{{ $item['type'] }}"
                             onclick="(()=>{const {type} = this.dataset;const radio = document.getElementById(type);radio.checked = radio.checked ? false :true;})()"
-                            class="label-function w-full shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                            class="label-function w-full shadow-sm h-[30px]  flex items-center justify-between rounded-md px-4 mt-2 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                             <div class="flex">
                                 <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                                     <i class="{{ $item['icon'] }}"></i>
@@ -128,24 +128,24 @@
                         </button>
                         <div class="relative hidden peer-checked/function:block">
                             <div data-list-function="{{ $item['type'] }}"
-                                class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md text-[16px] pt-14 {{ $item['type'] === 'break' ? '!hidden' : '' }}">
+                                class="w-full max-h-[500px] bg-stone-50 overflow-y-auto p-4 rounded-md  pt-14 {{ $item['type'] === 'break' ? '!hidden' : '' }}">
                             </div>
 
                             @if ($item['type'] !== 'break')
                                 <div class="absolute top-0 right-0 flex w-full justify-end gap-2 pr-2 pt-1">
-                                    <div class="flex text-2xl">
+                                    <div class="flex ">
                                         <input type="checkbox" name="" class="peer/search sr-only"
                                             id="s-{{ $item['type'] }}" />
                                         <input data-type="{{ $item['type'] }}" type="text" data-action="search"
                                             class="search-function-input hidden rounded-l-md border-r-0 !border-gray-200 px-2 focus:bottom-0 focus:ring-transparent peer-checked/search:block" />
                                         <label for="s-{{ $item['type'] }}"
-                                            class="grid h-full place-content-center rounded-md border bg-white py-1 px-4 text-base peer-checked/search:rounded-l-none peer-checked/search:border-l-0">
+                                            class="grid h-full place-content-center rounded-md border bg-white py-1 px-4 peer-checked/search:rounded-l-none peer-checked/search:border-l-0">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </label>
                                     </div>
                                     <button data-index="{{ $index }}" data-button-function-kind="new"
                                         data-type-mission="{{ $item['type'] }}"
-                                        class="btn rounded-md bg-main py-1 px-2 text-2xl text-white">
+                                        class="btn rounded-md bg-main py-1 px-2  text-white">
                                         New
                                     </button>
                                 </div>
@@ -180,7 +180,7 @@
                 <input type="radio" name="function" class="peer/function function" id="{{ $item['type'] }}" hidden />
                 <button data-type="{{ $item['type'] }}"
                     onclick="(()=>{const {type} = this.dataset;const radio = document.getElementById(type);radio.checked = radio.checked ? false :true;})()"
-                    class="label-function w-full shadow-sm h-[30px] text-[16px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                    class="label-function w-full shadow-sm h-[30px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                     <div class="flex">
                         <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                             <i class="{{ $item['icon'] }}"></i>
@@ -192,7 +192,7 @@
                     </span>
                 </button>
                 <div class="relative hidden peer-checked/function:block">
-                    <div class="max-h-[500px] min-h-[100px] w-full overflow-y-auto rounded-md bg-stone-50 p-4 text-2xl"
+                    <div class="max-h-[500px] min-h-[100px] w-full overflow-y-auto rounded-md bg-stone-50 p-4 "
                         data-list-type-mission="{{ $item['type'] }}"></div>
                 </div>
             </div>

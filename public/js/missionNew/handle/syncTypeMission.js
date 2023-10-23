@@ -9,14 +9,15 @@ export default function syncTypeMission(typeMission) {
             ? "logic_and"
             : type;
     const typeMissionBLockUpdateList = document.querySelectorAll(
-        `[data-block-wrapper='${newType}'][data-id='${id}']`
+        `[data-block-wrapper='${newType}'][data-id='${id}']`,
     );
     const asyncSaveTypeMission = Promise.resolve();
+
     asyncSaveTypeMission
         .then(() => {
             Array.from(typeMissionBLockUpdateList).forEach((item) => {
                 const [address, indexStep] = MissionClass.getAddressByStep(
-                    item.firstElementChild
+                    item.firstElementChild,
                 );
                 Promise.resolve([address, indexStep]).then(
                     ([address, indexStep]) => {
@@ -25,7 +26,7 @@ export default function syncTypeMission(typeMission) {
                             indexStep,
                             data: JSON.parse(JSON.stringify(typeMission)),
                         });
-                    }
+                    },
                 );
             });
         })

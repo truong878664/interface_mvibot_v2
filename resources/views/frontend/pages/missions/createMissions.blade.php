@@ -5,7 +5,7 @@
     </div>
     <div class="overflow-auto h-full w-full p-2" data-version="{{ $v }}" data-type-mission="{{ $type }}">
         <div id="create-mission" class="">
-            <div class="w-full grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            <div class="w-full grid gap-x-3 gap-y-5 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                 @include('frontend.blocks.mission.createMissions.index')
             </div>
 

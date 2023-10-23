@@ -18,4 +18,6 @@ handleResetMission();
 selectMission();
 sendMultiMission();
 
-missionCreateBtn.onclick = () => requestAnimationFrame(() => mission.focus());
+missionCreateBtn?.addEventListener("click", () =>
+    requestAnimationFrame(() => mission.focus()),
+);

@@ -17,24 +17,24 @@ export default function confirmationForm({
         "bg-black/20",
         "confirmation-form",
         "grid",
-        "place-content-center"
+        "place-content-center",
     );
     divElement.innerHTML = `
-        <div class="p-4 bg-[#fff] rounded-md flex flex-col justify-center text-2xl">
+        <div class="p-2 bg-[#fff] rounded-md flex flex-col justify-center">
             <p>${message}</p>
-            <div class="flex justify-between mt-8">
-                <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='submit-confirmation-form-btn'>Confirm</button>
-                <button class="border-yellow-500 border text-yellow-500 text-[# px-7 py-1 rounded-md btn text-2xl font-bold mx-4" id='cancel-confirmation-form-btn'>Cancel</button>
+            <div class="flex justify-between mt-4 font-bold gap-5">
+                <button class="bg-red-500 text-[#fff] px-7 py-1 rounded-md btn" id='submit-confirmation-form-btn'>Confirm</button>
+                <button class="border-yellow-500 border text-yellow-500 px-7 py-1 rounded-md btn" id='cancel-confirmation-form-btn'>Cancel</button>
             </div>
         </div>`;
 
     document.body.appendChild(divElement);
     const formSubmitAgain = document.querySelector(".confirmation-form");
     const submitFormAgainBtn = document.querySelector(
-        "#submit-confirmation-form-btn"
+        "#submit-confirmation-form-btn",
     );
     const cancelFormAgainBtn = document.querySelector(
-        "#cancel-confirmation-form-btn"
+        "#cancel-confirmation-form-btn",
     );
     cancelFormAgainBtn.addEventListener("click", hiddenFormAgain);
     submitFormAgainBtn.addEventListener("click", () => {

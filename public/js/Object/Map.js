@@ -25,6 +25,7 @@ export default class Map {
         this.mapElement = document.getElementById(mapID);
         this.idTab = generateID();
         this.getInfo();
+        this.layer.get();
         this.layer.topic = new ROSLIB.Topic({
             ros: this.ros,
             name: `/visualization_marker_layer${this.idTab}`,
@@ -234,7 +235,7 @@ export default class Map {
             this.clickCreatePoint.dataEventHandle.forEach((eventHandle) => {
                 this.mapElement.addEventListener(
                     eventHandle.event,
-                    eventHandle.handle
+                    eventHandle.handle,
                 );
             });
         },
@@ -242,7 +243,7 @@ export default class Map {
             this.clickCreatePoint.dataEventHandle.forEach((eventHandle) => {
                 this.mapElement.removeEventListener(
                     eventHandle.event,
-                    eventHandle.handle
+                    eventHandle.handle,
                 );
             });
         },
@@ -296,7 +297,7 @@ export default class Map {
     mixinMethodFromClass(objectsList) {
         const mixin = (objects) => {
             const methodObjectsNameList = Object.getOwnPropertyNames(
-                Object.getPrototypeOf(objects)
+                Object.getPrototypeOf(objects),
             );
             methodObjectsNameList.forEach((objectName) => {
                 if (
@@ -319,6 +320,20 @@ export default class Map {
             isCreateLayer: false,
         },
         topic: null,
+        get: async () => {
+            try {
+                const res = await fetch("/api/layer");
+                const layers = await res.json();
+                this.layerList = this.layer.layerDbToRos(layers);
+                this.layer.display();
+            } catch (error) {
+                console.log(error);
+                toggerMessage(
+                    "error",
+                    "There was an error, go to the console log for more details",
+                );
+            }
+        },
         save: async () => {
             // const res = await fetch("/api/layer", {
             //     method: "POST",
@@ -348,7 +363,7 @@ export default class Map {
             return layers;
         },
         layerDbToRos: (layersDb) => {
-            const layersRos = layersDb.map((layer) => {
+            return layersDb.map((layer) => {
                 const r = layer.yawo / (Math.PI / 180);
                 return {
                     height: layer.height,
@@ -358,10 +373,10 @@ export default class Map {
                     type: layer.type_layer,
                     x: layer.xo,
                     y: layer.yo,
-                    pointA,
-                    pointB,
-                    pointC,
-                    pointD,
+                    // pointA,
+                    // pointB,
+                    // pointC,
+                    // pointD,
                 };
             });
         },
@@ -463,8 +478,8 @@ export default class Map {
                         },
                         pose: {
                             position: {
-                                x: layer.position.x,
-                                y: layer.position.y,
+                                x: layer.x,
+                                y: layer.y,
                                 z: 0.1,
                             },
                             orientation: {
@@ -551,7 +566,7 @@ export default class Map {
                     this.layer.set.create.dataEventHandle.forEach((item) => {
                         this.mapElement.addEventListener(
                             item.event,
-                            item.handle
+                            item.handle,
                         );
                     });
                     this.camera.rotate.disable();
@@ -561,7 +576,7 @@ export default class Map {
                     this.layer.set.create.dataEventHandle.forEach((item) => {
                         this.mapElement.removeEventListener(
                             item.event,
-                            item.handle
+                            item.handle,
                         );
                     });
                     this.camera.rotate.enable();
@@ -607,7 +622,7 @@ export default class Map {
                     this.layer.set.select.dataEventHandle.forEach((item) => {
                         this.mapElement.addEventListener(
                             item.event,
-                            item.handle
+                            item.handle,
                         );
                     });
                     this.camera.lockZ();
@@ -618,7 +633,7 @@ export default class Map {
                     this.layer.set.select.dataEventHandle.forEach((item) => {
                         this.mapElement.removeEventListener(
                             item.event,
-                            item.handle
+                            item.handle,
                         );
                     });
                     this.layerList = JSON.parse(this.layer.oldLayerList);
@@ -801,13 +816,13 @@ export default class Map {
 
             const nameExist =
                 this.layerList.findIndex(
-                    (layerItem) => layerItem.name === layer.name
+                    (layerItem) => layerItem.name === layer.name,
                 ) !== -1;
 
             if (nameExist) {
                 toggerMessage(
                     "error",
-                    `Name "${layer.name}" already exists, please edit to another name!`
+                    `Name "${layer.name}" already exists, please edit to another name!`,
                 );
                 return;
             }
@@ -918,10 +933,10 @@ export default class Map {
         const angleInRadians = Math.atan2(deltaY, deltaX);
         const angleInDegrees = this.compact(angleInRadians * (180 / PI));
         const width = Math.abs(
-            this.compact(distance * Math.cos(angleInRadians))
+            this.compact(distance * Math.cos(angleInRadians)),
         );
         const height = Math.abs(
-            this.compact(distance * Math.sin(angleInRadians))
+            this.compact(distance * Math.sin(angleInRadians)),
         );
         return { width, height, r: angleInDegrees, distance };
     }

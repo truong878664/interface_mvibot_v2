@@ -25,7 +25,7 @@
             <div id="map" class="w-full h-full"></div>
         </div>
 
-        <div class="absolute top-0 left-0 text-lg">
+        <div class="absolute top-0 left-0 ">
             <?php
             $fileMapList = glob('../maps/*');
             ?>
@@ -39,7 +39,7 @@
                 @endforeach
             </span>
         </div>
-        <div class="absolute top-0 right-0 text-lg flex mt-2 mr-2 switch-click-position data-[status-switch=hidden]:hidden"
+        <div class="absolute top-0 right-0  flex mt-2 mr-2 switch-click-position data-[status-switch=hidden]:hidden"
             data-status-switch="">
             <div class="w-[60px] h-[34px]">
                 <label class="switch">
@@ -48,7 +48,7 @@
                 </label>
             </div>
         </div>
-        <ul class="absolute left-0 bottom-0 max-w-[300px] max-h-[400px] text-2xl p-4 flex-col items-end overflow-y-auto hidden data-[list-position=show]:flex"
+        <ul class="absolute left-0 bottom-0 max-w-[300px] max-h-[400px]  p-4 flex-col items-end overflow-y-auto hidden data-[list-position=show]:flex"
             data-list-position="">
             @for ($i = 0; $i < 20; $i++)
                 <li class="flex items-center my-3">

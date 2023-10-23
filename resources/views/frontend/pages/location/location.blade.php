@@ -6,15 +6,6 @@
             {{-- choose robot --}}
             <label class="absolute">
                 <input type="hidden" id="robot-navigation" value="{{ json_encode($robotNavigation) }}">
-                {{-- 
-                <select name="" id="robot-navigation-name" class="bg-transparent outline-none">
-                    <option value="">Select robot</option>
-                    @foreach ($robotNavigation as $item)
-                        <option value="{{ $item['name_seri'] }}" class="text-[#333]">{{ $item['name_seri'] }}</option>
-                    @endforeach
-                </select>
-                
-                --}}
                 @include('frontend.blocks.selectRobot', [
                     'type' => 'robot_navigation',
                     'id' => 'robot-navigation-name',
@@ -28,7 +19,7 @@
             </label>
             {{-- control --}}
             <div
-                class="absolute right-0 bottom-0 w-[400px] h-[200px] rounded-tl-2xl p-5 bg-[#ffffff7f] flex flex-col justify-between text-2xl">
+                class="absolute right-0 bottom-0 w-[400px] h-[200px] rounded-tl-2xl p-5 bg-[#ffffff7f] flex flex-col justify-between">
                 <div class="flex items-center">
                     <span class="pr-6">X</span>
                     <input id="position-x" type="range" class="input-control w-full" name="" value="0"
@@ -54,7 +45,7 @@
                 </div>
                 <div class="self-end">
                     <button id="send-location-btn"
-                        class="btn bg-main text-[#fff] self-end px-4 py-2 rounded-md mr-4 text-2xl font-bold">Send</button>
+                        class="btn bg-main text-white self-end px-4 py-1 rounded-md mr-4 font-bold">Send</button>
                 </div>
             </div>
         </div>

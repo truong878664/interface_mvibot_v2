@@ -12,26 +12,13 @@ export default class Mission {
         this.missionWrapperElement =
             document.getElementById("block-step-wrapper");
         this.id = id;
-
         this.typeMission = document.getElementById("type-mission")?.value;
         this.UrlApi = "/api/mission-v4/" + this.id;
         this.saved = true;
-        this.historyStatus = {
-            data: [],
-            currentLastIndexHistory: 0,
-        };
-        this.wakeup = {
-            normal: {},
-            module: {},
-        };
-        this.stop = {
-            normal: {},
-            module: {},
-        };
-        this.continue = {
-            normal: {},
-            module: {},
-        };
+        this.historyStatus = { data: [], currentLastIndexHistory: 0 };
+        this.wakeup = { normal: {}, module: {} };
+        this.stop = { normal: {}, module: {} };
+        this.continue = { normal: {}, module: {} };
     }
     async get() {
         const urlGet = this.UrlApi + "?kind=get";
@@ -41,7 +28,7 @@ export default class Mission {
         this.wakeup = JSON.parse(data.wake_up || `{"normal":{},"module":{}}`);
         this.stop = JSON.parse(data.stop || `{"normal":{},"module":{}}`);
         this.continue = JSON.parse(
-            data.continue || `{"normal":{},"module":{}}`
+            data.continue || `{"normal":{},"module":{}}`,
         );
         this.historyStatus.data.push(JSON.parse(JSON.stringify(this.data)));
         this.render();
@@ -85,7 +72,7 @@ export default class Mission {
             };
             publishTopicString(
                 `/change_data_mission/${this.id}`,
-                JSON.stringify(dataDevice)
+                JSON.stringify(dataDevice),
             );
 
             loadingHeader(false);
@@ -146,7 +133,7 @@ export default class Mission {
                     address: index,
                     name: item.name,
                     handleAble,
-                })
+                }),
             );
             return html;
         });
@@ -164,7 +151,7 @@ export default class Mission {
         ) {
             const typeDetail = locationAdd.closest("[data-data-block]");
             locationAdd = locationAdd.parentElement.closest(
-                "[data-block-wrapper]"
+                "[data-block-wrapper]",
             );
 
             timeLoop++;
@@ -176,7 +163,7 @@ export default class Mission {
                 const typeDetailValue = typeDetail.dataset.dataBlock;
                 const address = locationAdd.dataset.address;
                 addressCurrentAt.unshift(
-                    `[${address}].data.${typeDetailValue}`
+                    `[${address}].data.${typeDetailValue}`,
                 );
             }
         }
@@ -285,11 +272,11 @@ export default class Mission {
 
         const indexBranch = addressFromNew.slice(
             addressBranch.length + 1,
-            addressFromNew.indexOf("]", addressBranch.length)
+            addressFromNew.indexOf("]", addressBranch.length),
         );
         const addressNextPartBranch = addressFromNew.slice(
             addressBranch.length + indexBranch.length + 2,
-            addressFromNew.length
+            addressFromNew.length,
         );
         const case2 = () => {
             const isSameAddress = addressBranch === addressToNew;
@@ -356,7 +343,7 @@ export default class Mission {
                     this.data.push(normal);
                 } else {
                     const { targetObject, propertyName } = this.targetObject(
-                        this.currentAddAddress
+                        this.currentAddAddress,
                     );
 
                     let objectToAdd = step;
@@ -386,7 +373,7 @@ export default class Mission {
                     ? targetObject[propertyName].splice(
                           indexAdd,
                           0,
-                          objectToAdd
+                          objectToAdd,
                       )
                     : targetObject.splice(indexAdd, 0, objectToAdd);
             }
@@ -409,7 +396,7 @@ export default class Mission {
             const propertyName = addressParts[addressParts.length - 1];
             const targetObject = objectPath.reduce(
                 (targetObject, currentValue) => targetObject[currentValue],
-                this.data
+                this.data,
             );
             return {
                 targetObject,
@@ -444,10 +431,10 @@ export default class Mission {
                 return querys.push(query);
             });
             const parentButtonAdd = wrapperBlockCurrent.querySelector(
-                querys.join(" ")
+                querys.join(" "),
             );
             const buttonAdd = parentButtonAdd?.querySelector(
-                "[data-action-block-step='add']"
+                "[data-action-block-step='add']",
             );
             buttonAdd?.classList.add("active");
         }
@@ -523,7 +510,7 @@ export default class Mission {
             this.historyStatus.data.splice(
                 lengthHistory + currentHistory,
                 Math.abs(currentHistory),
-                JSON.parse(JSON.stringify(data))
+                JSON.parse(JSON.stringify(data)),
             );
         }
         this.historyStatus.currentLastIndexHistory = 0;
@@ -537,31 +524,15 @@ export default class Mission {
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "normal",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "normal", name, id, data: data, style };
     }
     IfElse({
-        data = {
-            condition: [],
-            if_: [],
-            else_: [],
-        },
+        data = { condition: [], if_: [], else_: [] },
         name = null,
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "ifelse",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "ifelse", name, id, data: data, style };
     }
     Trycatch({
         data = { try_: [], catch_: [] },
@@ -569,13 +540,7 @@ export default class Mission {
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "trycatch",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "trycatch", name, id, data: data, style };
     }
     While({
         data = { condition: [], do_: [] },
@@ -583,13 +548,7 @@ export default class Mission {
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "while",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "while", name, id, data: data, style };
     }
     LogicOr({
         data = { logicA: [], logicB: [] },
@@ -597,13 +556,7 @@ export default class Mission {
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "logicOr",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "logicOr", name, id, data: data, style };
     }
     LogicAnd({
         data = { logicA: [], logicB: [] },
@@ -611,12 +564,6 @@ export default class Mission {
         id = null,
         style = { hidden: false },
     }) {
-        return {
-            type: "logicAnd",
-            name,
-            id,
-            data: data,
-            style,
-        };
+        return { type: "logicAnd", name, id, data: data, style };
     }
 }
