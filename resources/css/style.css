@@ -68,6 +68,17 @@ input:focus {
 li {
     list-style: none;
 }
+
+.step-active {
+    @apply !bg-green-200 ring-4 ring-green-500;
+}
+.step-active.Cancel {
+    @apply !bg-yellow-200 ring-yellow-500;
+}
+.done:not(.step-active) {
+    opacity: 70%;
+}
+
 .fullscreen {
     @apply fixed bottom-0 left-0 right-0 top-0 z-10;
 }

@@ -55,9 +55,27 @@ function progress() {
                     "This robot could not find the data";
                 return;
             }
-            const infoMission = convertTopic.mission_action_infor(data);
+            const statusDataRobot = data.split("/").filter((e) => e);
+            const [status, mission_action_infor, Normal_mission_infor] =
+                statusDataRobot;
+
+            const [keyStatus, valueStatus] = status.split(">");
+            if (valueStatus === "Finish") {
+                progressMainWrapper.innerHTML = `
+                <div class="w-full flex justify-center">
+                    <div class="text-green-400 font-bold bg-white rounded-md px-2 py-1 shadow-md self-center">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Current mission completed</span>
+                    </div>
+                </div>
+                `;
+                return;
+            }
+            const infoMission =
+                convertTopic.mission_action_infor(Normal_mission_infor);
             const { id_mission } = infoMission;
-            activeStepNow(infoMission);
+
+            activeStepNow(infoMission, valueStatus);
             showProgress.render(infoMission);
             if (currentMission.id_mission !== id_mission) {
                 currentMission.id_mission = id_mission;
@@ -133,15 +151,13 @@ async function renderMission(infoMission) {
     }
 }
 
-function activeStepNow(infoMission) {
+function activeStepNow(infoMission, valueStatus) {
     const { total_step, now_step: stepNow } = infoMission;
-    if (stepNow >= total_step) messageComplete.dataset.status = "show";
-    const styleActive = ["ring-4", "ring-red-500", "step-active"];
+    const styleActive = ["step-active", valueStatus, "done"];
+
     const stepList = getNodeList("[data-name='step']");
-    const currentActiveStyle = getNode(
-        "[data-name='step']." + styleActive.join("."),
-    );
-    currentActiveStyle?.classList.remove(...styleActive);
+    const currentActiveStyle = getNode("[data-name='step'].step-active");
+    currentActiveStyle?.classList.remove("step-active", "Active", "Cancel");
 
     const stepActive = stepList[stepNow - 1];
     if (stepActive) {
