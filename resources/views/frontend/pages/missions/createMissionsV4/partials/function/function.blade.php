@@ -132,20 +132,25 @@
                             </div>
 
                             @if ($item['type'] !== 'break')
-                                <div class="absolute top-0 right-0 flex w-full justify-end gap-2 pr-2 pt-1">
+                                <div class="absolute top-0 right-0 flex w-full justify-end gap-2 pr-2 pt-1 text-sm">
                                     <div class="flex ">
                                         <input type="checkbox" name="" class="peer/search sr-only"
                                             id="s-{{ $item['type'] }}" />
                                         <input data-type="{{ $item['type'] }}" type="text" data-action="search"
-                                            class="search-function-input hidden rounded-l-md border-r-0 !border-gray-200 px-2 focus:bottom-0 focus:ring-transparent peer-checked/search:block" />
+                                            class="search-function-input hidden rounded-l-md border-r-0 !border-gray-200 px-2 py-0 focus:bottom-0 focus:ring-transparent peer-checked/search:block" />
                                         <label for="s-{{ $item['type'] }}"
-                                            class="grid h-full place-content-center rounded-md border bg-white py-1 px-4 peer-checked/search:rounded-l-none peer-checked/search:border-l-0">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            class="grid h-full place-content-center rounded-md border cursor-pointer bg-white px-4 peer-checked/search:rounded-l-none peer-checked/search:border-l-0 group">
+                                            <span class="peer-checked/search:group-[]:hidden">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </span>
+                                            <span class="hidden peer-checked/search:group-[]:block">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </span>
                                         </label>
                                     </div>
                                     <button data-index="{{ $index }}" data-button-function-kind="new"
                                         data-type-mission="{{ $item['type'] }}"
-                                        class="btn rounded-md bg-main py-1 px-2  text-white">
+                                        class="btn rounded-md bg-main py-1 px-2 text-white text-sm">
                                         New
                                     </button>
                                 </div>
@@ -179,8 +184,12 @@
             <div class="">
                 <input type="radio" name="function" class="peer/function function" id="{{ $item['type'] }}" hidden />
                 <button data-type="{{ $item['type'] }}"
-                    onclick="(()=>{const {type} = this.dataset;const radio = document.getElementById(type);radio.checked = radio.checked ? false :true;})()"
-                    class="label-function w-full shadow-sm h-[30px] flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                    onclick="(()=>{
+                        const {type} = this.dataset;
+                        const radio = document.getElementById(type);
+                        radio.checked = radio.checked ? false :true;
+                        })()"
+                    class="label-function w-full shadow-sm flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                     <div class="flex">
                         <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
                             <i class="{{ $item['icon'] }}"></i>
@@ -198,5 +207,4 @@
             </div>
         @endforeach
     </div>
-    <script></script>
 </div>

@@ -5,8 +5,8 @@
             style="--color: {{ $color }}"><i class="{{ $icon }}"></i>
         </div>
         <div class="h-full flex flex-col justify-end">
-            <span class="font-bold text-xl">{{ $title }}</span>
-            <span class="text-x">{{ $describe }}</span>
+            <span class="font-bold text-2xl">{{ $title }}</span>
+            <span class="text-lg">{{ $describe }}</span>
         </div>
     </li>
 </a>

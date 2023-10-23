@@ -175,7 +175,7 @@ const createHtml = {
                             </span>
                         </span>
                     </span>
-                    <div class="flex flex-col gap-4 w-full">
+                    <div class="flex flex-col gap-1 w-full">
                         ${NameComponent()}
                         <div class="${classNameWrapperData}" data-data-block="${type}">
                             ${children}
