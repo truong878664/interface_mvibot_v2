@@ -32,7 +32,7 @@
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
                 <div class="relative h-full w-full pr-2 transition-all md:peer-checked/step-wrapper:w-3/4">
                     <div id="block-step-wrapper"
-                        class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-4">
+                        class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-8">
                         <button data-action-block-step="add"
                             class="active active-block-step-root btn relative mb-2 ml-2 flex h-[20px] w-[25px] items-center justify-center self-center rounded-md bg-sky-100 text-[16px] text-sky-500 [&.active]:bg-sky-800 [&.active]:text-white">
                             <i class="fa-solid fa-plus"></i>
@@ -41,10 +41,10 @@
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')
                 </div>
 
-                <label for="step-wrapper"
+                {{-- <label for="step-wrapper"
                     class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block">
                     <i class="fa-solid fa-xmark"></i>
-                </label>
+                </label> --}}
 
                 <div
                     class="absolute right-0 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">

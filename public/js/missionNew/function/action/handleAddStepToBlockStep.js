@@ -34,7 +34,7 @@ export default function handleAddStepToBlockStep() {
                     return;
                 }
                 const activeButton = getNode(
-                    '[data-action-block-step="add"].active'
+                    '[data-action-block-step="add"].active',
                 );
                 activeButton?.classList.remove("active");
                 buttonAction.classList.add("active");
@@ -74,14 +74,14 @@ export default function handleAddStepToBlockStep() {
             },
             step() {
                 const isSticky = buttonAction.querySelector(
-                    "[data-name='sticky']"
+                    "[data-name='sticky']",
                 );
                 if (isSticky) {
                     isSticky.remove();
                 } else {
                     removeSticky();
                     const currentStickyShow = blockStepWrapper.querySelector(
-                        "[data-sticky='show']"
+                        "[data-sticky='show']",
                     );
                     if (currentStickyShow) {
                         currentStickyShow.dataset.sticky = "hidden";
@@ -119,17 +119,17 @@ export default function handleAddStepToBlockStep() {
                 if (typeStep === "break") return;
                 functionTab.checked = true;
                 const functionWrapperDetail = functionWrapper.querySelector(
-                    "#" + typeStep
+                    "#" + typeStep,
                 );
                 if (functionWrapperDetail) functionWrapperDetail.checked = true;
                 stepWrapper.checked = true;
                 const functionActive = functionWrapper.querySelector(
-                    `[data-function-type='${type}'][data-id='${id}']`
+                    `[data-function-type='${type}'][data-id='${id}']`,
                 );
                 if (!functionActive) {
                     toggerMessage(
                         "error",
-                        "This element was not found or deleted!"
+                        "This element was not found or deleted!",
                     );
                     return;
                 }
@@ -156,6 +156,7 @@ export default function handleAddStepToBlockStep() {
                 buttonSubmit.onclick = async (e) => {
                     const name = inputForm.value;
                     const dataTranslate = JSON.parse(data);
+                    dataTranslate.id = null;
                     dataTranslate.name = name;
                     const dataSaveBlockMission = {
                         name,
@@ -164,9 +165,8 @@ export default function handleAddStepToBlockStep() {
                         type_mission: MissionClass.typeMission,
                     };
                     const typeMission = new TypeMission();
-                    const message = await typeMission.save(
-                        dataSaveBlockMission
-                    );
+                    const message =
+                        await typeMission.save(dataSaveBlockMission);
 
                     const [address, indexStep] =
                         MissionClass.getAddressByStep(buttonAction);
@@ -185,18 +185,18 @@ export default function handleAddStepToBlockStep() {
                     message.saved && typeMission.render();
                     toggerMessage(
                         message.saved ? "success" : "error",
-                        message.message
+                        message.message,
                     );
                 };
             },
             update() {
                 const handle = async () => {
                     const blockTypeMission = buttonAction.closest(
-                        "[data-block-wrapper]"
+                        "[data-block-wrapper]",
                     );
                     const idTypeMission = blockTypeMission.dataset.id;
                     const valueNewTypeMission = JSON.parse(
-                        blockTypeMission.dataset.value
+                        blockTypeMission.dataset.value,
                     );
 
                     const message = await typeMissionClass.update({
@@ -206,7 +206,7 @@ export default function handleAddStepToBlockStep() {
                     syncTypeMission(valueNewTypeMission);
                     toggerMessage(
                         message.error ? "error" : "success",
-                        message.message
+                        message.message,
                     );
                 };
                 confirmationForm({
@@ -220,19 +220,19 @@ export default function handleAddStepToBlockStep() {
                 const typeMissionTab =
                     document.getElementById("tab-type-mission");
                 const listTypeMissionWrapper = document.querySelector(
-                    "#list-type-mission-wrapper"
+                    "#list-type-mission-wrapper",
                 );
 
                 const dataListTypeMissionWrapper =
                     listTypeMissionWrapper.querySelector(
-                        `[data-list-type-mission='${typeMission}']`
+                        `[data-list-type-mission='${typeMission}']`,
                     );
                 stepWrapper.checked = true;
                 typeMissionTab.checked = true;
                 document.querySelector(`input#${typeMission}`).checked = true;
                 const foundedTypeMission =
                     dataListTypeMissionWrapper.querySelector(
-                        `[data-id='${idTypeMission}']`
+                        `[data-id='${idTypeMission}']`,
                     );
 
                 foundedTypeMission?.classList.add("highline-type-mission");
@@ -240,11 +240,11 @@ export default function handleAddStepToBlockStep() {
                 clearTimeout(timeOutDeleteHighline);
                 typeMissionHighline?.classList.remove("highline");
                 typeMissionHighline = getNode(
-                    "[data-name='item-type-mission'].highline-type-mission"
+                    "[data-name='item-type-mission'].highline-type-mission",
                 );
                 timeOutDeleteHighline = setTimeout(() => {
                     typeMissionHighline?.classList.remove(
-                        "highline-type-mission"
+                        "highline-type-mission",
                     );
                 }, 4000);
             },
