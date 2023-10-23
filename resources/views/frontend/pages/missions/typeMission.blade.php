@@ -1,6 +1,5 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading">Mission</div>
     <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
         <div class="w-full flex flex-wrap">
             @php
@@ -11,7 +10,7 @@
                     'battery' => 'from-blue-500 to-blue-600',
                     'gpio' => 'from-yellow-500 to-orange-600',
                 ];
-                
+
                 $typeMisison = [
                     'robot-mission' => ['normal', 'error-robot', 'battery'],
                     'gpio-mission' => ['gpio', 'error-gpio'],
@@ -24,7 +23,7 @@
                         class=" bg-gradient-to-r {{ $color[$mission] }} w-[calc(100%_-_10px)] h-[120px] rounded-md p-4 mb-4 mx-[5px] btn">
                         <a href="{{ route("dashboard.missions.$v.create-missions.", ['type' => $mission]) }}"
                             class=" flex relative items-end w-full h-full text-[#fff] href-mission text-[26px] font-bold capitalize">
-                            {{ ($mission === 'error-robot' || $mission === 'error-gpio') ? 'error' : $mission  }} mission
+                            {{ $mission === 'error-robot' || $mission === 'error-gpio' ? 'error' : $mission }} mission
                         </a>
                     </div>
                 </div>

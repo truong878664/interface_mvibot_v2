@@ -1,5 +1,6 @@
 <div class="h-[28px]  w-[50px] relative mr-2">
-    <button class="w-full h-full absolute top-0 left-0 btn border rounded-md flex items-center user-select-none {{ $type }}_btn">
+    <button
+        class="w-full h-full absolute top-0 left-0 btn border rounded-md flex items-center user-select-none {{ $type }}_btn">
 
         <input type="text"
             class="h-full border-none bg-transparent w-full text text-2xl text-center px-2 cursor-pointer  {{ $type }}_input"
@@ -15,4 +16,3 @@
         @endif
     </ul>
 </div>
- 

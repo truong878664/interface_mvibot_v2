@@ -62,7 +62,6 @@
     .dropdown .options div ion-icon {
         position: relative;
         top: 4px;
-
         margin-right: 10px;
     }
 </style>
@@ -72,14 +71,16 @@
         <div class="">
             <input class="text-box bg-[#fff] text-[#000] shadow-md" type="text" placeholder="Select map"
                 id="{{ $id }}" readonly>
-            <div class="absolute top-0 right-[10px] text-3xl text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
+            <div
+                class="absolute top-0 right-[10px] text-3xl text-[#0f6cbd] h-full flex items-center group-[.active]/dropdown:rotate-180 transition-all duration-500">
                 <i class="fa-solid fa-caret-down"></i>
             </div>
         </div>
         <div class="options">
             @foreach ($datas as $data)
-                <div class="{{$id.'-item'}}" data-map="{{ $data[$nameArray]}}" onclick="show('{{ $data[$nameArray]}}', this)"><i
-                        class="fa-solid fa-caret-right mr-4 text-[#0f6cbd]"></i>{{ $data[$nameArray] }}</div> 
+                <div class="{{ $id . '-item' }}" data-map="{{ $data[$nameArray] }}"
+                    onclick="show('{{ $data[$nameArray] }}', this)"><i
+                        class="fa-solid fa-caret-right mr-4 text-[#0f6cbd]"></i>{{ $data[$nameArray] }}</div>
             @endforeach
             <div onclick="show('', this)"> - {{ $title }} - </div>
         </div>
@@ -92,11 +93,9 @@
         inputSelect.dispatchEvent(new Event('change'));
     }
 
-    document.querySelectorAll(".dropdown").forEach(dropdown => { 
+    document.querySelectorAll(".dropdown").forEach(dropdown => {
         dropdown.onclick = function() {
             dropdown.classList.toggle("active")
         }
     });
 </script>
-
-

@@ -39,7 +39,6 @@
                         </div>
                     </div>
 
-
                     <div
                         class="px-4 py-4 flex items-center justify-between  border-b border-solid border-stone-400 text-stone-400">
                         <span class="text-[16px] pointer-events-none">Automatic Login</span>

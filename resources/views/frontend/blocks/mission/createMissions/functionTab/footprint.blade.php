@@ -1,40 +1,41 @@
-<div class="h-full w-full flex flex-col function-item form-footprint function-mission-tab hidden bg-[#fff] p-4" data-type="footprint">
+<div class="h-full w-full flex flex-col function-item form-footprint function-mission-tab hidden bg-[#fff] p-4"
+    data-type="footprint">
     <div class="flex flex-col mr-[30px]">
-        <label for="" class="text-xl">Name function footpint</label>
-        <input class="w-[200px] text-xl px-4 py-1 input-reset valid-input" type="text" name="name_footprint" required>
+        <label for="" class="">Name function footpint</label>
+        <input class="w-[200px] mb-2 px-4 py-1 input-reset valid-input" type="text" name="name_footprint" required>
     </div>
     <div class="flex w-full h-[calc(100%_-_100px)] ">
-        <div class="w-[22%]">
-            <div class="mr-4">
-                <label for="" class="text-xl">X1</label>
+        <div class="w-[22%] flex flex-col gap-2">
+            <div class="">
+                <label for="" class="">X1</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
+                    class="w-24  px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
                     name="x1_footprint" value="">
             </div>
 
-            <div class="mr-4 ">
-                <label for="" class="text-xl">X2</label>
+            <div class=" ">
+                <label for="" class="">X2</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
+                    class="w-24  px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
                     name="x2_footprint" value="">
             </div>
 
-            <div class="mr-4 ">
-                <label for="" class="text-xl">Y1</label>
+            <div class=" ">
+                <label for="" class="">Y1</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
+                    class="w-24  px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
                     name="y1_footprint" value="">
             </div>
 
-            <div class="mr-4">
-                <label for="" class="text-xl">Y2</label>
+            <div class="">
+                <label for="" class="">Y2</label>
                 <input required type="text" placeholder="m"
-                    class="w-[50px] text-xl px-2 py-1 text-center placeholder:text-xl input-type-number input-reset" step="0.01"
+                    class="w-24  px-2 py-1 text-center placeholder:text-sm input-type-number input-reset" step="0.01"
                     name="y2_footprint" value="">
             </div>
-            <div class="mr-4">
+            <div class="">
                 <button
-                    class="max-h-[24.5px] text-xl md:text-xl btn border-solid border-[1px] border-[#00000085] self-end px-4 py-1 rounded-md default-value-footprint">default
+                    class="btn border-solid border border-black/80 self-end px-4 py-1 rounded-md default-value-footprint">default
                     value</button>
             </div>
 

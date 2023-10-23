@@ -12,7 +12,7 @@
     </div>
     <div class="absolute right-0 bottom-0 ">
         <input type="checkbox" class="peer/joystick sr-only" id="show-joystick">
-        <div class="peer-checked/joystick:w-0 peer-checked/joystick:mr-0 w-fit overflow-hidden mr-[120px] mb-[50px]">
+        <div class="peer-checked/joystick:w-0 peer-checked/joystick:mr-0 w-fit mr-[120px] mb-[50px]">
             @include('frontend.blocks.joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
         </div>
         <label class="absolute top-0 right-0 bg-white p-2 rounded-tl-2xl rounded-bl-xl shadow-md group"
@@ -21,17 +21,14 @@
                 <i class="fa-solid fa-caret-left"></i>
             </span>
     </div>
-    <div class="absolute right-3 top-3">
-        <button
-            class=" btn bg-red-500 text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold stop-mission-btn">
+    <div class="absolute right-3 top-3 font-bold">
+        <button class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-mission-btn">
             Stop
         </button>
-        <button
-            class=" btn bg-green-500 text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold continue-mission-btn">
+        <button class=" btn bg-green-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 continue-mission-btn">
             Continue
         </button>
-        <button
-            class=" btn bg-main text-[#fff] self-end px-5 py-3 rounded-md mr-4 text-2xl font-bold refresh-mission-btn">
+        <button class=" btn bg-main text-[#fff] self-end px-4 py-1 rounded-md mr-4 refresh-mission-btn">
             Reset server
         </button>
     </div>

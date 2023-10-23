@@ -139,7 +139,7 @@ function activeStepNow(infoMission) {
     const styleActive = ["ring-4", "ring-red-500", "step-active"];
     const stepList = getNodeList("[data-name='step']");
     const currentActiveStyle = getNode(
-        "[data-name='step']." + styleActive.join(".")
+        "[data-name='step']." + styleActive.join("."),
     );
     currentActiveStyle?.classList.remove(...styleActive);
 
@@ -189,7 +189,7 @@ const showProgress = {
                 </span>
             </div>
             </div>    
-            <div class="w-full h-4 bg-white/50 backdrop-blur-sm">
+            <div class="w-full h-3 bg-white/50 backdrop-blur-sm">
                 <div class="h-full bg-green-500" style="width:${progress};" ></div>
             </div>
 

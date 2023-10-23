@@ -14,7 +14,8 @@
 
         </div>
 
-        <div class="w-3/4 flex justify-center items-center overflow-hidden data-[status=disabled]:opacity-50 hook-wrapper" data-status="disabled">
+        <div class="w-3/4 flex justify-center items-center overflow-hidden data-[status=disabled]:opacity-50 hook-wrapper"
+            data-status="disabled">
             <div class="w-full img-wrapper relative">
                 <div class="w-full img-item bg-contain bg-no-repeat bg-center absolute left-0 top-0"
                     style="background-image: url(/img/hook/robot2.png)"></div>

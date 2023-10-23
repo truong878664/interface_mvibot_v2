@@ -40,7 +40,7 @@ export default class TypeMission {
 
         for (const key in htmlElement) {
             const wrapper = document.querySelector(
-                `[data-list-type-mission='${key}']`
+                `[data-list-type-mission='${key}']`,
             );
             wrapper.innerHTML = htmlElement[key].join("");
         }
@@ -53,7 +53,7 @@ export default class TypeMission {
                 data-value='${JSON.stringify(data)}'
                 data-id='${id}'
                 data-name="item-type-mission"
-                class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg last:mb-20">
+                class="flex relative justify-between items-center bg-slate-50 px-5 py-3 mb-2 shadow-sm shadow-[#ccc] rounded-lg text-sm last:mb-20">
                 
                 <div class="flex w-full">
                     <input
@@ -61,21 +61,21 @@ export default class TypeMission {
                     id="${id + type}"
                     data-type="${type}"
                     type="checkbox"
-                    class="mr-4 w-6 h-6 rounded-md cursor-pointer text-green-500 bg-stone-200 border-none function-item-select">
+                    class="mr-4 w-4 h-4 rounded cursor-pointer text-green-500 bg-stone-200 border-none function-item-select">
                     <button data-button-type-mission-kind="detail" class="font-bold text-sky-600 w-full py-3 text-start">${name}</button>
                 </div>
 
                 <div class="absolute top-0 right-0">
                     <button data-button-type-mission-kind="add" 
-                        class="text-2xl mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
+                        class="mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                     <div
-                        class="text-2xl mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
+                        class="mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md text-xl z-50 hidden group-hover:block py-4">
+                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md z-50 hidden group-hover:block py-4 text-xs">
                             <li>
-                                <button data-button-type-mission-kind="edit" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                <button data-button-type-mission-kind="edit" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
                                     <span class="mr-2 w-[20px] text-blue-500">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </span>
@@ -83,7 +83,7 @@ export default class TypeMission {
                                 </button>
                             </li>
                             <li>
-                                <button data-button-type-mission-kind="delete" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                <button data-button-type-mission-kind="delete" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
                                     <span class="mr-2 w-[20px] text-red-500">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
@@ -91,7 +91,7 @@ export default class TypeMission {
                                 </button>
                             </li>
                             <li>
-                                <button data-button-type-mission-kind="detail" class="btn hidden px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                <button data-button-type-mission-kind="detail" class="btn hidden px-6 py-2 hover:bg-stone-100 w-full">
                                     <span class="mr-2 w-[20px] text-sky-500">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </span>
@@ -100,7 +100,7 @@ export default class TypeMission {
                             </li>
                             
                             <li>
-                                <button data-button-type-mission-kind="sync" class="btn flex px-6 py-2 hover:bg-stone-100 text-xl w-full">
+                                <button data-button-type-mission-kind="sync" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
                                     <span class="mr-2 w-[20px] text-yellow-500">
                                         <i class="fa-solid fa-rotate"></i>
                                     </span>

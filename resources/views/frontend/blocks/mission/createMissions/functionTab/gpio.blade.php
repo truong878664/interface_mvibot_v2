@@ -1,20 +1,20 @@
 <div class="{{ $type != 'gpio_wake_up' && $type != 'gpio_stop' ? 'function-item function-mission-tab hidden' : '' }} h-full w-full flex flex-col bg-[#fff] p-4"
     data-type="{{ $type }}">
-    <div class="flex mb-4">
+    <div class="flex">
         @if ($type != 'gpio_wake_up' && $type != 'gpio_stop')
             <div class="flex flex-col">
-                <label for="" class="text-xl">Name function GPIO</label>
+                <label for="" class="">Name function GPIO</label>
                 <input
-                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_function_gpio_module' : 'name_gpio' }} input-reset valid-input"
+                    class="w-[200px] px-4 py-1 {{ $type == 'gpio_module' ? 'name_function_gpio_module' : 'name_gpio' }} input-reset valid-input"
                     type="text" name="name_gpio" required>
             </div>
             <div class="flex flex-col ml-2 {{ $type == 'gpio_module' ? '' : 'hidden' }}">
-                <label for="" class="text-xl">Name GPIO module</label>
+                <label for="" class="">Name GPIO module</label>
                 {{-- <input
-                    class="w-[200px] text-xl px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
+                    class="w-[200px]  px-4 py-1 {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     type="text" name="name_gpio" required> --}}
                 <select
-                    class="w-[200px] text-xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
+                    class="w-[200px]  px-4 py-1 outline-none border bg-[#fff] {{ $type == 'gpio_module' ? 'name_gpio_module ' : '' }} input-reset valid-input"
                     name="name_gpio" id="">
 
                     @foreach ($allRobots as $robot)
@@ -24,9 +24,9 @@
             </div>
 
             <div class="flex flex-col ml-2">
-                <label for="" class="text-xl">Time out</label>
+                <label for="" class="">Time out</label>
                 <input
-                    class="w-[40px] text-xl px-2 py-1 {{ $type == 'gpio_module' ? 'time_out_gpio_module' : 'time_out_gpio' }} text-center input-type-number"
+                    class="w-[40px]  px-2 py-1 {{ $type == 'gpio_module' ? 'time_out_gpio_module' : 'time_out_gpio' }} text-center input-type-number"
                     type="text" name="time_out" value="-1" required>
             </div>
         @elseif($type == 'gpio_wake_up')
@@ -36,11 +36,11 @@
                 </div>
                 <div class="flex">
                     <button data-type-ws-btn="gpio_wake_up" data-module="gpio"
-                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn active">
+                        class="ml-2  font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn active">
                         Wake up normal
                     </button>
                     <button data-type-ws-btn="gpio_wake_up" data-module="gpio_module"
-                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn">
+                        class=" font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] wakeup-module-btn">
                         Wake up module
                     </button>
                 </div>
@@ -52,11 +52,11 @@
                 </div>
                 <div class="flex">
                     <button data-type-ws-btn="gpio_stop" data-module="gpio"
-                        class="ml-2 text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn active">
+                        class="ml-2  font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn active">
                         Stop normal
                     </button>
                     <button data-type-ws-btn="gpio_stop" data-module="gpio_module"
-                        class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn">
+                        class=" font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] btn self-end border border-[#000] [&.active]:bg-[#0f6cbd] [&.active]:text-[#fff] stop-module-btn">
                         Stop module
                     </button>
                 </div>
@@ -66,50 +66,50 @@
     <div class="w-full h-full flex flex-col justify-center">
         <div class="">
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
                 type='out_set'>
                 Out Set
             </button>
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
                 type='out_reset'>
                 Out Reset
             </button>
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"
                 type='in_on'>
                 In On
             </button>
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-off-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-off-btn"
                 type='in_off'>
                 In Off
             </button>
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pullup-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pullup-btn"
                 type='in_pullup'>
                 In Pullup
             </button>
             <button
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pulldown-btn"
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pulldown-btn"
                 type='in_pulldown'>
                 In Pulldown
             </button>
 
             @if ($type == 'gpio_wake_up' || $type == 'gpio_stop')
                 <select data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}'
-                    class="w-[120px] text-xl px-4 py-1 outline-none h-[24.5px] bg-[#fff] border border-[#000] rounded-md name_gpio_module_wakeup-stop hidden"
+                    class="w-[120px]  px-4 py-1 outline-none h-[24.5px] bg-[#fff] border border-[#000] rounded-md name_gpio_module_wakeup-stop hidden"
                     name="name_gpio" id="">
                     @foreach ($allRobots as $robot)
                         <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
                     @endforeach
                 </select>
                 {{-- <input
-            class="ml-2 text-xl transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
+            class="ml-2  transition-all rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] w-[180px] name_gpio_module_wakeup-stop hidden"
             type="text" data-ws-module-name="{{ $type }}" type-gpio='{{ $type }}' placeholder="Name seri GPIO module" /> --}}
             @endif
             <button data-type="{{ $type }}"
-                class="ml-2 text-xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] reset-gpio-btn">
+                class="ml-2  rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] reset-gpio-btn">
                 <i class="fa-solid fa-rotate"></i>
             </button>
 

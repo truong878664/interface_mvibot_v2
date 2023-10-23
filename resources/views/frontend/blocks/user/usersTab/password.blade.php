@@ -24,7 +24,6 @@
                 <input type="password" class="px-2 py-1 w-1/2 new-password">
             </div>
 
-
             <div class="text-[16px] mb-6 flex flex-col items-end">
                 <div class="flex justify-end ">
                     <span class="mr-4">Confirm new password</span>

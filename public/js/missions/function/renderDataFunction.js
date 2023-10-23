@@ -3,13 +3,13 @@ import { htmlDataFunction } from "../handleTypeMission.js";
 export default function renderDataFunction(data, type) {
     const BUTTON_ACTION_FUNCTION = `
     <div class="min-w-[120px] flex justify-end">
-        <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn shadow-sm shadow-[#ccc]">
+        <button class="mr-2 h-[30px] w-[30px] bg-white btn rounded-md delete-function-item-btn shadow-sm shadow-[#ccc]">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn shadow-sm shadow-[#ccc]">
+        <button class="mr-2 h-[30px] w-[30px] bg-white btn rounded-md edit-function-item-btn shadow-sm shadow-[#ccc]">
             <i class="fa-solid fa-pen"></i>
         </button>
-        <button class="text-3xl mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn shadow-sm shadow-[#ccc]">
+        <button class="mr-2 h-[30px] w-[30px] bg-white btn rounded-md add-mission-step-item-btn shadow-sm shadow-[#ccc]">
             <i class="fa-solid fa-plus"></i>
         </button>
     </div>
@@ -23,13 +23,21 @@ export default function renderDataFunction(data, type) {
         htmlDataFunction[type].push(
             `<div data-id=${item.id} function-id=${item.id} function-type="${
                 item.mode
-            }" ${item.mode === 'marker' && 'data-type-maker="' + item.marker_type + '"' } ${item.mode === 'gpio_module' && 'data-type-gpio_module="' + item.name_gpio_module + '"' }
-                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xl shadow-sm shadow-[#ccc] rounded-lg">
+            }" ${
+                item.mode === "marker" &&
+                'data-type-maker="' + item.marker_type + '"'
+            } ${
+                item.mode === "gpio_module" &&
+                'data-type-gpio_module="' + item.name_gpio_module + '"'
+            }
+                class="flex justify-between items-center bg-[rgba(204,204,204,0.2)] px-5 py-3 mb-2 point-id-8 type-mission-function-item shadow-sm shadow-[#ccc] rounded-lg">
                 <input type="hidden" value='${JSON.stringify(
-                    item
+                    item,
                 )}' class="value-function-item"/>
                 <div class="flex">
-                    <input data-select-function-id=${item.id} data-type="${item.mode}" type="checkbox" class="mr-4 w-[12px] h-[12px] accent-[#f5b933] function-item-select">
+                    <input data-select-function-id=${item.id} data-type="${
+                        item.mode
+                    }" type="checkbox" class="mr-4 w-3 h-3 rounded text-yellow-500 function-item-select">
                     <div class="flex flex-col">
                         <div class="flex">
                             <span class=" font-bold font-3xl capitalize">${
@@ -49,12 +57,12 @@ export default function renderDataFunction(data, type) {
                         </div>
                         <span>${dataFunctionDetail}</span>
                         <input value="${item.mode}#${item.name}#${
-                item.id
-            }" type="hidden" class="value-type-mission-function-item"/>
+                            item.id
+                        }" type="hidden" class="value-type-mission-function-item"/>
                     </div>
                 </div>
                 ${BUTTON_ACTION_FUNCTION}                
-            </div>`
+            </div>`,
         );
     });
 

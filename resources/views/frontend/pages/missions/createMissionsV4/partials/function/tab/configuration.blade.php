@@ -1,53 +1,85 @@
-<div class="h-full w-full flex flex-col bg-[#fff] p-4 relative" data-type="{{ $type }}"
-    data-type-wake-stop-wrapper="{{ $type }}">
-    <div class="flex mb-4 font-bold capitalize z-[2]">{{ $type }}</div>
-    <div data-module="" data-type="{{ $type }}"
-        class="group/module peer/module z-[2] inline-flex w-fit rounded-md ml-2 data-[module='']:animate-bounce data-[module='']:ring-4 ring-red-300 shadow-sm">
-        <button data-kind="normal" data-kind-button='changeModule' data-type="{{ $type }}"
-            class="text-xl font-bold rounded-l-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] group-data-[module='normal']/module:bg-[#0f6cbd] group-data-[module='normal']/module:text-[#fff]">
+<div
+    class="relative flex h-full w-full flex-col bg-[#fff] p-4"
+    data-type="{{ $type }}"
+    data-type-wake-stop-wrapper="{{ $type }}"
+>
+    <div class="z-[2] mb-4 flex font-bold capitalize">{{ $type }}</div>
+    <div
+        data-module=""
+        data-type="{{ $type }}"
+        class="group/module peer/module z-[2] ml-2 inline-flex w-fit rounded-md shadow-sm ring-red-300 data-[module='']:animate-bounce data-[module='']:ring-4"
+    >
+        <button
+            data-kind="normal"
+            data-kind-button="changeModule"
+            data-type="{{ $type }}"
+            class="self-end rounded-l-md border border-[#000] bg-[#fff] px-4 py-1 text-xl font-bold text-[#000] group-data-[module='normal']/module:bg-[#0f6cbd] group-data-[module='normal']/module:text-[#fff]"
+        >
             Gpio normal
         </button>
-        <button data-kind="module" data-kind-button='changeModule' data-type="{{ $type }}"
-            class="text-xl font-bold rounded-r-md px-4 py-1 bg-[#fff] text-[#000] self-end border border-[#000] group-data-[module='module']/module:bg-[#0f6cbd] group-data-[module='module']/module:text-[#fff]">
+        <button
+            data-kind="module"
+            data-kind-button="changeModule"
+            data-type="{{ $type }}"
+            class="self-end rounded-r-md border border-[#000] bg-[#fff] px-4 py-1 text-xl font-bold text-[#000] group-data-[module='module']/module:bg-[#0f6cbd] group-data-[module='module']/module:text-[#fff]"
+        >
             Gpio module
         </button>
     </div>
     <div
-        class="absolute top-0 left-0 right-0 bottom-0 bg-white/80 z-[1] place-content-center hidden peer-data-[module='']/module:grid text-[20px]">
-    </div>
-    {{-- <span>
-        Select type {{ $type }}
-    </span> --}}
-    <div class="w-full h-full flex flex-col justify-center group/module">
-        <div class="ml-2 items-center hidden my-3 peer-data-[module='module']/module:group-[]/module:flex">
-            <label for="" class="text-2xl mr-3">Name GPIO module</label>
-            <select data-name-seri-module="{{ $type }}"
-                class="w-[200px] text-2xl px-4 py-1 outline-none h-[24.5px] border bg-[#fff] input-reset valid-input"
-                name="name_gpio" id="">
+        class="absolute top-0 left-0 right-0 bottom-0 z-[1] hidden place-content-center bg-white/80 text-[20px] peer-data-[module='']/module:grid"
+    ></div>
+    {{-- <span> Select type {{ $type }} </span> --}}
+    <div class="group/module flex h-full w-full flex-col justify-center">
+        <div
+            class="my-3 ml-2 hidden items-center peer-data-[module='module']/module:group-[]/module:flex"
+        >
+            <label for="" class="mr-3 text-2xl">Name GPIO module</label>
+            <select
+                data-name-seri-module="{{ $type }}"
+                class="input-reset valid-input h-[24.5px] w-[200px] border bg-[#fff] px-4 py-1 text-2xl outline-none"
+                name="name_gpio"
+                id=""
+            >
                 @foreach ($allRobots as $robot)
-                    <option value="{{ $robot->name_seri }}">{{ $robot->name_seri }}</option>
+                <option value="{{ $robot->name_seri }}">
+                    {{ $robot->name_seri }}
+                </option>
                 @endforeach
             </select>
         </div>
-        <div class="text-2xl mb-4 ml-2">
-            <label for="not_set_out_{{ $type }}" class="inline-flex items-center gap-4 ">
+        <div class="mb-4 ml-2 text-2xl">
+            <label
+                for="not_set_out_{{ $type }}"
+                class="inline-flex items-center gap-4"
+            >
                 <span>Not set out </span>
-                <input id="not_set_out_{{ $type }}" type="checkbox" name="not_set_out"
-                    class="w-6 h-6 rounded-md text-red-400 focus:outline-red-400">
+                <input
+                    id="not_set_out_{{ $type }}"
+                    type="checkbox"
+                    name="not_set_out"
+                    class="h-6 w-6 rounded-md text-red-400 focus:outline-red-400"
+                />
             </label>
         </div>
         <div class="">
-            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.kindGpio', [
-                'type' => $type,
-            ])
+            @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.kindGpio',
+            [ 'type' => $type, ])
         </div>
-        <div class="flex-1 max-h-[calc(100%_-_80px)] overflow-hidden">
+        <div class="max-h-[calc(100%_-_80px)] flex-1 overflow-hidden">
             @include('frontend.pages.missions.createMissionsV4.partials.function.tab.tabGpio.board')
         </div>
         <div class="text-2xl font-bold">
-            <div class="mt-4 absolute left-0 bottom-2 px-2 w-full flex justify-end">
-                <button data-kind-button='save' data-type="{{ $type }}"
-                    class="btn bg-[#0f6cbd] text-[#fff] self-end px-4 py-2 rounded-md">Save</button>
+            <div
+                class="absolute left-0 bottom-2 mt-4 flex w-full justify-end px-2"
+            >
+                <button
+                    data-kind-button="save"
+                    data-type="{{ $type }}"
+                    class="btn self-end rounded-md bg-[#0f6cbd] px-4 py-2 text-[#fff]"
+                >
+                    Save
+                </button>
             </div>
         </div>
     </div>

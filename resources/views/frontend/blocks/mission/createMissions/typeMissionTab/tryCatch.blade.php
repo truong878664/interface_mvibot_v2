@@ -1,9 +1,8 @@
 <div class="hidden h-full w-full flex flex-col function-item form-else-if type-mission-tab overflow-hidden">
     <div class="flex justify-between items-end">
         <div class="flex flex-col">
-            <label for="" class="text-xl">Name try-catch</label>
-            <input class="w-[200px] text-xl px-4 py-1 name-trycatch-mission" type="text" name=""
-                required>
+            <label for="" class="">Name try-catch</label>
+            <input class="w-[200px]  px-4 py-1 name-trycatch-mission" type="text" name="" required>
         </div>
 
         @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', [
@@ -42,7 +41,6 @@
         ])
 
     </div>
-
 
 </div>
 <style>

@@ -6,40 +6,18 @@
             @include('frontend.blocks.selectRobot', ['type' => 'all_robot', 'id' => 'robot-gpio'])
 
             <button
-                class="ml-2 text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-set-btn"
+                class="ml-2 rounded-md px-4 py-1 bg-white text-black mx-2 btn self-end border border-black type-gpio-btn out-set-btn"
                 id='out_set'>
                 Set
             </button>
             <button
-                class="ml-2 hidden text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn out-reset-btn"
+                class="ml-2 hidden rounded-md px-4 py-1 bg-white text-black mx-2 btn self-end border border-black type-gpio-btn out-reset-btn"
                 id='out_reset'>
                 Out Reset
             </button>
 
             <button
-                class="ml-10 text-2xl rounded-md px-4 py-1 border font-bold border-[#0f6cbd] bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
-
-            {{-- <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-on-btn"
-                id='in_on'>
-                In On
-            </button>
-            <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-off-btn"
-                id='in_off'>
-                In Off
-            </button>
-            <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pullup-btn"
-                id='in_pullup'>
-                In Pullup
-            </button>
-            <button
-                class="ml-2 text-xl md:text-2xl rounded-md px-4 py-1 bg-[#fff] text-[#000] mx-2 btn self-end border border-[#000] type-gpio-btn in-pulldown-btn"
-                id='in_pulldown'>
-                In Pulldown
-            </button> --}}
-
+                class="ml-10 rounded-md px-4 py-1 border font-bold border-[#0f6cbd] bg-[#0f6cbd] text-[#fff] btn self-end send-gpio-btn">Send</button>
         </div>
 
         <div class="flex-1 max-w-[1400px] w-full mx-auto">
@@ -353,7 +331,6 @@
                 </defs>
             </svg>
         </div>
-
 
     </div>
 

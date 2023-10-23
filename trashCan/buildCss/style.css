@@ -50,25 +50,14 @@ a {
 i {
     pointer-events: none;
 }
-input {
-    border: 1px solid #ccc;
-    font-family: var(--main-font);
-    font-size: 1.6rem;
-    outline: none;
-    padding: 6px 4px;
-}
+
 input[type="number"] {
     font-family: var(--number-font);
 }
 input[type="color"] {
     padding: 0;
 }
-input::-moz-placeholder {
-    font-size: 1.3rem;
-}
-input::placeholder {
-    font-size: 1.3rem;
-}
+
 input::-moz-focus-inner {
     border: 0;
 }
@@ -643,7 +632,9 @@ li {
 }
 .avatar-user {
     border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--main-color), 0 0 0 4px #949494;
+    box-shadow:
+        0 0 0 3px var(--main-color),
+        0 0 0 4px #949494;
     font-size: 32px;
     height: 1em;
     width: 1em;
@@ -1646,7 +1637,9 @@ input:checked + .slider:before {
     background: #f5f5f5;
     border-color: #f4f4f4;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
-    transition: border-color 0.167s linear, box-shadow 0.167s linear;
+    transition:
+        border-color 0.167s linear,
+        box-shadow 0.167s linear;
 }
 .heading-form-mission {
     font-size: 2.3rem;
@@ -1895,7 +1888,8 @@ input[type="number"] {
     width: 80px;
 }
 .button-move {
-    background: linear-gradient(#bfbfbf, #fff) content-box,
+    background:
+        linear-gradient(#bfbfbf, #fff) content-box,
         linear-gradient(#fff, #979797) padding-box,
         linear-gradient(#969696, #fbfbfb) border-box;
     border-radius: 40%;
@@ -1903,8 +1897,10 @@ input[type="number"] {
     cursor: pointer;
 }
 .button-console-wrapper {
-    box-shadow: 0 -5px 5px hsla(0, 0%, 100%, 0.1),
-        0 5px 5px hsla(0, 0%, 100%, 0.05), inset 0 5px 5px rgba(0, 0, 0, 0.2),
+    box-shadow:
+        0 -5px 5px hsla(0, 0%, 100%, 0.1),
+        0 5px 5px hsla(0, 0%, 100%, 0.05),
+        inset 0 5px 5px rgba(0, 0, 0, 0.2),
         inset 0 -5px 5px hsla(0, 0%, 100%, 0.05);
 }
 .button-move:active {

@@ -40,11 +40,11 @@ const stepHTML = (props) => {
 
     return `
     <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-        <span class="text-sky-500 font-bold text-[16px] group-data-[type='error']/step:text-red-500 mr-4">${
+        <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500 mr-2">${
             details[type]
         }</span>
         <div draggable="true"
-            class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+            class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
             <span class="mr-4">${icon}</span>
             <span>${type === "break" ? "break;" : detail?.name || name}</span>
             ${iconEnableMove}
@@ -67,9 +67,9 @@ const htmlVariable = (props) => {
         case command_action === "new":
             return `
             <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-                <span class="text-sky-500 mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500">create variable</span>
+                <span class="text-sky-500 mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500">create variable</span>
                 <div draggable="true"
-                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
                     <span class="font-bold min-w-[20px] text-center">${name_variable}</span>
                     ${iconEnableMove}
                 </div>
@@ -80,13 +80,13 @@ const htmlVariable = (props) => {
         case isDeleteOrReset:
             return `
             <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-                <span class="mr-2 ml-6 font-bold text-[16px] group-data-[type='error']/step:text-red-500 ${
+                <span class="mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500 ${
                     command_action === "delete"
                         ? "text-red-500"
                         : "text-blue-500"
                 } ">${command_action} variable</span>
                 <div draggable="true"
-                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
                     <span class="font-bold min-w-[20px] text-center"></span>
                     ${iconEnableMove}
                 </div>
@@ -97,9 +97,9 @@ const htmlVariable = (props) => {
         case notFoundDetailVariable:
             return `
             <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-                <span class="text-sky-500 font-bold text-[16px] group-data-[type='error']/step:text-red-500 mr-4">${details[type]}</span>
+                <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500 mr-4">${details[type]}</span>
                 <div draggable="true"
-                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 rounded-lg inline-flex items-center px-4 text-[16px] ${color}">
+                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
                     <span class="mr-4">${icon}</span>
                     <span>${name}</span>
                 </div>
@@ -108,10 +108,10 @@ const htmlVariable = (props) => {
             return `
             <div class="relative group/step flex items-center mb-4 rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <div draggable="true"
-                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] mr-2 border rounded-lg inline-flex items-center gap-3 px-4 text-[16px]">
-                    <span class="font-bold min-w-[20px] text-3xl text-center rounded px-6 block ${color}">${name_variable}</span>
-                    <span class="font-bold text-3xl text-pink-600">${typeVariable[command_action]}</span>
-                    <span class="font-bold min-w-[20px] text-3xl text-center rounded px-6 block ${color}">${focus_value}</span>
+                    class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] border rounded-lg inline-flex items-center gap-3 px-1">
+                    <span class="font-bold min-w-[20px] text-center rounded px-6 block ${color}">${name_variable}</span>
+                    <span class="font-bold text-pink-600">${typeVariable[command_action]}</span>
+                    <span class="font-bold min-w-[20px] text-center rounded px-6 block ${color}">${focus_value}</span>
                     ${iconEnableMove}
                 </div>
                 ${overLayPreventMoveOnMobile}

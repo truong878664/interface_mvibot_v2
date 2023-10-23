@@ -1,11 +1,13 @@
 <div class="hidden h-full w-full flex flex-col function-item form-else-if type-mission-tab overflow-hidden">
     <div class="flex justify-between items-end">
         <div class="flex flex-col">
-            <label for="" class="text-xl">Name if-else</label>
-            <input class="w-[200px] text-xl px-4 py-1 name-ifelse-mission" type="text" name="" required>
+            <label for="" class="">Name if-else</label>
+            <input class="w-[200px]  px-4 py-1 name-ifelse-mission" type="text" name="" required>
         </div>
 
-        @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', ['type'=>'ifelse'])
+        @include('frontend.blocks.mission.createMissions.typeMissionTab.buttonTypeMission', [
+            'type' => 'ifelse',
+        ])
 
     </div>
     <div class="h-[calc(100%_-_42px)] flex flex-col">
@@ -57,7 +59,6 @@
         ])
 
     </div>
-
 
 </div>
 <style>

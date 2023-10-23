@@ -4,7 +4,7 @@
             @include('frontend.blocks.setting.settingTab.saveButton', ['setting' => 'ethernet'])
 
             {{-- LAN TYPE --}}
-            <div class="w-full flex text-2xl px-8 py-4 peer/lan-type type-lan-wrapper" data-is-manual="false">
+            <div class="w-full flex  px-8 py-4 peer/lan-type type-lan-wrapper" data-is-manual="false">
                 <span class="font-bold min-w-[70px]">LAN type</span>
                 <div class="ml-8">
                     <div class="flex items-center mb-3">
@@ -23,32 +23,41 @@
                 <div class="mx-8 my-6 flex justify-between text-2xl">
                     <span class="font-bold">Ip v4</span>
                     <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4"
+                            type="number">
                     </div>
                 </div>
                 {{-- LAN IPV4 GATEWAY --}}
                 <div class="mx-8 my-6 flex justify-between text-2xl">
                     <span class="font-bold">Ip v4 gateway</span>
                     <div class="border inline-block py-2 px-1 rounded-md bg-gray-200">
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway"
+                            type="number">
                         <span>.</span>
-                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway" type="number">
+                        <input class="w-[50px] text-center border-none bg-transparent" data-ip="lan_ipv4_gateway"
+                            type="number">
                     </div>
                 </div>
                 {{-- LAN IPV4 DNS --}}
                 <div class="mx-8 my-6 flex justify-between text-2xl">
                     <span class="font-bold">Ip v4 DNS</span>
-                    <input type="text" class="h-[32px] w-[275px] px-4 text-right rounded-md border-none bg-gray-200" data-ip="lan_ipv4_dns">
+                    <input type="text" class="h-[32px] w-[275px] px-4 text-right rounded-md border-none bg-gray-200"
+                        data-ip="lan_ipv4_dns">
                 </div>
                 {{-- END IPV4 DNS --}}
             </div>
