@@ -10,17 +10,18 @@
             ])
         </div>
     </div>
-    <div class="absolute right-0 bottom-0 ">
-        <input type="checkbox" class="peer/joystick sr-only" id="show-joystick">
-        <div class="peer-checked/joystick:w-0 peer-checked/joystick:mr-0 w-fit mr-[120px] mb-[50px]">
+    <input type="checkbox" class="peer/joystick sr-only" id="show-joystick">
+    <div class="absolute right-0 bottom-0 group">
+        <div class="peer-checked/joystick:group-[]:hidden w-fit mr-[120px] mb-[50px]">
             @include('frontend.blocks.joystick', ['mb' => '160px', 'md' => '220px', 'lg' => '300px'])
         </div>
-        <label class="absolute top-0 right-0 bg-white p-2 rounded-tl-2xl rounded-bl-xl shadow-md group"
-            for="show-joystick">
-            <span class="rotate-180 block transition-all duration-300 peer-checked/joystick:group-[]:rotate-0">
-                <i class="fa-solid fa-caret-left"></i>
-            </span>
     </div>
+    <label class="absolute top-1/2 right-0 bg-white p-2 rounded-tl-2xl rounded-bl-xl shadow-md group"
+        for="show-joystick">
+        <span class="rotate-180 block transition-all duration-300 peer-checked/joystick:group-[]:rotate-0">
+            <i class="fa-solid fa-caret-left"></i>
+        </span>
+    </label>
     <div class="absolute right-3 top-3 font-bold">
         <button class=" btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-mission-btn">
             Stop

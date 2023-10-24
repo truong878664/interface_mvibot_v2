@@ -55,7 +55,17 @@ class TypeMissionVerController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+
+            $dataTypeMission = TypeMissionVer::where("id", $id)->first();
+            return [
+                "message" => "Get data successfully!", "error" => false, "data" => $dataTypeMission
+            ];
+        } catch (\Throwable $th) {
+            return [
+                "message" => "Error!" . $th, "error" => true, "data" => null
+            ];
+        }
     }
 
     /**

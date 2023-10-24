@@ -66,11 +66,24 @@ export default function handleActionTypeMission() {
                 div.innerHTML = contentDetail;
                 document.body.appendChild(div);
             },
-            sync() {
-                const dataTypeMission = JSON.parse(
-                    JSON.parse(itemTypeMission.dataset.value).data,
-                );
-                syncTypeMission(dataTypeMission);
+            async sync() {
+                try {
+                    const idTypeMission = +itemTypeMission.dataset.id;
+                    const dataTypeMissionFromDB =
+                        await typeMissionClass.getById(idTypeMission);
+                    const dataTypeMission = JSON.parse(
+                        dataTypeMissionFromDB.data.data,
+                    );
+                    dataTypeMission.id = idTypeMission;
+                    await syncTypeMission(dataTypeMission);
+                    toggerMessage("success", "Async successfully!");
+                } catch (error) {
+                    console.error(error);
+                    toggerMessage(
+                        "error",
+                        "An error occurred, please check the console log for more details!",
+                    );
+                }
             },
             edit() {
                 const dataTypeMission = JSON.parse(
@@ -106,7 +119,7 @@ export default function handleActionTypeMission() {
                     });
                     if (!status.error) {
                         formElement.remove();
-                        syncTypeMission(dataTypeMission);
+                        await syncTypeMission(dataTypeMission);
                     }
                     toggerMessage(
                         status.error ? "error" : "success",

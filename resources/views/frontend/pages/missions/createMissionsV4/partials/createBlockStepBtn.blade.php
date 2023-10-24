@@ -80,10 +80,10 @@
 
                     <li>
                         <button id="button-test-1" class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
-                            <span class="w-[40px] text-red-600">
+                            <span class="w-10 text-red-600">
                                 <i class="fa-solid fa-umbrella"></i>
                             </span>
-                            <span class="flex-1 text-start"> Button test </span>
+                            <span class="flex-1 text-start">Button test</span>
                         </button>
                     </li>
                 </ul>
@@ -91,15 +91,9 @@
         </div>
         {{-- WAKE UP STOP --}}
         <div class="flex justify-end gap-2 py-3 text-white xl:absolute xl:bottom-full xl:right-0 xl:mb-5 xl:py-0">
-            <label for="input-continue" class="btn rounded-md bg-sky-500 px-4 py-1 font-bold">
-                Continue
-            </label>
-            <label for="input-wakeup" class="btn rounded-md bg-green-500 px-4 py-1 font-bold">
-                Wake up
-            </label>
-            <label for="input-stop" class="btn rounded-md bg-red-500 px-4 py-1 font-bold">
-                Stop
-            </label>
+            <label for="input-continue" class="btn rounded-md bg-sky-500 px-4 py-1 font-bold">Continue</label>
+            <label for="input-wakeup" class="btn rounded-md bg-green-500 px-4 py-1 font-bold">Wake up</label>
+            <label for="input-stop" class="btn rounded-md bg-red-500 px-4 py-1 font-bold">Stop</label>
         </div>
         <input type="radio" class="peer/continue sr-only" name="configuration" id="input-continue"
             data-type="continue" />
@@ -132,30 +126,50 @@
         </div>
         {{-- END WAKE UP STOP --}}
 
-        <div class="ml-2 flex flex-col flex-wrap justify-start gap-1 xl:flex-row" id="create-type-mission-wrapper">
+        <div class="ml-2 flex flex-col flex-wrap justify-start gap-1 z-4 xl:flex-row" id="create-type-mission-wrapper">
             @php
                 $blockMissions = [
-                    ['color' => 'text-red-400', 'type' => 'Normal', 'title' => 'Normal', 'icon' => 'fa-solid fa-bullseye'],
+                    [
+                        'color' => 'text-red-400',
+                        'type' => 'Normal',
+                        'title' => 'Normal',
+                        'icon' => 'fa-solid fa-bullseye',
+                    ],
                     [
                         'color' => 'text-green-400',
                         'type' => 'IfElse',
                         'title' => 'If Else',
                         'icon' => 'fa-solid fa-code-fork',
                     ],
-                    ['color' => 'text-yellow-400', 'type' => 'Trycatch', 'title' => 'Try Catch', 'icon' => 'fa-solid fa-triangle-exclamation'],
-                    ['color' => 'text-sky-400', 'type' => 'While', 'title' => 'While', 'icon' => 'fa-solid fa-arrows-spin'],
+                    [
+                        'color' => 'text-yellow-400',
+                        'type' => 'Trycatch',
+                        'title' => 'Try Catch',
+                        'icon' => 'fa-solid fa-triangle-exclamation',
+                    ],
+                    [
+                        'color' => 'text-sky-400',
+                        'type' => 'While',
+                        'title' => 'While',
+                        'icon' => 'fa-solid fa-arrows-spin',
+                    ],
                     [
                         'color' => 'text-blue-400',
                         'type' => 'LogicOr',
                         'title' => 'Logic OR',
                         'icon' => 'fa-solid fa-grip-lines-vertical',
                     ],
-                    ['color' => 'text-pink-400', 'type' => 'LogicAnd', 'title' => 'Logic AND', 'icon' => 'fa-solid fa-link'],
+                    [
+                        'color' => 'text-pink-400',
+                        'type' => 'LogicAnd',
+                        'title' => 'Logic AND',
+                        'icon' => 'fa-solid fa-link',
+                    ],
                 ];
             @endphp
             @foreach ($blockMissions as $item)
                 <button data-type-mission="{{ $item['type'] }}"
-                    class="btn flex gap-3 rounded-lg border bg-white px-4 py-1">
+                    class="btn flex gap-3 rounded-lg shadow-lg border bg-white px-4 py-1">
                     <span class="{{ $item['color'] }}">
                         <i class=" {{ $item['icon'] }}"></i>
                     </span>
@@ -165,14 +179,10 @@
                     </span>
                 </button>
             @endforeach
-            <label for="step-wrapper" class="btn mx-2 rounded-lg border bg-white px-4 py-1">
-                <span class="text-purple-700">
-                    <i class="fa-solid fa-square"></i>
-                </span>
+            <label for="step-wrapper" class="btn rounded-lg cursor-pointer shadow-lg border bg-white px-4 py-1">
+                <span class="text-purple-700"><i class="fa-solid fa-square"></i></span>
                 <span class=" font-bold">Step</span>
-                <span class="text-blue-600">
-                    <i class="fa-solid fa-angle-right"></i>
-                </span>
+                <span class="text-blue-600"><i class="fa-solid fa-angle-right"></i></span>
             </label>
         </div>
     </div>
