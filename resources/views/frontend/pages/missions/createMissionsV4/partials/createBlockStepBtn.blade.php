@@ -1,4 +1,4 @@
-<div class="absolute bottom-0 right-0 mb-2 flex flex-col-reverse items-end justify-between gap-[10px] xl:w-full">
+<div class="absolute bottom-0 right-0 mb-2 flex flex-col-reverse items-end justify-between gap-2 xl:w-full">
     <div class="xl:hidden">
         <label for="action-create-block" class="btn mx-2 rounded-lg border bg-white px-4 py-2">
             <i class="fa-solid fa-bars"></i>
@@ -6,7 +6,7 @@
     </div>
     <input type="checkbox" name="" id="action-create-block" class="peer" hidden />
     <div
-        class="hidden flex-col-reverse justify-between gap-[4px] rounded-md bg-white px-4 py-8 shadow-md peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:bg-transparent xl:p-0 xl:shadow-none">
+        class="hidden flex-col-reverse justify-between gap-1 rounded-md bg-white px-4 py-8 shadow-md peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:bg-transparent xl:p-0 xl:shadow-none">
         <div class="flex">
             {{-- ACTION SEND MISSION --}}
             <input class="peer/send-mission" type="checkbox" name="" hidden id="input-send-mission" />
@@ -15,7 +15,7 @@
                 <span class="text-blue-400">
                     <i class="fa-solid fa-paper-plane"></i>
                 </span>
-                <span class="text-[16px] font-bold">Send mission</span>
+                <span class=" font-bold">Send mission</span>
             </label>
             <div
                 class="fixed bottom-0 left-0 right-0 top-0 z-10 hidden items-center justify-center transition-all peer-checked/send-mission:flex">
@@ -27,7 +27,7 @@
                         'id' => 'select-robot-option',
                     ])
                     <button data-type-mission="{{ $itemRender->type }}" data-type-button="send-mission"
-                        class="btn mx-2 rounded-md bg-[#0f6cbd] px-4 py-2 font-bold text-[#fff]">
+                        class="btn mx-2 rounded-md bg-main px-4 py-1 font-bold text-white">
                         Send
                     </button>
                 </div>
@@ -42,11 +42,11 @@
                 <label for="more-action"
                     class="fixed bottom-0 left-0 right-0 top-0 z-20 hidden bg-black/10 peer-checked/more-action:block"></label>
                 <ul id="more-action-wrapper"
-                    class="absolute bottom-[calc(100%_+_10px)] right-0 hidden w-[200px] overflow-hidden rounded-md bg-white py-4 text-sm opacity-0 shadow-sm transition-all peer-checked/more-action:z-50 peer-checked/more-action:block peer-checked/more-action:opacity-100">
+                    class="absolute bottom-[calc(100%_+_10px)] right-0 hidden w-52 overflow-hidden rounded-md bg-white py-4 text-sm opacity-0 shadow-sm transition-all peer-checked/more-action:z-50 peer-checked/more-action:block peer-checked/more-action:opacity-100">
                     <li>
                         <button data-button-action-more="code"
                             class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
-                            <span class="w-[40px] text-blue-600">
+                            <span class="w-10 text-blue-600">
                                 <i class="fa-solid fa-code"></i>
                             </span>
                             <span class="flex-1 text-start">
@@ -58,7 +58,7 @@
                     <li>
                         <button data-button-action-more="showAllMission"
                             class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
-                            <span class="w-[40px] text-green-600">
+                            <span class="w-10 text-green-600">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
                             <span class="flex-1 text-start">
@@ -69,7 +69,7 @@
                     <li>
                         <button data-button-action-more="hideAllMission"
                             class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
-                            <span class="w-[40px] text-fuchsia-600">
+                            <span class="w-10 text-fuchsia-600">
                                 <i class="fa-solid fa-eye-slash"></i>
                             </span>
                             <span class="flex-1 text-start">
@@ -90,7 +90,7 @@
             </div>
         </div>
         {{-- WAKE UP STOP --}}
-        <div class="flex justify-end gap-[10px] py-3 text-white xl:absolute xl:bottom-full xl:right-0 xl:mb-5 xl:py-0">
+        <div class="flex justify-end gap-2 py-3 text-white xl:absolute xl:bottom-full xl:right-0 xl:mb-5 xl:py-0">
             <label for="input-continue" class="btn rounded-md bg-sky-500 px-4 py-1 font-bold">
                 Continue
             </label>
@@ -109,7 +109,7 @@
         <div data-name="wakeup-stop-wrapper"
             class="fullscreen group z-20 hidden h-screen w-screen items-center justify-center peer-checked/continue:flex peer-checked/stop:flex peer-checked/wakeup:flex">
             <label for="input-show-configuration"
-                class="fullscreen !z-[-1] hidden bg-black/20 peer-checked/continue:group-[]:block peer-checked/stop:group-[]:block peer-checked/wakeup:group-[]:block"></label>
+                class="fullscreen !-z-1 hidden bg-black/20 peer-checked/continue:group-[]:block peer-checked/stop:group-[]:block peer-checked/wakeup:group-[]:block"></label>
 
             <div
                 class="function-item-form relative z-10 -mt-[5%] hidden h-[80%] w-[80%] items-center justify-center overflow-hidden rounded-md bg-white peer-checked/wakeup:group-[]:flex">
@@ -132,8 +132,7 @@
         </div>
         {{-- END WAKE UP STOP --}}
 
-        <div class="ml-[10px] flex flex-col flex-wrap justify-start gap-[4px] xl:flex-row"
-            id="create-type-mission-wrapper">
+        <div class="ml-2 flex flex-col flex-wrap justify-start gap-1 xl:flex-row" id="create-type-mission-wrapper">
             @php
                 $blockMissions = [
                     ['color' => 'text-red-400', 'type' => 'Normal', 'title' => 'Normal', 'icon' => 'fa-solid fa-bullseye'],
@@ -160,7 +159,7 @@
                     <span class="{{ $item['color'] }}">
                         <i class=" {{ $item['icon'] }}"></i>
                     </span>
-                    <span class="text-[16px] font-bold">{{ $item['title'] }}</span>
+                    <span class=" font-bold">{{ $item['title'] }}</span>
                     <span class="text-blue-600">
                         <i class="fa-solid fa-plus"></i>
                     </span>
@@ -170,7 +169,7 @@
                 <span class="text-purple-700">
                     <i class="fa-solid fa-square"></i>
                 </span>
-                <span class="text-[16px] font-bold">Step</span>
+                <span class=" font-bold">Step</span>
                 <span class="text-blue-600">
                     <i class="fa-solid fa-angle-right"></i>
                 </span>
