@@ -1,6 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
+const zIndex = () => {
+    const arrayConfigZIndex = {};
+    for (let z = 1; z <= 100; z++) {
+        arrayConfigZIndex[z] = z;
+    }
+    return arrayConfigZIndex;
+};
+
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
@@ -19,6 +27,7 @@ module.exports = {
                 "black-o-30": "rgba(0,0,0,30%)",
                 ...colors,
             },
+            zIndex: zIndex(),
         },
     },
     plugins: [

@@ -26,7 +26,6 @@
             'icon' => 'fa-solid fa-mattress-pillow',
             'mission_not_allowed' => [],
         ],
-<<<<<<< HEAD
         [
             'type' => 'sound',
             'title' => 'sound',
@@ -35,9 +34,6 @@
             'icon' => 'fa-solid fa-volume-high',
             'mission_not_allowed' => ['error-gpio'],
         ],
-=======
-        ['type' => 'sound', 'title' => 'sound', 'color' => 'text-[#9333EA]', 'bg' => 'bg-[#9333EA]/20', 'icon' => 'fa-solid fa-volume-high', 'mission_not_allowed' => ['error-robot', 'error-gpio']],
->>>>>>> main-tailwind
         [
             'type' => 'position',
             'title' => 'position',
@@ -54,7 +50,6 @@
             'icon' => 'fa-solid fa-file-code',
             'mission_not_allowed' => [],
         ],
-<<<<<<< HEAD
         [
             'type' => 'config',
             'title' => 'config',
@@ -63,9 +58,6 @@
             'icon' => 'fa-solid fa-grip',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
-=======
-        ['type' => 'config', 'title' => 'config', 'color' => 'text-yellow-500', 'bg' => 'bg-yellow-500/20', 'icon' => 'fa-solid fa-grip', 'mission_not_allowed' => []],
->>>>>>> main-tailwind
         [
             'type' => 'break',
             'title' => 'break',

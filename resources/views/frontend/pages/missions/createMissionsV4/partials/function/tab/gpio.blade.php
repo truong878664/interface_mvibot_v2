@@ -3,12 +3,11 @@
     <div class="mb-2 flex">
         <div class="flex flex-col">
             <label for="" class="">Name function GPIO</label>
-            <input class="name_gpio input-reset valid-input w-[200px] px-4 py-1 " type="text" name="name_gpio"
-                required />
+            <input class="name_gpio input-reset valid-input w-52 px-4 py-1 " type="text" name="name_gpio" required />
         </div>
         <div class="ml-2 flex flex-col">
             <label for="" class="">Time out</label>
-            <input class="time_out_gpio input-type-number w-12 px-2 py-1 text-center " type="text" name="time_out"
+            <input class="time_out_gpio input-type-number w-20 px-2 py-1 text-center " type="text" name="time_out"
                 value="-1" required />
         </div>
     </div>
