@@ -7,7 +7,7 @@
     </div>
     <div class="relative h-[calc(100%_-_10px)] w-full lg:m-2 lg:w-[calc(100%_-_10px)] lg:p-1">
         {{-- action history --}}
-        <div class="absolute top-0 z-[1]" id="action-history">
+        <div class="absolute top-0 z-1" id="action-history">
             <button data-action-history="undo" class="btn h-7 w-7 rounded-md border border-stone-400 bg-white px-2">
                 <svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -31,13 +31,10 @@
             <div class="relative flex h-full w-full">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
                 <div class="relative h-full w-full pr-2 transition-all md:peer-checked/step-wrapper:w-3/4">
-                    <div id="block-step-wrapper"
-                        class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-4">
-                        <button data-action-block-step="add"
-                            class="active active-block-step-root btn relative mb-2 ml-2 flex h-[20px] w-[25px] items-center justify-center self-center rounded-md bg-sky-100 text-[16px] text-sky-500 [&.active]:bg-sky-800 [&.active]:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
+                    {{-- BLOCK STEP WRAPPER --}}
+                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-10"
+                        id="block-step-wrapper"></div>
+                    {{-- END BLOCK STEP WRAPPER --}}
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')
                 </div>
 

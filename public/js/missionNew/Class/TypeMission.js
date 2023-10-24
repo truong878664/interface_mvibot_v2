@@ -1,3 +1,5 @@
+import { toggerMessage } from "../../main.js";
+
 export default class TypeMission {
     constructor() {
         this.type = document.querySelector("#type-mission").value;
@@ -16,6 +18,11 @@ export default class TypeMission {
     }
     async get() {
         const res = await fetch(this.urlApi + `?type-mission=${this.type}`);
+        const data = await res.json();
+        return data;
+    }
+    async getById(id) {
+        const res = await fetch(this.urlApi + "/" + id);
         const data = await res.json();
         return data;
     }

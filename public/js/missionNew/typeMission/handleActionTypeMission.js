@@ -6,16 +6,16 @@ import { MissionClass } from "../index.js";
 import typeMission, { typeMissionClass } from "./index.js";
 export default function handleActionTypeMission() {
     const listTypeMissionWrapper = document.getElementById(
-        "list-type-mission-wrapper"
+        "list-type-mission-wrapper",
     );
     listTypeMissionWrapper.onclick = (e) => {
         const buttonAction = e.target.closest(
-            "[data-button-type-mission-kind]"
+            "[data-button-type-mission-kind]",
         );
         if (!buttonAction) return;
         const typeButtonAction = buttonAction.dataset.buttonTypeMissionKind;
         const itemTypeMission = buttonAction.closest(
-            "[data-name='item-type-mission']"
+            "[data-name='item-type-mission']",
         );
         const actions = {
             add() {
@@ -35,14 +35,14 @@ export default function handleActionTypeMission() {
                 const status = await typeMissionClass.delete(idMissionType);
                 toggerMessage(
                     status.deleted ? "success" : "error",
-                    status.message
+                    status.message,
                 );
                 status.deleted && itemTypeMission.remove();
                 status.error && console.log(status.error);
             },
             detail() {
                 const dataTypeMission = JSON.parse(
-                    JSON.parse(itemTypeMission.dataset.value).data
+                    JSON.parse(itemTypeMission.dataset.value).data,
                 );
                 const html = MissionClass.renderHtml({
                     data: [dataTypeMission],
@@ -55,7 +55,7 @@ export default function handleActionTypeMission() {
                     "justify-center",
                     "items-center",
                     "w-screen",
-                    "h-screen"
+                    "h-screen",
                 );
                 const contentDetail = `
                     <div class="absolute top-0 left-0 right-0 bottom-0 bg-black/20 z-[-1]" onclick="this.parentElement.remove()"></div>
@@ -66,15 +66,28 @@ export default function handleActionTypeMission() {
                 div.innerHTML = contentDetail;
                 document.body.appendChild(div);
             },
-            sync() {
-                const dataTypeMission = JSON.parse(
-                    JSON.parse(itemTypeMission.dataset.value).data
-                );
-                syncTypeMission(dataTypeMission);
+            async sync() {
+                try {
+                    const idTypeMission = +itemTypeMission.dataset.id;
+                    const dataTypeMissionFromDB =
+                        await typeMissionClass.getById(idTypeMission);
+                    const dataTypeMission = JSON.parse(
+                        dataTypeMissionFromDB.data.data,
+                    );
+                    dataTypeMission.id = idTypeMission;
+                    await syncTypeMission(dataTypeMission);
+                    toggerMessage("success", "Async successfully!");
+                } catch (error) {
+                    console.error(error);
+                    toggerMessage(
+                        "error",
+                        "An error occurred, please check the console log for more details!",
+                    );
+                }
             },
             edit() {
                 const dataTypeMission = JSON.parse(
-                    JSON.parse(itemTypeMission.dataset.value).data
+                    JSON.parse(itemTypeMission.dataset.value).data,
                 );
                 const { id, name } = dataTypeMission;
                 const { x, y } = buttonAction.getBoundingClientRect();
@@ -89,7 +102,7 @@ export default function handleActionTypeMission() {
                     if (inputForm.value === "") {
                         toggerMessage(
                             "error",
-                            "The name field cannot be empty!"
+                            "The name field cannot be empty!",
                         );
                         return;
                     }
@@ -105,11 +118,11 @@ export default function handleActionTypeMission() {
                     });
                     if (!status.error) {
                         formElement.remove();
-                        syncTypeMission(dataTypeMission);
+                        await syncTypeMission(dataTypeMission);
                     }
                     toggerMessage(
                         status.error ? "error" : "success",
-                        status.message
+                        status.message,
                     );
                 };
             },

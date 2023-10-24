@@ -1,22 +1,23 @@
-<nav class="fixed top-0 left-0 z-10 flex h-full w-[74px] flex-col bg-slate-50 shadow-sm">
-    <ul class="flex flex-col gap-6 pt-16 pb-5">
-        <a href="{{ route('home') }}">
+<nav
+    class="fixed bottom-0 left-0 z-10 flex h-[74px] w-full flex-col bg-slate-50 shadow-sm md:top-0 md:h-full md:w-[74px]">
+    <ul class="grid grid-cols-3 h-full justify-between items-center md:flex md:flex-col md:h-fit md:pt-16 md:w-full">
+        <a class="h-full md:w-full" href="{{ route('home') }}">
             <li
-                class="home flex cursor-pointer flex-col items-center justify-center border-l-4 text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main">
+                class="home flex cursor-pointer flex-col items-center justify-center border-b-4 h-full text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main md:border-l-4 md:border-b-0 md:py-3">
                 <i class="fa-solid fa-house"></i>
                 <span class="text-sm">Home</span>
             </li>
         </a>
-        <a href="{{ route('dashboard.') }}">
+        <a class="h-full md:w-full" href="{{ route('dashboard.') }}">
             <li
-                class="dashboard flex cursor-pointer flex-col items-center justify-center border-l-4 text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main">
+                class="dashboard flex cursor-pointer flex-col items-center justify-center border-b-4 h-full text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main md:border-l-4 md:border-b-0 md:py-3">
                 <i class="fa-solid fa-gamepad"></i>
                 <span class="text-sm">Dashboard</span>
             </li>
         </a>
-        <a href="{{ route('user') }}">
+        <a class="h-full md:w-full" href="{{ route('user') }}">
             <li
-                class="user flex cursor-pointer flex-col items-center justify-center border-l-4 text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main">
+                class="user flex cursor-pointer flex-col items-center justify-center border-b-4 h-full text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main md:border-l-4 md:border-b-0 md:py-3">
                 <i class="fa-solid fa-user-gear"></i>
                 <span class="text-sm">User</span>
             </li>

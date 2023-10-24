@@ -4,7 +4,7 @@
     $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
     $color = $colors[strlen($userName)];
 @endphp
-<header class="fixed top-0 left-0 z-[11] flex h-11 w-full items-center justify-between bg-main px-7 text-white">
+<header class="fixed top-0 left-0 z-11 flex h-11 w-full items-center justify-between bg-main px-7 text-white shadow-md">
     <div class="flex h-full items-center gap-4">
         <div
             class="connect-ros-btn connection-failed shake z-12 text-center text-2xl [&.connected]:text-green-400 [&.connection-failed]:text-red-500">
@@ -22,8 +22,7 @@
                     <i class="fa-regular fa-bookmark"></i>
                 </div>
             </button>
-            <div
-                class="absolute top-full hidden w-[200px] rounded-md bg-[#fff] p-4 text-2xl text-[#000] shadow-sm shadow-[#ccc]">
+            <div class="absolute top-full hidden w-52 rounded-md bg-white p-4 text-2xl text-black shadow-sm">
                 <span>Bookmark add</span>
                 <div class="my-2 flex">
                     <label for="name-bookmark" class="mr-2">name</label>
@@ -33,7 +32,7 @@
                     <button class="btn btn float-right mr-2 self-end rounded-full border px-4 py-1">
                         Remove
                     </button>
-                    <button class="btn btn float-right self-end rounded-full border bg-sky-400 px-4 py-1 text-[#fff]">
+                    <button class="btn btn float-right self-end rounded-full border bg-sky-400 px-4 py-1 text-white">
                         Done
                     </button>
                 </div>
@@ -48,7 +47,7 @@
         <span>{{ session('UserName') }}</span>
         <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
             style="background-color: {{ $color }};"
-            class="avatar-user transparent bg-avatar relative flex aspect-square w-7 items-center justify-center rounded-full text-3xl ring-2 ring-sky-200 after:absolute after:text-[24px] after:font-bold after:uppercase after:content-[attr(key)]">
+            class="avatar-user transparent bg-avatar relative flex aspect-square w-7 items-center justify-center rounded-full text-3xl ring-2 ring-sky-200 after:absolute after:text-lg after:font-bold after:uppercase after:content-[attr(key)]">
             <span class="uppercase"></span>
             @if (session('TypeUser') == 'admin')
                 <div
