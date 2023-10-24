@@ -39,8 +39,8 @@
                 </div>
 
                 <label for="step-wrapper"
-                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block">
-                    <i class="fa-solid fa-xmark"></i>
+                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block"><i
+                        class="fa-solid fa-xmark"></i>
                 </label>
 
                 <div
