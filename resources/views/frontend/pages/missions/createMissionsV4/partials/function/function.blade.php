@@ -93,8 +93,9 @@
             'bg' => 'bg-pink-100',
             'icon' => 'fa-solid fa-link',
         ],
-]; @endphp
-<div class="flex h-full flex-col m-1" id="function-container">
+    ];
+@endphp
+<div class="flex h-full flex-col p-1" id="function-container">
     <input type="radio" name="tab-function" class="peer/function" hidden id="tab-function" checked />
     <input type="radio" name="tab-function" class="peer/type-mission" hidden id="tab-type-mission" />
     <div class="group flex w-full items-center justify-evenly rounded-md bg-stone-200/90 p-1 ">
@@ -114,9 +115,9 @@
             @if (!in_array($currentTypeMission, $item['mission_not_allowed']))
                 @if ($item['type'] === 'break')
                     <button data-button-function-kind="add" data-function-type="break" data-value="break##"
-                        class="function-item label-function shadow-sm h-[30px]  flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                        class="function-item label-function shadow-sm h-8  flex items-center justify-between rounded-md px-4 mt-3 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                         <div class="flex">
-                            <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
+                            <span class="mr-4 {{ $item['color'] }} w-6 text-center">
                                 <i class="{{ $item['icon'] }}"></i>
                             </span>
                             <span class="capitalize">{{ $item['title'] }}</span>
@@ -124,13 +125,13 @@
                     </button>
                 @else
                     <div class="">
-                        <input type="radio" name="function" class="peer/function function" id="{{ $item['type'] }}"
-                            hidden />
+                        <input type="radio" name="function" class="sr-only peer/function function"
+                            id="{{ $item['type'] }}" />
                         <button data-type="{{ $item['type'] }}"
                             onclick="(()=>{const {type} = this.dataset;const radio = document.getElementById(type);radio.checked = radio.checked ? false :true;})()"
-                            class="label-function w-full shadow-sm h-[30px]  flex items-center justify-between rounded-md px-4 mt-2 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
+                            class="label-function w-full shadow-sm h-7 flex items-center justify-between rounded-md px-4 mt-2 mb-1 btn border border-stone-100 {{ $item['bg'] }}">
                             <div class="flex">
-                                <span class="mr-4 {{ $item['color'] }} w-[24px] text-center">
+                                <span class="mr-4 {{ $item['color'] }} w-6 text-center">
                                     <i class="{{ $item['icon'] }}"></i>
                                 </span>
                                 <span class="capitalize">{{ $item['title'] }}</span>

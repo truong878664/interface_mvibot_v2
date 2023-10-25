@@ -1,5 +1,7 @@
 import confirmationForm from "../../../functionHandle/confirmationForm.js";
+import debouche from "../../../functionHandle/debouche.js";
 import { loadingHeader } from "../../../functionHandle/displayLoad.js";
+import isNullOrEmpty from "../../../functionHandle/isNullOrEmpty.js";
 import { toggerMessage } from "../../../main.js";
 import TypeMission from "../../Class/TypeMission.js";
 import Label from "../../component/Label.js";
@@ -11,18 +13,17 @@ import {
 } from "../../index.js";
 import { typeMissionClass } from "../../typeMission/index.js";
 
-const getNode = document.querySelector.bind(document);
-const getNodeList = document.querySelectorAll.bind(document);
 export default function handleAddStepToBlockStep() {
+    const getNode = document.querySelector.bind(document);
+    const getNodeList = document.querySelectorAll.bind(document);
+    const deboucheRemoveFunctionHighline = debouche();
+    const deboucheRemoveTypeMissionHighline = debouche();
+
     blockStepWrapper.addEventListener("click", (e) => {
         const buttonAction = e.target.closest("[data-action-block-step]");
         const stepWrapper = document.getElementById("step-wrapper");
         if (!buttonAction) return;
         const typeAction = buttonAction.dataset.actionBlockStep;
-        let functionHighline;
-        let typeMissionHighline;
-        let timeOutDeleteHighline;
-
         const blockWrapper = buttonAction.closest("[data-block-wrapper]");
         const actions = {
             add() {
@@ -34,7 +35,7 @@ export default function handleAddStepToBlockStep() {
                     return;
                 }
                 const activeButton = getNode(
-                    '[data-action-block-step="add"].active'
+                    '[data-action-block-step="add"].active',
                 );
                 activeButton?.classList.remove("active");
                 buttonAction.classList.add("active");
@@ -74,14 +75,18 @@ export default function handleAddStepToBlockStep() {
             },
             step() {
                 const isSticky = buttonAction.querySelector(
-                    "[data-name='sticky']"
+                    "[data-name='sticky']",
                 );
                 if (isSticky) {
                     isSticky.remove();
                 } else {
-                    removeSticky();
+                    (function removeSticky() {
+                        blockStepWrapper
+                            .querySelector("[data-name='sticky']")
+                            ?.remove();
+                    })();
                     const currentStickyShow = blockStepWrapper.querySelector(
-                        "[data-sticky='show']"
+                        "[data-sticky='show']",
                     );
                     if (currentStickyShow) {
                         currentStickyShow.dataset.sticky = "hidden";
@@ -119,29 +124,40 @@ export default function handleAddStepToBlockStep() {
                 if (typeStep === "break") return;
                 functionTab.checked = true;
                 const functionWrapperDetail = functionWrapper.querySelector(
-                    "#" + typeStep
+                    "#" + typeStep,
                 );
                 if (functionWrapperDetail) functionWrapperDetail.checked = true;
-                stepWrapper.checked = true;
-                const functionActive = functionWrapper.querySelector(
-                    `[data-function-type='${type}'][data-id='${id}']`
-                );
-                if (!functionActive) {
-                    toggerMessage(
-                        "error",
-                        "This element was not found or deleted!"
+                new Promise((resolve, reject) => {
+                    stepWrapper.checked = true;
+                    const functionActive = functionWrapper.querySelector(
+                        `[data-function-type='${type}'][data-id='${id}']`,
                     );
-                    return;
-                }
-
-                functionActive?.classList.add("highline");
-                functionActive?.scrollIntoView({ behavior: "smooth" });
-                clearTimeout(timeOutDeleteHighline);
-                functionHighline?.classList.remove("highline");
-                functionHighline = getNode("[data-function-type].highline");
-                timeOutDeleteHighline = setTimeout(() => {
-                    functionHighline?.classList.remove("highline");
-                }, 4000);
+                    if (!functionActive) reject();
+                    resolve(functionActive);
+                })
+                    .then((functionActive) => {
+                        const FunctionHighline =
+                            "[data-function-type].highline";
+                        getNode(FunctionHighline)?.classList.remove("highline");
+                        functionActive?.classList.add("highline");
+                        return functionActive;
+                    })
+                    .then((functionActive) => {
+                        functionActive?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                        deboucheRemoveFunctionHighline.run(() => {
+                            functionActive?.classList.remove("highline");
+                        }, 4000);
+                    })
+                    .catch((error) => {
+                        toggerMessage(
+                            "error",
+                            "This element was not found or deleted!",
+                        );
+                        console.error(error);
+                    });
             },
             save() {
                 const data = blockWrapper.dataset.value;
@@ -153,8 +169,12 @@ export default function handleAddStepToBlockStep() {
                 });
                 requestAnimationFrame(() => inputForm.focus());
 
-                buttonSubmit.onclick = async (e) => {
+                buttonSubmit.onclick = async () => {
                     const name = inputForm.value;
+                    if (isNullOrEmpty(name)) {
+                        toggerMessage("error", "Please enter filed name!");
+                        return;
+                    }
                     const dataTranslate = JSON.parse(data);
                     dataTranslate.name = name;
                     const dataSaveBlockMission = {
@@ -164,9 +184,8 @@ export default function handleAddStepToBlockStep() {
                         type_mission: MissionClass.typeMission,
                     };
                     const typeMission = new TypeMission();
-                    const message = await typeMission.save(
-                        dataSaveBlockMission
-                    );
+                    const message =
+                        await typeMission.save(dataSaveBlockMission);
 
                     const [address, indexStep] =
                         MissionClass.getAddressByStep(buttonAction);
@@ -185,18 +204,18 @@ export default function handleAddStepToBlockStep() {
                     message.saved && typeMission.render();
                     toggerMessage(
                         message.saved ? "success" : "error",
-                        message.message
+                        message.message,
                     );
                 };
             },
             update() {
                 const handle = async () => {
                     const blockTypeMission = buttonAction.closest(
-                        "[data-block-wrapper]"
+                        "[data-block-wrapper]",
                     );
                     const idTypeMission = blockTypeMission.dataset.id;
                     const valueNewTypeMission = JSON.parse(
-                        blockTypeMission.dataset.value
+                        blockTypeMission.dataset.value,
                     );
 
                     const message = await typeMissionClass.update({
@@ -206,7 +225,7 @@ export default function handleAddStepToBlockStep() {
                     syncTypeMission(valueNewTypeMission);
                     toggerMessage(
                         message.error ? "error" : "success",
-                        message.message
+                        message.message,
                     );
                 };
                 confirmationForm({
@@ -219,34 +238,43 @@ export default function handleAddStepToBlockStep() {
                 const typeMission = blockWrapper.dataset.blockWrapper;
                 const typeMissionTab =
                     document.getElementById("tab-type-mission");
-                const listTypeMissionWrapper = document.querySelector(
-                    "#list-type-mission-wrapper"
+                const listTypeMissionWrapper = getNode(
+                    "#list-type-mission-wrapper",
                 );
-
                 const dataListTypeMissionWrapper =
                     listTypeMissionWrapper.querySelector(
-                        `[data-list-type-mission='${typeMission}']`
-                    );
-                stepWrapper.checked = true;
-                typeMissionTab.checked = true;
-                document.querySelector(`input#${typeMission}`).checked = true;
-                const foundedTypeMission =
-                    dataListTypeMissionWrapper.querySelector(
-                        `[data-id='${idTypeMission}']`
+                        `[data-list-type-mission='${typeMission}']`,
                     );
 
-                foundedTypeMission?.classList.add("highline-type-mission");
-                foundedTypeMission?.scrollIntoView({ behavior: "smooth" });
-                clearTimeout(timeOutDeleteHighline);
-                typeMissionHighline?.classList.remove("highline");
-                typeMissionHighline = getNode(
-                    "[data-name='item-type-mission'].highline-type-mission"
-                );
-                timeOutDeleteHighline = setTimeout(() => {
-                    typeMissionHighline?.classList.remove(
-                        "highline-type-mission"
-                    );
-                }, 4000);
+                new Promise((resolve, reject) => {
+                    stepWrapper.checked = true;
+                    typeMissionTab.checked = true;
+                    getNode(`input#${typeMission}`).checked = true;
+                    const foundedTypeMission =
+                        dataListTypeMissionWrapper.querySelector(
+                            `[data-id='${idTypeMission}']`,
+                        );
+                    if (!foundedTypeMission) reject();
+                    resolve(foundedTypeMission);
+                })
+                    .then((foundedTypeMission) => {
+                        foundedTypeMission?.classList.add(
+                            "highline-type-mission",
+                        );
+                        foundedTypeMission?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                        return foundedTypeMission;
+                    })
+                    .then((foundedTypeMission) => {
+                        deboucheRemoveTypeMissionHighline.run(() => {
+                            foundedTypeMission.classList.remove(
+                                "highline-type-mission",
+                            );
+                            console.log("remove");
+                        }, 4000);
+                    });
             },
             unLinkTypeMission() {
                 const handle = () => {
@@ -268,8 +296,4 @@ export default function handleAddStepToBlockStep() {
 
         actions[typeAction]?.();
     });
-
-    function removeSticky() {
-        blockStepWrapper.querySelector("[data-name='sticky']")?.remove();
-    }
 }

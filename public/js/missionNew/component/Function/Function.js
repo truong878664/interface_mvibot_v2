@@ -53,9 +53,9 @@ const createHtmlFunctionItem = {
                         <i class="fa-solid fa-plus"></i>
                     </button>
                     <div
-                        class=" mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
+                        class=" mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group/item-function">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md  z-50 hidden group-hover:block">
+                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md  z-50 hidden group-hover/item-function:block">
                             ${this.optionButtonFunction}
                         </div>
                     </div>

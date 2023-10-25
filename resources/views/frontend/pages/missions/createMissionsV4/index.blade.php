@@ -39,12 +39,12 @@
                 </div>
 
                 <label for="step-wrapper"
-                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block"><i
+                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block xl:!hidden"><i
                         class="fa-solid fa-xmark"></i>
                 </label>
 
                 <div
-                    class="absolute right-0 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
+                    class="absolute right-0 bottom-0 h-full w-0 z-5 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
                     @include('frontend.pages.missions.createMissionsV4.partials.function.function')
                 </div>
             </div>

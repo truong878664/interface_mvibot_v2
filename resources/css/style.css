@@ -2429,6 +2429,7 @@ input[type="number"] {
 
 [data-function-type].highline {
     border: 2px solid #0f6cbd;
+    display: block !important;
 }
 
 .bl-step-code {

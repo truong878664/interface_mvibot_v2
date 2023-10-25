@@ -1,3 +1,4 @@
+import isNullOrEmpty from "../../../functionHandle/isNullOrEmpty.js";
 import Step from "./Step.js";
 export default class Gpio extends Step {
     constructor(data) {
@@ -46,14 +47,14 @@ export default class Gpio extends Step {
         this.data.notSetout.checked = Number(not_set_out);
 
         const gpioWrapElement = document.querySelector(
-            `#function-item-form-wrapper [data-type='${this.type}']`
+            `#function-item-form-wrapper [data-type='${this.type}']`,
         );
         this.setLightGpio(field, gpioWrapElement);
     }
     get() {
         console.log(this.data.notSetout);
         const gpioContainer = document.querySelector(
-            `.function-mission-tab[data-type=${this.type}]`
+            `.function-mission-tab[data-type=${this.type}]`,
         );
         const data = this.getGpio(gpioContainer);
 
@@ -120,7 +121,7 @@ export default class Gpio extends Step {
             const elements = wrapperGpio.querySelectorAll(`.gpio-io.${type}`);
             this.data[type] = [];
             this.data[type].push(
-                ...Array.from(elements, (gpio) => gpio.dataset.gpio)
+                ...Array.from(elements, (gpio) => gpio.dataset.gpio),
             );
         });
 

@@ -3,7 +3,7 @@ import { toggerMessage } from "../../main.js";
 import Label from "../component/Label.js";
 import syncTypeMission from "../handle/syncTypeMission.js";
 import { MissionClass } from "../index.js";
-import typeMission, { typeMissionClass } from "./index.js";
+import { typeMissionClass } from "./index.js";
 export default function handleActionTypeMission() {
     const listTypeMissionWrapper = document.getElementById(
         "list-type-mission-wrapper",
