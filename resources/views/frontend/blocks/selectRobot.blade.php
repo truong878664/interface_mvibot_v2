@@ -21,6 +21,7 @@
 @endphp
 
 <div class="text-xl mx-2 mt-2 user-select-none">
+    <input type="hidden" value="{{ json_encode($robotArray) }}" id="{{ $id }}-array">
     <div class="group/dropdown dropdown">
         <div class="">
             <input class="text-box bg-[#fff] text-[#000] shadow-md placeholder:text-base" type="text"

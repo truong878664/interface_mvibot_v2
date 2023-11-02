@@ -53,7 +53,7 @@
 <input id="show-create-missions" type="checkbox" class="show-create-missions" hidden>
 
 <label for="show-create-missions"
-    class="create-missions-btn bg-gray-200/50 rounded-md text-5xl grid place-content-center shadow-sm hover:opacity-100 cursor-pointer opacity-70 {{ $colorButton[$type] }}">
+    class="create-missions-btn bg-gray-200/50 min-h-[106px] rounded-md text-5xl grid place-content-center shadow-sm hover:opacity-100 cursor-pointer opacity-70 {{ $colorButton[$type] }}">
     <i class="fa-solid fa-plus"></i>
 </label>
 

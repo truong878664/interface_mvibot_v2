@@ -99,12 +99,15 @@ li {
     text-align: center;
 }
 ::-webkit-scrollbar {
-    border-right: 2px solid transparent;
-    height: 3px;
-    width: 3px;
+    width: 4px;
+    height: 4px;
 }
 ::-webkit-scrollbar-thumb {
     /* background: #9a9a9a; */
+    background-clip: content-box;
+    border-right: 1px solid transparent;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
     @apply rounded-full bg-slate-300;
 }
 ::-webkit-scrollbar-track {

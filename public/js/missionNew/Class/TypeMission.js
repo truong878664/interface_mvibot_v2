@@ -74,16 +74,16 @@ export default class TypeMission {
 
                 <div class="absolute top-0 right-0">
                     <button data-button-type-mission-kind="add" 
-                        class="mx-1 mb-1 h-[30px] w-[30px] btn rounded-md add-function-btn">
+                        class="mx-1 mb-1 h-7 w-7 btn rounded-md add-function-btn">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                     <div
-                        class="mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
+                        class="mx-1 mb-1 h-7 w-7 rounded-md more-option-function-btn relative inline-block group">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <ul class="absolute top-[10px] right-0 bg-white rounded-md shadow-md z-50 hidden group-hover:block py-4 text-xs">
+                        <ul class="absolute top-2 right-0 bg-white rounded-md shadow-md z-50 hidden group-hover:block py-4 text-xs">
                             <li>
                                 <button data-button-type-mission-kind="edit" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
-                                    <span class="mr-2 w-[20px] text-blue-500">
+                                    <span class="mr-2 w-5 text-blue-500">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </span>
                                     <span>Edit</span>
@@ -91,7 +91,7 @@ export default class TypeMission {
                             </li>
                             <li>
                                 <button data-button-type-mission-kind="delete" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
-                                    <span class="mr-2 w-[20px] text-red-500">
+                                    <span class="mr-2 w-5 text-red-500">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span>Delete</span>
@@ -99,7 +99,7 @@ export default class TypeMission {
                             </li>
                             <li>
                                 <button data-button-type-mission-kind="detail" class="btn hidden px-6 py-2 hover:bg-stone-100 w-full">
-                                    <span class="mr-2 w-[20px] text-sky-500">
+                                    <span class="mr-2 w-5 text-sky-500">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </span>
                                     <span>Detail</span>
@@ -108,7 +108,7 @@ export default class TypeMission {
                             
                             <li>
                                 <button data-button-type-mission-kind="sync" class="btn flex px-6 py-2 hover:bg-stone-100 w-full">
-                                    <span class="mr-2 w-[20px] text-yellow-500">
+                                    <span class="mr-2 w-5 text-yellow-500">
                                         <i class="fa-solid fa-rotate"></i>
                                     </span>
                                     <span>Sync</span>

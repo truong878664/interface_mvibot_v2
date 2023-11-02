@@ -104,19 +104,20 @@ async function handleCode() {
     showMissionForm.classList.add(
         "fixed",
         "top-0",
-        "z-[51]",
+        "z-51",
         "left-0",
         "right-0",
         "bottom-0",
-        "bg-[rgba(0,0,0,0.2)]",
+        "bg-black/20",
         "show-mission-form-wrapper",
         "flex",
         "justify-center",
-        "items-center",
+        "items-end",
+        "md:items-center",
     );
 
     const htmlMission = `
-                <div class="bg-[#fff] rounded-md flex flex-col show-mission-form w-2/3 max-h-[500px] h- relative">
+                <div class="bg-white flex flex-col show-mission-form w-full h-[90%] md:w-[80%] md:h-[80%] md:rounded-md relative">
                     <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
                         <i class="fa-regular fa-copy"></i>
                     </button>

@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 class MissionsV4Controller extends Controller
 {
     public $v = 'v4';
-    public function index() {
+    public function index()
+    {
         return 123;
     }
 
@@ -34,33 +35,36 @@ class MissionsV4Controller extends Controller
         $type = $request->type;
         $title = "Type mission";
         $v = $this->v;
-
         return view('frontend.pages.missions.typeMission', compact('type', 'title', 'v'));
     }
 
     public function createStepsMissions(Request $request)
     {
 
-        if (Map::all()->count() > 0) {
-            $mapActive = Map::all()[0]['name_map_active'];
-        } else {
-            $mapActive = "";
+        try {
+            if (Map::all()->count() > 0) {
+                $mapActive = Map::all()[0]['name_map_active'];
+            } else {
+                $mapActive = "";
+            }
+            $idRender = $request->id;
+            $itemRender = MissionsVer::find($idRender);
+
+            $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
+
+            $allRobot = Robot::all()->toArray();
+
+            $currentWakeUp = json_encode(WakeUp::where('id_mission', $itemRender->id)->get());
+            $currentStop = json_encode(Stop::where('id_mission', $itemRender->id)->get());
+
+            $map = new mapController();
+            $mapActive = $map->mapActive();
+
+            $title = "Mission - $itemRender->name";
+            $v = $this->v;
+            return view('frontend.pages.missions.createMissionsV4.index', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Mission not found!');
         }
-        $idRender = $request->id;
-        $itemRender = MissionsVer::find($idRender);
-
-        $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
-
-        $allRobot = Robot::all()->toArray();
-
-        $currentWakeUp = json_encode(WakeUp::where('id_mission', $itemRender->id)->get());
-        $currentStop = json_encode(Stop::where('id_mission', $itemRender->id)->get());
-
-        $map = new mapController();
-        $mapActive = $map->mapActive();
-
-        $title = "Mission - $itemRender->name";
-        $v = $this->v;
-        return view('frontend.pages.missions.createMissionsV4.index', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
     }
 }

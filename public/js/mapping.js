@@ -1,7 +1,7 @@
 import createJoystick from "./createJoystick/createJoystick.js";
 import createMap from "./rosModule/createMap.js";
 import createTfClient from "./rosModule/createTfClient.js";
-import { $, $$, toggerMessage } from "./main.js";
+import ros, { $, $$, toggerMessage } from "./main.js";
 import changeMapActive from "./rosModule/changeMapMapping.js";
 import createAxes from "./rosModule/createAxes.js";
 import reloadWhenOrientation from "./reloadOnOrientation.js";
@@ -10,10 +10,13 @@ import publishTopicString from "./rosModule/topicString.js";
 import confirmationForm from "./functionHandle/confirmationForm.js";
 import subscribeTopic from "./rosModule/subscribeTopic.js";
 import { setRobotMove } from "./rosModule/moveRobot.js";
+import showUrd from "./rosModule/showUrd.js";
 
-const heightMap = $("#map").offsetHeight;
-const widthMap = $("#map").offsetWidth;
+const mapElement = $("#map");
+const heightMap = mapElement.offsetHeight;
+const widthMap = mapElement.offsetWidth;
 let robotActive = $("#robot-mapping").value;
+const listRobotMapping = JSON.parse($("#robot-mapping-array").value);
 const tfClient = createTfClient();
 const topic = "/";
 
@@ -25,6 +28,13 @@ createJoystick();
 changeTopic();
 
 createMoveAction();
+
+// showUrdRobotMapping();
+// function showUrdRobotMapping() {
+//     listRobotMapping.forEach((robot) => {
+//         showUrd(robot.name_seri, ros, viewer, tfClient);
+//     });
+// }
 
 function changeTopic() {
     $("#robot-mapping").onchange = (e) => {
@@ -40,7 +50,7 @@ function changeTopicMoveRobot(robotActive) {
 }
 
 function changTopicOccupancy(robotActive) {
-    $("#map").remove();
+    mapElement.remove();
     $("#map-wrapper").innerHTML = `<div class="w-full h-full" id="map"></div>`;
     viewer = createMap(
         heightMap,
@@ -48,7 +58,7 @@ function changTopicOccupancy(robotActive) {
         tfClient,
         `${robotActive}/map`,
         "map",
-        robotActive
+        robotActive,
     );
 }
 
@@ -61,10 +71,9 @@ $("#create_map_btn").onclick = () => {
             $("#error_create_map").innerText = "";
         };
     } else {
-
         if (!robotActive) {
-            toggerMessage('error', 'Choose robot to save map!')
-            return
+            toggerMessage("error", "Choose robot to save map!");
+            return;
         }
         confirmationForm({
             message: `Do you want to save this map with the name ${nameMap.value}?`,
@@ -73,7 +82,6 @@ $("#create_map_btn").onclick = () => {
                 nameMap.value = "";
             },
         });
-      
     }
 };
 
@@ -85,7 +93,7 @@ function changeJoystick() {
             e.target.dataset.active = "active";
             console.log($(".action-move-robot-wrapper:not(.hidden)"));
             $(".action-move-robot-wrapper:not(.hidden)").classList.add(
-                "hidden"
+                "hidden",
             );
             $$(".action-move-robot-wrapper")[index].classList.remove("hidden");
         };
@@ -123,9 +131,9 @@ function handleSendTopic() {
                 timeIntervalSendTopic.push(
                     setInterval(() => {
                         sendTopic(valueSend);
-                    }, 100)
+                    }, 100),
                 );
-            }, 100)
+            }, 100),
         );
     };
 
@@ -139,7 +147,7 @@ function handleSendTopic() {
         timeIntervalSendTopic.push(
             setInterval(() => {
                 sendTopic(valueSend);
-            }, 100)
+            }, 100),
         );
     });
 
@@ -161,16 +169,9 @@ function handleSendTopic() {
     }
 }
 
-subscribeTopic(
-    `/request_action`,
-    "std_msgs/String",
-    (data, name) => {
-        if (data.data.indexOf('save_map' !== -1)) {
-            toggerMessage(
-                "success",
-                "Map saved!"
-            );
-        }
-        console.log(data);
+subscribeTopic(`/request_action`, "std_msgs/String", (data, name) => {
+    if (data.data.indexOf("save_map" !== -1)) {
+        toggerMessage("success", "Map saved!");
     }
-);
+    console.log(data);
+});

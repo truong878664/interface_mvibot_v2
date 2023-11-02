@@ -124,24 +124,24 @@ const createHtmlFunctionItem = {
 
     optionButtonFunction: `
         <ul class="bg-white shadow-md py-2 rounded-md overflow-hidden text-stone-900">
-            <li class="px-6 hover:bg-stone-100">
-                <button data-button-function-kind="delete" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="delete" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-red-500">
                         <i class="fa-solid fa-trash-can"></i>
                     </span>
                     <span>Delete</span>
                 </button>
             </li>
-            <li class="px-6 hover:bg-stone-100 ">
-                <button data-button-function-kind="edit" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="edit" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-sky-500">
                         <i class="fa-solid fa-pen"></i>
                     </span>
                     <span>Edit</span>
                 </button>
             </li>
-            <li class="px-6 hover:bg-stone-100 ">
-                <button data-button-function-kind="duplicate" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="duplicate" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-orange-500">
                         <i class="fa-regular fa-clone"></i>
                     </span>

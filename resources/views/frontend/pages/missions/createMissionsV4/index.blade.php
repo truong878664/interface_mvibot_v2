@@ -5,9 +5,9 @@
     <div class="fixed top-0 left-0 right-0 bottom-0 z-10 grid place-content-center bg-white" id="loading-mission">
         <span class="loader-mission"></span>
     </div>
-    <div class="relative h-[calc(100%_-_10px)] w-full lg:m-2 lg:w-[calc(100%_-_10px)] lg:p-1">
+    <div class="relative h-full w-full lg:p-1">
         {{-- action history --}}
-        <div class="absolute top-0 z-1" id="action-history">
+        <div class="absolute top-0 z-1 pt-2 pr-2" id="action-history">
             <button data-action-history="undo" class="btn h-7 w-7 rounded-md border border-stone-400 bg-white px-2">
                 <svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -30,16 +30,16 @@
 
             <div class="relative flex h-full w-full">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
-                <div class="relative h-full w-full pr-2 transition-all md:peer-checked/step-wrapper:w-3/4">
+                <div class="relative h-full w-full transition-all md:peer-checked/step-wrapper:w-3/4">
                     {{-- BLOCK STEP WRAPPER --}}
-                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-10"
+                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-10 pl-1 pr-1"
                         id="block-step-wrapper"></div>
                     {{-- END BLOCK STEP WRAPPER --}}
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')
                 </div>
 
                 <label for="step-wrapper"
-                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 rounded-full peer-checked/step-wrapper:block xl:!hidden"><i
+                    class="btn absolute top-0 right-0 z-10 mx-2 hidden px-4 py-2 m-2 rounded-full peer-checked/step-wrapper:block bg-white/50 backdrop-blur-sm shadow-sm xl:!hidden"><i
                         class="fa-solid fa-xmark"></i>
                 </label>
 

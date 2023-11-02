@@ -1,5 +1,5 @@
 <nav
-    class="fixed bottom-0 left-0 z-10 flex h-[74px] w-full flex-col bg-slate-50 shadow-sm md:top-0 md:h-full md:w-[74px]">
+    class="fixed bottom-0 left-0 z-10 flex h-16 w-full min-w-[320px] md:min-w-0 flex-col bg-slate-50 shadow-sm md:top-0 md:h-full md:w-[74px]">
     <ul class="grid grid-cols-3 h-full justify-between items-center md:flex md:flex-col md:h-fit md:pt-16 md:w-full">
         <a class="h-full md:w-full" href="{{ route('home') }}">
             <li
