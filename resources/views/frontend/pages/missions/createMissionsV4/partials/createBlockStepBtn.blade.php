@@ -1,10 +1,15 @@
 <div class="absolute bottom-0 right-0 mb-2 flex flex-col-reverse items-end justify-between gap-2 xl:w-full">
-    <div class="xl:hidden">
+    <input type="checkbox" name="" id="action-create-block" class="peer" hidden />
+    <div class="xl:hidden group/bars">
         <label for="action-create-block" class="btn mx-2 rounded-lg border bg-white px-4 py-2">
-            <i class="fa-solid fa-bars"></i>
+            <span class="peer-checked:group-[]/bars:hidden">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+            <span class="peer-checked:group-[]/bars:block hidden text-red-400">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
         </label>
     </div>
-    <input type="checkbox" name="" id="action-create-block" class="peer" hidden />
     <div
         class="hidden flex-col-reverse justify-between gap-1 rounded-md bg-white px-4 py-8 shadow-md peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:bg-transparent xl:p-0 xl:shadow-none">
         <div class="flex">

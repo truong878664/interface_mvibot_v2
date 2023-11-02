@@ -39,8 +39,13 @@ class LayerController extends Controller
     {
         // $dataLayer = json_decode($request->data_layer);
         // $array = json_decode(json_encode($dataLayer), true);
-        Layer::insert($request->all());
-        return $request->all();
+        try {
+            //code...
+            Layer::insert($request->all());
+            return [123];
+        } catch (\Throwable $th) {
+            return ["message" => $th];
+        }
     }
 
     /**

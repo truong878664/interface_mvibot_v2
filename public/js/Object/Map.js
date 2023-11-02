@@ -1,4 +1,5 @@
 import { generateID } from "../functionHandle/createIdBrowser.js";
+import { loadingHeader } from "../functionHandle/displayLoad.js";
 import ros, { toggerMessage } from "../main.js";
 import DispatchCustomEvent from "./DispatchCustomEvent.js";
 
@@ -325,7 +326,6 @@ export default class Map {
                 const res = await fetch("/api/layer");
                 const layers = await res.json();
                 this.layerList = this.layer.layerDbToRos(layers);
-                this.layer.display();
             } catch (error) {
                 console.log(error);
                 toggerMessage(
@@ -335,19 +335,34 @@ export default class Map {
             }
         },
         save: async () => {
-            // const res = await fetch("/api/layer", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(this.layer.layerRosToDb()),
-            // });
-            console.log(this.layer.layerRosToDb());
-            // const status = await res.json();
-            // console.log(status);
+            try {
+                loadingHeader(true);
+                const res = await fetch("/api/layer", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(this.layer.layerRosToDb()),
+                });
+                const status = await res.json();
+                if (res.status === 200) {
+                    this.layerList.forEach((layer) => {
+                        layer.new = false;
+                    });
+                }
+                loadingHeader(false);
+            } catch (error) {
+                loadingHeader(false);
+                toggerMessage(
+                    "error",
+                    "There was an error, go to the console log for more details",
+                );
+                console.log(error);
+            }
         },
         layerRosToDb: () => {
             const layers = this.layerList.map((layer) => {
+                if (!layer.new) return {};
                 const yawo = layer.r * (Math.PI / 180);
                 return {
                     name_map_active: this.nameMap,
@@ -360,7 +375,7 @@ export default class Map {
                     yawo,
                 };
             });
-            return layers;
+            return layers.filter((layer) => Object.keys(layer).length);
         },
         layerDbToRos: (layersDb) => {
             return layersDb.map((layer) => {
@@ -389,10 +404,11 @@ export default class Map {
             });
         },
         create: ({ type, width, height, x, y, z, w, r, id }) => {
-            const colorDeadZone = { r: 1, g: 0, b: 0, a: 0.3 };
-            const colorHightZone = { r: 0.2, g: 0, b: 0.8, a: 0.3 };
-            const colorSelect = { r: 0, g: 1, b: 0, a: 0.3 };
-
+            const color = {
+                dead_zone: { r: 1, g: 0, b: 0, a: 0.3 },
+                high_zone: { r: 0.2, g: 0, b: 0.8, a: 0.3 },
+                default: { r: 0, g: 1, b: 0, a: 0.3 },
+            };
             let _z = z;
             let _w = w;
             if (r) {
@@ -426,12 +442,7 @@ export default class Map {
                 id: _id,
             };
 
-            layer.color =
-                type === "dead_zone"
-                    ? colorDeadZone
-                    : type === "high_zone"
-                    ? colorHightZone
-                    : colorSelect;
+            layer.color = color[type] || color.default;
             return {
                 layer,
                 display: () => {
@@ -440,61 +451,23 @@ export default class Map {
             };
         },
         display: (layer) => {
-            if (layer) {
-                const optionDisplay = {
-                    header: {
-                        frame_id: "/map",
-                    },
-                    ns: "layer",
-                    id: layer.id,
-                    type: 1,
-                    action: 0,
-                    frame_locked: false,
-                    mesh_resource: "",
-                    mesh_use_embedded_materials: false,
-                    color: layer.color,
-                    scale: layer.scale,
-                    pose: layer.pose,
-                };
-                this.layer.topic.publish(new ROSLIB.Message(optionDisplay));
-            } else {
-                this.layerList.forEach((layer, index) => {
-                    const optionDisplay = {
-                        header: {
-                            frame_id: "/map",
-                        },
-                        ns: "layer",
-                        id: layer.id,
-                        type: 1,
-                        action: 0,
-                        frame_locked: false,
-                        mesh_resource: "",
-                        mesh_use_embedded_materials: false,
-                        color: { r: 0.2, g: 0, b: 0.8, a: 0.3 },
-                        scale: {
-                            x: layer.width,
-                            y: layer.height,
-                            z: 0.01,
-                        },
-                        pose: {
-                            position: {
-                                x: layer.x,
-                                y: layer.y,
-                                z: 0.1,
-                            },
-                            orientation: {
-                                x: 0,
-                                y: 0,
-                                z: 0,
-                                w: 1,
-                            },
-                        },
-                    };
-                    this.layer.topic.publish(new ROSLIB.Message(optionDisplay));
-                });
-            }
+            const optionDisplay = {
+                header: {
+                    frame_id: "/map",
+                },
+                ns: "layer",
+                id: layer.id,
+                type: 1,
+                action: 0,
+                frame_locked: false,
+                mesh_resource: "",
+                mesh_use_embedded_materials: false,
+                color: layer.color,
+                scale: layer.scale,
+                pose: layer.pose,
+            };
+            this.layer.topic.publish(new ROSLIB.Message(optionDisplay));
         },
-
         delete: {
             all: () => {
                 const sceneViewer = this.viewer.scene.children;
@@ -571,6 +544,7 @@ export default class Map {
                     });
                     this.camera.rotate.disable();
                     this.camera.lockZ();
+                    this.mapElement.style.cursor = "crosshair";
                 },
                 disable: () => {
                     this.layer.set.create.dataEventHandle.forEach((item) => {
@@ -581,6 +555,7 @@ export default class Map {
                     });
                     this.camera.rotate.enable();
                     this.layer.check.isCreateLayer = false;
+                    this.mapElement.style.cursor = "default";
                 },
             },
 
@@ -743,39 +718,39 @@ export default class Map {
         };
 
         const div = document.createElement("div");
-        div.classList.add("fullscreen", "!z-[100]");
+        div.classList.add("fullscreen", "!z-50");
         div.innerHTML = `
-        <div class="absolute text-2xl flex flex-col gap-2 p-3 rounded-md bg-white shadow-md overflow-hidden pt-10 form-layer-wrapper"
+        <div class="absolute flex flex-col gap-2 p-3 rounded-md bg-white shadow-md overflow-hidden pt-10 form-layer-wrapper"
             style="left:${offsetX || 100}px; top:${offsetY || 100}px;">
-            <div class="absolute top-0 left-0 w-full h-10 bg-gray-100 cursor-pointer header-form"></div>
-            <button class="float-right px-2 py-1 absolute top-0 right-0 close-form-layer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="absolute top-0 left-0 w-full h-10 bg-gray-100 cursor-move header-form"></div>
+            <button class="float-right py-2 px-4 absolute top-0 right-0 close-form-layer"><i class="fa-solid fa-xmark"></i></button>
             <div class="form-input-layer">
-                <div class="flex justify-evenly mb-3">
-                    <label class="flex gap-2 cursor-pointer">
-                        <div>high zone</div>
-                        <input type="radio" name="type" value="high_zone">
+                <div class="grid grid-cols-2 mt-2 mb-3 gap-2 text-center">
+                    <label class="border border-gray-200 rounded cursor-pointer">
+                        <input id="" type="radio" value="high_zone" name="type" class="sr-only peer/type">
+                        <div class="px-2 py-1 w-full text-sm font-medium text-gray-900 peer-checked/type:font-bold peer-checked/type:text-[#3e00ff] peer-checked/type:bg-[#3e00ff]/20">High zone</div>
                     </label>
-                    <label class="flex gap-2 cursor-pointer">
-                        <div>dead zone</div>
-                        <input type="radio" name="type" value="dead_zone">
+                    <label class="border border-gray-200 rounded cursor-pointer">
+                        <input id="" type="radio" value="dead_zone" name="type" class="sr-only peer/type">
+                        <div class="px-2 py-1 w-full text-sm font-medium text-gray-900 peer-checked/type:font-bold peer-checked/type:text-red-500 peer-checked/type:bg-red-500/30">Dead zone</div>
                     </label>
                 </div>
                 <div class="grid grid-cols-2 gap-x-6 gap-y-3">
                     <label class="border p-1 flex justify-between items-center">
                         <span class="pl-2">X</span>
-                        <input type="number" class="w-24 border-none" name="x" value="${x}">
+                        <input type="number" class="w-24 border-none py-1 focus:ring-0" name="x" value="${x}">
                     </label>
                     <label class="border p-1 flex justify-between items-center">
                         <span class="pl-2">Y</span>
-                        <input type="number" class="w-24 border-none" name="y" value="${y}">
+                        <input type="number" class="w-24 border-none py-1 focus:ring-0" name="y" value="${y}">
                     </label>
                     <label class="border p-1 flex justify-between items-center">
                         <span class="pl-2">W</span>
-                        <input type="number" class="w-24 border-none" name="width" value="${width}">
+                        <input type="number" class="w-24 border-none py-1 focus:ring-0" name="width" value="${width}">
                     </label>
                     <label class="border p-1 flex justify-between items-center">
                         <span class="pl-2">H</span>
-                        <input type="number" class="w-24 border-none" name="height" value="${height}">
+                        <input type="number" class="w-24 border-none py-1 focus:ring-0" name="height" value="${height}">
                     </label>
 
                     <label class="border p-1 flex justify-between items-center">
@@ -785,13 +760,13 @@ export default class Map {
                                 </path>
                             </svg>
                         </span>
-                        <input type="number" class="w-24 border-none" name="r" value="${r}">
+                        <input type="number" class="w-24 border-none py-1 focus:ring-0" name="r" value="${r}">
                     </label>
                 </div>
             </div>
-            <div class="mt-1 flex gap-4">
-                <input type="text" class="px-3 py-1 name-layer" name="name" placeholder="Name layer" />
-                <button class="btn bg-main rounded-md px-3 text-white submit-btn"><i class="fa-solid fa-check"></i></button>
+            <div class="mt-1 flex gap-2 justify-between">
+                <input type="text" class="px-3 py-1 flex-1 name-layer" name="name" placeholder="Name layer" />
+                <button class="btn bg-main rounded px-3 text-white submit-btn"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>
         `;
@@ -800,10 +775,17 @@ export default class Map {
         const formLayerWrapper = div.querySelector(".form-layer-wrapper");
         const closeFormLayer = div.querySelector(".close-form-layer");
 
-        closeFormLayer.addEventListener("click", (e) => {
+        const onDismiss = () => {
             this.layer.delete.last();
             div.remove();
-        });
+        };
+        closeFormLayer.addEventListener("click", onDismiss);
+
+        const onRemove = (e) => {
+            if (e.key === "Escape") onDismiss();
+            window.removeEventListener("keydown", onRemove);
+        };
+        window.addEventListener("keydown", onRemove);
 
         new DispatchCustomEvent("press", headerForm);
         button.addEventListener("click", () => {
@@ -814,9 +796,15 @@ export default class Map {
                 }
             }
 
+            function removeDiacritics(input) {
+                var pattern = /[\p{M}]/gu;
+                return String(input).normalize("NFD").replace(pattern, "");
+            }
+
+            layer.name = removeDiacritics(layer.name);
             const nameExist =
                 this.layerList.findIndex(
-                    (layerItem) => layerItem.name === layer.name,
+                    (layerItem) => layerItem.name == layer.name,
                 ) !== -1;
 
             if (nameExist) {
@@ -826,6 +814,7 @@ export default class Map {
                 );
                 return;
             }
+            layer.new = true;
             this.layerList = layer;
             div.remove();
         });

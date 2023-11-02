@@ -79,7 +79,7 @@ function progress() {
             showProgress.render(infoMission);
             if (currentMission.id_mission !== id_mission) {
                 currentMission.id_mission = id_mission;
-                renderMission(infoMission);
+                renderMission(infoMission, valueStatus);
             }
         };
         actionTopic.subscribe(actionSubscribe);
@@ -134,7 +134,7 @@ function progress() {
         memoryTopic.subscribe(memorySubscribe);
     }
 }
-async function renderMission(infoMission) {
+async function renderMission(infoMission, valueStatus) {
     console.log("get mission from database");
     const { id_mission } = infoMission;
     if (!id_mission) return;
@@ -145,7 +145,7 @@ async function renderMission(infoMission) {
             data: JSON.parse(currentMission.mission_shorthand),
             handleAble: false,
         });
-        activeStepNow(infoMission);
+        activeStepNow(infoMission, valueStatus);
     } else {
         toggerMessage("error", statusFetch.message);
     }
@@ -154,7 +154,6 @@ async function renderMission(infoMission) {
 function activeStepNow(infoMission, valueStatus) {
     const { total_step, now_step: stepNow } = infoMission;
     const styleActive = ["step-active", valueStatus, "done"];
-
     const stepList = getNodeList("[data-name='step']");
     const currentActiveStyle = getNode("[data-name='step'].step-active");
     currentActiveStyle?.classList.remove("step-active", "Active", "Cancel");

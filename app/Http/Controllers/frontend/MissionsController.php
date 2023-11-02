@@ -12,9 +12,10 @@ use App\Models\backend\Robot;
 use App\Models\backend\StatusRobot;
 use App\Models\backend\Stop;
 use App\Models\backend\WakeUp;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MissionsController extends Controller
-{   
+{
     public $v = 'v3';
     public function index()
     {
@@ -49,28 +50,32 @@ class MissionsController extends Controller
 
     public function createStepsMissions(Request $request)
     {
+        try {
+            //code...
+            if (Map::all()->count() > 0) {
+                $mapActive = Map::all()[0]['name_map_active'];
+            } else {
+                $mapActive = "";
+            }
+            $idRender = $request->id;
+            $itemRender = Missions::find($idRender);
 
-        if (Map::all()->count() > 0) {
-            $mapActive = Map::all()[0]['name_map_active'];
-        } else {
-            $mapActive = "";
+            $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
+
+            $allRobot = Robot::all()->toArray();
+
+            $currentWakeUp = json_encode(WakeUp::where('id_mission', $itemRender->id)->get());
+            $currentStop = json_encode(Stop::where('id_mission', $itemRender->id)->get());
+
+            $map = new mapController();
+            $mapActive = $map->mapActive();
+
+            $title = "Mission - $itemRender->name";
+            $v = $this->v;
+            return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Mission not found!');
         }
-        $idRender = $request->id;
-        $itemRender = Missions::find($idRender);
-
-        $allPoints = MissionPosition::where('map', $mapActive)->orderBy('id', 'desc')->get();
-
-        $allRobot = Robot::all()->toArray();
-
-        $currentWakeUp = json_encode(WakeUp::where('id_mission', $itemRender->id)->get());
-        $currentStop = json_encode(Stop::where('id_mission', $itemRender->id)->get());
-
-        $map = new mapController();
-        $mapActive = $map->mapActive();
-
-        $title = "Mission - $itemRender->name";
-        $v = $this->v;
-        return view('frontend.pages.missions.createStepMissions', compact('itemRender', 'allRobot', 'currentWakeUp', 'currentStop', 'mapActive', 'title', 'v'));
     }
 
     public function typeMission(Request $request)

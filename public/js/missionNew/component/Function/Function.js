@@ -53,9 +53,9 @@ const createHtmlFunctionItem = {
                         <i class="fa-solid fa-plus"></i>
                     </button>
                     <div
-                        class=" mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group">
+                        class=" mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group/item-function">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md  z-50 hidden group-hover:block">
+                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md  z-50 hidden group-hover/item-function:block">
                             ${this.optionButtonFunction}
                         </div>
                     </div>
@@ -124,24 +124,24 @@ const createHtmlFunctionItem = {
 
     optionButtonFunction: `
         <ul class="bg-white shadow-md py-2 rounded-md overflow-hidden text-stone-900">
-            <li class="px-6 hover:bg-stone-100">
-                <button data-button-function-kind="delete" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="delete" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-red-500">
                         <i class="fa-solid fa-trash-can"></i>
                     </span>
                     <span>Delete</span>
                 </button>
             </li>
-            <li class="px-6 hover:bg-stone-100 ">
-                <button data-button-function-kind="edit" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="edit" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-sky-500">
                         <i class="fa-solid fa-pen"></i>
                     </span>
                     <span>Edit</span>
                 </button>
             </li>
-            <li class="px-6 hover:bg-stone-100 ">
-                <button data-button-function-kind="duplicate" class="btn flex py-2">
+            <li>
+                <button data-button-function-kind="duplicate" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
                     <span class="mr-2 text-orange-500">
                         <i class="fa-regular fa-clone"></i>
                     </span>

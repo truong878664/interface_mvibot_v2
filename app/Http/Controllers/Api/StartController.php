@@ -68,32 +68,22 @@ class StartController extends Controller
                     $idPositionNoToollift = json_decode($dataStart->position_no_toollift)[0]->id;
                     $idMissionToollift = json_decode($dataStart->mission_go_to_toollift)[0]->id;
 
-                    $missionGotoToollift =  Missions::where("id", $idMissionToollift)->first();
+                    $miController = new MissionV4Controller();
+
+                    $missionGotoToollift = $miController->dataRobotEnd($idMissionToollift);
                     $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
                     $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
 
-                    $miController = new MiController();
-
-                    $list_id = array_map(function ($mission) use ($miController) {
-                        $miController->translateStepMissionName($mission->id);
-                        $miController->translateData($mission->id);
-
-                        return $mission->id;
+                    $dataMissionSendToRobots = array_map(function ($mission) use ($miController) {
+                        $mission = $miController->dataRobotEnd($mission->id);
+                        return $mission;
                     }, json_decode($dataStart->missions_send_robot));
-
-                    $list_id = array_map(function ($mission) {
-                        return $mission->id;
-                    }, json_decode($dataStart->missions_send_robot));
-
-                    $dataMissionSendToRobot = array_map(function ($item) {
-                        return Missions::where('id', $item)->first();
-                    }, $list_id);
 
                     $data = [
                         "missionGotoToollift" => $missionGotoToollift,
                         "positionWithToollift" => $positionWithToollift,
                         "positionNoToollift" => $positionNoToollift,
-                        "dataMissionSendToRobot" => $dataMissionSendToRobot,
+                        "dataMissionSendToRobot" => implode("", $dataMissionSendToRobots),
                     ];
                     return ["data" => $data, "message" => "get data successfully!", "error" => false];
                     break;
@@ -102,7 +92,6 @@ class StartController extends Controller
                     break;
             }
         } catch (\Throwable $th) {
-            //throw $th;
             return ["data" => null, "message" => "Error" . $th, "error" => false];
         }
     }

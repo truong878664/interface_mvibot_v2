@@ -11,7 +11,7 @@ function ulSelectComponent({ x, y, dataList, dataListCheck, multiple = true }) {
         "right-0",
         "bottom-0",
         "overlay-start",
-        "z-[100]",
+        "z-100",
     ];
 
     div.classList.add(...className);
@@ -23,11 +23,11 @@ function ulSelectComponent({ x, y, dataList, dataListCheck, multiple = true }) {
         <li class="w-full border-b border-gray-200 rounded-t-lg">
             <div class="flex items-center pl-3">
                 <input id="checkbox-${item.id}" type="${
-            multiple ? "checkbox" : "radio"
-        }" ${multiple ? "" : "name='radio'"}  class="item-li" value="${
-            item.id
-        }" data-name="${item.name}" ${isLiActive ? "checked" : ""}
-                    class="w-[16px] aspect-square text-blue-600 rounded-3xl bg-gray-100 border-gray-300"/>
+                    multiple ? "checkbox" : "radio"
+                }" ${multiple ? "" : "name='radio'"} value="${
+                    item.id
+                }" data-name="${item.name}" ${isLiActive ? "checked" : ""}
+                    class="w-4 aspect-square text-green-500 rounded focus:ring-green-500 bg-gray-100 border-gray-300 item-li"/>
                 <label for="checkbox-${item.id}"
                     class="w-full text-[12px] py-3 ml-2 font-medium text-gray-900">
                     ${item.name}
@@ -39,7 +39,7 @@ function ulSelectComponent({ x, y, dataList, dataListCheck, multiple = true }) {
     });
 
     div.innerHTML = `
-    <ul style="left: ${x}px; top: ${y}px" class="fixed w-full max-w-[400px] mt-[10px] font-medium text-gray-900 bg-white border border-gray-200 rounded-lg max-h-[300px] overflow-y-auto">
+    <ul style="left: ${x}px; top: ${y}px" class="fixed w-full max-w-[400px] mt-2 font-medium text-gray-900 bg-white border border-gray-200 rounded-lg max-h-[300px] overflow-y-auto">
         ${htmlLi.join("")}
     </ul>`;
     return Promise.resolve(document.body.appendChild(div));

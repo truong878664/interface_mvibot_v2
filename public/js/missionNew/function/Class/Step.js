@@ -1,3 +1,4 @@
+import isNullOrEmpty from "../../../functionHandle/isNullOrEmpty.js";
 import { toggerMessage } from "../../../main.js";
 
 export default class Step {
@@ -47,11 +48,7 @@ export default class Step {
         dataValidated.data.name = name?.replaceAll("?", "").replaceAll("!", "");
 
         for (const key in data) {
-            if (
-                data[key] === undefined ||
-                data[key] === null ||
-                data[key] === ""
-            ) {
+            if (isNullOrEmpty(data[key])) {
                 dataValidated.success = false;
                 dataValidated.message = `${key} cannot be empty!`;
             }

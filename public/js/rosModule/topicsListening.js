@@ -20,16 +20,13 @@ export default function topicsListening() {
                     (data, name) => {
                         if (data.data) {
                             const amountMission =
-                                data.data.split("][").length || 1;
-
-                            console.log(data);
-
+                                data.data.split("@&").length || 1;
                             toggerMessage(
                                 "success",
-                                `The robot ${name_seri} has received ${amountMission} mission! - Topic: ${missionTopic[i]}`
+                                `The robot ${name_seri} has received ${amountMission} mission! - Topic: ${missionTopic[i]}`,
                             );
                         }
-                    }
+                    },
                 );
             }
 
@@ -38,16 +35,16 @@ export default function topicsListening() {
                 `/${name_seri}/mission_action`,
                 "std_msgs/String",
                 (data) => {
-                    if (data.data == 0) {
+                    if (data.data == 0)
                         toggerMessage("success", `Robot ${name_seri}: stopped`);
-                    } else if (data.data == 1) {
+                    else if (data.data == 1)
                         toggerMessage(
                             "success",
-                            `Robot ${name_seri}: continued`
+                            `Robot ${name_seri}: continued`,
                         );
-                    }
+
                     console.log(data);
-                }
+                },
             );
 
             subscribeTopic(
@@ -57,16 +54,16 @@ export default function topicsListening() {
                     if (data.data == 1) {
                         toggerMessage(
                             "success",
-                            `Robot ${name_seri}: Shutdown success`
+                            `Robot ${name_seri}: Shutdown success`,
                         );
                     } else if (data.data == 2) {
                         toggerMessage(
                             "success",
-                            `Robot ${name_seri}: Reboot success`
+                            `Robot ${name_seri}: Reboot success`,
                         );
                     }
                     console.log(data);
-                }
+                },
             );
 
             subscribeTopic(
@@ -76,9 +73,9 @@ export default function topicsListening() {
                     console.log(data, name);
                     toggerMessage(
                         "success",
-                        `You sent the data to the robot: ${data.data}`
+                        `You sent the data to the robot: ${data.data}`,
                     );
-                }
+                },
             );
         }
     }

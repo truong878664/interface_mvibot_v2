@@ -26,6 +26,7 @@ import activeSelectRobot from "./activeSelectRobot.js";
 import { createMakerClientFootprint } from "../rosModule/footprint/createMakerClientFootprint.js";
 import { createMarkerClientPath } from "../rosModule/path/createMarkerClientPath.js";
 import { subscribePath } from "./path.js";
+import handleShowJoystick from "./handleShowJoystick.js";
 
 const getNode = document.querySelector.bind(document);
 const getNodeList = document.querySelectorAll.bind(document);
@@ -38,25 +39,34 @@ const tfClient = createTfClient();
 const listRobotElement = getNode("#robot-navigation-json");
 export const robotList = JSON.parse(listRobotElement.value);
 
-markerClient(tfClient, viewer);
-// markerClientPath(tfClient, viewer);
-createMarkerClientArrow(tfClient, viewer);
-createMakerClientFootprint(tfClient, viewer);
-createMarkerClientPath(tfClient, viewer);
+(function createMarker() {
+    markerClient(tfClient, viewer);
+    createMarkerClientArrow(tfClient, viewer);
+    createMakerClientFootprint(tfClient, viewer);
+    createMarkerClientPath(tfClient, viewer);
+    createAxes(viewer);
+    createPoint(viewer, tfClient);
+    createPose(viewer, tfClient);
+})();
 
 subscribeFootprint();
 subscribePath();
 addLayerDbToLayerActive();
 
-createAxes(viewer);
-
-createPoint(viewer, tfClient);
-createPose(viewer, tfClient);
 displayLayer(tfClient);
-
-createJoystick();
 progress();
 changeTopic();
+
+handleShowJoystick();
+(function handleJoystick() {
+    new Promise((resolve, reject) => {
+        createJoystick();
+        resolve();
+    }).then(() => {
+        getNode("#show-joystick").checked =
+            JSON.parse(localStorage.getItem("show-joystick")) || false;
+    });
+})();
 
 async function addLayerDbToLayerActive() {
     const mvibot_layer_active = [];
@@ -72,7 +82,7 @@ async function addLayerDbToLayerActive() {
             item.yo,
             item.type_layer,
             z,
-            w
+            w,
         );
         mvibot_layer_active.push(layer);
         return mvibot_layer_active;

@@ -10,13 +10,13 @@ function configStart() {
 
     const buttonShow = document.querySelector("[data-name='show-label']");
     const buttonPositionToolLift = document.querySelector(
-        "[data-name='option-toollift']"
+        "[data-name='option-toollift']",
     );
     const buttonPositionNoToolLift = document.querySelector(
-        "[data-name='option-no-toollift']"
+        "[data-name='option-no-toollift']",
     );
     const buttonMissionGoToLift = document.querySelector(
-        "[data-name='option-go-to-lift']"
+        "[data-name='option-go-to-lift']",
     );
     const saveStartBtn = document.querySelector("#save-start-btn");
 
@@ -78,11 +78,11 @@ function configStart() {
     buttonShow.addEventListener("click", handleClickMissionRobot);
     buttonPositionToolLift.addEventListener(
         "click",
-        handleClickPositionToolLift
+        handleClickPositionToolLift,
     );
     buttonPositionNoToolLift.addEventListener(
         "click",
-        handleClickPositionNoToolLift
+        handleClickPositionNoToolLift,
     );
     buttonMissionGoToLift.addEventListener("click", handleClickMissionGoToLift);
 
@@ -105,7 +105,7 @@ function configStart() {
                 const isCheck = e.target.checked;
                 const data = { id, name };
                 dataMissionSendToRobot = dataMissionSendToRobot.filter(
-                    (itemF) => itemF.id !== id
+                    (itemF) => itemF.id !== id,
                 );
                 isCheck && dataMissionSendToRobot.push(data);
                 renderLiActive({
@@ -199,11 +199,7 @@ function configStart() {
         });
     }
     async function getAllMission() {
-        const column = ["id", "name"];
-
-        const res = await fetch(
-            `/api/mi/get-column-mission?column=${JSON.stringify(column)}`
-        );
+        const res = await fetch(`/api/mission-v4`);
         const missions = await res.json();
         return missions;
     }

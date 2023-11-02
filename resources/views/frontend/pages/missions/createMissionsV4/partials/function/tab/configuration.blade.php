@@ -1,8 +1,16 @@
+@php
+    $colorRing = [
+        'continue' => 'ring-sky-400',
+        'stop' => 'ring-red-400',
+        'wakeup' => 'ring-green-400',
+    ];
+@endphp
+
 <div class="relative flex h-full w-full flex-col bg-white p-4" data-type="{{ $type }}"
     data-type-wake-stop-wrapper="{{ $type }}">
     <div class="z-[2] mb-2 flex font-bold capitalize">{{ $type }}</div>
     <div data-module="" data-type="{{ $type }}"
-        class="group/module peer/module z-[2] ml-2 inline-flex w-fit rounded-md shadow-sm ring-red-300 data-[module='']:animate-bounce data-[module='']:ring-4">
+        class="group/module peer/module z-[2] ml-2 inline-flex w-fit rounded-md shadow-sm {{ $colorRing[$type] }} data-[module='']:animate-bounce data-[module='']:ring-4">
         <button data-kind="normal" data-kind-button="changeModule" data-type="{{ $type }}"
             class="self-end rounded-l-md border border-black bg-white px-4 py-1 font-bold text-black text-sm group-data-[module='normal']/module:bg-main group-data-[module='normal']/module:text-white">
             Gpio normal
