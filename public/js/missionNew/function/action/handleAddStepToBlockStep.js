@@ -127,21 +127,10 @@ export default function handleAddStepToBlockStep() {
                     "#" + typeStep,
                 );
                 if (functionWrapperDetail) functionWrapperDetail.checked = true;
-<<<<<<< HEAD
-                stepWrapper.checked = true;
-                const functionActive = functionWrapper.querySelector(
-                    `[data-function-type='${type}'][data-id='${id}']`,
-                );
-                if (!functionActive) {
-                    toggerMessage(
-                        "error",
-                        "This element was not found or deleted!",
-=======
                 new Promise((resolve, reject) => {
                     stepWrapper.checked = true;
                     const functionActive = functionWrapper.querySelector(
                         `[data-function-type='${type}'][data-id='${id}']`,
->>>>>>> main-v4-feature
                     );
                     if (!functionActive) reject();
                     resolve(functionActive);
@@ -250,39 +239,12 @@ export default function handleAddStepToBlockStep() {
                 const typeMission = blockWrapper.dataset.blockWrapper;
                 const typeMissionTab =
                     document.getElementById("tab-type-mission");
-<<<<<<< HEAD
-                const listTypeMissionWrapper = document.querySelector(
-=======
                 const listTypeMissionWrapper = getNode(
->>>>>>> main-v4-feature
                     "#list-type-mission-wrapper",
                 );
                 const dataListTypeMissionWrapper =
                     listTypeMissionWrapper.querySelector(
                         `[data-list-type-mission='${typeMission}']`,
-<<<<<<< HEAD
-                    );
-                stepWrapper.checked = true;
-                typeMissionTab.checked = true;
-                document.querySelector(`input#${typeMission}`).checked = true;
-                const foundedTypeMission =
-                    dataListTypeMissionWrapper.querySelector(
-                        `[data-id='${idTypeMission}']`,
-                    );
-
-                foundedTypeMission?.classList.add("highline-type-mission");
-                foundedTypeMission?.scrollIntoView({ behavior: "smooth" });
-                clearTimeout(timeOutDeleteHighline);
-                typeMissionHighline?.classList.remove("highline");
-                typeMissionHighline = getNode(
-                    "[data-name='item-type-mission'].highline-type-mission",
-                );
-                timeOutDeleteHighline = setTimeout(() => {
-                    typeMissionHighline?.classList.remove(
-                        "highline-type-mission",
-                    );
-                }, 4000);
-=======
                     );
 
                 new Promise((resolve, reject) => {
@@ -314,7 +276,6 @@ export default function handleAddStepToBlockStep() {
                             console.log("remove");
                         }, 4000);
                     });
->>>>>>> main-v4-feature
             },
             unLinkTypeMission() {
                 const handle = () => {
