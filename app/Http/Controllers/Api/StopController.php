@@ -48,7 +48,7 @@ class StopController extends Controller
         }
 
         $data = Stop::where('id_mission', $request->id_mission)->get();
-        if(count($data) === 2) {
+        if (count($data) === 2) {
             Missions::where('id', $request->id_mission)->update(['stop' => $data[0]['data'] . $data[1]['data']]);
         } else {
             Missions::where('id', $request->id_mission)->update(['stop' => $data[0]['data']]);

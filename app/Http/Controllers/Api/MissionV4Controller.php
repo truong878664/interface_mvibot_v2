@@ -20,8 +20,8 @@ class MissionV4Controller extends Controller
      */
     public function index()
     {
-        $mission = $this->translateDataRobot(25, false);
-        return $mission;
+        // $mission = $this->translateDataRobot(25, false);
+        return MissionsVer::all();;
     }
 
     /**
@@ -198,5 +198,20 @@ class MissionV4Controller extends Controller
             }
         }
         return false;
+    }
+    public function dataRobotEnd($id)
+    {
+        try {
+            $data = $this->translateDataRobot($id, false);
+            $name = $data['name'];
+            $idMission = $data['id'];
+            $continue = $data['continue'];
+            $wakeup = $data['wakeup'];
+            $stop = $data['stop'];
+            $dataMission = $data['data'];
+            return "&/name_mission>$name//id_mission>$idMission//data_configuration>$continue$wakeup$stop/*$dataMission@";
+        } catch (\Throwable $th) {
+            return "";
+        }
     }
 }

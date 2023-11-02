@@ -1,5 +1,4 @@
 import configStart from "./config.js";
-import toMissionRobot from "./toMissionRobot.js";
 import { toggerMessage } from "../main.js";
 import amclSet from "../rosModule/amclSet.js";
 import { publishMission } from "../rosModule/handleMission.js";
@@ -25,7 +24,8 @@ startBtn.onclick = () => {
 async function handleStart() {
     try {
         const isWithToollift = JSON.parse(
-            document.querySelector("[name='toollift']:checked").dataset.toollift
+            document.querySelector("[name='toollift']:checked").dataset
+                .toollift,
         );
         const nameRobot = robotActive.value;
         if (!nameRobot) {
@@ -39,31 +39,26 @@ async function handleStart() {
             const positionInit = isWithToollift
                 ? data.positionWithToollift
                 : data.positionNoToollift;
-            console.log(isWithToollift);
 
             amclSet(
                 nameRobot,
                 positionInit.x,
                 positionInit.y,
                 positionInit.z,
-                positionInit.w
+                positionInit.w,
             );
 
             const missions = [];
-
             if (!isWithToollift) {
-                const missionGoToToolliftRobot = toMissionRobot(
-                    data.missionGotoToollift
-                );
-                missions.push(missionGoToToolliftRobot);
+                missions.push(dataStart.data.missionGotoToollift);
             }
-
-            data.dataMissionSendToRobot.map((missionItem) => {
-                missions.push(toMissionRobot(missionItem));
-                return missions;
-            });
+            missions.push(dataStart.data.dataMissionSendToRobot);
 
             const topic = `/${nameRobot}/mission_normal`;
+            if (!missions.join("")) {
+                toggerMessage("error", "Mission không có dữ liệu!");
+                return;
+            }
             publishMission(topic, missions.join(""));
             publishTopicString(`/${nameRobot}/output_user_set`, "(6|1)");
         } else {

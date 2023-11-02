@@ -21,20 +21,20 @@
                                 Vị trí ban đầu <span class="font-bold">có</span> tool lift
                             </span>
                             <div data-name="option-toollift"
-                                class="px-4 gap-2 rounded-md border ml-4 cursor-pointer relative">
+                                class="px-1 gap-2 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap gap-2" id="position-with-tool-active"></div>
-                                    <span><i class="fa-solid fa-sort-down"></i></span>
+                                    <span class="px-2"><i class="fa-solid fa-sort-down"></i></span>
                                 </div>
                             </div>
                         </li>
                         <li class="mb-4 flex">
                             <span>Mission đi vào tool lift</span>
                             <div data-name="option-go-to-lift"
-                                class="px-4 gap-2 rounded-md border ml-4 cursor-pointer relative">
+                                class="px-1 gap-2 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap gap-2" id="go-to-lift-active"></div>
-                                    <span><i class="fa-solid fa-sort-down"></i></span>
+                                    <span class="px-2"><i class="fa-solid fa-sort-down"></i></span>
                                 </div>
                             </div>
                         </li>
@@ -43,24 +43,24 @@
                                 Vị trí ban đầu <span class="font-bold">không</span> có tool lift
                             </span>
                             <div data-name="option-no-toollift"
-                                class="px-4 gap-2 rounded-md border ml-4 cursor-pointer relative">
+                                class="px-1 gap-2 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap gap-2" id="position-no-tool-active"></div>
-                                    <span><i class="fa-solid fa-sort-down"></i></span>
+                                    <span class="px-2"><i class="fa-solid fa-sort-down"></i></span>
                                 </div>
                             </div>
                         </li>
                         <li class="mb-4 flex ">
                             <span class="whitespace-nowrap">Các Missions gửi cho robot</span>
-                            <div data-name="show-label" class="px-4 py-1 rounded-md border ml-4 cursor-pointer relative">
+                            <div data-name="show-label" class="px-1 rounded-md border ml-4 cursor-pointer relative">
                                 <div class="flex">
                                     <div class="flex flex-wrap gap-2" id="mission-active"></div>
-                                    <span><i class="fa-solid fa-sort-down"></i></span>
+                                    <span class="px-2"><i class="fa-solid fa-sort-down"></i></span>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <button class="btn bg-main px-4 py-2 rounded-md text-white font-bold" id="save-start-btn">Lưu</button>
+                    <button class="btn bg-main px-4 py-1 rounded-md text-white font-bold" id="save-start-btn">Lưu</button>
                 </div>
 
                 <div class="">
@@ -71,14 +71,14 @@
                 </div>
                 <div class="">
                     <div class="inline-flex gap-2 bg-gray-200 p-1 mt-6 rounded-xl">
-                        <label>
+                        <label class="cursor-pointer">
                             <input type="radio" name="toollift" data-toollift="false" class="sr-only peer" checked />
                             <div
                                 class="px-4 py-2 text-gray-500 rounded-lg peer-checked:bg-white peer-checked:text-green-700 peer-checked:font-bold">
                                 Không bao gồm tool lift
                             </div>
                         </label>
-                        <label>
+                        <label class="cursor-pointer">
                             <input type="radio" name="toollift" data-toollift="true" class="sr-only peer" />
                             <div
                                 class="px-4 py-2 text-gray-500 rounded-lg peer-checked:bg-white peer-checked:text-red-700 peer-checked:font-bold">
