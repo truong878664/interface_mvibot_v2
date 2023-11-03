@@ -1,10 +1,11 @@
 import clx from "../../../functionHandle/clx.js";
+import { generateID } from "../../../functionHandle/createIdBrowser.js";
 
 const createHtml = {
     htmlBlock: {
         normal({ value, data, address, addable = true, draggable = true }) {
             const buttonAdd = this.ButtonAdd(addable);
-            const children = `<div data-data-block="normal" class="flex-1 w-full inline-flex flex-wrap items-start gap-3">${data}${buttonAdd}</div>`;
+            const children = `<div data-data-block="normal" class="flex-1 w-full inline-flex flex-wrap items-start gap-3 p-1">${data}${buttonAdd}</div>`;
             const type = "normal";
             const props = { value, address, addable, draggable, type };
             return this.BlockWrapper({ props, children });
@@ -128,6 +129,9 @@ const createHtml = {
             const { value, address, addable, draggable, type } = props;
             const { name, style, id } = value;
             const { icon, color } = this.style[type];
+
+            const genId = () => generateID();
+
             const isLogicAndOrLogicOr =
                 type === "logic_and" || type === "logic_or";
             const classNameWrapper = clx(
@@ -149,12 +153,15 @@ const createHtml = {
                 {
                     flex: isLogicAndOrLogicOr,
                 },
-                "w-full rounded-lg group-data-[show-data='hidden']/wrapper:hidden ",
+                "w-full rounded-lg group-data-[show-data='hidden']/wrapper:hidden border-2 border-transparent",
             );
             const NameComponent = () =>
                 `<span class="${clxName}">${name || "No name"}</span>`;
             return `
-                <div data-name="block" data-block-wrapper="${type}"
+                <div
+                    id="${genId()}"
+                    data-action="drag"
+                    data-name="block" data-block-wrapper="${type}"
                     data-value='${JSON.stringify(value)}'
                     data-id="${value.id}"
                     data-address="${address}"
@@ -177,7 +184,9 @@ const createHtml = {
                     </span>
                     <div class="flex flex-col gap-1 w-full">
                         ${NameComponent()}
-                        <div class="${classNameWrapperData}" data-data-block="${type}">
+                        <div
+                            class="${classNameWrapperData}"
+                        >
                             ${children}
                         </div>
                     </div>

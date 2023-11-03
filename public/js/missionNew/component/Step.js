@@ -1,3 +1,4 @@
+import { generateID } from "../../functionHandle/createIdBrowser.js";
 import { FunctionStepClass } from "../FunctionStepClass.js";
 
 const details = {
@@ -36,10 +37,12 @@ const iconEnableMove = `<span class="absolute top-1/2 left-1/2 -translate-x-1/2 
 
 const stepHTML = (props) => {
     const { step, id, addressIndex, type, name, color, icon, detail } = props;
-    if (type === "variable") return htmlVariable(props);
+    const genId = () => generateID();
+
+    if (type === "variable") return htmlVariable(props, genId);
 
     return `
-    <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+    <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
         <span class="text-sky-500 font-bold group-data-[type='error']/step:text-red-500 mr-2">${
             details[type]
         }</span>
@@ -59,7 +62,7 @@ const stepHTML = (props) => {
     </div>
     `;
 };
-const htmlVariable = (props) => {
+const htmlVariable = (props, genId) => {
     const { step, id, addressIndex, type, name, color, icon, detail } = props;
     const { command_action, name_variable, focus_value } = detail;
 
@@ -71,7 +74,7 @@ const htmlVariable = (props) => {
     switch (true) {
         case command_action === "new":
             return `
-            <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <span class="text-sky-500 mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500">create variable</span>
                 <div draggable="true"
                     class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
@@ -84,7 +87,7 @@ const htmlVariable = (props) => {
             `;
         case isDeleteOrReset:
             return `
-            <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <span class="mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500 ${
                     command_action === "delete"
                         ? "text-red-500"
@@ -101,8 +104,10 @@ const htmlVariable = (props) => {
             `;
         case notFoundDetailVariable:
             return `
-            <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-                <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500">${details[type]}</span>
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+                <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500">${
+                    details[type]
+                }</span>
                 <div draggable="true"
                     class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
                     <span class="mr-4">${icon}</span>
@@ -111,11 +116,13 @@ const htmlVariable = (props) => {
             </div>`;
         default:
             return `
-            <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <div draggable="true"
                     class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] border rounded-lg inline-flex items-center gap-3 px-1">
                     <span class="font-bold min-w-[20px] text-center rounded px-6 block ${color}">${name_variable}</span>
-                    <span class="font-bold text-pink-600">${typeVariable[command_action]}</span>
+                    <span class="font-bold text-pink-600">${
+                        typeVariable[command_action]
+                    }</span>
                     <span class="font-bold min-w-[20px] text-center rounded px-6 block ${color}">${focus_value}</span>
                     ${iconEnableMove}
                 </div>

@@ -6,6 +6,30 @@ export default function handleDragDrop() {
     let isLeftOrRightDrop;
     let valueStepDrag;
     let addressStepDrag;
+    let currentItemDrop;
+    const opacityClassWhenStartDrag = "opacity-30";
+
+    const itemOver = (function () {
+        const HTMLDivElement = document.createElement("div");
+        HTMLDivElement.id = "itemOver";
+        HTMLDivElement.classList.add(
+            "bg-blue-600",
+            "data-[type='small']:h-[30px]",
+            "data-[type='small']:w-[2px]",
+            "data-[type='largeH']:w-full",
+            "data-[type='largeH']:h-[2px]",
+            "data-[type='largeV']:w-[2px]",
+            "data-[type='largeV']:h-[100px]",
+            "!cursor-not-allowed",
+        );
+        return {
+            node(type) {
+                HTMLDivElement.dataset.type = type;
+                return HTMLDivElement;
+            },
+        };
+    })();
+
     // DROP
     blockStepWrapper.addEventListener("drop", (e) => {
         const itemDrop = e.target.closest(
@@ -60,21 +84,22 @@ export default function handleDragDrop() {
         const itemDrop = e.target.closest("[data-name='step']");
         const blockDrop = e.target.closest("[data-block-wrapper]");
         if (itemDrop) {
+            itemDrop.classList.add(opacityClassWhenStartDrag);
+            currentItemDrop = itemDrop;
             valueStepDrag = itemDrop.dataset.value;
         } else if (blockDrop) {
+            blockDrop?.classList.add(opacityClassWhenStartDrag);
+            currentItemDrop = blockDrop;
             valueStepDrag = blockDrop.dataset.value;
         }
         blockStepWrapper.appendChild(deleteZone());
     });
     // END DRAG START
     // OVER
-    const line = Label.line();
-    const lineLargeY = Label.lineLargeY();
-    const lineLargeX = Label.lineLargeX();
     blockStepWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();
         const itemDrop = e.target.closest(
-            "[data-name='step'],[data-data-block], [data-block-wrapper]",
+            "[data-name='step'], [data-data-block], [data-block-wrapper]",
         );
 
         const isStep = itemDrop?.dataset.name === "step";
@@ -82,54 +107,59 @@ export default function handleDragDrop() {
         const deleteZone = e.target.closest("#delete-zone");
 
         if (isStep) {
-            removeSticky.hightLineBorder();
-            const offsetX = e.offsetX;
-            const targetWidth = itemDrop.offsetWidth;
-            const distanceFromCenter = offsetX - targetWidth / 2;
+            const rect = itemDrop.getBoundingClientRect();
+            const distanceFromCenter = e.clientX - (rect.x + rect.width / 2);
 
             if (distanceFromCenter < 0) {
-                line.style.left = "-3px";
-                line.style.right = "auto";
                 isLeftOrRightDrop = "left";
+                itemDrop.parentElement.insertBefore(
+                    itemOver.node("small"),
+                    itemDrop,
+                );
             } else {
                 isLeftOrRightDrop = "right";
-                line.style.right = "-3px";
-                line.style.left = "auto";
+                itemDrop.parentElement.insertBefore(
+                    itemOver.node("small"),
+                    itemDrop.nextSibling,
+                );
             }
-            itemDrop.appendChild(line);
             e.preventDefault();
             return;
         } else if (isBlock) {
-            removeSticky.hightLineLine();
             removeSticky.hightLineBorder();
             itemDrop.parentElement.classList.add("highline-border");
+            itemDrop.insertBefore(
+                itemOver.node("small"),
+                itemDrop.lastElementChild,
+            );
             return;
         } else if (itemDrop) {
             removeSticky.hightLineBorder();
-
-            const offsetY = e.offsetY;
-            const targetHeight = itemDrop.offsetHeight;
-            const distanceFromCenter = offsetY - targetHeight / 2;
-
+            const rect = itemDrop.getBoundingClientRect();
             const isHidden = itemDrop.dataset.showData === "hidden";
-            const lineLarge = isHidden ? lineLargeX : lineLargeY;
-            const typeSide = isHidden ? "x" : "y";
-            const valueSideLineLarge = {
-                x: ["left", "right"],
-                y: ["top", "bottom"],
-            };
-            if (distanceFromCenter < 0) {
-                lineLarge.style[valueSideLineLarge[typeSide][0]] = "-3px";
-                lineLarge.style[valueSideLineLarge[typeSide][1]] = "auto";
-                isLeftOrRightDrop = "left";
-            } else {
-                lineLarge.style[valueSideLineLarge[typeSide][1]] = "-3px";
-                lineLarge.style[valueSideLineLarge[typeSide][0]] = "auto";
+            const clientCheck = isHidden ? e.clientX : e.clientY;
+            const rectCheck = isHidden
+                ? rect.x + rect.width / 2
+                : rect.y + rect.height / 2;
+
+            const typeItemOver = isHidden ? "largeV" : "largeH";
+            const distanceFromCenter = clientCheck - rectCheck;
+            if (distanceFromCenter > 0) {
+                itemDrop.parentElement.insertBefore(
+                    itemOver.node(typeItemOver),
+                    itemDrop.nextSibling,
+                );
                 isLeftOrRightDrop = "right";
+            } else {
+                itemDrop.parentElement.insertBefore(
+                    itemOver.node(typeItemOver),
+                    itemDrop,
+                );
+                isLeftOrRightDrop = "left";
             }
-            itemDrop.appendChild(lineLarge);
+            return;
         } else {
-            removeSticky.hightLineLine();
+            itemOver.node("none").remove();
             removeSticky.hightLineBorder();
         }
         if (deleteZone) {
@@ -141,9 +171,8 @@ export default function handleDragDrop() {
     // END OVER
     // DRAG END
     blockStepWrapper.addEventListener("dragend", (e) => {
-        removeSticky.hightLineLine();
-        removeSticky.hightLineBorder();
         blockStepWrapper.querySelector("#delete-zone").remove();
+        currentItemDrop?.classList.remove(opacityClassWhenStartDrag);
     });
     // END DRAG END
 }
@@ -153,10 +182,5 @@ const removeSticky = {
         blockStepWrapper
             .querySelector(".highline-border")
             ?.classList.remove("highline-border");
-    },
-    hightLineLine() {
-        blockStepWrapper
-            .querySelectorAll(".highline-line")
-            ?.forEach((e) => e.remove());
     },
 };
