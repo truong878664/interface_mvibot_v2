@@ -40,15 +40,20 @@ const stepHTML = (props) => {
 
     return `
     <div class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
-        <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500 mr-2">${
+        <span class="text-sky-500 font-bold group-data-[type='error']/step:text-red-500 mr-2">${
             details[type]
         }</span>
+        ${
+            type === "position"
+                ? `<span class="h-4 w-4 mr-1 rounded-full" style="background-color:${detail?.color_position}"></span>`
+                : ""
+        }
         <div draggable="true"
             class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
             <span class="mr-4">${icon}</span>
             <span>${type === "break" ? "break;" : detail?.name || name}</span>
             ${iconEnableMove}
-            </div>
+        </div>
             ${overLayPreventMoveOnMobile}
         ${buttonDetailStep}
     </div>
@@ -121,7 +126,7 @@ const htmlVariable = (props) => {
     }
 };
 
-const checkExistStep = ({ id, type }) => {
+export const checkExistStep = ({ id, type }) => {
     const listFunctionStep = FunctionStepClass.data || {};
     const found = listFunctionStep[type]?.find((item) => {
         return item.id === Number(id);

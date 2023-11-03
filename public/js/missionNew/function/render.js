@@ -3,8 +3,8 @@ import { $ } from "../../main.js";
 import createHtmlDataFunction from "./action/createHtmlDataFunction.js";
 import { FunctionStepClass } from "../FunctionStepClass.js";
 
-const renderFunction = async () => {
-    const data = await FunctionStepClass.get();
+const renderFunction = () => {
+    const data = FunctionStepClass.data;
     for (const key in data) {
         createHtmlDataFunction(data[key], key);
     }

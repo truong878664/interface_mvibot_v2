@@ -1,5 +1,6 @@
 import { toggerMessage } from "../main.js";
 import Mission from "../missionNew/Class/Mission.js";
+import { FunctionStepClass } from "../missionNew/FunctionStepClass.js";
 import convertTopic from "./convertTopic.js";
 import pub from "./demo/pub.js";
 import topic from "./subscribeTopic.js";
@@ -21,7 +22,7 @@ let currentMission = {
     mission_shorthand: "",
 };
 function progress() {
-    // pub();
+    pub();
     let actionTopic;
     let variableTopic;
     let memoryTopic;
@@ -139,6 +140,7 @@ async function renderMission(infoMission, valueStatus) {
     const { id_mission } = infoMission;
     if (!id_mission) return;
     const statusFetch = await missionClass.getDataById(id_mission);
+    await FunctionStepClass.get();
     if (!statusFetch.error) {
         currentMission.mission_shorthand = statusFetch.data.mission_shorthand;
         progressMainWrapper.innerHTML = missionClass.renderHtml({

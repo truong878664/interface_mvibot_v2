@@ -2,6 +2,7 @@ export default class FunctionStep {
     data;
     constructor() {}
     async get() {
+        console.log("function step class get");
         const data = this.fetchApi();
         this.data = await data;
         return data;
@@ -24,7 +25,7 @@ export default class FunctionStep {
                 this.data[type].splice(
                     index,
                     1,
-                    JSON.parse(JSON.stringify(data))
+                    JSON.parse(JSON.stringify(data)),
                 );
             }
         });

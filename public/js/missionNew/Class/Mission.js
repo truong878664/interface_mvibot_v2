@@ -21,6 +21,7 @@ export default class Mission {
         this.continue = { normal: {}, module: {} };
     }
     async get() {
+        console.log("Mission class get");
         const urlGet = this.UrlApi + "?kind=get";
         const res = await fetch(urlGet);
         const data = await res.json();

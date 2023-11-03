@@ -9,7 +9,7 @@ export default function handleDragDrop() {
     // DROP
     blockStepWrapper.addEventListener("drop", (e) => {
         const itemDrop = e.target.closest(
-            "[data-name='step'],[data-data-block], [data-block-wrapper]"
+            "[data-name='step'],[data-data-block], [data-block-wrapper]",
         );
         const deleteZone = e.target.closest("#delete-zone");
 
@@ -74,7 +74,7 @@ export default function handleDragDrop() {
     blockStepWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();
         const itemDrop = e.target.closest(
-            "[data-name='step'],[data-data-block], [data-block-wrapper]"
+            "[data-name='step'],[data-data-block], [data-block-wrapper]",
         );
 
         const isStep = itemDrop?.dataset.name === "step";

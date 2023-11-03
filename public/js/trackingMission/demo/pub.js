@@ -8,13 +8,13 @@ function pub() {
         if (i < 5)
             publishTopic(
                 "/MB23_916b/mission_action_infor",
-                `/Status>Cancel//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:12)(now_step:4)(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
+                `/Status>Cancel//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:60)(now_step:4)(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
             );
 
         if (i < 7 && i >= 5) {
             publishTopic(
                 "/MB23_916b/mission_action_infor",
-                `/Status>Active//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:12)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
+                `/Status>Active//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:60)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
             );
             console.log("active");
         }
@@ -22,24 +22,24 @@ function pub() {
         if (i < 9 && i >= 7) {
             publishTopic(
                 "/MB23_916b/mission_action_infor",
-                `/Status>Cancel//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:12)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
+                `/Status>Cancel//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:60)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
             );
             console.log("cancel");
         }
 
-        if (i < 13 && i >= 9) {
-            publishTopic(
-                "/MB23_916b/mission_action_infor",
-                `/Status>Error//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:12)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
-            );
-            console.log("error");
-        }
+        // if (i < 13 && i >= 9) {
+        publishTopic(
+            "/MB23_916b/mission_action_infor",
+            `/Status>Error//mission_action_infor>Normal//Normal_mission_infor:(name_mission:HS_0020)(id_mission:10)(total_step:60)(now_step:${i})(infor_action_step:name:D_1.6_30s|time_out:30|mode:marker|data:~marker_type=none_marker_dis~~off_set_dis=1.6~~sx1=0.05~~sx2=0.15~~sy1=0.05~~sy2=0.25~)/`,
+        );
+        console.log("error");
+        // }
 
         if (i >= 13) {
-            publishTopic(
-                "/MB23_916b/mission_action_infor",
-                `/Status>Finish//mission_action_infor>Normal//Normal_mission_infor:/`,
-            );
+            // publishTopic(
+            //     "/MB23_916b/mission_action_infor",
+            //     `/Status>Finish//mission_action_infor>Normal//Normal_mission_infor:/`,
+            // );
             console.log("finish");
             // return;
         }
