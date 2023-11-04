@@ -263,8 +263,8 @@ export default function handleAddStepToBlockStep() {
                             "highline-type-mission",
                         );
                         foundedTypeMission?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
+                            behavior: "auto",
+                            block: "center",
                         });
                         return foundedTypeMission;
                     })

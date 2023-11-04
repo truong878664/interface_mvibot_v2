@@ -147,14 +147,16 @@
                             </div>
 
                             @if ($item['type'] !== 'break')
-                                <div class="absolute top-0 right-0 flex w-full justify-end gap-2 pr-2 pt-1 text-sm">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-8 bg-white/20 backdrop-blur-sm shadow-sm m-0.5 mb-0 rounded flex gap-2 justify-end py-1">
+
                                     <div class="flex ">
                                         <input type="checkbox" name="" class="peer/search sr-only"
                                             id="s-{{ $item['type'] }}" />
                                         <input data-type="{{ $item['type'] }}" type="text" data-action="search"
                                             class="search-function-input hidden rounded-l-md border-r-0 !border-gray-200 px-2 py-0 focus:bottom-0 focus:ring-transparent peer-checked/search:block" />
                                         <label for="s-{{ $item['type'] }}"
-                                            class="grid h-full place-content-center rounded-md border cursor-pointer bg-white px-4 peer-checked/search:rounded-l-none peer-checked/search:border-l-0 group">
+                                            class="grid h-full place-content-center rounded-md border cursor-pointer px-2 text-xs peer-checked/search:rounded-l-none peer-checked/search:border-l-0 group">
                                             <span class="peer-checked/search:group-[]:hidden">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </span>
@@ -163,11 +165,18 @@
                                             </span>
                                         </label>
                                     </div>
+
+                                    @if ($item['type'] === 'position')
+                                        <button data-button-function-kind="showAllPosition"
+                                            data-function-type="position"
+                                            class="rounded border px-2 btn text-xs text-yellow-600">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    @endif
+
                                     <button data-index="{{ $index }}" data-button-function-kind="new"
                                         data-type-mission="{{ $item['type'] }}"
-                                        class="btn rounded-md bg-main py-1 px-2 text-white text-sm">
-                                        New
-                                    </button>
+                                        class="rounded border px-2 btn">New</button>
                                 </div>
                             @endif
                         </div>

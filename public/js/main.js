@@ -16,7 +16,7 @@ function toggerMessage(type, message) {
         notification.classList.add("notification-show", type);
     }, 100);
 
-    $("#message").innerText = message;
+    $("#message").innerHTML = message;
     timeOut = setTimeout(() => {
         notification.classList.remove("notification-show", type);
     }, 3000);

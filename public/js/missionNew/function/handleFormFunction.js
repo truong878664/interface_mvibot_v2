@@ -27,7 +27,7 @@ export default function handleFormFunction() {
 
 function handleActionFunction() {
     const formFunctionItemWrapper = document.getElementById(
-        "function-item-form-wrapper"
+        "function-item-form-wrapper",
     );
 
     formFunctionItemWrapper.addEventListener("click", async (e) => {
@@ -84,10 +84,10 @@ function handleActionFunction() {
                         status: "update",
                     });
                     const wrapperFunction = document.querySelector(
-                        `[data-list-function='${functionType}']`
+                        `[data-list-function='${functionType}']`,
                     );
                     const elementUpdating = wrapperFunction.querySelector(
-                        `[data-id='${id}']`
+                        `[data-id='${id}']`,
                     );
                     wrapperFunction.replaceChild(DOMElement, elementUpdating);
                     MissionClass.render();

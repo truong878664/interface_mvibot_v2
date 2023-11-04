@@ -28,7 +28,7 @@
             <input class="" id="id-mission" value="{{ $itemRender->id }}" hidden />
             <input class="" id="type-mission" value="{{ $itemRender->type }}" hidden />
 
-            <div class="relative flex h-full w-full">
+            <div class="relative flex h-full w-full z-1">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
                 <div class="relative h-full w-full transition-all md:peer-checked/step-wrapper:w-3/4">
                     {{-- BLOCK STEP WRAPPER --}}
@@ -44,7 +44,7 @@
                 </label>
 
                 <div
-                    class="absolute right-0 bottom-0 h-full w-0 z-5 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
+                    class="absolute right-0 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
                     @include('frontend.pages.missions.createMissionsV4.partials.function.function')
                 </div>
             </div>
