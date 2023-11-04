@@ -11,7 +11,7 @@
         </label>
     </div>
     <div
-        class="hidden flex-col-reverse justify-between gap-1 rounded-md bg-white px-4 py-8 shadow-md peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:bg-transparent xl:p-0 xl:shadow-none">
+        class="hidden flex-col-reverse justify-between gap-1 rounded-md bg-white px-4 py-8 shadow-md z-1 peer-checked:flex xl:flex xl:w-full xl:flex-row-reverse xl:bg-transparent xl:p-0 xl:shadow-none">
         <div class="flex">
             {{-- ACTION SEND MISSION --}}
             <input class="peer/send-mission" type="checkbox" name="" hidden id="input-send-mission" />
@@ -50,7 +50,7 @@
                     class="absolute bottom-[calc(100%_+_10px)] right-0 hidden w-52 overflow-hidden rounded-md bg-white py-4 text-sm opacity-0 shadow-sm transition-all peer-checked/more-action:z-50 peer-checked/more-action:block peer-checked/more-action:opacity-100">
                     <li>
                         <button data-button-action-more="code"
-                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
+                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100" tabindex="-1">
                             <span class="w-10 text-blue-600">
                                 <i class="fa-solid fa-code"></i>
                             </span>
@@ -62,7 +62,7 @@
 
                     <li>
                         <button data-button-action-more="showAllMission"
-                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
+                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100" tabindex="-1">
                             <span class="w-10 text-green-600">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
@@ -73,7 +73,7 @@
                     </li>
                     <li>
                         <button data-button-action-more="hideAllMission"
-                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100">
+                            class="flex w-full justify-end px-4 py-2 hover:bg-stone-100" tabindex="-1">
                             <span class="w-10 text-fuchsia-600">
                                 <i class="fa-solid fa-eye-slash"></i>
                             </span>
@@ -95,7 +95,7 @@
             </div>
         </div>
         {{-- WAKE UP STOP --}}
-        <div class="flex justify-end gap-2 py-3 text-white xl:absolute xl:bottom-full xl:right-0 xl:mb-5 xl:py-0">
+        <div class="flex justify-end gap-2 py-3 z-1 text-white xl:absolute xl:bottom-full xl:right-0 xl:mb-5 xl:py-0">
             <label for="input-continue" class="btn rounded-md bg-sky-500 px-4 py-1 font-bold">Continue</label>
             <label for="input-wakeup" class="btn rounded-md bg-green-500 px-4 py-1 font-bold">Wake up</label>
             <label for="input-stop" class="btn rounded-md bg-red-500 px-4 py-1 font-bold">Stop</label>

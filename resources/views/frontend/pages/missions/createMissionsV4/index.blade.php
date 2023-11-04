@@ -32,7 +32,7 @@
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
                 <div class="relative h-full w-full transition-all md:peer-checked/step-wrapper:w-3/4">
                     {{-- BLOCK STEP WRAPPER --}}
-                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 pt-10 pl-1 pr-1"
+                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 mt-10 pl-1 pr-1"
                         id="block-step-wrapper"></div>
                     {{-- END BLOCK STEP WRAPPER --}}
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')

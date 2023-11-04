@@ -22,7 +22,7 @@ let currentMission = {
     mission_shorthand: "",
 };
 function progress() {
-    pub();
+    // pub();
     let actionTopic;
     let variableTopic;
     let memoryTopic;

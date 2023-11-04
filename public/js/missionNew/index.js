@@ -117,29 +117,29 @@ async function handleCode() {
     );
 
     const htmlMission = `
-                <div class="bg-white flex flex-col show-mission-form w-full h-[90%] md:w-[80%] md:h-[80%] md:rounded-md relative">
-                    <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
-                        <i class="fa-regular fa-copy"></i>
-                    </button>
-                    <div class="p-4 h-full w-full overflow-y-auto">
-                        <div>
-                            <span class="font-bold mr-2">Continue:</span>
-                            <span>${data.continue}</span>
-                        </div>
-                        <div>
-                            <span class="font-bold mr-2">Wake up:</span>
-                            <span>${data.wakeup}</span>
-                        </div>
-                        <div>
-                            <span class="font-bold mr-2">Stop:</span>
-                            <span>${data.stop}</span>
-                        </div>
-                        <div>
-                            <span class="font-bold mr-2">Data:</span>
-                            <div class="text-justify">${data.data}</div>
-                        </div>
-                    </div>
-                </div>`;
+    <div class="bg-white flex flex-col show-mission-form w-full h-[90%] md:w-[80%] md:h-[80%] md:rounded-md relative">
+        <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
+            <i class="fa-regular fa-copy"></i>
+        </button>
+        <div class="p-4 h-full w-full overflow-y-auto">
+            <div>
+                <span class="font-bold mr-2">Continue:</span>
+                <span>${data.continue}</span>
+            </div>
+            <div>
+                <span class="font-bold mr-2">Wake up:</span>
+                <span>${data.wakeup}</span>
+            </div>
+            <div>
+                <span class="font-bold mr-2">Stop:</span>
+                <span>${data.stop}</span>
+            </div>
+            <div>
+                <span class="font-bold mr-2">Data:</span>
+                <div class="text-justify">${data.data}</div>
+            </div>
+        </div>
+    </div>`;
 
     showMissionForm.innerHTML = htmlMission;
     document.body.appendChild(showMissionForm);
@@ -156,12 +156,10 @@ function handleCopyMission() {
     const copyMissionBtn = $(".copy-mission-btn");
     copyMissionBtn &&
         (copyMissionBtn.onclick = async (e) => {
-            // loading();
             const data = await MissionClass.getDataRobot({});
             const dataEnd = MissionClass.dataEndToRobot(data);
             console.log(dataEnd);
             copyToClipboard(dataEnd);
-            // loaded();
         });
 
     const copyToClipboard = (content) => {

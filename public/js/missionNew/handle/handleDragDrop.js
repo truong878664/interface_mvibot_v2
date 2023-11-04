@@ -35,6 +35,7 @@ export default function handleDragDrop() {
         const itemDrop = e.target.closest(
             "[data-name='step'],[data-data-block], [data-block-wrapper]",
         );
+
         const deleteZone = e.target.closest("#delete-zone");
 
         const isStep = itemDrop?.dataset.name === "step";
@@ -165,7 +166,8 @@ export default function handleDragDrop() {
         if (deleteZone) {
             deleteZone.dataset.status = "active";
         } else {
-            blockStepWrapper.querySelector("#delete-zone").dataset.status = "";
+            const deleteZone = blockStepWrapper.querySelector("#delete-zone");
+            if (deleteZone) deleteZone.dataset.status = "";
         }
     });
     // END OVER

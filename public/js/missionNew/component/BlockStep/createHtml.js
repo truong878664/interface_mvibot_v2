@@ -140,7 +140,7 @@ const createHtml = {
                     "flex w-full": !isLogicAndOrLogicOr,
                     "inline-flex": isLogicAndOrLogicOr,
                 },
-                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex shadow-block bg-white px-2 py-3 rounded-lg relative",
+                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex ring-2 ring-stone-100 bg-white px-2 py-3 rounded-lg relative",
             );
             const isShowData = !draggable
                 ? "show"
@@ -168,12 +168,19 @@ const createHtml = {
                     data-address-index="${address}"
                     class="${classNameWrapper}"
                     data-show-data="${isShowData}">
+                    <div class="absolute top-0 left-0 w-full h-full">
+                        <div class="bg-stone-100 sticky w-full h-3 top-0 z-1" data-name="header-block-step">
+                            <div class="relative w-full h-3 rounded-t-lg bg-white ring-2 ring-stone-100" data-name="header-block-step">
+                                <div class="absolute top-1/2 h-2 w-full bg-white rounded-md left-0 shadow-sm shadow-white" data-name="header-block-step"></div>
+                            </div>
+                        </div>
+                    </div>
                     <span
                         draggable="${draggable}"
                         data-action-block-step="hidden"
                         data-status="${checkIsBlockHidden}"
                         data-name="icon-block"
-                        class="${color} mr-1 w-10 h-10 relative bg-blue-50 shadow-sm rounded-md text-xl flex justify-center items-center cursor-grab group/drag active:cursor-grabbing">
+                        class="${color} mr-1 mt-1 w-10 h-10 relative bg-blue-50 shadow-sm rounded-md text-xl flex justify-center items-center cursor-grab group/drag active:cursor-grabbing">
                         ${icon}
                         <span class="hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-1 absolute text-black/40 group-hover/drag:text-black/90 backdrop-blur-sm w-full h-full place-content-center">
                             <span class="flex gap-1">
@@ -189,12 +196,12 @@ const createHtml = {
                         >
                             ${children}
                         </div>
+                        ${this.buttonMore({
+                            name,
+                            enable: addable,
+                            isTypeMissionAvailable: id,
+                        })}
                     </div>
-                    ${this.buttonMore({
-                        name,
-                        enable: addable,
-                        isTypeMissionAvailable: id,
-                    })}
                 </div>
                 `;
         },
@@ -273,8 +280,8 @@ const createHtml = {
             };
             const listButtonHtml = buttonList.map(ButtonItemMore).join("");
             return `
-            <div class="absolute top-0 right-0 hover:z-50">
-                <div class="group/more">
+            <div class="absolute top-1 right-0 hover:z-50 pr-4 pl-1 py-1 rounded-md bg-white">
+                <div class="group/more z-50">
                     <span class="h-5 w-5 mr-1 btn text-stone-500 text-xl hover:text-stone-900"><i class="fa-solid fa-ellipsis"></i></span>
                     <div class="absolute top-[20px] right-2 h-12 hidden group-hover/more:block">
                         <ul class="bg-white shadow-md py-4 rounded-md overflow-hidden min-w-[100px]">
