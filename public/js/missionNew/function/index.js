@@ -1,4 +1,4 @@
-import create from "./handleFormFunction.js";
+import create from "./action/handleFormFunction.js";
 import render from "./render.js";
 import Gpio from "./Class/Gpio.js";
 import GpioModule from "./Class/GpioModule.js";
@@ -8,7 +8,7 @@ import Sound from "./Class/Sound.js";
 import Position from "./Class/Position.js";
 import Variable from "./Class/Variable.js";
 import Footprint from "./Class/Footprint.js";
-import handleWrapFunction from "./handleWrapFunction.js";
+import handleWrapFunction from "./action/handleWrapFunction.js";
 import Config from "./Class/Config.js";
 
 export const htmlDataFunction = {

@@ -25,6 +25,10 @@ export default function topicsListening() {
                                 "success",
                                 `The robot ${name_seri} has received ${amountMission} mission! - Topic: ${missionTopic[i]}`,
                             );
+                            lockDataWhenSendMissionToRobot({
+                                data: data.data,
+                                robot: name_seri,
+                            });
                         }
                     },
                 );
@@ -84,3 +88,18 @@ export default function topicsListening() {
         toggerMessage("success", "Reset server success!");
     });
 }
+
+const lockDataWhenSendMissionToRobot = ({ data, robot }) => {
+    const listIdSendToRobot = data.split("@&").map((mission) => {
+        const infoEachMission = {};
+        mission
+            .split("//")
+            .filter((i) => i)
+            .map((info) => {
+                const [key, value] = info.split(">");
+                infoEachMission[key] = value;
+                return infoEachMission;
+            });
+        return infoEachMission.id_mission;
+    });
+};

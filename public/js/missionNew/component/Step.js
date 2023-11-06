@@ -30,7 +30,7 @@ const typeVariable = {
 };
 
 const overLayPreventMoveOnMobile = `<button class="absolute top-0 left-0 right-0 bottom-0 z-1 hover:hidden peer-hover/step:hidden cursor-default"></button>`;
-const buttonDetailStep = `<button data-action-block-step="step" class="data-[sticky='show']:z-10 z-2 hidden group-hover/step:block absolute top-0 left-0 bottom-0 peer px-2 bg-black/10 text-gray-600 backdrop-blur-sm rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
+const buttonDetailStep = `<button data-action-block-step="step" class="data-[sticky='show']:z-10 z-2 hidden group-hover/step:flex gap-0.5 justify-center items-center absolute top-0 left-0 bottom-0 peer px-1 bg-black/10 text-gray-600 backdrop-blur-sm rounded-l-md after:absolute after:top-full after:left-1/2 after:w-[100px] after:h-4 after:-translate-x-1/2">
                                 <i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>`;
 const iconEnableMove = `<span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black hidden group-hover/stepz:block"><i class="fa-solid fa-up-down-left-right"></i></span>`;
@@ -42,7 +42,7 @@ const stepHTML = (props) => {
     if (type === "variable") return htmlVariable(props, genId);
 
     return `
-    <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+    <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 whitespace-nowrap data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
         <span class="text-sky-500 font-bold group-data-[type='error']/step:text-red-500 mr-2">${
             details[type]
         }</span>
@@ -74,7 +74,7 @@ const htmlVariable = (props, genId) => {
     switch (true) {
         case command_action === "new":
             return `
-            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 whitespace-nowrap data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <span class="text-sky-500 mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500">create variable</span>
                 <div draggable="true"
                     class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] rounded-lg inline-flex items-center px-4  ${color}">
@@ -87,7 +87,7 @@ const htmlVariable = (props, genId) => {
             `;
         case isDeleteOrReset:
             return `
-            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 whitespace-nowrap data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <span class="mr-2 ml-6 font-bold  group-data-[type='error']/step:text-red-500 ${
                     command_action === "delete"
                         ? "text-red-500"
@@ -104,7 +104,7 @@ const htmlVariable = (props, genId) => {
             `;
         case notFoundDetailVariable:
             return `
-            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 whitespace-nowrap data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <span class="text-sky-500 font-bold  group-data-[type='error']/step:text-red-500">${
                     details[type]
                 }</span>
@@ -116,7 +116,7 @@ const htmlVariable = (props, genId) => {
             </div>`;
         default:
             return `
-            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
+            <div id="${genId()}" data-action="drag" class="relative group/step flex items-center rounded-md hover:ring-2 hover:ring-slate-50 hover:bg-slate-50/60 whitespace-nowrap data-[type='error']:hover:bg-red-50" data-name="step" data-value="${step}" data-id="${id}" data-address-index="${addressIndex}" data-type="${type}" data-sticky="hidden">
                 <div draggable="true"
                     class="data-[sticky='show']:z-10 peer/step group/stepz relative cursor-grab active:cursor-grabbing h-[30px] border rounded-lg inline-flex items-center gap-3 px-1">
                     <span class="font-bold min-w-[20px] text-center rounded px-6 block ${color}">${name_variable}</span>

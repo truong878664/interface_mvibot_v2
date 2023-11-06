@@ -321,7 +321,7 @@ const createHtml = {
         classNameDataItem: {
             wrap: "wrap-block bg-stone-100 p-2 rounded-lg flex mb-1 border-2 border-transparent",
             span: "font-bold mr-3 text-red-600",
-            data: "flex-1 flex flex-wrap items-start gap-4 content-start",
+            data: "flex-1 flex flex-wrap items-start gap-4 content-start ",
         },
         ButtonAdd(isButton) {
             const buttonAddStep = `

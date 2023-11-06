@@ -1,3 +1,4 @@
+import Node from "../../functionHandle/Node.js";
 import confirmationForm from "../../functionHandle/confirmationForm.js";
 import { toggerMessage } from "../../main.js";
 import Label from "../component/Label.js";
@@ -25,6 +26,10 @@ export default function handleActionTypeMission() {
                 MissionClass.addStep({
                     step: { ...data, id: dataDatabase.id },
                 });
+                toggerMessage(
+                    "success",
+                    `Add type mission <span class="font-bold text-pink-600">${dataDatabase.type}</span> successfully!`,
+                );
                 MissionClass.render();
             },
             delete() {
@@ -48,23 +53,23 @@ export default function handleActionTypeMission() {
                     data: [dataTypeMission],
                     handleAble: false,
                 });
-                const div = document.createElement("div");
-                div.classList.add(
-                    "fullscreen",
-                    "flex",
-                    "justify-center",
-                    "items-center",
-                    "w-screen",
-                    "h-screen",
-                );
-                const contentDetail = `
-                    <div class="absolute top-0 left-0 right-0 bottom-0 bg-black/20 z-[-1]" onclick="this.parentElement.remove()"></div>
-                    <div class="w-10/12 max-h-[80%] bg-white rounded-md p-4 shrink-0 z-10 overflow-auto">
-                        ${html}
-                    </div>
-                `;
-                div.innerHTML = contentDetail;
-                document.body.appendChild(div);
+                const DetailComponent = Node("div").props({
+                    className:
+                        "fullscreen flex justify-center items-center w-screen h-screen",
+                    children: [
+                        Node("div").props({
+                            onClick: () => DetailComponent.remove(),
+                            className:
+                                "absolute top-0 left-0 right-0 bottom-0 bg-black/20 -z-1",
+                        }),
+                        Node("div").props({
+                            className:
+                                "w-10/12 max-h-[80%] bg-white rounded-md p-4 shrink-0 z-10 overflow-auto",
+                            children: html,
+                        }),
+                    ],
+                });
+                document.body.appendChild(DetailComponent);
             },
             async sync() {
                 try {
@@ -92,33 +97,15 @@ export default function handleActionTypeMission() {
                 const id = +itemTypeMission.dataset.id;
                 const { name } = dataTypeMission;
                 const { x, y } = buttonAction.getBoundingClientRect();
-                const { inputForm, buttonSubmit, formElement } = Label.form({
-                    x,
-                    y,
-                });
-                requestAnimationFrame(() => inputForm.focus());
-                inputForm.value = name;
 
-                buttonSubmit.onclick = async () => {
-                    if (inputForm.value === "") {
-                        toggerMessage(
-                            "error",
-                            "The name field cannot be empty!",
-                        );
-                        return;
-                    }
-
-                    if (inputForm.value === name) {
-                        formElement.remove();
-                        return;
-                    }
-                    dataTypeMission.name = inputForm.value;
+                const onSubmit = async (nameNew) => {
+                    if (name === nameNew) return;
+                    dataTypeMission.name = nameNew;
                     const status = await typeMissionClass.update({
                         id,
                         data: dataTypeMission,
                     });
                     if (!status.error) {
-                        formElement.remove();
                         await syncTypeMission(dataTypeMission);
                     }
                     toggerMessage(
@@ -126,6 +113,7 @@ export default function handleActionTypeMission() {
                         status.message,
                     );
                 };
+                Label.form({ x, y, onSubmit, name });
             },
         };
         actions[typeButtonAction]?.();

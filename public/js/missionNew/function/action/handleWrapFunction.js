@@ -1,39 +1,11 @@
-import { MissionClass } from "../index.js";
-import { toggerMessage } from "../../main.js";
-import confirmationForm from "../../functionHandle/confirmationForm.js";
-import showFormFunction from "./action/showFormFunction.js";
-import { classFunctions } from "./index.js";
-import { FunctionStepClass } from "../FunctionStepClass.js";
-import Map from "../../Object/Map.js";
-
-const Node = (tag) => {
-    const HTMLElement = document.createElement(tag);
-    return {
-        props({
-            id = "",
-            className = "",
-            children = null,
-            onClick = () => {},
-            style = {},
-        }) {
-            id && (HTMLElement.id = id);
-            HTMLElement.className = className;
-            HTMLElement.addEventListener("click", onClick);
-
-            if (style) {
-                for (const styleItem in style) {
-                    HTMLElement.style[styleItem] = style[styleItem];
-                }
-            }
-            if (typeof children === "string") {
-                HTMLElement.innerHTML = children;
-            } else {
-                children && HTMLElement.append(...children);
-            }
-            return HTMLElement;
-        },
-    };
-};
+import { MissionClass } from "../../index.js";
+import { toggerMessage } from "../../../main.js";
+import confirmationForm from "../../../functionHandle/confirmationForm.js";
+import showFormFunction from "./showFormFunction.js";
+import { classFunctions } from "../index.js";
+import { FunctionStepClass } from "../../FunctionStepClass.js";
+import Map from "../../../Object/Map.js";
+import Node from "../../../functionHandle/Node.js";
 
 export default function handleWrapFunction() {
     const functionContainer = document.getElementById("function-container");

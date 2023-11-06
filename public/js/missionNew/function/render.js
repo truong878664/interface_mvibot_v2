@@ -10,9 +10,11 @@ const renderFunction = () => {
     }
 
     for (const key in htmlDataFunction) {
-        if ($(`[data-list-function='${key}'`)) {
-            $(`[data-list-function='${key}'`).innerHTML =
-                htmlDataFunction[key].join("");
+        const dataListFunction = document.querySelector(
+            `[data-list-function='${key}'`,
+        );
+        if (dataListFunction) {
+            dataListFunction.innerHTML = htmlDataFunction[key].join("");
         }
     }
 };

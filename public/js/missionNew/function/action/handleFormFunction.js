@@ -1,17 +1,17 @@
-import handleShowFormFunction from "./handle/showFromFunction.js";
-import footprint from "./footprint/index.js";
-import gpio from "./gpio/index.js";
-import gpioModule from "./gpioModule/index.js";
-import marker from "./marker/index.js";
-import { toggerMessage } from "../../main.js";
-import createHtmlFunctionItem from "../component/Function/Function.js";
-import showFormFunction from "./action/showFormFunction.js";
-import position from "./position/index.js";
-import sound from "./sound/index.js";
-import variable from "./variable/index.js";
-import { classFunctions } from "./index.js";
-import { MissionClass } from "../index.js";
-import { FunctionStepClass } from "../FunctionStepClass.js";
+import handleShowFormFunction from "../handle/showFromFunction.js";
+import footprint from "../footprint/index.js";
+import gpio from "../gpio/index.js";
+import gpioModule from "../gpioModule/index.js";
+import marker from "../marker/index.js";
+import { toggerMessage } from "../../../main.js";
+import createHtmlFunctionItem from "../../component/Function/Function.js";
+import showFormFunction from "./showFormFunction.js";
+import position from "../position/index.js";
+import sound from "../sound/index.js";
+import variable from "../variable/index.js";
+import { classFunctions } from "../index.js";
+import { MissionClass } from "../../index.js";
+import { FunctionStepClass } from "../../FunctionStepClass.js";
 
 export default function handleFormFunction() {
     handleShowFormFunction();

@@ -1,5 +1,4 @@
 import bookmark from "./bookmark.js";
-import { color } from "./color.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -36,7 +35,7 @@ const xhttp = new XMLHttpRequest();
 xhttp.onload = function () {
     if (this.responseText === "no map") {
         document.querySelector(
-            ".message-map-wrapper"
+            ".message-map-wrapper",
         ).innerHTML = `<div class = "message-map-none" >
                             <i class = "fa-solid fa-triangle-exclamation" ></i>
                             <span> no active map </span>
@@ -51,4 +50,3 @@ function robotActive() {
 }
 
 export { connected, connectionFailed, robotActive };
-

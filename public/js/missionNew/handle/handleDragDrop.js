@@ -1,3 +1,4 @@
+import Node from "../../functionHandle/Node.js";
 import Label from "../component/Label.js";
 import deleteZone from "../component/deleteZone.js";
 import { MissionClass, blockStepWrapper } from "../index.js";
@@ -10,22 +11,15 @@ export default function handleDragDrop() {
     const opacityClassWhenStartDrag = "opacity-30";
 
     const itemOver = (function () {
-        const HTMLDivElement = document.createElement("div");
-        HTMLDivElement.id = "itemOver";
-        HTMLDivElement.classList.add(
-            "bg-blue-600",
-            "data-[type='small']:h-[30px]",
-            "data-[type='small']:w-[2px]",
-            "data-[type='largeH']:w-full",
-            "data-[type='largeH']:h-[2px]",
-            "data-[type='largeV']:w-[2px]",
-            "data-[type='largeV']:h-[100px]",
-            "!cursor-not-allowed",
-        );
+        const HTMLElement = Node("div").props({
+            id: "itemOver",
+            className:
+                "bg-blue-600 data-[type='small']:h-[30px] data-[type='small']:w-[2px] data-[type='largeH']:w-full data-[type='largeH']:h-[2px] data-[type='largeV']:w-[2px] data-[type='largeV']:h-[100px] !cursor-not-allowed",
+        });
         return {
-            node(type) {
-                HTMLDivElement.dataset.type = type;
-                return HTMLDivElement;
+            add(data) {
+                Object.assign(HTMLElement.dataset, data.dataset);
+                return HTMLElement;
             },
         };
     })();
@@ -114,13 +108,13 @@ export default function handleDragDrop() {
             if (distanceFromCenter < 0) {
                 isLeftOrRightDrop = "left";
                 itemDrop.parentElement.insertBefore(
-                    itemOver.node("small"),
+                    itemOver.add({ dataset: { type: "small" } }),
                     itemDrop,
                 );
             } else {
                 isLeftOrRightDrop = "right";
                 itemDrop.parentElement.insertBefore(
-                    itemOver.node("small"),
+                    itemOver.add({ dataset: { type: "small" } }),
                     itemDrop.nextSibling,
                 );
             }
@@ -130,7 +124,7 @@ export default function handleDragDrop() {
             removeSticky.hightLineBorder();
             itemDrop.parentElement.classList.add("highline-border");
             itemDrop.insertBefore(
-                itemOver.node("small"),
+                itemOver.add({ dataset: { type: "small" } }),
                 itemDrop.lastElementChild,
             );
             return;
@@ -147,20 +141,20 @@ export default function handleDragDrop() {
             const distanceFromCenter = clientCheck - rectCheck;
             if (distanceFromCenter > 0) {
                 itemDrop.parentElement.insertBefore(
-                    itemOver.node(typeItemOver),
+                    itemOver.add({ dataset: { type: typeItemOver } }),
                     itemDrop.nextSibling,
                 );
                 isLeftOrRightDrop = "right";
             } else {
                 itemDrop.parentElement.insertBefore(
-                    itemOver.node(typeItemOver),
+                    itemOver.add({ dataset: { type: typeItemOver } }),
                     itemDrop,
                 );
                 isLeftOrRightDrop = "left";
             }
             return;
         } else {
-            itemOver.node("none").remove();
+            itemOver.add({ dataset: { type: "none" } }).remove();
             removeSticky.hightLineBorder();
         }
         if (deleteZone) {

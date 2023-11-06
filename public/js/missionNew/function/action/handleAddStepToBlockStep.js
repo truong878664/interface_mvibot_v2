@@ -1,3 +1,4 @@
+import Node from "../../../functionHandle/Node.js";
 import confirmationForm from "../../../functionHandle/confirmationForm.js";
 import debouche from "../../../functionHandle/debouche.js";
 import { loadingHeader } from "../../../functionHandle/displayLoad.js";
@@ -15,7 +16,6 @@ import { typeMissionClass } from "../../typeMission/index.js";
 
 export default function handleAddStepToBlockStep() {
     const getNode = document.querySelector.bind(document);
-    const getNodeList = document.querySelectorAll.bind(document);
     const deboucheRemoveFunctionHighline = debouche();
     const deboucheRemoveTypeMissionHighline = debouche();
 
@@ -88,15 +88,14 @@ export default function handleAddStepToBlockStep() {
                     const currentStickyShow = blockStepWrapper.querySelector(
                         "[data-sticky='show']",
                     );
-                    if (currentStickyShow) {
+                    if (currentStickyShow)
                         currentStickyShow.dataset.sticky = "hidden";
-                    }
 
-                    const sticky = Label.sticky;
-                    const div = document.createElement("div");
-                    div.innerHTML = sticky;
+                    const MoreActionStep = Node("div").props({
+                        children: Label.sticky,
+                    });
                     buttonAction.dataset.sticky = "show";
-                    buttonAction.appendChild(div.firstElementChild);
+                    buttonAction.appendChild(MoreActionStep.firstElementChild);
                 }
             },
             hidden() {
@@ -128,14 +127,15 @@ export default function handleAddStepToBlockStep() {
                 );
                 if (functionWrapperDetail) functionWrapperDetail.checked = true;
                 new Promise((resolve, reject) => {
-                    stepWrapper.checked = true;
                     const functionActive = functionWrapper.querySelector(
                         `[data-function-type='${type}'][data-id='${id}']`,
                     );
-                    if (!functionActive) reject();
+                    if (!functionActive)
+                        reject("This element was not found or deleted!");
                     resolve(functionActive);
                 })
                     .then((functionActive) => {
+                        stepWrapper.checked = true;
                         const FunctionHighline =
                             "[data-function-type].highline";
                         getNode(FunctionHighline)?.classList.remove("highline");
@@ -152,30 +152,20 @@ export default function handleAddStepToBlockStep() {
                         }, 4000);
                     })
                     .catch((error) => {
-                        toggerMessage(
-                            "error",
-                            "This element was not found or deleted!",
-                        );
-                        console.error(error);
+                        toggerMessage("error", error);
                     });
             },
             save() {
                 const data = blockWrapper.dataset.value;
                 const typeBlock = blockWrapper.dataset.blockWrapper;
                 const { x, y } = buttonAction.getBoundingClientRect();
-                const { inputForm, buttonSubmit, formElement } = Label.form({
-                    x,
-                    y,
-                });
-                requestAnimationFrame(() => inputForm.focus());
-
-                buttonSubmit.onclick = async () => {
-                    const name = inputForm.value;
-                    if (isNullOrEmpty(name)) {
+                const onSubmit = async (name) => {
+                    if (!isNullOrEmpty(name)) {
                         toggerMessage("error", "Please enter filed name!");
                         return;
                     }
                     const dataTranslate = JSON.parse(data);
+                    console.log(dataTranslate);
                     dataTranslate.id = null;
                     dataTranslate.name = name;
                     const dataSaveBlockMission = {
@@ -199,15 +189,17 @@ export default function handleAddStepToBlockStep() {
                             name: message.name,
                         },
                     });
-
-                    formElement.remove();
-                    MissionClass.save();
                     message.saved && typeMission.render();
                     toggerMessage(
                         message.saved ? "success" : "error",
                         message.message,
                     );
                 };
+                Label.form({
+                    x,
+                    y,
+                    onSubmit,
+                });
             },
             update() {
                 const handle = async () => {

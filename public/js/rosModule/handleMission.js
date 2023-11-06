@@ -11,12 +11,11 @@ function publishMission(nameTopic, dataMission) {
         data: dataMission,
     });
 
-    console.log(dataMission);
     mission_pub.publish(mission_set);
     if (!ros.isConnected) {
         toggerMessage(
             "error",
-            `WebSocket connection to '${ros.socket.url}' failed:`
+            `WebSocket connection to '${ros.socket.url}' failed:`,
         );
     }
 }
