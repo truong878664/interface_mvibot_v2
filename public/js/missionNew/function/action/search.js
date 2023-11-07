@@ -10,7 +10,7 @@ function search() {
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
         const currentFunctionSearchWrapper = functionWrapper.querySelector(
-            `[data-list-function='${type}']`
+            `[data-list-function='${type}']`,
         );
         const itemFunctionList =
             currentFunctionSearchWrapper.querySelectorAll("[data-name]");
@@ -18,7 +18,6 @@ function search() {
         itemFunctionList.forEach((element) => {
             element.dataset.status = "show";
         });
-        console.log(valueSearch);
         itemFunctionList.forEach((element) => {
             const dataName = element.dataset.name.toLowerCase();
             if (dataName.indexOf(valueSearch) !== -1) return;

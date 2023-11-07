@@ -4,7 +4,7 @@
     $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
     $color = $colors[strlen($userName)];
 @endphp
-<header class="fixed top-0 left-0 z-11 flex h-11 w-full items-center justify-between bg-main px-7 text-white shadow-md">
+<header class="header-main z-11 flex h-full w-full items-center justify-between bg-main px-7 text-white shadow-md">
     <div class="flex h-full items-center gap-4">
         <div
             class="connect-ros-btn connection-failed shake z-12 text-center text-2xl [&.connected]:text-green-400 [&.connection-failed]:text-red-500">

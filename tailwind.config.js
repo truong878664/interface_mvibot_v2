@@ -28,6 +28,15 @@ module.exports = {
                 ...colors,
             },
             zIndex: zIndex(),
+            animation: {
+                message: "message 0.15s ease-in-out 1",
+            },
+            keyframes: {
+                message: {
+                    "0%": { transform: "translate3d(0,-100%,0)" },
+                    "100%": { transform: "translate3d(0, 0, 0)" },
+                },
+            },
         },
     },
     plugins: [

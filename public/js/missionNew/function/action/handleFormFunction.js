@@ -1,17 +1,17 @@
-import handleShowFormFunction from "./handle/showFromFunction.js";
-import footprint from "./footprint/index.js";
-import gpio from "./gpio/index.js";
-import gpioModule from "./gpioModule/index.js";
-import marker from "./marker/index.js";
-import { toggerMessage } from "../../main.js";
-import createHtmlFunctionItem from "../component/Function/Function.js";
-import showFormFunction from "./action/showFormFunction.js";
-import position from "./position/index.js";
-import sound from "./sound/index.js";
-import variable from "./variable/index.js";
-import { classFunctions } from "./index.js";
-import { MissionClass } from "../index.js";
-import { FunctionStepClass } from "../FunctionStepClass.js";
+import handleShowFormFunction from "../handle/showFromFunction.js";
+import footprint from "../footprint/index.js";
+import gpio from "../gpio/index.js";
+import gpioModule from "../gpioModule/index.js";
+import marker from "../marker/index.js";
+import { toggerMessage } from "../../../main.js";
+import createHtmlFunctionItem from "../../component/Function/Function.js";
+import showFormFunction from "./showFormFunction.js";
+import position from "../position/index.js";
+import sound from "../sound/index.js";
+import variable from "../variable/index.js";
+import { classFunctions } from "../index.js";
+import { MissionClass } from "../../index.js";
+import { FunctionStepClass } from "../../FunctionStepClass.js";
 
 export default function handleFormFunction() {
     handleShowFormFunction();
@@ -27,7 +27,7 @@ export default function handleFormFunction() {
 
 function handleActionFunction() {
     const formFunctionItemWrapper = document.getElementById(
-        "function-item-form-wrapper"
+        "function-item-form-wrapper",
     );
 
     formFunctionItemWrapper.addEventListener("click", async (e) => {
@@ -84,10 +84,10 @@ function handleActionFunction() {
                         status: "update",
                     });
                     const wrapperFunction = document.querySelector(
-                        `[data-list-function='${functionType}']`
+                        `[data-list-function='${functionType}']`,
                     );
                     const elementUpdating = wrapperFunction.querySelector(
-                        `[data-id='${id}']`
+                        `[data-id='${id}']`,
                     );
                     wrapperFunction.replaceChild(DOMElement, elementUpdating);
                     MissionClass.render();

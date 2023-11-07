@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="missions-content w-[calc(100%_-_8px)] h-[calc(100%_-_8px)] m-2">
+    <div class="missions-content w-full h-full p-1">
         @include('frontend.blocks.mission.createMissions.createStep')
     </div>
 

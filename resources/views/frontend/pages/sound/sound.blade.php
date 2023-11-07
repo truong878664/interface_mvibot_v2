@@ -1,8 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="heading dashboard-heading">Sound</div>
-    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 flex flex-col overflow-auto">
-        <div class="w-1/2 mx-auto py-10 px-5 border-stone-300 border bg-stone-200 min-w-[500px]">
+    <div class="w-full h-full p-1">
+        <div class="w-1/2 mx-auto py-5 px-2 border-stone-300 border bg-stone-200 min-w-[500px]">
             <div class="flex justify-between items-center mb-8">
 
                 @include('frontend.blocks.selectRobot', [
@@ -11,7 +10,6 @@
                 ])
 
                 <div class="inline-block">
-
                     <button
                         class="float-right font-bold btn bg-red-500 text-[#fff] self-end px-4 py-1 rounded-md mr-4 stop-sound-btn">Stop</button>
 

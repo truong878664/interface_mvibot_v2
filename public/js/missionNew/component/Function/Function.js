@@ -26,7 +26,7 @@ const createHtmlFunctionItem = {
             data-id=${id}
             data-data='${data}'
             ${MarkerType}
-            class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xs shadow-sm shadow-[#ccc] rounded-lg hover:z-50 data-[status='hidden']:hidden last:mb-20">
+            class="function-item flex justify-between relative bg-slate-50 px-5 py-3 mb-2 point-id-8 type-mission-function-item text-xs shadow-sm shadow-[#ccc] rounded-lg data-[status='hidden']:hidden last:mb-20">
                 <div class="flex">
                     <input
                         data-select-function-id="${id}"

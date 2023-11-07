@@ -14,6 +14,7 @@ import search from "./function/action/search.js";
 import handleAddStepToBlockStep from "./function/action/handleAddStepToBlockStep.js";
 import test from "./test.js";
 import { FunctionStepClass } from "./FunctionStepClass.js";
+import Node from "../functionHandle/Node.js";
 
 const idMission = document.getElementById("id-mission");
 
@@ -41,7 +42,7 @@ export const functionWrapper = document.getElementById("function-container");
 function handleSendMission() {
     const sendBtn = document.querySelector("[data-type-button='send-mission']");
     const closeFormSendMission = document.getElementById("input-send-mission");
-    sendBtn.onclick = async (e) => {
+    sendBtn.onclick = async () => {
         try {
             loading();
             const data = await MissionClass.getDataRobot({});
@@ -55,6 +56,7 @@ function handleSendMission() {
             ).value;
             const typeMission = sendBtn.dataset.typeMission;
             const dataEnd = MissionClass.dataEndToRobot(data);
+            console.log(data);
             sendMission({ nameRobot, data: dataEnd, typeMission });
             closeFormSendMission.checked = false;
             loaded();
@@ -99,96 +101,84 @@ function handleMoreAction() {
 async function handleCode() {
     loading();
     const data = await MissionClass.getDataRobot({ html: true });
-
-    const showMissionForm = document.createElement("div");
-    showMissionForm.classList.add(
-        "fixed",
-        "top-0",
-        "z-51",
-        "left-0",
-        "right-0",
-        "bottom-0",
-        "bg-black/20",
-        "show-mission-form-wrapper",
-        "flex",
-        "justify-center",
-        "items-end",
-        "md:items-center",
-    );
-
-    const htmlMission = `
-    <div class="bg-white flex flex-col show-mission-form w-full h-[90%] md:w-[80%] md:h-[80%] md:rounded-md relative">
-        <button class="absolute top-2 right-2 p-2 btn copy-mission-btn">
-            <i class="fa-regular fa-copy"></i>
-        </button>
-        <div class="p-4 h-full w-full overflow-y-auto">
-            <div>
-                <span class="font-bold mr-2">Continue:</span>
-                <span>${data.continue}</span>
-            </div>
-            <div>
-                <span class="font-bold mr-2">Wake up:</span>
-                <span>${data.wakeup}</span>
-            </div>
-            <div>
-                <span class="font-bold mr-2">Stop:</span>
-                <span>${data.stop}</span>
-            </div>
-            <div>
-                <span class="font-bold mr-2">Data:</span>
-                <div class="text-justify">${data.data}</div>
-            </div>
-        </div>
-    </div>`;
-
-    showMissionForm.innerHTML = htmlMission;
-    document.body.appendChild(showMissionForm);
-    const formShowMission = $(".show-mission-form-wrapper");
-    formShowMission.onclick = (e) => {
-        const isOverlay = e.target.closest(".show-mission-form");
-        !isOverlay && formShowMission.remove();
-    };
-    handleCopyMission();
-    loaded();
-}
-
-function handleCopyMission() {
-    const copyMissionBtn = $(".copy-mission-btn");
-    copyMissionBtn &&
-        (copyMissionBtn.onclick = async (e) => {
+    const onCopy = () => {
+        (async () => {
             const data = await MissionClass.getDataRobot({});
             const dataEnd = MissionClass.dataEndToRobot(data);
-            console.log(dataEnd);
             copyToClipboard(dataEnd);
-        });
+        })();
 
-    const copyToClipboard = (content) => {
-        try {
-            if (window.isSecureContext && navigator.clipboard) {
-                toggerMessage("success", content);
-                navigator.clipboard.writeText(content);
-            } else {
-                toggerMessage("success", content);
-                unsecuredCopyToClipboard(content);
+        const copyToClipboard = (content) => {
+            try {
+                if (window.isSecureContext && navigator.clipboard) {
+                    navigator.clipboard.writeText(content);
+                } else {
+                    unsecuredCopyToClipboard(content);
+                }
+                toggerMessage("success", "Copied!");
+            } catch (error) {
+                toggerMessage("success", error);
             }
-            toggerMessage("success", "Copied!");
-        } catch (error) {
-            toggerMessage("success", error);
-        }
+        };
+        const unsecuredCopyToClipboard = (text) => {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand("copy");
+            } catch (err) {
+                console.error("Unable to copy to clipboard", err);
+            }
+            document.body.removeChild(textArea);
+        };
     };
-    const unsecuredCopyToClipboard = (text) => {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-            document.execCommand("copy");
-        } catch (err) {
-            console.error("Unable to copy to clipboard", err);
-        }
-        document.body.removeChild(textArea);
-    };
+
+    const showMissionForm = Node("div").props({
+        onClick: (e) => {
+            if (e.target === showMissionForm) showMissionForm.remove();
+        },
+        className:
+            "fixed top-0 z-51 left-0 right-0 bottom-0 bg-black/20 show-mission-form-wrapper flex justify-center items-end md:items-center",
+        children: [
+            Node("div").props({
+                className:
+                    "bg-white flex flex-col show-mission-form w-full h-[90%] md:w-[80%] md:h-[80%] md:rounded-md relative",
+                children: [
+                    Node("button").props({
+                        className:
+                            "absolute top-2 right-2 p-2 btn copy-mission-btn",
+                        onClick: onCopy,
+                        children: [
+                            Node("i").props({
+                                className: "fa-regular fa-copy",
+                            }),
+                        ],
+                    }),
+                    Node("div").props({
+                        className: "p-4 h-full w-full overflow-y-auto",
+                        children: ["continue", "wakeup", "stop", "data"].map(
+                            (item) =>
+                                Node("div").props({
+                                    children: [
+                                        Node("span").props({
+                                            className: "font-bold mr-2",
+                                            children: item + ":",
+                                        }),
+                                        Node("span").props({
+                                            children: data[item],
+                                        }),
+                                    ],
+                                }),
+                        ),
+                    }),
+                ],
+            }),
+        ],
+    });
+    document.body.appendChild(showMissionForm);
+    loaded();
 }
 
 function subscribeMissionChange() {

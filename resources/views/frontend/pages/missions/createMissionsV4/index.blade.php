@@ -1,7 +1,8 @@
 @php
     $json = '[{"type":"normal","data":{"normal":["footprint#HS_123#1","marker#HS_111#1","gpio_module#JS_123#2","gpio#HB_999#23"]}},{"type":"while","data":{"condition":[{"type":"logicAnd","data":{"logicA":["gpio_module#name#2","gpio_module#name#2"],"logicB":["gpio_module#name#2","gpio_module#name#2"]}},{"type":"logicOr","data":{"logicA":["gpio_module#name#2","gpio_module#name#2"],"logicB":["gpio_module#name#2","gpio_module#name#2"]}}],"do_":["gpio_module#name#2","gpio_module#name#2"]}}]';
 @endphp
-@extends('frontend.layouts.mainLayout') @section('content')
+@extends('frontend.layouts.mainLayout')
+@section('content')
     <div class="fixed top-0 left-0 right-0 bottom-0 z-10 grid place-content-center bg-white" id="loading-mission">
         <span class="loader-mission"></span>
     </div>
@@ -28,11 +29,11 @@
             <input class="" id="id-mission" value="{{ $itemRender->id }}" hidden />
             <input class="" id="type-mission" value="{{ $itemRender->type }}" hidden />
 
-            <div class="relative flex h-full w-full">
+            <div class="relative flex h-full w-full z-1">
                 <input type="checkbox" class="peer/step-wrapper" id="step-wrapper" hidden />
                 <div class="relative h-full w-full transition-all md:peer-checked/step-wrapper:w-3/4">
                     {{-- BLOCK STEP WRAPPER --}}
-                    <div class="inline-flex h-full w-full flex-wrap content-start items-start gap-2 overflow-y-auto pb-72 mt-10 pl-1 pr-1"
+                    <div class="inline-flex w-full h-[calc(100%_-_40px)] flex-wrap content-start items-start gap-2 overflow-y-auto pl-1 pr-1 mt-10"
                         id="block-step-wrapper"></div>
                     {{-- END BLOCK STEP WRAPPER --}}
                     @include('frontend.pages.missions.createMissionsV4.partials.createBlockStepBtn')
@@ -44,7 +45,7 @@
                 </label>
 
                 <div
-                    class="absolute right-0 bottom-0 h-full w-0 z-5 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
+                    class="absolute right-0 z-1 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
                     @include('frontend.pages.missions.createMissionsV4.partials.function.function')
                 </div>
             </div>

@@ -24,7 +24,7 @@ export default class Map {
         this.ros = ros;
         this.nameMap = nameMap;
         this.mapElement = document.getElementById(mapID);
-        this.idTab = generateID();
+        this.idTab = window.name;
         this.getInfo();
         this.layer.get();
         this.layer.topic = new ROSLIB.Topic({
@@ -33,10 +33,12 @@ export default class Map {
             messageType: "visualization_msgs/Marker",
         });
         this.layer.listenerEventDisplayLayer();
-        new DispatchCustomEvent("dbltouch", this.mapElement);
-        new DispatchCustomEvent("press", this.mapElement);
+        if (this.mapElement) {
+            new DispatchCustomEvent("dbltouch", this.mapElement);
+            new DispatchCustomEvent("press", this.mapElement);
+        }
     }
-    create() {
+    create({ type = "all" }) {
         this.deleteMapCanvas();
         const rectMap = this.mapElement.getBoundingClientRect();
         const MIN_HEIGHT_MAP_IF_NOT = 500;
@@ -72,7 +74,9 @@ export default class Map {
             continuous: true,
             topic: "/map",
         });
-        this.axes();
+        if (type === "all") {
+            this.axes();
+        }
     }
     point = {
         create: ({ color = "#FD841F", id = "" }) => {
@@ -82,20 +86,20 @@ export default class Map {
                 tfClient: this.tfClient,
                 topic: `/point_pub_${this.idTab}${id}`,
                 color,
-                queue_size: 1,
+                queue_size: 3,
                 throttle_rate: 1000,
                 radius: 0.1,
             });
             return {
                 display: ({ x, y }) => {
-                    this.point.display({ x, y });
+                    this.point.display({ x, y, id });
                 },
             };
         },
-        display: ({ x = this.position.x, y = this.position.y }) => {
+        display: ({ x = this.position.x, y = this.position.y, id = "" }) => {
             const point_pub = new ROSLIB.Topic({
                 ros: this.ros,
-                name: `/point_pub_${this.idTab}`,
+                name: `/point_pub_${this.idTab}${id}`,
                 messageType: "geometry_msgs/PointStamped",
                 queue_size: 0.1,
             });
@@ -105,22 +109,33 @@ export default class Map {
             });
             point_pub.publish(point_msg);
         },
+        displayAll: (pointList) => {
+            pointList.forEach((point) => {
+                const { color_position: color, id, x, y, z, w } = point;
+                this.point.create({ id }).display({ x, y });
+                this.pose.create({ color, id }).display({ x, y, z, w });
+            });
+            console.log("display all");
+        },
     };
     pose = {
-        create: ({ color = "#EA047E" }) => {
+        create: ({ color = "#EA047E", id = "", type = "normal" }) => {
+            const typeList = {
+                normal: { headDiameter: 0.3, shaftDiameter: 0.1, length: 2 },
+                highline: { headDiameter: 0.5, shaftDiameter: 0.3, length: 2 },
+            };
+
             new ROS3D.Pose({
                 ros: this.ros,
                 rootObject: this.viewer.scene,
                 tfClient: this.tfClient,
                 color,
-                topic: `/pose_pub_${this.idTab}`,
-                headDiameter: 0.3,
-                shaftDiameter: 0.1,
-                length: 2,
+                topic: `/pose_pub_${this.idTab}${id}`,
+                ...typeList[type],
             });
             return {
                 display: ({ x, y, z, w }) => {
-                    this.pose.display({ x, y, z, w });
+                    this.pose.display({ x, y, z, w, id });
                 },
             };
         },
@@ -129,10 +144,11 @@ export default class Map {
             y = this.position.y,
             z = this.position.z,
             w = this.position.w,
+            id = "",
         }) => {
             const pose_pub = new ROSLIB.Topic({
                 ros: this.ros,
-                name: `/pose_pub_${this.idTab}`,
+                name: `/pose_pub_${this.idTab}${id}`,
                 messageType: "geometry_msgs/PoseStamped",
                 queue_size: 1,
             });
@@ -396,7 +412,7 @@ export default class Map {
             });
         },
         listenerEventDisplayLayer: () => {
-            this.mapElement.addEventListener("changeLayer", () => {
+            this.mapElement?.addEventListener("changeLayer", () => {
                 this.layer.delete.all();
                 this.layerList.forEach((layer, index) => {
                     this.layer.create({ ...layer }).display();
@@ -890,7 +906,7 @@ export default class Map {
     }
 
     dispatchCustomEvent(nameEvent) {
-        this.mapElement.dispatchEvent(new Event(nameEvent));
+        this.mapElement?.dispatchEvent(new Event(nameEvent));
     }
 
     toQuaternions(degrees) {

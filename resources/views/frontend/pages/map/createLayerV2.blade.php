@@ -1,6 +1,5 @@
 @extends('frontend.layouts.mainLayout') @section('content')
-    <div data-map-active="{{ $mapActive }}"
-        class="relative m-2 h-[calc(100%_-_10px)] w-[calc(100%_-_10px)] overflow-hidden rounded-md bg-stone-200">
+    <div data-map-active="{{ $mapActive }}" class="relative p-1 h-full w-full overflow-hidden rounded-md bg-stone-200">
         <div class="absolute left-0 top-0 min-h-[40px] p-2">
             <div class="flex h-full rounded-md border bg-white shadow-md backdrop-blur-sm">
                 <div class="flex items-center" data-name="tool-layer">

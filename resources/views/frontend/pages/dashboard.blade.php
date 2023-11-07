@@ -1,7 +1,7 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
     <ul
-        class="w-[calc(100%_-_10px)] h-[calc(100%_-_24px)] m-2 overflow-auto p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-6">
+        class="w-full h-full overflow-auto p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-6">
         <x-dashboard-item route='dashboard.start-robot' icon="fa-solid fa-power-off" title='Start ROBOT'
             describe='Feature, send mission to start' color="#BB2525" />
 

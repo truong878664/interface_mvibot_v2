@@ -24,18 +24,13 @@
 
 .status-item {
     display: flex;
-
 }
 
 .status-header {
     display: flex;
     justify-content: space-between;
     /* background-color: red; */
-    font-size: 2.2rem;
     margin-bottom: 10px;
-}
-
-.status-name-robot {
 }
 
 .status-status-robot {
@@ -109,7 +104,7 @@
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-60%);
-} 
+}
 
 .battery-parameter {
     display: flex;
@@ -125,7 +120,8 @@
     margin: 0 20px;
 }
 
-.battery-volt, .battery-temper {
+.battery-volt,
+.battery-temper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -219,7 +215,6 @@
     color: #ccc;
 }
 
-
 .status-item-wrapper.disconnect::after {
     content: "";
     position: absolute;
@@ -237,7 +232,6 @@
     line-height: 320px;
 }
 
- 
 .status-item-wrapper.disconnect .accessoty-item-wrapper .accessoty-item {
     background: #ccc;
     box-shadow: none;

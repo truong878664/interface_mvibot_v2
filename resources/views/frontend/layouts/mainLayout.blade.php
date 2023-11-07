@@ -7,18 +7,57 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
     @vite('resources/css/app.css')
+
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 </head>
 
-<body class="fixed top-0 left-0 right-0 bottom-0 min-h-[667px] min-w-[320px]">
+
+<style>
+    body {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-areas:
+            "header header"
+            "navbar  content"
+            "navbar  content";
+        grid-template-rows: 50px 1fr;
+        grid-template-columns: 74px 1fr;
+    }
+
+    .header-main {
+        grid-area: header;
+    }
+
+    .navbar-main {
+        grid-area: navbar;
+
+    }
+
+    .content-main {
+        grid-area: content;
+
+    }
+</style>
+
+<body>
+    {{-- <body class="fixed top-0 left-0 right-0 bottom-0 min-h-[667px] min-w-[320px]"> --}}
     @include('components.header')
+    {{-- <nav class="navbar-main bg-blue-300">navbar</nav> --}}
+    @include('components.navbar')
+    <main class="content overflow-y-auto relative">
+        @yield('content')
+    </main>
+
+    {{-- <main class="content-main bg-green-300">content main</main> --}}
+    {{-- @include('components.header')
     <div class="flex h-full w-full flex-col">
         @include('components.navbar')
         <div
-            class="mt-11 h-[calc(100%_-_64px_-_44px)] w-full md:ml-[74px] md:h-[calc(100%_-_44px)] md:w-[calc(100%_-_74px)]">
+            class="mt-11 h-[calc(100%_-_64px_-_44px)] w-full md:ml-[74px] md:h-[calc(100%_-_44px)] md:w-[calc(100%_-_74px)] bg-red-300 mb-10">
             @yield('content')
         </div>
-    </div>
-    {{-- <h1 class="fixed top-0 left-0 z-100">1312</h1> --}}
+    </div> --}}
     @if (Session::has('error'))
         @include('components.messageSession', ['status' => 'error', 'message' => Session::get('error')])
     @elseif(Session::has('success'))

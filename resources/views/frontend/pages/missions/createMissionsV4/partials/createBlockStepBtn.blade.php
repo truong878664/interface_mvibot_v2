@@ -106,7 +106,7 @@
         <input type="radio" class="peer/stop sr-only" name="configuration" id="input-stop" data-type="stop" />
         <input type="radio" class="sr-only" name="configuration" id="input-show-configuration" />
         <div data-name="wakeup-stop-wrapper"
-            class="fullscreen group z-20 hidden h-screen w-screen items-center justify-center peer-checked/continue:flex peer-checked/stop:flex peer-checked/wakeup:flex">
+            class="fullscreen relative group z-50 hidden h-screen w-screen items-center justify-center peer-checked/continue:flex peer-checked/stop:flex peer-checked/wakeup:flex">
             <label for="input-show-configuration"
                 class="fullscreen !-z-1 hidden bg-black/20 peer-checked/continue:group-[]:block peer-checked/stop:group-[]:block peer-checked/wakeup:group-[]:block"></label>
 
@@ -131,7 +131,7 @@
         </div>
         {{-- END WAKE UP STOP --}}
 
-        <div class="ml-2 flex flex-col flex-wrap justify-start gap-1 z-4 xl:flex-row" id="create-type-mission-wrapper">
+        <div class="ml-2 flex flex-col flex-wrap justify-start gap-1 z-10 xl:flex-row" id="create-type-mission-wrapper">
             @php
                 $blockMissions = [
                     [
