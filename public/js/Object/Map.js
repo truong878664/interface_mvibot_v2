@@ -38,7 +38,7 @@ export default class Map {
             new DispatchCustomEvent("press", this.mapElement);
         }
     }
-    create({ type = "all" }) {
+    create(type = "all") {
         this.deleteMapCanvas();
         const rectMap = this.mapElement.getBoundingClientRect();
         const MIN_HEIGHT_MAP_IF_NOT = 500;
