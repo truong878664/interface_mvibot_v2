@@ -7,7 +7,7 @@
 
         <div class="w-full flex-1 flex justify-evenly items-center mt-[70px]">
             <div class="relative">
-                <div class="mb-8 absolute w-full -top-[30px] -translate-y-full flex flex-col gap-16">
+                <div class="mb-2 absolute w-full -top-[30px] -translate-y-full flex flex-col gap-2">
                     <div class="range-slider relative mb-12 flex">
                         <span id="rs-bullet-speed"
                             class="rs-label-speed rs-label absolute -left-2 -translate-x-full -translate-y-full "

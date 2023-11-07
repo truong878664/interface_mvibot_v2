@@ -102,4 +102,19 @@ const lockDataWhenSendMissionToRobot = ({ data, robot }) => {
             });
         return infoEachMission.id_mission;
     });
+
+    (async function saveMissionSent() {
+        const res = await fetch("/api/mission-sent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name_seri: robot,
+                missionSentList: listIdSendToRobot,
+            }),
+        });
+        const status = await res.json();
+        if (status.error) toggerMessage("error", status.error);
+    })();
 };

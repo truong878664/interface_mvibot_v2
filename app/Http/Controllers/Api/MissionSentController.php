@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\MissionSent;
+use App\Models\backend\MissionsVer;
 use Illuminate\Http\Request;
 
 class MissionSentController extends Controller
@@ -14,7 +16,6 @@ class MissionSentController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -35,7 +36,21 @@ class MissionSentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $name_seri = $request->name_seri;
+            $currentMissionRobotSent = MissionSent::where("name_seri", $name_seri)->first();
+            $missionSentList = $request->missionSentList;
+            $foundMissionSentList = MissionsVer::whereIn("id", $missionSentList)->get();
+            if ($currentMissionRobotSent) {
+                MissionSent::where("name_seri", $name_seri)->update(["mission_sent" => json_encode($foundMissionSentList)]);
+            } else {
+                MissionSent::create(["name_seri" => $name_seri, "mission_sent" => json_encode($foundMissionSentList)]);
+            }
+
+            return ["error" => false, "message" => "Save mission sent to robot successfully!"];
+        } catch (\Throwable $th) {
+            return ["error" => true, "message" => "ERR!,$th"];
+        }
     }
 
     /**
@@ -44,9 +59,14 @@ class MissionSentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name_seri)
     {
-        //
+        try {
+            $currentMissionRobotSent = MissionSent::where("name_seri", $name_seri)->first();
+            return ["error" => false, "message" => "get mission sent successfully", "data" => $currentMissionRobotSent];
+        } catch (\Throwable $th) {
+            return ["error" => true, "message" => "ERR!,$th", "data" => null];
+        }
     }
 
     /**

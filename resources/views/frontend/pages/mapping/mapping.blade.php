@@ -1,5 +1,5 @@
 @extends('frontend.layouts.mainLayout') @section('content')
-    <div class="m-2 h-[calc(100%_-_10px)] w-[calc(100%_-_10px)] overflow-auto border lg:flex">
+    <div class="p-0.5 h-full w-full overflow-auto border lg:flex">
         <div class="relative h-2/3 lg:h-full lg:w-2/3">
             <div class="absolute m-2 flex h-[30px] items-center">
                 @include('frontend.blocks.selectRobot', ['type' => 'robot_slam', 'id' => 'robot-mapping'])

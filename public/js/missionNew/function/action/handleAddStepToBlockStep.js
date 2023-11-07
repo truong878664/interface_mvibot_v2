@@ -145,7 +145,7 @@ export default function handleAddStepToBlockStep() {
                     .then((functionActive) => {
                         functionActive?.scrollIntoView({
                             behavior: "auto",
-                            block: "start",
+                            block: "center",
                         });
                         deboucheRemoveFunctionHighline.run(() => {
                             functionActive?.classList.remove("highline");

@@ -1,6 +1,5 @@
-<nav
-    class="fixed bottom-0 left-0 z-10 flex h-16 w-full min-w-[320px] md:min-w-0 flex-col bg-slate-50 shadow-sm md:top-0 md:h-full md:w-[74px]">
-    <ul class="grid grid-cols-3 h-full justify-between items-center md:flex md:flex-col md:h-fit md:pt-16 md:w-full">
+<nav class="navbar-main z-10 flex h-full w-full min-w-[320px] md:min-w-0 flex-col bg-slate-50 shadow-sm">
+    <ul class="grid grid-cols-3 h-full justify-between items-center md:flex md:flex-col md:h-fit md:w-full">
         <a class="h-full md:w-full" href="{{ route('home') }}">
             <li
                 class="home flex cursor-pointer flex-col items-center justify-center border-b-4 h-full text-2xl text-stone-600/50 [&.active]:border-main [&.active]:text-main md:border-l-4 md:border-b-0 md:py-3">

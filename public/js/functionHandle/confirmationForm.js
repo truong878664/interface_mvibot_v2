@@ -11,9 +11,12 @@ export default function confirmationForm({
         children: [
             Node("div").props({
                 className:
-                    "p-2 bg-white rounded-md flex flex-col justify-center",
+                    "p-4 bg-white rounded-md flex flex-col justify-center",
                 children: [
-                    Node("p").props({ children: message }),
+                    Node("p").props({
+                        className: "text-center",
+                        children: message,
+                    }),
                     Node("div").props({
                         className: "flex justify-between mt-4 font-bold gap-5",
                         children: [

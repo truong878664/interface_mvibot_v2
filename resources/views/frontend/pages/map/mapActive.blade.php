@@ -1,5 +1,5 @@
 @extends('frontend.layouts.mainLayout') @section('content')
-    <div class="m-2 flex h-[calc(100%_-_10px)] w-[calc(100%_-_10px)] flex-col">
+    <div class="p-1 h-full w-full">
         <div class="relative flex h-full flex-col overflow-hidden rounded-md bg-[#ccc]">
             <div class="h-full w-full" id="map-wrapper">
                 <div class="h-full w-full" id="map"></div>

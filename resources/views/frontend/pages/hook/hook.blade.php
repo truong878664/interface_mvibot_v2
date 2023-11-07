@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="flex w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-auto border shadow-sm shadow-[#ccc]">
+    <div class="flex w-full h-full p-1 overflow-auto border shadow-sm shadow-[#ccc]">
         <div class="h-full w-1/4">
             {{-- <select name=""  id="robot-hook"
                 class="ml-4 mt-4 text-2xl borde rounded-md border-[#0f6cbd] mr-[20px] bg-[#0f6cbd] py-2 text-white px-4 outline-none inline-block">

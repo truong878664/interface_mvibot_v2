@@ -48,17 +48,16 @@ class MiController extends Controller
                 $idMission = $request->id;
                 $v = $request->version;
 
-                if($v ===  "v3") {
-                    $missionClass= new Missions();
-                } else if($v ===  "v4") {
-                    $missionClass= new MissionsVer();
-
+                if ($v ===  "v3") {
+                    $missionClass = new Missions();
+                } else if ($v ===  "v4") {
+                    $missionClass = new MissionsVer();
                 }
 
                 $data = ($missionClass->where('id', $idMission)->first());
                 $dataClone = [
                     "mission_shorthand" => $data->mission_shorthand,
-                    "name" => $data->name . "(copy)",
+                    "name" => $data->name . "__copy",
                     "steps_mission" => $data->steps_mission,
                     "steps_mission_name" => $data->steps_mission_name,
                     "stop" => $data->stop,
@@ -124,15 +123,15 @@ class MiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {  
-        
+    {
+
         $v = $request->version;
-        if($v ===  "v3") {
-            $missionClass= new Missions();
-        } else if($v ===  "v4") {
-            $missionClass= new MissionsVer();
+        if ($v ===  "v3") {
+            $missionClass = new Missions();
+        } else if ($v ===  "v4") {
+            $missionClass = new MissionsVer();
         } else {
-            $missionClass= new Missions();
+            $missionClass = new Missions();
         }
 
         switch ($request->method) {
@@ -212,10 +211,10 @@ class MiController extends Controller
     {
         try {
             $v = $request->version;
-            if($v ===  "v3") {
-                $missionClass= new Missions();
-            } else if($v ===  "v4") {
-                $missionClass= new MissionsVer();
+            if ($v ===  "v3") {
+                $missionClass = new Missions();
+            } else if ($v ===  "v4") {
+                $missionClass = new MissionsVer();
             }
 
             switch ($type) {
@@ -233,7 +232,7 @@ class MiController extends Controller
                     }
                 case 'delete':
                     $idDelete = $request->idDelete;
-                   
+
                     $missionClass->where('id', $idDelete)->delete();
                     Stop::where('id_mission', $idDelete)->delete();
                     WakeUp::where('id_mission', $idDelete)->delete();

@@ -6,9 +6,8 @@
         $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
         $color = $colors[strlen($userName)];
     @endphp
-    <div class="heading dashboard-heading">User</div>
-    <div class="w-full h-[calc(100%_-_38px)] flex flex-col">
-        <div class="w-full h-full mx-auto mt-10 max-w-[500px] overflow-auto">
+    <div class="w-full h-full p-1">
+        <div class="w-full mx-auto py-10 max-w-lg overflow-auto">
             <div class="flex items-center">
                 <div key="{{ $key }}" style="background-color: {{ $color }};"
                     class="w-[70px] h-[70px] lg:w-[140px] lg:h-[140px] rounded-full m-3 transparent bg-avatar flex justify-center items-center shadow-lg after:absolute after:w-[110%] after:h-[110%] after:rounded-full after:border after:border-stone-400 text-white avatar-img-key before:content-[attr(key)] relative before:absolute before:top-1/2 before:left-1/2 before:font-bold before:-translate-x-1/2 before:-translate-y-1/2 before:text-[80px] before:uppercase">
@@ -24,7 +23,7 @@
                     readonly value="{{ session('UserName') }}" />
             </div>
 
-            <div class="mt-16">
+            <div class="mt-6">
                 <span class="mb-4 block">Authentication & login</span>
                 <div class="w-full bg-stone-300 border border-solid border-stone-400 border-b-0">
                     <div

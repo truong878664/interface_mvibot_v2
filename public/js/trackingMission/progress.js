@@ -80,7 +80,7 @@ function progress() {
             showProgress.render(infoMission);
             if (currentMission.id_mission !== id_mission) {
                 currentMission.id_mission = id_mission;
-                renderMission(infoMission, valueStatus);
+                renderMission(infoMission, valueStatus, nameRobot);
             }
         };
         actionTopic.subscribe(actionSubscribe);
@@ -135,28 +135,42 @@ function progress() {
         memoryTopic.subscribe(memorySubscribe);
     }
 }
-async function renderMission(infoMission, valueStatus) {
+async function renderMission(infoMission, valueStatus, nameRobot) {
+    console.log(nameRobot);
     console.log("get mission from database");
     const { id_mission } = infoMission;
     if (!id_mission) return;
-    const statusFetch = await missionClass.getDataById(id_mission);
-    await FunctionStepClass.get();
-    if (!statusFetch.error) {
-        currentMission.mission_shorthand = statusFetch.data.mission_shorthand;
-        progressMainWrapper.innerHTML = missionClass.renderHtml({
-            data: JSON.parse(currentMission.mission_shorthand),
-            handleAble: false,
-        });
-        activeStepNow(infoMission, valueStatus);
-    } else {
-        toggerMessage("error", statusFetch.message);
+    const res = await fetch("/api/mission-sent/" + nameRobot);
+    const dataMissionSentRobot = await res.json();
+    if (!dataMissionSentRobot.data) {
+        toggerMessage(
+            "error",
+            "The robot currently does not receive any missions!",
+        );
+        return;
     }
+    const dataMissionSent = JSON.parse(dataMissionSentRobot.data.mission_sent);
+    const foundMission = dataMissionSent.find(
+        (mission) => mission.id === id_mission,
+    );
+    if (!foundMission) {
+        toggerMessage("error", "The robot currently not found missions!");
+        return;
+    }
+    await FunctionStepClass.get();
+    currentMission.mission_shorthand = foundMission.mission_shorthand;
+    progressMainWrapper.innerHTML = missionClass.renderHtml({
+        data: JSON.parse(currentMission.mission_shorthand),
+        handleAble: false,
+    });
+    activeStepNow(infoMission, valueStatus);
+    return;
 }
 
 function activeStepNow(infoMission, valueStatus) {
     const { total_step, now_step: stepNow } = infoMission;
     const styleActive = ["step-active", valueStatus, "done"];
-    const stepList = getNodeList("[data-name='step']");
+    const stepList = getNodeList("[data-name='step']:not([data-type='error'])");
     const currentActiveStyle = getNode("[data-name='step'].step-active");
     currentActiveStyle?.classList.remove("step-active", "Active", "Cancel");
 

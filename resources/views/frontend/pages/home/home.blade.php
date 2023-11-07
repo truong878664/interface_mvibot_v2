@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 rounded-lg overflow-y-auto overflow-x-hidden">
+    <div class="w-full h-full p-1 pr-0 rounded-lg overflow-y-auto overflow-x-hidden">
         <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/bg.jpg)">
             <span class="absolute top-0 left-4 text-orange-400 ">website: maruei-robots.com</span>
             <span class="absolute top-0 right-4 ">version: {{ $version }}</span>
@@ -201,20 +201,20 @@
         </style>
         <style>
             /* body {
-                    <<<<<<< HEAD
-                                        margin: 0;
-                                        height: 100vh;
-                                        font-weight: 100;
-                                        background: radial-gradient(#a23982, #1f1013);
-                                        -webkit-overflow-Y: hidden;
-                                        -moz-overflow-Y: hidden;
-                                        -o-overflow-Y: hidden;
-                                        overflow-y: hidden;
-                                        -webkit-animation: fadeIn 1 1s ease-out;
-                                        -moz-animation: fadeIn 1 1s ease-out;
-                                        -o-animation: fadeIn 1 1s ease-out;
-                                        animation: fadeIn 1 1s ease-out;
-                                    } */
+                                <<<<<<< HEAD
+                                                    margin: 0;
+                                                    height: 100vh;
+                                                    font-weight: 100;
+                                                    background: radial-gradient(#a23982, #1f1013);
+                                                    -webkit-overflow-Y: hidden;
+                                                    -moz-overflow-Y: hidden;
+                                                    -o-overflow-Y: hidden;
+                                                    overflow-y: hidden;
+                                                    -webkit-animation: fadeIn 1 1s ease-out;
+                                                    -moz-animation: fadeIn 1 1s ease-out;
+                                                    -o-animation: fadeIn 1 1s ease-out;
+                                                    animation: fadeIn 1 1s ease-out;
+                                                } */
             =======margin: 0;
             height: 100vh;
             font-weight: 100;

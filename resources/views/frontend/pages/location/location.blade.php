@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="flex flex-col w-[calc(100%_-_10px)] h-[calc(100%_-_10px)] m-2 overflow-hidden border rounded-md">
+    <div class="w-full h-full p-1 overflow-hidden border rounded-md">
         <div class="h-full flex flex-col bg-[#ccc] relative overflow-hidden" id="map-wrapper">
             <div class="h-full w-full" id="map"></div>
             {{-- choose robot --}}

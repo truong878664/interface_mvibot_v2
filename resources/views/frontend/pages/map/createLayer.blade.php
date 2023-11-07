@@ -1,5 +1,6 @@
-@extends('frontend.layouts.mainLayout') @section('content')
-    <div class="m-2 flex h-[calc(100%_-_10px)] w-[calc(100%_-_10px)] flex-col overflow-hidden rounded-md bg-stone-200">
+@extends('frontend.layouts.mainLayout')
+@section('content')
+    <div class="p-1 w-full h-full overflow-hidden rounded-md bg-stone-200">
         <div class="flex h-full flex-col">
             <div class="flex flex-1">
                 <div class="relative h-full w-5/6 overflow-hidden">
@@ -35,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 flex w-[300px] flex-col content-start justify-end rounded-md px-5">
+                <div class="flex max-w-[300px] flex-col content-start justify-end rounded-md px-5 h-full">
                     <div class="">
                         <div for="" class="relative mb-9 w-full ">
                             <div class="flex items-center">
@@ -45,7 +46,7 @@
                             <span class="absolute bottom-0 right-0 block w-full translate-y-full text-right  text-red-500"
                                 id="msg-name-layer"></span>
                         </div>
-                        <div class="mb-4 h-[1px] w-full bg-slate-400"></div>
+
                         <div for="" class="mb-9 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">Type layer</span>
                             <select name="" id="type-layer" class="w-[200px] flex-1 border-[1px] px-4 outline-none">

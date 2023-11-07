@@ -42,7 +42,7 @@ export const functionWrapper = document.getElementById("function-container");
 function handleSendMission() {
     const sendBtn = document.querySelector("[data-type-button='send-mission']");
     const closeFormSendMission = document.getElementById("input-send-mission");
-    sendBtn.onclick = async (e) => {
+    sendBtn.onclick = async () => {
         try {
             loading();
             const data = await MissionClass.getDataRobot({});

@@ -32,7 +32,7 @@
             </div>
             <div class="status-accessory">
                 @foreach ($dataAccessory as $item)
-                    <div class="accessoty-item-wrapper {{ $item['status'] ? 'active' : 'inactive' }}">
+                    <div class="accessoty-item-wrapper text-xs {{ $item['status'] ? 'active' : 'inactive' }}">
                         <div class="accessoty-item">
                             <img src="/icon/{{ $item['type'] }}.svg" alt="" class="accessoty-icon">
                         </div>
