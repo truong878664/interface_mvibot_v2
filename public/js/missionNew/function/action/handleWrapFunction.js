@@ -53,6 +53,7 @@ export default function handleWrapFunction() {
                 functionClass.currentIdUpdate = data.id;
             },
             showAllPosition() {
+                return;
                 const positionList = FunctionStepClass.data.position;
                 let mapObject;
 
