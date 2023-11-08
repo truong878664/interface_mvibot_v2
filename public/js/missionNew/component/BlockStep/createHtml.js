@@ -5,7 +5,7 @@ const createHtml = {
     htmlBlock: {
         normal({ value, data, address, addable = true, draggable = true }) {
             const buttonAdd = this.ButtonAdd(addable);
-            const children = `<div data-data-block="normal" class="flex-1 w-full inline-flex flex-wrap items-start gap-3 p-1">${data}${buttonAdd}</div>`;
+            const children = `<div data-data-block="normal" class="flex-1 w-full flex flex-wrap items-start p-1">${data}${buttonAdd}</div>`;
             const type = "normal";
             const props = { value, address, addable, draggable, type };
             return this.BlockWrapper({ props, children });
@@ -140,7 +140,7 @@ const createHtml = {
                     "flex w-full": !isLogicAndOrLogicOr,
                     "inline-flex": isLogicAndOrLogicOr,
                 },
-                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex ring-2 ring-stone-100 bg-white px-2 py-3 rounded-lg relative",
+                "group/wrapper [&:hover>span>span]:grid data-[show-data='hidden']:inline-block data-[show-data='hidden']:mx-2 data-[show-data='hidden']:w-fit min-w-[100px] min-h-[103px] flex ring-2 ring-stone-100 bg-white px-2 py-3 rounded-lg relative my-2",
             );
             const isShowData = !draggable
                 ? "show"
@@ -321,7 +321,7 @@ const createHtml = {
         classNameDataItem: {
             wrap: "wrap-block bg-stone-100 p-2 rounded-lg flex mb-1 border-2 border-transparent",
             span: "font-bold mr-3 text-red-600",
-            data: "flex-1 flex flex-wrap items-start gap-4 content-start ",
+            data: "flex-1 flex flex-wrap items-start content-start ",
         },
         ButtonAdd(isButton) {
             const buttonAddStep = `

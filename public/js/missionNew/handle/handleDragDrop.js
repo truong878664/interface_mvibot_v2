@@ -14,7 +14,8 @@ export default function handleDragDrop() {
         const HTMLElement = Node("div").props({
             id: "itemOver",
             className:
-                "bg-blue-600 data-[type='small']:h-[30px] data-[type='small']:w-[2px] data-[type='largeH']:w-full data-[type='largeH']:h-[2px] data-[type='largeV']:w-[2px] data-[type='largeV']:h-[100px] !cursor-not-allowed",
+                // "sr-only bg-blue-600 data-[type='small']:h-[30px] data-[type='small']:w-[2px] data-[type='largeH']:w-full data-[type='largeH']:h-[2px] data-[type='largeV']:w-[2px] data-[type='largeV']:h-[100px] !cursor-not-allowed",
+                "w-0 h-0 relative after:absolute after:top-0 after:left-0 after:bg-blue-600 data-[type='largeH']:w-full data-[type='small']:after:h-[30px] data-[type='small']:after:w-[2px] data-[type='largeH']:after:w-full data-[type='largeH']:after:h-[2px] data-[type='largeV']:after:w-[2px] data-[type='largeV']:after:h-[110px]",
         });
         return {
             add(data) {
