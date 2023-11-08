@@ -115,6 +115,7 @@ const lockDataWhenSendMissionToRobot = ({ data, robot }) => {
             }),
         });
         const status = await res.json();
+        console.log(status);
         if (status.error) toggerMessage("error", status.error);
     })();
 };

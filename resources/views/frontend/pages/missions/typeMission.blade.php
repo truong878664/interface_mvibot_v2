@@ -1,6 +1,6 @@
 @extends('frontend.layouts.mainLayout')
 @section('content')
-    <div class="missions-content w-[calc(100%_-_10px)] h-[calc(100%_-_38px)] m-2 overflow-auto">
+    <div class="missions-content w-full h-full p-1 overflow-auto">
         <div class="w-full flex flex-wrap">
             @php
                 $color = [

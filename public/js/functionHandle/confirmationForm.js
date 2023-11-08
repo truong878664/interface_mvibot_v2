@@ -27,10 +27,6 @@ export default function confirmationForm({
                                 onClick: () => {
                                     callback();
                                     ConfirmElement.remove();
-                                    toggerMessage(
-                                        "success",
-                                        "Action has been processed!",
-                                    );
                                 },
                             }),
                             Node("button").props({

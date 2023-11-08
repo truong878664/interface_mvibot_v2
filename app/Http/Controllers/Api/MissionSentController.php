@@ -42,7 +42,16 @@ class MissionSentController extends Controller
             $missionSentList = $request->missionSentList;
             $foundMissionSentList = MissionsVer::whereIn("id", $missionSentList)->get();
             if ($currentMissionRobotSent) {
-                MissionSent::where("name_seri", $name_seri)->update(["mission_sent" => json_encode($foundMissionSentList)]);
+                $currentMissionRobotSentArray =  json_decode($currentMissionRobotSent->mission_sent);
+                foreach ($foundMissionSentList as $mission) {
+                    $indexFound = array_search($mission->id, array_column($currentMissionRobotSentArray, 'id'));
+                    if ($indexFound !== false) {
+                        $currentMissionRobotSentArray[$indexFound] = $mission;
+                    } else {
+                        array_push($currentMissionRobotSentArray, $mission);
+                    }
+                }
+                MissionSent::where("name_seri", $name_seri)->update(["mission_sent" => json_encode($currentMissionRobotSentArray)]);
             } else {
                 MissionSent::create(["name_seri" => $name_seri, "mission_sent" => json_encode($foundMissionSentList)]);
             }

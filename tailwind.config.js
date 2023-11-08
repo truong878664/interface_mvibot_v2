@@ -37,11 +37,21 @@ module.exports = {
                     "100%": { transform: "translate3d(0, 0, 0)" },
                 },
             },
+            gridTemplateAreas: {
+                wide: ["header header", "navbar  content"],
+                slim: ["header", "content", "navbar"],
+            },
+            gridTemplateColumns: {
+                wide: "60px 1fr",
+                slim: "1fr",
+            },
+            gridTemplateRows: { wide: "36px 1fr", slim: "50px 1fr 60px" },
         },
     },
     plugins: [
         "postcss-import",
         require("@tailwindcss/forms"),
+        require("@savvywombat/tailwindcss-grid-areas"),
         plugin(function ({ addUtilities }) {
             addUtilities({
                 ".scrollbar-hide": {
