@@ -84,20 +84,20 @@ function renderBookmark(data) {
 
     data?.map((item) => {
         htmlBookmark.push(
-            `<li class="mx-2 py-2 w-[80%] min-h-[60px] rounded-lg btn bg-[#cccccc40] last:mb-[200px] shadow-md shadow-[#ccc] hover:shadow-md lowercase">
-            <a href="${
-                origin + item.link
-            }" class="flex flex-col items-center h-full">
-                <div class="leading-[0px] icon-bookmark" style="color:${
-                    item.color
-                }">
-                    <i class="${item.icon} drop-shadow-[0_5px_5px_#d6d6d6]"></i>
-                </div>
-                <div class="w-full flex-1 flex justify-center items-center">
-                    <p class="text-xs text-center text-clamp-2">${item.name}</p>
-                </div>
+            `
+            <a href="${origin + item.link}">
+                <li class="w-full flex flex-col justify-evenly min-h-[3.5rem] items-center rounded-lg btn bg-stone-200 shadow lowercase py-1">
+                    <span
+                        class="leading-none"
+                        style="color:${item.color}">
+                            <i class="${item.icon}"></i>
+                    </span>
+                    <span class="text-xs text-center text-clamp-2 text-slate-500">
+                        ${item.name}
+                    </span>
+                </li>
             </a>
-            </li>`,
+            `,
         );
 
         return htmlBookmark;

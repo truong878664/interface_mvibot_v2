@@ -1,5 +1,5 @@
 <div
-    class="absolute bottom-0 right-0 flex flex-col-reverse items-end p-2 pt-1 justify-between gap-2 xl:w-full bg-black/10 z-1">
+    class="absolute bottom-0 right-0 flex flex-col-reverse items-end p-2 pt-1 justify-between gap-2 xl:w-full xl:bg-black/10 z-1">
     <input type="checkbox" name="" id="action-create-block" class="peer" hidden />
     <div class="xl:hidden group/bars">
         <label for="action-create-block" class="btn mx-2 rounded-lg border bg-white px-4 py-2">
