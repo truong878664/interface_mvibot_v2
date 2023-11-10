@@ -21,7 +21,7 @@
     </div>
     <div class="flex flex-col" id="info-progress"></div>
     <div
-        class="scrollbar-hide w-full bg-white/10 [&_[data-name='icon-block']]:bg-transparent [&_[data-name='header-block-step']]:ring-transparent [&_[data-block-wrapper]]:ring-transparent [&_[data-name='header-block-step']]:shadow-none [&_[data-name='header-block-step']]:bg-transparent [&_[data-name='step']]:bg-white/90 [&_[data-name='step']]:p-1 [&_[data-name='step']]:py- [&_.wrap-block]:bg-white/20 [&_[data-block-wrapper]]:bg-white/20 overflow-auto max-h-0 group peer-checked/progress:max-h-[1000px] peer-checked/hidden-progress:max-h-0 transition-all duration-500">
+        class="scrollbar-hide w-full bg-white/10 [&_[data-name='icon-block']]:bg-transparent [&_[data-name='header-block-step']]:ring-transparent [&_[data-block-wrapper]]:ring-transparent [&_[data-name='header-block-step']]:shadow-none [&_[data-name='header-block-step']]:bg-transparent [&_[data-name='step']]:bg-white/90 [&_[data-name='step']]:p-1 [&_.wrap-block]:bg-white/20 [&_[data-block-wrapper]]:bg-white/20 [&_[data-data-block]]:gap-1 overflow-auto max-h-0 group peer-checked/progress:max-h-[1000px] peer-checked/hidden-progress:max-h-0 transition-all duration-500">
         <div class="p-4 hidden peer-checked/progress-main:group-[]:block">
             <div data-status=""
                 class="absolute top-0 left-1/2 -translate-x-1/2 z-10 translate-y-full mt-10 text-green-500 px-5 py-2 rounded-md shadow-md bg-white data-[status='show']:block hidden"

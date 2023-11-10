@@ -45,7 +45,7 @@
                 </label>
 
                 <div
-                    class="absolute right-0 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
+                    class="absolute right-0 bottom-0 h-full w-0 overflow-hidden rounded-lg bg-white opacity-0 z-1 transition-all peer-checked/step-wrapper:w-full peer-checked/step-wrapper:opacity-100 xl:relative xl:peer-checked/step-wrapper:w-1/4">
                     @include('frontend.pages.missions.createMissionsV4.partials.function.function')
                 </div>
             </div>

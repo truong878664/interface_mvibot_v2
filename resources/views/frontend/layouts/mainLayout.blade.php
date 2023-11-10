@@ -7,14 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>MViBot | {{ isset($title) ? $title : '' }}</title>
     @vite('resources/css/app.css')
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 </head>
 
 
 <body
     class="w-full h-full grid grid-areas-slim grid-cols-slim grid-rows-slim sm:grid-areas-wide sm:grid-cols-wide sm:grid-rows-wide">
     @include('components.header')
+
     @include('components.navbar')
-    <main class="content overflow-y-auto relative grid-in-content">
+    <main class="grid-in-content overflow-y-auto relative">
         @yield('content')
     </main>
 
