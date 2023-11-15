@@ -1,5 +1,5 @@
 function isNullOrEmpty(value) {
-    return value === null || value === undefined || value === "";
+    return value === null || value === undefined || value.trim() === "";
 }
 
 export default isNullOrEmpty;

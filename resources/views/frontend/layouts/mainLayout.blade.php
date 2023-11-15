@@ -19,7 +19,6 @@
     <main class="grid-in-content overflow-y-auto relative">
         @yield('content')
     </main>
-
     @if (Session::has('error'))
         @include('components.messageSession', ['status' => 'error', 'message' => Session::get('error')])
     @elseif(Session::has('success'))

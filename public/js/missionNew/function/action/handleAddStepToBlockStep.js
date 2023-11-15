@@ -160,7 +160,7 @@ export default function handleAddStepToBlockStep() {
                 const typeBlock = blockWrapper.dataset.blockWrapper;
                 const { x, y } = buttonAction.getBoundingClientRect();
                 const onSubmit = async (name) => {
-                    if (!isNullOrEmpty(name)) {
+                    if (isNullOrEmpty(name)) {
                         toggerMessage("error", "Please enter filed name!");
                         return;
                     }
