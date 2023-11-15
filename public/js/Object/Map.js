@@ -1,4 +1,3 @@
-import { generateID } from "../functionHandle/createIdBrowser.js";
 import { loadingHeader } from "../functionHandle/displayLoad.js";
 import ros, { toggerMessage } from "../main.js";
 import DispatchCustomEvent from "./DispatchCustomEvent.js";
@@ -84,7 +83,7 @@ export default class Map {
                 ros: this.ros,
                 rootObject: this.viewer.scene,
                 tfClient: this.tfClient,
-                topic: `/point_pub_${this.idTab}${id}`,
+                topic: `/point_pub_${this.idTab}`,
                 color,
                 queue_size: 3,
                 throttle_rate: 1000,
@@ -99,11 +98,13 @@ export default class Map {
         display: ({ x = this.position.x, y = this.position.y, id = "" }) => {
             const point_pub = new ROSLIB.Topic({
                 ros: this.ros,
-                name: `/point_pub_${this.idTab}${id}`,
+                name: `/point_pub_${this.idTab}`,
                 messageType: "geometry_msgs/PointStamped",
                 queue_size: 0.1,
             });
             const point_msg = new ROSLIB.Message({
+                ns: id,
+                id: id,
                 header: { frame_id: "/map" },
                 point: { x, y, z: 0 },
             });
@@ -112,8 +113,8 @@ export default class Map {
         displayAll: (pointList) => {
             pointList.forEach((point) => {
                 const { color_position: color, id, x, y, z, w } = point;
-                this.point.create({ id }).display({ x, y });
-                this.pose.create({ color, id }).display({ x, y, z, w });
+                this.point.display({ x, y, id });
+                this.pose.display({ x, y, z, w, id });
             });
             console.log("display all");
         },
@@ -130,7 +131,7 @@ export default class Map {
                 rootObject: this.viewer.scene,
                 tfClient: this.tfClient,
                 color,
-                topic: `/pose_pub_${this.idTab}${id}`,
+                topic: `/pose_pub_${this.idTab}`,
                 ...typeList[type],
             });
             return {
@@ -148,11 +149,13 @@ export default class Map {
         }) => {
             const pose_pub = new ROSLIB.Topic({
                 ros: this.ros,
-                name: `/pose_pub_${this.idTab}${id}`,
+                name: `/pose_pub_${this.idTab}`,
                 messageType: "geometry_msgs/PoseStamped",
                 queue_size: 1,
             });
             const pose_msg = new ROSLIB.Message({
+                ns: id,
+                id: id,
                 header: { frame_id: "/map" },
                 pose: {
                     position: { x, y, z: 0 },

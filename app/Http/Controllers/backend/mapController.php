@@ -39,13 +39,14 @@ class mapController extends Controller
         return $mapActive;
     }
     public function createLayer()
-    {   
+    {
         $title = "Create layer";
         $mapActive = $this->mapActive();
         $allLayer = Layer::where('name_map_active', $mapActive)->get();
         return view('frontend.pages.map.createLayer', compact('mapActive', 'allLayer', 'title'));
     }
-    public function createLayerV2() {
+    public function createLayerV2()
+    {
         $title = "Create layer v2";
         $mapActive = $this->mapActive();
         $allLayer = Layer::where('name_map_active', $mapActive)->get();
@@ -55,5 +56,10 @@ class mapController extends Controller
     {
         $title = 'Choose map active';
         return view('frontend.pages.map.mapActive', compact('title'));
+    }
+    public function editMap()
+    {
+        $title = "Edit map";
+        return view("frontend.pages.map.editMap", compact('title'));
     }
 }

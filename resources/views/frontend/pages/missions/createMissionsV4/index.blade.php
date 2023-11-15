@@ -8,7 +8,7 @@
     </div>
     <div class="relative h-full w-full lg:p-1">
         {{-- action history --}}
-        <div class="absolute top-0 z-1 pt-2 pr-2" id="action-history">
+        <div class="absolute top-0 z-2 pt-2 pr-2" id="action-history">
             <button data-action-history="undo" class="btn h-7 w-7 rounded-md border border-stone-400 bg-white px-2">
                 <svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

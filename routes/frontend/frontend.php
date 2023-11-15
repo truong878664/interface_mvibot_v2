@@ -76,6 +76,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             Route::get('create-layer', [mapController::class, 'createLayer'])->name('create-layer');
             Route::get('create-layer-v2', [mapController::class, 'createLayerV2'])->name('create-layer-v2');
             Route::get('choose-map-active', [mapController::class, 'chooseMapActive'])->name('choose-map-active');
+            Route::get('edit-map', [mapController::class, 'editMap'])->name('edit-map');
         });
 
         Route::prefix('status')->name('status.')->group(function () {

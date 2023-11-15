@@ -19,5 +19,11 @@
                 Create layer v2
             </li>
         </a>
+        <a href="{{ route('dashboard.map.edit-map') }}">
+            <li class="hidden btn mb-4 flex h-[140px] w-full items-end justify-end rounded-md bg-cover bg-no-repeat p-4 shadow-md hover:shadow-lg"
+                style="background-image: url(/img/map/layer.png)">
+                Edit map
+            </li>
+        </a>
     </ul>
 @endsection
