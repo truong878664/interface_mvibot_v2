@@ -58,11 +58,11 @@
         <script src="/js/library/eventemitter2.js"></script>
         <script src="/js/library/ColladaLoader.js"></script>
         <script src="/js/library/roslib.js"></script>
-        <script src="/js/library/ros3d.js"></script>
         --}}
+    <script src="/js/library/ros3d.js"></script>
 
     <script type="text/javascript" src="/js/library/roslib.min.js"></script>
-    <script type="text/javascript" src="/js/library/ros3d.min.js"></script>
+    <script type="text/javascript" src="/js/library/ros3dnew.min.js"></script>
     <script type="text/javascript" src="/js/library/nipplejs.js"></script>
     <script type="text/javascript" src="/js/library/dragDropMobile.js"></script>
 

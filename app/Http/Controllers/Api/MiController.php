@@ -69,7 +69,7 @@ class MiController extends Controller
                 $this->cloneWakeUp($idMission);
                 $this->cloneStop($idMission);
 
-                return  $dataClone;
+                return $this->missionClone;
 
                 break;
             default:

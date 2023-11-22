@@ -42,6 +42,13 @@ class MissionV4Controller extends Controller
      */
     public function store(Request $request)
     {
+        $name = $request->name;
+        $type = $request->type;
+        $mission = MissionsVer::create([
+            "name" => $name,
+            "type" => $type
+        ]);
+        return $mission;
     }
 
     /**
@@ -62,6 +69,14 @@ class MissionV4Controller extends Controller
                     return [];
                 };
                 return $data;
+            case "get_by_type":
+                $type = $request->type;
+                if ($type) {
+                    $data = MissionsVer::where('type', $type)->get();
+                    return $data;
+                } else return null;
+
+
             case 'get_by_name':
                 $data = MissionsVer::where('name', $id)->first();
                 if (!$data) {
@@ -124,6 +139,12 @@ class MissionV4Controller extends Controller
      */
     public function destroy($id)
     {
+        try {
+            MissionsVer::where('id', $id)->delete();
+            return ['message' => "Delete mission successfully!", "error" => false];
+        } catch (\Throwable $th) {
+            return ['message' => "ERR!" . $th, "error" => true];
+        }
     }
 
     public function translateDataRobot($id, $html)
