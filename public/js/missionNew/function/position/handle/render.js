@@ -25,7 +25,7 @@ export default function render3DMap(
     y = 0,
     z = 0,
     w = 1,
-    colorPose = "#EA047E"
+    colorPose = "#EA047E",
 ) {
     let positionX = parseFloat(x);
     let positionY = parseFloat(y);
@@ -55,7 +55,7 @@ export default function render3DMap(
         positionZElement,
         controlPositionX,
         controlPositionY,
-        controlRotateZ
+        controlRotateZ,
     );
 
     const mapElement = $("#map");
@@ -106,7 +106,7 @@ export default function render3DMap(
                         item.yo,
                         item.type_layer,
                         z,
-                        w
+                        w,
                     );
                     mvibot_layer_active.push(layer);
                 });
@@ -259,7 +259,7 @@ export default function render3DMap(
             e.offsetY,
             rotateZ,
             rotateW,
-            viewer
+            viewer,
         );
         const inx = $("#inx");
         const iny = $("#iny");
@@ -314,7 +314,7 @@ export default function render3DMap(
             e.touches[0].pageY - rect.top,
             rotateZ,
             rotateW,
-            viewer
+            viewer,
         );
 
         const inx = $("#inx");
@@ -344,7 +344,7 @@ export default function render3DMap(
                     ? toggerMessage("success", "add point successfully")
                     : toggerMessage(
                           "error",
-                          "An internet error has occurred or your type data, please try again"
+                          "An internet error has occurred or your type data, please try again",
                       );
                 $("#create-point-checkbox").checked = false;
             })
@@ -352,7 +352,7 @@ export default function render3DMap(
                 console.log(res);
                 toggerMessage(
                     "error",
-                    "An internet error has occurred or your type data, please try again"
+                    "An internet error has occurred or your type data, please try again",
                 );
             });
     }

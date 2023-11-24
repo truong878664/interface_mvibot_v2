@@ -5,7 +5,7 @@ function clickSetPointMap(xEvent, yEvent, rotateZ, rotateW, viewer) {
     const [xCameraConvert, yCameraConvert] = convertToPosition(
         xEvent,
         yEvent,
-        viewer
+        viewer,
     );
     displayPose(xCameraConvert, yCameraConvert, rotateZ, rotateW);
     displayPoint(xCameraConvert, yCameraConvert);
@@ -38,8 +38,12 @@ export function convertToPosition(xEvent, yEvent, viewer) {
 
     const t = -zCamera / a3;
 
-    const xCameraConvert = Number((xCamera + xClickConvert + a1 * t).toFixed(2));
-    const yCameraConvert = Number((yCamera + yClickConvert + a2 * t).toFixed(2));
+    const xCameraConvert = Number(
+        (xCamera + xClickConvert + a1 * t).toFixed(2),
+    );
+    const yCameraConvert = Number(
+        (yCamera + yClickConvert + a2 * t).toFixed(2),
+    );
     return [xCameraConvert, yCameraConvert];
 }
 

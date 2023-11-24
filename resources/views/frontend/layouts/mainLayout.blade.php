@@ -63,6 +63,7 @@
 
     <script type="text/javascript" src="/js/library/roslib.min.js"></script>
     <script type="text/javascript" src="/js/library/ros3dnew.min.js"></script>
+    {{-- <script type="text/javascript" src="/js/library/ros3d.js"></script> --}}
     <script type="text/javascript" src="/js/library/nipplejs.js"></script>
     <script type="text/javascript" src="/js/library/dragDropMobile.js"></script>
 

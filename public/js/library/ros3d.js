@@ -57451,11 +57451,13 @@ var ROS3D = (function (exports, ROSLIB) {
             // set the scene
             this.renderer.clear(true, true, true);
             this.renderer.render(this.scene, this.camera);
-            this.highlighter.renderHighlights(
-                this.scene,
-                this.renderer,
-                this.camera,
-            );
+
+            //disable error white zone map in ios
+            // this.highlighter.renderHighlights(
+            //     this.scene,
+            //     this.renderer,
+            //     this.camera,
+            // );
 
             // draw the frame
             this.animationRequestId = requestAnimationFrame(
