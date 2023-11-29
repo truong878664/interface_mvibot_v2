@@ -53797,7 +53797,6 @@ var ROS3D = (function (exports, ROSLIB) {
 
         subscribe() {
             this.unsubscribe();
-
             // subscribe to the topic
             this.rosTopic = new ROSLIB__namespace.Topic({
                 ros: this.ros,
@@ -53843,7 +53842,8 @@ var ROS3D = (function (exports, ROSLIB) {
                     });
                     this.rootObject.add(this.sceneNode);
                 } else {
-                    this.sceneNode.add(this.currentGrid);
+                    //fix error not show map
+                    this.rootObject.add(this.currentGrid);
                 }
             } else {
                 this.sceneNode = this.currentGrid = newGrid;
