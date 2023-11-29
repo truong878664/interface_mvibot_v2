@@ -10,7 +10,7 @@ function createMap(
     tfClient = "",
     topic = "/map",
     divID = "map",
-    nameRobot = ""
+    nameRobot = "",
 ) {
     const optionViewer = {
         divID: divID,
@@ -23,7 +23,6 @@ function createMap(
     };
 
     viewer = new ROS3D.Viewer(optionViewer);
-
     new ROS3D.OccupancyGridClient({
         ros: ros,
         rootObject: viewer.scene,

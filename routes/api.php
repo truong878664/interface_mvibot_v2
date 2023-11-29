@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\ConfigRobotController;
@@ -86,3 +87,4 @@ Route::resource('bookmark', BookmarkController::class);
 Route::resource('mission-v4', MissionV4Controller::class);
 Route::resource('type-mission-v4', TypeMissionVerController::class);
 Route::resource('mission-sent', MissionSentController::class);
+Route::resource('auth', AuthController::class);

@@ -87,7 +87,7 @@ function getLayer() {
                     item.yo,
                     item.type_layer,
                     z,
-                    w
+                    w,
                 );
 
                 mvibot_layer_active.push(layer);
@@ -107,10 +107,10 @@ function checkNameLayer(nameLayer, e) {
         .then((res) => res.json())
         .then((data) => {
             const dataCompareDatabase = data.find(
-                (item) => item.name_layer === nameLayer
+                (item) => item.name_layer === nameLayer,
             );
             const dataCompareListLayer = dataLayerSaveDatabase.find(
-                (item) => item.name_layer === nameLayer
+                (item) => item.name_layer === nameLayer,
             );
             if (dataCompareDatabase || dataCompareListLayer) {
                 $("#msg-name-layer").innerText =
@@ -134,7 +134,7 @@ function setDbSetLayer(e) {
         const [x, y] = convertToPosition(
             e.targetTouches[0].pageX - rect.left,
             e.targetTouches[0].pageY - rect.top,
-            viewer
+            viewer,
         );
         handleClickSetPositionLayer(x, y);
     }
@@ -265,7 +265,7 @@ function renderLayer(dataLayerSaveDatabase) {
                 <button id-delete=${index} class="delete-layer-btn text-[rgba(51,51,51,0.34)] px-2 hover:text-[#333]">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
-            </div>`
+            </div>`,
         );
     });
     $("#layer-container").innerHTML = html.join("");
@@ -361,7 +361,7 @@ function createModelLayer() {
         dataLayerModel.yo,
         dataLayerModel.type_layer,
         z,
-        w
+        w,
     );
 
     return layer;
