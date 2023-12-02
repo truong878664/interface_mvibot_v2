@@ -47,7 +47,6 @@ class RobotController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -58,7 +57,9 @@ class RobotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $name_seri = $request->nameRobot;
+        // $data = DB::table('my_robot')->where('name_seri', $name_seri)->get();
+        // return $data;
     }
 
     /**
@@ -70,7 +71,9 @@ class RobotController extends Controller
     public function show(Request $request, $robot)
     {
         $statusRobot = StatusRobot::where('name_seri', $robot)->first();
-        if ($statusRobot) {
+        $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->first();
+        if ($statusRobot || $dataMyRobot) {
+            $statusRobot->history = $dataMyRobot->history;
             return $statusRobot;
         } else {
             return ['message' => 'no robot'];
@@ -95,9 +98,16 @@ class RobotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $robot)
     {
-        //
+        try {
+            //code...
+            $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->update(["history" => null]);
+            return ["error" => false, "message" => "Reset successfully!"];
+        } catch (\Throwable $th) {
+            //throw $th;
+            return ["error" => true, "message" => "ERR!" . $th];
+        }
     }
 
     /**

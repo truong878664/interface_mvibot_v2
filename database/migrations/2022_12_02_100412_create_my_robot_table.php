@@ -17,6 +17,7 @@ return new class extends Migration
             Schema::create('my_robot', function (Blueprint $table) {
                 $table->string('name_seri')->unique();
                 $table->string('type');
+                $table->longText('history');
             });
         }
     }

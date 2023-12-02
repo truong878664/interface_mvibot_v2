@@ -20,7 +20,7 @@ class PositionController extends Controller
     public function index()
     {
         $mapActive = Map::first();
-        if($mapActive) {
+        if ($mapActive) {
             return MissionPosition::where('map', $mapActive->name_map_active)->get();
         } else {
             return [];
@@ -44,7 +44,10 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-       return MissionPosition::create($request->all());
+        $mapActive = Map::first();
+        $data = $request->all();
+        $data['map'] = $mapActive->name_map_active;
+        return MissionPosition::create($data);
     }
 
     /**
@@ -92,11 +95,10 @@ class PositionController extends Controller
         $itemDelete = MissionPosition::where('id', $id)->first();
         $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
 
-         //function at controller.php
+        //function at controller.php
         $this->updateStepDelete($itemName);
 
         MissionPosition::where('id', $id)->delete();
         return ['message' => 'delete position success'];
     }
-
 }
