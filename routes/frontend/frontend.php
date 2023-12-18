@@ -66,7 +66,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
                 });
             });
 
-            Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
+            // Route::get('/layer-active', [layerController::class, 'layerActive'])->name('layer-active');
         });
         Route::get('/tracking-mission', [MissionsController::class, 'trackingMission'])->name('tracking-mission');
 
@@ -123,5 +123,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
             $title = 'Start robot';
             return  view('frontend.pages.startRobot.index', compact('title'));
         })->name('start-robot');
+        Route::get('chart', function () {
+            $title = 'Activity chart';
+            return  view('frontend.pages.chart.index', compact('title'));
+        })->name('chart');
     });
 });

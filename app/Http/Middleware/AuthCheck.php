@@ -26,12 +26,12 @@ class AuthCheck
 
         return $next($request);
     }
-    public function handleApi(Request $request, Closure $next)
-    {
-        if (!session()->has('LoggedUser')) {
-            return ["error" => true, "message" => "You must be logged in"];
-        } else {
-            return $next($request);
-        }
-    }
+    // public function handleApi(Request $request, Closure $next)
+    // {
+    //     if (!session()->has('LoggedUser')) {
+    //         return ["error" => true, "message" => "You must be logged in"];
+    //     } else {
+    //         return $next($request);
+    //     }
+    // }
 }

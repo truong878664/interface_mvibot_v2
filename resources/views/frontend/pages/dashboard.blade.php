@@ -4,8 +4,8 @@
         <x-dashboard-item route='dashboard.start-robot' icon="fa-solid fa-power-off" title='Start ROBOT'
             describe='Feature, send mission to start' color="#BB2525" />
 
-        <x-dashboard-item route='dashboard.missions.v3.select' icon='fa-solid fa-bullseye' title='Create missions'
-            describe='Assign tasks to robots' color="#0f6cbd" />
+        {{-- <x-dashboard-item route='dashboard.missions.v3.select' icon='fa-solid fa-bullseye' title='Create missions'
+            describe='Assign tasks to robots' color="#0f6cbd" /> --}}
 
         <x-dashboard-item route='dashboard.missions.v4.select' icon='fa-solid fa-bullseye' title='Create missions V4'
             describe='Assign tasks to robots (new version)' color="#898121" />
@@ -45,6 +45,9 @@
 
         <x-dashboard-item route='dashboard.history' icon='fa-solid fa-clock-rotate-left' title='History'
             describe='Operation history of all robots' color="#0A4D68" />
+
+        <x-dashboard-item route='dashboard.chart' icon='fa-solid fa-chart-line' title='Activity chart'
+            describe="The chart shows the robot's operation" color="#FF9800" />
 
         <x-dashboard-item route='dashboard.history' icon='fa-solid fa-rotate' title='Update' describe='Update system'
             color="#F0DE36" />

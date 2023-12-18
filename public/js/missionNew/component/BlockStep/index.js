@@ -17,7 +17,7 @@ const blockStep = {
                         name,
                         handleAble,
                         ...rest,
-                    })
+                    }),
                 );
             } else {
                 htmlNormal.push(Step(item, index));
@@ -48,7 +48,7 @@ const blockStep = {
                             name,
                             handleAble,
                             ...rest,
-                        })
+                        }),
                     );
                 } else {
                     htmlIfElse[key].push(Step(item, index));
@@ -80,7 +80,7 @@ const blockStep = {
                             name,
                             handleAble,
                             ...rest,
-                        })
+                        }),
                     );
                 } else {
                     htmlTryCatch[key].push(Step(item, index));
@@ -111,7 +111,7 @@ const blockStep = {
                             name,
                             handleAble,
                             ...rest,
-                        })
+                        }),
                     );
                 } else {
                     htmlWhile[key].push(Step(item, index));
@@ -142,7 +142,7 @@ const blockStep = {
                             name,
                             handleAble,
                             ...rest,
-                        })
+                        }),
                     );
                 } else {
                     htmlLogicAnd[key].push(Step(item, index));
@@ -173,7 +173,7 @@ const blockStep = {
                             name,
                             handleAble,
                             ...rest,
-                        })
+                        }),
                     );
                 } else {
                     htmlLogicOr[key].push(Step(item, index));

@@ -1,16 +1,23 @@
 import confirmationForm from "../functionHandle/confirmationForm.js";
-import splitTwoChar from "../functionHandle/splitTwoChar.js";
+import { getHistory, parseDataHistoryString } from "../lib/ultils.js";
 import { toggerMessage } from "../main.js";
+
 const logContentElement = document.querySelector(".log-content");
 const robotHistory = document.querySelector("#robot-history");
 const refreshBtn = document.querySelector("[data-name='refresh-btn']");
 const resetBtn = document.querySelector("[data-name='reset-btn']");
+const exportBtn = document.querySelector("[data-name='export-btn']");
+
+const dataHistoryRobot = { current: null };
+
 renderLog(null);
 
 robotHistory.addEventListener("change", async (e) => {
     const nameRobot = e.target.value;
     if (nameRobot) {
-        getHistory(nameRobot);
+        const data = await getHistory(nameRobot);
+        dataHistoryRobot.current = data;
+        renderLog(data);
         toggerMessage(
             "success",
             `Moved to the history of robots <span class="font-bold text-red-500">${nameRobot}</span>!`,
@@ -47,40 +54,44 @@ resetBtn.onclick = () => {
         callback: reset,
     });
 };
-
-const getHistory = async (nameRobot) => {
-    try {
-        const res = await fetch("/api/robot/" + nameRobot);
-        const data = await res.json();
-        renderLog(parseDataHistoryString(data.history));
-    } catch (error) {
-        console.log(error);
-        renderLog(parseDataHistoryString(null));
-    }
-};
-
-const historyData =
-    "&/time>2023-12-01 15:58:49 //type>normal//data>Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up...Robot start up.../@&/time>2023-12-01 15:58:52 //type>normal//data>Motor left disable brake/@&/time>2023-12-01 15:59:02 //type>normal//data>Camera2 is available/@&/time>2023-12-01 15:59:19 //type>error//data>Restart camera1 because no signal/@&/time>2023-12-01 15:59:33 //type>normal//data>Sensor startup success. Start up mode: navigation/@&/time>2023-12-01 15:59:38 //type>warning//data>Robot load mission charge battery: empty/@&/time>2023-12-01 15:59:39 //type>normal//data>Find new module IB03_916b/@&/time>2023-12-01 16:09:45 //type>normal//data>Robot recevice multiple mission normal: HS_0010__copy/@&/time>2023-12-01 16:10:14 //type>warning//data>Robot reset mission normal/@&/time>2023-12-02 03:00:46 //type>normal//data>Change to mode action mission normal/@&/time>2023-12-02 07:45:49 //type>normal//data>Robot recevice multiple mission normal: In_lift/@&/time>2023-12-02 08:28:16 //type>normal//data>Find new module /@&/time>2023-12-02 08:29:47 //type>warning//data>Robot reset mission normal/@&/time>2023-12-02 08:31:34 //type>warning//data>Robot reset mission normal/@&/time>2023-12-02 08:34:35 //type>warning//data>Robot reset mission normal/@&/time>2023-12-02 08:40:49 //type>normal//data>Robot recevice multiple mission normal: In_lift/@";
-const parseDataHistoryString = (historyData) => {
-    if (!historyData) return null;
-    const trHistoryStringList = splitTwoChar(historyData, "&", "@");
-    const resultTrItem = [];
-    const parseTrLine = trHistoryStringList.map((trItem) =>
-        trItem.split("/").filter((i) => i),
-    );
-    parseTrLine.map((trStringLine) => {
-        const trObjectItem = {};
-        trStringLine.map((item) => {
-            const [key, value] = item.split(">");
-            if (key === "time") {
-                trObjectItem.timeLine = new Date(value).getTime();
-            }
-            trObjectItem[key] = value;
-            return trObjectItem;
+exportBtn.onclick = () => {
+    const nameRobot = robotHistory.value;
+    const handleExport = () => {
+        const dataCSV = ["no,type,time,log"];
+        if (!dataHistoryRobot.current) {
+            toggerMessage("error", "Data empty!");
+            return;
+        }
+        dataHistoryRobot.current.map((item, index) => {
+            const { time, type, data } = item;
+            dataCSV.push(
+                `${
+                    dataHistoryRobot.current.length - index
+                },${type},${time},${data}`,
+            );
+            return dataCSV;
         });
-        resultTrItem.push(trObjectItem);
+        const aElement = document.createElement("a");
+        aElement.setAttribute(
+            "href",
+            "data:csv/plain;charset=utf-8," +
+                encodeURIComponent(dataCSV.join("\n")),
+        );
+        aElement.setAttribute("download", `history_${nameRobot}.csv`);
+        aElement.style.display = "none";
+        document.body.appendChild(aElement);
+        aElement.click();
+        document.body.removeChild(aElement);
+        // console.log(dataHistoryRobot.current);
+    };
+    if (!nameRobot) {
+        toggerMessage("error", "Please choose robot!");
+        return;
+    }
+    confirmationForm({
+        message: `Do you want to export history data of ${nameRobot} robot?`,
+        callback: handleExport,
     });
-    return resultTrItem;
 };
 
 function renderLog(data) {
@@ -107,7 +118,7 @@ function renderLog(data) {
         htmlLog.push(`
         <tr
             data-log="${item.type}"
-            class="group/log font-bold data-[log=normal]:font-normal">
+            class="group/log font-bold">
         <td class="${classNameItem} text-center"><span>${
             data.length - index
         }</span></td>

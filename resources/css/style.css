@@ -98,12 +98,12 @@ li {
     margin: 4px 0;
     text-align: center;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
 }
 ::-webkit-scrollbar-thumb {
-    /* background: #9a9a9a; */
+    background: black;
     background-clip: content-box;
     border-right: 1px solid transparent;
     border-top: 8px solid transparent;
@@ -111,8 +111,8 @@ li {
     @apply rounded-full bg-slate-300;
 }
 ::-webkit-scrollbar-track {
-    /* background: rgb(236, 236, 236); */
-}
+    background: rgb(236, 236, 236);
+} */
 
 :root {
     --column-status: 2;

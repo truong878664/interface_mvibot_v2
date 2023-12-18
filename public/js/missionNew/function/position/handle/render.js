@@ -65,7 +65,7 @@ export default function render3DMap(
     const widthMap = mapElement.offsetWidth;
 
     const viewer = createMap(heightMap, widthMap);
-
+    console.log("render");
     const tfClient = createTfClient();
     createAxes(viewer);
 
@@ -75,8 +75,6 @@ export default function render3DMap(
     markerClient(tfClient, viewer);
     markerClientPath(tfClient, viewer);
 
-    // displayPoint(0, 0);
-    // displayPose(0, 0, 0, 1);
     setTimeout(() => {
         displayPoint(positionX, positionY);
         displayPose(positionX, positionY, rotateZ, rotateW);
@@ -92,10 +90,9 @@ export default function render3DMap(
 
     function addLayerDbToLayerActive() {
         const mvibot_layer_active = [];
-        fetch("/dashboard/missions/layer-active")
+        fetch("/api/layer")
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 data.forEach((item) => {
                     const { z, w } = mathYaw(item.yawo);
                     const layer = new mvibot_layer(
@@ -110,8 +107,29 @@ export default function render3DMap(
                     );
                     mvibot_layer_active.push(layer);
                 });
+
                 displayLayer(mvibot_layer_active);
             });
+        // fetch("/dashboard/missions/layer-active")
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data);
+        //         data.forEach((item) => {
+        //             const { z, w } = mathYaw(item.yawo);
+        //             const layer = new mvibot_layer(
+        //                 item.name_layer,
+        //                 item.width,
+        //                 item.height,
+        //                 item.xo,
+        //                 item.yo,
+        //                 item.type_layer,
+        //                 z,
+        //                 w,
+        //             );
+        //             mvibot_layer_active.push(layer);
+        //         });
+        //         displayLayer(mvibot_layer_active);
+        //     });
     }
     // validateInputSubmit(
     //     ".input-submit",

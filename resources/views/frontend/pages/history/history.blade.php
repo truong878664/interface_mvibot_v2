@@ -10,6 +10,7 @@
             </div>
             <div class="mt-2">
                 <button class="px-4 py-1 rounded bg-sky-500 text-white" data-name="reset-btn">Reset value</button>
+                <button class="px-4 py-1 rounded bg-white border" data-name="export-btn">Export</button>
             </div>
 
         </div>
