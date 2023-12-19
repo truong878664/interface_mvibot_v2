@@ -7,6 +7,7 @@ const selectChartType = document.querySelector(
 const dataChartRobot = {
     trip: {},
     error: {},
+    battery: {},
 };
 const activeSelect = {
     nameRobot: "",
@@ -21,6 +22,10 @@ const detailChart = {
         borderColor: "#EF4040",
         label: "Error",
     },
+    battery: {
+        borderColor: "#52D3D8",
+        label: "Battery",
+    },
 };
 const dataUiChair = {
     labels: [],
@@ -30,7 +35,10 @@ const dataUiChair = {
             data: [],
             fill: false,
             borderColor: "rgb(75, 192, 192)",
-            tension: 0.1,
+            tension: 0.01,
+            pointStyle: "circle",
+            pointRadius: 10,
+            pointHoverRadius: 15,
         },
     ],
 };
@@ -39,14 +47,40 @@ const chart = new Chart(document.getElementById("trips"), {
     type: "line",
     data: dataUiChair,
     options: {
-        onClick: (e) => {
+        responsive: true,
+        onClick: (e, legendItem, chart) => {
+            const index = legendItem[0].index;
             console.log(e);
+            console.log(chart.data.labels.at(index));
+            // console.log(dataChartRobot[activeSelect.type]);
+        },
+        element: {
+            borderJoinStyle: "round",
+            capBezierPoints: false,
         },
         plugins: {
             datalabels: {
                 color: "#36A2EB",
                 align: "top",
                 offset: 6,
+            },
+        },
+        interaction: {
+            mode: "index",
+            intersect: false,
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: "Date",
+                },
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: "Quantity",
+                },
             },
         },
     },
@@ -59,11 +93,14 @@ robotChart.addEventListener("change", async (e) => {
         const dataChart = getDataChart(data);
         const formatTripsDateData = formatDataChartFollowDate(dataChart.trips);
         const formatErrorData = formatDataChartFollowDate(dataChart.error);
+        const formatBatteryData = formatDataChartFollowDate(dataChart.battery);
 
         const tripCount = toChartLib(formatTripsDateData);
         const errorCount = toChartLib(formatErrorData);
+        const batteryCount = toChartLib(formatBatteryData);
         dataChartRobot.trip = tripCount;
         dataChartRobot.error = errorCount;
+        dataChartRobot.battery = batteryCount;
 
         drawChart();
     } else {
@@ -75,8 +112,10 @@ function getDataChart(data) {
     const dataChart = {
         trips: [],
         error: [],
+        battery: [],
     };
     const STRING_FINISH_TRIP = "Finish mission action normal";
+    const STRING_FINISH_BATTERY = "action mission charge battery";
     const STRING_ERROR_MISSIon = "Error mission";
     data.map((item) => {
         if (item.data.includes(STRING_FINISH_TRIP)) {
@@ -86,6 +125,9 @@ function getDataChart(data) {
                 timeLine: item.timeLine,
                 nameMission: item.data.replace(STRING_FINISH_TRIP + ": ", ""),
             });
+        }
+        if (item.data.includes(STRING_FINISH_BATTERY)) {
+            dataChart.battery.push(item);
         }
         if (item.data.includes(STRING_ERROR_MISSIon)) {
             dataChart.error.push(item);
@@ -156,7 +198,9 @@ function drawChart() {
 
 selectChartType.onclick = (e) => {
     const type = e.target.dataset.name;
-    selectChartType.dataset.active = type;
-    activeSelect.type = type;
-    drawChart();
+    if (dataChartRobot.hasOwnProperty(type)) {
+        selectChartType.dataset.active = type;
+        activeSelect.type = type;
+        drawChart();
+    }
 };

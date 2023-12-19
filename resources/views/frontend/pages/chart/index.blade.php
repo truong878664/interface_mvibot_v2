@@ -13,6 +13,9 @@
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='error']:text-white group-data-[active='error']:bg-main"
                         data-name="error">Error</button>
+                    <button
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='battery']:text-white group-data-[active='battery']:bg-main"
+                        data-name="battery">Battery</button>
                 </div>
             </div>
             <div class="flex items-center justify-center w-full h-full">

@@ -70,7 +70,7 @@ handleShowJoystick();
 
 async function addLayerDbToLayerActive() {
     const mvibot_layer_active = [];
-    const res = await fetch("/dashboard/missions/layer-active");
+    const res = await fetch("/api/layer");
     const data = await res.json();
     data.map((item) => {
         const { z, w } = mathYaw(item.yawo);
