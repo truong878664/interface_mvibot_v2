@@ -86,15 +86,6 @@ type Sound = {
     mode: string;
     music_mode: 0 | 1 | 2 | 3 | 4;
     music_start: 0 | 1;
-};
+}
 
-
-Footprint
-Position
-Sleep
-Gpio
-GpioModule
-Variable
-Marker
-Config
-Sound
+const text = String("dsf")

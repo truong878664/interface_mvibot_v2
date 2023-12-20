@@ -5,6 +5,7 @@ const selectChartType = document.querySelector(
     "[data-name='change-type-chart']",
 );
 const dataChartRobot = {
+    listDate: [],
     trip: {},
     error: {},
     battery: {},
@@ -49,10 +50,11 @@ const chart = new Chart(document.getElementById("trips"), {
     options: {
         responsive: true,
         onClick: (e, legendItem, chart) => {
-            const index = legendItem[0].index;
-            console.log(e);
-            console.log(chart.data.labels.at(index));
-            // console.log(dataChartRobot[activeSelect.type]);
+            if (legendItem) {
+                const index = legendItem[0].index;
+                console.log(e);
+                console.log(chart.data.labels.at(index));
+            }
         },
         element: {
             borderJoinStyle: "round",
@@ -81,6 +83,10 @@ const chart = new Chart(document.getElementById("trips"), {
                     display: true,
                     text: "Quantity",
                 },
+                min: 0,
+                ticks: {
+                    stepSize: 1,
+                },
             },
         },
     },
@@ -91,13 +97,21 @@ robotChart.addEventListener("change", async (e) => {
     if (nameRobot) {
         const data = await getHistory(nameRobot);
         const dataChart = getDataChart(data);
+
         const formatTripsDateData = formatDataChartFollowDate(dataChart.trips);
         const formatErrorData = formatDataChartFollowDate(dataChart.error);
         const formatBatteryData = formatDataChartFollowDate(dataChart.battery);
 
         const tripCount = toChartLib(formatTripsDateData);
-        const errorCount = toChartLib(formatErrorData);
-        const batteryCount = toChartLib(formatBatteryData);
+        const errorCount = toChartLib(
+            formatErrorData,
+            Object.keys(formatTripsDateData),
+        );
+        const batteryCount = toChartLib(
+            formatBatteryData,
+            Object.keys(formatTripsDateData),
+        );
+
         dataChartRobot.trip = tripCount;
         dataChartRobot.error = errorCount;
         dataChartRobot.battery = batteryCount;
@@ -116,8 +130,9 @@ function getDataChart(data) {
     };
     const STRING_FINISH_TRIP = "Finish mission action normal";
     const STRING_FINISH_BATTERY = "action mission charge battery";
-    const STRING_ERROR_MISSIon = "Error mission";
-    data.map((item) => {
+    const STRING_ERROR_MISSION = "Error mission";
+
+    data?.map((item) => {
         if (item.data.includes(STRING_FINISH_TRIP)) {
             dataChart.trips.push({
                 data: item.data,
@@ -129,10 +144,11 @@ function getDataChart(data) {
         if (item.data.includes(STRING_FINISH_BATTERY)) {
             dataChart.battery.push(item);
         }
-        if (item.data.includes(STRING_ERROR_MISSIon)) {
+        if (item.data.includes(STRING_ERROR_MISSION)) {
             dataChart.error.push(item);
         }
     });
+
     return dataChart;
 }
 
@@ -149,14 +165,31 @@ function formatDataChartFollowDate(dataList) {
     return data;
 }
 
-function toChartLib(input) {
-    const labelList = Object.keys(input).map((date) => {
-        return new Date(Number(date)).toLocaleDateString("VI-vi");
-    });
-    const data = Object.keys(input).map((date) => {
-        return input[date].length;
-    });
-    return { data, labelList };
+function toChartLib(data, keys) {
+    if (!keys) {
+        const labelList = Object.keys(data).map((date) => {
+            return new Date(Number(date)).toLocaleDateString("VI-vi");
+        });
+        const dataChart = Object.keys(data).map((date) => {
+            return data[date].length;
+        });
+
+        return { data: dataChart, labelList };
+    } else {
+        const dataChart = keys.map((keys) => {
+            const dataListChart = data[keys];
+            if (dataListChart) {
+                return dataListChart.length;
+            } else {
+                return 0;
+            }
+        });
+
+        const stringDateList = keys.map((date) => {
+            return new Date(Number(date)).toLocaleDateString("VI-vi");
+        });
+        return { data: dataChart, labelList: stringDateList };
+    }
 }
 
 function updateChart({
@@ -174,10 +207,14 @@ function updateChart({
         chart.data.labels.length = 0;
         chart.update();
     } else {
+        if (chart.data.datasets.length > 1) {
+            chart.data.datasets.pop();
+        }
         chart.data.labels.length = 0;
         chart.data.datasets.forEach((dataset) => {
             dataset.data.length = 0;
             dataset.data.push(...data);
+            dataset.type = "line";
             dataset.label = label;
             borderColor && (dataset.borderColor = borderColor);
         });
@@ -198,9 +235,36 @@ function drawChart() {
 
 selectChartType.onclick = (e) => {
     const type = e.target.dataset.name;
+    selectChartType.dataset.active = type;
     if (dataChartRobot.hasOwnProperty(type)) {
-        selectChartType.dataset.active = type;
         activeSelect.type = type;
         drawChart();
     }
+    if (type === "performance") {
+        // console.log(chart.data.datasets);
+        handler(chart);
+    }
+};
+
+const handler = (chart) => {
+    if (chart.data.datasets.length > 1) {
+        chart.data.datasets.pop();
+    }
+    updateChart({
+        chart: chart,
+        data: dataChartRobot.error.data,
+        labelList: dataChartRobot.error.labelList,
+        label: detailChart.error.label,
+        borderColor: detailChart.error.borderColor,
+    });
+    const newDataset = {
+        label: "Trips",
+        backgroundColor: "#ccc",
+        borderColor: "#ccc",
+        borderWidth: 1,
+        type: "bar",
+        data: dataChartRobot.trip.data,
+    };
+    chart.data.datasets.push(newDataset);
+    chart.update();
 };

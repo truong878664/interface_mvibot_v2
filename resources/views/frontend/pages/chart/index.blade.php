@@ -16,6 +16,9 @@
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='battery']:text-white group-data-[active='battery']:bg-main"
                         data-name="battery">Battery</button>
+                    <button data-name="performance"
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performance']:text-white group-data-[active='performance']:bg-main">robot
+                        performance chart</button>
                 </div>
             </div>
             <div class="flex items-center justify-center w-full h-full">
@@ -24,7 +27,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <script type="module" src="/js/library/chart.js"></script>
     <script type="module" src="/js/library/ChartDataLabels.js"></script>
