@@ -38,10 +38,11 @@
                 ],
             ];
         @endphp
-        <div class="group/status wrapper-battery-content overflow-auto flex flex-wrap data-[status-robot=no]:!text-[#d2d2d2]"
+        <div class="group/status wrapper-battery-content overflow-auto grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 data-[status-robot=no]:!text-[#d2d2d2]"
             data-status-robot="no">
             @foreach ($statusDetails as $item)
-                <div class="w-1/2 md:w-1/3 lg:w-1/4">
+                <div class="">
+                    {{-- <div class="w-1/2 md:w-1/3 lg:w-1/4  "> --}}
                     <div class="w-[calc(100%_-_8px)] mx-2 bg-[#fff] rounded-md shadow-md">
                         <div class="flex justify-between items-center px-4 py-1 cursor-pointer border-b group/status-title peer/status-title status-title"
                             data-status="hidden">

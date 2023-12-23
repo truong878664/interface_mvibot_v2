@@ -27,6 +27,7 @@ import { createMakerClientFootprint } from "../rosModule/footprint/createMakerCl
 import { createMarkerClientPath } from "../rosModule/path/createMarkerClientPath.js";
 import { subscribePath } from "./path.js";
 import handleShowJoystick from "./handleShowJoystick.js";
+import { processLayer } from "../lib/ROS3D/utils.js";
 
 const getNode = document.querySelector.bind(document);
 const getNodeList = document.querySelectorAll.bind(document);
@@ -40,7 +41,6 @@ const listRobotElement = getNode("#robot-navigation-json");
 export const robotList = JSON.parse(listRobotElement.value);
 
 (function createMarker() {
-    markerClient(tfClient, viewer);
     createMarkerClientArrow(tfClient, viewer);
     createMakerClientFootprint(tfClient, viewer);
     createMarkerClientPath(tfClient, viewer);
@@ -48,6 +48,8 @@ export const robotList = JSON.parse(listRobotElement.value);
     createPoint(viewer, tfClient);
     createPose(viewer, tfClient);
 })();
+
+const layer = processLayer({ ros, tfClient, viewer });
 
 subscribeFootprint();
 subscribePath();
@@ -87,7 +89,7 @@ async function addLayerDbToLayerActive() {
         mvibot_layer_active.push(layer);
         return mvibot_layer_active;
     });
-    displayLayer(mvibot_layer_active);
+    layer.display(mvibot_layer_active);
 }
 
 const robotNavigation = JSON.parse(getNode("#robot-navigation-json").value);

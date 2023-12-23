@@ -52,8 +52,8 @@
             type="text/javascript"
             src="/js/library/easeljs.min.js"
         ></script>
-        <script type="text/javascript" src="/js/library/ros2d.min.js"></script>
         <script src="/js/library/three.js"></script>
+        <script type="text/javascript" src="/js/library/ros2d.min.js"></script>
         <script src="/js/library/STLLoader.js"></script>
         <script src="/js/library/eventemitter2.js"></script>
         <script src="/js/library/ColladaLoader.js"></script>

@@ -1,23 +1,18 @@
-// import validateInputSubmit from "../../../../functionHandle/validateForm.js";
+import {
+    processLayer,
+    processPoint,
+    processPose,
+} from "../../../../lib/ROS3D/utils.js";
 import ros, { $, toggerMessage } from "../../../../main.js";
 import reloadWhenOrientation from "../../../../reloadOnOrientation.js";
 import { mvibot_layer } from "../../../../rosModule/classMvibot.js";
 import clickSetPointMap from "../../../../rosModule/clickSetPointMap.js";
 import createAxes from "../../../../rosModule/createAxes.js";
 import createMap from "../../../../rosModule/createMap.js";
-import createPoint from "../../../../rosModule/createPoint.js";
-import createPose from "../../../../rosModule/createPose.js";
 import createTfClient from "../../../../rosModule/createTfClient.js";
-import displayPoint from "../../../../rosModule/displayPoint.js";
-import displayPose from "../../../../rosModule/displayPose.js";
 import setSizeMap from "../../../../rosModule/getSizeMap.js";
-import {
-    displayLayer,
-    markerClient,
-} from "../../../../rosModule/layer/markerClient.js";
 import lockZ from "../../../../rosModule/lockZ.js";
 import mathYaw from "../../../../rosModule/mathYaw.js";
-import { markerClientPath } from "../../../../rosModule/path/markerClientPath.js";
 import qToYaw from "../../../../rosModule/qToYawn.js";
 
 export default function render3DMap(
@@ -69,16 +64,18 @@ export default function render3DMap(
     const tfClient = createTfClient();
     createAxes(viewer);
 
-    createPoint(viewer, tfClient);
-    createPose(viewer, tfClient, colorPose);
+    const point = processPoint({ ros, viewer, tfClient });
+    const pose = processPose({ ros, viewer, tfClient, color: colorPose });
+    const layer = processLayer({ ros, viewer, tfClient });
 
-    markerClient(tfClient, viewer);
-    markerClientPath(tfClient, viewer);
+    const displayPosePoint = () => {
+        point.display(positionX, positionY);
+        pose.display(positionX, positionY, rotateZ, rotateW);
+        displayValue(positionX, positionY, rotateZdeg);
+    };
 
     setTimeout(() => {
-        displayPoint(positionX, positionY);
-        displayPose(positionX, positionY, rotateZ, rotateW);
-        displayValue(positionX, positionY, rotateZdeg);
+        displayPosePoint();
     }, 100);
 
     addLayerDbToLayerActive();
@@ -107,50 +104,19 @@ export default function render3DMap(
                     );
                     mvibot_layer_active.push(layer);
                 });
-
-                displayLayer(mvibot_layer_active);
+                layer.display(mvibot_layer_active);
             });
-        // fetch("/dashboard/missions/layer-active")
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //         data.forEach((item) => {
-        //             const { z, w } = mathYaw(item.yawo);
-        //             const layer = new mvibot_layer(
-        //                 item.name_layer,
-        //                 item.width,
-        //                 item.height,
-        //                 item.xo,
-        //                 item.yo,
-        //                 item.type_layer,
-        //                 z,
-        //                 w,
-        //             );
-        //             mvibot_layer_active.push(layer);
-        //         });
-        //         displayLayer(mvibot_layer_active);
-        //     });
     }
-    // validateInputSubmit(
-    //     ".input-submit",
-    //     ".form-create-point",
-    //     ".submit-btn-position",
-    //     ".time-out"
-    // );
 
     function setPosition() {
         controlPositionX.addEventListener("input", (e) => {
             positionX = Number(e.target.value);
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            displayPosePoint();
         });
 
         controlPositionY.addEventListener("input", (e) => {
             positionY = Number(e.target.value);
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            displayPosePoint();
         });
 
         controlRotateZ.addEventListener("input", (e) => {
@@ -159,25 +125,19 @@ export default function render3DMap(
             const { z, w } = mathYaw(degInput);
             rotateZ = z * 1;
             rotateW = w * 1;
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            displayPosePoint();
         });
 
         positionXElement.addEventListener("change", (e) => {
             checkValueInput(positionXElement);
             positionX = Number(e.target.value);
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            displayPosePoint();
         });
 
         positionYElement.addEventListener("change", (e) => {
             checkValueInput(positionYElement);
             positionY = Number(e.target.value);
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            displayPosePoint();
         });
 
         positionZElement.addEventListener("change", (e) => {
@@ -186,11 +146,9 @@ export default function render3DMap(
             const degInput = (Number(e.target.value) / 180) * Math.PI;
             const { z, w } = mathYaw(degInput);
 
-            rotateZ = z * 1;
-            rotateW = w * 1;
-            displayPoint(positionX, positionY);
-            displayPose(positionX, positionY, rotateZ, rotateW);
-            displayValue(positionX, positionY, rotateZdeg);
+            rotateZ = Number(z);
+            rotateW = Number(w);
+            displayPosePoint();
         });
     }
 

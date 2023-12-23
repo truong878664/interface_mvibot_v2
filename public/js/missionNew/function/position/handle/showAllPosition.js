@@ -33,6 +33,7 @@ export default function showAllPosition() {
                     });
                     $("[data-list-position]").innerHTML =
                         htmlListPoint.join("");
+                    console.log(1111);
                     return data;
                 })
                 .then((data) => {
@@ -40,26 +41,29 @@ export default function showAllPosition() {
                     data.forEach((position) => {
                         for (let i = 0; i < NUMBER_PUB; i++) {
                             const yaw = qToYaw(position.z, position.w);
-                            const {z, w} = mathYaw((Number(yaw) / 180) * Math.PI);
-
-                            showPoint(
-                                position.x,
-                                position.y,
-                                viewer,
-                                tfClient,
-                                `point_pub_${position.id}`
+                            const { z, w } = mathYaw(
+                                (Number(yaw) / 180) * Math.PI,
                             );
 
-                            showPose(
-                                position.x,
-                                position.y,
-                                z,
-                                w,
-                                viewer,
-                                tfClient,
-                                position.color_position,
-                                `/pose_pub_${position.id}`
-                            );
+                            console.log(123);
+                            // showPoint(
+                            //     position.x,
+                            //     position.y,
+                            //     viewer,
+                            //     tfClient,
+                            //     `point_pub_${position.id}`
+                            // );
+
+                            // showPose(
+                            //     position.x,
+                            //     position.y,
+                            //     z,
+                            //     w,
+                            //     viewer,
+                            //     tfClient,
+                            //     position.color_position,
+                            //     `/pose_pub_${position.id}`
+                            // );
                         }
                     });
                 });
@@ -105,7 +109,7 @@ export default function showAllPosition() {
         viewer,
         tfClient,
         color,
-        nameTopic = "/pose_pub"
+        nameTopic = "/pose_pub",
     ) {
         new ROS3D.Pose({
             ros: ros,

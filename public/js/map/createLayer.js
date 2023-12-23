@@ -7,7 +7,7 @@ import createPose from "../rosModule/createPose.js";
 import displayPoint from "../rosModule/displayPoint.js";
 import {
     markerClient,
-    displayLayer,
+    // displayLayer,
     deleteAllLayer,
 } from "../rosModule/layer/markerClient.js";
 import { mvibot_layer, mvibot_color } from "../rosModule/classMvibot.js";
@@ -16,6 +16,7 @@ import lockZ from "../rosModule/lockZ.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
+import { processLayer } from "../lib/ROS3D/utils.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -59,6 +60,12 @@ function start() {
     linkInputRange();
 }
 start();
+
+const layer = processLayer({ ros, viewer, tfClient });
+
+function displayLayer(layerList) {
+    layer.display(layerList);
+}
 
 const dataLayerModel = {
     name_map_active: mapActive,

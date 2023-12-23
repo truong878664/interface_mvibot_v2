@@ -15,6 +15,7 @@ import showLaser from "../rosModule/showLaser.js";
 import showUrd from "../rosModule/showUrd.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
 import confirmationForm from "../functionHandle/confirmationForm.js";
+import { processPoint, processPose } from "../lib/ROS3D/utils.js";
 
 const mapElement = $("#map");
 const heightMap = mapElement.offsetHeight;
@@ -25,11 +26,12 @@ let viewer = createMap(heightMap, widthMap);
 
 createAxes(viewer);
 reloadWhenOrientation();
-createPoint(viewer, tfClient);
-createPose(viewer, tfClient);
 
-displayPoint(0, 0);
-displayPose(0, 0, 0, 1);
+const point = processPoint({ ros, tfClient, viewer });
+const pose = processPose({ ros, tfClient, viewer });
+
+point.display(0, 0);
+pose.display(0, 0, 0, 1);
 
 getSizeMap();
 
@@ -131,8 +133,8 @@ $("#robot-navigation-name").onchange = (e) => {
 };
 
 function displayLocation() {
-    displayPoint(x, y);
-    displayPose(x, y, rotateZ, rotateW);
+    point.display(x, y);
+    pose.display(x, y, rotateZ, rotateW);
 }
 
 $("#send-location-btn").onclick = () => {
@@ -187,7 +189,7 @@ const clickSetPoint = function (e) {
         e.offsetY,
         rotateZ,
         rotateW,
-        viewer
+        viewer,
     );
     x = Number(positionXSet.toFixed(2));
     y = Number(positionYSet.toFixed(2));
@@ -220,7 +222,7 @@ const touchSetPoint = function (e) {
         e.touches[0].pageY - mapWrapper.offsetTop,
         rotateZ,
         rotateW,
-        viewer
+        viewer,
     );
 
     x = Number(positionXSet.toFixed(2));

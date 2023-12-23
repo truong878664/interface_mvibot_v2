@@ -1,15 +1,14 @@
 <div class="flex flex-col text-right">
-    <span class="py-2 h-8 font-bold px-2">Motor left</span>
-    <span class="py-2 h-8 px-2">Live</span>
-    <span class="py-2 h-8 px-2">Error</span>
-    <span class="py-2 h-8 px-2">Enable</span>
-    <span class="py-2 h-8 px-2">Brake</span>
-
-    <span class="py-2 h-8 font-bold px-2">Motor right</span>
-    <span class="py-2 h-8 px-2">Live</span>
-    <span class="py-2 h-8 px-2">Error</span>
-    <span class="py-2 h-8 px-2">Enable</span>
-    <span class="py-2 h-8 px-2">Brake</span>
+    <span class="py-2 h-8 whitespace-nowrap font-bold px-2">Motor left</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Live</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Error</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Enable</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Brake</span>
+    <span class="py-2 h-8 whitespace-nowrap font-bold px-2">Motor right</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Live</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Error</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Enable</span>
+    <span class="py-2 h-8 whitespace-nowrap px-2">Brake</span>
 </div>
 <div class="flex flex-col mx-6">
     <span class="py-2 h-8 pr-8 pl-2 text-transparent">-</span>

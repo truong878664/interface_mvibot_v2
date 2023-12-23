@@ -53,7 +53,6 @@ export default function handleWrapFunction() {
                 functionClass.currentIdUpdate = data.id;
             },
             showAllPosition() {
-                // return;
                 const positionList = FunctionStepClass.data.position;
                 let mapObject;
 
@@ -166,8 +165,8 @@ export default function handleWrapFunction() {
                 document.body.appendChild(Div);
                 mapObject = new Map({ mapID: "map-show-all" });
                 mapObject.create({ type: "basic" });
-                mapObject.point.create({});
-                mapObject.pose.create({});
+                // mapObject.point.create({});
+                // mapObject.pose.create({});
                 mapObject.point.displayAll(positionList);
             },
         };
