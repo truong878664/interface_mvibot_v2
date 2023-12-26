@@ -83,8 +83,10 @@ function updateStatus() {
                         const value = data[key];
                         const mapping = valueMapping[value];
                         if (mapping) {
-                            itemElement.innerText = mapping.text;
-                            itemElement.classList.add(mapping.class);
+                            if (itemElement) {
+                                itemElement.innerText = mapping.text;
+                                itemElement.classList.add(mapping.class);
+                            }
                         } else {
                             key === "is_master" &&
                                 (itemElement.dataset.status = value);
