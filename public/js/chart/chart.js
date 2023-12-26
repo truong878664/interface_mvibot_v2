@@ -251,9 +251,7 @@ function updateChart({
         chart.data.labels.length = 0;
         chart.update();
     } else {
-        if (chart.data.datasets.length > 1) {
-            chart.data.datasets.pop();
-        }
+        justOneDataChart(chart);
         chart.data.labels.length = 0;
         chart.data.datasets.forEach((dataset) => {
             dataset.data.length = 0;
@@ -264,6 +262,13 @@ function updateChart({
         });
         chart.data.labels.push(...labelList);
         chart.update();
+    }
+}
+
+function justOneDataChart(chart) {
+    if (chart.data.datasets.length > 1) {
+        chart.data.datasets.pop();
+        chart.data.datasets.pop();
     }
 }
 
@@ -290,9 +295,7 @@ selectChartType.onclick = (e) => {
 };
 
 const handler = (chart) => {
-    if (chart.data.datasets.length > 1) {
-        chart.data.datasets.pop();
-    }
+    justOneDataChart(chart);
     updateChart({
         chart: chart,
         data: dataChartRobot.error.data,
@@ -300,14 +303,21 @@ const handler = (chart) => {
         label: detailChart.error.label,
         borderColor: detailChart.error.borderColor,
     });
+    const dataSystemError = {
+        label: detailChart.systemError.label,
+        borderColor: detailChart.systemError.borderColor,
+        borderWidth: 2,
+        type: "line",
+        data: dataChartRobot.systemError.data,
+        stepSize: 2,
+    };
     const newDataset = {
         label: "Trips",
-        backgroundColor: "#ccc",
-        borderColor: "#ccc",
-        borderWidth: 1,
+        borderColor: detailChart.trip.borderColor,
+        borderWidth: 2,
         type: "bar",
         data: dataChartRobot.trip.data,
     };
-    chart.data.datasets.push(newDataset);
+    chart.data.datasets.push(newDataset, dataSystemError);
     chart.update();
 };
