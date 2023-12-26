@@ -1,4 +1,6 @@
+import Node from "../functionHandle/Node.js";
 import { getHistory } from "../lib/ultils.js";
+import ShowTrip from "./component/ShowTrip.js";
 
 const robotChart = document.querySelector("#robot-chart");
 const selectChartType = document.querySelector(
@@ -9,6 +11,7 @@ const dataChartRobot = {
     trip: {},
     error: {},
     battery: {},
+    systemError: {},
 };
 const activeSelect = {
     nameRobot: "",
@@ -20,14 +23,19 @@ const detailChart = {
         label: "Trips",
     },
     error: {
-        borderColor: "#EF4040",
-        label: "Error",
+        borderColor: "#FFB534",
+        label: "Short stop error",
     },
     battery: {
         borderColor: "#52D3D8",
         label: "Battery",
     },
+    systemError: {
+        borderColor: "red",
+        label: "System error",
+    },
 };
+
 const dataUiChair = {
     labels: [],
     datasets: [
@@ -44,6 +52,34 @@ const dataUiChair = {
     ],
 };
 
+const ShowTripElement = Node("div").props({
+    className: "bg-white w-3/4 h-3/4 rounded-md",
+    children: "12",
+});
+const ShowTripComponent = (() => {
+    const ShowTripContainer = Node("div").props({
+        className:
+            "fixed top-0 left-0 w-full h-full bg-black/10 flex justify-center items-center",
+        onClick: (e) => {
+            if (e.target === ShowTripContainer) {
+                ShowTripContainer.remove();
+            }
+        },
+        children: [ShowTripElement],
+    });
+
+    return {
+        show() {
+            document.body.appendChild(ShowTripContainer);
+        },
+        remove() {
+            ShowTripContainer.children.remove();
+
+            ShowTripContainer.remove();
+        },
+    };
+})();
+
 const chart = new Chart(document.getElementById("trips"), {
     type: "line",
     data: dataUiChair,
@@ -51,9 +87,9 @@ const chart = new Chart(document.getElementById("trips"), {
         responsive: true,
         onClick: (e, legendItem, chart) => {
             if (legendItem) {
-                const index = legendItem[0].index;
-                console.log(e);
-                console.log(chart.data.labels.at(index));
+                // const index = legendItem[0].index;
+                // console.log(ShowTripElement);
+                // ShowTripComponent.show(ShowTripElement);
             }
         },
         element: {
@@ -81,7 +117,7 @@ const chart = new Chart(document.getElementById("trips"), {
             y: {
                 title: {
                     display: true,
-                    text: "Quantity",
+                    text: "Count",
                 },
                 min: 0,
                 ticks: {
@@ -101,6 +137,9 @@ robotChart.addEventListener("change", async (e) => {
         const formatTripsDateData = formatDataChartFollowDate(dataChart.trips);
         const formatErrorData = formatDataChartFollowDate(dataChart.error);
         const formatBatteryData = formatDataChartFollowDate(dataChart.battery);
+        const formatSystemErrorData = formatDataChartFollowDate(
+            dataChart.errorSystem,
+        );
 
         const tripCount = toChartLib(formatTripsDateData);
         const errorCount = toChartLib(
@@ -111,10 +150,14 @@ robotChart.addEventListener("change", async (e) => {
             formatBatteryData,
             Object.keys(formatTripsDateData),
         );
-
+        const SystemError = toChartLib(
+            formatSystemErrorData,
+            Object.keys(formatTripsDateData),
+        );
         dataChartRobot.trip = tripCount;
         dataChartRobot.error = errorCount;
         dataChartRobot.battery = batteryCount;
+        dataChartRobot.systemError = SystemError;
 
         drawChart();
     } else {
@@ -127,6 +170,7 @@ function getDataChart(data) {
         trips: [],
         error: [],
         battery: [],
+        errorSystem: [],
     };
     const STRING_FINISH_TRIP = "Finish mission action normal";
     const STRING_FINISH_BATTERY = "action mission charge battery";
@@ -241,7 +285,6 @@ selectChartType.onclick = (e) => {
         drawChart();
     }
     if (type === "performance") {
-        // console.log(chart.data.datasets);
         handler(chart);
     }
 };
