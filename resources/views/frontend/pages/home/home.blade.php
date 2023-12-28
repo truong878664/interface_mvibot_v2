@@ -58,26 +58,26 @@
 
         @php
             $maruei = [
-                ['title' => 'MARUEI INDUSTRIES CO., LTD.', 'description' => 'Sản xuất và bán phụ tùng ô tô'],
-                ['title' => 'MARUEI MIYAZAKI CO., LTD.', 'description' => 'Maruei Miyazaki nguồn cung cấp nguyên liệu cho các công ty của Tập đoàn Maruei.'],
-                ['title' => 'MARUEI TECHNOS CO., LTD.', 'description' => 'Maruei Technos chủ yếu sản xuất các sản phẩm bằng máy móc.'],
-                ['title' => 'MARLEY PRECISION INC.', 'description' => 'Marley Precision tham gia vào kinh doanh và sản xuất gia công, nhắm mục tiêu các khu vực Bắc Mỹ.'],
-                ['title' => 'MARLEY PRECISION MEXICO', 'description' => 'Marley Precision Mexico tham gia vào kinh doanh và sản xuất gia công, nhắm vào các công ty Nhật Bản tại Mexico.'],
-                ['title' => 'MARUEI VIETNAM PRECISION', 'description' => 'Maruei Việt Nam Precision có nhà máy sản xuất lớn nhất trong Tập đoàn Maruei.'],
-                ['title' => 'MARUEI NEW WAVE CO., LTD.', 'description' => 'Maruei New Wave là phụ trách việc kiểm soát sản xuất và phân phối các phần của Maruei Industries.'],
-                ['title' => 'MARUEI TOYOTA CO., LTD.', 'description' => 'Maruei Toyota là một công ty sản xuất lắp ráp các linh kiện điện tử của xe ô tô.'],
-                ['title' => 'MIYAZAKI TECHNOVILLAGE CO., LTD.', 'description' => 'Cửa hàng đầu tiên tại khu vực thương mại của Technovillage, chúng tôi kinh doanh một cửa hàng tiện lợi với giặt tự động.'],
+                ['className' => 'hidden', 'title' => 'MARUEI INDUSTRIES CO., LTD.', 'description' => 'Sản xuất và bán phụ tùng ô tô'],
+                ['className' => '', 'title' => 'MARUEI MIYAZAKI CO., LTD.', 'description' => 'Located in Sadowara Town, Miyazaki Prefecture, we supply cold forged materials to our domestic and overseas production bases. Maruei Miyazaki has four bases: the Head Office Factory, which is a forging processing factory, the TRP Factory, which specializes in precision cutting, the MTV Factory, and the Innovation Center, which is a development center. We have created an environment where everything from development to cutting can be carried out in Miyazaki.'],
+                ['className' => 'hidden', 'title' => 'MARUEI TECHNOS CO., LTD.', 'description' => 'Maruei Technos chủ yếu sản xuất các sản phẩm bằng máy móc.'],
+                ['className' => 'hidden', 'title' => 'MARLEY PRECISION INC.', 'description' => 'Marley Precision tham gia vào kinh doanh và sản xuất gia công, nhắm mục tiêu các khu vực Bắc Mỹ.'],
+                ['className' => '', 'title' => 'Maruei De Mexico SA.DE.CV.', 'description' => 'Maruei De MEXICO was established in neighboring Mexico to cover demand in the United States and to meet the needs of customers in Mexico. We operate as a low-volume, high-mix production factory, taking advantage of our labor-intensive line structure.'],
+                ['className' => '', 'title' => 'MARUEI VIETNAM PRECISION', 'description' => "Maruei Vietnam is our largest production factory, and was established in 2001 to provide our products at low prices to users from all over the ASEAN region as well as from domestic companies. Maruei Vietnam's products, which have a large number of hard-working and talented staff, have received high praise from many users for both price and quality."],
+                ['className' => '', 'title' => 'MARUEI NEW WAVE CO., LTD.', 'description' => 'We handle general domestic and international logistics operations such as automobile parts transportation, equipment transportation, and overseas moving, as well as warehousing operations.'],
+                ['className' => '', 'title' => 'MARUEI TOYOTA CO., LTD.', 'description' => 'Maruei Toyota Co., Ltd., which was spun off as an independent company in April 2014, assembles and produces electronic parts such as switch parts for automobile steering wheels and parking brake switches. We carry out efficient production using the Toyota Kanban system so that we can quickly respond to daily changing demand.'],
+                ['className' => '', 'title' => 'MIYAZAKI TECHNOVILLAGE CO., LTD.', 'description' => ''],
             ];
 
         @endphp
         <div class="w-full h-full">
             <header class="text-center text-[30px] font-bold mt-8 text-[#0f6cbd]">The Maruei Group</header>
             <section class="w-full max-w-[1000px] mx-auto">
-                <ul class="w-full flex flex-wrap">
+                <ul class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
 
                     @foreach ($maruei as $index => $item)
-                        <li class="min-h-[300px] w-1/2 lg:w-1/4 p-4  mb-2">
-                            <div class="w-full h-[200px] bg-slate-500 bg-cover rounded-md hover:scale-110 transition-all"
+                        <li class="border rounded-md p-2 {{ $item['className'] }}">
+                            <div class="w-full h-[320px] bg-slate-500 bg-cover rounded-md hover:scale-105 origin-center transition-all"
                                 style="background-image: url(/img/home2/{{ $index + 1 }}.jpg)"></div>
                             <span class="font-bold">{{ $item['title'] }}</span>
                             <span>{{ $item['description'] }}</span>
@@ -200,36 +200,22 @@
             }
         </style>
         <style>
-            /* body {
-                                <<<<<<< HEAD
-                                                    margin: 0;
-                                                    height: 100vh;
-                                                    font-weight: 100;
-                                                    background: radial-gradient(#a23982, #1f1013);
-                                                    -webkit-overflow-Y: hidden;
-                                                    -moz-overflow-Y: hidden;
-                                                    -o-overflow-Y: hidden;
-                                                    overflow-y: hidden;
-                                                    -webkit-animation: fadeIn 1 1s ease-out;
-                                                    -moz-animation: fadeIn 1 1s ease-out;
-                                                    -o-animation: fadeIn 1 1s ease-out;
-                                                    animation: fadeIn 1 1s ease-out;
-                                                } */
-            =======margin: 0;
-            height: 100vh;
-            font-weight: 100;
-            background: radial-gradient(#a23982, #1f1013);
-            -webkit-overflow-Y: hidden;
-            -moz-overflow-Y: hidden;
-            -o-overflow-Y: hidden;
-            overflow-y: hidden;
-            -webkit-animation: fadeIn 1 1s ease-out;
-            -moz-animation: fadeIn 1 1s ease-out;
-            -o-animation: fadeIn 1 1s ease-out;
-            animation: fadeIn 1 1s ease-out;
+            body {
+                margin: 0;
+                height: 100vh;
+                font-weight: 100;
+                background: radial-gradient(#a23982, #1f1013);
+                -webkit-overflow-Y: hidden;
+                -moz-overflow-Y: hidden;
+                -o-overflow-Y: hidden;
+                overflow-y: hidden;
+                -webkit-animation: fadeIn 1 1s ease-out;
+                -moz-animation: fadeIn 1 1s ease-out;
+                -o-animation: fadeIn 1 1s ease-out;
+                animation: fadeIn 1 1s ease-out;
             }
 
-            */>>>>>>>new_wave .light {
+            .light {
                 position: absolute;
                 width: 0px;
                 opacity: .75;

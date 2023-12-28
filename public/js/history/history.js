@@ -96,11 +96,14 @@ exportBtn.onclick = () => {
 
 function renderLog(data) {
     if (!data) {
-        logContentElement.innerHTML = `<tr class="text-center text-slate-500">
-        <td>N/A</td>
-        <td>N/A</td>
-        <td>N/A</td>
-        <td>Robot has no history</td>
+        logContentElement.innerHTML = `
+        <tr class="text-center text-slate-500">
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>Robot has no history</td>
+            <td>N/A</td>
+
         </tr>`;
         return;
     }
@@ -116,17 +119,26 @@ function renderLog(data) {
     const htmlLog = [];
     data.reverse().map((item, index) => {
         htmlLog.push(`
-        <tr
-            data-log="${item.type}"
-            class="group/log font-bold">
-        <td class="${classNameItem} text-center"><span>${
-            data.length - index
-        }</span></td>
-        <td class="${classNameItem}"><span>${icons[item.type]}  ${
+        <tr data-log="${
             item.type
-        }</span></td>
-        <td class="${classNameItem}"><span>${item.time}</span></td>
-        <td class="${classNameItem}"><span>${item.data}</span></td>
+        }" class="group/log font-bold" data-index="${index}">
+            <td class="whitespace-nowrap ${classNameItem} text-center">
+                <span>${data.length - index}</span>
+            </td>
+            <td class="whitespace-nowrap ${classNameItem}">
+                <span>${icons[item.type]}  ${item.type}</span>
+            </td>
+            <td class="break-words ${classNameItem}">
+                <span>${item.time}</span>
+            </td>
+            <td class="break-all ${classNameItem}">
+                <span>${item.data}</span>
+            </td>
+            <td class="${classNameItem}">
+                <button class="px-2 text-gray-200 hidden">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
         </tr>
     `);
         return htmlLog;

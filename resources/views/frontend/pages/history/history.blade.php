@@ -18,10 +18,11 @@
             <table class="w-full font-['ubuntu-mono']">
                 <thead class="sticky top-0">
                     <tr class="bg-stone-50">
-                        <th class="p-4 w-1/12">No</th>
-                        <th class="p-4 w-1/12">Type</th>
-                        <th class="p-4 w-2/12">Time</th>
-                        <th class="p-4 w-8/12">Log</th>
+                        <th class="p-4 w-1/12 border">No</th>
+                        <th class="p-4 w-1/12 border">Type</th>
+                        <th class="p-4 w-1/12 border">Time</th>
+                        <th class="p-4 w-8/12 border">Log</th>
+                        <th class="p-4 w-1/12 border">action</th>
                     </tr>
                 </thead>
                 <tbody class="log-content bg-stone-50"></tbody>
