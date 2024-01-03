@@ -15,7 +15,7 @@
 
         </div>
         <div class="w-full mt-4 flex-1 overflow-y-auto">
-            <table class="w-full font-['ubuntu-mono']">
+            <table class="w-full font-['ubuntu-mono']" data-name="history-table">
                 <thead class="sticky top-0">
                     <tr class="bg-stone-50">
                         <th class="p-4 w-1/12 border">No</th>

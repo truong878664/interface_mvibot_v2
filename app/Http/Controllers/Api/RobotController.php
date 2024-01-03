@@ -101,9 +101,21 @@ class RobotController extends Controller
     public function update(Request $request, $robot)
     {
         try {
-            //code...
-            $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->update(["history" => null]);
-            return ["error" => false, "message" => "Reset successfully!"];
+            $type = $request->type;
+            switch ($type) {
+                case 'update':
+                    DB::table('my_robot')->where('name_seri', $robot)->update(["history" => $request->data]);
+                    return ["error" => false, "message" => "Save history successfully!"];
+                    break;
+                case 'reset':
+                    $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->update(["history" => null]);
+                    return ["error" => false, "message" => "Reset successfully!"];
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
         } catch (\Throwable $th) {
             //throw $th;
             return ["error" => true, "message" => "ERR!" . $th];

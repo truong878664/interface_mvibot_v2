@@ -36,7 +36,10 @@ class ConfigController extends Controller
      */
     public function store(Request $request)
     {
-        return  MissionConfig::create($request->all());
+        $configSaved = MissionConfig::create($request->all());
+        $configSaved->mode = "config";
+        $configSaved->time_out = -1;
+        return $configSaved;
     }
 
     /**

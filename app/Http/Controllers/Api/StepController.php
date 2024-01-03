@@ -76,6 +76,9 @@ class StepController extends Controller
             case 'sound':
                 return MissionSound::where('id', $request->id)->get();
                 break;
+            case 'config':
+                return DB::table("mission_configs")->where('id', $request->id)->get();
+                break;
             default:
                 return ['status' => 200];
         }

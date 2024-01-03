@@ -2,11 +2,14 @@ import confirmationForm from "../functionHandle/confirmationForm.js";
 import { getHistory, parseDataHistoryString } from "../lib/ultils.js";
 import { toggerMessage } from "../main.js";
 
+const getNodeByName = (name) => document.querySelector(`[data-name='${name}']`);
+
 const logContentElement = document.querySelector(".log-content");
 const robotHistory = document.querySelector("#robot-history");
 const refreshBtn = document.querySelector("[data-name='refresh-btn']");
 const resetBtn = document.querySelector("[data-name='reset-btn']");
 const exportBtn = document.querySelector("[data-name='export-btn']");
+const historyTable = getNodeByName("history-table");
 
 const dataHistoryRobot = { current: null };
 
@@ -135,7 +138,7 @@ function renderLog(data) {
                 <span>${item.data}</span>
             </td>
             <td class="${classNameItem}">
-                <button class="px-2 text-gray-200 hidden">
+                <button class="px-2" data-name="delete-history" data-index="${index}">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
             </td>
@@ -145,3 +148,37 @@ function renderLog(data) {
     });
     logContentElement.innerHTML = htmlLog.join("");
 }
+
+const deleteHistoryItem = async (index) => {
+    dataHistoryRobot.current.splice(index, 1);
+    const dataString = dataHistoryRobot.current
+        .map(
+            (item) =>
+                `&/time>${item.time}//type>${item.type}//data>${item.data}/@`,
+        )
+        .reverse()
+        .join("");
+    const nameRobot = robotHistory.value;
+    const res = await fetch("/api/robot/" + nameRobot, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ type: "update", data: dataString }),
+    });
+    const message = await res.json();
+    console.log(message);
+    renderLog(dataHistoryRobot.current.reverse());
+};
+historyTable.addEventListener("click", (e) => {
+    if (e.target.dataset.name !== "delete-history") return;
+    const index = e.target.dataset.index;
+
+    confirmationForm({
+        callback: () => {
+            deleteHistoryItem(index);
+        },
+    });
+});
+
+// &/time>2023-12-01 15:58:49 //type>normal//data>Robot start up.../@

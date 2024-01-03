@@ -45,9 +45,11 @@ class SleepController extends Controller
         $dataSleep = [
             "name" => $name,
             "time_sleep" => $time_sleep,
+            "mode" => "sleep",
+            "time_out" => $request->time_out || -1
         ];
 
-       return  MissionSleep::create($dataSleep);
+        return  MissionSleep::create($dataSleep);
     }
 
     /**
@@ -94,7 +96,7 @@ class SleepController extends Controller
     {
         $itemDelete = MissionSleep::where('id', $id)->first();
         $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
-         //function at controller.php
+        //function at controller.php
         $this->updateStepDelete($itemName);
 
         MissionSleep::where('id', $id)->delete();
