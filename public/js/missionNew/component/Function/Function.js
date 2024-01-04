@@ -148,6 +148,14 @@ const createHtmlFunctionItem = {
                     <span>Duplicate</span>
                 </button>
             </li>
+            <li>
+                <button data-button-function-kind="duplicate" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
+                    <span class="mr-2 text-orange-500">
+                        <i class="fa-regular fa-clone"></i>
+                    </span>
+                    <span>Mission used</span>
+                </button>
+            </li>
         </ul>
     `,
 };
