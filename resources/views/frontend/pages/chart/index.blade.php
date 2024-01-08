@@ -25,8 +25,17 @@
                 </div>
             </div>
             <div class="flex items-center justify-center w-full h-full">
-                <div class="w-[90%] h-[90%] flex items-center justify-center">
+                <div class="relative w-[90%] h-[90%] flex items-center justify-center">
                     <canvas id="trips"></canvas>
+                    <button data-name="left-chart-date"
+                        class="absolute left-0 bottom-0 -translate-x-full rounded-full border border-gray-600 py-1 px-3">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button data-name="right-chart-date"
+                        class="absolute right-0 bottom-0 translate-x-full rounded-full border border-gray-600 py-1 px-3">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+
                 </div>
             </div>
         </div>

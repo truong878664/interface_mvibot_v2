@@ -20,7 +20,6 @@ class MissionV4Controller extends Controller
      */
     public function index()
     {
-        // $mission = $this->translateDataRobot(25, false);
         return MissionsVer::all();;
     }
 

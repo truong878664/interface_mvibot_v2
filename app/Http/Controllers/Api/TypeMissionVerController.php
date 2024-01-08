@@ -40,10 +40,10 @@ class TypeMissionVerController extends Controller
     {
         try {
             $typeMission = TypeMissionVer::create($request->all());
-            return ["saved" => true, "message" => "Save block step successfully!", "error" => null, "id" => $typeMission->id, "name" => $typeMission->name];
+            return ["saved" => true, "message" => "Save block step successfully!", "error" => null, "id" => $typeMission->id, "name" => $typeMission->name, "data" => $typeMission];
         } catch (\Throwable $th) {
-            throw $th;
-            // return ["saved" => false, "message" => "Save block step error!", "error" => $th];
+
+            return ["saved" => false, "message" => "Save block step error!", "error" => $th, "id" => null, "name" => null, "data" => null];
         }
     }
 
@@ -89,10 +89,8 @@ class TypeMissionVerController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $data = $request->data;
-            $name = $data['name'];
-            TypeMissionVer::where("id", $id)->update(['data' => $request->data, 'name' => $name]);
-            return ["message" => "update type mission successfully", "error" => false];
+            TypeMissionVer::where("id", $id)->update($request->all());
+            return ["message" => "update type mission successfully", "error" => false,];
         } catch (\Throwable $th) {
             return ["message" => "ERR!" . $th, "error" => true];
         }

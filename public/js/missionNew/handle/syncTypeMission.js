@@ -12,8 +12,8 @@ export default function syncTypeMission(typeMission) {
         const typeMissionBLockUpdateList = document.querySelectorAll(
             `[data-block-wrapper='${newType}'][data-id='${id}']`,
         );
-        const asyncSaveTypeMission = Promise.resolve();
 
+        const asyncSaveTypeMission = Promise.resolve();
         asyncSaveTypeMission
             .then(() => {
                 Array.from(typeMissionBLockUpdateList).forEach((item) => {

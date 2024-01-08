@@ -138,7 +138,10 @@ export default class TypeMission {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ data }),
+                body: JSON.stringify({
+                    name: data.name,
+                    data: JSON.stringify(data),
+                }),
             });
             const message = await res.json();
             this.render();

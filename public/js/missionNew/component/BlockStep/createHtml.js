@@ -163,7 +163,7 @@ const createHtml = {
                     data-action="drag"
                     data-name="block" data-block-wrapper="${type}"
                     data-value='${JSON.stringify(value)}'
-                    data-id="${value.id}"
+                    data-id="${value.id || ""}"
                     data-address="${address}"
                     data-address-index="${address}"
                     class="${classNameWrapper}"

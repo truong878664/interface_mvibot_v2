@@ -6,6 +6,9 @@ const robotChart = document.querySelector("#robot-chart");
 const selectChartType = document.querySelector(
     "[data-name='change-type-chart']",
 );
+const leftChartDate = document.querySelector("[data-name='left-chart-date']");
+const rightChartDate = document.querySelector("[data-name='right-chart-date']");
+
 const dataChartRobot = {
     listDate: [],
     trip: {},
@@ -128,42 +131,116 @@ const chart = new Chart(document.getElementById("trips"), {
     },
     plugins: [ChartDataLabels],
 });
+
+const currentStepDate = { current: 0 };
+const nameRobotRef = { current: null };
+const dataHistoryRef = { current: null };
+const dataErrorSystemRef = { current: null };
+
+leftChartDate.addEventListener("click", () => {
+    if (!nameRobotRef.current) return;
+    currentStepDate.current = currentStepDate.current + 1;
+    drawChareAll();
+});
+
+rightChartDate.addEventListener("click", () => {
+    if (!nameRobotRef.current) {
+        return;
+    }
+    if (currentStepDate.current !== 0) {
+        currentStepDate.current = currentStepDate.current - 1;
+        drawChareAll();
+    }
+});
+
 robotChart.addEventListener("change", async (e) => {
     const nameRobot = e.target.value;
     if (nameRobot) {
-        const data = await getHistory(nameRobot);
-        const dataChart = getDataChart(data);
-
-        const formatTripsDateData = formatDataChartFollowDate(dataChart.trips);
-        const formatErrorData = formatDataChartFollowDate(dataChart.error);
-        const formatBatteryData = formatDataChartFollowDate(dataChart.battery);
-        const formatSystemErrorData = formatDataChartFollowDate(
-            dataChart.errorSystem,
-        );
-
-        const tripCount = toChartLib(formatTripsDateData);
-        const errorCount = toChartLib(
-            formatErrorData,
-            Object.keys(formatTripsDateData),
-        );
-        const batteryCount = toChartLib(
-            formatBatteryData,
-            Object.keys(formatTripsDateData),
-        );
-        const SystemError = toChartLib(
-            formatSystemErrorData,
-            Object.keys(formatTripsDateData),
-        );
-        dataChartRobot.trip = tripCount;
-        dataChartRobot.error = errorCount;
-        dataChartRobot.battery = batteryCount;
-        dataChartRobot.systemError = SystemError;
-
-        drawChart();
+        nameRobotRef.current = nameRobot;
+        const data = await getHistory(nameRobotRef.current);
+        const dataERrorSystem = await errorSystem(nameRobotRef.current);
+        const showChart = Promise.resolve();
+        showChart
+            .then(() => {
+                dataHistoryRef.current = data;
+                dataErrorSystemRef.current = dataERrorSystem;
+            })
+            .then(drawChareAll);
     } else {
         updateChart({ chart: chart, reset: true });
+        nameRobotRef.current = null;
+        dataHistoryRef.current = null;
+        dataErrorSystemRef.current = null;
     }
 });
+
+async function drawChareAll() {
+    const STEP_MOVE_DAY = 14;
+    function getListDay() {
+        const listDate = {};
+        const now = new Date();
+        for (
+            let i = currentStepDate.current * STEP_MOVE_DAY;
+            i < currentStepDate.current * STEP_MOVE_DAY + STEP_MOVE_DAY;
+            i++
+        ) {
+            const time = new Date().setDate(now.getDate() - i);
+            const newTime = new Date(time);
+            newTime.setHours(0);
+            newTime.setSeconds(0);
+            newTime.setMinutes(0);
+            newTime.setMilliseconds(0);
+            const timeLine = newTime.getTime();
+            listDate[timeLine] = [];
+        }
+        return listDate;
+    }
+    const listDay = getListDay();
+    const dataChart = getDataChart(dataHistoryRef.current);
+    const formatTripsDateData = formatDataChartFollowDate(dataChart.trips);
+    const formatErrorData = formatDataChartFollowDate(dataChart.error);
+    const formatBatteryData = formatDataChartFollowDate(dataChart.battery);
+
+    const tripCount = toChartLib(
+        formatTripsDateData,
+        Object.keys(listDay).reverse(),
+    );
+    const errorCount = toChartLib(
+        formatErrorData,
+        Object.keys(listDay).reverse(),
+    );
+    const errorSystemCount = toChartLib(
+        dataErrorSystemRef.current,
+        Object.keys(listDay).reverse(),
+    );
+
+    const batteryCount = toChartLib(
+        formatBatteryData,
+        Object.keys(listDay).reverse(),
+    );
+
+    // const tripCount = toChartLib(formatTripsDateData);
+    // const errorCount = toChartLib(
+    //     formatErrorData,
+    //     Object.keys(formatTripsDateData),
+    // );
+    // const errorSystemCount = toChartLib(
+    //     dataERrorSystem,
+    //     Object.keys(formatTripsDateData),
+    // );
+
+    // const batteryCount = toChartLib(
+    //     formatBatteryData,
+    //     Object.keys(formatTripsDateData),
+    // );
+
+    dataChartRobot.trip = tripCount;
+    dataChartRobot.error = errorCount;
+    dataChartRobot.battery = batteryCount;
+    dataChartRobot.systemError = errorSystemCount;
+
+    drawChart();
+}
 
 function getDataChart(data) {
     const dataChart = {
@@ -273,13 +350,17 @@ function justOneDataChart(chart) {
 }
 
 function drawChart() {
-    updateChart({
-        chart: chart,
-        data: dataChartRobot[activeSelect.type].data,
-        labelList: dataChartRobot[activeSelect.type].labelList,
-        label: detailChart[activeSelect.type].label,
-        borderColor: detailChart[activeSelect.type].borderColor,
-    });
+    if (activeSelect.type === "performance") {
+        handler(chart);
+    } else {
+        updateChart({
+            chart: chart,
+            data: dataChartRobot[activeSelect.type].data,
+            labelList: dataChartRobot[activeSelect.type].labelList,
+            label: detailChart[activeSelect.type].label,
+            borderColor: detailChart[activeSelect.type].borderColor,
+        });
+    }
 }
 
 selectChartType.onclick = (e) => {
@@ -291,6 +372,7 @@ selectChartType.onclick = (e) => {
     }
     if (type === "performance") {
         handler(chart);
+        activeSelect.type = "performance";
     }
 };
 
@@ -321,3 +403,23 @@ const handler = (chart) => {
     chart.data.datasets.push(newDataset, dataSystemError);
     chart.update();
 };
+
+async function errorSystem(name_seri) {
+    const res = await fetch("/api/error-system/" + name_seri);
+    const data = await res.json();
+    const errorSystemList = {};
+    data.map((error) => {
+        const time = new Date(error.created_at);
+        time.setHours(0);
+        time.setSeconds(0);
+        time.setMinutes(0);
+        time.setMilliseconds(0);
+        const timeLine = time.getTime();
+        if (errorSystemList.hasOwnProperty(timeLine)) {
+            return errorSystemList[timeLine].push(error);
+        } else {
+            return (errorSystemList[timeLine] = [error]);
+        }
+    });
+    return errorSystemList;
+}

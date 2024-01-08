@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\ConfigRobotController;
+use App\Http\Controllers\Api\ErrorSystemController;
 use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
 use App\Http\Controllers\Api\GpioController;
@@ -49,7 +50,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('start', StartController::class);
-Route::resource('mission', MissionController::class);
+// Route::resource('mission', MissionController::class);
 Route::resource('position', PositionController::class);
 Route::resource('layer', LayerController::class);
 Route::resource('step', StepController::class);
@@ -81,7 +82,7 @@ Route::resource('config-status', ConfigRobotController::class)->only('index');
 Route::resource('status', StatusController::class)->only('show');
 
 Route::resource('bookmark', BookmarkController::class);
-
+Route::resource('error-system', ErrorSystemController::class);
 
 // mission v4
 Route::resource('mission-v4', MissionV4Controller::class);

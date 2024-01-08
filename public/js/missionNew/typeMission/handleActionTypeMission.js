@@ -97,7 +97,6 @@ export default function handleActionTypeMission() {
                 const id = +itemTypeMission.dataset.id;
                 const { name } = dataTypeMission;
                 const { x, y } = buttonAction.getBoundingClientRect();
-
                 const onSubmit = async (nameNew) => {
                     if (name === nameNew) return;
                     dataTypeMission.name = nameNew;
@@ -106,7 +105,7 @@ export default function handleActionTypeMission() {
                         data: dataTypeMission,
                     });
                     if (!status.error) {
-                        await syncTypeMission(dataTypeMission);
+                        await syncTypeMission({ ...dataTypeMission, id });
                     }
                     toggerMessage(
                         status.error ? "error" : "success",

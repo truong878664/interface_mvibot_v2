@@ -13,10 +13,12 @@ handleModule();
 
 const startBtn = document.querySelector("[data-name='start']");
 const robotActive = document.querySelector("#robot-navigation");
+const robotListElement = document.querySelector("#robot-navigation-array");
+const robotList = JSON.parse(robotListElement.value);
 
 startBtn.onclick = () => {
     confirmationForm({
-        message: "Bạn có chắc muốn khởi chạy robot?",
+        message: "Chỉ khởi chạy lại robot khi bị lỗi hệ thống!",
         callback: handleStart,
     });
 };
@@ -61,6 +63,18 @@ async function handleStart() {
             }
             publishMission(topic, missions.join(""));
             publishTopicString(`/${nameRobot}/output_user_set`, "(6|1)");
+
+            (async function addErrorSystem() {
+                await fetch("/api/error-system", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name_seri: nameRobot,
+                    }),
+                });
+            })();
         } else {
             toggerMessage("error", dataStart.message);
         }

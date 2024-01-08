@@ -52,6 +52,65 @@ export default function handleWrapFunction() {
                 functionClass.display(data);
                 functionClass.currentIdUpdate = data.id;
             },
+            async findMissionUsed() {
+                const { x = 0, y = 0 } = buttonAction?.getBoundingClientRect();
+
+                const res = await fetch("/api/mission-v4");
+                const allMission = await res.json();
+                if (!allMission) return;
+                const regex = new RegExp(functionType + "#[^#]+#" + functionId);
+                const missionUsedStepList = [];
+                allMission.map((mission) => {
+                    if (mission.mission_shorthand) {
+                        const matches = mission.mission_shorthand.match(regex);
+                        if (matches) {
+                            missionUsedStepList.push(
+                                mission.type + " / " + mission.name,
+                            );
+                        }
+                    }
+                    return missionUsedStepList;
+                });
+
+                const listMissionUsed = missionUsedStepList.length
+                    ? missionUsedStepList.map((mission) => {
+                          return Node("li").props({
+                              className: "px-2 py-1",
+                              children: mission,
+                          });
+                      })
+                    : [
+                          Node("li").props({
+                              className: "px-2 py-1",
+                              children: "Step not used",
+                          }),
+                      ];
+
+                const missionUsedWrapper = Node("ul").props({
+                    className:
+                        "bg-white absolute max-h-[200px] rounded-sm overflow-auto min-w-[150px] shadow-sm border",
+                    style: { left: x + "px", top: y + "px" },
+                    children: [
+                        Node("div").props({
+                            children: "List mission used",
+                            className:
+                                "bg-gray-500 rounded-t-sm px-2 font-bold text-sm text-center text-white",
+                        }),
+                        ...listMissionUsed,
+                    ],
+                });
+                const missionUsedContainer = Node("div").props({
+                    className:
+                        "w-full h-full fixed top-0 left-0 bg-black/5 z-100",
+                    onClick: (e) => {
+                        if (e.target === missionUsedContainer) {
+                            missionUsedContainer.remove();
+                        }
+                    },
+                    children: [missionUsedWrapper],
+                });
+                document.body.appendChild(missionUsedContainer);
+            },
             showAllPosition() {
                 const positionList = FunctionStepClass.data.position;
                 let mapObject;

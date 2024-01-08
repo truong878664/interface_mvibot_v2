@@ -55,7 +55,7 @@ const createHtmlFunctionItem = {
                     <div
                         class=" mx-1 mb-1 h-[30px] w-[30px] rounded-md more-option-function-btn relative inline-block group/item-function">
                         <i class="fa-solid fa-ellipsis"></i>
-                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md  z-50 hidden group-hover/item-function:block">
+                        <div class="absolute top-[10px] right-0 bg-white rounded-md shadow-md z-50 hidden group-hover/item-function:block">
                             ${this.optionButtonFunction}
                         </div>
                     </div>
@@ -149,9 +149,9 @@ const createHtmlFunctionItem = {
                 </button>
             </li>
             <li>
-                <button data-button-function-kind="duplicate" class="btn flex py-2 w-full px-6 hover:bg-stone-100">
-                    <span class="mr-2 text-orange-500">
-                        <i class="fa-regular fa-clone"></i>
+                <button data-button-function-kind="findMissionUsed" class="btn flex py-2 w-full px-6 hover:bg-stone-100 whitespace-nowrap">
+                    <span class="mr-2 text-green-500">
+                    <i class="fa-solid fa-bullseye"></i>
                     </span>
                     <span>Mission used</span>
                 </button>
