@@ -61,7 +61,7 @@ export default class Marker extends Step {
         document.querySelector(`.marker-btn.${marker_type}-btn`).click();
         this.updateElementMarker(marker_type);
         for (const key in filed) {
-            if (filed[key]) {
+            if (filed[key] !== null) {
                 this.data[key].value = filed[key] || 0;
             }
         }
@@ -71,14 +71,14 @@ export default class Marker extends Step {
         let formElement;
         if (type) {
             formElement = document.querySelector(
-                `.marker-item[data-type-marker='${type}']`
+                `.marker-item[data-type-marker='${type}']`,
             );
         } else {
             formElement = document.querySelector(`.marker-item:not(.hidden)`);
         }
         this.data.name = formElement.querySelector('[name="name_marker"]');
         this.data.marker_type = formElement.querySelector(
-            '[name="marker_type"]'
+            '[name="marker_type"]',
         );
         this.data.marker_dir = formElement.querySelector('[name="marker_dir"]');
         this.data.off_set_x1 = formElement.querySelector('[name="off_set_x1"]');
@@ -86,10 +86,10 @@ export default class Marker extends Step {
         this.data.off_set_y1 = formElement.querySelector('[name="off_set_y1"]');
         this.data.off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
         this.data.off_set_dis = formElement.querySelector(
-            '[name="off_set_dis"]'
+            '[name="off_set_dis"]',
         );
         this.data.off_set_angle = formElement.querySelector(
-            '[name="off_set_angle"]'
+            '[name="off_set_angle"]',
         );
         this.data.time_out = formElement.querySelector('[name="time_out"]');
         this.data.sx1 = formElement.querySelector('[name="sx1"]');
