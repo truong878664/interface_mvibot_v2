@@ -26,7 +26,7 @@ export const parseDataHistoryString = (historyData) => {
             const [key, value] = item.split(">");
             if (key === "time") {
                 const time = new Date(value);
-                time.setHours(0);
+                // time.setHours(0);
                 time.setSeconds(0);
                 time.setMinutes(0);
                 time.setMilliseconds(0);

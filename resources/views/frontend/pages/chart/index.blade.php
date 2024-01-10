@@ -9,19 +9,32 @@
                 <div class="flex gap-2 group" data-name="change-type-chart" data-active="trip">
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='trip']:text-white group-data-[active='trip']:bg-main"
-                        data-name="trip">Trips</button>
+                        data-name="trip">
+                        Trips
+                    </button>
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='error']:text-white group-data-[active='error']:bg-main"
-                        data-name="error">Short stop error</button>
+                        data-name="error">
+                        Short stop error
+                    </button>
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='systemError']:text-white group-data-[active='systemError']:bg-main"
-                        data-name="systemError">System Error</button>
+                        data-name="systemError">
+                        System Error
+                    </button>
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='battery']:text-white group-data-[active='battery']:bg-main"
-                        data-name="battery">Battery</button>
+                        data-name="battery">
+                        Battery
+                    </button>
                     <button data-name="performance"
-                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performance']:text-white group-data-[active='performance']:bg-main">robot
-                        performance chart</button>
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performance']:text-white group-data-[active='performance']:bg-main">
+                        robot performance chart
+                    </button>
+                    <button data-name="performanceMvpTime"
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performanceMvpTime']:text-white group-data-[active='performanceMvpTime']:bg-main">
+                        performance chart MVP time
+                    </button>
                 </div>
             </div>
             <div class="flex items-center justify-center w-full h-full">
