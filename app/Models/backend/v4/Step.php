@@ -31,12 +31,15 @@ class Step extends Model
                     $name_position = $dataFunction->name;
                     $time_out = $dataFunction->time_out;
                     $mode = $dataFunction->mode;
+                    $non_avoid = $dataFunction->non_avoid;
                     $x_position = $dataFunction->x;
                     $y_position = $dataFunction->y;
                     $z_position = $dataFunction->z;
                     $w_position = $dataFunction->w;
                     $mode_position = $dataFunction->mode_position;
-                    $dataTranslated = "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~)";
+
+                    $dataNoneAvoid = $mode_position === "line_follow" ? ($non_avoid ?  "~non_avoid=1~" : "~non_avoid=0~") : "";
+                    $dataTranslated = "(name:$name_position|time_out:$time_out|mode:$mode|data:~x=$x_position~~y=$y_position~~z=$z_position~~w=$w_position~~mode=$mode_position~$dataNoneAvoid)";
 
                     break;
                 case 'sleep':
@@ -135,7 +138,7 @@ class Step extends Model
                     $time_out = $dataFunction->time_out;
                     $mode = $dataFunction->mode;
                     $data = "";
-                    $attribute_list = ["footprint_padding", "max_vel_x", "acc_lim_x", "max_vel_theta", "acc_lim_theta", "inflation_radius"];
+                    $attribute_list = ["footprint_padding", "max_vel_x", "min_vel_x", "acc_lim_x", "max_vel_theta", "acc_lim_theta", "inflation_radius"];
 
                     foreach ($attribute_list as $attribute) {
                         $value = $dataFunction->$attribute;

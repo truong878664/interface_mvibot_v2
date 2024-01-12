@@ -220,6 +220,7 @@ const drawChartMain = () => {
                 chart: chart,
                 data: datasetError.datasets,
                 labelList: datasetError.labels,
+                label: "Short stop error",
                 labels: detailChart.error.label,
                 borderColor: detailChart.error.borderColor,
             });

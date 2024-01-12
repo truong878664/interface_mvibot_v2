@@ -90,9 +90,9 @@ class TypeMissionVerController extends Controller
     {
         try {
             TypeMissionVer::where("id", $id)->update($request->all());
-            return ["message" => "update type mission successfully", "error" => false,];
+            return ["message" => "update type mission successfully", "error" => false, "dataUpdated" => $request->all()];
         } catch (\Throwable $th) {
-            return ["message" => "ERR!" . $th, "error" => true];
+            return ["message" => "ERR!" . $th, "error" => true, "dataUpdated" => null];
         }
     }
 

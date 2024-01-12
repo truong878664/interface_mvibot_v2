@@ -111,7 +111,6 @@ class RobotController extends Controller
                     $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->update(["history" => null]);
                     return ["error" => false, "message" => "Reset successfully!"];
                     break;
-
                 default:
                     # code...
                     break;

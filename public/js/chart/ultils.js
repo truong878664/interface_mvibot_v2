@@ -65,6 +65,8 @@ export const detailChart = {
 
 export const toDatasetChart = (data, keys, type = "equal") => {
     const dataGroupByDate = JSON.parse(JSON.stringify(keys));
+    const HOUR_PER_DAY = 24;
+    const MILLISECONDS_PER_HOUR = 3600000;
     const dataChart = {
         labels: [],
         datasets: [],
@@ -84,7 +86,7 @@ export const toDatasetChart = (data, keys, type = "equal") => {
             arrayTimeLine.forEach((date) => {
                 if (
                     item.timeLine > date &&
-                    item.timeLine < date + 3600000 * 24
+                    item.timeLine < date + MILLISECONDS_PER_HOUR * HOUR_PER_DAY
                 ) {
                     if (date in dataGroupByDate) {
                         return dataGroupByDate[date].push(item);
@@ -105,9 +107,9 @@ export const toDatasetChart = (data, keys, type = "equal") => {
                 return dataChart;
             } else if (type === "scope") {
                 const time = new Date(Number(timeline));
-                const time1 = `6:00 ${time.getDate()}/${time.getMonth() + 1}`;
+                const time1 = `6 AM ${time.getDate()}/${time.getMonth() + 1}`;
                 time.setDate(time.getDate() + 1);
-                const time2 = `6:00 ${time.getDate()}/${time.getMonth() + 1}`;
+                const time2 = `6 AM ${time.getDate()}/${time.getMonth() + 1}`;
                 dataChart.labels.push(time1 + " - " + time2);
                 dataChart.datasets.push(dataGroupByDate[timeline].length);
                 return dataChart;

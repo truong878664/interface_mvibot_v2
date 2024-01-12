@@ -10,6 +10,7 @@ export default class Config extends Step {
         const configList = [
             "footprint_padding",
             "max_vel_x",
+            "min_vel_x",
             "acc_lim_x",
             "max_vel_theta",
             "acc_lim_theta",

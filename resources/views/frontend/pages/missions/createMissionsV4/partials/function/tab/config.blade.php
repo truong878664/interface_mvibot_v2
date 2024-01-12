@@ -6,7 +6,7 @@
             required />
     </div>
 
-    @php $inputConfigList = ['footprint_padding', 'max_vel_x', 'acc_lim_x', 'max_vel_theta', 'acc_lim_theta', 'inflation_radius']; @endphp
+    @php $inputConfigList = ['footprint_padding', 'max_vel_x',"min_vel_x", 'acc_lim_x', 'max_vel_theta', 'acc_lim_theta', 'inflation_radius']; @endphp
 
     <div class="my-8 flex flex-col flex-wrap gap-8">
         @foreach ($inputConfigList as $config)

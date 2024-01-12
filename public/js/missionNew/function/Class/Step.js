@@ -64,6 +64,7 @@ export default class Step {
     async save() {
         try {
             const data = this.get();
+            console.log(data);
             if (!data.success) {
                 this.message.message = data.message;
                 return this.message;

@@ -1,5 +1,5 @@
 import confirmationForm from "../functionHandle/confirmationForm.js";
-import { getHistory, parseDataHistoryString } from "../lib/ultils.js";
+import { getHistory, parseDataHistoryString, useRef } from "../lib/ultils.js";
 import { toggerMessage } from "../main.js";
 
 const getNodeByName = (name) => document.querySelector(`[data-name='${name}']`);
@@ -10,54 +10,72 @@ const refreshBtn = document.querySelector("[data-name='refresh-btn']");
 const resetBtn = document.querySelector("[data-name='reset-btn']");
 const exportBtn = document.querySelector("[data-name='export-btn']");
 const historyTable = getNodeByName("history-table");
+const loadMoreHistory = getNodeByName("load-more-history");
 
-const dataHistoryRobot = { current: null };
+const nameRobotRef = useRef();
+const dataHistoryRobot = useRef([]);
+const dataHistoryShow = useRef([]);
+const ITEM_ON_PAGE = 50;
+const currentPage = useRef(0);
 
-renderLog(null);
-
-robotHistory.addEventListener("change", async (e) => {
+const onChangeNameRobot = async (e) => {
     const nameRobot = e.target.value;
+    nameRobotRef.current = nameRobot;
+    dataHistoryRobot.current = [];
+    dataHistoryShow.current = [];
     if (nameRobot) {
         const data = await getHistory(nameRobot);
         dataHistoryRobot.current = data;
-        renderLog(data);
+        onAddMoreHistory();
         toggerMessage(
             "success",
             `Moved to the history of robots <span class="font-bold text-red-500">${nameRobot}</span>!`,
         );
     } else {
-        renderLog(parseDataHistoryString(null));
+        handleRenderLog({ reset: true });
     }
-});
-
-refreshBtn.onclick = (e) => {
-    toggerMessage("success", "Refreshed!");
-    getHistory(robotHistory.value);
 };
-resetBtn.onclick = () => {
-    const nameRobot = robotHistory.value;
+
+const onRefresh = async () => {
+    if (nameRobotRef.current) {
+        const data = await getHistory(nameRobotRef.current);
+        dataHistoryRobot.current = data;
+        onAddMoreHistory();
+        toggerMessage("success", "Refreshed!");
+    } else {
+        toggerMessage("error", "Choose robot, please!");
+    }
+};
+const onReset = () => {
     const reset = async () => {
-        const res = await fetch("/api/robot/" + nameRobot, {
+        const res = await fetch("/api/robot/" + nameRobotRef.current, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({
+                type: "reset",
+            }),
         });
         const message = await res.json();
         if (!message.error) {
-            renderLog(null);
+            handleRenderLog({ reset: true });
+            dataHistoryRobot.current = [];
+            dataHistoryShow.current = [];
+            currentPage.current = 0;
         }
     };
-    if (!nameRobot) {
+    if (!nameRobotRef.current) {
         toggerMessage("error", "Please choose robot!");
         return;
     }
     confirmationForm({
-        message: `Do you want to refresh the data for ${nameRobot} robot to empty?`,
+        message: `Do you want to refresh the data for ${nameRobotRef.current} robot to empty?`,
         callback: reset,
     });
 };
-exportBtn.onclick = () => {
+
+const onExport = () => {
     const nameRobot = robotHistory.value;
     const handleExport = () => {
         const dataCSV = ["no,type,time,log"];
@@ -97,8 +115,19 @@ exportBtn.onclick = () => {
     });
 };
 
-function renderLog(data) {
-    if (!data) {
+const onClickAtHistoryTable = (e) => {
+    if (e.target.dataset.name !== "delete-history") return;
+    const index = e.target.dataset.index;
+    confirmationForm({
+        callback: () => {
+            deleteHistoryItem(index);
+        },
+    });
+};
+
+const handleRenderLog = ({ reset = false }) => {
+    const data = dataHistoryShow.current;
+    if (reset) {
         logContentElement.innerHTML = `
         <tr class="text-center text-slate-500">
             <td>N/A</td>
@@ -122,11 +151,11 @@ function renderLog(data) {
     const htmlLog = [];
     data.reverse().map((item, index) => {
         htmlLog.push(`
-        <tr data-log="${
-            item.type
-        }" class="group/log font-bold" data-index="${index}">
+        <tr data-log="${item.type}" class="group/log font-bold" data-index="${
+            item.index
+        }">
             <td class="whitespace-nowrap ${classNameItem} text-center">
-                <span>${data.length - index}</span>
+                <span>${item.index}</span>
             </td>
             <td class="whitespace-nowrap ${classNameItem}">
                 <span>${icons[item.type]}  ${item.type}</span>
@@ -138,7 +167,9 @@ function renderLog(data) {
                 <span>${item.data}</span>
             </td>
             <td class="${classNameItem}">
-                <button class="px-2" data-name="delete-history" data-index="${index}">
+                <button class="px-2" data-name="delete-history" data-index="${
+                    item.index
+                }">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
             </td>
@@ -147,17 +178,20 @@ function renderLog(data) {
         return htmlLog;
     });
     logContentElement.innerHTML = htmlLog.join("");
-}
+};
 
 const deleteHistoryItem = async (index) => {
-    dataHistoryRobot.current.splice(index, 1);
+    const indexFind = dataHistoryRobot.current.findIndex((item) => {
+        return item.index === Number(index);
+    });
+    dataHistoryRobot.current.splice(indexFind, 1);
     const dataString = dataHistoryRobot.current
         .map(
             (item) =>
                 `&/time>${item.time}//type>${item.type}//data>${item.data}/@`,
         )
-        .reverse()
         .join("");
+
     const nameRobot = robotHistory.value;
     const res = await fetch("/api/robot/" + nameRobot, {
         method: "PUT",
@@ -167,18 +201,36 @@ const deleteHistoryItem = async (index) => {
         body: JSON.stringify({ type: "update", data: dataString }),
     });
     const message = await res.json();
-    console.log(message);
-    renderLog(dataHistoryRobot.current.reverse());
-};
-historyTable.addEventListener("click", (e) => {
-    if (e.target.dataset.name !== "delete-history") return;
-    const index = e.target.dataset.index;
-
-    confirmationForm({
-        callback: () => {
-            deleteHistoryItem(index);
-        },
+    new Promise((resolve, reject) => {
+        const dataNew = parseDataHistoryString(dataString);
+        dataHistoryRobot.current = dataNew;
+        resolve();
+    }).then(() => {
+        onAddMoreHistory();
     });
-});
+};
 
-// &/time>2023-12-01 15:58:49 //type>normal//data>Robot start up.../@
+const onAddMoreHistory = () => {
+    currentPage.current = currentPage.current + 1;
+    addMoreHistory();
+    handleRenderLog({});
+};
+const addMoreHistory = () => {
+    const lengthHistory = dataHistoryRobot.current.length;
+    const dataGet = dataHistoryRobot.current?.filter(
+        (item) =>
+            item.index >= lengthHistory - ITEM_ON_PAGE * currentPage.current &&
+            item.index <=
+                lengthHistory -
+                    ITEM_ON_PAGE +
+                    ITEM_ON_PAGE * currentPage.current,
+    );
+    dataHistoryShow.current = dataGet;
+};
+
+robotHistory.addEventListener("change", onChangeNameRobot);
+refreshBtn.addEventListener("click", onRefresh);
+resetBtn.addEventListener("click", onReset);
+exportBtn.addEventListener("click", onExport);
+historyTable.addEventListener("click", onClickAtHistoryTable);
+loadMoreHistory.addEventListener("click", onAddMoreHistory);

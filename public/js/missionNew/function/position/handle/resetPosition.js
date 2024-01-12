@@ -1,16 +1,4 @@
-// import { mode_child, mode_position, mode_position_other, name_position, time_out, time_out_position } from "../getDataFunction.js";
-
 import { $ } from "../../../../main.js";
-
-// export default function resetPosition() {
-//     name_position.value = "";
-//     time_out_position.value = -1;
-//     mode_position.value = "normal";
-//     mode_child.value = -1;
-//     mode_position_other.dataset.modePosition = "";
-//     mode_position_other.value = "";
-// }
-
 export default function resetPosition() {
     $(".number-position-x").value = 0;
     $(".number-position-y").value = 0;

@@ -9,6 +9,6 @@ class MissionPosition extends Model
 {
     use HasFactory;
     public $table = 'mission_positions';
-    protected $fillable = ['name', 'time_out', 'mode', 'x', 'y', 'z', 'w', 'color_position', 'map', 'mode_position', 'mode_child'];
+    protected $fillable = ['name', 'time_out', 'mode', "non_avoid", 'x', 'y', 'z', 'w', 'color_position', 'map', 'mode_position', 'mode_child'];
     public $timestamps = false;
 }

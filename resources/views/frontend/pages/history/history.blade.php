@@ -27,7 +27,9 @@
                 </thead>
                 <tbody class="log-content bg-stone-50"></tbody>
             </table>
-
+            <div class="flex justify-center">
+                <button data-name="load-more-history" class="px-10 py-4 hover:underline">Load more ...</button>
+            </div>
         </div>
     </div>
     <script type="module" src="/js/history/history.js"></script>

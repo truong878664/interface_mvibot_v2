@@ -27,12 +27,14 @@
                         data-name="battery">
                         Battery
                     </button>
-                    <button data-name="performance"
-                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performance']:text-white group-data-[active='performance']:bg-main">
+                    <button
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performance']:text-white group-data-[active='performance']:bg-main"
+                        data-name="performance">
                         robot performance chart
                     </button>
-                    <button data-name="performanceMvpTime"
-                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performanceMvpTime']:text-white group-data-[active='performanceMvpTime']:bg-main">
+                    <button
+                        class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='performanceMvpTime']:text-white group-data-[active='performanceMvpTime']:bg-main"
+                        data-name="performanceMvpTime">
                         performance chart MVP time
                     </button>
                 </div>

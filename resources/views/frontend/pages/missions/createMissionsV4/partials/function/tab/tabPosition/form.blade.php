@@ -55,7 +55,10 @@
                     class="input-reset hidden w-[80px] px-4 py-1  data-[mode-position=other]:inline-block" />
             </div>
         </div>
-
+        <div class="hidden" data-name="non-avoid-wrap">
+            <label for="non-avoid" class="">Non avoid</label>
+            <input type="checkbox" class="rounded-md" name="non-avoid" id="non-avoid" />
+        </div>
         <div class="mb-4">
             <label for="" class="">Mode child</label>
 
