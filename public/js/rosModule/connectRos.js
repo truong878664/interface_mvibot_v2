@@ -1,7 +1,10 @@
 import { connected, connectionFailed } from "../mainLayout.js";
 
 function connectRos(ip) {
+    // const nextIp = "10.0.70.20";
+
     const ros = new ROSLIB.Ros({
+        // url: `ws://${nextIp}:9090`,
         url: `ws://${ip}:9090`,
     });
 
@@ -19,7 +22,6 @@ function connectRos(ip) {
         console.log("Connection to websocket server closed.");
         connectionFailed();
     });
-
 
     if (!ros.isConnected) connectionFailed();
 

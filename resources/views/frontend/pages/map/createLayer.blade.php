@@ -38,47 +38,48 @@
                 </div>
                 <div class="flex max-w-[300px] flex-col content-start justify-end rounded-md px-5 h-full">
                     <div class="">
-                        <div for="" class="relative mb-9 w-full ">
+                        <div for="" class="relative mb-4 w-full ">
                             <div class="flex items-center">
                                 <span class="min-w-[77px] pr-2">Name layer</span>
-                                <input type="text" class="w-[200px] px-4" id="name_layer" />
+                                <input type="text" class="w-[200px] px-4 py-1" id="name_layer" />
                             </div>
                             <span class="absolute bottom-0 right-0 block w-full translate-y-full text-right  text-red-500"
                                 id="msg-name-layer"></span>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center ">
+                        <div for="" class="mb-2 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">Type layer</span>
-                            <select name="" id="type-layer" class="w-[200px] flex-1 border-[1px] px-4 outline-none">
+                            <select name="" id="type-layer"
+                                class="w-[200px] flex-1 border-[1px] px-4 py-0 outline-none">
                                 <option value="high_zone">high_zone</option>
                                 <option value="dead_zone">dead_zone</option>
                             </select>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center text ">
+                        <div for="" class="mb-2 flex w-full items-center text ">
                             <span class="min-w-[77px] pr-2">Width</span>
                             <div class="flex flex-1 flex-col">
-                                <input type="number" class="w-[200px] flex-1 px-4" value="1" id="width-layer" />
+                                <input type="number" class="w-[200px] flex-1 px-4 py-0" value="1" id="width-layer" />
                                 <input id="width-layer-range" type="range" step="0.1" value="0.1" max="50"
                                     min="0.1"
                                     class="layer-range mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700" />
                             </div>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center ">
+                        <div for="" class="mb-2 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">Length</span>
                             <div class="flex flex-1 flex-col">
-                                <input type="number" class="w-[200px] flex-1 px-4" value="1" id="height-layer" />
+                                <input type="number" class="w-[200px] flex-1 px-4 py-0" value="1" id="height-layer" />
                                 <input id="height-layer-range" type="range" step="0.1" max="50" value="0.1"
                                     min="0.1"
                                     class="layer-range mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700" />
                             </div>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center ">
+                        <div for="" class="mb-2 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">X</span>
                             <div class="flex flex-1 flex-col">
-                                <input type="number" class="w-[200px] flex-1 px-4" value="0" name="xo"
+                                <input type="number" class="w-[200px] flex-1 px-4 py-0" value="0" name="xo"
                                     id="xo" />
                                 <input id="xo-range" type="range" step="0.1" value="0" max="30"
                                     min="-30" value="1"
@@ -86,10 +87,10 @@
                             </div>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center ">
+                        <div for="" class="mb-2 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">Y</span>
                             <div class="flex flex-1 flex-col">
-                                <input type="number" class="w-[200px] flex-1 px-4" value="0" name="yo"
+                                <input type="number" class="w-[200px] flex-1 px-4 py-0" value="0" name="yo"
                                     id="yo" />
                                 <input id="yo-range" type="range" step="0.1" value="0" max="30"
                                     min="-30"
@@ -97,10 +98,11 @@
                             </div>
                         </div>
 
-                        <div for="" class="mb-9 flex w-full items-center ">
+                        <div for="" class="mb-2 flex w-full items-center ">
                             <span class="min-w-[77px] pr-2">Angle</span>
                             <div class="flex flex-1 flex-col">
-                                <input type="number" class="w-[200px] flex-1 px-4" value="0" id="z-rotate" />
+                                <input type="number" class="w-[200px] flex-1 px-4 py-0" value="0"
+                                    id="z-rotate" />
                                 <input id="z-rotate-range" type="range" step="1" value="0" max="180"
                                     min="-180"
                                     class="layer-range mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700" />

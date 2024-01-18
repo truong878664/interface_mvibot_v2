@@ -14,7 +14,10 @@ import {
 import createJoystick from "../createJoystick/createJoystick.js";
 import mathYaw from "../rosModule/mathYaw.js";
 import showUrd from "../rosModule/showUrd.js";
-import showLaser from "../rosModule/showLaser.js";
+import showLaser, {
+    COLOR_CAMERA,
+    showLaserCamera,
+} from "../rosModule/showLaser.js";
 import { setRobotMove } from "../rosModule/moveRobot.js";
 import topicString from "../rosModule/topicString.js";
 import reloadWhenOrientation from "../reloadOnOrientation.js";
@@ -95,11 +98,15 @@ async function addLayerDbToLayerActive() {
 const robotNavigation = JSON.parse(getNode("#robot-navigation-json").value);
 const robotNavigationChange = [...robotNavigation];
 const laser = [];
+const laserCamera = [];
 
 displayLaserUrd(robotNavigationChange);
 function displayLaserUrd(dataRobotNavigation) {
     dataRobotNavigation.forEach((robot) => {
         laser.push(showLaser(robot.name_seri, ros, viewer, tfClient));
+        laserCamera.push(
+            showLaserCamera(robot.name_seri, ros, viewer, tfClient),
+        );
         showUrd(robot.name_seri, ros, viewer, tfClient);
     });
 }
@@ -116,6 +123,7 @@ function activeLaserRobot(robotActive) {
                 material: { size: 0.3, color: 0x00ff00 },
                 rate: 1,
             });
+            laserCamera[i].points.material.color = COLOR_CAMERA.active.rgb;
         } else if (robotActive === "") {
             viewer.scene.remove(laser[i].points.sn);
             laser[i] = new ROS3D.LaserScan({
@@ -126,6 +134,7 @@ function activeLaserRobot(robotActive) {
                 material: { size: 0.3, color: 0x008000 },
                 rate: 1,
             });
+            laserCamera[i].points.material.color = COLOR_CAMERA.default.rgb;
         } else {
             viewer.scene.remove(laser[i].points.sn);
             laser[i] = new ROS3D.LaserScan({
@@ -136,6 +145,7 @@ function activeLaserRobot(robotActive) {
                 material: { size: 0.3, color: 0x008000 },
                 rate: 1,
             });
+            laserCamera[i].points.material.color = COLOR_CAMERA.default.rgb;
         }
     }
 }
