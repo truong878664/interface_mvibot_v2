@@ -6,15 +6,18 @@ import confirmationForm from "../functionHandle/confirmationForm.js";
 import feature from "./feature.js";
 import publishTopicString from "../rosModule/topicString.js";
 import handleModule from "./handleModule.js";
-
-configStart();
-feature();
-handleModule();
+import subscribeTopic from "../rosModule/subscribeTopic.js";
 
 const startBtn = document.querySelector("[data-name='start']");
 const robotActive = document.querySelector("#robot-navigation");
 const robotListElement = document.querySelector("#robot-navigation-array");
 const robotList = JSON.parse(robotListElement.value);
+const gpioStartElement = document.querySelector("[data-name='gpio-start']");
+const refreshBtn = document.querySelector("[data-name='refresh-io-btn']");
+
+configStart();
+feature();
+handleModule();
 
 startBtn.onclick = () => {
     confirmationForm({
@@ -83,3 +86,62 @@ async function handleStart() {
         toggerMessage("error", "ERROR!" + error);
     }
 }
+
+const HTMLIoItem = ` <li class="w-8 h-8 rounded-full flex justify-center font-bold text-white items-center bg-red-500"></li>`;
+robotActive.addEventListener("change", (e) => {
+    const nameRobot = e.target.value;
+    renderIo(nameRobot);
+});
+const renderIo = async (nameRobot) => {
+    const res = await fetch(`/api/input-gpio?name_seri=${nameRobot}`);
+    const data = await res.json();
+    const ioInputHTML = data?.dataInput?.map((io, index) => {
+        return `<li class="w-8 h-8 rounded-full flex justify-center font-bold text-white items-center ${
+            io === 0 ? "bg-red-500" : "bg-green-500"
+        }">${index}</li>`;
+    });
+    const ioOutputHTML = data?.dataOutput?.map((io, index) => {
+        return `<li class="w-8 h-8 rounded-full flex justify-center font-bold text-white items-center ${
+            io === 0 ? "bg-red-500" : "bg-green-500"
+        }">${index}</li>`;
+    });
+    const html = `
+<div class="">
+<span>Input</span>
+    <ul class="flex gap-1 flex-wrap">
+    ${ioInputHTML?.join("") || HTMLIoItem}
+    </ul>
+</div><div class=""><span>Output</span>
+    <ul class="flex gap-1 flex-wrap">
+    ${ioOutputHTML?.join("") || HTMLIoItem}
+    </ul>
+</div>`;
+    gpioStartElement.innerHTML = html;
+};
+
+refreshBtn.onclick = (e) => {
+    if (robotActive.value) {
+        console.log(robotActive.value);
+        renderIo(robotActive.value);
+        toggerMessage("success", "refresh io successfully!");
+    } else {
+        toggerMessage("error", "Choose robot please!");
+    }
+};
+
+robotList?.forEach((robot) => {
+    subscribeTopic(
+        `/${robot.name_seri}/output_user_set`,
+        "std_msgs/String",
+        (data, name) => {
+            if (robotActive.value === robot.name_seri) {
+                let counter = 0;
+                var interval = setInterval(() => {
+                    counter++;
+                    renderIo(robot.name_seri);
+                    if (counter >= 10) clearInterval(interval);
+                }, 1500);
+            }
+        },
+    );
+});

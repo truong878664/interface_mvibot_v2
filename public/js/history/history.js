@@ -39,6 +39,7 @@ const onChangeNameRobot = async (e) => {
 const onRefresh = async () => {
     if (nameRobotRef.current) {
         const data = await getHistory(nameRobotRef.current);
+
         dataHistoryRobot.current = data;
         onAddMoreHistory();
         toggerMessage("success", "Refreshed!");

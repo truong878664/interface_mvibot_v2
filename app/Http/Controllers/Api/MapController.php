@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\Layer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class LayerController extends Controller
+class MapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,15 @@ class LayerController extends Controller
      */
     public function index()
     {
-        $mapActive = DB::table("map_active")->first();
-        return Layer::where("name_map_active", $mapActive->name_map_active)->get();
+        $fileMapList = glob('../maps/*');
+        $arrayMap = [];
+        foreach ($fileMapList as $urlMap) {
+            if (str_ends_with($urlMap, '.yaml')) {
+                array_push($arrayMap, str_replace('.yaml', '', str_replace('../maps/', '', $urlMap)));
+            }
+        };
+
+        return $arrayMap;
     }
 
     /**
@@ -27,6 +32,7 @@ class LayerController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -37,18 +43,7 @@ class LayerController extends Controller
      */
     public function store(Request $request)
     {
-        // $dataLayer = json_decode($request->data_layer);
-        // $array = json_decode(json_encode($dataLayer), true);
-        try {
-            //code...
-            $mapActive = DB::table("map_active")->first();
-            $dataLayer = $request->all();
-            $dataLayer["name_map_active"] = $mapActive->name_map_active;
-            Layer::insert($dataLayer);
-            return ["message" => "Ok", "data" => $dataLayer];
-        } catch (\Throwable $th) {
-            return ["message" => $th];
-        }
+        //
     }
 
     /**
@@ -91,11 +86,8 @@ class LayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($name)
+    public function destroy($id)
     {
-        // return $request->all();
-        Layer::where('name_layer', $name)->delete();
-
-        return ["status" => 200];
+        //
     }
 }

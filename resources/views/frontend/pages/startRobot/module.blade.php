@@ -1,4 +1,4 @@
-<div class="rounded-md p-4 bg-gray-50 shadow-sm flex flex-col">
+<div class="rounded-md p-4 bg-gray-50 shadow-sm flex flex-col border-2 border-black">
     <input class="sr-only" id="module_gpio_list" type="text" value="{{ json_encode($moduleGpios) }}">
     <div class="h-full flex flex-col">
         <div class="">

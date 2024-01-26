@@ -2,11 +2,11 @@
 @section('content')
     <div class="w-full p-1 h-full flex flex-col">
         <div class="h-full flex flex-col">
-            <div class="absolute top-0 left-0 flex gap-2">
+            <div class="flex gap-2 z-10">
                 <div class="">
                     @include('frontend.blocks.selectRobot', ['type' => 'robot', 'id' => 'robot-chart'])
                 </div>
-                <div class="flex gap-2 group" data-name="change-type-chart" data-active="trip">
+                <div class="flex gap-2 group flex-wrap" data-name="change-type-chart" data-active="trip">
                     <button
                         class="px-4 mt-2 btn rounded border border-gray-500 group-data-[active='trip']:text-white group-data-[active='trip']:bg-main"
                         data-name="trip">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-center w-full h-full">
-                <div class="relative w-[90%] h-[90%] flex items-center justify-center">
+                <div class="relative w-[90%] h-[90%] flex items-center justify-center border rounded-md">
                     <canvas id="trips"></canvas>
                     <button data-name="left-chart-date"
                         class="absolute left-0 bottom-0 -translate-x-full rounded-full border border-gray-600 py-1 px-3">

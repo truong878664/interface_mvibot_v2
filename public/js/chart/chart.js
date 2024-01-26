@@ -1,13 +1,16 @@
 import { getHistory } from "../lib/ultils.js";
+import handleErrorSystem from "./handleErrorSystem.js";
 import {
     detailChart,
     getDataChart,
     getErrorSystem,
     getListDay,
+    groupDateMvpTime,
     toDatasetChart,
     updateChart,
     useRef,
 } from "./ultils.js";
+
 const getElementByName = (name) =>
     document.querySelector(`[data-name='${name}']`);
 
@@ -26,6 +29,7 @@ export const dataErrorSystemRef = useRef(null);
 export const dataTripsRef = useRef(null);
 export const dataErrorRef = useRef(null);
 export const dataBatteryRef = useRef(null);
+export const detailErrorSystemRef = useRef(null);
 
 const dataChartRef = useRef({
     systemError: null,
@@ -57,11 +61,79 @@ const dataUiChair = {
     ],
 };
 
+const alwayShowToolTip = {
+    id: "alwayShowToolTip",
+    afterDraw(chart, args, options) {
+        if (typeActiveRef.current !== "systemError") return;
+        const { ctx } = chart;
+        chart.data.datasets.forEach((dataset, i) => {
+            chart.getDatasetMeta(i).data.forEach((dataPoint, index) => {
+                const timeLineLabel = chart.data.labels[index];
+                // console.log(detailErrorSystemRef.current);
+                // console.detailErrorSystemRef.current?.[]
+                const found = detailErrorSystemRef.current?.[timeLineLabel];
+
+                // const found = detailErrorSystemRef.current?.find(
+                //     (item) =>
+                //         item?.time?.includes(` ${chart.data.labels[index]}`),
+                //     // item?.time?.includes(` ${chart.data.labels[index]}`),
+                // );
+                if (found) {
+                    const { x, y } = dataPoint.tooltipPosition();
+                    const width = 80;
+                    const padding = 5;
+                    const leading = 16;
+                    const positionX =
+                        index === 0
+                            ? x
+                            : index === chart.getDatasetMeta(i).data.length - 1
+                            ? x - width
+                            : x - width / 2;
+
+                    ctx.fillStyle = "rgba(0,0,0,0.8)";
+                    ctx.fillRect(
+                        positionX,
+                        y - 10,
+                        width,
+                        (leading * 3 + padding) * found.length,
+                    );
+                    found.forEach((item, index) => {
+                        ctx.fillStyle = "white";
+                        ctx.fillText(
+                            `• ${item.from}_${item.dateFrom}`,
+                            positionX + padding,
+                            y + (leading * 3 * index + padding * index),
+                        );
+                        ctx.fillText(
+                            `${item.to}_${item.dateTo}`,
+                            positionX + padding,
+                            y +
+                                leading +
+                                (leading * 3 * index + padding * index),
+                        );
+                        ctx.fillText(
+                            `P/T: ${item.hours}h ${item.minute}m`,
+                            positionX + padding,
+                            y +
+                                leading * 2 +
+                                (leading * 3 * index + padding * index),
+                        );
+                    });
+
+                    // ctx.beginPath();
+                    // ctx.moveTo();
+                }
+            });
+        });
+        // console.log(ctx);
+    },
+};
+
+// console.log();
 const chart = new window.Chart(ctx, {
     type: "line",
     data: dataUiChair,
     options: {
-        responsive: true,
         onClick: (e, legendItem, chart) => {},
         element: {
             borderJoinStyle: "round",
@@ -74,7 +146,12 @@ const chart = new window.Chart(ctx, {
                 anchor: "end",
                 offset: 3,
             },
+            tooltip: {
+                enabled: true,
+            },
+            legend: { display: true },
         },
+
         interaction: {
             mode: "index",
             intersect: false,
@@ -98,7 +175,7 @@ const chart = new window.Chart(ctx, {
             },
         },
     },
-    plugins: [ChartDataLabels],
+    plugins: [ChartDataLabels, alwayShowToolTip],
 });
 
 const onChangeRobot = async (e) => {
@@ -107,9 +184,14 @@ const onChangeRobot = async (e) => {
         nameRobotRef.current = nameRobot;
         const dataHistory = await getHistory(nameRobotRef.current);
         const dataErrorSystem = await getErrorSystem(nameRobotRef.current);
-
         dataHistoryRef.current = dataHistory;
         const dataParseFromHistory = getDataChart(dataHistory);
+
+        detailErrorSystemRef.current = handleErrorSystem({
+            dataErrorSystem,
+            dataErrorShort: dataParseFromHistory.error,
+        });
+
         dataChartRef.current.systemError = dataErrorSystem;
         dataChartRef.current.trip = dataParseFromHistory.trips;
         dataChartRef.current.error = dataParseFromHistory.error;
@@ -254,6 +336,21 @@ const drawChartMain = () => {
 
             chart.data.datasets.push(dataTrips, dataSystemError);
             chart.update();
+            break;
+        case "systemError":
+            currentDatasetChart.current.labels = getListDay({ atHour: 6 });
+            const datasetErrorSystemMvpTime = toDatasetChart(
+                dataChartRef.current.systemError,
+                currentDatasetChart.current.labels,
+                "scope",
+            );
+            updateChart({
+                chart: chart,
+                data: datasetErrorSystemMvpTime.datasets,
+                labelList: datasetErrorSystemMvpTime.labels,
+                label: detailChart[typeActiveRef.current].label,
+                borderColor: detailChart[typeActiveRef.current].borderColor,
+            });
             break;
         default:
             currentDatasetChart.current.labels = getListDay({});

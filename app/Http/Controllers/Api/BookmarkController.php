@@ -37,7 +37,7 @@ class BookmarkController extends Controller
     public function store(Request $request)
     {
         DB::table('bookmark')->insert($request->all());
-        return ['message'=>'Save bookmark successfully!'];
+        return ['message' => 'Save bookmark successfully!'];
     }
 
     /**
@@ -84,6 +84,6 @@ class BookmarkController extends Controller
     {
 
         DB::table('bookmark')->where('link', $request->pathName)->delete();
-        return ['message'=>'delete bookmark successfully'];
+        return ['message' => 'delete bookmark successfully'];
     }
 }

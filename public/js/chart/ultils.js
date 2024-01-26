@@ -1,7 +1,7 @@
 import { currentStepDate } from "./chart.js";
 
 export const getListDay = ({ atHour = 0, typeReturn = "object" }) => {
-    const STEP_MOVE_DAY = 14;
+    const STEP_MOVE_DAY = 9;
     const listDate = {};
     const listDateArray = [];
     const now = new Date();
@@ -64,13 +64,13 @@ export const detailChart = {
 };
 
 export const toDatasetChart = (data, keys, type = "equal") => {
-    const dataGroupByDate = JSON.parse(JSON.stringify(keys));
-    const HOUR_PER_DAY = 24;
-    const MILLISECONDS_PER_HOUR = 3600000;
+    let dataGroupByDate = JSON.parse(JSON.stringify(keys));
+
     const dataChart = {
         labels: [],
         datasets: [],
     };
+
     if (type === "equal") {
         data.map((item) => {
             const time = new Date(item.timeLine);
@@ -82,14 +82,30 @@ export const toDatasetChart = (data, keys, type = "equal") => {
         });
     } else if (type === "scope") {
         const arrayTimeLine = Object.keys(keys).map((key) => Number(key));
+        // const dataGroup = groupDateMvpTime(data, keys);
+        // dataGroupByDate = dataGroup;
+
+        const HOUR_PER_DAY = 24;
+        const MILLISECONDS_PER_HOUR = 3600000;
         data.map((item) => {
-            arrayTimeLine.forEach((date) => {
+            arrayTimeLine.forEach((date, index) => {
                 if (
-                    item.timeLine > date &&
+                    item.timeLine >= date &&
                     item.timeLine < date + MILLISECONDS_PER_HOUR * HOUR_PER_DAY
                 ) {
-                    if (date in dataGroupByDate) {
-                        return dataGroupByDate[date].push(item);
+                    let nextDate;
+                    const timeItem = new Date(item.timeLine);
+                    const currentHours = timeItem.getHours();
+                    if (currentHours < 6) {
+                        timeItem.setDate(timeItem.getDate() - 1);
+                        timeItem.setHours(6);
+                        nextDate = timeItem.getTime();
+                    } else if (currentHours >= 6) {
+                        timeItem.setHours(6);
+                        nextDate = timeItem.getTime();
+                    }
+                    if (nextDate in dataGroupByDate) {
+                        return dataGroupByDate[nextDate].push(item);
                     }
                 }
             });
@@ -116,6 +132,43 @@ export const toDatasetChart = (data, keys, type = "equal") => {
             }
         });
     return dataChart;
+};
+
+export const groupDateMvpTime = (dataErrorSystem) => {
+    const dataGroupDateMvpTime = [];
+    dataErrorSystem.map((item) => {
+        const timeItem = new Date(item.created_at);
+        const currentHours = timeItem.getHours();
+        let nextDate;
+        if (currentHours < 6) {
+            timeItem.setDate(timeItem.getDate() - 1);
+            timeItem.setHours(6);
+            timeItem.setMinutes(0);
+            timeItem.setSeconds(0);
+            timeItem.setMilliseconds(0);
+            nextDate = timeItem.getTime();
+        } else if (currentHours >= 6) {
+            timeItem.setHours(6);
+            timeItem.setMinutes(0);
+            timeItem.setSeconds(0);
+            timeItem.setMilliseconds(0);
+            nextDate = timeItem.getTime();
+        }
+
+        const time = new Date(nextDate);
+        const time1 = `6 AM ${time.getDate()}/${time.getMonth() + 1}`;
+        time.setDate(time.getDate() + 1);
+        const time2 = `6 AM ${time.getDate()}/${time.getMonth() + 1}`;
+        const label = time1 + " - " + time2;
+        if (label in dataGroupDateMvpTime) {
+            dataGroupDateMvpTime[label].push(item);
+        } else {
+            dataGroupDateMvpTime[label] = [item];
+        }
+        return dataGroupDateMvpTime;
+    });
+
+    return dataGroupDateMvpTime;
 };
 
 export function getDataChart(data) {

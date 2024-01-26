@@ -1,4 +1,4 @@
-<div class="rounded-md flex flex-col bg-gray-50 shadow-sm p-4">
+<div class="rounded-md flex flex-col bg-gray-50 shadow-sm p-4 border-2 border-black">
     <div class="">
         <span class="font-bold">Tool lift ROBOT</span>
     </div>
@@ -16,9 +16,8 @@
                     Nâng tool lift
                 </button>
                 <button data-type-button="downToolLift"
-                    class="bg-green-500 p-7 shadow-light shadow-green-500/10 btn font-bold rounded-full">Hạ
-                    tool
-                    lif</button>
+                    class="bg-green-500 p-7 shadow-light shadow-green-500/10 btn font-bold rounded-full">Hạ tool
+                    lift</button>
             </div>
         </div>
     </div>
