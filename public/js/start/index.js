@@ -65,8 +65,7 @@ async function handleStart() {
                 return;
             }
             publishMission(topic, missions.join(""));
-            publishTopicString(`/${nameRobot}/output_user_set`, "(6|1)");
-            publishTopicString(`/${nameRobot}/output_user_set`, "(5|1)");
+            publishTopicString(`/${nameRobot}/output_user_set`, "(5|1)(6|1)");
 
             (async function addErrorSystem() {
                 await fetch("/api/error-system", {
