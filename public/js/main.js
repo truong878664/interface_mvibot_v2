@@ -1,10 +1,12 @@
 import Node from "./functionHandle/Node.js";
 import createNameWindow from "./functionHandle/createIdBrowser.js";
 import connectRos from "./rosModule/connectRos.js";
+import subscribeTopic from "./rosModule/subscribeTopic.js";
 import topicsListening from "./rosModule/topicsListening.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+const timeResetElement = document.querySelector("[data-name='time-reset']");
 createNameWindow();
 const ros = connectRos(window.location.hostname);
 
@@ -69,4 +71,13 @@ window.oncontextmenu = (e) => {
 
 export { $, $$, toggerMessage };
 export default ros;
+subscribeTopic("/time_reset", "std_msgs/String", (ms) => {
+    const secondTotal = isNaN(Number(ms.data)) ? 0 : Number(ms.data);
+    const hourFloat = secondTotal / 3600;
+    const hour = Math.floor(hourFloat);
+    const minuteFloat = (hourFloat - hour) * 60;
+    const minute = Math.floor(minuteFloat);
+    const second = Math.floor((minuteFloat - minute) * 60);
+    timeResetElement.innerHTML = `${hour}:${minute}:${second}`;
+});
 topicsListening();

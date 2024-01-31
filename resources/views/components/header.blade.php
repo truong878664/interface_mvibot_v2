@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+        <div data-name="time-reset">00:00</div>
         <div class="ml-4">
             <div class="ml-7 !hidden" id="loader-header"></div>
         </div>
