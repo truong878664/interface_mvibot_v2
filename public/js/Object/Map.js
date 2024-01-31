@@ -358,7 +358,10 @@ export default class Map {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(this.layer.layerRosToDb()),
+                    body: JSON.stringify({
+                        type: "listLayer",
+                        data: this.layer.layerRosToDb(),
+                    }),
                 });
                 const status = await res.json();
                 if (res.status === 200) {

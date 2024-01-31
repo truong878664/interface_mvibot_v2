@@ -79,10 +79,17 @@ const dataLayerModel = {
 };
 
 function getLayer() {
-    deleteAllLayer(mvibot_layer_active);
-    mvibot_layer_active.splice(0, mvibot_layer_active.length);
     fetch("/api/layer")
         .then((res) => res.json())
+        .then((data) => {
+            deleteAllLayer(mvibot_layer_active);
+            mvibot_layer_active.splice(0, mvibot_layer_active.length);
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(data);
+                }, 100);
+            });
+        })
         .then((data) => {
             data.forEach((item) => {
                 const { z, w } = mathYaw(item.yawo);
@@ -255,12 +262,17 @@ function saveDataToDatabase(dataLayerModel) {
 }
 
 const deleteLayer = (id) => {
-    deleteAllLayer(mvibot_layer_active);
-    mvibot_layer_active.splice(id + countLayerDb, 1);
-    dataLayerSaveDatabase.splice(id, 1);
-
-    displayLayer(mvibot_layer_active);
-    renderLayer(dataLayerSaveDatabase);
+    new Promise((resolve, reject) => {
+        deleteAllLayer(mvibot_layer_active);
+        mvibot_layer_active.splice(id + countLayerDb, 1);
+        dataLayerSaveDatabase.splice(id, 1);
+        setTimeout(() => {
+            resolve();
+        }, 100);
+    }).then(() => {
+        displayLayer(mvibot_layer_active);
+        renderLayer(dataLayerSaveDatabase);
+    });
 };
 
 function renderLayer(dataLayerSaveDatabase) {
@@ -304,10 +316,12 @@ function handleSaveLayer() {
                 "Content-Type": "application/json",
             },
             method: "POST",
-            body: JSON.stringify(dataLayerSaveDatabase),
+            body: JSON.stringify({
+                type: "listLayer",
+                data: dataLayerSaveDatabase,
+            }),
         })
             .then(function (res) {
-                console.log(res);
                 if (res.status == 200) {
                     renderLayer([]);
                     renderListLayer(mvibot_layer_active);
@@ -319,6 +333,10 @@ function handleSaveLayer() {
                 } else {
                     toggerMessage("error", `error(code:${res.status})`);
                 }
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
             })
             .catch(function (res) {
                 console.log(res);

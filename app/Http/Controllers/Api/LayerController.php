@@ -40,12 +40,20 @@ class LayerController extends Controller
         // $dataLayer = json_decode($request->data_layer);
         // $array = json_decode(json_encode($dataLayer), true);
         try {
-            //code...
             $mapActive = DB::table("map_active")->first();
-            $dataLayer = $request->all();
-            $dataLayer["name_map_active"] = $mapActive->name_map_active;
-            Layer::insert($dataLayer);
-            return ["message" => "Ok", "data" => $dataLayer];
+            $nameMapActive = $mapActive->name_map_active;
+            switch ($request->type) {
+                case 'listLayer':
+                    Layer::insert($request->data);
+                    return ["message" => "Ok", "data" => null];
+                    break;
+                default:
+                    $dataLayer = $request->all();
+                    $dataLayer["name_map_active"] = $nameMapActive;
+                    Layer::insert($dataLayer);
+                    return ["message" => "Ok", "data" => $dataLayer];
+                    break;
+            }
         } catch (\Throwable $th) {
             return ["message" => $th];
         }
