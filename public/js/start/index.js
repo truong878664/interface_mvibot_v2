@@ -7,6 +7,7 @@ import feature from "./feature.js";
 import publishTopicString from "../rosModule/topicString.js";
 import handleModule from "./handleModule.js";
 import subscribeTopic from "../rosModule/subscribeTopic.js";
+import { getHistory } from "../lib/ultils.js";
 
 const startBtn = document.querySelector("[data-name='start']");
 const robotActive = document.querySelector("#robot-navigation");
@@ -14,6 +15,9 @@ const robotListElement = document.querySelector("#robot-navigation-array");
 const robotList = JSON.parse(robotListElement.value);
 const gpioStartElement = document.querySelector("[data-name='gpio-start']");
 const refreshBtn = document.querySelector("[data-name='refresh-io-btn']");
+const timePosition = document.querySelector(".time-set-position");
+const timeMissionReceive = document.querySelector(".time-mission-receive");
+const nameMissionReceive = document.querySelector(".name-mission-receive");
 
 configStart();
 feature();
@@ -29,7 +33,7 @@ startBtn.onclick = () => {
 async function handleStart() {
     try {
         const isWithToollift = JSON.parse(
-            document.querySelector("[name='toollift']:checked").dataset
+            document.querySelector("[name='toollift']:checked")?.dataset
                 .toollift,
         );
         const nameRobot = robotActive.value;
@@ -66,7 +70,6 @@ async function handleStart() {
             }
             publishMission(topic, missions.join(""));
             publishTopicString(`/${nameRobot}/output_user_set`, "(5|1)(6|1)");
-
             (async function addErrorSystem() {
                 await fetch("/api/error-system", {
                     method: "POST",
@@ -90,6 +93,7 @@ const HTMLIoItem = ` <li class="w-8 h-8 rounded-full flex justify-center font-bo
 robotActive.addEventListener("change", (e) => {
     const nameRobot = e.target.value;
     renderIo(nameRobot);
+    statusPositionAndMission(nameRobot);
 });
 const renderIo = async (nameRobot) => {
     const res = await fetch(`/api/input-gpio?name_seri=${nameRobot}`);
@@ -144,3 +148,39 @@ robotList?.forEach((robot) => {
         },
     );
 });
+
+const updateBtn = document.querySelector(".update-btn");
+updateBtn.onclick = () => {
+    if (robotActive.value) {
+        statusPositionAndMission(robotActive.value);
+        toggerMessage("success", "Đã cập nhật");
+    } else {
+        toggerMessage("error", "Vui lòng chọn robot!");
+    }
+};
+async function statusPositionAndMission(nameRobot) {
+    const RECEIVE_POSITION = "Set position for robot";
+    const RECEIVE_MISSION = "Robot recevice multiple mission normal:";
+    const historyList = await getHistory(nameRobot);
+
+    const historySorted = historyList.sort((a, b) => b.timeLine - a.timeLine);
+    const itemPosition = historySorted.find((his) => {
+        return his.data.includes(RECEIVE_POSITION);
+    });
+    const itemMission = historySorted.find((his) => {
+        return his.data.includes(RECEIVE_MISSION);
+    });
+
+    if (itemPosition) {
+        timePosition.innerHTML = itemPosition.time;
+    }
+    if (itemMission) {
+        console.log(timeMissionReceive);
+        timeMissionReceive.innerHTML = itemMission.time || "không có dữ liệu";
+        console.log();
+        nameMissionReceive.innerHTML =
+            itemMission.data?.replace(RECEIVE_MISSION, "") ||
+            "không có dữ liệu";
+    }
+    console.log(itemPosition);
+}

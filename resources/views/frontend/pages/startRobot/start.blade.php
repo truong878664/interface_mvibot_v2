@@ -63,7 +63,7 @@
         ])
     </div>
     <div class="">
-        <div class="inline-flex gap-2 bg-gray-200 p-1 mt-6 rounded-xl">
+        <div class="inline-flex gap-2 bg-gray-200 p-1 mt-6 rounded-xl sr-only">
             <label class="cursor-pointer">
                 <input type="radio" name="toollift" data-toollift="false" class="sr-only peer" checked />
                 <div
@@ -80,21 +80,26 @@
             </label>
         </div>
     </div>
-    <div class="flex flex-col h-full">
-        <div class="grid place-content-center flex-1 h-3/4 py-3">
+    <div class="flex flex-col h-full gap-2">
+        <div class="grid place-content-center flex-1 py-3">
             <button class="bg-green-400 text-white rounded-full px-16 py-7 btn shadow-light shadow-green-700/20"
                 data-name="start">
-                <span class="label font-bold text-2xl">
-                    Start
+                <span class="label font-bold text-2xl">Start
                     <i class="fa-solid fa-power-off"></i>
                 </span>
             </button>
         </div>
+
         <div class="">
-            <div class="flex justify-end">
-                <button data-name="refresh-io-btn" class="px-2 py-1 rounded border"><i
-                        class="fa-solid fa-arrows-rotate"></i></button>
+            <button class="update-btn hover:underline">cập nhật</button>
+            <div>- Thiết lập vị trí cho robot gần nhất lúc: <span class="font-bold time-set-position"> không có dữ liệu
+                </span></div>
+            <div>- Robot nhận nhiệm vụ cuối cùng vào lúc <span class="font-bold time-mission-receive">không có dữ
+                    liệu</span> bao gồm:
+                <span class="font-bold name-mission-receive">không có dữ liệu</span>
             </div>
+        </div>
+        <div class="flex justify-between">
             <div class="" data-name="gpio-start">
                 <div class="">
                     <span>Input IO</span>
@@ -112,6 +117,10 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="flex justify-end items-start">
+                <button data-name="refresh-io-btn" class="px-2 py-1 rounded border"><i
+                        class="fa-solid fa-arrows-rotate"></i></button>
             </div>
         </div>
     </div>

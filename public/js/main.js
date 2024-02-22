@@ -15,12 +15,14 @@ function toggerMessage(type, message) {
         const Icon =
             type === "success"
                 ? Node("i").props({ className: "fa-solid fa-check" })
-                : Node("i").props({ className: "fa-solid fa-xmark" });
+                : type === "error"
+                ? Node("i").props({ className: "fa-solid fa-xmark" })
+                : Node("i").props({ className: "fa-solid fa-warning" });
 
         const HTMLElement = Node("div").props({
             id: "notification-message",
             className:
-                "text-white transition-transform data-[status='error']:text-red-500 data-[status='success']:text-green-500 -translate-y-[120%] -translate-x-1/2 fixed top-2 left-1/2 z-100 bg-white px-4 py-2 min-w-[200px] min-h-[60px] max-h-[120px] rounded-lg flex gap-2 items-center shadow overflow-hidden",
+                "text-white transition-transform data-[status='error']:text-red-500 data-[status='warning']:text-orange-500 data-[status='success']:text-green-500 -translate-y-[120%] -translate-x-1/2 fixed top-2 left-1/2 z-100 bg-white px-4 py-2 min-w-[200px] min-h-[60px] max-h-[120px] rounded-lg flex gap-2 items-center shadow overflow-hidden",
             dataset: { status: type },
             children: [
                 Node("span").props({

@@ -17,7 +17,18 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+
+        $data = [
+            "robot" => DB::table("my_robot")->get(),
+            "battery_status" => DB::table('battery_status')->get(),
+            "sensor_status" => DB::table('sensor_status')->get(),
+            "robot_config_status" => DB::table('robot_config_status')->get(),
+            "motor_left_status" => DB::table('motor_left_status')->get(),
+            "motor_right_status" => DB::table('motor_right_status')->get(),
+            "input_user_status" => DB::table("input_user_status")->get(),
+            "output_user_status" => DB::table("output_user_status")->get(),
+        ];
+        return $data;
     }
 
     /**
@@ -75,7 +86,7 @@ class StatusController extends Controller
                 'motor_left' => ['error' => 0, 'live' => 0],
                 'motor_right' => ['error' => 0, 'live' => 0],
                 'soc' => 0,
-                'status'=>'error'
+                'status' => 'error'
 
             ];
         }

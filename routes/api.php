@@ -80,7 +80,7 @@ Route::resource('function', FunctionController::class);
 Route::resource('var', VarController::class);
 Route::resource('sound-file', SoundFileController::class)->only('destroy');
 Route::resource('config-status', ConfigRobotController::class)->only('index');
-Route::resource('status', StatusController::class)->only('show');
+Route::resource('status', StatusController::class);
 
 Route::resource('bookmark', BookmarkController::class);
 Route::resource('error-system', ErrorSystemController::class);

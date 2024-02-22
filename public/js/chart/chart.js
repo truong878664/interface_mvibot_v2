@@ -1,4 +1,6 @@
 import { getHistory } from "../lib/ultils.js";
+import { toggerMessage } from "../main.js";
+import DetailShortError from "./component/DetailShortError.js";
 import handleErrorSystem from "./handleErrorSystem.js";
 import {
     detailChart,
@@ -69,15 +71,7 @@ const alwayShowToolTip = {
         chart.data.datasets.forEach((dataset, i) => {
             chart.getDatasetMeta(i).data.forEach((dataPoint, index) => {
                 const timeLineLabel = chart.data.labels[index];
-                // console.log(detailErrorSystemRef.current);
-                // console.detailErrorSystemRef.current?.[]
                 const found = detailErrorSystemRef.current?.[timeLineLabel];
-
-                // const found = detailErrorSystemRef.current?.find(
-                //     (item) =>
-                //         item?.time?.includes(` ${chart.data.labels[index]}`),
-                //     // item?.time?.includes(` ${chart.data.labels[index]}`),
-                // );
                 if (found) {
                     const { x, y } = dataPoint.tooltipPosition();
                     const width = 80;
@@ -119,22 +113,76 @@ const alwayShowToolTip = {
                                 (leading * 3 * index + padding * index),
                         );
                     });
-
-                    // ctx.beginPath();
-                    // ctx.moveTo();
                 }
             });
         });
-        // console.log(ctx);
     },
 };
 
-// console.log();
 const chart = new window.Chart(ctx, {
     type: "line",
     data: dataUiChair,
     options: {
-        onClick: (e, legendItem, chart) => {},
+        onClick: (e, legendItem, chart) => {
+            try {
+                if (
+                    chart.data.datasets[0].id_ !== "error" ||
+                    !chart.data.datasets[0].label?.includes(
+                        "Short stop error",
+                    ) ||
+                    chart.data.datasets.length > 1
+                )
+                    return;
+                const indexClick = legendItem[0].index;
+                const countShortErrorClick =
+                    chart.data.datasets[0].data[indexClick];
+
+                if (countShortErrorClick === 0) {
+                    toggerMessage(
+                        "warning",
+                        "There are no short stop errors on this day",
+                    );
+                    return;
+                }
+                const labelShortErrorClick = chart.data.labels[indexClick];
+                const dataShortError = dataChartRef.current.error;
+
+                const [day, month, year] = labelShortErrorClick.split("/");
+                const nextMonth = month.length === 1 ? "0" + month : month;
+                const nextDay = day.length === 1 ? "0" + day : day;
+
+                const listShortErrorFound = dataShortError.filter(
+                    (shortErrorItem) =>
+                        shortErrorItem.time.includes(
+                            `${year}-${nextMonth}-${nextDay}`,
+                        ),
+                );
+
+                const listShortErrorFoundAndContinue = listShortErrorFound.map(
+                    (shortErrorItem, index) => {
+                        const itemContinueShortError =
+                            dataHistoryRef.current.find((item, index) => {
+                                return (
+                                    index >= shortErrorItem.index &&
+                                    (item.data.includes("Start mission") ||
+                                        item.data.includes(
+                                            "Try continue mission",
+                                        ))
+                                );
+                            });
+                        return {
+                            error: shortErrorItem,
+                            continue: itemContinueShortError,
+                        };
+                    },
+                );
+                document.body.appendChild(
+                    DetailShortError(listShortErrorFoundAndContinue),
+                );
+            } catch (error) {
+                console.log(error);
+            }
+        },
         element: {
             borderJoinStyle: "round",
             capBezierPoints: false,
@@ -360,13 +408,16 @@ const drawChartMain = () => {
                 currentDatasetChart.current.labels,
             );
             currentDatasetChart.current = datasetChart;
-            updateChart({
+
+            const optionUpdateChart = {
                 chart: chart,
                 data: datasetChart.datasets,
                 labelList: datasetChart.labels,
                 label: detailChart[typeActiveRef.current].label,
                 borderColor: detailChart[typeActiveRef.current].borderColor,
-            });
+                id_: typeActiveRef.current,
+            };
+            updateChart(optionUpdateChart);
             break;
     }
 };

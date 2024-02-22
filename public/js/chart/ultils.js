@@ -215,6 +215,7 @@ export const updateChart = ({
     label = "",
     borderColor = "",
     reset = false,
+    id_,
 }) => {
     justOneDataChartMain(chart);
     if (reset) {
@@ -231,6 +232,9 @@ export const updateChart = ({
                 dataset.data.push(...data);
                 dataset.type = "line";
                 dataset.label = label;
+                if (id_) {
+                    dataset.id_ = id_;
+                }
                 borderColor && (dataset.borderColor = borderColor);
             }
         });
