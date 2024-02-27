@@ -7,6 +7,8 @@ import topicsListening from "./rosModule/topicsListening.js";
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const timeResetElement = document.querySelector("[data-name='time-reset']");
+const toastMessageContainer = document.querySelector("#toast-message");
+
 createNameWindow();
 const ros = connectRos(window.location.hostname);
 
@@ -22,7 +24,8 @@ function toggerMessage(type, message) {
         const HTMLElement = Node("div").props({
             id: "notification-message",
             className:
-                "text-white transition-transform data-[status='error']:text-red-500 data-[status='warning']:text-orange-500 data-[status='success']:text-green-500 -translate-y-[120%] -translate-x-1/2 fixed top-2 left-1/2 z-100 bg-white px-4 py-2 min-w-[200px] min-h-[60px] max-h-[120px] rounded-lg flex gap-2 items-center shadow overflow-hidden",
+                "flex max-h-[120px] min-h-[60px] min-w-[200px] items-center gap-2 overflow-hidden rounded-lg bg-white px-4 py-2 text-white shadow transition-transform data-[status='error']:text-red-500 data-[status='success']:text-green-500 data-[status='warning']:text-orange-500",
+            // "fixed left-1/2 top-2 z-100 flex max-h-[120px] min-h-[60px] min-w-[200px] -translate-x-1/2 -translate-y-[120%] items-center gap-2 overflow-hidden rounded-lg bg-white px-4 py-2 text-white shadow transition-transform data-[status='error']:text-red-500 data-[status='success']:text-green-500 data-[status='warning']:text-orange-500",
             dataset: { status: type },
             children: [
                 Node("span").props({
@@ -63,7 +66,8 @@ function toggerMessage(type, message) {
         setTimeout(onRemove, 5000);
         return HTMLElement;
     };
-    document.body.appendChild(MessageComponent(type, message));
+    toastMessageContainer.appendChild(MessageComponent(type, message));
+    // document.body.appendChild(MessageComponent(type, message));
 }
 
 window.oncontextmenu = (e) => {

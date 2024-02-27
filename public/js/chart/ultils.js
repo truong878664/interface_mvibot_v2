@@ -62,10 +62,15 @@ export const detailChart = {
         label: "System error",
     },
 };
-
+/**
+ *
+ * @param {({timeLine: number} & {[key:string]:unknown})[]} data
+ * @param {{[key: string]:[]}} keys
+ * @param {"equal" | "scope"} type
+ * @returns
+ */
 export const toDatasetChart = (data, keys, type = "equal") => {
     let dataGroupByDate = JSON.parse(JSON.stringify(keys));
-
     const dataChart = {
         labels: [],
         datasets: [],
@@ -119,6 +124,7 @@ export const toDatasetChart = (data, keys, type = "equal") => {
                 dataChart.labels.push(
                     new Date(Number(timeline)).toLocaleDateString("VI-vi"),
                 );
+
                 dataChart.datasets.push(dataGroupByDate[timeline].length);
                 return dataChart;
             } else if (type === "scope") {
@@ -188,6 +194,7 @@ export function getDataChart(data) {
                 time: item.time,
                 timeLine: item.timeLine,
                 nameMission: item.data.replace(STRING_FINISH_TRIP + ": ", ""),
+                index: item.index,
             });
         }
         if (item.data.includes(STRING_FINISH_BATTERY)) {

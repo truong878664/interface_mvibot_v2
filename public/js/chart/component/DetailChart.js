@@ -1,6 +1,10 @@
 import { Html, secondToTime } from "../../../lib/ultils.js";
-
-const DetailShortError = (data) => {
+/**
+ *
+ * @param {{data: object[], type: "short-error" | "trip"}} dataDetail
+ * @returns {void}
+ */
+const DetailChart = (dataDetail) => {
     const container = Html("div").props({
         className:
             "z-100 fixed top-o left-0 h-full w-full bg-black/20 grid place-content-center",
@@ -22,10 +26,18 @@ const DetailShortError = (data) => {
                     Html("ul").props({
                         className: "max-h-[500px] overflow-auto",
                         children: [
-                            ...data.map((item, index) => {
+                            ...dataDetail?.data.map((item, index) => {
+                                const keyDataDetail = {
+                                    "short-error": ["continue", "error"],
+                                    trip: ["finish", "start"],
+                                };
+                                const [firstKey, secondKey] =
+                                    keyDataDetail[dataDetail.type];
                                 const { hour, minute, second } = secondToTime(
-                                    (new Date(item.continue.time).getTime() -
-                                        new Date(item.error.time).getTime()) /
+                                    (new Date(item[firstKey].time).getTime() -
+                                        new Date(
+                                            item[secondKey].time,
+                                        ).getTime()) /
                                         1000,
                                 );
                                 return Html("li").props({
@@ -37,8 +49,21 @@ const DetailShortError = (data) => {
                                         }),
                                         Html("span").props({
                                             children: `
-                                                <div><span class="font-bold">Detail error: </span><span class="break-all">${item.error.data}</span></div>
-                                                <div><span class="font-bold">from</span> ${item.error.time} <span class="font-bold">to</span> ${item.continue.time}</div>
+                                                <div><span class="font-bold">Detail ${
+                                                    dataDetail.type
+                                                }: </span><span class="break-all">${
+                                                    item[
+                                                        dataDetail.type ===
+                                                        "trip"
+                                                            ? firstKey
+                                                            : secondKey
+                                                    ].data
+                                                }</span></div>
+                                                <div><span class="font-bold">from</span> ${
+                                                    item[firstKey].time
+                                                } <span class="font-bold">to</span> ${
+                                                    item[secondKey].time
+                                                }</div>
                                                 <div><span class="font-bold">Processing Time: </span>${hour}h ${minute}m ${second}s</div>`,
                                         }),
                                     ],
@@ -52,4 +77,4 @@ const DetailShortError = (data) => {
     });
     return container;
 };
-export default DetailShortError;
+export default DetailChart;

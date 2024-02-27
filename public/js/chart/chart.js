@@ -1,6 +1,7 @@
 import { getHistory } from "../lib/ultils.js";
 import { toggerMessage } from "../main.js";
-import DetailShortError from "./component/DetailShortError.js";
+import DetailShortError from "./component/DetailChart.js";
+import { showPopupShortError, showPopupTrip } from "./handle.js";
 import handleErrorSystem from "./handleErrorSystem.js";
 import {
     detailChart,
@@ -23,8 +24,8 @@ const rightChartDate = getElementByName("right-chart-date");
 const ctx = document.getElementById("trips");
 
 export const nameRobotRef = useRef(null);
-export const typeActiveRef = useRef("trip");
 
+export const typeActiveRef = useRef("trip");
 export const dataHistoryRef = useRef(null);
 
 export const dataErrorSystemRef = useRef(null);
@@ -33,7 +34,7 @@ export const dataErrorRef = useRef(null);
 export const dataBatteryRef = useRef(null);
 export const detailErrorSystemRef = useRef(null);
 
-const dataChartRef = useRef({
+export const dataChartRef = useRef({
     systemError: null,
     trip: null,
     error: null,
@@ -125,60 +126,18 @@ const chart = new window.Chart(ctx, {
     options: {
         onClick: (e, legendItem, chart) => {
             try {
-                if (
-                    chart.data.datasets[0].id_ !== "error" ||
-                    !chart.data.datasets[0].label?.includes(
+                const isShortError =
+                    chart.data.datasets[0].id_ === "error" &&
+                    chart.data.datasets[0].label?.includes(
                         "Short stop error",
-                    ) ||
-                    chart.data.datasets.length > 1
-                )
-                    return;
-                const indexClick = legendItem[0].index;
-                const countShortErrorClick =
-                    chart.data.datasets[0].data[indexClick];
+                    ) &&
+                    chart.data.datasets.length === 1;
 
-                if (countShortErrorClick === 0) {
-                    toggerMessage(
-                        "warning",
-                        "There are no short stop errors on this day",
-                    );
-                    return;
-                }
-                const labelShortErrorClick = chart.data.labels[indexClick];
-                const dataShortError = dataChartRef.current.error;
-
-                const [day, month, year] = labelShortErrorClick.split("/");
-                const nextMonth = month.length === 1 ? "0" + month : month;
-                const nextDay = day.length === 1 ? "0" + day : day;
-
-                const listShortErrorFound = dataShortError.filter(
-                    (shortErrorItem) =>
-                        shortErrorItem.time.includes(
-                            `${year}-${nextMonth}-${nextDay}`,
-                        ),
-                );
-
-                const listShortErrorFoundAndContinue = listShortErrorFound.map(
-                    (shortErrorItem, index) => {
-                        const itemContinueShortError =
-                            dataHistoryRef.current.find((item, index) => {
-                                return (
-                                    index >= shortErrorItem.index &&
-                                    (item.data.includes("Start mission") ||
-                                        item.data.includes(
-                                            "Try continue mission",
-                                        ))
-                                );
-                            });
-                        return {
-                            error: shortErrorItem,
-                            continue: itemContinueShortError,
-                        };
-                    },
-                );
-                document.body.appendChild(
-                    DetailShortError(listShortErrorFoundAndContinue),
-                );
+                const isTrip =
+                    chart.data.datasets[0].label?.includes("Trips") &&
+                    chart.data.datasets.length === 1;
+                if (isTrip) showPopupTrip({ chart, legendItem });
+                if (isShortError) showPopupShortError({ chart, legendItem });
             } catch (error) {
                 console.log(error);
             }
@@ -399,6 +358,26 @@ const drawChartMain = () => {
                 label: detailChart[typeActiveRef.current].label,
                 borderColor: detailChart[typeActiveRef.current].borderColor,
             });
+            break;
+        case "battery":
+            currentDatasetChart.current.labels = getListDay({});
+            const listDataChart_ = dataChartRef.current[typeActiveRef.current];
+            const datasetChart_ = toDatasetChart(
+                listDataChart_,
+                currentDatasetChart.current.labels,
+            );
+            currentDatasetChart.current = datasetChart_;
+            const optionUpdateChart_ = {
+                chart: chart,
+                data: datasetChart_.datasets.map((count) =>
+                    Math.floor(count / 2),
+                ),
+                labelList: datasetChart_.labels,
+                label: detailChart[typeActiveRef.current].label,
+                borderColor: detailChart[typeActiveRef.current].borderColor,
+                id_: typeActiveRef.current,
+            };
+            updateChart(optionUpdateChart_);
             break;
         default:
             currentDatasetChart.current.labels = getListDay({});

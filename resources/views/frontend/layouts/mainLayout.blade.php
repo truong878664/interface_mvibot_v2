@@ -13,6 +13,7 @@
 
 <body
     class="w-full h-full grid grid-areas-slim grid-cols-slim grid-rows-slim sm:grid-areas-wide sm:grid-cols-wide sm:grid-rows-wide">
+    <div class="fixed left-1/2 top-2 z-100 transition-all -translate-x-1/2 flex flex-col gap-2" id="toast-message"></div>
     @include('components.header')
 
     @include('components.navbar')
