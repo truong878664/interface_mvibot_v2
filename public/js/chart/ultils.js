@@ -249,10 +249,3 @@ export const updateChart = ({
         chart.update();
     }
 };
-
-export const useRef = (init) => {
-    const ref = { current: init };
-    return ref;
-};
-
-export const parseDate = (time) => new Date(time.replace(/-/g, "/"));

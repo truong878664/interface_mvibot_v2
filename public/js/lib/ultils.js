@@ -1,5 +1,6 @@
-import { parseDate } from "../chart/ultils.js";
 import splitTwoChar from "../functionHandle/splitTwoChar.js";
+
+export const parseDate = (time) => new Date(time.replace(/-/g, "/"));
 
 export const getHistory = async (nameRobot) => {
     try {

@@ -1,6 +1,4 @@
-import { getHistory } from "../lib/ultils.js";
-import { toggerMessage } from "../main.js";
-import DetailShortError from "./component/DetailChart.js";
+import { getHistory, useRef } from "../lib/ultils.js";
 import { showPopupShortError, showPopupTrip } from "./handle.js";
 import handleErrorSystem from "./handleErrorSystem.js";
 import {
@@ -8,10 +6,8 @@ import {
     getDataChart,
     getErrorSystem,
     getListDay,
-    groupDateMvpTime,
     toDatasetChart,
     updateChart,
-    useRef,
 } from "./ultils.js";
 
 const getElementByName = (name) =>

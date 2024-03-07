@@ -1,4 +1,5 @@
 import { Html, secondToTime } from "../../../lib/ultils.js";
+import { parseDate } from "../../lib/ultils.js";
 /**
  *
  * @param {{data: object[], type: "short-error" | "trip"}} dataDetail
@@ -34,8 +35,8 @@ const DetailChart = (dataDetail) => {
                                 const [firstKey, secondKey] =
                                     keyDataDetail[dataDetail.type];
                                 const { hour, minute, second } = secondToTime(
-                                    (new Date(item[firstKey].time).getTime() -
-                                        new Date(
+                                    (parseDate(item[firstKey].time).getTime() -
+                                        parseDate(
                                             item[secondKey].time,
                                         ).getTime()) /
                                         1000,
