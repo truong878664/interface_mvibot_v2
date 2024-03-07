@@ -141,7 +141,7 @@ export const toDatasetChart = (data, keys, type = "equal") => {
 };
 
 export const groupDateMvpTime = (dataErrorSystem) => {
-    const dataGroupDateMvpTime = [];
+    const dataGroupDateMvpTime = {};
     dataErrorSystem.map((item) => {
         const timeItem = new Date(item.created_at);
         const currentHours = timeItem.getHours();
@@ -254,3 +254,5 @@ export const useRef = (init) => {
     const ref = { current: init };
     return ref;
 };
+
+export const parseDate = (time) => new Date(time.replace(/-/g, "/"));

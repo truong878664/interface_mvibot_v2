@@ -198,7 +198,6 @@ const onChangeRobot = async (e) => {
             dataErrorSystem,
             dataErrorShort: dataParseFromHistory.error,
         });
-
         dataChartRef.current.systemError = dataErrorSystem;
         dataChartRef.current.trip = dataParseFromHistory.trips;
         dataChartRef.current.error = dataParseFromHistory.error;
@@ -386,6 +385,7 @@ const drawChartMain = () => {
                 listDataChart,
                 currentDatasetChart.current.labels,
             );
+
             currentDatasetChart.current = datasetChart;
 
             const optionUpdateChart = {

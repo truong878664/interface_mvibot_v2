@@ -1,4 +1,4 @@
-import { groupDateMvpTime } from "./ultils.js";
+import { groupDateMvpTime, parseDate } from "./ultils.js";
 
 const handleErrorSystem = ({ dataErrorSystem, dataErrorShort }) => {
     const listErrorMap = [];
@@ -11,16 +11,16 @@ const handleErrorSystem = ({ dataErrorSystem, dataErrorShort }) => {
         const timeLineErSystem = new Date(erSystem.created_at).getTime();
 
         const foundErShort = dataErrorShortSorted.find((erShort, index) => {
-            const timeLineErShort = new Date(erShort.time).getTime();
+            const timeLineErShort = parseDate(erShort.time).getTime();
 
             return timeLineErShort < timeLineErSystem;
         });
 
         const period =
-            (timeLineErSystem - new Date(foundErShort?.time).getTime()) /
+            (timeLineErSystem - parseDate(foundErShort?.time).getTime()) /
             (1000 * 60 * 60);
 
-        const timeFrom = new Date(foundErShort.time);
+        const timeFrom = parseDate(foundErShort.time);
         const timeTo = new Date(erSystem.created_at);
         const itemErrorSystem = {
             system: erSystem,

@@ -1,3 +1,4 @@
+import { parseDate } from "../chart/ultils.js";
 import splitTwoChar from "../functionHandle/splitTwoChar.js";
 
 export const getHistory = async (nameRobot) => {
@@ -25,8 +26,7 @@ export const parseDataHistoryString = (historyData) => {
         trStringLine.map((item) => {
             const [key, value] = item.split(">");
             if (key === "time") {
-                const time = new Date(value);
-                // time.setHours(0);
+                const time = parseDate(value);
                 time.setSeconds(0);
                 time.setMinutes(0);
                 time.setMilliseconds(0);
