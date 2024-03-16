@@ -16,7 +16,6 @@
     padding: 0;
     scrollbar-width: thin;
     scrollbar-color: #8c8c8c transparent;
-    scrollbar-gutter: stable;
 }
 :root {
     --white-color: #fff;
