@@ -68,15 +68,15 @@ export const detailChart = {
  * @param {({timeLine: number} & {[key:string]:unknown})[]} data
  * @param {{[key: string]:[]}} keys
  * @param {"equal" | "scope"} type
+ * @param {string | undefined} typeActive
  * @returns
  */
-export const toDatasetChart = (data, keys, type = "equal") => {
+export const toDatasetChart = (data, keys, type = "equal", typeActive) => {
     let dataGroupByDate = JSON.parse(JSON.stringify(keys));
     const dataChart = {
         labels: [],
         datasets: [],
     };
-
     if (type === "equal") {
         data.map((item) => {
             const time = new Date(item.timeLine);
@@ -116,6 +116,15 @@ export const toDatasetChart = (data, keys, type = "equal") => {
             return dataGroupByDate;
         });
     }
+
+    /** uniq data error when duplicate */
+    if (typeActive === "error") {
+        Object.keys(dataGroupByDate).forEach((key) => {
+            const uniqResult = uniqBy(dataGroupByDate[key], "data");
+            dataGroupByDate[key] = uniqResult;
+        });
+    }
+    /**group data */
     Object.keys(dataGroupByDate)
         .reverse()
         .map((timeline) => {
@@ -123,7 +132,6 @@ export const toDatasetChart = (data, keys, type = "equal") => {
                 dataChart.labels.push(
                     new Date(Number(timeline)).toLocaleDateString("VI-vi"),
                 );
-
                 dataChart.datasets.push(dataGroupByDate[timeline].length);
                 return dataChart;
             } else if (type === "scope") {

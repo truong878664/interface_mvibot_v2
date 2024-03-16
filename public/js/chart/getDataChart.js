@@ -27,6 +27,6 @@ export function getDataChart(data) {
             dataChart.error.push(item);
         }
     });
-    dataChart.error = uniqBy(dataChart.error, "data");
+    // dataChart.error = uniqBy(dataChart.error, "data");
     return dataChart;
 }

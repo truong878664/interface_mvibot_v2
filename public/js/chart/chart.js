@@ -260,6 +260,7 @@ const drawChartMain = () => {
                 dataChartRef.current.error,
                 currentDatasetChart.current.labels,
                 "scope",
+                "error",
             );
             updateChart({
                 chart: chart,
@@ -315,6 +316,8 @@ const drawChartMain = () => {
             const datasetError = toDatasetChart(
                 dataChartRef.current.error,
                 currentDatasetChart.current.labels,
+                "equal",
+                "error",
             );
             updateChart({
                 chart: chart,
@@ -408,6 +411,8 @@ const drawChartMain = () => {
             const datasetChart = toDatasetChart(
                 listDataChart,
                 currentDatasetChart.current.labels,
+                "equal",
+                typeActiveRef.current,
             );
 
             currentDatasetChart.current = datasetChart;
