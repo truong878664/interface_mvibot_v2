@@ -12,7 +12,7 @@ const DetailChart = (dataDetail) => {
         children: [
             Html("div").props({
                 className:
-                    "bg-white relative p-2 rounded-md max-w-[90%] mx-auto",
+                    "bg-white relative py-2 pl-2 rounded-md max-w-[90%] mx-auto",
                 children: [
                     Html("button").props({
                         className:

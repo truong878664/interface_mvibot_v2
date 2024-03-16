@@ -1,3 +1,4 @@
+import uniqBy from "../lib/lodash/uniqby.js";
 import { currentStepDate } from "./chart.js";
 
 export const getListDay = ({ atHour = 0, typeReturn = "object" }) => {
@@ -87,8 +88,6 @@ export const toDatasetChart = (data, keys, type = "equal") => {
         });
     } else if (type === "scope") {
         const arrayTimeLine = Object.keys(keys).map((key) => Number(key));
-        // const dataGroup = groupDateMvpTime(data, keys);
-        // dataGroupByDate = dataGroup;
 
         const HOUR_PER_DAY = 24;
         const MILLISECONDS_PER_HOUR = 3600000;
@@ -204,7 +203,9 @@ export function getDataChart(data) {
             dataChart.error.push(item);
         }
     });
-
+    // const draftError = uniqBy(dataChart.error, "data");
+    // dataChart.error = draftError;
+    // console.log(draftError, dataChart.error);
     return dataChart;
 }
 
@@ -239,6 +240,9 @@ export const updateChart = ({
                 dataset.data.push(...data);
                 dataset.type = "line";
                 dataset.label = label;
+
+                const maxY = Math.max(...data) + 5;
+                chart.options.scales.y.suggestedMax = maxY;
                 if (id_) {
                     dataset.id_ = id_;
                 }

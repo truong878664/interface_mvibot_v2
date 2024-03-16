@@ -1,14 +1,15 @@
+import uniqBy from "../lib/lodash/uniqby.js";
 import { getHistory, useRef } from "../lib/ultils.js";
 import { showPopupShortError, showPopupTrip } from "./handle.js";
 import handleErrorSystem from "./handleErrorSystem.js";
 import {
     detailChart,
-    getDataChart,
     getErrorSystem,
     getListDay,
     toDatasetChart,
     updateChart,
 } from "./ultils.js";
+import { getDataChart } from "./getDataChart.js";
 
 const getElementByName = (name) =>
     document.querySelector(`[data-name='${name}']`);
@@ -56,6 +57,7 @@ const dataUiChair = {
             pointStyle: "circle",
             pointRadius: 10,
             pointHoverRadius: 15,
+            tension: 0.08,
         },
     ],
 };
@@ -171,7 +173,10 @@ const chart = new window.Chart(ctx, {
                     display: true,
                     text: "Count",
                 },
+                suggestedMax: 10,
+                suggestedMin: 0,
                 min: 0,
+
                 ticks: {
                     stepSize: 1,
                 },
@@ -190,11 +195,13 @@ const onChangeRobot = async (e) => {
         dataHistoryRef.current = dataHistory;
         const dataParseFromHistory = getDataChart(dataHistory);
 
-        detailErrorSystemRef.current = handleErrorSystem({
+        const dataParserErrorSystem = handleErrorSystem({
             dataErrorSystem,
             dataErrorShort: dataParseFromHistory.error,
         });
-        dataChartRef.current.systemError = dataErrorSystem;
+        detailErrorSystemRef.current = dataParserErrorSystem.groupMVPtime;
+        dataChartRef.current.systemError =
+            dataParserErrorSystem.uniqueListError;
         dataChartRef.current.trip = dataParseFromHistory.trips;
         dataChartRef.current.error = dataParseFromHistory.error;
         dataChartRef.current.battery = dataParseFromHistory.battery;
@@ -291,7 +298,16 @@ const drawChartMain = () => {
                 labels: datasetTripMvpTime.labels,
             };
 
+            /**update max axes y */
             chart.data.datasets.push(dataTripsMvpTime, dataSystemErrorMvpTime);
+            const maxY =
+                Math.max(
+                    ...datasetTripMvpTime.datasets,
+                    ...datasetSystemErrorMvpTime.datasets,
+                ) + 5;
+            chart.options.scales.y.suggestedMax = maxY;
+
+            /** update all */
             chart.update();
             break;
         case "performance":
@@ -336,7 +352,19 @@ const drawChartMain = () => {
                 labels: datasetSystemError.labels,
             };
 
+            /**
+             * update max axes y
+             */
+            const maxY_ =
+                Math.max(
+                    ...datasetSystemError.datasets,
+                    ...datasetTrip.datasets,
+                ) + 5;
+            chart.options.scales.y.suggestedMax = maxY_;
+
             chart.data.datasets.push(dataTrips, dataSystemError);
+
+            /**update all */
             chart.update();
             break;
         case "systemError":

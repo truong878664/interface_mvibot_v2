@@ -1,6 +1,11 @@
+import uniqBy from "../lib/lodash/uniqby.js";
 import { parseDate } from "../lib/ultils.js";
 import { groupDateMvpTime } from "./ultils.js";
-
+/**
+ *
+ * @param {*} param0
+ * @returns { { groupMVPtime: object, uniqueListError:object }}
+ */
 const handleErrorSystem = ({ dataErrorSystem, dataErrorShort }) => {
     const listErrorMap = [];
     const listDateError = {};
@@ -34,7 +39,7 @@ const handleErrorSystem = ({ dataErrorSystem, dataErrorShort }) => {
             to: `${timeTo.getHours()}:${timeTo.getMinutes()}`,
             dateTo: `${timeTo.getDate()}/${timeTo.getMonth() + 1}`,
             time: timeTo.toLocaleString("vi-VI"),
-            created_at: erSystem.created_at,
+            ...erSystem,
         };
         listErrorMap.push(itemErrorSystem);
 
@@ -50,7 +55,8 @@ const handleErrorSystem = ({ dataErrorSystem, dataErrorShort }) => {
 
         return listDateError;
     });
-    const groupMVPtime = groupDateMvpTime(listErrorMap);
-    return groupMVPtime;
+    const uniqueListError = uniqBy(listErrorMap, "short.time");
+    const groupMVPtime = groupDateMvpTime(uniqueListError);
+    return { groupMVPtime, uniqueListError };
 };
 export default handleErrorSystem;
