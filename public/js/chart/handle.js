@@ -1,3 +1,4 @@
+import uniqBy from "../lib/lodash/uniqby.js";
 import { toggerMessage } from "../main.js";
 import { dataChartRef, dataHistoryRef } from "./chart.js";
 import DetailChart from "./component/DetailChart.js";
@@ -38,9 +39,14 @@ export const showPopupShortError = ({ chart, legendItem }) => {
             };
         },
     );
+
+    const nextListShortErrorFoundAndContinue = uniqBy(
+        listShortErrorFoundAndContinue,
+        "error.data",
+    );
     document.body.appendChild(
         DetailChart({
-            data: listShortErrorFoundAndContinue,
+            data: nextListShortErrorFoundAndContinue,
             type: "short-error",
         }),
     );
