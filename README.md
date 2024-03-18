@@ -1,23 +1,3 @@
-```tsx
-cd /home/mvibot/Truong/project/interface_mvibot_v2
-php artisan serve
-```
-
-```tsx
-roslaunch rosbridge_server rosbridge_websocket.launch
-```
-
-```tsx
-rosrun tf2_web_republisher tf2_web_republisher
-```
-
-```tsx
-cd maps
-rosrun map_server map_server map22.yaml
-```
-
----
-
 # <strong>Mvibot interface v2 - config ubuntu 20.04</strong>
 
 # <strong>Install git</strong>
@@ -64,6 +44,10 @@ sudo apt install lsb-release ca-certificates apt-transport-https software-proper
 ```
 
 ```tsx
+sudo add-apt-repository ppa:ondrej/php
+```
+
+```tsx
 sudo apt install php8.1
 ```
 
@@ -81,6 +65,10 @@ sudo apt install php8.1-common
 
 ```tsx
 sudo apt install php8.1-xml
+```
+
+```tsx
+sudo apt install php8.1-curl
 ```
 
 You will be prompted to confirm installation by typing Y and then ENTER.
@@ -173,7 +161,7 @@ mysql>
 To create a database with the name tutorial_database, type the following command.
 
 ```tsx
-mysql> CREATE DATABASE IF NOT EXISTS mvibot_database;
+CREATE DATABASE IF NOT EXISTS mvibot_database;
 ```
 
 Create new user
@@ -183,15 +171,15 @@ CREATE USER 'mvibot'@'localhost' IDENTIFIED BY 'Mvibot@v1';
 ```
 
 ```tsx
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
 ```
 
 ```tsx
-mysql> FLUSH PRIVILEGES;
+FLUSH PRIVILEGES;
 ```
 
 ```tsx
-mysql > exit;
+exit;
 ```
 
 # <strong> Add C++ -> MySql </strong>
@@ -212,14 +200,6 @@ Download the files above and place on your server.
 create folder
 
 ```tsx
-mkdir mvibotApp
-```
-
-```tsx
-cd mvibotApp
-```
-
-```tsx
 git clone https://github.com/truong878664/interface_mvibot_v2.git
 ```
 
@@ -232,7 +212,7 @@ press Ctrl + H
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong> -->
 
 ```tsx
-cd / mvibotApp / interface_mvibot_v2;
+cd interface_mvibot_v2;
 ```
 
 ```tsx
@@ -242,10 +222,6 @@ mv.env.example.env;
 # <strong>Composer</strong>
 
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
-
-```tsx
-cd / mvibotApp / interface_mvibot_v2;
-```
 
 ```tsx
 composer update
@@ -296,5 +272,23 @@ User: admin <br>
 Password: admin
 
 #
+
+```tsx
+cd /home/mvibot/Truong/project/interface_mvibot_v2 && php artisan serve
+```
+
+```tsx
+roslaunch rosbridge_server rosbridge_websocket.launch
+```
+
+```tsx
+rosrun tf2_web_republisher tf2_web_republisher
+```
+
+```tsx
+cd maps && rosrun map_server map_server map22.yaml && cd ..
+```
+
+---
 
 run one file migrate: php artisan migrate --path=/database/migrations/2023_08_22_184035_create_start_table.php
