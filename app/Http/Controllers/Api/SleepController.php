@@ -46,7 +46,7 @@ class SleepController extends Controller
             "name" => $name,
             "time_sleep" => $time_sleep,
             "mode" => "sleep",
-            "time_out" => $request->time_out || -1
+            "time_out" => $request->time_out ? $request->time_out : -1
         ];
 
         return  MissionSleep::create($dataSleep);

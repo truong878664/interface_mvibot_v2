@@ -1,7 +1,29 @@
 @php
     $userName = session('UserName');
     $key = substr($userName, 0, 1);
-    $colors = ['#FF7B54', '#D7E9B9', '#7B2869', '#B5D5C5', '#3C6255', '#579BB1', '#FF6E31', '#FFEBB7', '#AD8E70', '#B9FFF8', '#6FEDD6', '#FF9551', '#FF4A4A', '#FDFDBD', '#C8FFD4', '#B8E8FC', '#B1AFFF', '#FED049', '#CFFDE1', '#68B984', '#3D5656'];
+    $colors = [
+        '#FF7B54',
+        '#D7E9B9',
+        '#7B2869',
+        '#B5D5C5',
+        '#3C6255',
+        '#579BB1',
+        '#FF6E31',
+        '#FFEBB7',
+        '#AD8E70',
+        '#B9FFF8',
+        '#6FEDD6',
+        '#FF9551',
+        '#FF4A4A',
+        '#FDFDBD',
+        '#C8FFD4',
+        '#B8E8FC',
+        '#B1AFFF',
+        '#FED049',
+        '#CFFDE1',
+        '#68B984',
+        '#3D5656',
+    ];
     $color = $colors[strlen($userName)];
 @endphp
 <header class="grid-in-header flex h-full w-full items-center justify-between bg-main px-7 text-white shadow-md">
@@ -43,19 +65,20 @@
             <div class="ml-7 !hidden" id="loader-header"></div>
         </div>
     </div>
-
-    <div class="flex items-center gap-4">
-        <span>{{ session('UserName') }}</span>
-        <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
-            style="background-color: {{ $color }};"
-            class="avatar-user transparent bg-avatar relative flex aspect-square w-7 items-center justify-center rounded-full text-3xl ring-2 ring-sky-200 after:absolute after:text-lg after:font-bold after:uppercase after:content-[attr(key)]">
-            <span class="uppercase"></span>
-            @if (session('TypeUser') == 'admin')
-                <div
-                    class="absolute -top-1 -right-2 grid aspect-square w-5 place-content-center rounded-full bg-cyan-400 text-xs text-white">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-            @endif
+    <a href="/user">
+        <div class="flex items-center gap-4">
+            <span class="capitalize">{{ session('UserName') }}</span>
+            <div data-user-name="{{ session('UserName') }}" key="{{ $key }}"
+                style="background-color: {{ $color }};"
+                class="avatar-user transparent bg-avatar relative flex aspect-square w-7 items-center justify-center rounded-full text-3xl ring-2 ring-sky-200 after:absolute after:text-lg after:font-bold after:uppercase after:content-[attr(key)]">
+                <span class="uppercase"></span>
+                @if (session('TypeUser') == 'admin')
+                    <div
+                        class="absolute -top-1 -right-2 grid aspect-square w-5 place-content-center rounded-full bg-cyan-400 text-xs text-white">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
+    </a>
 </header>
