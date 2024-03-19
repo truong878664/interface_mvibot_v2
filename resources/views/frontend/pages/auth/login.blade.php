@@ -15,7 +15,7 @@
 <body>
     <div class="login-wrapper">
         <div class="login-img-wrapper">
-            <img class="login-img" src="/img/background_login_2.jpg" alt="">
+            <img class="login-img object-right" src="/img/background_7.jpg" alt="">
             <div class="login-layer login-layer-1"></div>
             <div class="login-layer login-layer-2"></div>
             <div class="login-layer login-layer-3"></div>

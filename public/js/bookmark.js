@@ -92,7 +92,7 @@ function renderBookmark(data) {
                         style="color:${item.color}">
                             <i class="${item.icon}"></i>
                     </span>
-                    <span class="text-xs text-center text-clamp-2 text-slate-500">
+                    <span class="text-xs text-center text-clamp-2 text-slate-500 capitalize">
                         ${item.name}
                     </span>
                 </li>

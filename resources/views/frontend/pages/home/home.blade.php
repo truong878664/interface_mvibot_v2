@@ -3,7 +3,7 @@
     <div class="w-full h-full p-1 pr-0 rounded-lg overflow-y-auto overflow-x-hidden">
         <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/bg.jpg)">
             <span class="absolute top-0 left-4 text-orange-400 ">website: maruei-robots.com</span>
-            <span class="absolute top-0 right-4 ">version: {{ $version }}</span>
+            <span class="absolute top-0 right-4 ">Version: {{ $version }}</span>
             <div class="absolute top-[20%] left-1/2 -translate-x-1/2 flex flex-col items-center text-[#fff]">
                 <h1>
                     <div class="animation-text text-[100px] font-bold">
@@ -12,7 +12,7 @@
                     </div>
                 </h1>
                 </h1>
-                <span class="text-[30px] text-[#0f6cbd]">ready for the future</span>
+                <span class="text-[30px] text-[#0f6cbd]">Ready for the future</span>
             </div>
             <div class='light x1'></div>
             <div class='light x2'></div>
@@ -50,22 +50,60 @@
                 </div>
             </div>
 
-            <div class="h-full w-1/2"
-                style="background-image: url(/img/background_login_2.jpg); clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0% 100%);">
-
+            <div class="h-full w-1/2" style="clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0% 100%);">
+                <div style="background-image: url(/img/mvp_1.jpeg);" class="h-1/2 w-full bg-cover"></div>
+                <div style="background-image: url(/img/background_7.jpg);" class="h-1/2 w-full bg-cover"></div>
             </div>
         </div>
 
         @php
             $maruei = [
-                ['className' => 'hidden', 'title' => 'MARUEI INDUSTRIES CO., LTD.', 'description' => 'Sản xuất và bán phụ tùng ô tô'],
-                ['className' => '', 'title' => 'MARUEI MIYAZAKI CO., LTD.', 'description' => 'Located in Sadowara Town, Miyazaki Prefecture, we supply cold forged materials to our domestic and overseas production bases. Maruei Miyazaki has four bases: the Head Office Factory, which is a forging processing factory, the TRP Factory, which specializes in precision cutting, the MTV Factory, and the Innovation Center, which is a development center. We have created an environment where everything from development to cutting can be carried out in Miyazaki.'],
-                ['className' => 'hidden', 'title' => 'MARUEI TECHNOS CO., LTD.', 'description' => 'Maruei Technos chủ yếu sản xuất các sản phẩm bằng máy móc.'],
-                ['className' => 'hidden', 'title' => 'MARLEY PRECISION INC.', 'description' => 'Marley Precision tham gia vào kinh doanh và sản xuất gia công, nhắm mục tiêu các khu vực Bắc Mỹ.'],
-                ['className' => '', 'title' => 'Maruei De Mexico SA.DE.CV.', 'description' => 'Maruei De MEXICO was established in neighboring Mexico to cover demand in the United States and to meet the needs of customers in Mexico. We operate as a low-volume, high-mix production factory, taking advantage of our labor-intensive line structure.'],
-                ['className' => '', 'title' => 'MARUEI VIETNAM PRECISION', 'description' => "Maruei Vietnam is our largest production factory, and was established in 2001 to provide our products at low prices to users from all over the ASEAN region as well as from domestic companies. Maruei Vietnam's products, which have a large number of hard-working and talented staff, have received high praise from many users for both price and quality."],
-                ['className' => '', 'title' => 'MARUEI NEW WAVE CO., LTD.', 'description' => 'We handle general domestic and international logistics operations such as automobile parts transportation, equipment transportation, and overseas moving, as well as warehousing operations.'],
-                ['className' => '', 'title' => 'MARUEI TOYOTA CO., LTD.', 'description' => 'Maruei Toyota Co., Ltd., which was spun off as an independent company in April 2014, assembles and produces electronic parts such as switch parts for automobile steering wheels and parking brake switches. We carry out efficient production using the Toyota Kanban system so that we can quickly respond to daily changing demand.'],
+                [
+                    'className' => 'hidden',
+                    'title' => 'MARUEI INDUSTRIES CO., LTD.',
+                    'description' => 'Sản xuất và bán phụ tùng ô tô',
+                ],
+                [
+                    'className' => '',
+                    'title' => 'MARUEI MIYAZAKI CO., LTD.',
+                    'description' =>
+                        'Located in Sadowara Town, Miyazaki Prefecture, we supply cold forged materials to our domestic and overseas production bases. Maruei Miyazaki has four bases: the Head Office Factory, which is a forging processing factory, the TRP Factory, which specializes in precision cutting, the MTV Factory, and the Innovation Center, which is a development center. We have created an environment where everything from development to cutting can be carried out in Miyazaki.',
+                ],
+                [
+                    'className' => 'hidden',
+                    'title' => 'MARUEI TECHNOS CO., LTD.',
+                    'description' => 'Maruei Technos chủ yếu sản xuất các sản phẩm bằng máy móc.',
+                ],
+                [
+                    'className' => 'hidden',
+                    'title' => 'MARLEY PRECISION INC.',
+                    'description' =>
+                        'Marley Precision tham gia vào kinh doanh và sản xuất gia công, nhắm mục tiêu các khu vực Bắc Mỹ.',
+                ],
+                [
+                    'className' => '',
+                    'title' => 'Maruei De Mexico SA.DE.CV.',
+                    'description' =>
+                        'Maruei De MEXICO was established in neighboring Mexico to cover demand in the United States and to meet the needs of customers in Mexico. We operate as a low-volume, high-mix production factory, taking advantage of our labor-intensive line structure.',
+                ],
+                [
+                    'className' => '',
+                    'title' => 'MARUEI VIETNAM PRECISION',
+                    'description' =>
+                        "Maruei Vietnam is our largest production factory, and was established in 2001 to provide our products at low prices to users from all over the ASEAN region as well as from domestic companies. Maruei Vietnam's products, which have a large number of hard-working and talented staff, have received high praise from many users for both price and quality.",
+                ],
+                [
+                    'className' => '',
+                    'title' => 'MARUEI NEW WAVE CO., LTD.',
+                    'description' =>
+                        'We handle general domestic and international logistics operations such as automobile parts transportation, equipment transportation, and overseas moving, as well as warehousing operations.',
+                ],
+                [
+                    'className' => '',
+                    'title' => 'MARUEI TOYOTA CO., LTD.',
+                    'description' =>
+                        'Maruei Toyota Co., Ltd., which was spun off as an independent company in April 2014, assembles and produces electronic parts such as switch parts for automobile steering wheels and parking brake switches. We carry out efficient production using the Toyota Kanban system so that we can quickly respond to daily changing demand.',
+                ],
                 ['className' => '', 'title' => 'MIYAZAKI TECHNOVILLAGE CO., LTD.', 'description' => ''],
             ];
 
