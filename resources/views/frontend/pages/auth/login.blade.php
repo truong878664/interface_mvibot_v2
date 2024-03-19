@@ -15,7 +15,13 @@
 <body>
     <div class="login-wrapper">
         <div class="login-img-wrapper">
-            <img class="login-img object-right" src="/img/background_7.jpg" alt="">
+            <div class="h-full w-full relative">
+                <img class="h-full object-cover object-right" src="/img/background_7.jpg" alt="">
+                <div
+                    class="absolute bottom-10 left-0 text-white flex justify-center z-10 text-4xl md:text-2xl 2xl:text-6xl w-full md:w-11/12 bg-gradient-to-l from-main/0 via-main to-main/0 font-bold">
+                    <span>Smart AMR For Logistic</span>
+                </div>
+            </div>
             <div class="login-layer login-layer-1"></div>
             <div class="login-layer login-layer-2"></div>
             <div class="login-layer login-layer-3"></div>

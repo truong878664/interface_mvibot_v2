@@ -51,7 +51,7 @@
             </div>
 
             <div class="h-full w-1/2" style="clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0% 100%);">
-                <div style="background-image: url(/img/mvp_1.jpeg);" class="h-1/2 w-full bg-cover"></div>
+                <div style="background-image: url(/img/mvp_1.jpeg);" class="h-1/2 w-full bg-cover bg-bottom"></div>
                 <div style="background-image: url(/img/background_7.jpg);" class="h-1/2 w-full bg-cover"></div>
             </div>
         </div>
