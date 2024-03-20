@@ -10,6 +10,7 @@ import Variable from "./Class/Variable.js";
 import Footprint from "./Class/Footprint.js";
 import handleWrapFunction from "./action/handleWrapFunction.js";
 import Config from "./Class/Config.js";
+import Telegram from "./Class/Telegram.js";
 
 export const htmlDataFunction = {
     footprint: [],
@@ -21,6 +22,7 @@ export const htmlDataFunction = {
     variable: [],
     sound: [],
     config: [],
+    telegram: [],
 };
 export const classFunctions = {
     footprint: new Footprint(),
@@ -32,6 +34,7 @@ export const classFunctions = {
     position: new Position(),
     variable: new Variable(),
     config: new Config(),
+    telegram: new Telegram(),
 };
 
 export default function Function() {

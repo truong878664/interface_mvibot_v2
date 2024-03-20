@@ -13,6 +13,7 @@ use App\Models\backend\MissionPosition;
 use App\Models\backend\Missions;
 use App\Models\backend\MissionSleep;
 use App\Models\backend\MissionSound;
+use App\Models\backend\MissionTelegram;
 use App\Models\backend\MissionVariable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,7 @@ class FunctionController extends Controller
             'variable' => MissionVariable::all(),
             'sound' => MissionSound::all(),
             'config' => MissionConfig::all(),
+            'telegram' => MissionTelegram::all(),
         ];
         return $data;
     }

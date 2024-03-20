@@ -148,6 +148,16 @@ class Step extends Model
                     }
                     $dataTranslated =  "(name:$name_config|time_out:$time_out|mode:$mode|data:$data)";
                     break;
+                case 'telegram':
+                    $name_telegram = $dataFunction->name;
+                    $time_out = $dataFunction->time_out;
+                    $mode = $dataFunction->mode;
+                    $chat_id = $dataFunction->chat_id;
+                    $token = $dataFunction->token;
+                    $msg = $dataFunction->msg;
+
+                    $dataTranslated = "(name:$name_telegram|time_out:$time_out|mode:$mode|data:~token=$token~~chat_id=$chat_id~~msg=$msg~)";
+                    break;
             }
         } catch (\Throwable $th) {
             $dataTranslated = "";

@@ -13,6 +13,7 @@ const details = {
     error: "STEP NOT FOUND",
     sleep: "sleep",
     config: "config",
+    telegram: "send message to Telegram",
 };
 const typeVariable = {
     new: "new",
@@ -189,6 +190,10 @@ const Step = (step, addressIndex = "") => {
         config: {
             color: "bg-yellow-300/20 text-yellow-500",
             icon: '<i class="fa-solid fa-grip"></i>',
+        },
+        telegram: {
+            color: "bg-sky-300/20 text-sky-500",
+            icon: '<i class="fa-brands fa-telegram"></i>',
         },
         sleep: { color: "bg-[#DC262633] text-[#DC2626]", icon: "" },
     };

@@ -79,6 +79,9 @@ class StepController extends Controller
             case 'config':
                 return DB::table("mission_configs")->where('id', $request->id)->get();
                 break;
+            case 'telegram':
+                return DB::table("mission_telegrams")->where('id', $request->id)->get();
+                break;
             default:
                 return ['status' => 200];
         }

@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\StartController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
+use App\Http\Controllers\Api\TelegramController;
 use App\Http\Controllers\Api\TypeMissionController;
 use App\Http\Controllers\Api\TypeMissionVerController;
 use App\Http\Controllers\Api\userController;
@@ -65,6 +66,7 @@ Route::resource('sleep', SleepController::class);
 Route::resource('variable', VariableController::class);
 Route::resource('sound', SoundController::class);
 Route::resource('config', ConfigController::class);
+Route::resource('telegram', TelegramController::class);
 
 Route::resource('mi', MiController::class);
 Route::resource('type-mission', TypeMissionController::class);

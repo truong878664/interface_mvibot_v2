@@ -8,7 +8,14 @@
             'icon' => 'fa-solid fa-arrows-left-right-to-line',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
-        ['type' => 'gpio', 'title' => 'gpio', 'color' => 'text-[#30C930]', 'bg' => 'bg-[#30C930]/20', 'icon' => 'fa-solid fa-microchip', 'mission_not_allowed' => []],
+        [
+            'type' => 'gpio',
+            'title' => 'gpio',
+            'color' => 'text-[#30C930]',
+            'bg' => 'bg-[#30C930]/20',
+            'icon' => 'fa-solid fa-microchip',
+            'mission_not_allowed' => [],
+        ],
         [
             'type' => 'gpio_module',
             'title' => 'gpio module',
@@ -17,7 +24,14 @@
             'icon' => 'fa-solid fa-microchip',
             'mission_not_allowed' => [],
         ],
-        ['type' => 'marker', 'title' => 'marker', 'color' => 'text-[#432C7A]', 'bg' => 'bg-[#432C7A]/20', 'icon' => 'fa-solid fa-arrows-up-to-line', 'mission_not_allowed' => ['error-robot', 'error-gpio']],
+        [
+            'type' => 'marker',
+            'title' => 'marker',
+            'color' => 'text-[#432C7A]',
+            'bg' => 'bg-[#432C7A]/20',
+            'icon' => 'fa-solid fa-arrows-up-to-line',
+            'mission_not_allowed' => ['error-robot', 'error-gpio'],
+        ],
         [
             'type' => 'sleep',
             'title' => 'sleep',
@@ -59,6 +73,14 @@
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
         [
+            'type' => 'telegram',
+            'title' => 'telegram message',
+            'color' => 'text-sky-500',
+            'bg' => 'bg-sky-500/20',
+            'icon' => 'fa-brands fa-telegram',
+            'mission_not_allowed' => ['error-robot', 'error-gpio'],
+        ],
+        [
             'type' => 'break',
             'title' => 'break',
             'color' => 'text-[#C9000C]',
@@ -76,8 +98,20 @@
             'bg' => 'bg-red-100',
             'icon' => 'fa-solid fa-bullseye',
         ],
-        ['type' => 'ifelse', 'title' => 'If else', 'color' => 'text-green-400', 'bg' => 'bg-green-100', 'icon' => ' fa-solid fa-code-fork'],
-        ['type' => 'trycatch', 'title' => 'Try Catch', 'color' => 'text-yellow-400', 'bg' => 'bg-yellow-100', 'icon' => ' fa-solid fa-triangle-exclamation'],
+        [
+            'type' => 'ifelse',
+            'title' => 'If else',
+            'color' => 'text-green-400',
+            'bg' => 'bg-green-100',
+            'icon' => ' fa-solid fa-code-fork',
+        ],
+        [
+            'type' => 'trycatch',
+            'title' => 'Try Catch',
+            'color' => 'text-yellow-400',
+            'bg' => 'bg-yellow-100',
+            'icon' => ' fa-solid fa-triangle-exclamation',
+        ],
         [
             'type' => 'while',
             'title' => 'While',
@@ -85,7 +119,13 @@
             'bg' => 'bg-sky-100',
             'icon' => ' fa-solid fa-arrows-spin',
         ],
-        ['type' => 'logic_or', 'title' => 'Logic OR', 'color' => 'text-blue-400', 'bg' => 'bg-blue-100', 'icon' => ' fa-solid fa-grip-lines-vertical'],
+        [
+            'type' => 'logic_or',
+            'title' => 'Logic OR',
+            'color' => 'text-blue-400',
+            'bg' => 'bg-blue-100',
+            'icon' => ' fa-solid fa-grip-lines-vertical',
+        ],
         [
             'type' => 'logic_and',
             'title' => 'Logic AND',
@@ -198,6 +238,7 @@
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.position')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.variable')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.config')
+                @include('frontend.pages.missions.createMissionsV4.partials.function.tab.telegram')
             </div>
         </div>
     </div>
