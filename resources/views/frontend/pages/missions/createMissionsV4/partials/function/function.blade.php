@@ -78,7 +78,7 @@
             'color' => 'text-sky-500',
             'bg' => 'bg-sky-500/20',
             'icon' => 'fa-brands fa-telegram',
-            'mission_not_allowed' => ['error-robot', 'error-gpio'],
+            'mission_not_allowed' => [],
         ],
         [
             'type' => 'break',
