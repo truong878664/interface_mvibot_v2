@@ -52,7 +52,19 @@ export default class Step {
                 dataValidated.success = false;
                 dataValidated.message = `${key} cannot be empty!`;
             }
+            if (key === "token") {
+                const tokenTelegram = data.token;
+                const isValidToken =
+                    tokenTelegram.split(":").filter((v) => v.trim()).length ===
+                    2;
+
+                if (!isValidToken) {
+                    dataValidated.success = false;
+                    dataValidated.message = `Invalid token, ex: 123:abc`;
+                }
+            }
         }
+
         if (time_out && isNaN(Number(time_out))) {
             dataValidated.success = false;
             dataValidated.message = "Time out is have to number!";

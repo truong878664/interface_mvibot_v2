@@ -21,6 +21,7 @@ export default class Marker extends Step {
                     : value;
         }
         const dataValidated = this.validate(data);
+        console.log(dataValidated);
         dataValidated.success && this.reset();
         return dataValidated;
     }
@@ -87,6 +88,9 @@ export default class Marker extends Step {
         this.data.off_set_y2 = formElement.querySelector('[name="off_set_y2"]');
         this.data.off_set_dis = formElement.querySelector(
             '[name="off_set_dis"]',
+        );
+        this.data.bar_distance = formElement.querySelector(
+            "[name='bar_distance']",
         );
         this.data.off_set_angle = formElement.querySelector(
             '[name="off_set_angle"]',

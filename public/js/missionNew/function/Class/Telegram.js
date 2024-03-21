@@ -10,4 +10,8 @@ export default class Telegram extends Step {
         this.data.chat_id = form?.querySelector('[name="chat_id"]');
         this.data.msg = form?.querySelector('[name="msg"]');
     }
+    validateToken(data) {
+        data.token = 11111111;
+        // console.log("validate token", data);
+    }
 }

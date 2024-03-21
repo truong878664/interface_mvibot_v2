@@ -43,6 +43,7 @@ class MarkerController extends Controller
         $marker_type = $request->marker_type;
         $time_out = $request->time_out;
         $marker_dir = $this->checkDataMarker($request->marker_dir);
+        $bar_distance = $this->checkDataMarker($request->bar_distance);
         $off_set_x1 = $this->checkDataMarker($request->off_set_x1);
         $off_set_x2 = $this->checkDataMarker($request->off_set_x2);
         $off_set_y1 = $this->checkDataMarker($request->off_set_y1);
@@ -60,6 +61,7 @@ class MarkerController extends Controller
             'time_out' => $time_out,
             'marker_type' => $marker_type,
             'marker_dir' => $marker_dir,
+            'bar_distance' => $bar_distance,
             'off_set_x1' => $off_set_x1,
             'off_set_x2' => $off_set_x2,
             'off_set_y1' => $off_set_y1,

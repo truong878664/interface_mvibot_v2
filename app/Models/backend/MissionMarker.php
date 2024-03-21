@@ -14,6 +14,7 @@ class MissionMarker extends Model
         'mode',
         'marker_type',
         'marker_dir',
+        'bar_distance',
         'off_set_x1',
         'off_set_x2',
         'off_set_y1',
