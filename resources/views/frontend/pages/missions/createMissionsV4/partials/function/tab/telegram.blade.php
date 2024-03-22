@@ -1,5 +1,8 @@
 <div class="function-form-item function-mission-tab relative hidden w-fit rounded-md bg-[#fff] p-4 pb-[60px]"
     data-type="telegram">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'telegram',
+    ])
     <div class="mb-4 flex flex-col">
         <label for="">Name function telegram</label>
         <input class="input-reset valid-input w-[200px] px-4 py-1" type="text" name="name_telegram" required />

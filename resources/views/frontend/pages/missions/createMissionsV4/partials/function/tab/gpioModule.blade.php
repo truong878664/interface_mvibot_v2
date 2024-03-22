@@ -1,5 +1,8 @@
-<div class="function-form-item function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4 text-sm"
+<div class="function-form-item relative function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4 text-sm"
     data-type="gpio_module">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'gpio_module',
+    ])
     <div class="mb-2 flex">
         <div class="flex flex-col">
             <label for="" class="">Name function GPIO</label>

@@ -1,4 +1,8 @@
-<div class="function-form-item function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4" data-type="marker">
+<div class="function-form-item relative function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4"
+    data-type="marker">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'marker',
+    ])
     <div class="flex flex-wrap text-sm">
         <button class="btn marker-btn l_marker-btn active mx-2 mb-2 bg-[#0f6cbd] px-2 py-1 text-[#fff] opacity-60">
             L Marker

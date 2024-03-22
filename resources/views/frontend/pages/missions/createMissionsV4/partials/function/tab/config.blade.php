@@ -1,5 +1,8 @@
-<div class="function-form-item function-mission-tab relative hidden w-fit rounded-md bg-[#fff] py-4 px-8 pb-[60px]"
+<div class="function-form-item relative function-mission-tab relative hidden w-fit rounded-md bg-[#fff] py-4 px-8 pb-[60px]"
     data-type="config">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'config',
+    ])
     <div class="mb-4 flex flex-col">
         <label for="" class="">Name config</label>
         <input class="input-reset valid-input w-full min-w-[200px] px-4 py-1 " type="text" name="name_config"

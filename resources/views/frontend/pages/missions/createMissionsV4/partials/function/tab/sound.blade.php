@@ -20,6 +20,9 @@
     }
 </style>
 <div class="function-form-item function-mission-tab relative hidden rounded-md bg-[#fff] p-4 pb-[60px]" data-type="sound">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'sound',
+    ])
     <div class="mb-4 flex flex-col">
         <label for="">Name function sound</label>
         <input class="input-reset name_function_sound valid-input w-[200px] px-4 py-1 " type="text" required />

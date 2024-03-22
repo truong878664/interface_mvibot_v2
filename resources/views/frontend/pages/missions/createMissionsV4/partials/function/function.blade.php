@@ -226,9 +226,8 @@
         @endforeach
 
         <div id="function-item-form-wrapper"
-            class="fixed top-0 left-0 right-0 bottom-0 z-20 flex hidden items-center justify-center bg-[rgba(0,0,0,0.2)]">
-            <div
-                class="function-item-form relative flex h-[80%] w-[80%] items-center justify-center overflow-hidden rounded-md">
+            class="fixed top-0 left-0 right-0 bottom-0 z-20 flex hidden items-center justify-center bg-black/20">
+            <div class="function-item-form relative flex h-[80%] w-[80%] items-center justify-center rounded-md">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpioModule')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.footprint')

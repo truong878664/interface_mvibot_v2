@@ -6,11 +6,11 @@ export default function showFormFunction({
     method = "create",
 }) {
     const functionFormWrapper = document.getElementById(
-        "function-item-form-wrapper"
+        "function-item-form-wrapper",
     );
     const functionFormItems = document.querySelectorAll(".function-form-item");
     const buttonWrapper = document.querySelector(
-        `[data-name="action-form-function"][data-type="${type}"]`
+        `[data-name="action-form-function"][data-type="${type}"]`,
     );
     functionFormWrapper?.classList.toggle("hidden", !show);
 

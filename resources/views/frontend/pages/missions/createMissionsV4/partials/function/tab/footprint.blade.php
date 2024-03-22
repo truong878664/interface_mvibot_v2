@@ -1,5 +1,8 @@
-<div class="function-form-item form-footprint function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4 gap-2"
+<div class="function-form-item relative form-footprint function-mission-tab flex hidden h-full w-full flex-col bg-[#fff] p-4 gap-2"
     data-type="footprint">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'footprint',
+    ])
     <div class="mr-[30px] flex flex-col">
         <label for="" class="">Name function footpint</label>
         <input class="input-reset valid-input w-[200px] px-4 py-1 " type="text" name="name_footprint" data-type="string"
