@@ -8,7 +8,14 @@
             'icon' => 'fa-solid fa-arrows-left-right-to-line',
             'mission_not_allowed' => ['error-robot', 'error-gpio'],
         ],
-        ['type' => 'gpio', 'title' => 'gpio', 'color' => 'text-[#30C930]', 'bg' => 'bg-[#30C930]/20', 'icon' => 'fa-solid fa-microchip', 'mission_not_allowed' => []],
+        [
+            'type' => 'gpio',
+            'title' => 'gpio',
+            'color' => 'text-[#30C930]',
+            'bg' => 'bg-[#30C930]/20',
+            'icon' => 'fa-solid fa-microchip',
+            'mission_not_allowed' => [],
+        ],
         [
             'type' => 'gpio_module',
             'title' => 'gpio module',
@@ -17,7 +24,14 @@
             'icon' => 'fa-solid fa-microchip',
             'mission_not_allowed' => [],
         ],
-        ['type' => 'marker', 'title' => 'marker', 'color' => 'text-[#432C7A]', 'bg' => 'bg-[#432C7A]/20', 'icon' => 'fa-solid fa-arrows-up-to-line', 'mission_not_allowed' => ['error-robot', 'error-gpio']],
+        [
+            'type' => 'marker',
+            'title' => 'marker',
+            'color' => 'text-[#432C7A]',
+            'bg' => 'bg-[#432C7A]/20',
+            'icon' => 'fa-solid fa-arrows-up-to-line',
+            'mission_not_allowed' => ['error-robot', 'error-gpio'],
+        ],
         [
             'type' => 'sleep',
             'title' => 'sleep',
@@ -76,8 +90,20 @@
             'bg' => 'bg-red-100',
             'icon' => 'fa-solid fa-bullseye',
         ],
-        ['type' => 'ifelse', 'title' => 'If else', 'color' => 'text-green-400', 'bg' => 'bg-green-100', 'icon' => ' fa-solid fa-code-fork'],
-        ['type' => 'trycatch', 'title' => 'Try Catch', 'color' => 'text-yellow-400', 'bg' => 'bg-yellow-100', 'icon' => ' fa-solid fa-triangle-exclamation'],
+        [
+            'type' => 'ifelse',
+            'title' => 'If else',
+            'color' => 'text-green-400',
+            'bg' => 'bg-green-100',
+            'icon' => ' fa-solid fa-code-fork',
+        ],
+        [
+            'type' => 'trycatch',
+            'title' => 'Try Catch',
+            'color' => 'text-yellow-400',
+            'bg' => 'bg-yellow-100',
+            'icon' => ' fa-solid fa-triangle-exclamation',
+        ],
         [
             'type' => 'while',
             'title' => 'While',
@@ -85,7 +111,13 @@
             'bg' => 'bg-sky-100',
             'icon' => ' fa-solid fa-arrows-spin',
         ],
-        ['type' => 'logic_or', 'title' => 'Logic OR', 'color' => 'text-blue-400', 'bg' => 'bg-blue-100', 'icon' => ' fa-solid fa-grip-lines-vertical'],
+        [
+            'type' => 'logic_or',
+            'title' => 'Logic OR',
+            'color' => 'text-blue-400',
+            'bg' => 'bg-blue-100',
+            'icon' => ' fa-solid fa-grip-lines-vertical',
+        ],
         [
             'type' => 'logic_and',
             'title' => 'Logic AND',
@@ -186,9 +218,8 @@
         @endforeach
 
         <div id="function-item-form-wrapper"
-            class="fixed top-0 left-0 right-0 bottom-0 z-20 flex hidden items-center justify-center bg-[rgba(0,0,0,0.2)]">
-            <div
-                class="function-item-form relative flex h-[80%] w-[80%] items-center justify-center overflow-hidden rounded-md">
+            class="fixed top-0 left-0 right-0 bottom-0 z-20 flex hidden items-center justify-center bg-black/20">
+            <div class="function-item-form relative flex h-[80%] w-[80%] items-center justify-center rounded-md">
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpio')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.gpioModule')
                 @include('frontend.pages.missions.createMissionsV4.partials.function.tab.footprint')

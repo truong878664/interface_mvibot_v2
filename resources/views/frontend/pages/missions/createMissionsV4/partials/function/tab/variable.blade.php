@@ -1,9 +1,25 @@
 @php
-    $formatCommandActionList = [['value' => 'new', 'symbol' => 'new'], ['value' => 'equal', 'symbol' => '='], ['value' => 'equal_as', 'symbol' => '=='], ['value' => 'equal_not', 'symbol' => '!='], ['value' => 'smaller_as', 'symbol' => '<'], ['value' => 'smaller_equal_as', 'symbol' => '<='], ['value' => 'bigger_as', 'symbol' => '>'], ['value' => 'bigger_equal_as', 'symbol' => '>='], ['value' => 'equal_+', 'symbol' => '++'], ['value' => 'equal_-', 'symbol' => '--'], ['value' => 'reset', 'symbol' => 'reset'], ['value' => 'delete', 'symbol' => 'delete']];
+    $formatCommandActionList = [
+        ['value' => 'new', 'symbol' => 'new'],
+        ['value' => 'equal', 'symbol' => '='],
+        ['value' => 'equal_as', 'symbol' => '=='],
+        ['value' => 'equal_not', 'symbol' => '!='],
+        ['value' => 'smaller_as', 'symbol' => '<'],
+        ['value' => 'smaller_equal_as', 'symbol' => '<='],
+        ['value' => 'bigger_as', 'symbol' => '>'],
+        ['value' => 'bigger_equal_as', 'symbol' => '>='],
+        ['value' => 'equal_+', 'symbol' => '++'],
+        ['value' => 'equal_-', 'symbol' => '--'],
+        ['value' => 'reset', 'symbol' => 'reset'],
+        ['value' => 'delete', 'symbol' => 'delete'],
+    ];
 @endphp
 
 <div class="function-form-item function-mission-tab relative hidden rounded-md bg-[#fff] p-4 pb-[60px]"
     data-type="variable">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'variable',
+    ])
     <div class="m-4 flex flex-col">
         <label for="" class="">Name function variable</label>
         <input class="input-reset name_function_variable valid-input px-4 py-1 " type="text"

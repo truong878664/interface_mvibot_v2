@@ -19,7 +19,11 @@
         display: block;
     }
 </style>
-<div class="function-form-item point-function-item function-mission-tab hidden h-full w-full" data-type="position">
+<div class="function-form-item relative point-function-item function-mission-tab hidden h-full w-full"
+    data-type="position">
+    @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
+        'type' => 'position',
+    ])
     <div class="relative h-full w-full overflow-auto">
         <div class="map-position-wrapper h-full w-full overflow-hidden rounded-md bg-[#ccc]">
             <div id="map" class="h-full w-full"></div>

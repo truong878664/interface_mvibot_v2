@@ -6,8 +6,17 @@ export default function handleShowFormFunction() {
     const functionContainer = document.getElementById("function-container");
     functionContainer.addEventListener("click", (e) => {
         const newFunctionBtn = e.target.closest(
-            "[data-button-function-kind='new']"
+            "[data-button-function-kind='new']",
         );
+        const isButtonDismiss = e.target.closest(
+            "[data-button-function-kind='dismiss']",
+        );
+
+        if (isButtonDismiss) {
+            showFormFunction({
+                show: false,
+            });
+        }
         if (!newFunctionBtn) return;
         const typeFunction = newFunctionBtn.dataset.typeMission;
         showFormFunction({
@@ -18,11 +27,10 @@ export default function handleShowFormFunction() {
             render3DMap();
         }
     });
-    HideFormFunction();
 
     function HideFormFunction() {
         const functionFormWrapper = document.getElementById(
-            "function-item-form-wrapper"
+            "function-item-form-wrapper",
         );
         functionFormWrapper.onclick = function (e) {
             const isFunctionItem = e.target.closest(".function-form-item");
