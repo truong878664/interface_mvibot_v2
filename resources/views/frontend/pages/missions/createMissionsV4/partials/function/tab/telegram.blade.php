@@ -1,4 +1,4 @@
-<div class="function-form-item function-mission-tab relative hidden w-fit rounded-md bg-[#fff] p-4 pb-[60px]"
+<div class="function-form-item function-mission-tab relative hidden rounded-md bg-white p-4 pb-[60px]"
     data-type="telegram">
     @include('frontend.pages.missions.createMissionsV4.partials.function.tab.buttonDismiss', [
         'type' => 'telegram',
@@ -18,7 +18,8 @@
     </div>
     <div class="flex flex-col">
         <label for="">Message</label>
-        <textarea class="input-reset input-type-number w-[200px] px-4 py-1" cols="2" name="msg"></textarea>
+        <textarea class="input-reset input-type-number min-w-[400px] px-4 py-1 resize" cols="2" rows="3"
+            name="msg"></textarea>
     </div>
 
 
