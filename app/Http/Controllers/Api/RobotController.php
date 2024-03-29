@@ -137,6 +137,9 @@ class RobotController extends Controller
         DB::table('motor_left_status')->where('name_seri', $name_seri)->delete();
         DB::table('input_user_status')->where('name_seri', $name_seri)->delete();
         DB::table('battery_status')->where('name_seri', $name_seri)->delete();
+        DB::table('battery_cell_status')->where('name_seri', $name_seri)->delete();
+        DB::table('robot_config_status')->where('name_seri', $name_seri)->delete();
+        DB::table('battery_small_status')->where('name_seri', $name_seri)->delete();
 
         return ['status' => 200];
     }

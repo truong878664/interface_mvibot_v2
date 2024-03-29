@@ -4,13 +4,13 @@
 
 Check version Git
 
-```tsx
+```bash
 git --version
 ```
 
 If you receive output similar to the following, then Git is already installed.
 
-```tsx
+```bash
 Output
 git version 2.25.1
 ```
@@ -19,11 +19,11 @@ git version 2.25.1
 
 install Git
 
-```tsx
+```bash
 sudo apt update
 ```
 
-```tsx
+```bash
 sudo apt install git
 ```
 
@@ -31,43 +31,43 @@ sudo apt install git
 
 https://computingforgeeks.com/how-to-install-php-on-ubuntu-linux-system/
 
-```tsx
+```bash
 sudo apt -y upgrade
 ```
 
-```tsx
+```bash
 sudo apt update
 ```
 
-```tsx
+```bash
 sudo apt install lsb-release ca-certificates apt-transport-https software-properties-common -y
 ```
 
-```tsx
+```bash
 sudo add-apt-repository ppa:ondrej/php
 ```
 
-```tsx
+```bash
 sudo apt install php8.1
 ```
 
-```tsx
+```bash
 sudo apt install php8.1-mysql
 ```
 
-```tsx
+```bash
 sudo apt install php8.1-mbstring
 ```
 
-```tsx
+```bash
 sudo apt install php8.1-common
 ```
 
-```tsx
+```bash
 sudo apt install php8.1-xml
 ```
 
-```tsx
+```bash
 sudo apt install php8.1-curl
 ```
 
@@ -77,36 +77,36 @@ You will be prompted to confirm installation by typing Y and then ENTER.
 
 Download the PHP Composer installer script by utilizing the following “curl” command:
 
-```tsx
+```bash
 cd ~
 curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 ```
 
 Verify the hash of the downloaded PHP composer script with the signatures present at the official page:
 
-```tsx
+```bash
 HASH = `curl -sS https://composer.github.io/installer.sig`;
 ```
 
 Then, validate if the PHP Composer installer can be safely executed or not:
 
-```tsx
+```bash
 php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 ```
 
 After verifying the installer, install PHP Composer on Ubuntu 22.04 by utilizing the following command:
 
-```tsx
+```bash
 sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
 
 To test your installation, run:
 
-```tsx
+```bash
 composer;
 ```
 
-```tsx
+```bash
    ______
   / ____/___  ____ ___  ____  ____  ________  _____
  / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
@@ -122,11 +122,11 @@ Reference link: https://www.digitalocean.com/community/tutorials/how-to-install-
 
 -   Installing MySQL
 
-```tsx
+```bash
 sudo apt update
 ```
 
-```tsx
+```bash
 sudo apt install mysql-server
 ```
 
@@ -134,7 +134,7 @@ sudo apt install mysql-server
 
 Run the security script with sudo:
 
-```tsx
+```bash
 sudo mysql_secure_installation
 ```
 
@@ -146,7 +146,7 @@ MySQL creates a root user account which you can use to manage your database
 
 -   Creating a Dedicated MySQL User and Granting Privileges
 
-```tsx
+```bash
 sudo mysql -u root -p
 ```
 
@@ -154,41 +154,41 @@ Enter your password...
 
 A prompt displays like the one below once you log in.
 
-```tsx
+```bash
 mysql>
 ```
 
 To create a database with the name tutorial_database, type the following command.
 
-```tsx
+```bash
 CREATE DATABASE IF NOT EXISTS mvibot_database;
 ```
 
 Create new user
 
-```tsx
+```bash
 CREATE USER 'mvibot'@'localhost' IDENTIFIED BY 'Mvibot@v1';
 ```
 
-```tsx
+```bash
 GRANT ALL PRIVILEGES ON *.* TO 'mvibot'@'localhost' WITH GRANT OPTION;
 ```
 
-```tsx
+```bash
 FLUSH PRIVILEGES;
 ```
 
-```tsx
+```bash
 exit;
 ```
 
 # <strong> Add C++ -> MySql </strong>
 
-```tsx
+```bash
 apt-get install libmysqlcppconn-dev
 ```
 
-```tsx
+```bash
 sudo apt-get install libmysqlcppconn-dev
 ```
 
@@ -199,94 +199,179 @@ sudo apt-get install libmysqlcppconn-dev
 Download the files above and place on your server.
 create folder
 
-```tsx
-git clone https://github.com/truong878664/interface_mvibot_v2.git
+# Config apache2
+
+-   Download source code
+
+```bash
+cd /var/www/html/
+sudo git clone https://github.com/truong878664/interface_mvibot_v2.git
+```
+
+-   Tạo file `.htaccess` tại public của dự án.
+
+```bash
+sudo touch interface_mvibot_v2/public/.htaccess;
+```
+
+```bash
+# .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule . /index.php [L]
+</IfModule>
+```
+
+-   Tạo 1 máy chủ ảo cho dự án
+
+```bash
+sudo nano /etc/apache2/sites-available/interface_mvibot_v2.conf
+```
+
+```bash
+# interface_mvibot_v2.conf
+<VirtualHost *:80>
+   ServerAdmin mvibot@10.0.3.40
+   ServerName 10.0.3.40
+   ServerAlias 10.0.3.40
+   DocumentRoot /var/www/html/interface_mvibot_v2/public
+
+   <Directory /var/www/html/interface_mvibot_v2>
+         Options Indexes FollowSymLinks
+         AllowOverride All
+         Require all granted
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+-   Cấp quyền cho project
+
+```bash
+  sudo chgrp -R www-data /var/www/html/interface_mvibot_v2/
+  sudo chmod -R 775 /var/www/html/interface_mvibot_v2/storage
+```
+
+-   Vô hiệu hóa conf cũ của apache2
+
+```bash
+   sudo a2dissite 000-default.conf
+
+   #hoặc project đang chạy trên apache2
+   sudo a2dissite interface_mvibot_v2.conf
+```
+
+-   kích hoạt máy chủ ảo và module **`rewrite`**
+
+```bash
+   sudo a2ensite interface_mvibot_v2.conf
+   sudo a2enmod rewrite
+```
+
+-   Restart lại Apache2
+
+```bash
+sudo systemctl restart apache2
+```
+
+-   Chạy dự án xem được chưa nếu gặp lỗi phiên bản php thì chạy thêm
+
+```bash
+sudo apt-get install libapache2-mod-php8.2
+#tùy thuộc vào từng phiên bản php để chạy
 ```
 
 # <strong>Environment Files</strong>
 
-<!-- Into the directory /mvibotApp/interface_mvibot_v2
-
-press Ctrl + H
-
 You must rename file <strong>.env.example</strong> to just <strong>.env</strong> -->
 
-```tsx
-cd interface_mvibot_v2;
+```bash
+cd /var/www/html/interface_mvibot_v2/;
 ```
 
-```tsx
-mv.env.example.env;
+```bash
+sudo mv .env.example .env;
 ```
 
 # <strong>Composer</strong>
 
 Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and typing this command:
 
-```tsx
-composer update
+```bash
+sudo composer update
 ```
 
-```tsx
-composer install
+```bash
+sudo composer install
 ```
 
 # <strong>Artisan Commands</strong>
 
 The first thing we are going to do is set the key that Laravel will use when doing encryption.
 
-```tsx
-php artisan key:generate
+```bash
+sudo php artisan key:generate
 ```
 
 # <strong>Clear cache</strong>
 
-```tsx
-php artisan config:clear
-php artisan cache:clear
+```bash
+sudo php artisan config:clear
+sudo php artisan cache:clear
 ```
 
 # <strong>Create table database</strong>
 
-```tsx
-php artisan migrate
+```bash
+sudo php artisan migrate
 ```
 
 # <strong>Create User admin</strong>
 
-```tsx
-php artisan db:seed
+```bash
+sudo php artisan db:seed
 ```
 
 # <strong>Run Project</strong>
 
-```tsx
-php artisan serve
+```bash
+sudo php artisan serve
 ```
 
 # <strong>Open link</strong>
 
-open link: http://127.0.0.1:8000/ open the link in your browser
+```bash
+ifconfig
+```
+
+Open link: http://127.0.0.1 or your pc and open the link in your browser.
 
 User: admin <br>
 Password: admin
 
 #
 
-```tsx
-cd /home/mvibot/Truong/project/interface_mvibot_v2 && php artisan serve
+```bash
+cd /home/mvibot/Truong/project/interface_mvibot_v2
+php artisan serve
 ```
 
-```tsx
+```bash
 roslaunch rosbridge_server rosbridge_websocket.launch
 ```
 
-```tsx
+```bash
 rosrun tf2_web_republisher tf2_web_republisher
 ```
 
-```tsx
-cd maps && rosrun map_server map_server map22.yaml && cd ..
+```bash
+rosrun map_server map_server /maps/map22.yaml
 ```
 
 ---
