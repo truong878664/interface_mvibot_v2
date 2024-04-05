@@ -371,7 +371,7 @@ rosrun tf2_web_republisher tf2_web_republisher
 ```
 
 ```bash
-rosrun map_server map_server /maps/map22.yaml
+rosrun map_server map_server maps/map22.yaml
 ```
 
 ---
