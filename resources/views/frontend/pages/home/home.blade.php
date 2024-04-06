@@ -3,7 +3,7 @@
     <div class="w-full h-full p-1 pr-0 rounded-lg overflow-y-auto overflow-x-hidden">
         <div class="w-full h-full bg-cover flex relative items-end" style="background-image: url(/img/home2/bg.jpg)">
             <span class="absolute top-0 left-4 text-orange-400 ">website: maruei-robots.com</span>
-            <span class="absolute top-0 right-4 ">Version: 1.0</span>
+            <span class="absolute top-0 right-4 ">Version: 1.1</span>
             {{-- <span class="absolute top-0 right-4 ">Version: {{ $version }}</span> --}}
             <div class="absolute top-[20%] left-1/2 -translate-x-1/2 flex flex-col items-center text-[#fff]">
                 <h1>
