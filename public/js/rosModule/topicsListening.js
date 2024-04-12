@@ -71,6 +71,19 @@ export default function topicsListening() {
             );
 
             subscribeTopic(
+                `/${name_seri}/robot_update_software`,
+                "std_msgs/String",
+                (data) => {
+                    if (data.data == 1) {
+                        toggerMessage(
+                            "success",
+                            `Robot ${name_seri}: The robot has received an update request and is updating the software`,
+                        );
+                    }
+                },
+            );
+
+            subscribeTopic(
                 `/${name_seri}/set_config`,
                 "std_msgs/String",
                 (data, name) => {

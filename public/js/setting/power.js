@@ -19,11 +19,25 @@ export default function power() {
         });
     };
 
+    $("#update-btn").onclick = () => {
+        const robotSelect = robotActive();
+        confirmationForm({
+            message: `Do you want to update Robot ${robotSelect}?`,
+            callback: update,
+        });
+    };
+
     function shutdown() {
         robotAction("1");
     }
     function reboot() {
         robotAction("2");
+    }
+    function update() {
+        const robotSelect = robotActive();
+        !robotSelect
+            ? toggerMessage("error", "Please choose robot!")
+            : publishTopic(`${robotSelect}/robot_update_software`, "1");
     }
     const robotAction = (action) => {
         const robotSelect = robotActive();

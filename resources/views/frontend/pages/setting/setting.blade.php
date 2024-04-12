@@ -55,6 +55,12 @@
                         'class' => 'hidden',
                         'color' => 'bg-[#FC4552]',
                     ],
+                    [
+                        'title' => 'Update',
+                        'icon' => 'fa-solid fa-arrows-rotate',
+                        'class' => 'hidden',
+                        'color' => 'bg-yellow-400',
+                    ],
                 ];
             @endphp
 
@@ -82,6 +88,7 @@
             @include('frontend.blocks.setting.settingTab.camera')
             @include('frontend.blocks.setting.settingTab.publicTopic')
             @include('frontend.blocks.setting.settingTab.rebotShutdown')
+            @include('frontend.blocks.setting.settingTab.update')
         </div>
     </div>
     {{-- @include('frontend.blocks.setting.settingTab.rbst') --}}
