@@ -91,14 +91,15 @@ export const toDatasetChart = (data, keys, type = "equal", typeActive) => {
 
         const HOUR_PER_DAY = 24;
         const MILLISECONDS_PER_HOUR = 3600000;
-        data.map((item) => {
+        data.map((history) => {
             arrayTimeLine.forEach((date, index) => {
                 if (
-                    item.timeLine >= date &&
-                    item.timeLine < date + MILLISECONDS_PER_HOUR * HOUR_PER_DAY
+                    history.timeLine >= date &&
+                    history.timeLine <
+                        date + MILLISECONDS_PER_HOUR * HOUR_PER_DAY
                 ) {
                     let nextDate;
-                    const timeItem = new Date(item.timeLine);
+                    const timeItem = new Date(history.timeLine);
                     const currentHours = timeItem.getHours();
                     if (currentHours < 6) {
                         timeItem.setDate(timeItem.getDate() - 1);
@@ -109,7 +110,7 @@ export const toDatasetChart = (data, keys, type = "equal", typeActive) => {
                         nextDate = timeItem.getTime();
                     }
                     if (nextDate in dataGroupByDate) {
-                        return dataGroupByDate[nextDate].push(item);
+                        return dataGroupByDate[nextDate].push(history);
                     }
                 }
             });

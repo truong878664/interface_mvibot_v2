@@ -6,18 +6,18 @@
         </div>
         <div class="grid grid-cols-3 grid-rows-1 flex-1 gap-4 mx-auto w-full max-w-3xl" id="light-andon-wrapper">
             <div class="h-full">
-                <div data-hs="hs-0010-0020-12" data-module="IB05_916b" class="andon aspect-square"></div>
-                <span class="block text-center">HS0010 - HS0020 line 12</span>
+                <div data-hs="hs-0010-0020-12" data-module="IB07_916b" class="andon aspect-square"></div>
+                <span class="block text-center" data-span-module="IB07_916b">HS0010 - HS0020 line 12</span>
 
             </div>
             <div class="h-full">
                 <div data-hs="hs-0020-34-56" data-module="IB03_916b" class="andon aspect-square"></div>
-                <span class="block text-center">HS0020 line 34,56</span>
+                <span class="block text-center" data-module="IB03_916b">HS0020 line 34,56</span>
 
             </div>
             <div class="h-full">
                 <div data-hs="hs-2360-12-34" data-module="IB04_916b" class="andon aspect-square"></div>
-                <span class="block text-center">HS2360 line 12,34</span>
+                <span class="block text-center" data-module="IB04_916b">HS2360 line 12,34</span>
 
             </div>
         </div>

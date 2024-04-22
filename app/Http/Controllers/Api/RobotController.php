@@ -72,8 +72,10 @@ class RobotController extends Controller
     {
         $statusRobot = StatusRobot::where('name_seri', $robot)->first();
         $dataMyRobot = DB::table('my_robot')->where('name_seri', $robot)->first();
+        $dataErrorSystem = DB::table("error_system")->where('name_seri', $robot)->get();
         if ($statusRobot || $dataMyRobot) {
             $statusRobot->history = $dataMyRobot->history;
+            $statusRobot->errorSystem = $dataErrorSystem;
             return $statusRobot;
         } else {
             return ['message' => 'no robot'];

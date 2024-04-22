@@ -7,7 +7,6 @@ async function handleModule() {
         const currentIO = {};
         setInterval(async () => {
             const dataOutputGpio = await getOutPutGpioModule();
-            // console.log(dataOutputGpio);
             dataOutputGpio.data.forEach((output, index) => {
                 const { out1, out2, out3 } = output;
 
@@ -38,7 +37,7 @@ async function handleModule() {
 
 async function getOutPutGpioModule() {
     try {
-        const moduleGet = ["IB03_916b", "IB04_916b", "IB05_916b"];
+        const moduleGet = ["IB03_916b", "IB04_916b", "IB07_916b"];
         const res = await fetch(
             `/api/input-gpio/get-output-module?moduleGet=${JSON.stringify(
                 moduleGet,
