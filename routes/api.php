@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BatteryChartController;
 use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\ConfigRobotController;
@@ -86,6 +87,7 @@ Route::resource('status', StatusController::class);
 
 Route::resource('bookmark', BookmarkController::class);
 Route::resource('error-system', ErrorSystemController::class);
+Route::resource("battery-chart", BatteryChartController::class)->only("index");
 
 // mission v4
 Route::resource('mission-v4', MissionV4Controller::class);

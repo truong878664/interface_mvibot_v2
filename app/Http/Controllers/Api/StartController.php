@@ -8,6 +8,7 @@ use App\Models\backend\Missions;
 use App\Models\backend\Start;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\MiController;
+use App\Models\backend\MissionsVer;
 
 class StartController extends Controller
 {
@@ -16,14 +17,27 @@ class StartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             $dataStart = Start::all()->first();
-            if ($dataStart) {
-                return ["data" => $dataStart, "error" => false, "message" => "Get data successfully!"];
-            } else {
-                return ["data" => [], "error" => true, "message" => "Currently no data, please create data start at tab config!"];
+            switch ($request->type) {
+                case 'all':
+                    $allMission = MissionsVer::all();
+                    $allPosition = MissionPosition::all();
+                    return [
+                        "missionList" => $allMission,
+                        "positionList" => $allPosition,
+                        'selectedList' => $dataStart
+                    ];
+                    break;
+                default:
+                    if ($dataStart) {
+                        return ["data" => $dataStart, "error" => false, "message" => "Get data successfully!"];
+                    } else {
+                        return ["data" => [], "error" => true, "message" => "Currently no data, please create data start at tab config!"];
+                    }
+                    break;
             }
         } catch (\Throwable $th) {
             return ["data" => [], "error" => true, "message" => $th];
@@ -64,29 +78,38 @@ class StartController extends Controller
             switch ($id) {
                 case 'get-detail-start':
                     $dataStart = Start::all()->first();
-                    $idPositionWithToollift = json_decode($dataStart->position_with_toollift)[0]->id;
-                    $idPositionNoToollift = json_decode($dataStart->position_no_toollift)[0]->id;
-                    $idMissionToollift = json_decode($dataStart->mission_go_to_toollift)[0]->id;
+                    if ($dataStart) {
+                        $data_position_with_toollift = $dataStart->position_with_toollift !== null ? json_decode($dataStart->position_with_toollift) : [];
+                        $data_position_no_toollift = $dataStart->position_no_toollift !== null ? json_decode($dataStart->position_no_toollift) : [];
+                        $data_mission_go_to_toollift = $dataStart->mission_go_to_toollift !== null ? json_decode($dataStart->mission_go_to_toollift) : [];
 
-                    $miController = new MissionV4Controller();
 
-                    $missionGotoToollift = $miController->dataRobotEnd($idMissionToollift);
-                    $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
-                    $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
+                        $idPositionWithToollift = count($data_position_with_toollift) > 0 ?  $data_position_with_toollift[0]->id : null;
+                        $idPositionNoToollift = count($data_position_no_toollift) > 0 ? $data_position_no_toollift[0]->id : null;
+                        $idMissionToollift = count($data_mission_go_to_toollift) > 0 ? $data_mission_go_to_toollift[0]->id : null;
 
-                    $dataMissionSendToRobots = array_map(function ($mission) use ($miController) {
-                        $mission = $miController->dataRobotEnd($mission->id);
-                        return $mission;
-                    }, json_decode($dataStart->missions_send_robot));
+                        $miController = new MissionV4Controller();
 
-                    $data = [
-                        "missionGotoToollift" => $missionGotoToollift,
-                        "positionWithToollift" => $positionWithToollift,
-                        "positionNoToollift" => $positionNoToollift,
-                        "dataMissionSendToRobot" => implode("", $dataMissionSendToRobots),
-                    ];
-                    return ["data" => $data, "message" => "get data successfully!", "error" => false];
-                    break;
+                        $missionGotoToollift = $miController->dataRobotEnd($idMissionToollift);
+                        $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
+                        $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
+
+                        $dataMissionSendToRobots = array_map(function ($mission) use ($miController) {
+                            $mission = $miController->dataRobotEnd($mission->id);
+                            return $mission;
+                        }, json_decode($dataStart->missions_send_robot));
+
+                        $data = [
+                            "missionGotoToollift" => $missionGotoToollift,
+                            "positionWithToollift" => $positionWithToollift,
+                            "positionNoToollift" => $positionNoToollift,
+                            "dataMissionSendToRobot" => implode("", $dataMissionSendToRobots),
+                        ];
+                        return ["data" => $data, "message" => "get data successfully!", "error" => false];
+                        break;
+                    } else {
+                        return ["data" => null, "message" => "data empty", "error" => true];
+                    }
                 default:
                     # code...
                     break;
@@ -117,8 +140,8 @@ class StartController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            if (Start::where("id", 1)->first()) {
-                Start::where("id", 1)->update($request->all());
+            if (Start::all()->first()) {
+                Start::all()->first()->update($request->all());
             } else {
                 Start::insert($request->all());
             }
