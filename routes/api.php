@@ -48,65 +48,65 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::group([
-//     'middleware' => 'api',
-//     'namespace' => 'App\Http\Controllers',
-//     'prefix' => 'auth'
+Route::group([
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'auth'
 
-// ], function ($route) {
-//     Route::post('/login', 'Api\AuthController@login');
-//     Route::post('/register', 'Api\AuthController@register');
-//     Route::post('/logout', 'Api\AuthController@logout');
-//     Route::post('/refresh', 'Api\AuthController@refresh');
-//     Route::get('/user-profile', 'Api\AuthController@userProfile');
-//     Route::post('/change-pass', 'Api\AuthController@changePassWord');
-// });
+], function ($route) {
+    Route::post('/login', 'Api\AuthController@login');
+    Route::post('/register', 'Api\AuthController@register');
+    Route::post('/logout', 'Api\AuthController@logout');
+    Route::post('/refresh', 'Api\AuthController@refresh');
+    Route::get('/user-profile', 'Api\AuthController@userProfile');
+    Route::post('/change-pass', 'Api\AuthController@changePassWord');
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('start', StartController::class);
 
-Route::resource('a', StartController::class);
+Route::group(['middleware' => ['VerifyJWTToken']], function () {
+    Route::resource('start', StartController::class);
+    Route::resource('position', PositionController::class);
+    Route::resource('layer', LayerController::class);
+    Route::resource('step', StepController::class);
+    Route::resource('user', userController::class);
 
-Route::resource('position', PositionController::class);
-Route::resource('layer', LayerController::class);
-Route::resource('step', StepController::class);
-Route::resource('user', userController::class);
+    Route::resource('footprint', FootprintController::class);
+    Route::resource('gpio', GpioController::class);
+    Route::resource('gpio_module', GpioModuleController::class);
+    Route::resource('marker', MarkerController::class);
+    Route::resource('sleep', SleepController::class);
+    Route::resource('variable', VariableController::class);
+    Route::resource('sound', SoundController::class);
+    Route::resource('config', ConfigController::class);
+    Route::resource('telegram', TelegramController::class);
 
-Route::resource('footprint', FootprintController::class);
-Route::resource('gpio', GpioController::class);
-Route::resource('gpio_module', GpioModuleController::class);
-Route::resource('marker', MarkerController::class);
-Route::resource('sleep', SleepController::class);
-Route::resource('variable', VariableController::class);
-Route::resource('sound', SoundController::class);
-Route::resource('config', ConfigController::class);
-Route::resource('telegram', TelegramController::class);
+    Route::resource('mi', MiController::class);
+    Route::resource('type-mission', TypeMissionController::class);
 
-Route::resource('mi', MiController::class);
-Route::resource('type-mission', TypeMissionController::class);
+    Route::resource('wake_up', WakeUpController::class);
+    Route::resource('stop', StopController::class);
 
-Route::resource('wake_up', WakeUpController::class);
-Route::resource('stop', StopController::class);
+    Route::resource('input-gpio', InputGpioController::class);
 
-Route::resource('input-gpio', InputGpioController::class);
+    Route::resource('robot', RobotController::class);
+    Route::resource('function', FunctionController::class);
 
-Route::resource('robot', RobotController::class);
-Route::resource('function', FunctionController::class);
+    Route::resource('var', VarController::class);
+    Route::resource('sound-file', SoundFileController::class)->only('destroy');
+    Route::resource('config-status', ConfigRobotController::class)->only('index');
+    Route::resource('status', StatusController::class);
 
-Route::resource('var', VarController::class);
-Route::resource('sound-file', SoundFileController::class)->only('destroy');
-Route::resource('config-status', ConfigRobotController::class)->only('index');
-Route::resource('status', StatusController::class);
+    Route::resource('bookmark', BookmarkController::class);
+    Route::resource('error-system', ErrorSystemController::class);
+    Route::resource("battery-chart", BatteryChartController::class)->only("index");
 
-Route::resource('bookmark', BookmarkController::class);
-Route::resource('error-system', ErrorSystemController::class);
-Route::resource("battery-chart", BatteryChartController::class)->only("index");
-
-// mission v4
-Route::resource('mission-v4', MissionV4Controller::class);
-Route::resource('type-mission-v4', TypeMissionVerController::class);
-Route::resource('mission-sent', MissionSentController::class);
-Route::resource('auth', AuthController::class);
-Route::resource('map', MapController::class)->only("index");
+    // mission v4
+    Route::resource('mission-v4', MissionV4Controller::class);
+    Route::resource('type-mission-v4', TypeMissionVerController::class);
+    Route::resource('mission-sent', MissionSentController::class);
+    Route::resource('auth', AuthController::class);
+    Route::resource('map', MapController::class)->only("index");
+});
