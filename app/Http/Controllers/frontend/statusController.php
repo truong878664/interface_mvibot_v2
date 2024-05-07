@@ -158,7 +158,7 @@ class statusController extends Controller
                         $outputIO->out7,
                         $outputIO->out8,
                     ];
-                    $this->dataStatus[$index]['moduleOut'] = implode(",",$dataIO);
+                    $this->dataStatus[$index]['moduleOut'] = implode(",", $dataIO);
                 }
             }
         }

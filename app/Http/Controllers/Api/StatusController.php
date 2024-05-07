@@ -27,6 +27,7 @@ class StatusController extends Controller
             "motor_right_status" => DB::table('motor_right_status')->get(),
             "input_user_status" => DB::table("input_user_status")->get(),
             "output_user_status" => DB::table("output_user_status")->get(),
+            "robot_status" => DB::table("robot_status")->get()
         ];
         return $data;
     }
