@@ -48,12 +48,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::group([
+//     'middleware' => 'api',
+//     'namespace' => 'App\Http\Controllers',
+//     'prefix' => 'auth'
+
+// ], function ($route) {
+//     Route::post('/login', 'Api\AuthController@login');
+//     Route::post('/register', 'Api\AuthController@register');
+//     Route::post('/logout', 'Api\AuthController@logout');
+//     Route::post('/refresh', 'Api\AuthController@refresh');
+//     Route::get('/user-profile', 'Api\AuthController@userProfile');
+//     Route::post('/change-pass', 'Api\AuthController@changePassWord');
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::resource('start', StartController::class);
-// Route::resource('mission', MissionController::class);
+
+Route::resource('a', StartController::class);
+
 Route::resource('position', PositionController::class);
 Route::resource('layer', LayerController::class);
 Route::resource('step', StepController::class);
