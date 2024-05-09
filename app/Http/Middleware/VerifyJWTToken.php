@@ -20,6 +20,7 @@ class VerifyJWTToken
     public function handle(Request $request, Closure $next)
     {
         $isLogin = auth('api')->check();
+        return response()->json(['token' => $request->bearerToken()]);
         if ($isLogin) {
             return $next($request);
         } else {
