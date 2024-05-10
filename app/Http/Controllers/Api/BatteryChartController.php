@@ -38,7 +38,7 @@ class BatteryChartController extends Controller
         {
             return DB::select("
                 SELECT 
-                    id, created_at, soc, HOUR(created_at) + MINUTE(created_at)/60 + SECOND(created_at)/120 as decimal_hour
+                    id, created_at, soc, HOUR(created_at) as hour, HOUR(created_at) + MINUTE(created_at)/60 as decimal_hour
                 FROM battery_status_chart
                     WHERE name_seri = '$name_seri' 
                         AND $query_date
