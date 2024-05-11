@@ -19,13 +19,7 @@ class VerifyJWTToken
      */
     public function handle(Request $request, Closure $next)
     {
-        $requestToken = $request->cookie('token');
-        if ($requestToken) {
-            $token = str_replace('Bearer ', "", $request->cookie('token'));
-            $isLogin = JWTAuth::setToken($token)->check();
-        } else {
-            $isLogin = auth('api')->check();
-        }
+        $isLogin = auth('api')->check();
         if ($isLogin) {
             return $next($request);
         } else {

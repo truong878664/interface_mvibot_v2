@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -17,11 +18,16 @@ class AuthController extends Controller
     {
         try {
             //code...
-
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string',
                 'password' => 'required|string',
             ]);
+
+            $currentToken = JWTAuth::getToken();
+
+            if ($currentToken) {
+                return  back()->with('fail', 'someone login, logout to continue, please');
+            }
 
             if ($validator->fails()) {
                 return  back()->with('fail', 'Enter your username and password');
@@ -38,7 +44,7 @@ class AuthController extends Controller
 
             return redirect("/")->withCookies([
                 cookie("token", $token, $timeLine),
-                cookie("username", $request->input('name'), $timeLine)
+                cookie("_username", $request->input('name'), $timeLine)
             ]);
         } catch (\Throwable $th) {
             return redirect("/")->with("fail", "something wrong, try again");
