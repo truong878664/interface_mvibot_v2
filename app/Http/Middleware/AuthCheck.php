@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthCheck
 {
@@ -16,22 +17,16 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->has('LoggedUser') && ($request->path() != 'login')) {
+        try {
+            $token = str_replace('Bearer ', "", $request->cookie('token'));
+            $isLogin = JWTAuth::setToken($token)->check();
+            if ($isLogin) {
+                return $next($request);
+            } else {
+                return redirect('login')->with('fail', 'You must be logged in');
+            }
+        } catch (\Throwable $th) {
             return redirect('login')->with('fail', 'You must be logged in');
         }
-
-        if (session()->has('LoggedUser') && $request->path() == 'login') {
-            return back();
-        }
-
-        return $next($request);
     }
-    // public function handleApi(Request $request, Closure $next)
-    // {
-    //     if (!session()->has('LoggedUser')) {
-    //         return ["error" => true, "message" => "You must be logged in"];
-    //     } else {
-    //         return $next($request);
-    //     }
-    // }
 }

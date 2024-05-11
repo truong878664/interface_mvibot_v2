@@ -17,10 +17,10 @@ use App\Http\Controllers\frontend\MissionsV4Controller;
 use App\Http\Controllers\frontend\SoundController;
 use App\Http\Controllers\frontend\statusController;
 
-Route::group(['middleware' => ['AuthCheck']], function () {
-    Route::get('login', function () {
-        return view('frontend.pages.auth.login');
-    });
+Route::get('login', function () {
+    return view('frontend.pages.auth.login');
+});
+Route::group(['middleware' => ['AuthCheck']],    function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
 

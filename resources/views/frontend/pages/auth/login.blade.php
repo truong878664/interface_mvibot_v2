@@ -28,18 +28,19 @@
         </div>
         <div class="login-from-wrapper">
             <form method="POST" action="{{ route('check') }}" class="login-form">
+                {{-- <div class="login-form"> --}}
                 <div class="login-header">
                     <img class="robot-login-img" src="/img/robot_login.png" alt="">
                     <p class="text-main ml-40 ">Login</p>
                 </div>
 
                 <div class="username-wrapper">
-                    <input type="text" placeholder="Username" name="username"
+                    <input type="text" placeholder="Username" name="name"
                         class="bg-transparent text-main rounded-md border-transparent border-t-0 border-l-0 border-r-0 border-b-2 border-b-stone-300 px-2 py-1 focus:ring-0 username"
-                        value="{{ old('username') }}">
+                        {{-- value="{{ old('username') }}" --}}>
 
                     <span class="text-red-500">
-                        @error('username')
+                        @error('name')
                             {{ $message }}
                         @enderror
                     </span>
@@ -79,10 +80,11 @@
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </button>
                 @csrf
+                {{-- </div> --}}
             </form>
         </div>
     </div>
-    <script src="/js/login.js"></script>
+    <script src="/js/login.js" type="module"></script>
 </body>
 
 </html>

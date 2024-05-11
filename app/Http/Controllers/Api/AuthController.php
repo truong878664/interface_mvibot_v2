@@ -43,7 +43,15 @@ class AuthController extends Controller
         if (!$token = auth('api')->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this->createNewToken($token);
+
+        $tokenResult = $this->createNewToken($token);
+
+        // $request->cookie("token", $token, $this->guard()->factory()->getTTL() * 60);
+        // response()->withCookie()
+        $request->session()->put('token', $token);
+        $request->session()->put('expires_in', $this->guard()->factory()->getTTL() * 60);
+
+        return $tokenResult->withCookie(cookie("token", $token, $this->guard()->factory()->getTTL() * 60));
     }
 
     /**
