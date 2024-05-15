@@ -17,15 +17,15 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
         if (!session()->has('LoggedUser') && ($request->path() != 'login')) {
-            return redirect('login')->with('fail', 'You must be logged in');
+            return redirect('login')->with('fail', 'You must be logged in!');
         }
 
         if (session()->has('LoggedUser') && $request->path() == 'login') {
             return back();
         }
-
         return $next($request);
     }
+
     // test
     // public function handleApi(Request $request, Closure $next)
     // {

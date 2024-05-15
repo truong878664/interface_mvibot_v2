@@ -25,7 +25,7 @@ class AuthController extends Controller
                 $request->session()->put('UserName', $userInfo->name);
                 return redirect('/');
             } else {
-                return back()->with('fail', 'incorrect password');
+                return back()->with('fail', 'incorrect password!');
             };
         }
     }
