@@ -29,7 +29,7 @@ class AuthController extends Controller
             };
         }
     }
-
+    // test
     public function logout()
     {
         if (session()->has('LoggedUser')) {

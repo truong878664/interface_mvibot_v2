@@ -26,6 +26,7 @@ class AuthCheck
 
         return $next($request);
     }
+    // test
     // public function handleApi(Request $request, Closure $next)
     // {
     //     if (!session()->has('LoggedUser')) {
