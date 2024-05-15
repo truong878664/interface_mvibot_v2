@@ -1,8 +1,24 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
-    RewriteRule ^index\.php$ - [L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    #RewriteBase /
+    #RewriteRule ^index\.php$ - [L]
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule . /index.php [L]
+
+    #RewriteCond %{HTTP:Authorization} ^(.*)
+    #RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+    RewriteCond %{HTTP:Authorization} ^(.+)$
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault A1
+    Header append Cache-Control must-revalidate
 </IfModule>

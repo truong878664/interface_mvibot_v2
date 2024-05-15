@@ -5,8 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
-class AuthCheck
+class VerifyJWTToken
 {
     /**
      * Handle an incoming request.
@@ -17,16 +19,13 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        try {
-            $token = str_replace('Bearer ', "", $request->cookie('token'));
-            $isLogin = JWTAuth::setToken($token)->check();
-            if ($isLogin) {
-                return $next($request);
-            } else {
-                return redirect('login')->with('fail', 'You must be logged in');
-            }
-        } catch (\Throwable $th) {
-            return redirect('login')->with('fail', 'You must be logged in');
+        $isLogin = auth('api')->check();
+        if ($isLogin) {
+            return $next($request);
+        } else {
+            return response()->json([
+                'message' => 'use must login to get data',
+            ], 401);
         }
     }
 }

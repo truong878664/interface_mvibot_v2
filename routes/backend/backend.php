@@ -11,10 +11,10 @@ use App\Http\Controllers\frontend\SoundController;
 
 Route::prefix('dashboard')->group(function () {
     Route::prefix('missions')->group(function () {
-        Route::prefix('v3')->group(function() {
+        Route::prefix('v3')->group(function () {
             Route::post('create-missions', [CreateMissionsController::class, 'createMissions']);
         });
-        Route::prefix('v4')->group(function() {
+        Route::prefix('v4')->group(function () {
             Route::post('create-missions', [MissionsVerController::class, 'createMissions']);
         });
         // Route::post('create-point', [PositionController::class, 'createPoint']);
