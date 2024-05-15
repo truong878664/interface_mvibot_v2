@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -35,9 +35,12 @@ class AuthController extends Controller
             'name' => 'required|string',
             'password' => 'required|string',
         ]);
+        if ($request->input('remember')) {
+            JWTAuth::factory()->setTTL(null);
+        }
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['error' => 'validator'], 422);
         }
 
         if (!$token = auth('api')->attempt($validator->validated())) {
