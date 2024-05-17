@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\StopController;
 use App\Http\Controllers\Api\TelegramController;
+use App\Http\Controllers\Api\ToolliftController;
 use App\Http\Controllers\Api\TypeMissionController;
 use App\Http\Controllers\Api\TypeMissionVerController;
 use App\Http\Controllers\Api\userController;
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('sound', SoundController::class);
     Route::resource('config', ConfigController::class);
     Route::resource('telegram', TelegramController::class);
+    Route::resource('lift', ToolliftController::class);
 
     Route::resource('mi', MiController::class);
     Route::resource('type-mission', TypeMissionController::class);

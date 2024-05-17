@@ -186,7 +186,6 @@ class MissionV4Controller extends Controller
             $dataConfiguration = json_decode($data);
             $normalConfiguration = $dataConfiguration->normal;
             $moduleConfiguration = $dataConfiguration->module;
-
             $stringDataNormalConfiguration = $this->toStringConfiguration($normalConfiguration);
             $stringDataModuleConfiguration = $this->toStringConfiguration($moduleConfiguration);
 
@@ -194,7 +193,7 @@ class MissionV4Controller extends Controller
             $dataModule =  $this->checkDataConfiguration($moduleConfiguration) ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleConfiguration)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
-            return "(name:wake_up|time_out:-1|mode:gpio|data:'')";
+            return "(name:$type|time_out:-1|mode:$type|data:'')";
         }
     }
     public function toStringConfiguration($data)

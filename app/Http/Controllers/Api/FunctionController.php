@@ -8,6 +8,7 @@ use App\Models\backend\MissionConfig;
 use App\Models\backend\MissionFootprint;
 use App\Models\backend\MissionGpio;
 use App\Models\backend\MissionGpioModule;
+use App\Models\backend\MissionLift;
 use App\Models\backend\MissionMarker;
 use App\Models\backend\MissionPosition;
 use App\Models\backend\Missions;
@@ -40,6 +41,7 @@ class FunctionController extends Controller
             'sound' => MissionSound::all(),
             'config' => MissionConfig::all(),
             'telegram' => MissionTelegram::all(),
+            'lift' => MissionLift::all(),
         ];
         return $data;
     }
