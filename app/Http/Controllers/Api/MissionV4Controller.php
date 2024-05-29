@@ -189,8 +189,10 @@ class MissionV4Controller extends Controller
             $stringDataNormalConfiguration = $this->toStringConfiguration($normalConfiguration);
             $stringDataModuleConfiguration = $this->toStringConfiguration($moduleConfiguration);
 
-            $dataNormal = $this->checkDataConfiguration($normalConfiguration) ? "(name:$type|time_out:-1|mode:gpio|data:$stringDataNormalConfiguration)" : null;
-            $dataModule =  $this->checkDataConfiguration($moduleConfiguration) ? "(name:$type|time_out:-1|mode:gpio_module|data:$stringDataModuleConfiguration)" : null;
+            $bothDataWakeup = $type === "wake_up" ? "|both:$moduleConfiguration->both" : "";
+
+            $dataNormal = $this->checkDataConfiguration($normalConfiguration) ? "(name:$type|time_out:-1|mode:gpio$bothDataWakeup|data:$stringDataNormalConfiguration)" : null;
+            $dataModule =  $this->checkDataConfiguration($moduleConfiguration) ? "(name:$type|time_out:-1|mode:gpio_module$bothDataWakeup|data:$stringDataModuleConfiguration)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
             return "(name:$type|time_out:-1|mode:$type|data:'')";
@@ -201,7 +203,9 @@ class MissionV4Controller extends Controller
         $dataTranslate = [];
         foreach ($data as $key => $value) {
             if ($value || $value == 0) {
-                array_push($dataTranslate, "~$key=$value~");
+                if ($key !== "both") {
+                    array_push($dataTranslate, "~$key=$value~");
+                }
             }
         }
         $stringDataWakeup = implode("", $dataTranslate);
