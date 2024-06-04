@@ -88,9 +88,14 @@ class LayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $name_layer)
     {
-        //
+        try {
+            Layer::where('name_layer', $name_layer)->update($request->all());
+            return ['message' => 'update successfully.'];
+        } catch (\Throwable $th) {
+            return ['message' => 'something wrong, try again!', "error" => $th];
+        }
     }
 
     /**

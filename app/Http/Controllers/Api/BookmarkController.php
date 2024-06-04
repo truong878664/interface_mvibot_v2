@@ -82,8 +82,7 @@ class BookmarkController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
-        DB::table('bookmark')->where('link', $request->pathName)->delete();
+        DB::table('bookmark')->where('id', $id)->delete();
         return ['message' => 'delete bookmark successfully'];
     }
 }

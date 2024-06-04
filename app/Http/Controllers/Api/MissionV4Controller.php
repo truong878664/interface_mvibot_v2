@@ -189,13 +189,20 @@ class MissionV4Controller extends Controller
             $stringDataNormalConfiguration = $this->toStringConfiguration($normalConfiguration);
             $stringDataModuleConfiguration = $this->toStringConfiguration($moduleConfiguration);
 
-            $bothDataWakeup = $type === "wake_up" ? "|both:$moduleConfiguration->both" : "";
+            $both = 0;
+            try {
+                $both = $moduleConfiguration->both;
+            } catch (\Throwable $th) {
+                $both = 0;
+            }
+            $bothDataWakeup = $type === "wake_up" ? "|both:$both" : "";
 
             $dataNormal = $this->checkDataConfiguration($normalConfiguration) ? "(name:$type|time_out:-1|mode:gpio$bothDataWakeup|data:$stringDataNormalConfiguration)" : null;
             $dataModule =  $this->checkDataConfiguration($moduleConfiguration) ? "(name:$type|time_out:-1|mode:gpio_module$bothDataWakeup|data:$stringDataModuleConfiguration)" : null;
             return $dataNormal . $dataModule;
         } catch (\Throwable $th) {
-            return "(name:$type|time_out:-1|mode:$type|data:'')";
+            // return "(name:$type|time_out:-1|mode:$type|data:'')";
+            return "";
         }
     }
     public function toStringConfiguration($data)
