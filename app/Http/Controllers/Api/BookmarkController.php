@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        return DB::table('bookmark')->get();
+        return Bookmark::get();
     }
 
     /**
@@ -36,8 +37,9 @@ class BookmarkController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('bookmark')->insert($request->all());
-        return ['message' => 'Save bookmark successfully!'];
+        $data = Bookmark::insert($request->all());
+        return [$data];
+        // return ['message' => 'Save bookmark successfully!', "data" => $data];
     }
 
     /**
@@ -82,7 +84,7 @@ class BookmarkController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        DB::table('bookmark')->where('id', $id)->delete();
+        Bookmark::where('id', $id)->delete();
         return ['message' => 'delete bookmark successfully'];
     }
 }
