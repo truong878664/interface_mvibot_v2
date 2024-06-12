@@ -37,8 +37,9 @@ class BookmarkController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Bookmark::insert($request->all());
-        return [$data];
+        $data = Bookmark::create($request->all());
+        return ['message' => "save bookmark successfully", 'data' => $data];
+
     }
 
     /**

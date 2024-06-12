@@ -10,6 +10,7 @@ class Bookmark extends Model
     use HasFactory;
     protected $table = "bookmark";
     protected $fillable = [
-        "name", "link", "color"
+        "name", "link", "color", "icon"
     ];
+    public $timestamps = false;
 }
