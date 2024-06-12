@@ -39,7 +39,6 @@ class BookmarkController extends Controller
     {
         $data = Bookmark::insert($request->all());
         return [$data];
-        // return ['message' => 'Save bookmark successfully!', "data" => $data];
     }
 
     /**
