@@ -18,12 +18,11 @@ class RobotController extends Controller
     public function index()
     {
         try {
-            $allRobots = Robot::all();
-            $robots = Robot::where('type', 'robot')->get();
-            $moduleGpios = Robot::where('type', 'module_gpio')->get();
+            $allRobots = Robot::select("name_seri", "type", "id")->get();
+            $robots = Robot::select("name_seri", "type", "id")->where('type', 'robot')->get();
+            $moduleGpios = Robot::select("name_seri", "type", "id")->where('type', 'module_gpio')->get();
             $robotsSlam = DB::table('robot_status')->where('mode', 'slam')->get();
             $robotsNavigation = DB::table('robot_status')->where('mode', 'navigation')->get();
-            //app version
         } catch (\Illuminate\Database\QueryException $e) {
             $robots = [];
             $moduleGpios = [];
