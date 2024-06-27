@@ -43,9 +43,11 @@ class MissionV4Controller extends Controller
     {
         $name = $request->name;
         $type = $request->type;
+        $version = $request->version;
         $mission = MissionsVer::create([
             "name" => $name,
-            "type" => $type
+            "type" => $type,
+            "version" => $version
         ]);
         return $mission;
     }
@@ -126,8 +128,15 @@ class MissionV4Controller extends Controller
      */
     public function update(Request $request, $id)
     {
-        MissionsVer::where('id', $id)->update($request->all());
-        return ['ms' => $request->mission_shorthand];
+        switch ($id) {
+            case 'update-multi':
+                MissionsVer::whereIn('id', $request->ids)->update($request->data);
+                break;
+            default:
+                MissionsVer::where('id', $id)->update($request->all());
+                return ['ms' => $request->mission_shorthand];
+                break;
+        }
     }
 
     /**
