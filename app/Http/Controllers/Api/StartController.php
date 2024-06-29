@@ -62,6 +62,7 @@ class StartController extends Controller
      */
     public function store(Request $request)
     {
+
         return null;
     }
 
@@ -73,50 +74,59 @@ class StartController extends Controller
      */
     public function show($id)
     {
-        try {
-            //code...
-            switch ($id) {
-                case 'get-detail-start':
-                    $dataStart = Start::all()->first();
-                    if ($dataStart) {
-                        $data_position_with_toollift = $dataStart->position_with_toollift !== null ? json_decode($dataStart->position_with_toollift) : [];
-                        $data_position_no_toollift = $dataStart->position_no_toollift !== null ? json_decode($dataStart->position_no_toollift) : [];
-                        $data_mission_go_to_toollift = $dataStart->mission_go_to_toollift !== null ? json_decode($dataStart->mission_go_to_toollift) : [];
+        // if(!$data->count()) {
+        //     // $data_s = Start::insert(["name_seri"=> $id]);
+        //     return [123];
+        // };
+        // return $data;
+        //         // if()
+        //         return [$data]; 
+
+        //code...
+        // switch ($id) {
+        //     case 'get-detail-start':
+        //         $dataStart = Start::all()->first();
+        //         if ($dataStart) {
+        //             $data_position_with_toollift = $dataStart->position_with_toollift !== null ? json_decode($dataStart->position_with_toollift) : [];
+        //             $data_position_no_toollift = $dataStart->position_no_toollift !== null ? json_decode($dataStart->position_no_toollift) : [];
+        //             $data_mission_go_to_toollift = $dataStart->mission_go_to_toollift !== null ? json_decode($dataStart->mission_go_to_toollift) : [];
 
 
-                        $idPositionWithToollift = count($data_position_with_toollift) > 0 ?  $data_position_with_toollift[0]->id : null;
-                        $idPositionNoToollift = count($data_position_no_toollift) > 0 ? $data_position_no_toollift[0]->id : null;
-                        $idMissionToollift = count($data_mission_go_to_toollift) > 0 ? $data_mission_go_to_toollift[0]->id : null;
+        //             $idPositionWithToollift = count($data_position_with_toollift) > 0 ?  $data_position_with_toollift[0]->id : null;
+        //             $idPositionNoToollift = count($data_position_no_toollift) > 0 ? $data_position_no_toollift[0]->id : null;
+        //             $idMissionToollift = count($data_mission_go_to_toollift) > 0 ? $data_mission_go_to_toollift[0]->id : null;
 
-                        $miController = new MissionV4Controller();
+        //             $miController = new MissionV4Controller();
 
-                        $missionGotoToollift = $miController->dataRobotEnd($idMissionToollift);
-                        $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
-                        $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
+        //             $missionGotoToollift = $miController->dataRobotEnd($idMissionToollift);
+        //             $positionWithToollift = MissionPosition::where("id", $idPositionWithToollift)->first();
+        //             $positionNoToollift = MissionPosition::where("id", $idPositionNoToollift)->first();
 
-                        $dataMissionSendToRobots = array_map(function ($mission) use ($miController) {
-                            $mission = $miController->dataRobotEnd($mission->id);
-                            return $mission;
-                        }, json_decode($dataStart->missions_send_robot));
+        //             $dataMissionSendToRobots = array_map(function ($mission) use ($miController) {
+        //                 $mission = $miController->dataRobotEnd($mission->id);
+        //                 return $mission;
+        //             }, json_decode($dataStart->missions_send_robot));
 
-                        $data = [
-                            "missionGotoToollift" => $missionGotoToollift,
-                            "positionWithToollift" => $positionWithToollift,
-                            "positionNoToollift" => $positionNoToollift,
-                            "dataMissionSendToRobot" => implode("", $dataMissionSendToRobots),
-                        ];
-                        return ["data" => $data, "message" => "get data successfully!", "error" => false];
-                        break;
-                    } else {
-                        return ["data" => null, "message" => "data empty", "error" => true];
-                    }
-                default:
-                    # code...
-                    break;
-            }
-        } catch (\Throwable $th) {
-            return ["data" => null, "message" => "Error" . $th, "error" => false];
-        }
+        //             $data = [
+        //                 "missionGotoToollift" => $missionGotoToollift,
+        //                 "positionWithToollift" => $positionWithToollift,
+        //                 "positionNoToollift" => $positionNoToollift,
+        //                 "dataMissionSendToRobot" => implode("", $dataMissionSendToRobots),
+        //             ];
+        //             return ["data" => $data, "message" => "get data successfully!", "error" => false];
+        //             break;
+        //         } else {
+        //             return ["data" => null, "message" => "data empty", "error" => true];
+        //         }
+        //     default:
+        //         $data = Start::where("name_seri", $id)->get();
+        //         // if()
+        //         return [$data]; 
+        //         break;
+        // }
+        // } catch (\Throwable $th) {
+        //     return ["data" => null, "message" => "Error" . $th, "error" => false];
+        // }
     }
 
     /**

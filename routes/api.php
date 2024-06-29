@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\MissionSentController;
 use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
@@ -69,6 +70,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('start', StartController::class);
+    Route::resource('reset', ResetController::class);
+
     Route::resource('position', PositionController::class);
     Route::resource('layer', LayerController::class);
     Route::resource('step', StepController::class);

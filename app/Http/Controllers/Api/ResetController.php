@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\Map;
-use App\Models\backend\Mi;
 use App\Models\backend\MissionPosition;
-use App\Models\backend\Missions;
-use App\Models\backend\TypeMission;
+use App\Models\backend\MissionsVer;
+use App\Models\backend\Reset;
 use Illuminate\Http\Request;
 
-class PositionController extends Controller
+class ResetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +17,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $mapActive = Map::first();
-        if ($mapActive) {
-            return MissionPosition::where('map', $mapActive->name_map_active)->get();
-        } else {
-            return [];
-        }
+        //
     }
 
     /**
@@ -34,6 +27,7 @@ class PositionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -44,10 +38,7 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        $mapActive = Map::first();
-        $data = $request->all();
-        $data['map'] = $mapActive->name_map_active;
-        return MissionPosition::create($data);
+        //
     }
 
     /**
@@ -58,7 +49,18 @@ class PositionController extends Controller
      */
     public function show($id)
     {
-        return  MissionPosition::where('id', $id)->first();
+
+        $data = Reset::where("name_seri", $id)->first();
+        $allMission = MissionsVer::all();
+        $allPosition = MissionPosition::all();
+        if (!$data) {
+            Reset::create(["name_seri" => $id]);
+        }
+        return [
+            "missionList" => $allMission,
+            "positionList" => $allPosition,
+            'data' => $data
+        ];
     }
 
     /**
@@ -81,7 +83,13 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [
+            "mission_go_to_toollift"=> $request->mission_go_to_toollift,
+            "missions_send_robot"=>$request->missions_send_robot,
+            "position_no_toollift"=> $request->position_no_toollift
+        ];
+        Reset::where("name_seri", $id)->update($data);
+        return $request->all();
     }
 
     /**
@@ -92,13 +100,6 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        $itemDelete = MissionPosition::where('id', $id)->first();
-        $itemName =  "$itemDelete->mode#$itemDelete->name#$itemDelete->id";
-
-        //function at controller.php
-        $this->updateStepDelete($itemName);
-
-        MissionPosition::where('id', $id)->delete();
-        return ['message' => 'delete position success'];
+        //
     }
 }
