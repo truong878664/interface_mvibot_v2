@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
 use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\MissionSentController;
+use App\Http\Controllers\Api\MissionSentV2Controller;
 use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\ResetController;
@@ -112,6 +113,7 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('mission-v4', MissionV4Controller::class);
     Route::resource('type-mission-v4', TypeMissionVerController::class);
     Route::resource('mission-sent', MissionSentController::class);
+    Route::resource('mission-sent-v2', MissionSentV2Controller::class);
     Route::resource('auth', AuthController::class);
     Route::resource('map', MapController::class)->only("index");
 });
