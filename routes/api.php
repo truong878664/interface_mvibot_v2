@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\MissionSentController;
 use App\Http\Controllers\Api\MissionSentV2Controller;
 use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\RawMaterialController;
 use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
@@ -116,4 +117,5 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('mission-sent-v2', MissionSentV2Controller::class);
     Route::resource('auth', AuthController::class);
     Route::resource('map', MapController::class)->only("index");
+    Route::resource('raw-material', RawMaterialController::class);
 });
