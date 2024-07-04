@@ -16,7 +16,12 @@ class RawMaterialController extends Controller
      */
     public function index()
     {
-        return RawMaterial::where("done", false)->where("cancel", false)->get();
+
+        return [
+            "require" => RawMaterial::where("done", false)->where("cancel", false)->get(),
+            "cancel" => RawMaterial::where("cancel", true)->orderBy("updated_at", "desc")->limit(5)->get(),
+            "done" => RawMaterial::where("done", true)->orderBy("updated_at", "desc")->limit(5)->get(),
+        ];
     }
 
     /**
@@ -84,7 +89,8 @@ class RawMaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return RawMaterial::where("id", $id)->update($request->all());
+        RawMaterial::where("id", $id)->update($request->all());
+        return  RawMaterial::find($id);
     }
 
     /**

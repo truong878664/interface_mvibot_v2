@@ -20,7 +20,9 @@ return new class extends Migration
             $table->integer('require');
             $table->boolean('done')->default(false);
             $table->boolean('cancel')->default(false);
-            $table->string('note')->nullable();
+            $table->string('notes')->nullable();
+            $table->string('cancel_reason')->nullable();
+            $table->integer('odd_box')->nullable();
         });
     }
 

@@ -58,10 +58,12 @@ class MiController extends Controller
                 $dataClone = [
                     "mission_shorthand" => $data->mission_shorthand,
                     "name" => $data->name . "__copy",
+                    "version" => $data->version,
                     "steps_mission" => $data->steps_mission,
                     "steps_mission_name" => $data->steps_mission_name,
                     "stop" => $data->stop,
                     "wake_up" => $data->wake_up,
+                    "continue" => $data->continue,
                     "type" => $data->type,
                 ];
                 $this->missionClone = $missionClass->create($dataClone);
