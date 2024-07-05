@@ -18,9 +18,9 @@ class RawMaterialController extends Controller
     {
 
         return [
-            "require" => RawMaterial::where("done", false)->where("cancel", false)->get(),
-            "cancel" => RawMaterial::where("cancel", true)->orderBy("updated_at", "desc")->limit(5)->get(),
-            "done" => RawMaterial::where("done", true)->orderBy("updated_at", "desc")->limit(5)->get(),
+            "require" => RawMaterial::whereIn("status", array("require", "processing"))->get(),
+            "cancel" => RawMaterial::where("status", "cancel")->limit(5)->get(),
+            "done" => RawMaterial::where("status", "done")->limit(5)->get(),
         ];
     }
 
@@ -43,7 +43,7 @@ class RawMaterialController extends Controller
     public function store(Request $request)
     {
 
-        $itemNotDone = RawMaterial::where("done", false)->where("cancel", false)->get();
+        $itemNotDone = RawMaterial::whereNotIn("status", array("cancel", "done"))->get();
         if (count($itemNotDone) >= 2) {
             return [
                 'success' =>  false,
@@ -89,8 +89,25 @@ class RawMaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $currentRaw = RawMaterial::find($id);
+        $user = auth('api')->user();
+        $status = $request->status;
+        if ($user->line !== "QLSX") {
+            if ($currentRaw->status === "processing") {
+                return response(["message" => "Cannot cancel, QLSX is processing"], 409);
+            }
+            if ($currentRaw->status === "done") {
+                return ['data' => []];
+            }
+        }
+
         RawMaterial::where("id", $id)->update($request->all());
-        return  RawMaterial::find($id);
+        return [
+            'data' => RawMaterial::find($id),
+            'jwt' => auth('api')->user(),
+            'status' => $status = $request->status,
+            'line' => $user->line
+        ];
     }
 
     /**

@@ -18,8 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('line');
             $table->integer('require');
-            $table->boolean('done')->default(false);
-            $table->boolean('cancel')->default(false);
+            $table->enum('status', array("done", "cancel", "processing", "require"))->nullable();
             $table->string('notes')->nullable();
             $table->string('cancel_reason')->nullable();
             $table->integer('odd_box')->nullable();
