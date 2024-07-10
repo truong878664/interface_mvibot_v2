@@ -20,7 +20,7 @@ class MissionV4Controller extends Controller
      */
     public function index()
     {
-        return MissionsVer::all();;
+        return MissionsVer::where('deleted', false)->get();
     }
 
     /**
@@ -73,7 +73,7 @@ class MissionV4Controller extends Controller
             case "get_by_type":
                 $type = $request->type;
                 if ($type) {
-                    $data = MissionsVer::where('type', $type)->get();
+                    $data = MissionsVer::where('type', $type)->where('deleted', false)->get();
                     return $data;
                 } else return null;
 
@@ -148,7 +148,7 @@ class MissionV4Controller extends Controller
     public function destroy($id)
     {
         try {
-            MissionsVer::where('id', $id)->delete();
+            MissionsVer::where('id', $id)->update(['deleted' => true]);
             return ['message' => "Delete mission successfully!", "error" => false];
         } catch (\Throwable $th) {
             return ['message' => "ERR!" . $th, "error" => true];

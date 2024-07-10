@@ -212,36 +212,19 @@ class MiController extends Controller
     public function destroy(Request $request, $type)
     {
         try {
-            $v = $request->version;
-            if ($v ===  "v3") {
-                $missionClass = new Missions();
-            } else if ($v ===  "v4") {
-                $missionClass = new MissionsVer();
-            }
-
             switch ($type) {
                 case 'delete-multi':
                     if (count($request->idDelete)) {
-                        foreach ($request->idDelete as $id) {
-                            $missionClass->where('id', $id)->delete();
-                            Stop::where('id_mission', $id)->delete();
-                            WakeUp::where('id_mission', $id)->delete();
-                            DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $id)->delete();
-                        }
+                        MissionsVer::whereIn('id', $request->idDelete)->update(['deleted' => true]);
                         return ['message' => 'Delete missions success', 'status' => 200];
                     } else {
                         return ['message' => 'No mission selected', 'status' => 100];
                     }
                 case 'delete':
-                    $idDelete = $request->idDelete;
-
-                    $missionClass->where('id', $idDelete)->delete();
-                    Stop::where('id_mission', $idDelete)->delete();
-                    WakeUp::where('id_mission', $idDelete)->delete();
-                    DB::table('bookmark')->where('link', "/dashboard/missions/create-missions/" . $idDelete)->delete();
+                    MissionsVer::where('id', $request->idDelete)->update(['deleted' => true]);
                     return ['message' => 'Delete mission success', 'deleted' => true];
                 default:
-                    return 123;
+                    return [];
             }
         } catch (\Throwable $th) {
             throw $th;
