@@ -13,9 +13,13 @@ class ModulePinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ModulePinMaterial::all()->groupBy("when");
+        $data = ModulePinMaterial::all()->groupBy("when");
+        if($request->when) {
+            $data = ModulePinMaterial::where('when', $request->when)->get();
+        }
+        return ['data' => $data, 'request' => $request->when];
     }
 
     /**
@@ -70,7 +74,8 @@ class ModulePinController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return ModulePinMaterial::where('id', $id)->update($request->all());
+        return ['request' => $request->all()];
     }
 
     /**
@@ -81,6 +86,9 @@ class ModulePinController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = ModulePinMaterial::where('id', $id);
+        $itemDelete = $item->first();
+        $item->delete();
+        return  $itemDelete;
     }
 }
