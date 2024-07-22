@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\ModulePinController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RawMaterialController;
+use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\SleepController;
@@ -121,5 +122,6 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('map', MapController::class)->only("index");
     Route::resource('raw-material', RawMaterialController::class);
     Route::resource('pin-io-material', ModulePinController::class);
-    
+
+    Route::resource('require', RequiresController::class);
 });

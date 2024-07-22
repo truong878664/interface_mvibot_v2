@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('require_produce', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('type')->default('user');
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('line');
+            $table->bigInteger('requireID');
+            $table->integer('quality');
+            $table->string('produceName');
+            $table->integer('pcs')->nullable();
+            $table->text('note')->nullable();
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('require_produce');
     }
 };
