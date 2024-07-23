@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('require', function (Blueprint $table) {
+        Schema::create('produce_code', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('userID');
-            $table->enum('status', array("done", "cancel", "processing", "require", "confirm"))->default("require");
-            $table->string("cancelReason")->nullable();
             $table->timestamps();
+            $table->string("lineID")->nullable();
+            $table->string("type")->nullable();
+            $table->string("code");
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('require');
+        Schema::dropIfExists('produce_code');
     }
 };

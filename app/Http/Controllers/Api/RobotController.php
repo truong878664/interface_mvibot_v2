@@ -24,11 +24,12 @@ class RobotController extends Controller
             $robotsSlam = DB::table('robot_status')->where('mode', 'slam')->get();
             $robotsNavigation = DB::table('robot_status')->where('mode', 'navigation')->get();
         } catch (\Illuminate\Database\QueryException $e) {
-            $robots = [];
-            $moduleGpios = [];
-            $robotsSlam = [];
-            $robotsNavigation = [];
-            $allRobots = [];
+            // $robots = [];
+            // $moduleGpios = [];
+            // $robotsSlam = [];
+            // $robotsNavigation = [];
+            // $allRobots = [];
+            throw $e;
         }
         return [
             'robots' => $robots,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\LogRequire;
 use App\Models\backend\RequireProduce;
 use App\Models\backend\RequireRaw;
 use App\Models\backend\Requires;
@@ -21,10 +22,27 @@ class RequiresController extends Controller
      */
     public function index()
     {
+        
+        $requiresQuery = Requires::where("status", "require")
+        ->orWhere("status", "processing")
+            ->orWhere("statusProduce", "unconfirmed")
 
-        $requiresQuery = Requires::where("status", "require")->get();
+        ->get();
+
+        $requireComplete = Requires::where("status", "done")->orWhere("status", "cancel")->orderBy("updated_at", "desc")->limit(5)->get();
+
+        $data = $this->toDataRequire($requiresQuery);
+        $history = $this->toDataRequire($requireComplete);
+
+
+
+        return ['data' => $data, 'history' => $history];
+    }
+
+    public function toDataRequire($data)
+    {
         $requiresArray = [];
-        foreach ($requiresQuery as $require) {
+        foreach ($data as $require) {
             array_push($requiresArray, $require);
         }
         $data = array_map(function ($require) {
@@ -33,27 +51,21 @@ class RequiresController extends Controller
                 'status' => $require->status,
                 'created_at' => $require->created_at,
                 'updated_at' => $require->updated_at,
-                'produce' => RequireProduce::where('requireID', $require->id)->get(),
-                'raw' => RequireRaw::where('requireID', $require->id)->get(),
+                'cancelReason' => $require->cancelReason,
+                'statusProduce' => $require->statusProduce,
+                'produce' => RequireProduce::where('requireID', $require->id)
+                ->join("line", "require_produce.line", "=", "line.id")
+                    ->select("require_produce.*", "line.name as name")
+                    ->get(),
+                'raw' => RequireRaw::where('requireID', $require->id)
+                ->join("line", "require_raw.line", "=", "line.id")
+                    ->select("require_raw.*", "line.name as name")
+                    ->get(),
                 'user' => User::where("id", $require->userID)->first(),
             ];
         }, $requiresArray);
+
         return $data;
-
-
-        // $produce =  Requires::select("require.created_at", "require.updated_at", "require.status", DB::raw("require.id as requireID"), "require_produce.*")
-        //     ->where("status", "require")
-        //     ->leftJoin("require_produce", "require.id", "=", "require_produce.requireID")
-        //     ->selectRaw("'produce' as type");
-
-        // $raw = Requires::select("require.created_at", "require.updated_at", "require.status", DB::raw("require.id as requireID"), "require_raw.*")
-        //     ->where("status", "require")
-        //     ->leftJoin("require_raw", "require.id", "=", "require_raw.requireID")
-        //     ->selectRaw("'raw' as type");
-
-        // $data = $produce->union($raw)->get();
-
-        // return $data;
     }
 
     /**
@@ -76,9 +88,12 @@ class RequiresController extends Controller
     {
         //code...
         $userID = auth('api')->user()['id'];
-        $requireCurrent = Requires::where("status", "require")->count();
+        $requireCurrent = Requires::where("status", "require")
+        ->orWhere("status", "processing")
+            ->orWhere("statusProduce", "unconfirmed")
+        ->count();
         if ($requireCurrent >= 2) {
-            return ['message' => 'require is full', 'success' => false, 'count' => $requireCurrent];
+            return ['message' => 'Chỉ được tối đa 2 yêu cầu', 'success' => false, 'count' => $requireCurrent];
         }
         $require = Requires::create(['userID' => $userID]);
 
@@ -98,10 +113,14 @@ class RequiresController extends Controller
                     'note' => $produce['note'],
                     'pcs' => $produce['pcs'],
                     'quality' => $produce['quality'],
-                    'requireID' => $require['id']
+                    'requireID' => $require['id'],
                 )
             );
-            array_push($created['produce'], $saved);
+            $data = RequireProduce::where("require_produce.id", $saved->id)
+            ->join("line", "require_produce.line",  "=", "line.id")
+            ->select("require_produce.*", "line.name as name")
+            ->first();
+            array_push($created['produce'], $data);
         }
 
         foreach ($raws as $raw) {
@@ -111,11 +130,24 @@ class RequiresController extends Controller
                 'note' => $raw['note'],
                 'pcs' => $raw['pcs'],
                 'quality' => $raw['quality'],
-                'requireID' => $require['id']
+                'requireID' => $require['id'],
             ));
-            array_push($created['raw'], $saved);
+            $data = RequireRaw::where("require_raw.id", $saved->id)
+                ->join("line", "require_raw.line",  "=", "line.id")
+                ->select("require_raw.*", "line.name as name")
+                ->first();
+            array_push($created['raw'], $data);
         }
-        return ['message' => '', 'data' => $created, 'success' => true, 'count' => $requireCurrent];
+        return ['message' => '', 'data' => [
+            'id' => $require->id,
+            'status' => "require",
+            'statusProduce' => "unconfirmed",
+            'created_at' => $require->created_at,
+            'updated_at' => $require->updated_at,
+            'produce' => $created['produce'],
+            'raw' => $created['raw'],
+            'user' => User::where("id", $require->userID)->first(),
+        ], 'success' => true];
     }
 
     /**
@@ -149,7 +181,36 @@ class RequiresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth('api')->user();
+        switch ($request->type) {
+            case 'produce':
+
+                $produce =  RequireProduce::where("id", $id);
+                $dataCurrent = $produce->first();
+                $dataUpdate = $request->data;
+
+                $log = [];
+
+                foreach ($dataUpdate as $key => $value) {
+                    if ($dataCurrent[$key] !== $value) {
+                        array_push($log, "$key from '$dataCurrent[$key]' to '$value'");
+                    }
+                }
+                $log_ = join(",", $log);
+                if ($log_) {
+                    LogRequire::create([
+                        'type' => "produce",
+                        'requireID' => $id,
+                        'log' => "User [$user->name]: changed  $log_"
+                    ]);
+                }
+
+                return $produce->update($dataUpdate);
+                break;
+            default:
+                return Requires::where("id", $id)->update($request->data);
+                break;
+        }
     }
 
     /**
