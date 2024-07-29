@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\GpioController;
 use App\Http\Controllers\Api\GpioModuleController;
 use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
+use App\Http\Controllers\Api\LineController;
 use App\Http\Controllers\Api\LineUserRoleController;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MarkerController;
@@ -41,6 +42,8 @@ use App\Http\Controllers\Api\userController;
 use App\Http\Controllers\Api\VarController;
 use App\Http\Controllers\Api\VariableController;
 use App\Http\Controllers\Api\WakeUpController;
+use App\Http\Controllers\backend\ConfigLineController;
+use App\Http\Controllers\backend\TimerGpioController;
 use App\Models\backend\ModulePinMaterial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -126,5 +129,8 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
 
     Route::resource('require', RequiresController::class);
     Route::resource('line-user-role', LineUserRoleController::class);
+    Route::resource('timer-gpio', TimerGpioController::class);
+    Route::resource('line', LineController::class);
+    Route::resource('config-line-timer', ConfigLineController::class);
 
 });

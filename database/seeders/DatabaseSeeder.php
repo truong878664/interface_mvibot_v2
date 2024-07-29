@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use \App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -17,9 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        User::factory()->create([
+        DB::table("users")->insert([
             [
                 'name' => 'admin',
                 'email' => 'admin@email.com',
@@ -34,8 +33,7 @@ class DatabaseSeeder extends Seeder
                 'line'=> "admin",
                 'type' => 'admin'
             ],
-
-
         ]);
+        
     }
 }

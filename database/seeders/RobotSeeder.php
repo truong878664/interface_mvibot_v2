@@ -28,133 +28,133 @@ class RobotSeeder extends Seeder
             ]
         );
 
-        DB::table('input_user_status')->insert(
-            [
-                [
-                    'name_seri' => 'Mb23_946',
-                    'in1' => 1,
-                    'in2' => 0,
-                    'in3' => 1,
-                    'in4' => 1,
-                    'in5' => 0,
-                    'in6' => 1,
-                    'in7' => 1,
-                    'in8' => 0,
-                    'in9' => 1,
-                    'in10' => 1,
-                    'in11' => 1,
-                    'in12' => 0,
-                    'in13' => 1,
-                    'in14' => 1,
-                    'in15' => 1,
-                    'in16' => 1,
-                ],
-                [
-                    'name_seri' => 'Mb23_94',
-                    'in1' => 1,
-                    'in2' => 0,
-                    'in3' => 1,
-                    'in4' => 1,
-                    'in5' => 0,
-                    'in6' => 1,
-                    'in7' => 1,
-                    'in8' => 0,
-                    'in9' => 1,
-                    'in10' => 1,
-                    'in11' => 1,
-                    'in12' => 0,
-                    'in13' => 1,
-                    'in14' => 1,
-                    'in15' => 1,
-                    'in16' => 1,
-                ]
-            ]
-        );
+        // DB::table('input_user_status')->insert(
+        //     [
+        //         [
+        //             'name_seri' => 'Mb23_946',
+        //             'in1' => 1,
+        //             'in2' => 0,
+        //             'in3' => 1,
+        //             'in4' => 1,
+        //             'in5' => 0,
+        //             'in6' => 1,
+        //             'in7' => 1,
+        //             'in8' => 0,
+        //             'in9' => 1,
+        //             'in10' => 1,
+        //             'in11' => 1,
+        //             'in12' => 0,
+        //             'in13' => 1,
+        //             'in14' => 1,
+        //             'in15' => 1,
+        //             'in16' => 1,
+        //         ],
+        //         [
+        //             'name_seri' => 'Mb23_94',
+        //             'in1' => 1,
+        //             'in2' => 0,
+        //             'in3' => 1,
+        //             'in4' => 1,
+        //             'in5' => 0,
+        //             'in6' => 1,
+        //             'in7' => 1,
+        //             'in8' => 0,
+        //             'in9' => 1,
+        //             'in10' => 1,
+        //             'in11' => 1,
+        //             'in12' => 0,
+        //             'in13' => 1,
+        //             'in14' => 1,
+        //             'in15' => 1,
+        //             'in16' => 1,
+        //         ]
+        //     ]
+        // );
 
-        DB::table('output_user_status')->insert(
-            [
-                [
-                    'name_seri' => 'Mb23_946',
-                    'out1' => 0,
-                    'out2' => 0,
-                    'out3' => 0,
-                    'out4' => 0,
-                    'out5' => 0,
-                    'out6' => 0,
-                    'out7' => 0,
-                    'out8' => 0,
-                    'out9' => 0,
-                    'out10' => 0,
-                    'out11' => 0,
-                    'out12' => 0,
-                    'out13' => 0,
-                    'out14' => 0,
-                    'out15' => 0,
-                    'out16' => 0,
-                ],
-                [
-                    'name_seri' => 'Mb23_94',
-                    'out1' => 0,
-                    'out2' => 0,
-                    'out3' => 0,
-                    'out4' => 0,
-                    'out5' => 0,
-                    'out6' => 0,
-                    'out7' => 0,
-                    'out8' => 0,
-                    'out9' => 0,
-                    'out10' => 0,
-                    'out11' => 0,
-                    'out12' => 0,
-                    'out13' => 0,
-                    'out14' => 0,
-                    'out15' => 0,
-                    'out16' => 0,
-                ]
-            ]
-        );
+        // DB::table('output_user_status')->insert(
+        //     [
+        //         [
+        //             'name_seri' => 'Mb23_946',
+        //             'out1' => 0,
+        //             'out2' => 0,
+        //             'out3' => 0,
+        //             'out4' => 0,
+        //             'out5' => 0,
+        //             'out6' => 0,
+        //             'out7' => 0,
+        //             'out8' => 0,
+        //             'out9' => 0,
+        //             'out10' => 0,
+        //             'out11' => 0,
+        //             'out12' => 0,
+        //             'out13' => 0,
+        //             'out14' => 0,
+        //             'out15' => 0,
+        //             'out16' => 0,
+        //         ],
+        //         [
+        //             'name_seri' => 'Mb23_94',
+        //             'out1' => 0,
+        //             'out2' => 0,
+        //             'out3' => 0,
+        //             'out4' => 0,
+        //             'out5' => 0,
+        //             'out6' => 0,
+        //             'out7' => 0,
+        //             'out8' => 0,
+        //             'out9' => 0,
+        //             'out10' => 0,
+        //             'out11' => 0,
+        //             'out12' => 0,
+        //             'out13' => 0,
+        //             'out14' => 0,
+        //             'out15' => 0,
+        //             'out16' => 0,
+        //         ]
+        //     ]
+        // );
 
-        DB::table('motor_left_status')->insert(
-            [
-                [
-                    'name_seri' => 'Mb23_946',
-                    'live' => 1,
-                    'error' => 1,
-                    'enable' => 1,
-                    'brake' => 1,
+        // DB::table('motor_left_status')->insert(
+        //     [
+        //         [
+        //             'name_seri' => 'Mb23_946',
+        //             'live' => 1,
+        //             'error' => 1,
+        //             'enable' => 1,
+        //             'brake' => 1,
 
-                ],
-                [
-                    'name_seri' => 'Mb23_94',
-                    'live' => 1,
-                    'error' => 1,
-                    'enable' => 1,
-                    'brake' => 1,
+        //         ],
+        //         [
+        //             'name_seri' => 'Mb23_94',
+        //             'live' => 1,
+        //             'error' => 1,
+        //             'enable' => 1,
+        //             'brake' => 1,
 
-                ]
-            ]
-        );
+        //         ]
+        //     ]
+        // );
 
-        DB::table('motor_right_status')->insert(
-            [
-                [
-                    'name_seri' => 'Mb23_946',
-                    'live' => 1,
-                    'error' => 1,
-                    'enable' => 1,
-                    'brake' => 1,
+        // DB::table('motor_right_status')->insert(
+        //     [
+        //         [
+        //             'name_seri' => 'Mb23_946',
+        //             'live' => 1,
+        //             'error' => 1,
+        //             'enable' => 1,
+        //             'brake' => 1,
 
-                ],
-                [
-                    'name_seri' => 'Mb23_94',
-                    'live' => 1,
-                    'error' => 1,
-                    'enable' => 1,
-                    'brake' => 1,
+        //         ],
+        //         [
+        //             'name_seri' => 'Mb23_94',
+        //             'live' => 1,
+        //             'error' => 1,
+        //             'enable' => 1,
+        //             'brake' => 1,
 
-                ]
-            ]
-        );
+        //         ]
+        //     ]
+        // );
 
         DB::table('robot_status')->insert(
             [
@@ -235,11 +235,11 @@ class RobotSeeder extends Seeder
             ]
         );
 
-        DB::table('map_active')->insert(
-            [
-                'name_map_active' => 'map22'
-            ]
-        );
+        // DB::table('map_active')->insert(
+        //     [
+        //         'name_map_active' => 'map22'
+        //     ]
+        // );
 
         DB::table('robot_config_status')->insert(
 

@@ -16,8 +16,12 @@ class LayerController extends Controller
      */
     public function index()
     {
-        $mapActive = DB::table("map_active")->first();
-        return Layer::where("name_map_active", $mapActive->name_map_active)->get();
+        try {
+            $mapActive = DB::table("map_active")->first();
+            return Layer::where("name_map_active", $mapActive->name_map_active)->get();
+        } catch (\Throwable $th) {
+            return [];
+        }
     }
 
     /**
