@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\RawMaterialController;
 use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
+use App\Http\Controllers\Api\RoleLineController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\SoundFileController;
@@ -129,6 +130,7 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
 
     Route::resource('require', RequiresController::class);
     Route::resource('line-user-role', LineUserRoleController::class);
+    Route::resource('role-line', RoleLineController::class);
     Route::resource('timer-gpio', TimerGpioController::class);
     Route::resource('line', LineController::class);
     Route::resource('config-line-timer', ConfigLineController::class);

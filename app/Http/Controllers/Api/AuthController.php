@@ -95,7 +95,7 @@ class AuthController extends Controller
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json(['message' => 'User successfully signed out'])->withCookie('username', 'hello', 7000);
     }
 
     /**
@@ -137,6 +137,7 @@ class AuthController extends Controller
             'expires_in' => $this->guard()->factory()->getTTL() * 60,
             'user' => auth('api')->user()
         ]);
+        // ->withCookie(cookie('token', $token, $this->guard()->factory()->getTTL() * 60));
     }
 
     public function changePassWord(Request $request)

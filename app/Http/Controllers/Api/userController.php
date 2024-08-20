@@ -17,6 +17,8 @@ class userController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+        return ["data" => $users];
     }
 
     /**
