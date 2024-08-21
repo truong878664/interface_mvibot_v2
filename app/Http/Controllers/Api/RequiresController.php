@@ -8,6 +8,7 @@ use App\Models\backend\RequireProduce;
 use App\Models\backend\RequireRaw;
 use App\Models\backend\Requires;
 use App\Models\User;
+use App\Providers\RequireService;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -22,51 +23,23 @@ class RequiresController extends Controller
      */
     public function index()
     {
-        
+
+        $requireService = new RequireService();
         $requiresQuery = Requires::where("status", "require")
         ->orWhere("status", "processing")
             ->orWhere("statusProduce", "unconfirmed")
-
         ->get();
 
         $requireComplete = Requires::where("status", "done")->orWhere("status", "cancel")->orderBy("updated_at", "desc")->limit(5)->get();
 
-        $data = $this->toDataRequire($requiresQuery);
-        $history = $this->toDataRequire($requireComplete);
+        $data = $requireService->toDataRequire($requiresQuery);
+        $history = $requireService->toDataRequire($requireComplete);
 
 
 
         return ['data' => $data, 'history' => $history];
     }
 
-    public function toDataRequire($data)
-    {
-        $requiresArray = [];
-        foreach ($data as $require) {
-            array_push($requiresArray, $require);
-        }
-        $data = array_map(function ($require) {
-            return [
-                'id' => $require->id,
-                'status' => $require->status,
-                'created_at' => $require->created_at,
-                'updated_at' => $require->updated_at,
-                'cancelReason' => $require->cancelReason,
-                'statusProduce' => $require->statusProduce,
-                'produce' => RequireProduce::where('requireID', $require->id)
-                ->join("line", "require_produce.line", "=", "line.id")
-                    ->select("require_produce.*", "line.name as name")
-                    ->get(),
-                'raw' => RequireRaw::where('requireID', $require->id)
-                ->join("line", "require_raw.line", "=", "line.id")
-                    ->select("require_raw.*", "line.name as name")
-                    ->get(),
-                'user' => User::where("id", $require->userID)->first(),
-            ];
-        }, $requiresArray);
-
-        return $data;
-    }
 
     /**
      * Show the form for creating a new resource.

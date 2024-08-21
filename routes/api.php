@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\ModulePinController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RawMaterialController;
+use App\Http\Controllers\Api\RequireHistoryController;
 use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
@@ -129,6 +130,7 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('pin-io-material', ModulePinController::class);
 
     Route::resource('require', RequiresController::class);
+    Route::resource('require-history', RequireHistoryController::class);
     Route::resource('line-user-role', LineUserRoleController::class);
     Route::resource('role-line', RoleLineController::class);
     Route::resource('timer-gpio', TimerGpioController::class);
