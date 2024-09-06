@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\LineController;
 use App\Http\Controllers\Api\LineUserRoleController;
+use App\Http\Controllers\Api\LogRequiredController;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
@@ -130,6 +131,8 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('pin-io-material', ModulePinController::class);
 
     Route::resource('require', RequiresController::class);
+    Route::resource('log-required', LogRequiredController::class);
+
     Route::resource('require-history', RequireHistoryController::class);
     Route::resource('line-user-role', LineUserRoleController::class);
     Route::resource('role-line', RoleLineController::class);

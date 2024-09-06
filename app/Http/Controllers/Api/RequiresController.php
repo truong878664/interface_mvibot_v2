@@ -93,6 +93,7 @@ class RequiresController extends Controller
             ->join("line", "require_produce.line",  "=", "line.id")
             ->select("require_produce.*", "line.name as name")
             ->first();
+            
             array_push($created['produce'], $data);
         }
 
@@ -166,17 +167,12 @@ class RequiresController extends Controller
 
                 foreach ($dataUpdate as $key => $value) {
                     if ($dataCurrent[$key] !== $value) {
-                        array_push($log, "$key from '$dataCurrent[$key]' to '$value'");
+                        array_push($log, "$key từ $dataCurrent[$key] sang $value");
                     }
                 }
-                $log_ = join(",", $log);
-                if ($log_) {
-                    LogRequire::create([
-                        'type' => "produce",
-                        'requireID' => $id,
-                        'log' => "User [$user->name]: changed  $log_"
-                    ]);
-                }
+
+                $logBody =  "$user->name: Thay đổi " . join(", ", $log);
+                $this->createLog('produce', $id, $logBody);
 
                 return $produce->update($dataUpdate);
                 break;
@@ -195,5 +191,16 @@ class RequiresController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function createLog($type, $requireID, $log)
+    {
+        if ($log) {
+            LogRequire::create([
+                'type' => $type,
+                'requireID' => $requireID,
+                'log' => $log
+            ]);
+        }
     }
 }
