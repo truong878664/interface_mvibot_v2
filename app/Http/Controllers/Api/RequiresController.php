@@ -13,6 +13,7 @@ use GuzzleHttp\Psr7\Response;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mockery\Undefined;
 
 class RequiresController extends Controller
 {
@@ -26,11 +27,14 @@ class RequiresController extends Controller
 
         $requireService = new RequireService();
         $requiresQuery = Requires::where("status", "require")
-        ->orWhere("status", "processing")
+            ->orWhere("status", "processing")
             ->orWhere("statusProduce", "unconfirmed")
         ->get();
 
-        $requireComplete = Requires::where("status", "done")->orWhere("status", "cancel")->orderBy("updated_at", "desc")->limit(5)->get();
+        $requireComplete = Requires::where("status", "done")
+        ->orWhere("status", "cancel")
+        ->where("statusProduce", "confirmed")
+        ->orderBy("updated_at", "desc")->limit(5)->get();
 
         $data = $requireService->toDataRequire($requiresQuery);
         $history = $requireService->toDataRequire($requireComplete);
@@ -60,18 +64,24 @@ class RequiresController extends Controller
     public function store(Request $request, Response $response)
     {
         //code...
+        $requireService = new RequireService();
         $userID = auth('api')->user()['id'];
-        $requireCurrent = Requires::where("status", "require")
+        $requireCurrentCount = Requires::where("status", "require")
         ->orWhere("status", "processing")
-            ->orWhere("statusProduce", "unconfirmed")
-        ->count();
-        if ($requireCurrent >= 2) {
-            return ['message' => 'Chỉ được tối đa 2 yêu cầu', 'success' => false, 'count' => $requireCurrent];
-        }
-        $require = Requires::create(['userID' => $userID]);
+        ->orWhere("statusProduce", "unconfirmed")->count();
 
+        if ($requireCurrentCount >= 2) {
+            return ['message' => 'Chỉ được tối đa 2 yêu cầu', 'success' => false, 'count' => $requireCurrentCount];
+        }
         $produces = $request->data['produce'];
         $raws = $request->data['raw'];
+
+        $require = Requires::create([
+            'userID' => $userID,
+            'status' => (count($raws) === 0) ? "done" : "require",
+            'statusProduce' => (count($produces) === 0) ? "confirmed" : "unconfirmed"
+        ]);
+
 
         $created = [
             "produce" => [],
@@ -90,10 +100,10 @@ class RequiresController extends Controller
                 )
             );
             $data = RequireProduce::where("require_produce.id", $saved->id)
-            ->join("line", "require_produce.line",  "=", "line.id")
-            ->select("require_produce.*", "line.name as name")
-            ->first();
-            
+                ->join("line", "require_produce.line",  "=", "line.id")
+                ->select("require_produce.*", "line.name as name")
+                ->first();
+
             array_push($created['produce'], $data);
         }
 
@@ -114,8 +124,8 @@ class RequiresController extends Controller
         }
         return ['message' => '', 'data' => [
             'id' => $require->id,
-            'status' => "require",
-            'statusProduce' => "unconfirmed",
+            'status' => $require->status,
+            'statusProduce' => $require->statusProduce,
             'created_at' => $require->created_at,
             'updated_at' => $require->updated_at,
             'produce' => $created['produce'],
@@ -195,12 +205,12 @@ class RequiresController extends Controller
 
     public function createLog($type, $requireID, $log)
     {
-        if ($log) {
-            LogRequire::create([
-                'type' => $type,
-                'requireID' => $requireID,
-                'log' => $log
-            ]);
-        }
+        // if ($log) {
+        LogRequire::create([
+            'type' => $type,
+            'requireID' => $requireID,
+            'log' => $log
+        ]);
+        // }
     }
 }
