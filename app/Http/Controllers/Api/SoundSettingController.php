@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SoundSettingController extends Controller
 {
@@ -12,9 +14,17 @@ class SoundSettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sounds = DB::table('sounds')->get();
+        $httpHost =  $request->getSchemeAndHttpHost();
+
+        return [
+            'data' => $sounds,
+            'meta' => [
+                'httpHost' => $httpHost . '/',
+            ],
+        ];
     }
 
     /**

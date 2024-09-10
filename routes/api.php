@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\RoleLineController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\SoundFileController;
+use App\Http\Controllers\Api\SoundSettingController;
 use App\Http\Controllers\Api\StartController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
@@ -139,5 +140,5 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('timer-gpio', TimerGpioController::class);
     Route::resource('line', LineController::class);
     Route::resource('config-line-timer', ConfigLineController::class);
-
+    Route::resource('sound-file', SoundSettingController::class);
 });
