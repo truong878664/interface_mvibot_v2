@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Line;
 use App\Models\backend\ModulePinMaterial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ModulePinController extends Controller
 {
@@ -16,10 +18,26 @@ class ModulePinController extends Controller
     public function index(Request $request)
     {
         $data = ModulePinMaterial::all()->groupBy("when");
+        $line = Line::all();
+        $userId = $request->userId;
         if($request->when) {
-            $data = ModulePinMaterial::where('when', $request->when)->get();
+            if ($userId) {
+                $lineValid = DB::table('line_user_role')->where('userID', $userId)->get();
+                $lineValidArray = array_map(function ($item) {
+                    return $item->lineID;
+                }, $lineValid->toArray());
+                $data = ModulePinMaterial::where('when', $request->when)->whereIn('lineID', $lineValidArray)->get();
+            } else {
+                $data = ModulePinMaterial::where('when', $request->when)->get();
+            }
         }
-        return ['data' => $data, 'request' => $request->when];
+        return [
+            'data' => $data,
+            'request' => $request->when,
+            'included' => [
+                'line' => $line,
+            ]
+        ];
     }
 
     /**
