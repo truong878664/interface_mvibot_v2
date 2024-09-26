@@ -19,8 +19,14 @@ class RequireHistoryController extends Controller
     {
         $ser = new RequireService();
         $query = $request->query();
-        $data = Requires::whereBetween("created_at", [$query['from'] . " 00:00:00", $query['to'] . " 23:59:59"])->get();
-        return ["data" => $ser->toDataRequire($data)];
+        $queryDb = Requires::whereBetween("created_at", [$query['from'] . " 00:00:00", $query['to'] . " 23:59:59"]);
+        if ($query["status"] !== "*") {
+            $queryDb->where("status", $query["status"]);
+        }
+        if ($query["userId"] !== "*") {
+            $queryDb->where("userId", $query["userId"]);
+        }
+        return ["data" => $ser->toDataRequire($queryDb->get())];
     }
 
     /**
