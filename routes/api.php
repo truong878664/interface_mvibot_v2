@@ -46,6 +46,7 @@ use App\Http\Controllers\Api\userController;
 use App\Http\Controllers\Api\VarController;
 use App\Http\Controllers\Api\VariableController;
 use App\Http\Controllers\Api\WakeUpController;
+use App\Http\Controllers\Api\WifiChartController;
 use App\Http\Controllers\backend\ConfigLineController;
 use App\Http\Controllers\backend\TimerGpioController;
 use App\Models\backend\ModulePinMaterial;
@@ -141,4 +142,5 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('line', LineController::class);
     Route::resource('config-line-timer', ConfigLineController::class);
     Route::resource('sound-file', SoundSettingController::class);
+    Route::resource('wifi-chart', WifiChartController::class);
 });
