@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 // HOUR(created_at)+ (MINUTE(created_at)/60) as decimal_hour,
 // TIME(created_at) as time, HOUR(created_at) as hour, MINUTE(created_at) as minute, WEEKOFYEAR(created_at) as week_of_year,
 // CONCAT_WS('-',DAY(created_at), MONTH(created_at)) as label_day, CONCAT(HOUR(created_at), 'h:',MINUTE(created_at),'m') as label_hour
-
 class BatteryChartController extends Controller
 {
     /**
@@ -22,51 +21,28 @@ class BatteryChartController extends Controller
      */
     public function index(Request $request)
     {
-        // return BatteryChart::all();
-        $dt = new DateTime();
-        $name_seri = $request->input('name_seri', '');
-        $hour = $request->input('hour', $dt->format('H'));
-        $day = $request->input('day', $dt->format('d'));
-        $month = $request->input('month', $dt->format('m'));
-        $year = $request->input('year', $dt->format('Y'));
-        $period = $request->input('period', 'day');
+        $query = $request->query();
 
-        $date = "$year-$month-$day";
-        $req = [];
 
-        function query($name_seri, $query_date)
-        {
-            return DB::select("
-                SELECT 
-                    id, soc, created_at, HOUR(created_at) as hour, HOUR(created_at) + MINUTE(created_at)/60 as decimal_hour
-                FROM battery_status_chart
-                    WHERE name_seri = '$name_seri' 
-                        AND $query_date
-                
-                ");
-        };
-
-        switch ($period) {
-            case 'day':
-                $req = query($name_seri, "YEAR(created_at) = $year && MONTH(created_at) = $month && DAY(created_at) = $day");
-                break;
-            case 'month':
-                $req = query($name_seri, "YEAR(created_at) = $year && MONTH(created_at) = $month");
-                break;
-            case 'week':
-                if ($request->has('number_of_week')) {
-                    $number_of_week = $request->input('number_of_week');
-                    $req = query($name_seri, "WEEKOFYEAR(created_at) = $number_of_week");
-                    break;
-                } else {
-                    $req = query($name_seri, "WEEKOFYEAR(created_at) = WEEKOFYEAR('$date')");
-                    break;
-                }
-
-            default:
-                break;
-        }
-        return ["data" => $req];
+        $data = BatteryChart::select(
+            DB::raw("*, 
+            HOUR(created_at) + MINUTE(created_at)/60 as 'hour',
+            CONCAT_WS('h',LPAD(HOUR(created_at), 2, '0'), LPAD(MINUTE(created_at),2, '0')) as 'time',
+            DAY(created_at) as 'day',
+            DATE_FORMAT(created_at, '%b %d, %Y %Hh%i') as 'dateFormat',
+            soc as 'value',
+            WEEKOFYEAR(created_at) as 'weekOfYear',
+            UNIX_TIMESTAMP(created_at) as 'label'"),
+        )->where("name_seri", $query["name_seri"])
+        ->where("created_at", "<=", $query["created_at"]["lte"])
+        ->where("created_at", ">=", $query["created_at"]["gte"]);
+        // if ($query["period"] === "day") {
+        // } else if ($query["period"] === "week") {
+        //     $date = strtotime($query["created_at"]["equal"]);
+        //     $week = date("W", $date);
+        //     $data->whereRaw("WEEKOFYEAR(created_at) = ?", [$week]);
+        // }
+        return ["data" => $data->get()];
     }
 
     /**

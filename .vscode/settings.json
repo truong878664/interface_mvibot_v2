@@ -18,6 +18,7 @@
         "logicand",
         "logicor",
         "lowspeed",
+        "LPAD",
         "Modulewakeup",
         "Mvibot",
         "nipplejs",
