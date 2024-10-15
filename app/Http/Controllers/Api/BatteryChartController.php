@@ -4,14 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\BatteryChart;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-// id, created_at, soc, YEAR(created_at) as year, MONTH(created_at) as month, DAY(created_at) as day,
-// HOUR(created_at)+ (MINUTE(created_at)/60) as decimal_hour,
-// TIME(created_at) as time, HOUR(created_at) as hour, MINUTE(created_at) as minute, WEEKOFYEAR(created_at) as week_of_year,
-// CONCAT_WS('-',DAY(created_at), MONTH(created_at)) as label_day, CONCAT(HOUR(created_at), 'h:',MINUTE(created_at),'m') as label_hour
 class BatteryChartController extends Controller
 {
     /**
@@ -22,27 +17,31 @@ class BatteryChartController extends Controller
     public function index(Request $request)
     {
         $query = $request->query();
+        $lte = $query["created_at"]["lte"];
+        $gte =  $query["created_at"]["gte"];
+        $dateDiff = ceil(abs((strtotime($lte) - strtotime($gte)) / (60 * 60 * 24)));
 
-
-        $data = BatteryChart::select(
-            DB::raw("*, 
-            HOUR(created_at) + MINUTE(created_at)/60 as 'hour',
-            CONCAT_WS('h',LPAD(HOUR(created_at), 2, '0'), LPAD(MINUTE(created_at),2, '0')) as 'time',
-            DAY(created_at) as 'day',
+        $rawQuery = DB::raw(
+            "id,
+            CONCAT_WS('h',LPAD(HOUR(created_at), 2, '0'), LPAD(MINUTE(created_at),2, '0')) as 'time', 
             DATE_FORMAT(created_at, '%b %d, %Y %Hh%i') as 'dateFormat',
             soc as 'value',
-            WEEKOFYEAR(created_at) as 'weekOfYear',
-            UNIX_TIMESTAMP(created_at) as 'label'"),
-        )->where("name_seri", $query["name_seri"])
-        ->where("created_at", "<=", $query["created_at"]["lte"])
-        ->where("created_at", ">=", $query["created_at"]["gte"]);
-        // if ($query["period"] === "day") {
-        // } else if ($query["period"] === "week") {
-        //     $date = strtotime($query["created_at"]["equal"]);
-        //     $week = date("W", $date);
-        //     $data->whereRaw("WEEKOFYEAR(created_at) = ?", [$week]);
-        // }
-        return ["data" => $data->get()];
+            UNIX_TIMESTAMP(DATE_SUB(created_at, INTERVAL SECOND(created_at) SECOND)) * 1000 as 'label'
+            "
+        );
+        $data = BatteryChart::select($rawQuery)
+            ->where("name_seri", $query["name_seri"])
+            ->where("created_at", "<=", $lte)
+            ->where("created_at", ">=", $gte)
+            ->whereRaw("MOD(MINUTE(created_at), ?) = 0", $dateDiff >= 20 ? 30 : ($dateDiff >= 5 ? 5 : 1));
+
+        $result = $data->get();
+        return [
+            "meta" => [
+                "count" => count($result)
+            ],
+            "data" => $result,
+        ];
     }
 
     /**
