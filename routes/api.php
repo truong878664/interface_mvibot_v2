@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\MissionSentV2Controller;
 use App\Http\Controllers\Api\MissionV4Controller;
 use App\Http\Controllers\Api\ModulePinController;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\RawConfirmController;
 use App\Http\Controllers\Api\RawMaterialController;
 use App\Http\Controllers\Api\RequireHistoryController;
 use App\Http\Controllers\Api\RequiresController;
@@ -143,4 +144,6 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('config-line-timer', ConfigLineController::class);
     Route::resource('sound-file', SoundSettingController::class);
     Route::resource('wifi-chart', WifiChartController::class);
+
+    Route::resource('raw-confirm', RawConfirmController::class);
 });
