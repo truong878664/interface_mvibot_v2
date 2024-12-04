@@ -62,7 +62,7 @@ class RawConfirmController extends Controller
             WHERE R.statusProduce = ? AND R.userID = ? 
             GROUP BY R.id
             ORDER BY R.id DESC
-            LIMIT 5
+            LIMIT 10
             ",
             ['confirmed', $user->id]
         );
@@ -127,7 +127,24 @@ class RawConfirmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $result = DB::table("require_produce")
+            ->where("id", $id)->where("confirm", "unconfirmed")
+            ->update([
+                "confirm" => $request["confirm"],
+                "noteConfirm" => $request["noteConfirm"],
+            ]);
+            return [
+                "message" => $result ? "Update successfully" : "Current status cannot be updated",
+                "success" => $result ? true : false
+            ];
+        } catch (\Throwable $th) {
+            throw $th;
+            // return [
+            //     "message" => "Something when wrong",
+            //     "success" => false
+            // ];
+        }
     }
 
     /**
