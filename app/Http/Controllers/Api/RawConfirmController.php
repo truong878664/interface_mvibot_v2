@@ -24,17 +24,28 @@ class RawConfirmController extends Controller
         $statusConfirm = $query["statusConfirm"] ?? "unconfirmed";
         $perPage = 5;
 
+        // $created_at = $query["created_at"];
+
         $required = DB::table("require as R")
             ->leftJoin("require_produce as RP", "R.id", "=", "RP.requireID")
             ->leftJoin("users as U", "R.userID", "=", "U.id")
             ->where("RP.confirm", $statusConfirm === "unconfirmed" ? "=" : "!=", "unconfirmed")
-            ->where("statusProduce", "confirmed");
+        ->where("statusProduce", "confirmed");
+
+        if (isset($query["created_at"])) {
+            $lte = $query["created_at"]["lte"];
+            $gte =  $query["created_at"]["gte"];
+            if ($lte && $gte) {
+                $required->where("R.created_at", ">=", $gte)
+                ->where("R.created_at", "<=", $lte);
+            }
+        }
 
         if ($user->type !== "qlsx") {
             $required->where("R.userID", $user->id);
         }
 
-        
+
         $required
             ->selectRaw("R.id, R.status, R.cancelReason, R.created_at, R.updated_at, DATE_FORMAT(R.updated_at, '%d-%m-%Y') AS 'date'")
             ->selectRaw(
@@ -67,7 +78,7 @@ class RawConfirmController extends Controller
 
         ->selectRaw("JSON_OBJECT( 'id', U.id, 'name', U.name) AS user")
         ->groupBy("R.id")
-        ->orderBy("R.id", "desc");
+            ->orderBy("R.id", "desc");
 
         $total = $required->get()->count();
 
