@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\LogRequiredController;
 use App\Http\Controllers\Api\MapController;
 use App\Http\Controllers\Api\MarkerController;
 use App\Http\Controllers\Api\MiController;
+use App\Http\Controllers\Api\MissionBlockController;
 use App\Http\Controllers\Api\MissionController;
 use App\Http\Controllers\Api\MissionSentController;
 use App\Http\Controllers\Api\MissionSentV2Controller;
@@ -146,4 +147,6 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('wifi-chart', WifiChartController::class);
 
     Route::resource('raw-confirm', RawConfirmController::class);
+
+    Route::resource('mission-block', MissionBlockController::class);
 });
