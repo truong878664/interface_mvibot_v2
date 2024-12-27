@@ -37,11 +37,11 @@ return new class extends Migration
         });
 
         Schema::table("mission_blocks", function (Blueprint $table) {
-            $table->foreign("next")->references("id")->on("mission_blocks")->onDelete("cascade");
-            $table->foreign("prev")->references("id")->on("mission_blocks")->onDelete("cascade");
-            $table->foreign("parent")->references("id")->on("mission_blocks")->onDelete("cascade");
-            $table->foreign("asyncTo")->references("id")->on("mission_blocks")->onDelete("cascade");
-            $table->foreign("rootId")->references("id")->on("mission_blocks")->onDelete("cascade");
+            $table->foreign("next")->references("id")->on("mission_blocks");
+            $table->foreign("prev")->references("id")->on("mission_blocks");
+            $table->foreign("parent")->references("id")->on("mission_blocks");
+            $table->foreign("asyncTo")->references("id")->on("mission_blocks");
+            $table->foreign("rootId")->references("id")->on("mission_blocks");
 
             $table->foreign("missionId")->references("id")->on("missions")->onDelete("cascade");
         });

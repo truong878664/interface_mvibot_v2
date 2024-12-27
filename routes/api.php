@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\FootprintController;
 use App\Http\Controllers\Api\FunctionController;
 use App\Http\Controllers\Api\GpioController;
 use App\Http\Controllers\Api\GpioModuleController;
+use App\Http\Controllers\Api\GroupMissionController;
 use App\Http\Controllers\Api\InputGpioController;
 use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\LineController;
@@ -148,5 +149,7 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
 
     Route::resource('raw-confirm', RawConfirmController::class);
 
+    Route::resource('mission', MissionController::class);
     Route::resource('mission-block', MissionBlockController::class);
+    Route::resource('mission-group', GroupMissionController::class);
 });

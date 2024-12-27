@@ -9,6 +9,7 @@ class RequireRaw extends Model
 {
     use HasFactory;
     protected $table = "require_raw";
-    protected $guarded = [];
-    public $timestamps = true;
+    // protected $guarded = [];
+    protected $fillable = ["line", "produceName", "pcs", "note", "quality", "requireID"];
+    protected $guarded = ['created_at', 'updated_at'];
 }

@@ -177,7 +177,7 @@ class RequiresController extends Controller
 
                 foreach ($dataUpdate as $key => $value) {
                     if ($dataCurrent[$key] !== $value) {
-                        array_push($log, "$key từ $dataCurrent[$key] sang $value");
+                        array_push($log, "$key từ \"$dataCurrent[$key]\" sang \"$value\"");
                     }
                 }
 
@@ -186,6 +186,14 @@ class RequiresController extends Controller
 
                 return $produce->update($dataUpdate);
                 break;
+            case "raw":
+                $data = $request->data;
+                foreach ($data as $value) {
+                    unset($value["created_at"]);
+                    unset($value["updated_at"]);
+                    RequireRaw::where("id", $value["id"])->update($value);
+                }
+                return ["message" => "update success"];
             default:
                 return Requires::where("id", $id)->update($request->data);
                 break;

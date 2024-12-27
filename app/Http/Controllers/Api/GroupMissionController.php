@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Mission;
-use App\Models\backend\MissionBlock;
+use App\Models\backend\MissionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MissionBlockController extends Controller
+class GroupMissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,14 @@ class MissionBlockController extends Controller
      */
     public function index()
     {
-        return "this mission block";
+        $data = MissionGroup::with("missions")->get();
+        $mission = Mission::where("groupId", null)->get();
+        return [
+            "data" => $data,
+            "included" => [
+                "missionNoGroup" => $mission
+            ]
+        ];
     }
 
     /**
@@ -38,33 +45,13 @@ class MissionBlockController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            //code...
-            $data = $request->data;
-            $missionBlock = new MissionBlock();
-            $missionNeedToUpdate = [];
+        $missionGroup = new MissionGroup();
+        $missionGroup->fill($request->all());
+        $missionGroup->save();
 
-            foreach ($data as $value) {
-                $id = $value['id'];
-                if ($missionBlock->where('id', $id)->exists()) {
-                    array_push($missionNeedToUpdate, $value);
-                } else {
-                    $missionBlock->create($value);
-                }
-            }
-
-
-            foreach ($missionNeedToUpdate as $valueUpdate) {
-                $idUpdate = $valueUpdate['id'];
-                unset($valueUpdate["created_at"]);
-                unset($valueUpdate["updated_at"]);
-                $missionBlock->where('id', $idUpdate)->update($valueUpdate);
-            }
-
-            return true;
-        } catch (\Throwable $th) {
-            return ["error"  => $th];
-        }
+        return [
+            'data' => $missionGroup
+        ];
     }
 
     /**
@@ -75,17 +62,7 @@ class MissionBlockController extends Controller
      */
     public function show($id)
     {
-        $missionBlock = new MissionBlock();
-        $data = $missionBlock->where("missionId", $id)->get();
-        $mission = Mission::where("id", $id)->first();
-        return [
-            "data" => [
-                "id" => (int)$id,
-                "type" => $mission["type"],
-                "name" => $mission["name"],
-                "blocks" => $data
-            ]
-        ];
+        return MissionGroup::with("missions")->get();
     }
 
     /**

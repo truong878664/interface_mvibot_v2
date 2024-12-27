@@ -22,6 +22,9 @@ class MissionBlock extends Model
         'topLever',
         'missionId'
     ];
+
+    protected $guarded = ['created_at', 'updated_at'];
+    
     /**
      * Get the attributes that should be cast.
      *
@@ -29,6 +32,7 @@ class MissionBlock extends Model
      */
     protected $casts =  [
         'setting' => 'array',
-        'fields' => 'array'
+        'fields' => 'array',
+        'id' => 'string'
     ];
 }
