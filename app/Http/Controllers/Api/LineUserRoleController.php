@@ -60,9 +60,12 @@ class LineUserRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId)
     {
-        //
+        $line = DB::table("line_user_role")
+        ->where("userID", $userId)
+            ->join("config_line_gpio", "config_line_gpio.line_id", "=", "line_user_role.lineID")->get();
+        return $line;
     }
 
     /**

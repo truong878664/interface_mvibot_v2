@@ -10,7 +10,7 @@ class MissionGroup extends Model
 {
     use HasFactory;
     protected $table = "mission_groups";
-    protected $fillable = ["name", "type"];
+    protected $fillable = ["name", "type", "hidden"];
 
     public function missions(): HasMany
     {

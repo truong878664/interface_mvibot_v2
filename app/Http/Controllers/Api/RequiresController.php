@@ -33,8 +33,8 @@ class RequiresController extends Controller
 
         $requireComplete = Requires::where("status", "done")
         ->orWhere("status", "cancel")
-        ->where("statusProduce", "confirmed")
-        ->orderBy("updated_at", "desc")->limit(5)->get();
+            ->where("statusProduce", "confirmed")
+            ->orderBy("updated_at", "desc")->limit(5)->get();
 
         $data = $requireService->toDataRequire($requiresQuery);
         $history = $requireService->toDataRequire($requireComplete);
@@ -188,10 +188,20 @@ class RequiresController extends Controller
                 break;
             case "raw":
                 $data = $request->data;
-                foreach ($data as $value) {
-                    unset($value["created_at"]);
-                    unset($value["updated_at"]);
-                    RequireRaw::where("id", $value["id"])->update($value);
+                foreach ($data as $dataRawUpdate) {
+                    unset($dataRawUpdate["created_at"]);
+                    unset($dataRawUpdate["updated_at"]);
+                    $raw = RequireRaw::where("id", $dataRawUpdate["id"]);
+                    $dataRawCurrent = $raw->first();
+                    $rawLog = [];
+                    foreach ($dataRawUpdate as $key => $rawUpdateItem) {
+                        if ($rawUpdateItem !== $dataRawCurrent[$key]) {
+                            array_push($rawLog, "$key từ \"$dataRawCurrent[$key]\" sang \"$rawUpdateItem\"");
+                        }
+                    }
+                    $logBody =  "$user->name: Thay đổi " . join(", ", $rawLog);
+                    $this->createLog('produce', $dataRawUpdate["id"], $logBody);
+                    $raw->update($dataRawUpdate);
                 }
                 return ["message" => "update success"];
             default:

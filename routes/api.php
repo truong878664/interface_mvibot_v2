@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\RoleLineController;
+use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\SoundFileController;
@@ -152,4 +153,5 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('mission', MissionController::class);
     Route::resource('mission-block', MissionBlockController::class);
     Route::resource('mission-group', GroupMissionController::class);
+    Route::resource('setting', SettingController::class);
 });

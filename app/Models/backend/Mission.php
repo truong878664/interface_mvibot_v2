@@ -5,6 +5,7 @@ namespace App\Models\backend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Mission extends Model
@@ -12,8 +13,20 @@ class Mission extends Model
     use HasFactory;
     protected $table = "missions";
     protected $fillable = ["name", "type", "groupId"];
+
+    /**
+     * 
+     */
     public function group(): BelongsTo
     {
         return $this->belongsTo(MissionGroup::class, "groupId");
+    }
+
+    /**
+     * 
+     */
+    public function blocks(): HasMany
+    {
+        return $this->hasMany(MissionBlock::class, "missionId");
     }
 }

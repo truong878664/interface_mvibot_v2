@@ -3,35 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\Mission;
-use App\Models\backend\MissionGroup;
+use App\Models\backend\Setting;
 use Illuminate\Http\Request;
 
-class MissionController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query =  $request->query();
-        $type = $query["type"] ?? null;
-
-        $data = [];
-        $group = [];
-
-        if ($type) {
-            $data = Mission::where("type", $type)->withCount("blocks")->get();
-            $group = MissionGroup::with("missions")->where("type", $type)->get();
-        }
-        return [
-            "data" => $data,
-            "included" => [
-                "group" => $group
-            ]
-        ];
+        return 123;
     }
 
     /**
@@ -52,10 +36,9 @@ class MissionController extends Controller
      */
     public function store(Request $request)
     {
-        $mission = new Mission();
-        $mission->fill($request->all());
-        $mission->save();
-        return ["data" => $mission];
+        $setting = new Setting();
+        $setting->updateOrCreate(["key" => $request->input("key")], $request->all());
+        return ["message" => "success"];
     }
 
     /**
@@ -64,9 +47,10 @@ class MissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($key)
     {
-        //
+        $data = Setting::where("key", $key)->orWhere("id", $key)->first();
+        return ["data" => $data];
     }
 
     /**
