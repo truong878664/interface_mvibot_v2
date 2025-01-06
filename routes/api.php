@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\RawMaterialController;
 use App\Http\Controllers\Api\RequireHistoryController;
 use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
+use App\Http\Controllers\Api\RmRawRequestTrip;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\RoleLineController;
 use App\Http\Controllers\Api\SettingController;
@@ -154,4 +155,6 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('mission-block', MissionBlockController::class);
     Route::resource('mission-group', GroupMissionController::class);
     Route::resource('setting', SettingController::class);
+
+    Route::resource('rm-raw-request-trip', RmRawRequestTrip::class);
 });
