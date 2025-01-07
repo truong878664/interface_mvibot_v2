@@ -48,12 +48,11 @@ class RmRawRequestTrip extends Controller
         $rmTrip = new RmTrip();
 
         if ($rmTrip->processing_trips()->count() > 1) {
-            return response()->json([
-                "errors" => [
+            return response()->json(["errors" => [[
                     "code" => 411,
                     "title" => "Chỉ được tối đa 2 yêu cầu.",
                     "detail" => "Qlsx cần xử lý xong 2 yêu cầu mới được tạo yêu cầu mới."
-                ]
+                ]]
             ], 411);
         }
 

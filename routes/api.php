@@ -31,6 +31,10 @@ use App\Http\Controllers\Api\RawMaterialController;
 use App\Http\Controllers\Api\RequireHistoryController;
 use App\Http\Controllers\Api\RequiresController;
 use App\Http\Controllers\Api\ResetController;
+use App\Http\Controllers\Api\RmFinishedProduct;
+use App\Http\Controllers\Api\RmFinishedProductController;
+use App\Http\Controllers\Api\RmRawMaterialRequest;
+use App\Http\Controllers\Api\RmRawMaterialRequestController;
 use App\Http\Controllers\Api\RmRawRequestTrip;
 use App\Http\Controllers\Api\RobotController;
 use App\Http\Controllers\Api\RoleLineController;
@@ -157,4 +161,6 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('setting', SettingController::class);
 
     Route::resource('rm-raw-request-trip', RmRawRequestTrip::class);
+    Route::resource('rm-finished-product', RmFinishedProductController::class);
+    Route::resource('rm-raw-material-request', RmRawMaterialRequestController::class);
 });
