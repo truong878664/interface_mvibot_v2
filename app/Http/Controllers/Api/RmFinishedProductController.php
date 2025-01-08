@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\RmFinishedProduct;
+use App\Models\backend\RmTripLog;
 use Illuminate\Http\Request;
 
 class RmFinishedProductController extends Controller
@@ -69,7 +71,28 @@ class RmFinishedProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth("api")->user();
+        $currentFinished = RmFinishedProduct::where("id", $id);
+
+        $data = $currentFinished->first();
+
+        $currentFinished->update($request->all());
+
+        foreach ($request->all() as $key => $value) {
+            if (isset($value)) {
+                if ($data[$key] !== $value) {
+                    RmTripLog::create([
+                        "finished_product_id" => $data["id"],
+                        "user_id" => $user["id"],
+                        "action" => "update",
+                        "key_change" => $key,
+                        "from" => $data[$key],
+                        "to" => $value
+                    ]);
+                }
+            }
+        }
+        return $request;
     }
 
     /**

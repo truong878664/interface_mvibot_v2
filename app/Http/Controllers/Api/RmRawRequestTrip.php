@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\RmFinishedProduct;
 use App\Models\backend\RmRawRequest;
 use App\Models\backend\RmTrip;
+use App\Models\backend\RmTripLog;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Mockery\Undefined;
 
 use function PHPSTORM_META\map;
 
@@ -48,7 +50,8 @@ class RmRawRequestTrip extends Controller
         $rmTrip = new RmTrip();
 
         if ($rmTrip->processing_trips()->count() > 1) {
-            return response()->json(["errors" => [[
+            return response()->json([
+                "errors" => [[
                     "code" => 411,
                     "title" => "Chỉ được tối đa 2 yêu cầu.",
                     "detail" => "Qlsx cần xử lý xong 2 yêu cầu mới được tạo yêu cầu mới."
@@ -117,8 +120,30 @@ class RmRawRequestTrip extends Controller
      */
     public function update(Request $request, $id)
     {
-        RmTrip::where("id", $id)->update($request["data"]);
-        return $request;
+        $user = auth("api")->user();
+        $currentTrip = RmTrip::where("id", $id);
+
+        $data = $currentTrip->first();
+
+        $currentTrip->update($request["data"]);
+
+        foreach ($request["data"] as $key => $value) {
+            if (isset($value)) {
+                if ($data[$key] !== $value) {
+                    RmTripLog::create([
+                        "trip_id" => $data["id"],
+                        "user_id" => $user["id"],
+                        "action" => "update",
+                        "key_change" => $key,
+                        "from" => $data[$key],
+                        "to" => $value
+                    ]);
+                }
+            }
+        }
+
+
+        return $data;
     }
 
     /**
