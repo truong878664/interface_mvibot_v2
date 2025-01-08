@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RmTrip extends Model
 {
@@ -53,5 +52,24 @@ class RmTrip extends Model
                         ->where("raw_material_status", "!=", "cancel");
                 });
         });
+    }
+    public function historical_trips()
+    {
+
+        return $this->where(function ($query) {
+            $query
+                ->where(function ($query) {
+                    $query->where("raw_material_status", "=", "done")
+                    ->orWhere("raw_material_status", "=", "cancel");
+                })
+                ->where(function ($query) {
+                    $query->where("finished_product_status", "=", "confirmed")
+                    ->orWhere("finished_product_status", "=", "wrong_and_confirmed");
+                });
+        });
+    }
+    public function logs(): HasMany
+    {
+        return $this->hasMany(RmTripLog::class, "trip_id");
     }
 }

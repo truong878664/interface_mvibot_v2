@@ -21,12 +21,29 @@ class RmRawRequestTrip extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status =  $request->query("status");
+        $page = (int)$request->query("page") ?? 1;
         $rmTrip = new RmTrip();
-        return [
-            "data" => $rmTrip->processing_trips()->with(["rm_raw_requests", "rm_finished_products", "user"])->get()
-        ];
+
+        if ($status === "processing") {
+            $rmTripWhere = $rmTrip->processing_trips();
+        } else if ($status  === "history") {
+            $rmTripWhere = $rmTrip->historical_trips();
+        } else {
+            return [];
+        }
+
+        $data =  $rmTripWhere->with([
+            "rm_raw_requests.logs.user",
+            "rm_finished_products.logs.user",
+            "user",
+            "logs.user"
+        ])->orderBy("updated_at", "desc")->paginate(5, ["*"], "page", $page);
+
+        return $data;
+    
     }
 
     /**

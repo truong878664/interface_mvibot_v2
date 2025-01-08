@@ -21,6 +21,10 @@ class ProduceSeeder extends Seeder
                 "name" => "Core",
             ],
             [
+                "id" => "outer",
+                "name" => "Outer",
+            ],
+            [
                 "id" => "sleeve",
                 "name" => "Sleeve",
             ],
@@ -199,6 +203,16 @@ class ProduceSeeder extends Seeder
                 'lineID' => 'weight',
                 'type' => null,
                 'code' => 'Core Busing - 220',
+            ],
+            [
+                'lineID' => 'outer',
+                'type' => null,
+                'code' => 'NC',
+            ],
+            [
+                'lineID' => 'outer',
+                'type' => null,
+                'code' => 'Nhiệt',
             ],
 
         ]);
