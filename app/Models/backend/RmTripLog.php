@@ -11,18 +11,18 @@ class RmTripLog extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "trip_id",
-        "finished_product_id",
-        "raw_request_id",
-        "trip_id",
-        "user_id",
-        "key_change",
+        "tripId",
+        "finishedProductId",
+        "rawRequestId",
+        "tripId",
+        "userId",
+        "keyChange",
         "action",
         "from",
         "to",
     ];
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, "userId");
     }
 }

@@ -15,17 +15,18 @@ return new class extends Migration
     {
         Schema::create('rm_finished_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("trip_id");
-            $table->string("product_name");
+            $table->unsignedBigInteger("tripId");
+            $table->string("productId");
             $table->integer("quality");
-            $table->integer("pcs")->nullable();
-            $table->string("note")->nullable();
-            $table->string("line");
+            $table->integer("qualityOdd")->nullable();
+            $table->integer("workShift");
+            $table->string("comment")->nullable();
+            $table->string("workerId");
             $table->timestamps();
         });
 
         Schema::table('rm_finished_products', function (Blueprint $table) {
-            $table->foreign('trip_id')->references('id')->on('rm_trips');
+            $table->foreign('tripId')->references('id')->on('rm_trips');
         });
     }
 

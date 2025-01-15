@@ -28,22 +28,21 @@ class RmRawRequestTrip extends Controller
         $rmTrip = new RmTrip();
 
         if ($status === "processing") {
-            $rmTripWhere = $rmTrip->processing_trips();
+            $rmTripWhere = $rmTrip->processingTripsWithUnRecorded();
         } else if ($status  === "history") {
-            $rmTripWhere = $rmTrip->historical_trips();
+            $rmTripWhere = $rmTrip->historicalTrips()->orderBy("updated_at", "desc");
         } else {
             return [];
         }
 
         $data =  $rmTripWhere->with([
-            "rm_raw_requests.logs.user",
-            "rm_finished_products.logs.user",
+            "rmRawRequests.logs.user",
+            "rmFinishedProducts.logs.user",
             "user",
             "logs.user"
-        ])->orderBy("updated_at", "desc")->paginate(5, ["*"], "page", $page);
+        ])->paginate(5, ["*"], "page", $page);
 
         return $data;
-    
     }
 
     /**
@@ -66,7 +65,7 @@ class RmRawRequestTrip extends Controller
     {
         $rmTrip = new RmTrip();
 
-        if ($rmTrip->processing_trips()->count() > 1) {
+        if ($rmTrip->processingTrips()->count() > 1) {
             return response()->json([
                 "errors" => [[
                     "code" => 411,
@@ -77,32 +76,45 @@ class RmRawRequestTrip extends Controller
         }
 
         $user = auth("api")->user();
-        $trip = $rmTrip->create(["user_id" => $user->id]);
+
         $finishedProducts  = $request["finishedProducts"];
         $rawMaterialRequest = $request["rawMaterialRequest"];
 
+        $dataTrip = ["userId" => $user->id];
+
+        if (count($finishedProducts) === 0) {
+            $dataTrip["finishedProductStatus"] = "confirmed";
+        }
+        if (count($rawMaterialRequest) === 0) {
+            $dataTrip["rawMaterialStatus"] = "done";
+        }
+        $trip = $rmTrip->create($dataTrip);
+
         foreach ($finishedProducts as $product) {
             RmFinishedProduct::create([
-                "line" => $product["line"],
-                "product_name" => $product["product_name"],
-                "note" => $product["note"],
-                "pcs" => $product["pcs"],
+                "workerId" => $product["workerId"],
+                "productId" => $product["productId"],
+                "comment" => $product["comment"],
+                "qualityOdd" => $product["qualityOdd"],
                 "quality" => $product["quality"],
-                "trip_id" => $trip["id"],
+                "workShift" => $product["workShift"],
+                "tripId" => $trip["id"],
             ]);
         }
         foreach ($rawMaterialRequest as $raw) {
-            RmRawRequest::create([
-                "line" => $raw["line"],
-                "product_name" => $raw["product_name"],
-                "note" => $raw["note"],
-                "pcs" => $raw["pcs"],
-                "quality" => $raw["quality"],
-                "trip_id" => $trip["id"],
-            ]);
+            RmRawRequest::create(
+                [
+                    "workerId" => $raw["workerId"],
+                    "productId" => $raw["productId"],
+                    "comment" => $raw["comment"],
+                    "qualityOdd" => $raw["qualityOdd"],
+                    "quality" => $raw["quality"],
+                    "workShift" => $raw["workShift"],
+                    "tripId" => $trip["id"],
+                ]
+            );
         }
-
-        $data = $rmTrip->where("id", $trip["id"])->with(["rm_raw_requests", "rm_finished_products"])->get();
+        $data = $rmTrip->where("id", $trip["id"])->with(["rmRawRequests", "rmFinishedProducts"])->get();
         return ["data" => $data];
     }
 
@@ -148,10 +160,10 @@ class RmRawRequestTrip extends Controller
             if (isset($value)) {
                 if ($data[$key] !== $value) {
                     RmTripLog::create([
-                        "trip_id" => $data["id"],
-                        "user_id" => $user["id"],
+                        "tripId" => $data["id"],
+                        "userId" => $user["id"],
                         "action" => "update",
-                        "key_change" => $key,
+                        "keyChange" => $key,
                         "from" => $data[$key],
                         "to" => $value
                     ]);

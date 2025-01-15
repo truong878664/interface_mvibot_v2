@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class RmFinishedProduct extends Model
 {
     use HasFactory;
-    protected $fillable = ["line", "product_name", "note", "pcs", "quality", "trip_id"];
+    protected $fillable = ["workerId", "productId", "comment", "qualityOdd", "quality", "tripId", "workShift"];
     public function logs(): HasMany
     {
-        return $this->hasMany(RmTripLog::class, "finished_product_id");
+        return $this->hasMany(RmTripLog::class, "finishedProductId");
     }
 }

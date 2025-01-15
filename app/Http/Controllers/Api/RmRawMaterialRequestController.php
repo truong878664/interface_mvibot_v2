@@ -37,7 +37,7 @@ class RmRawMaterialRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //zz
     }
 
     /**
@@ -79,17 +79,14 @@ class RmRawMaterialRequestController extends Controller
         $currentRawRequest->update($request->all());
 
         foreach ($request->all() as $key => $value) {
-            if (isset($value)) {
                 if ($data[$key] !== $value) {
-                    RmTripLog::create([
-                        "raw_request_id" => $data["id"],
-                        "user_id" => $user["id"],
+                RmTripLog::create(["rawRequestId" => $data["id"],
+                    "userId" => $user["id"],
                         "action" => "update",
-                        "key_change" => $key,
+                    "keyChange" => $key,
                         "from" => $data[$key],
                         "to" => $value
                     ]);
-                }
             }
         }
         return $request;

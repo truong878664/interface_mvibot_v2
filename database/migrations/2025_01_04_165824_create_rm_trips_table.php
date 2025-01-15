@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('rm_trips', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->enum('finished_product_status', array("unconfirmed", "was_wrong", "confirmed", "wrong_qlsx_confirmed", "wrong_and_confirmed"))->default("unconfirmed");
-            $table->enum('raw_material_status', array("cancel", "requesting", "processing",  "confirm", "done",))->default("requesting");
-            $table->string("cancel_raw_request_reason")->nullable();
+            $table->unsignedBigInteger("userId");
+            $table->enum('rawMaterialStatus', array("cancel", "requesting", "processing",  "confirm", "done",))->default("requesting");
+            $table->enum('finishedProductStatus', array("unconfirmed", "wasWrong", "confirmed",  "wrongAndConfirmed"))->default("unconfirmed");
+            $table->string("cancelRawRequestReason")->nullable();
+            $table->boolean("isRecorded")->default(false);
             $table->timestamps();
         });
         Schema::table('rm_trips', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('userId')->references('id')->on('users');
         });
     }
 

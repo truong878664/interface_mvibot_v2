@@ -79,18 +79,18 @@ class RmFinishedProductController extends Controller
         $currentFinished->update($request->all());
 
         foreach ($request->all() as $key => $value) {
-            if (isset($value)) {
+            // if (isset($value)) {
                 if ($data[$key] !== $value) {
-                    RmTripLog::create([
-                        "finished_product_id" => $data["id"],
-                        "user_id" => $user["id"],
+                RmTripLog::create([
+                    "finishedProductId" => $data["id"],
+                    "userId" => $user["id"],
                         "action" => "update",
-                        "key_change" => $key,
+                    "keyChange" => $key,
                         "from" => $data[$key],
                         "to" => $value
                     ]);
                 }
-            }
+            // }
         }
         return $request;
     }

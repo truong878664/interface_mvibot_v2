@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('rm_trip_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("finished_product_id")->nullable()->default(null);
-            $table->unsignedBigInteger("raw_request_id")->nullable()->default(null);;
-            $table->unsignedBigInteger("trip_id")->nullable()->default(null);;
-            $table->unsignedBigInteger("user_id")->nullable()->default(null);;
-            $table->string("key_change");
+            $table->unsignedBigInteger("finishedProductId")->nullable()->default(null);
+            $table->unsignedBigInteger("rawRequestId")->nullable()->default(null);;
+            $table->unsignedBigInteger("tripId")->nullable()->default(null);;
+            $table->unsignedBigInteger("userId")->nullable()->default(null);;
+            $table->string("keyChange");
             $table->string("action");
             $table->string("from")->nullable()->default(null);;
             $table->string("to")->nullable()->default(null);;
@@ -28,10 +28,10 @@ return new class extends Migration
         });
 
         Schema::table('rm_trip_logs', function (Blueprint $table) {
-            $table->foreign("finished_product_id")->references("id")->on("rm_finished_products");
-            $table->foreign("raw_request_id")->references("id")->on("rm_raw_requests");
-            $table->foreign("trip_id")->references("id")->on("rm_trips");
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("finishedProductId")->references("id")->on("rm_finished_products");
+            $table->foreign("rawRequestId")->references("id")->on("rm_raw_requests");
+            $table->foreign("tripId")->references("id")->on("rm_trips");
+            $table->foreign("userId")->references("id")->on("users");
         });
     }
 
