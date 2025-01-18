@@ -65,7 +65,7 @@ class MissionV4Controller extends Controller
 
         switch ($kind) {
             case 'get':
-                $data = MissionsVer::where('id', $id)->first();
+                $data = MissionsVer::where('id', $id)->where('deleted', false)->first();
                 if (!$data) {
                     return [];
                 };
@@ -79,14 +79,14 @@ class MissionV4Controller extends Controller
 
 
             case 'get_by_name':
-                $data = MissionsVer::where('name', $id)->first();
+                $data = MissionsVer::where('name', $id)->where('deleted', false)->first();
                 if (!$data) {
                     return ["error" => true, "message" => "not found data!", "data" => []];
                 };
                 return ["error" => false, "message" => "get data successfully!", "data" => $data];
 
             case 'get_by_id':
-                $data = MissionsVer::where('id', $id)->first();
+                $data = MissionsVer::where('id', $id)->where('deleted', false)->first();
                 if (!$data) {
                     return ["error" => true, "message" => "not found data!", "data" => []];
                 };
@@ -158,7 +158,7 @@ class MissionV4Controller extends Controller
     public function translateDataRobot($id, $html)
     {
         try {
-            $dataMission = MissionsVer::where("id", $id)->first();
+            $dataMission = MissionsVer::where("id", $id)->where('deleted', false)->first();
             $dataJson = $dataMission->mission_shorthand;
             $BlockStep = new BlockStep();
             $mission = json_decode($dataJson);

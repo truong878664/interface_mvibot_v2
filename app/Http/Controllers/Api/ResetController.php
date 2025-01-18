@@ -51,7 +51,7 @@ class ResetController extends Controller
     {
 
         $data = Reset::where("name_seri", $id)->first();
-        $allMission = MissionsVer::all();
+        $allMission = MissionsVer::where("deleted", false)->get();
         $allPosition = MissionPosition::all();
         if (!$data) {
             Reset::create(["name_seri" => $id]);
