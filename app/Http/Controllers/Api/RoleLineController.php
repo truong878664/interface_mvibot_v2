@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\StaffOfLine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ class RoleLineController extends Controller
      */
     public function index()
     {
+        // return StaffOfLine::all();
         $data =  DB::table("line_user_role")
             ->join("line", "line_user_role.lineID", "=", "line.id")
             ->select(["line_user_role.id", "line.name as lineName", "line.id as lineID",  "line_user_role.userID"])->get();

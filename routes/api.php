@@ -43,6 +43,7 @@ use App\Http\Controllers\Api\SleepController;
 use App\Http\Controllers\Api\SoundController;
 use App\Http\Controllers\Api\SoundFileController;
 use App\Http\Controllers\Api\SoundSettingController;
+use App\Http\Controllers\Api\StaffOfLineController;
 use App\Http\Controllers\Api\StartController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StepController;
@@ -162,4 +163,5 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
     Route::resource('rm-raw-request-trip', RmRawRequestTrip::class);
     Route::resource('rm-finished-product', RmFinishedProductController::class);
     Route::resource('rm-raw-material-request', RmRawMaterialRequestController::class);
+    Route::resource('staff-of-line', StaffOfLineController::class);
 });

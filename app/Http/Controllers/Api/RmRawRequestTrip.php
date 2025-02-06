@@ -90,29 +90,37 @@ class RmRawRequestTrip extends Controller
         }
         $trip = $rmTrip->create($dataTrip);
 
-        foreach ($finishedProducts as $product) {
-            RmFinishedProduct::create([
-                "workerId" => $product["workerId"],
-                "productId" => $product["productId"],
-                "comment" => $product["comment"],
-                "qualityOdd" => $product["qualityOdd"],
-                "quality" => $product["quality"],
-                "workShift" => $product["workShift"],
-                "tripId" => $trip["id"],
-            ]);
-        }
-        foreach ($rawMaterialRequest as $raw) {
-            RmRawRequest::create(
-                [
-                    "workerId" => $raw["workerId"],
-                    "productId" => $raw["productId"],
-                    "comment" => $raw["comment"],
-                    "qualityOdd" => $raw["qualityOdd"],
-                    "quality" => $raw["quality"],
-                    "workShift" => $raw["workShift"],
+        try {
+            foreach ($finishedProducts as $product) {
+                RmFinishedProduct::create(["msnv" => $product["msnv"],
+                    "productCode" => $product["productCode"],
+                    "comment" => $product["comment"],
+                    "quantityOdd" => $product["quantityOdd"],
+                    "quantity" => $product["quantity"],
+                    "workShift" => $product["workShift"],
                     "tripId" => $trip["id"],
-                ]
-            );
+                ]);
+            }
+        } catch (\Throwable $th) {
+            $dataTrip["finishedProductStatus"] = "confirmed";
+        }
+
+        try {
+            foreach ($rawMaterialRequest as $raw) {
+                RmRawRequest::create(
+                    [
+                        "msnv" => $raw["msnv"],
+                        "productCode" => $raw["productCode"],
+                        "comment" => $raw["comment"],
+                        "quantityOdd" => $raw["quantityOdd"],
+                        "quantity" => $raw["quantity"],
+                        "workShift" => $raw["workShift"],
+                        "tripId" => $trip["id"],
+                    ]
+                );
+            }
+        } catch (\Throwable $th) {
+            $dataTrip["rawMaterialStatus"] = "done";
         }
         $data = $rmTrip->where("id", $trip["id"])->with(["rmRawRequests", "rmFinishedProducts"])->get();
         return ["data" => $data];

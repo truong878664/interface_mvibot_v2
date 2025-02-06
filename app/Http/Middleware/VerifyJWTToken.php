@@ -23,8 +23,7 @@ class VerifyJWTToken
         if ($isLogin) {
             return $next($request);
         } else {
-            return response()->json([
-                'message' => 'use must login to get data',
+            return response()->json(['message' => 'must login',
             ], 401);
         }
     }

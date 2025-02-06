@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('rm_raw_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("tripId");
-            $table->string("productId");
-            $table->integer("quality");
-            $table->integer("qualityOdd")->nullable();
+            $table->string("productCode");
+            $table->integer("quantity");
+            $table->integer("quantityOdd")->nullable();
             $table->integer("workShift");
             $table->string("comment")->nullable();
-            $table->string("workerId");
+            $table->string("msnv");
             $table->timestamps();
         });
         Schema::table('rm_raw_requests', function (Blueprint $table) {

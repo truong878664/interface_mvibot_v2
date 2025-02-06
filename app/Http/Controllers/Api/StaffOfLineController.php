@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\backend\RmFinishedProduct;
-use App\Models\backend\RmTripLog;
+use App\Models\backend\StaffOfLine;
+use App\Models\backend\Start;
 use Illuminate\Http\Request;
 
-class RmFinishedProductController extends Controller
+class StaffOfLineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +16,17 @@ class RmFinishedProductController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = $request->query("filter");
-        $date = $filter["date"];
+        $data = [];
+        $userId = (int)$request->input("userId");
+        if ($userId) {
+            $data = StaffOfLine::where("userId", $userId)->get();
+        } else {
+            $data = StaffOfLine::all();
+        }
 
-
-        return RmFinishedProduct::select("rm_finished_products.productId", "ARRAY")
-        ->join("rm_trips", "rm_finished_products.tripId", "=", "rm_trips.id")
-        ->where("finishedProductStatus", "confirmed")
-        ->orWhere("finishedProductStatus", "wrongAndConfirmed")
-        ->where("rm_finished_products.created_at", $date)
-            // ->groupBy("productId")
-            ->get();
+        return [
+            "data" => $data
+        ];
     }
 
     /**
@@ -47,7 +47,7 @@ class RmFinishedProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return  StaffOfLine::create($request->all());
     }
 
     /**
@@ -81,28 +81,7 @@ class RmFinishedProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = auth("api")->user();
-        $currentFinished = RmFinishedProduct::where("id", $id);
-
-        $data = $currentFinished->first();
-
-        $currentFinished->update($request->all());
-
-        foreach ($request->all() as $key => $value) {
-            // if (isset($value)) {
-            if ($data[$key] !== $value) {
-                RmTripLog::create([
-                    "finishedProductId" => $data["id"],
-                    "userId" => $user["id"],
-                    "action" => "update",
-                    "keyChange" => $key,
-                    "from" => $data[$key],
-                    "to" => $value
-                ]);
-            }
-            // }
-        }
-        return $request;
+        //
     }
 
     /**
@@ -113,6 +92,6 @@ class RmFinishedProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return StaffOfLine::where("id", $id)->delete();
     }
 }

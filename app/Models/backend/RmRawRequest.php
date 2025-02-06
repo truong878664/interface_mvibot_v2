@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class RmRawRequest extends Model
 {
     use HasFactory;
-    protected $fillable = ["workerId", "productId", "comment", "qualityOdd", "quality", "tripId", "workShift"];
+    protected $fillable = ["msnv", "productCode", "comment", "quantityOdd", "quantity", "tripId", "workShift"];
     public function logs(): HasMany
     {
         return $this->hasMany(RmTripLog::class, "rawRequestId");
