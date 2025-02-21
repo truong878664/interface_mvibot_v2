@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\backend\Line;
 use App\Models\backend\ModulePinMaterial;
+use App\Models\backend\RmFinishedProduct;
+use App\Models\backend\RmRawRequest;
 use App\Models\backend\RmTrip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,29 +23,38 @@ class ModulePinController extends Controller
         $data = ModulePinMaterial::all()->groupBy("when");
         $line = Line::all();
         $userId = $request->userId;
+        $productCode = $request->productCode;
+        $currentTripId = $request->currentTripId;
 
         $rmTrip = new RmTrip();
         if ($request->when) {
             if ($userId) {
-                $lineValid = DB::table('line_user_role')->where('userID', $userId)->get();
-                $lineValidArray = array_map(function ($item) {
-                    return $item->lineID;
-                }, $lineValid->toArray());
-                
-                $queryModule =
-                    ModulePinMaterial::where('when', $request->when)->whereIn('lineID', $lineValidArray)->get();
-
-                if ($request->when === "require") {
-                    if ($rmTrip->processingTrips()->count() < 2) {
-                        $data = $queryModule;
-                    } else {
-                        $data = [];
-                    }
-                } else {
-                    $data = $queryModule;
-                }
+                $data = $this->getModuleWhenRequest($userId, $productCode);
             } else {
-                $data = ModulePinMaterial::where('when', $request->when)->get();
+                $rmTripQueryProcessingTrips = $rmTrip->processingTrips()->where("id", "!=", $currentTripId);
+                // return $rmTripQueryProcessingTrips->get();
+                // return $currentTripId;
+                $result = [];
+                if ($rmTripQueryProcessingTrips->count() === 1) {
+                    if ($request->when === "cancel" || $request->when === "done") {
+                        $rmTripProcessingTrips = $rmTripQueryProcessingTrips->first();
+                        $tripId = $rmTripProcessingTrips->id;
+                        $userId = $rmTripProcessingTrips->userId;
+
+                        $finishedProduct = RmFinishedProduct::where("tripId", $tripId)->first();
+                        if ($finishedProduct) {
+                            $productCode = $finishedProduct->productCode;
+                        } else {
+                            $rawRequest = RmRawRequest::where("tripId", $tripId)->first();
+                            $productCode = $rawRequest->productCode;
+                        }
+                        // if($rmTripProcessingTrips->)
+                        array_push($result, ...$this->getModuleWhenRequest($userId, $productCode));
+                    }
+                }
+
+                array_push($result, ...ModulePinMaterial::where('when', $request->when)->get());
+                $data = $result;
             }
         }
 
@@ -57,6 +68,27 @@ class ModulePinController extends Controller
             ]
         ];
     }
+
+
+    public function getModuleWhenRequest($userId, $productCode)
+    {
+        $lineValid = DB::table('line_user_role')->where('userID', $userId)->get();
+        $lineValidArray = array_map(function ($item) {
+            return $item->lineID;
+        }, $lineValid->toArray());
+        $data = [];
+
+        $queryModule =
+            ModulePinMaterial::where('when', "require")->whereIn('lineID', $lineValidArray);
+        $rmTrip = new RmTrip();
+        if ($rmTrip->processingTrips()->count() < 2) {
+            $data = $queryModule->where('productCode', $productCode)->get();
+        } else {
+            $data = [];
+        }
+        return $data;
+    }
+
 
     /**
      * Show the form for creating a new resource.
