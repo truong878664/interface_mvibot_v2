@@ -23,12 +23,17 @@ class RmRawRequestTrip extends Controller
      */
     public function index(Request $request)
     {
+        $user = auth("api")->user();
         $status =  $request->query("status");
         $page = (int)$request->query("page") ?? 1;
         $rmTrip = new RmTrip();
 
         if ($status === "processing") {
             $rmTripWhere = $rmTrip->processingTripsWithUnRecorded();
+            if ($user->type === "qlsx") {
+                $rmTripWhere->where("isRecorded", false);
+            }
+            // return $user;
         } else if ($status  === "history") {
             $rmTripWhere = $rmTrip->historicalTrips()->orderBy("updated_at", "desc");
         } else {
@@ -86,14 +91,16 @@ class RmRawRequestTrip extends Controller
             $dataTrip["finishedProductStatus"] = "confirmed";
         }
         if (count($rawMaterialRequest) === 0) {
-            $dataTrip["rawMaterialStatus"] = "done";
+            $dataTrip["rawMaterialStatus"] = "confirm";
         }
         $trip = $rmTrip->create($dataTrip);
 
         try {
             foreach ($finishedProducts as $product) {
-                RmFinishedProduct::create(["msnv" => $product["msnv"],
+                RmFinishedProduct::create([
+                    "msnv" => $product["msnv"],
                     "productCode" => $product["productCode"],
+                    "productName" => $product["productName"],
                     "comment" => $product["comment"],
                     "quantityOdd" => $product["quantityOdd"],
                     "quantity" => $product["quantity"],
@@ -111,6 +118,7 @@ class RmRawRequestTrip extends Controller
                     [
                         "msnv" => $raw["msnv"],
                         "productCode" => $raw["productCode"],
+                        "productName" => $raw["productName"],
                         "comment" => $raw["comment"],
                         "quantityOdd" => $raw["quantityOdd"],
                         "quantity" => $raw["quantity"],
@@ -120,7 +128,7 @@ class RmRawRequestTrip extends Controller
                 );
             }
         } catch (\Throwable $th) {
-            $dataTrip["rawMaterialStatus"] = "done";
+            $dataTrip["rawMaterialStatus"] = "confirm";
         }
         $data = $rmTrip->where("id", $trip["id"])->with(["rmRawRequests", "rmFinishedProducts"])->get();
         return ["data" => $data];

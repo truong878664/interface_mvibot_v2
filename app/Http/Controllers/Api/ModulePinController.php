@@ -32,8 +32,6 @@ class ModulePinController extends Controller
                 $data = $this->getModuleWhenRequest($userId, $productCode);
             } else {
                 $rmTripQueryProcessingTrips = $rmTrip->processingTrips()->where("id", "!=", $currentTripId);
-                // return $rmTripQueryProcessingTrips->get();
-                // return $currentTripId;
                 $result = [];
                 if ($rmTripQueryProcessingTrips->count() === 1) {
                     if ($request->when === "cancel" || $request->when === "done") {

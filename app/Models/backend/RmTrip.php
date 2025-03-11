@@ -45,11 +45,12 @@ class RmTrip extends Model
             $query
                 ->where(function ($query) {
                     $query->where("finishedProductStatus", "!=", "confirmed")
-                    ->where("finishedProductStatus", "!=", "wrongAndConfirmed");
+                ->where("finishedProductStatus", "!=", "wrongAndConfirmed");
                 })
                 ->orWhere(function ($query) {
-                    $query->where("rawMaterialStatus", "!=", "done")
-                    ->where("rawMaterialStatus", "!=", "cancel");
+                $query->where("rawMaterialStatus", "!=", "confirm")
+                    ->where("rawMaterialStatus", "!=", "cancel")
+                    ->where("rawMaterialStatus", "!=", "wrongAndConfirmed");
                 });
         });
     }
@@ -64,8 +65,10 @@ class RmTrip extends Model
                     ->where("finishedProductStatus", "!=", "wrongAndConfirmed");
                 })
                 ->orWhere(function ($query) {
-                $query->where("rawMaterialStatus", "!=", "done")
-                    ->where("rawMaterialStatus", "!=", "cancel");
+                $query->where("rawMaterialStatus", "!=", "confirm")
+                    ->where("rawMaterialStatus", "!=", "cancel")
+                    ->where("rawMaterialStatus", "!=", "done")
+                    ->where("rawMaterialStatus", "!=", "wrongAndConfirmed");
                 });
         });
     }
@@ -75,8 +78,9 @@ class RmTrip extends Model
         return $this->where(function ($query) {
             $query
                 ->where(function ($query) {
-                $query->where("rawMaterialStatus", "=", "done")
-                    ->orWhere("rawMaterialStatus", "=", "cancel");
+                $query->where("rawMaterialStatus", "=", "confirm")
+                    ->orWhere("rawMaterialStatus", "=", "cancel")
+                    ->where("rawMaterialStatus", "!=", "wrongAndConfirmed");
                 })
                 ->where(function ($query) {
                 $query->where("finishedProductStatus", "=", "confirmed")
