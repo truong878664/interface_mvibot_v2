@@ -37,18 +37,20 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        
         if ($request->input('remember')) {
-            JWTAuth::factory()->setTTL(null);
+            JWTAuth::factory()->setTTL(525600);
         }
 
         if ($validator->fails()) {
             return response()->json(['error' => 'validator'], 422);
         }
 
-        if (!$token = auth('api')->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $token = auth('api')->attempt($validator->validated());
+
+        if (!$token) {
+            return response()->json(['error' => "can't create token"], 401);
         }
+
         return $this->createNewToken($token);
     }
 

@@ -82,32 +82,32 @@ function renderBookmark(data) {
     const htmlBookmark = [];
     const origin = location.origin;
 
-    data?.map((item) => {
-        htmlBookmark.push(
-            `
-            <a href="${origin + item.link}">
-                <li class="w-full flex flex-col justify-evenly min-h-[3.5rem] items-center rounded-lg btn bg-stone-200 shadow lowercase py-1">
-                    <span
-                        class="leading-none"
-                        style="color:${item.color}">
-                            <i class="${item.icon}"></i>
-                    </span>
-                    <span class="text-xs text-center text-clamp-2 text-slate-500 capitalize">
-                        ${item.name}
-                    </span>
-                </li>
-            </a>
-            `,
-        );
+    // data?.map((item) => {
+    //     htmlBookmark.push(
+    //         `
+    //         <a href="${origin + item.link}">
+    //             <li class="w-full flex flex-col justify-evenly min-h-[3.5rem] items-center rounded-lg btn bg-stone-200 shadow lowercase py-1">
+    //                 <span
+    //                     class="leading-none"
+    //                     style="color:${item.color}">
+    //                         <i class="${item.icon}"></i>
+    //                 </span>
+    //                 <span class="text-xs text-center text-clamp-2 text-slate-500 capitalize">
+    //                     ${item.name}
+    //                 </span>
+    //             </li>
+    //         </a>
+    //         `,
+    //     );
 
-        return htmlBookmark;
-    });
+    //     return htmlBookmark;
+    // });
     $(".bookmark-wrapper").innerHTML = htmlBookmark.join("");
 }
 function checkIsBookmark(data) {
-    const pathName = location.pathname + location.search;
-    const isBookmark = !!data?.find((item) => item.link === pathName);
-    isBookmark && ($(".bookmark-btn").dataset.bookmark = "active");
+    // const pathName = location.pathname + location.search;
+    // const isBookmark = !!data?.find((item) => item.link === pathName);
+    // isBookmark && ($(".bookmark-btn").dataset.bookmark = "active");
 }
 
 function deleteBookmark(pathName) {

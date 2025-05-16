@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AmrConfigController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BatteryChartController;
 use App\Http\Controllers\Api\BookmarkController;
@@ -75,7 +76,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['api'],
+Route::group([
+    'middleware' => ['api'],
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'auth'
 
@@ -168,4 +170,8 @@ Route::group(['middleware' => ['VerifyJWTToken']], function () {
 
     Route::resource('rm-raw-request-history', RmRawRequestHistoryController::class);
 
+    Route::prefix("amr-config")->group(function () {
+        Route::resource('', AmrConfigController::class);
+        Route::post('/check/{name_seri}', [AmrConfigController::class, "check"]);
+    });
 });
