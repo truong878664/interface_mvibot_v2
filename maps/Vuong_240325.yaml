@@ -1,6 +1,7 @@
-image: map22.pgm
+image: Vuong_240325.pgm
 resolution: 0.050000
-origin: [-21.200000, -21.200000, 0.500000]
+origin: [-3.133886, -9.324480, 0.000000]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
+
