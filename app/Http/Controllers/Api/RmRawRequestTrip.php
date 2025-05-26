@@ -69,13 +69,14 @@ class RmRawRequestTrip extends Controller
     public function store(Request $request)
     {
         $rmTrip = new RmTrip();
+        $numberTripMax = config('services.app.number_trip_max');
 
-        if ($rmTrip->processingTrips()->count() > 1) {
+        if ($rmTrip->processingTrips()->count() >= $numberTripMax) {
             return response()->json([
                 "errors" => [[
                     "code" => 411,
-                    "title" => "Chỉ được tối đa 2 yêu cầu.",
-                    "detail" => "Qlsx cần xử lý xong 2 yêu cầu mới được tạo yêu cầu mới."
+                    "title" => "Chỉ được tối đa 3 yêu cầu.",
+                    "detail" => "Qlsx cần xử lý xong 3 yêu cầu mới được tạo yêu cầu mới."
                 ]]
             ], 411);
         }

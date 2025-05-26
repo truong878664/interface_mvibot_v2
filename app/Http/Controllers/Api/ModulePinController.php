@@ -9,6 +9,7 @@ use App\Models\backend\RmFinishedProduct;
 use App\Models\backend\RmRawRequest;
 use App\Models\backend\RmTrip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class ModulePinController extends Controller
@@ -25,28 +26,31 @@ class ModulePinController extends Controller
         $userId = $request->userId;
         $productCode = $request->productCode;
         $currentTripId = $request->currentTripId;
-
         $rmTrip = new RmTrip();
         if ($request->when) {
             if ($userId) {
-                $data = $this->getModuleWhenRequest($userId, $productCode);
+                $processingTripCount = $rmTrip->processingTrips()->count();
+                if ($processingTripCount === 1) {
+                    $data = $this->getModuleWhenRequest($userId, $productCode);
+                }
             } else {
                 $rmTripQueryProcessingTrips = $rmTrip->processingTrips()->where("id", "!=", $currentTripId);
                 $result = [];
-                if ($rmTripQueryProcessingTrips->count() === 1) {
+                if ($rmTripQueryProcessingTrips->count() >= 1) {
                     if ($request->when === "cancel" || $request->when === "done") {
                         $rmTripProcessingTrips = $rmTripQueryProcessingTrips->first();
                         $tripId = $rmTripProcessingTrips->id;
                         $userId = $rmTripProcessingTrips->userId;
 
                         $finishedProduct = RmFinishedProduct::where("tripId", $tripId)->first();
+
                         if ($finishedProduct) {
                             $productCode = $finishedProduct->productCode;
                         } else {
                             $rawRequest = RmRawRequest::where("tripId", $tripId)->first();
                             $productCode = $rawRequest->productCode;
                         }
-                        // if($rmTripProcessingTrips->)
+
                         array_push($result, ...$this->getModuleWhenRequest($userId, $productCode));
                     }
                 }
@@ -55,7 +59,6 @@ class ModulePinController extends Controller
                 $data = $result;
             }
         }
-
 
 
         return [
@@ -78,12 +81,13 @@ class ModulePinController extends Controller
 
         $queryModule =
             ModulePinMaterial::where('when', "require")->whereIn('lineID', $lineValidArray);
+
         $rmTrip = new RmTrip();
-        if ($rmTrip->processingTrips()->count() < 2) {
-            $data = $queryModule->where('productCode', $productCode)->get();
-        } else {
-            $data = [];
-        }
+        $data = $queryModule->where('productCode', $productCode)->get();
+        // if ($rmTrip->processingTrips()->count() >= 1) {
+        // } else {
+        //     $data = [];
+        // }
         return $data;
     }
 

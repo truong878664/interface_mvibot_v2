@@ -31,4 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'app' => [
+        'number_trip_max' => env("NUMBER_TRIP_MAX") * 1
+    ]
 ];
