@@ -53,7 +53,7 @@ class ResetController extends Controller
         $allMission = MissionsVer::where("deleted", false)->get();
         $allPosition = MissionPosition::all();
         if (!$data) {
-            Reset::create(["name_seri" => $id, "user_id" => $userId]);
+            $data =  Reset::create(["name_seri" => $id, "user_id" => $userId]);
         }
         return [
             "missionList" => $allMission,
