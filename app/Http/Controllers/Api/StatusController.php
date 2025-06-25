@@ -19,7 +19,7 @@ class StatusController extends Controller
     {
 
         $data = [
-            "robot" => DB::table("my_robot")->get(),
+            "robot" => DB::table("my_robot")->select(["name_seri", "type", "id"])->get(),
             "battery_status" => DB::table('battery_status')->get(),
             "sensor_status" => DB::table('sensor_status')->get(),
             "robot_config_status" => DB::table('robot_config_status')->get(),

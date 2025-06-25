@@ -11,6 +11,7 @@ class Reset extends Model
     protected $table = "reset";
     protected $fillable = [
         "name_seri",
+        "user_id",
         "position_no_toollift",
         "mission_go_to_toollift",
         "missions_send_robot",

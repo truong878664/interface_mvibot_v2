@@ -7,6 +7,7 @@ use App\Models\backend\MissionPosition;
 use App\Models\backend\MissionsVer;
 use App\Models\backend\Reset;
 use Illuminate\Http\Request;
+use Spatie\FlareClient\Api;
 
 class ResetController extends Controller
 {
@@ -15,8 +16,7 @@ class ResetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
@@ -47,12 +47,13 @@ class ResetController extends Controller
      */
     public function show($id)
     {
+        $userId = auth("api")->user()->id;
 
-        $data = Reset::where("name_seri", $id)->first();
+        $data = Reset::where("name_seri", $id)->where("user_id", $userId)->first();
         $allMission = MissionsVer::where("deleted", false)->get();
         $allPosition = MissionPosition::all();
         if (!$data) {
-            Reset::create(["name_seri" => $id]);
+            Reset::create(["name_seri" => $id, "user_id" => $userId]);
         }
         return [
             "missionList" => $allMission,
@@ -81,12 +82,13 @@ class ResetController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userId = auth("api")->user()->id;
         $data = [
-            "mission_go_to_toollift"=> $request->mission_go_to_toollift,
-            "missions_send_robot"=>$request->missions_send_robot,
-            "position_no_toollift"=> $request->position_no_toollift
+            "mission_go_to_toollift" => $request->mission_go_to_toollift,
+            "missions_send_robot" => $request->missions_send_robot,
+            "position_no_toollift" => $request->position_no_toollift
         ];
-        Reset::where("name_seri", $id)->update($data);
+        Reset::where("name_seri", $id)->where("user_id", $userId)->update($data);
         return $request->all();
     }
 
